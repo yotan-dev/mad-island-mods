@@ -1,0 +1,5 @@
+CommonStates npcA -- user
+SexPlace sexPlace - info about the toilet
+
+(Normal / Native x Native / grade 0)
+Start -> SexCountChange [Toilet] -> SexCountChange [creampie] -> End

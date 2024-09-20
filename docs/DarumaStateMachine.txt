@@ -1,0 +1,44 @@
+Daruma state machine
+
+// Click use
+
+[Start] State 0
+- tmpDaruma: labo cushion, type: BodyRack, size: 1
+
+// Click insert
+[Start] State 4
+- tmpDaruma = null
+
+[SexCount - Rape]
+
+[End] State 4
+
+// Hold
+
+[Start] State 4
+- tmpDaruma = null
+[End] State 4
+- tmpDaruma = null
+
+// Move
+[Start] State 4
+- tmpDaruma = null
+
+[SexCount - Rape]
+
+[End] State 4
+
+// Speed
+[Start] State 5
+[End] State 5
+
+// Bust
+[Start] State 6
+[Wait anim]
+[End] State 6
+
+// Leave
+[Start] State 6
+[End] State 6
+
+[End] State 0

@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YotanModCore", "YotanModCore.csproj", "{99aa1ae0-b6e6-6718-56aa-2232015001c2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallery", "Gallery.csproj", "{e8fc22d4-7356-75eb-a19a-0f32c64beb75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NpcStats", "NpcStats.csproj", "{c9b8f458-8462-e11b-abcf-503cbe41bdeb}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackNearby", "StackNearby.csproj", "{105115ea-0a8d-e953-6d92-74aa00b8de51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstPlugin", "MyFirstPlugin.csproj", "{162d0f69-7ff3-fd5f-4db2-775bcf0faddd}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarpBody", "WarpBody.csproj", "{cf7433f6-5576-c8f5-656e-cbbfab31f0d7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoUnnoficialPatches", "YoUnnoficialPatches.csproj", "{9e69af82-5d7a-7938-5970-0a2191ceab38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnhanceWorkplaces", "EnhanceWorkplaces.csproj", "{763ff09d-3fb2-d120-41ea-9c01b1b0b3ba}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CraftColors", "CraftColors.csproj", "{3fd75e16-500a-a5f9-929f-8165a0352522}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisassembleItems", "DisassembleItems.csproj", "{d906e2ae-aa8f-6778-3ece-cd0236eb0890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncreaseZoom", "IncreaseZoom.csproj", "{1579b593-90b7-9fef-2f29-4552dc30dc71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base", "Base.csproj", "{f99e6a9d-4536-4252-9fe2-6dbaf1f34d7d}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99aa1ae0-b6e6-6718-56aa-2232015001c2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99aa1ae0-b6e6-6718-56aa-2232015001c2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e8fc22d4-7356-75eb-a19a-0f32c64beb75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e8fc22d4-7356-75eb-a19a-0f32c64beb75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{c9b8f458-8462-e11b-abcf-503cbe41bdeb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c9b8f458-8462-e11b-abcf-503cbe41bdeb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{105115ea-0a8d-e953-6d92-74aa00b8de51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{105115ea-0a8d-e953-6d92-74aa00b8de51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162d0f69-7ff3-fd5f-4db2-775bcf0faddd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162d0f69-7ff3-fd5f-4db2-775bcf0faddd}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{cf7433f6-5576-c8f5-656e-cbbfab31f0d7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{cf7433f6-5576-c8f5-656e-cbbfab31f0d7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9e69af82-5d7a-7938-5970-0a2191ceab38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9e69af82-5d7a-7938-5970-0a2191ceab38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{763ff09d-3fb2-d120-41ea-9c01b1b0b3ba}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{763ff09d-3fb2-d120-41ea-9c01b1b0b3ba}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3fd75e16-500a-a5f9-929f-8165a0352522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3fd75e16-500a-a5f9-929f-8165a0352522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d906e2ae-aa8f-6778-3ece-cd0236eb0890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d906e2ae-aa8f-6778-3ece-cd0236eb0890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1579b593-90b7-9fef-2f29-4552dc30dc71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1579b593-90b7-9fef-2f29-4552dc30dc71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f99e6a9d-4536-4252-9fe2-6dbaf1f34d7d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f99e6a9d-4536-4252-9fe2-6dbaf1f34d7d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

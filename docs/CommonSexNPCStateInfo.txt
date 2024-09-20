@@ -1,0 +1,6 @@
+CommonStates npcA, CommonStates npcB -- actors
+SexPlace sexPlace - info about the place (bed/etc)
+SexManager.SexCountState sexType - kind of action (Normal, Rape, etc)
+
+(Normal / Native x Native / grade 0)
+Start -> SexCountChange [sexType] -> SexCountChange [creampie] -> End

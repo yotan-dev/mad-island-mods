@@ -1,0 +1,58 @@
+"Slave Sally" / "Slave Giant"
+
+"Use"
+[Start]
+	- state: 0
+	- tmpSlave: slave_sally_01_prefab(Clone), type: Slave, size: 0 / slave_giant_01_prefab(Clone),
+-> Opts: Insert / Leave
+
+"Insert"
+[start]
+	- state: 1
+	- tmpSlave: null
+[wait anim]
+[SexCountChanged] Rape ; from : Man ; to : Sally
+[end - Slave]
+	- state: 1
+	- tmpSlave: null
+-> Opts: Move / Leave
+
+"Move"
+[start]
+	- state: 4
+	- tmpSlave: null
+[end]
+	- state: 4
+	- tmpSlave: null
+-> Opts: "Hold" / "Speed" / "Bust" / "Leave"
+
+"Hold"
+[start]
+	- state: 4
+	- tmpSlave: null
+[end]
+	- state: 4
+	- tmpSlave: null
+-> Opts: Move / Leave
+
+"Speed"
+[start - Slave]
+	- state: 5
+	- tmpSlave: null
+[end - Slave]
+	- state: 5
+	- tmpSlave: null
+-> Opts: "Hold" / "Speed" / "Bust" / "Leave"
+
+"Bust"
+[start - Slave]
+	- state: 6
+	- tmpSlave: null
+[end - Slave]
+	- state: 6
+	- tmpSlave: null
+-> Opts: "Leave" / "Use"
+
+"Leave"
+[start/end] state 3
+[end] state 0

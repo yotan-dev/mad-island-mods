@@ -1,0 +1,83 @@
+AssWall
+
+Use
+[start - AssWall]
+    - state: 0
+    - tmpWall: gengirl_01_asswall_00_prefab(Clone), type: Toilet, size: 1
+
+
+Insert
+[start - AssWall]
+   - state: 4
+   - tmpWall: null, type: null, size: null
+[end - AssWall]
+   - state: 4
+   - tmpWall: null, type: null, size: null
+[SexCountChanged]
+   - sexState: Toilet
+   - from: Man|PlayerMan|1
+   - to: Female Native|gengirl_01_prefab(Clone)|15
+
+
+HOLD
+[start - AssWall]
+   - state: 4
+   - tmpWall: null, type: null, size: null
+[end - AssWall]
+   - state: 4
+   - tmpWall: null, type: null, size: null
+
+
+MOVE
+[start - AssWall]
+   - state: 4
+    - tmpWall: null, type: null, size: null
+[end - AssWall]
+    - state: 4
+    - tmpWall: null, type: null, size: null
+
+
+Speed
+
+[start - AssWall]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+[end - AssWall]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+
+
+Speed
+
+[start - AssWall]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+[end - AssWall]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+
+
+Bust
+[start - AssWall]
+   - state: 6
+   - tmpWall: null, type: null, size: null
+[WaitAnim]
+[SexCountChanged]
+   - sexState: Creampie
+   - from: Man|PlayerMan|1
+   - to: Female Native|gengirl_01_prefab(Clone)|15
+[end - AssWall]
+    - state: 6
+    - tmpWall: null, type: null, size: null
+
+Leave
+
+[start - AssWall]
+   - state: 3
+   - tmpWall: null, type: null, size: null
+[end - AssWall]
+   - state: 3
+   - tmpWall: null, type: null, size: null
+[end - AssWall]
+   - state: 0
+   - tmpWall: gengirl_01_asswall_00_prefab(Clone), type: Toilet, size: 1

@@ -1,0 +1,23 @@
+{
+    "name": "WarpBody",
+    "rootNamespace": "WarpBody",
+    "references": [
+        "GUID:ace3de03a23feaa4183559e532f177cd"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "BepInEx.dll",
+        "Unity.TextMeshPro.dll",
+        "Assembly-CSharp.dll",
+        "Mono.Cecil.dll",
+        "0Harmony.dll",
+        "spine-unity.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

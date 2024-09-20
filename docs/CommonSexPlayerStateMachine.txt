@@ -1,0 +1,53 @@
+CommonSexPlayer
+
+- SexManager.tmpSexCountType is set during Start. ("SpecialFlag")
+	- It is 0 for normal sex
+	- It is 1 for some special cases (which usually don't generate normal/creampie sex)
+		- Known cases (SPOILER!)
+			- Shino + Lv 0 bed -- tit fuck
+
+Start
+    [start] state = 0, sexType = 0 (man) charaA: "Yona|PlayerGirl|0", (girl) charaB: "Opalove|gen_01_prefab(Clone)|10"
+
+Caress
+    [start] state = 1, sexType = 0 -- null chars
+    [end] state = 1, sexType = 0 -- null chars
+
+Hold
+    [start] state = 6, sexType = 0 -- null chars
+    [end] {state = 6, sexType = 0 -- null chars
+
+Cares
+    [start] state = 1, sexType = 0
+    [end] state = 1, sexType = 0
+
+Hold (pink)
+    [start] state = 6, sexType = 0
+    [end] state = 6, sexType = 0
+
+Insert
+    [start] state = 2, sexType = 0
+    [SexCount - Normal]  from Yona / to Native 
+    [end] state = 2, sexType = 0
+
+
+Speed
+    [start] state = 3, sexType = 0
+    [end] state = 3, sexType = 0
+
+Speed
+	[start] state = 3, sexType = 0
+	[end] state = 3, sexType = 0
+
+
+Bust
+	[start] state = 4, sexType = 0
+	[Wait anim]
+	[SexCount - Creampie] from Yona / to Native
+	[end] state = 4, sexType = 0
+
+
+Leave
+	[start] state = 5, sexType = 0
+	[end] state = 5, sexType = 0
+	[end] state = 0, sexType = 0 -- charA  "Yona|PlayerGirl|0" charaB: "Opalove|gen_01_prefab(Clone)|10"

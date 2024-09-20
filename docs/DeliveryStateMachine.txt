@@ -1,0 +1,16 @@
+[start - Delivery]
+	- tmpWorkPlace: place being used (bed / etc)
+	- tmpSexPlace: null
+	- common: NPC giving birth
+
+[Wait]
+
+[SexCountChanged - Delivery]
+	- sexState: Delivery
+	- from: null
+	- to: NPC giving birth
+
+[end - Delivery]
+	- tmpWorkPlace: place being used (Bet/etc)
+	- tmpSexPlace: null
+	- common: NPC giving birth

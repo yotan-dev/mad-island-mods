@@ -1,0 +1,95 @@
+Start rape sleep:
+    [start] sexType = 0 / state = 0 -- this is the only one with chars
+
+[Ask mode]
+
+Select discretly
+    [start] sexType = 1 / state = 2
+    [end] sexType = 1 / state = 2
+
+
+[Asking to insert/leave]
+
+Select insert
+    [start] sexType = 0 / state = 3
+    [wait anim]
+    [SexCount - Rapes] -- with chars
+    [end] sexType = 0 / state = 3
+
+[Asking speed / bust / leave]
+
+Select speed
+    [start] sexType = 0 / state = 4
+    [end] sexType = 0 / state = 4
+
+
+[Asking speed / bust / leave]
+
+Select speed
+    [start] sexType = 0 / state = 4
+    [end] sexType = 0 / state = 4
+
+[Asking speed / bust / leave]
+
+Select burst
+    [start] sexType = 0 / state = 5
+    [wait anim]
+    [SexCount - Creampie] -- with chars
+    [end] sexType = 0 / state = 5
+
+[Asking to insert/leave]
+
+Select leave
+    [start] sexType = 0 / state = 10
+    [wait anim?]
+    [end] sexType = 0 / state = 10
+    [end] sexType = 0 / state = 0 -- with chars
+
+
+=============
+
+Start rape sleep:
+    [start] sexType = 0 / state = 0 -- this is the only one with chars
+
+[Ask mode]
+
+Select rape
+    [start] sexType = 0 / state = 1
+    [end] sexType = 0 / state = 1
+
+
+[Asking to insert/leave]
+
+Select insert
+    [start] sexType = 0 / state = 3
+    [wait anim]
+    [SexCount - Rapes] -- with chars
+    [end] sexType = 0 / state = 3
+
+[Asking speed / bust / leave]
+
+Select speed
+    [start] sexType = 0 / state = 4
+    [end] sexType = 0 / state = 4
+
+
+[Asking speed / bust / leave]
+
+Select speed
+    [start] sexType = 0 / state = 4
+    [end] sexType = 0 / state = 4
+
+[Asking speed / bust / leave]
+
+Select burst
+    [start] sexType = 0 / state = 5
+    [wait anim]
+    [SexCount - Creampie] -- with chars
+    [end] sexType = 0 / state = 5
+
+[Asking to insert/leave]
+
+Select leave
+    [start] sexType = 0 / state = 10
+    [end] sexType = 0 / state = 10
+    [end] sexType = 0 / state = 0 -- with chars

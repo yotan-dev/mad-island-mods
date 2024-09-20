@@ -1,0 +1,17 @@
+Assets/BepInEx
+MyFirstPlugin/lib
+MyFirstPlugin/obj
+MyFirstPlugin/bin
+Assets/MadIsland/
+Assets/Scenes/
+Assets/StreamingAssets/
+Assets/ThunderKitSettings/
+Library/
+Logs/
+Packages/
+ThunderKit/
+UserSettings/
+obj/
+Temp/
+ProjectSettings/
+ModProject.sln

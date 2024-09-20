@@ -1,0 +1,108 @@
+Toilet
+
+Use
+[start - Toilet]
+    - state: 0
+    - tmpWall: gengirl_01_toilet_prefab(Clone), type: Toilet, size: 1
+
+ShowFace
+[start - Toilet]
+   - state: 7
+   - tmpWall: null, type: null, size: null
+[ToiletFaceload]
+[end - Toilet]
+   - state: 7
+   - tmpWall: null, type: null, size: null
+
+Piss (Normal and Inserted)
+[start - Toilet]
+   - state: 2
+   - tmpWall: null, type: null, size: null
+[end - Toilet]
+   - state: 2
+   - tmpWall: null, type: null, size: null
+
+Hold (Before insert)
+[start - Toilet]
+   - state: 2
+   - tmpWall: null, type: null, size: null
+[end - Toilet]
+   - state: 2
+   - tmpWall: null, type: null, size: null
+
+
+Insert
+[start - Toilet]
+   - state: 1
+   - tmpWall: null, type: null, size: null
+[WaitAnim]
+[SexCountChanged]
+   - sexState: Toilet
+   - from: Man|PlayerMan|1
+   - to: Female Native|gengirl_01_prefab(Clone)|15
+[end - Toilet]
+   - state: 1
+   - tmpWall: null, type: null, size: null
+
+MOVE
+[start - Toilet]
+   - state: 4
+    - tmpWall: null, type: null, size: null
+[end - Toilet]
+    - state: 4
+    - tmpWall: null, type: null, size: null
+
+Hold (inserted)
+[start - Toilet]
+   - state: 4
+   - tmpWall: null, type: null, size: null
+[end - Toilet]
+   - state: 4
+   - tmpWall: null, type: null, size: null
+
+
+Speed
+
+[start - Toilet]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+[end - Toilet]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+
+
+Speed
+
+[start - Toilet]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+[end - Toilet]
+   - state: 5
+   - tmpWall: null, type: null, size: null
+
+
+Bust
+[start - Toilet]
+   - state: 6
+   - tmpWall: null, type: null, size: null
+[WaitAnim]
+[SexCountChanged]
+   - sexState: Creampie
+   - from: Man|PlayerMan|1
+   - to: Female Native|gengirl_01_prefab(Clone)|15
+[end - Toilet]
+    - state: 6
+    - tmpWall: null, type: null, size: null
+
+Leave
+
+[start - Toilet]
+   - state: 3
+   - tmpWall: null, type: null, size: null
+[end - Toilet]
+   - state: 3
+   - tmpWall: null, type: null, size: null
+[ToiletFaceLoad]
+[end - Toilet]
+   - state: 0
+   - tmpWall: gengirl_01_Toilet_00_prefab(Clone), type: Toilet, size: 1
