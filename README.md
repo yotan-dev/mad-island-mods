@@ -197,6 +197,7 @@ Included:
 - Translation of Quest UI titles to english
 - Translation of Surgery table / Cute Mirror to english
 - Translation of Craft "Ingredients", Shop "Buy", and "Paused" texts
+- Translation of Dye table UI from Japanese to English
 
 
 I won't fix:

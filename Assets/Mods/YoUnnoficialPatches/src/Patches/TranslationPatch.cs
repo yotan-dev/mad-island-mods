@@ -74,6 +74,17 @@ namespace YoUnnoficialPatches.Patches
 			
 			TryFixText(Managers.uiManager.UIManager?.editPanel, "CancelButton/Text", "Cancel");
 			TryFixText(Managers.uiManager.UIManager?.editPanel, "OKButton/Text", "Change");
+
+			// Dye table
+			TryFixText(Managers.uiManager.UIManager?.dyeEditPanel, "Text (1)", "Dye Table");
+			TryFixText(Managers.uiManager.UIManager?.dyeEditPanel, "HSBPanel/Hue/Text", "Hue");
+			TryFixText(Managers.uiManager.UIManager?.dyeEditPanel, "HSBPanel/Saturation/Text", "Satur.");
+			TryFixText(Managers.uiManager.UIManager?.dyeEditPanel, "HSBPanel/Brightness/Text", "Bright");
+			
+			TryFixText(Managers.uiManager.UIManager?.dyeEditPanel, "ColorPanel/Color/Text", "Color");
+
+			TryFixText(Managers.uiManager.UIManager?.dyeEditPanel, "CancelButton/Text", "Cancel");
+			TryFixText(Managers.uiManager.UIManager?.dyeEditPanel, "OKButton/Text", "Change");
 		}
 
 		[HarmonyPatch(typeof(UIManager), "Awake")]
