@@ -43,7 +43,7 @@ namespace YoUnnoficialPatches.Patches
 			yield return new WaitUntil(() => Managers.uiManager != null);
 			
 			// Craft/Shop "Ingredients"
-			TryFixText(Managers.uiManager.needPanel, "NeedText", "Requirements");
+			TryFixText(Managers.uiManager.needPanel, "NeedText", "Materials");
 		
 			// Shop title
 			TryFixText(Managers.uiManager.UIManager?.shopPanel, "InventoryName (1)/Text (TMP)", "Buy");
