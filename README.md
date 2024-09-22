@@ -146,6 +146,17 @@ Allows you to zoom out much further.
 **Note:** Zooming out is likely to use more PC resources, since the clipping panes/etc are also increased.
 
 
+### Item slot with colors
+
+Adds item color marker to item slots. Only for items that are dyeable.
+
+![alt text](docs/imgs/slotcolor.png)
+
+**Requirements:**
+
+1. Yotan Mod Core must be installed.
+
+
 ### NPC Stats
 
 Properly give stats points and applies then to NPCs when they are born/friendlied.
