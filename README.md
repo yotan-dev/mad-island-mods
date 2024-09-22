@@ -210,6 +210,15 @@ I won't fix:
 1. Yotan Mod Core must be installed.
 
 
+## Compatibility with Melon Loader
+
+You can use Melon Loader mods together with BepInEx mods. But to do that, you **CAN'T** install Melon Loader directly. Instead you have to:
+
+1. Install BepInEx: https://docs.bepinex.dev/articles/user_guide/installation/index.html
+2. Install BepInEx Melon Loader plugin: https://github.com/BepInEx/BepInEx.MelonLoader.Loader
+3. Put your MelonLoader mods inside MLLoader/Mods
+
+
 ## Support
 
 If you find a bug, have questions or feature requests, feel free to open an issue. Feature requests may not be implemented by me.
