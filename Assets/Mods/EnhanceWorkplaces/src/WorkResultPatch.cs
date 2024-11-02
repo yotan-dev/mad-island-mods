@@ -1,4 +1,5 @@
 using HarmonyLib;
+using YotanModCore;
 
 namespace EnhanceWorkplaces
 {
@@ -17,9 +18,12 @@ namespace EnhanceWorkplaces
 			switch (common.nMove.workType)
 			{
 				case NPCMove.WorkType.Harvest:
-					if (common.bag.slots[0]?.itemKey == "wp_fishingrod_01") {
-						if (!HarvestWork.TryCollectingFishTraps(common, workPlace, tmpInventory, posID, __instance)) {
-							HarvestWork.GiveRewards(common, workPlace, tmpInventory, posID, __instance);
+					if (GameInfo.GameVersion <= GameInfo.ToVersion("0.1.8")) {
+						// v0.2.0 officially supports that, so we don't need to patch it.
+						if (common.bag.slots[0]?.itemKey == "wp_fishingrod_01") {
+							if (!HarvestWork.TryCollectingFishTraps(common, workPlace, tmpInventory, posID, __instance)) {
+								HarvestWork.GiveRewards(common, workPlace, tmpInventory, posID, __instance);
+							}
 						}
 					}
 					break;
