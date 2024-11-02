@@ -6,7 +6,7 @@ using UnityEngine;
 namespace YotanModCore
 {
 	
-	[BepInPlugin("YotanModCore", "YotanModCore", "1.0.0")]
+	[BepInPlugin("YotanModCore", "YotanModCore", "1.1.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
