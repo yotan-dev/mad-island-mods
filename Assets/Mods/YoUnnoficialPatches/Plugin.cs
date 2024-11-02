@@ -5,7 +5,7 @@ using YoUnnoficialPatches.Patches;
 
 namespace YoUnnoficialPatches
 {
-	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.1.0")]
+	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.2.0")]
 	[BepInDependency("YotanModCore", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
