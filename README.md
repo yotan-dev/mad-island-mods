@@ -129,8 +129,10 @@ It currently affects Mining and Logging. When the drop of an item does happen, t
   - Gives between 1 and 1 + bonus items, capped at 3
   - Bonus starts at 0 and is increased by 1 every 30 levels or 75 moral
 
-Also, when doing Harvesting, if the NPC has a Fishing rod in their first inventory
+**(MadIsland v0.1.8 and earlier)** Also, when doing Harvesting, if the NPC has a Fishing rod in their first inventory
 slot, they will first try to collect any Fishtrap that has fishes in it.
+This is officially supported since MadIsland v0.2.0 so the Mod won't do it for newer versions.
+
 
 **Requirements:**
 
@@ -158,6 +160,15 @@ Adds item color marker to item slots. Only for items that are dyeable.
 
 
 ### NPC Stats
+
+> **!!! IMPORTANT !!!**
+> If you are playing on Mad Island v0.1.8 or earlier, you must use v1.0;
+> 
+> If you are playing on Mad Island v0.2.0 or newer, you must use v2.0;
+>
+> Both are the same (at least as of 2024.11.02), but they target different Mad Island versions and
+> I can't make both work at the same time.
+> 
 
 Properly give stats points and applies then to NPCs when they are born/friendlied.
 
