@@ -68,5 +68,5 @@ MonoBehaviour:
   Recursive: 0
   SourceRequired: 1
   EstablishDestination: 1
-  Source: F:\dev2\MI\ModProject\ThunderKit\Libraries\YotanModCore.dll
+  Source: F:\dev2\MI\mad-island-mods\ThunderKit\Libraries\YotanModCore.dll
   Destination: F:\SteamLibrary\steamapps\common\Mad Island\BepInEx\plugins\YotanModCore.dll
