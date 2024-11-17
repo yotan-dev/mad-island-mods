@@ -32,8 +32,13 @@ namespace ItemSlotColor
 			}
 
 			var itemData = Managers.mn.itemMN.FindItem(this.ItemKey);
+			if (itemData == null) {
+				this.Image.color = Transparent;
+				return;
+			}
+
 			this.IsDyeable = Managers.mn.inventory.IsDyeable(itemData.itemType);
-			if (itemData == null || !IsDyeable) {
+			if (!IsDyeable) {
 				this.Image.color = Transparent;
 				return;
 			}

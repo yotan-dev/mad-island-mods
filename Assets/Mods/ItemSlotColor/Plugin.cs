@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ItemSlotColor
 {
 	
-	[BepInPlugin("ItemSlotColor", "ItemSlotColor", "1.0.0")]
+	[BepInPlugin("ItemSlotColor", "ItemSlotColor", "1.0.1")]
 	[BepInDependency("YotanModCore", BepInDependency.DependencyFlags.HardDependency)]
 	public class Plugin : BaseUnityPlugin
 	{
