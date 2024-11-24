@@ -213,6 +213,8 @@ namespace YotanModCore.Consts
 		public const int Shino = 114;
 		[StrVal("Sally")]
 		public const int Sally = 115;
+		[StrVal("Santa")]
+		public const int Santa = 116;
 		[StrVal("Ent King")]
 		public const int EntKing = 120;
 		[StrVal("Ent Queen")]
@@ -241,5 +243,11 @@ namespace YotanModCore.Consts
 		public const int Jack = 160;
 		[StrVal("Halloween Ghost")]
 		public const int HalloweenGhost = 161;
+		[StrVal("Present (Blue)")]
+		public const int PresentBlue = 170;
+		[StrVal("Present (Green)")]
+		public const int PresentGreen = 171;
+		[StrVal("Present (Red)")]
+		public const int PresentRed = 172;
 	}
 }
