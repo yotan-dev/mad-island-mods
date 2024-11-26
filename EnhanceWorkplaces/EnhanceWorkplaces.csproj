@@ -34,8 +34,9 @@
 		<Reference Include="Unity-TextMeshPro">
 			<HintPath>../Assemblies/Unity.TextMeshPro.dll</HintPath>
 		</Reference>
-		<Reference Include="YotanModCore">
-			<HintPath>../Release/YotanModCore.dll</HintPath>
-		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\YotanModCore\YotanModCore.csproj" />
 	</ItemGroup>
 </Project>

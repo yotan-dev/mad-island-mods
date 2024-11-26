@@ -37,8 +37,9 @@
 		<Reference Include="UnityEngine-UI">
 			<HintPath>../Assemblies/UnityEngine.UI.dll</HintPath>
 		</Reference>
-		<Reference Include="YotanModCore">
-			<HintPath>../Release/YotanModCore.dll</HintPath>
-		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\YotanModCore\YotanModCore.csproj" />
 	</ItemGroup>
 </Project>

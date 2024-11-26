@@ -244,11 +244,18 @@ For bigger changes/new features, please open an issue for discussion first.
 
 ## Development Setup
 
-This project is currently using [ThunderKit](https://github.com/PassivePicasso/ThunderKit) -- too much? yeah... maybe, I thought it would be great for the Gallery.
+1. Clone this repo
+2. See `Assemblies/.gitkeep` for a list of DLLs you should copy from `<steam>/Mad Island_data/Managed/` into `Assemblies` folder and copy them
 
-You must install Unity 2021.3.6f and open this repository in it. Install ThunderKit and import MadIsland files to it.
 
-This should be enough to give you the list of pipelines and allow you to build the plugins.
+- You can build any mod by opening a shell in its folder and running `dotnet build`
+- You can build all mods by opening a PowerShell and running:
+```PowerShell
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
+.\make_release.ps1
+```
+DLLs will be put in Release folder
+
 
 **NEVER** commit original game files.
 
