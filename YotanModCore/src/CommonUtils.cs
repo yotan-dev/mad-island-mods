@@ -49,6 +49,23 @@ namespace YotanModCore
 		public static bool IsFriend(CommonStates common) {
 			return common.employ != CommonStates.Employ.None;
 		}
+		
+		public static bool IsFemale(CommonStates common) {
+			return Managers.mn.randChar.GetSexual(common.npcID) == Gender.Female;
+		}
+
+		public static int GetGender(CommonStates common) {
+			switch (Managers.mn.randChar.GetSexual(common.npcID)) {
+			case Gender.Male:
+				return Gender.Male;
+			case Gender.Female:
+				return Gender.Female;
+			case Gender.Invalid:
+				return Gender.Invalid;
+			default:
+				return Gender.Invalid;
+			}
+		}
 
 		/// <summary>
 		/// Gets a display name for npc ID. This represents the type of NPC (not their "person name")
