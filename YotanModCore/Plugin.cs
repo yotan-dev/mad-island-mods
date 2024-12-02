@@ -22,6 +22,7 @@ namespace YotanModCore
 			CommonUtils.Init();
 
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
+			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");
 		}

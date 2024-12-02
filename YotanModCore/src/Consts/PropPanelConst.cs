@@ -4,10 +4,12 @@ namespace YotanModCore.Consts
 	{
 		public class Type
 		{
+			public const int CommonSexPlayer = 2;
 			public const int SleepRape = 3;
 
 			// Custom
-			public const int SleepRapeGallery = 300;
+			public const int Custom = 300;
+			public const int SleepRapeGallery = 301;
 		}
 
 		public class Text
