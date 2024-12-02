@@ -67,6 +67,17 @@ namespace YotanModCore
 			}
 		}
 
+
+		/// <summary>
+		/// Checks if common is pregnant
+		/// </summary>
+		/// <param name="common"></param>
+		/// <returns></returns>
+		public static bool IsPregnant(CommonStates common)
+		{
+			return common.pregnant[0] != -1;
+		}
+
 		/// <summary>
 		/// Gets a display name for npc ID. This represents the type of NPC (not their "person name")
 		/// </summary>
