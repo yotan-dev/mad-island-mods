@@ -32,12 +32,12 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				NpcB = new SceneNpc() { NpcID = npcB, Pregnant = false },
 				IsUnlocked = this.IsUnlocked(NpcID.Yona, npcB),
 				RequireDLC = dlc,
-				Play = (PlayData data) => {
+				GetScene = (PlayData data) => {
 					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
 					scene.Init(new ExtendedHSystem.GallerySceneController());
 					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
 					
-					return scene.Run();
+					return scene;
 				},
 			};
 		}
@@ -52,12 +52,12 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				NpcB = new SceneNpc() { NpcID = npcB, Pregnant = false },
 				IsUnlocked = this.IsUnlocked(NpcID.Man, npcB),
 				RequireDLC = dlc,
-				Play = (PlayData data) => {
+				GetScene = (PlayData data) => {
 					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
 					scene.Init(new ExtendedHSystem.GallerySceneController());
 					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
 					
-					return scene.Run();
+					return scene;
 				},
 			};
 		}

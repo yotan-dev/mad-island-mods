@@ -85,7 +85,8 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 			if (npcPregnant)
 				npcBName += " (Pregnant)";
 
-			return new GallerySceneInfo() {
+			return new GallerySceneInfo()
+			{
 				CharGroup = charGroup,
 				SceneType = SceneTypes.CommonSexPlayer,
 				Name = $"{npcAName} sex with\n{npcBName}\n(SexType: {sexType})",
@@ -94,12 +95,13 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 				IsUnlocked = this.IsUnlocked(player, playerPregnant, npc, npcPregnant, sexType, 0),
 				MinVersion = minVersion,
 				RequireDLC = dlc,
-				Play = (PlayData data) => {
+				GetScene = (PlayData data) =>
+				{
 					var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
 					scene.Init(new ExtendedHSystem.GallerySceneController());
 					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
-					
-					return scene.Run();
+
+					return scene;
 				},
 			};
 		}
@@ -123,12 +125,12 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					NpcB = new SceneNpc() { NpcID = NpcID.Man, Pregnant = false },
 					IsUnlocked = this.IsUnlocked(NpcID.Man, false, NpcID.Shino, false, 1),
 					RequireDLC = false,
-					Play = (PlayData data) => {
-						// NpcB is player, and after v0.0.12 player is also sent first
-						if (GameInfo.GameVersion <= GameInfo.ToVersion("0.0.12"))
-							return Managers.mn.sexMN.CommonSexPlayer(0, data.NpcA, data.NpcB, Managers.mn.sexMN.transform.position, 0);
-						else
-							return Managers.mn.sexMN.CommonSexPlayer(0, data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
+					GetScene = (PlayData data) => {
+						var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
+						scene.Init(new ExtendedHSystem.GallerySceneController());
+						scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+
+						return scene;
 					},
 				},
 				new() {
@@ -139,12 +141,12 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					NpcB = new SceneNpc() { NpcID = NpcID.Man, Pregnant = false },
 					IsUnlocked = this.IsUnlocked(NpcID.Man, false, NpcID.Shino, false, 0),
 					RequireDLC = false,
-					Play = (PlayData data) => {
-						// NpcB is player, and after v0.0.12 player is also sent first
-						if (GameInfo.GameVersion <= GameInfo.ToVersion("0.0.12"))
-							return Managers.mn.sexMN.CommonSexPlayer(0, data.NpcA, data.NpcB, Managers.mn.sexMN.transform.position, 1);
-						else
-							return Managers.mn.sexMN.CommonSexPlayer(0, data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 1);
+					GetScene = (PlayData data) => {
+						var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 1);
+						scene.Init(new ExtendedHSystem.GallerySceneController());
+						scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+						
+						return scene;
 					},
 				},
 

@@ -61,12 +61,12 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 				NpcA = new SceneNpc() { NpcID = npcA, Pregnant = false },
 				NpcB = new SceneNpc() { NpcID = npcB, Pregnant = false },
 				IsUnlocked = this.IsUnlocked(npcA, npcB, 0, SexPlace.SexPlaceType.Normal, SexManager.SexCountState.Normal),
-				Play = (PlayData data) => {
+				GetScene = (PlayData data) => {
 					var scene = new ExtendedHSystem.Scenes.CommonSexNPC(data.NpcA, data.NpcB, data.Prop.GetComponent<SexPlace>(), SexManager.SexCountState.Normal);
 					scene.Init(new ExtendedHSystem.GallerySceneController());
 					// scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
 					
-					return scene.Run();
+					return scene;
 				},
 				Prop = "bed_01",
 			};

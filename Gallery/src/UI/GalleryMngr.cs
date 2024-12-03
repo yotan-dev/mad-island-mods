@@ -11,6 +11,7 @@ using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 using YotanModCore.Consts;
+using ExtendedHSystem.Scenes;
 
 namespace Gallery.UI
 {
@@ -28,6 +29,8 @@ namespace Gallery.UI
 		public GameObject GallerySceneBtnPrefab;
 
 		public GameObject DummySexMeter;
+
+		private IScene ActiveScene;
 
 		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> PlayerRapedCheck = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
 			GalleryState.Instance.PlayerRaped.Any((x) =>
@@ -330,6 +333,11 @@ namespace Gallery.UI
 
 		private IEnumerator DoScene(GallerySceneInfo scene)
 		{
+			if (this.ActiveScene != null) {
+				this.ActiveScene.Destroy();
+				this.ActiveScene = null;
+			}
+
 			GallerySceneInfo.PlayData playData = new GallerySceneInfo.PlayData();
 
 			yield return this.CreateNpc(scene.NpcA);
@@ -357,7 +365,9 @@ namespace Gallery.UI
 				yield return null;
 			}
 
-			yield return base.StartCoroutine(scene.Play(playData));
+			var playableScene = scene.GetScene(playData);
+			this.ActiveScene = playableScene;
+			yield return base.StartCoroutine(playableScene.Run());
 
 			if (playData.Prop != null)
 				GameObject.Destroy(playData.Prop);

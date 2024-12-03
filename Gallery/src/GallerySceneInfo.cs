@@ -4,6 +4,7 @@ using YotanModCore;
 using Gallery.SaveFile.Containers;
 using UnityEngine;
 using UnityEngine.UIElements;
+using ExtendedHSystem.Scenes;
 
 namespace Gallery
 {
@@ -66,7 +67,7 @@ namespace Gallery
 
 		public bool IsUnlocked;
 
-		public Func<PlayData, IEnumerator> Play { get; set; }
+		public Func<PlayData, IScene> GetScene { get; set; }
 	}
 
 }

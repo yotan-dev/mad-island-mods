@@ -49,50 +49,50 @@ namespace Gallery.GalleryScenes.AssWall
 			);
 		}
 
-		private GallerySceneInfo BuildSceneInfo(string charGroup, int npcB, bool dlc = false)
-		{
-			return new GallerySceneInfo() {
-				CharGroup = charGroup,
-				SceneType = SceneTypes.AssWall,
-				Name = "{npcA} fucks\n{npcB} on\nBack Toilet",
-				NpcA = new SceneNpc() { NpcID = NpcID.Man, Pregnant = false },
-				NpcB = new SceneNpc() { NpcID = npcB, Pregnant = false },
-				IsUnlocked = this.IsUnlocked(NpcID.Man, npcB, InventorySlot.Type.Toilet),
-				RequireDLC = dlc,
-				Play = (PlayData data) => {
-					// Put NPC into a dummy inventory slot
-					var npcItem = Managers.mn.itemMN.FindItem(Managers.mn.itemMN.NPCIDToItem(data.NpcB.npcID));
-					Managers.mn.itemMN.ItemToSlot(npcItem, Managers.mn.inventory.itemSlot[0], 1);
-					Managers.mn.inventory.itemSlot[0].common = data.NpcB;
+		// private GallerySceneInfo BuildSceneInfo(string charGroup, int npcB, bool dlc = false)
+		// {
+		// 	return new GallerySceneInfo() {
+		// 		CharGroup = charGroup,
+		// 		SceneType = SceneTypes.AssWall,
+		// 		Name = "{npcA} fucks\n{npcB} on\nBack Toilet",
+		// 		NpcA = new SceneNpc() { NpcID = NpcID.Man, Pregnant = false },
+		// 		NpcB = new SceneNpc() { NpcID = npcB, Pregnant = false },
+		// 		IsUnlocked = this.IsUnlocked(NpcID.Man, npcB, InventorySlot.Type.Toilet),
+		// 		RequireDLC = dlc,
+		// 		Play = (PlayData data) => {
+		// 			// Put NPC into a dummy inventory slot
+		// 			var npcItem = Managers.mn.itemMN.FindItem(Managers.mn.itemMN.NPCIDToItem(data.NpcB.npcID));
+		// 			Managers.mn.itemMN.ItemToSlot(npcItem, Managers.mn.inventory.itemSlot[0], 1);
+		// 			Managers.mn.inventory.itemSlot[0].common = data.NpcB;
 
-					// Hide entities
-					data.NpcA.gameObject.SetActive(false);
-					data.NpcB.gameObject.SetActive(false);
+		// 			// Hide entities
+		// 			data.NpcA.gameObject.SetActive(false);
+		// 			data.NpcB.gameObject.SetActive(false);
 					
-					// Add NpcB to AssWall slot[0]
-					var invSlot = data.Prop.GetComponent<InventorySlot>();
-					Managers.mn.inventory.SlotToSlot(
-						Managers.mn.inventory.itemSlot[0],
-						invSlot.slots[0]
-					);
+		// 			// Add NpcB to AssWall slot[0]
+		// 			var invSlot = data.Prop.GetComponent<InventorySlot>();
+		// 			Managers.mn.inventory.SlotToSlot(
+		// 				Managers.mn.inventory.itemSlot[0],
+		// 				invSlot.slots[0]
+		// 			);
 
-					// Set AssWall as active inventory
-					Managers.mn.inventory.tmpSubInventory = invSlot;
+		// 			// Set AssWall as active inventory
+		// 			Managers.mn.inventory.tmpSubInventory = invSlot;
 
-					Managers.mn.StartCoroutine(Managers.mn.gameMN.ToiletCheck(invSlot, 0));
+		// 			Managers.mn.StartCoroutine(Managers.mn.gameMN.ToiletCheck(invSlot, 0));
 
-					return new AssWallScenePlayer(data.NpcA.GetComponent<CommonStates>(), invSlot.slots[0].common, invSlot)
-						.Play(0);
-				},
-				Prop = "gen_asswall_00", // _01 and _02 also works
-			};
-		}
+		// 			return new AssWallScenePlayer(data.NpcA.GetComponent<CommonStates>(), invSlot.slots[0].common, invSlot)
+		// 				.Play(0);
+		// 		},
+		// 		Prop = "gen_asswall_00", // _01 and _02 also works
+		// 	};
+		// }
 
 		public GallerySceneInfo[] GetScenes()
 		{
 			return new GallerySceneInfo[] {
-				this.BuildSceneInfo(CharGroups.NativeFemale, NpcID.FemaleNative),
-				this.BuildSceneInfo(CharGroups.NativeGirl, NpcID.NativeGirl, dlc: true),
+				// this.BuildSceneInfo(CharGroups.NativeFemale, NpcID.FemaleNative),
+				// this.BuildSceneInfo(CharGroups.NativeGirl, NpcID.NativeGirl, dlc: true),
 			};
 		}
 	}
