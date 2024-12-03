@@ -79,7 +79,7 @@ namespace ExtendedHSystem.Scenes
 		{
 			CapsuleCollider toColl = player.GetComponent<CapsuleCollider>();
 			toColl.enabled = true;
-			
+
 			// We can't restore the mesh here or the respawn will have 2 sprites...
 			// MeshRenderer toMesh = player.anim.GetComponent<MeshRenderer>();
 			// toMesh.enabled = true;
@@ -209,8 +209,8 @@ namespace ExtendedHSystem.Scenes
 			bool hasFainted = false;
 			foreach (var x in this.Controller.PlayPlayerGrappledStep(this, sexAnim, "A_Attack_loop", this.Player))
 			{
-				if (x != null)
-					hasFainted = (bool)x;
+				if (x is bool v)
+					hasFainted = v;
 				yield return x;
 			}
 
