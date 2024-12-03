@@ -1,4 +1,5 @@
 using System.Collections;
+using ExtendedHSystem.Scenes;
 
 namespace ExtendedHSystem
 {
@@ -21,7 +22,22 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		public virtual IEnumerable OnNormalSex(CommonStates a, CommonStates b)
+		{
+			yield return null;
+		}
+
+		public virtual IEnumerable OnCreampie(CommonStates from, CommonStates to)
+		{
+			yield return null;
+		}
+
 		public virtual IEnumerable AfterRape(CommonStates victim, CommonStates rapist)
+		{
+			yield return null;
+		}
+
+		public virtual IEnumerable AfterSex(IScene scene, CommonStates from, CommonStates to)
 		{
 			yield return null;
 		}

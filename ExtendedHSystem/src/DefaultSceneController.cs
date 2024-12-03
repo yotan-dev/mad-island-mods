@@ -7,6 +7,11 @@ namespace ExtendedHSystem
 {
 	public class DefaultSceneController: ISceneController
 	{
+		public void LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
+		{
+			tmpSexAnim.state.SetAnimation(0, name, true);
+		}
+
 		public IEnumerable PlayTimedStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, float time)
 		{
 			tmpSexAnim.state.SetAnimation(0, name, true);

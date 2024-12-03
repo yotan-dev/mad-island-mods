@@ -1,4 +1,5 @@
 using System.Collections;
+using ExtendedHSystem.Scenes;
 using UnityEngine;
 using UnityEngine.UI;
 using YotanModCore;
@@ -26,6 +27,18 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		public override IEnumerable OnNormalSex(CommonStates a, CommonStates b)
+		{
+			Managers.mn.sexMN.SexCountChange(a, b, SexManager.SexCountState.Normal);
+			yield return null;
+		}
+
+		public override IEnumerable OnCreampie(CommonStates from, CommonStates to)
+		{
+			Managers.mn.sexMN.SexCountChange(to, from, SexManager.SexCountState.Creampie);
+			yield return null;
+		}
+
 		public override IEnumerable BeforeRespawn()
 		{
 			Managers.mn.uiMN.SkipView(false);
@@ -37,6 +50,17 @@ namespace ExtendedHSystem
 			if (rapist.debuff.discontent == 4)
 				rapist.MoralChange(20f, null, NPCManager.MoralCause.None);
 
+			yield return null;
+		}
+
+		public override IEnumerable AfterSex(IScene scene, CommonStates from, CommonStates to)
+		{
+			if (scene is CommonSexPlayer commonSexPlayer) {
+				if (commonSexPlayer.GetSexMeterFillAmount() == 1f)
+					from.LoveChange(to, 10f, false);
+				else if (commonSexPlayer.GetSexMeterFillAmount() < 0.3f)
+					from.LoveChange(to, -5f, false);
+			}
 			yield return null;
 		}
 
