@@ -330,9 +330,6 @@ namespace Gallery.UI
 
 		private IEnumerator DoScene(GallerySceneInfo scene)
 		{
-			// @TODO: Use props
-			this.mn.sexMN.gallery = true;
-
 			GallerySceneInfo.PlayData playData = new GallerySceneInfo.PlayData();
 
 			yield return this.CreateNpc(scene.NpcA);
@@ -343,9 +340,16 @@ namespace Gallery.UI
 			playData.NpcA = npcA.GetComponent<CommonStates>();
 			playData.NpcB = npcB.GetComponent<CommonStates>();
 
-			if (scene.Prop != "") {
+			if (scene.Prop != "")
+			{
 				ItemData tmpItem = this.mn.itemMN.FindItem(scene.Prop);
-				GameObject tmpBuild = GameObject.Instantiate<GameObject>(tmpItem.itemObj,  Managers.mn.sexMN.transform.position, Quaternion.identity);
+				if (tmpItem == null)
+				{
+					PLogger.LogError("Item not found: " + scene.Prop);
+					yield break;
+				}
+
+				GameObject tmpBuild = GameObject.Instantiate<GameObject>(tmpItem.itemObj, Managers.mn.sexMN.transform.position, Quaternion.identity);
 
 				playData.Prop = tmpBuild;
 
@@ -353,27 +357,12 @@ namespace Gallery.UI
 				yield return null;
 			}
 
-			// FIXME: if we enable that, Player X NPC falls through the world. not sure why.
-			// this.mn.cam.camRig.GetComponent<FollowTarget>().target = npcA;
-
 			yield return base.StartCoroutine(scene.Play(playData));
 
-			// switch (scene.SceneType)
-			// {
-			// 	case GallerySceneInfo.SceneTypes.SleepRaes:
-			// 		{
-			// 			var scn = ManRapesSleepScene.Create();
-			// 			yield return base.StartCoroutine(scn.ManRapesSleep(ManRapeSleepStates.Start, npcB.GetComponent<CommonStates>(), npcA.GetComponent<CommonStates>(), 0));
-			// 			break;
-			// 		}
-			// }
-
-			// May not be needed, but just in case
 			if (playData.Prop != null)
 				GameObject.Destroy(playData.Prop);
 			GameObject.Destroy(npcA);
 			GameObject.Destroy(npcB);
-			this.mn.sexMN.gallery = false;
 		}
 
 		public void BackToTitle()

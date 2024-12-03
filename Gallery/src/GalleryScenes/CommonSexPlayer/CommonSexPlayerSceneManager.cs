@@ -95,11 +95,11 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 				MinVersion = minVersion,
 				RequireDLC = dlc,
 				Play = (PlayData data) => {
-					// NpcB is player, and after v0.0.12 player is also sent first
-					if (GameInfo.GameVersion <= GameInfo.ToVersion("0.0.12"))
-						return Managers.mn.sexMN.CommonSexPlayer(0, data.NpcA, data.NpcB, Managers.mn.sexMN.transform.position, 0);
-					else
-						return Managers.mn.sexMN.CommonSexPlayer(0, data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
+					var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
+					scene.Init(new ExtendedHSystem.GallerySceneController());
+					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+					
+					return scene.Run();
 				},
 			};
 		}

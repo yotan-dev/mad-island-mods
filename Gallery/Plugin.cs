@@ -9,6 +9,8 @@ using YotanModCore;
 namespace Gallery
 {
 	[BepInPlugin("Gallery", "Gallery", "0.1.0")]
+	[BepInDependency("YotanModCore", "1.4.0")]
+	[BepInDependency("ExtendedHSystem", "0.1.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
@@ -38,7 +40,7 @@ namespace Gallery
 			Harmony.CreateAndPatchAll(typeof(ManRapesSleepPatch));
 			Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			Harmony.CreateAndPatchAll(typeof(PlaySexPatch));
-			Harmony.CreateAndPatchAll(typeof(PropPanelPatch));
+			Harmony.CreateAndPatchAll(typeof(PropPanelPatch)); // @TODO: Remove once PlayerRape is implemented in the new system
 			Harmony.CreateAndPatchAll(typeof(SexCountPatch));
 			Harmony.CreateAndPatchAll(typeof(SlavePatch));
 			Harmony.CreateAndPatchAll(typeof(StoryPatches));

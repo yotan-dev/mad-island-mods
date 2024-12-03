@@ -45,4 +45,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\YotanModCore\YotanModCore.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ExtendedHSystem\ExtendedHSystem.csproj" />
+	</ItemGroup>
 </Project>
