@@ -422,5 +422,11 @@ namespace ExtendedHSystem.Scenes
 		{
 			return this.TmpSex != null && this.AreActorsWaiting() && this.AreActorsAlive();
 		}
+
+		public void Destroy()
+		{
+			GameObject.Destroy(this.TmpSex);
+			this.TmpSex = null;
+		}
 	}
 }

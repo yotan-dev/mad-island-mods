@@ -339,5 +339,11 @@ namespace ExtendedHSystem.Scenes
 		{
 			return this.TmpSex != null && !Managers.mn.uiMN.skip;
 		}
+
+		public void Destroy()
+		{
+			GameObject.Destroy(this.TmpSex);
+			this.TmpSex = null;
+		}
 	}
 }

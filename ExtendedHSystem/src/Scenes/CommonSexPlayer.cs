@@ -533,5 +533,11 @@ namespace ExtendedHSystem.Scenes
 		{
 			return this.SexMeter.fillAmount;
 		}
+
+		public void Destroy()
+		{
+			GameObject.Destroy(this.TmpSex);
+			this.TmpSex = null;
+		}
 	}
 }
