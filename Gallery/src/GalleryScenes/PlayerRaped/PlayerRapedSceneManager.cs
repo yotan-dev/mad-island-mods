@@ -8,15 +8,14 @@ namespace Gallery.GalleryScenes.PlayerRaped
 {
 	public class PlayerRapedSceneManager : ISceneManager
 	{
-		private readonly PlayerRapedSceneTracker Tracker = new PlayerRapedSceneTracker();
+		public static readonly PlayerRapedSceneManager Instance = new PlayerRapedSceneManager();
 
-		public PlayerRapedSceneManager()
+		private PlayerRapedSceneManager() { }
+
+		private bool IsUnlocked(int playerNpcId, int rapistNpcId)
 		{
-			this.Tracker.OnUnlock += this.OnUnlock;
-		}
-
-		private bool IsUnlocked(int playerNpcId, int rapistNpcId) {
-			return SaveFile.GalleryState.Instance.PlayerRaped.Any((interaction) => {
+			return SaveFile.GalleryState.Instance.PlayerRaped.Any((interaction) =>
+			{
 				return interaction.Character1.Id == playerNpcId &&
 					interaction.Character2.Id == rapistNpcId;
 			});
@@ -24,7 +23,8 @@ namespace Gallery.GalleryScenes.PlayerRaped
 
 		private GallerySceneInfo BuildYonaSceneInfo(int npcB, bool dlc = false)
 		{
-			return new GallerySceneInfo() {
+			return new GallerySceneInfo()
+			{
 				CharGroup = CharGroups.Yona,
 				SceneType = SceneTypes.PlayerRaped,
 				Name = "{npcB} rapes\n{npcA}",
@@ -32,11 +32,12 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				NpcB = new SceneNpc() { NpcID = npcB, Pregnant = false },
 				IsUnlocked = this.IsUnlocked(NpcID.Yona, npcB),
 				RequireDLC = dlc,
-				GetScene = (PlayData data) => {
+				GetScene = (PlayData data) =>
+				{
 					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
 					scene.Init(new ExtendedHSystem.GallerySceneController());
 					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
-					
+
 					return scene;
 				},
 			};
@@ -44,7 +45,8 @@ namespace Gallery.GalleryScenes.PlayerRaped
 
 		private GallerySceneInfo BuildManSceneInfo(string charGroup, int npcB, bool dlc = false)
 		{
-			return new GallerySceneInfo() {
+			return new GallerySceneInfo()
+			{
 				CharGroup = charGroup,
 				SceneType = SceneTypes.PlayerRaped,
 				Name = "{npcB} rapes\n{npcA}",
@@ -52,11 +54,12 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				NpcB = new SceneNpc() { NpcID = npcB, Pregnant = false },
 				IsUnlocked = this.IsUnlocked(NpcID.Man, npcB),
 				RequireDLC = dlc,
-				GetScene = (PlayData data) => {
+				GetScene = (PlayData data) =>
+				{
 					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
 					scene.Init(new ExtendedHSystem.GallerySceneController());
 					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
-					
+
 					return scene;
 				},
 			};
@@ -76,9 +79,10 @@ namespace Gallery.GalleryScenes.PlayerRaped
 			};
 		}
 
-		private void OnUnlock(GalleryChara player, GalleryChara rapist)
+		public void Unlock(GalleryChara player, GalleryChara rapist)
 		{
-			if (IsUnlocked(player.Id, rapist.Id)) {
+			if (IsUnlocked(player.Id, rapist.Id))
+			{
 				GalleryLogger.LogDebug($"PlayerRapedSceneManager: OnEnd: event already unlocked for {player} x {rapist}");
 				return;
 			}

@@ -46,49 +46,60 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SexCountChanged(from, to, sexState, "");
 
-				var sceneA = GalleryManager.GetSceneWithChara(from);
-				var sceneB = GalleryManager.GetSceneWithChara(to);
-				if (sceneA != sceneB) {
+				var handlerA = GalleryManager.GetSceneHandlerForCommon(from);
+				var handlerB = GalleryManager.GetSceneHandlerForCommon(to);
+				if (handlerA != handlerB) {
 					var charaAName = CommonUtils.DetailedString(from);
 					var charaBName = CommonUtils.DetailedString(to);
 					GalleryLogger.LogError($"Pre_SexManager_SexCountChange: Found different scenes for {charaAName} and {charaBName} while changing sex count.");
 				}
 
+				CommonStates realFrom = from;
+				CommonStates realTo = to;
+				if (!CommonUtils.IsMale(from) && CommonUtils.IsMale(to)) {
+					realFrom = to;
+					realTo = from;
+				}
+
 				switch (sexState)
 				{
 					case SexManager.SexCountState.Creampie:
-						sceneA?.OnCreampieCount();
-						sceneB?.OnCreampieCount();
+						handlerA?.OnCreampie(realFrom, realTo);
+						if (handlerA != handlerB)
+							handlerB?.OnCreampie(realFrom, realTo);
+
 						OnCreampie?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Delivery:
-						sceneA?.OnDeliveryCount();
-						sceneB?.OnDeliveryCount();
+						// handlerA?.OnDelivery();
+						// handlerB?.OnDelivery();
 						OnDelivery?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Normal:
-						sceneA?.OnNormalCount();
-						sceneB?.OnNormalCount();
+						handlerA?.OnNormalSex(realFrom, realTo);
+						if (handlerA != handlerB)
+							handlerB?.OnNormalSex(realFrom, realTo);
 						OnNormal?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Pregnant:
-						sceneA?.OnPregnantCount();
-						sceneB?.OnPregnantCount();
+						// handlerA?.OnPregnantCount();
+						// handlerB?.OnPregnantCount();
 						OnPregnant?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Rapes:
-						sceneA?.OnRapeCount();
-						sceneB?.OnRapeCount();
+						// handlerA?.OnRape(realFrom, realTo);
+						// if (handlerA != handlerB)
+						// 	handlerB?.OnRape(realFrom, realTo);
 						OnRape?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Toilet:
-						sceneA?.OnToiletCount();
-						sceneB?.OnToiletCount();
+						// handlerA?.OnToiletCount();
+						// handlerB?.OnToiletCount();
 						OnToilet?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 

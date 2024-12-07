@@ -10,12 +10,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 {
 	public class CommonSexNPCSceneManager : ISceneManager
 	{
-		private readonly CommonSexNPCSceneTracker SceneTracker = new CommonSexNPCSceneTracker();
-
-		public CommonSexNPCSceneManager()
-		{
-			SceneTracker.OnUnlock += this.OnUnlock;
-		}
+		public static readonly CommonSexNPCSceneManager Instance = new CommonSexNPCSceneManager();
 
 		private bool IsUnlocked(int npcA, int npcB, int placeGrade, SexPlace.SexPlaceType placeType, SexManager.SexCountState sexType)
 		{
@@ -30,7 +25,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 			});
 		}
 
-		private void OnUnlock(GalleryChara npcA, GalleryChara npcB, int placeGrade, SexPlace.SexPlaceType placeType, SexManager.SexCountState sexType)
+		public void Unlock(GalleryChara npcA, GalleryChara npcB, int placeGrade, SexPlace.SexPlaceType placeType, SexManager.SexCountState sexType)
 		{
 			if (npcA == null || npcB == null)
 			{

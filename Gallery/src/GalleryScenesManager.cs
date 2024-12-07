@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ExtendedHSystem;
 using Gallery.GalleryScenes;
 using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.CommonSexNPC;
@@ -23,17 +24,19 @@ namespace Gallery
 
 		private List<IGalleryScene> ActiveScenes = new List<IGalleryScene>();
 
+		private Dictionary<CommonStates, SceneEventHandler> SceneHandlers = new Dictionary<CommonStates, SceneEventHandler>();
+
 		public List<ISceneManager> SceneManagers = new List<ISceneManager>()
 		{
 			new ManRapesSceneManager(),
 			new DarumaSceneManager(),
 			new SlaveSceneManager(),
-			new CommonSexNPCSceneManager(),
-			new CommonSexPlayerSceneManager(),
+			CommonSexNPCSceneManager.Instance,
+			CommonSexPlayerSceneManager.Instance,
 			new AssWallSceneManager(),
 			new DeliverySceneManager(),
 			new ManSleepRapeSceneManager(),
-			new PlayerRapedSceneManager(),
+			PlayerRapedSceneManager.Instance,
 			new ToiletNpcSceneManager(),
 			new ToiletSceneManager(),
 		};
@@ -99,6 +102,25 @@ namespace Gallery
 				sceneB?.OnEnd();
 				ActiveScenes.Remove(sceneB);
 			}
+		}
+
+		public SceneEventHandler GetSceneHandlerForCommon(CommonStates common)
+		{
+			return this.SceneHandlers.GetValueOrDefault(common, null);
+		}
+
+		public void AddSceneHandlerForCommon(CommonStates common, SceneEventHandler handler)
+		{
+			if (this.SceneHandlers.ContainsKey(common))
+				this.SceneHandlers[common] = handler;
+			else
+				this.SceneHandlers.Add(common, handler);
+		}
+
+		public void RemoveSceneHandlerForCommon(CommonStates common)
+		{
+			if (this.SceneHandlers.ContainsKey(common))
+				this.SceneHandlers.Remove(common);
 		}
 
 		public void AddScene(IGalleryScene scene)

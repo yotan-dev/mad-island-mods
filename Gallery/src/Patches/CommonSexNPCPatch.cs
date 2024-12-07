@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gallery.GalleryScenes.CommonSexNPC;
 using HarmonyLib;
 
 namespace Gallery.Patches
@@ -25,10 +26,6 @@ namespace Gallery.Patches
 
 		public delegate void OnSceneInfo(CommonSexNpcInfo info);
 
-		public static event OnSceneInfo OnStart;
-
-		public static event OnSceneInfo OnEnd;
-
 		private static Dictionary<string, CommonStates> GetChars(CommonStates npcA, CommonStates npcB)
 		{
 			return new Dictionary<string, CommonStates>() {
@@ -49,9 +46,6 @@ namespace Gallery.Patches
 		[HarmonyPrefix]
 		private static void Pre_SexManager_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
 		{
-			if (Plugin.InGallery)
-				return;
-
 			try
 			{
 				GalleryLogger.SceneStart("CommonSexNPC", GetChars(npcA, npcB), GetInfos(sexPlace, sexType));
@@ -66,7 +60,9 @@ namespace Gallery.Patches
 					return;
 				}
 
-				OnStart?.Invoke(new CommonSexNpcInfo(npcA, npcB, sexPlace, sexType));
+				var handler = new CommonSexNPCSceneEventHandler(npcA, npcB, sexPlace, sexType);
+				GalleryScenesManager.Instance.AddSceneHandlerForCommon(npcA, handler);
+				GalleryScenesManager.Instance.AddSceneHandlerForCommon(npcB, handler);
 			}
 			catch (Exception error)
 			{
@@ -93,12 +89,22 @@ namespace Gallery.Patches
 				}
 				else
 				{
-					OnEnd?.Invoke(new CommonSexNpcInfo(npcA, npcB, sexPlace, sexType));
+					var handlerA = GalleryScenesManager.Instance.GetSceneHandlerForCommon(npcA);
+					handlerA?.AfterSex(null, npcA, npcB);
+
+					var handlerB = GalleryScenesManager.Instance.GetSceneHandlerForCommon(npcB);
+					if (handlerB != handlerA)
+						handlerB?.AfterSex(null, npcA, npcB);
 				}
 			}
 			catch (Exception error)
 			{
 				GalleryLogger.SceneErrorToPlayer("CommonSexNPC", error);
+			}
+			finally
+			{
+				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(npcA);
+				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(npcB);
 			}
 		}
 	}

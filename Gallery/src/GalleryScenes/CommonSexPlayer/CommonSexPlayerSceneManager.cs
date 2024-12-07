@@ -9,12 +9,7 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 {
 	public class CommonSexPlayerSceneManager : ISceneManager
 	{
-		private readonly CommonSexPlayerSceneTracker SceneTracker = new CommonSexPlayerSceneTracker();
-
-		public CommonSexPlayerSceneManager()
-		{
-			SceneTracker.OnUnlock += this.OnUnlock;
-		}
+		public static readonly CommonSexPlayerSceneManager Instance = new CommonSexPlayerSceneManager();
 
 		private bool IsUnlocked(int player, bool playerPregnant, int npc, bool npcPregnant, int sexType, int specialFlag)
 		{
@@ -44,7 +39,7 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 			});
 		}
 
-		private void OnUnlock(GalleryChara player, GalleryChara npc, int sexType, int specialFlag)
+		public void Unlock(GalleryChara player, GalleryChara npc, int sexType, int specialFlag)
 		{
 			if (player == null || npc == null)
 			{

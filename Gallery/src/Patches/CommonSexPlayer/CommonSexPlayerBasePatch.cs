@@ -1,38 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HarmonyLib;
-using YotanModCore;
-using Gallery.GalleryScenes;
+using Gallery.GalleryScenes.CommonSexPlayer;
 
 namespace Gallery.Patches.CommonSexPlayer
 {
 	public class CommonSexPlayerBasePatch
 	{
-		public struct CommonSexPlayerInfo
-		{
-			public CommonStates Player;
-			
-			public CommonStates Npc;
-
-			public int SexType;
-
-			public CommonSexPlayerInfo(CommonStates player, CommonStates npc, int sexType) {
-				this.Player = player;
-				this.Npc = npc;
-				this.SexType = sexType;
-			}
-		}
-
-		public delegate void OnSceneInfo(CommonSexPlayerInfo info);
-
-		public delegate void BustedInfo(int specialFlag);
-
-		public static event OnSceneInfo OnStart;
-
-		public static event BustedInfo OnBusted;
-		
-		public static event OnSceneInfo OnEnd;
+		private static CommonSexPlayerSceneEventHandler EventHandler = null;
 
 		private static Dictionary<string, CommonStates> GetChars(CommonStates pCommon, CommonStates nCommon)
 		{
@@ -52,19 +27,20 @@ namespace Gallery.Patches.CommonSexPlayer
 
 		protected static void Pre_SexManager_CommonSexPlayer(CommonStates pCommon, CommonStates nCommon, int sexType, int state, SexManager __instance)
 		{
-			if (Plugin.InGallery)
-				return;
-
-			try {
+			try
+			{
 				GalleryLogger.SceneStart("CommonSexPlayer", GetChars(pCommon, nCommon), GetInfos(sexType, state));
 
-				switch ((CommonSexPlayerState)state) {
+				switch ((CommonSexPlayerState)state)
+				{
 					case CommonSexPlayerState.Start:
-						OnStart?.Invoke(new CommonSexPlayerInfo(pCommon, nCommon, sexType));
+						EventHandler = new CommonSexPlayerSceneEventHandler(pCommon, nCommon, sexType);
+						GalleryScenesManager.Instance.AddSceneHandlerForCommon(pCommon, EventHandler);
+						GalleryScenesManager.Instance.AddSceneHandlerForCommon(nCommon, EventHandler);
 						break;
 
 					case CommonSexPlayerState.Bust:
-						OnBusted?.Invoke(__instance.tmpSexCountType);
+						EventHandler?.OnBusted(null, null, __instance.tmpSexCountType);
 						break;
 
 					case CommonSexPlayerState.Caress:
@@ -75,12 +51,14 @@ namespace Gallery.Patches.CommonSexPlayer
 					case CommonSexPlayerState.SwitchPosition:
 						/* Nothing to do here */
 						break;
-				
+
 					default:
 						GalleryLogger.LogError($"CommonSexPlayer: Unknown state: {state}");
 						break;
 				}
-			} catch (Exception error) {
+			}
+			catch (Exception error)
+			{
 				GalleryLogger.SceneErrorToPlayer("CommonSexPlayer", error);
 			}
 		}
@@ -90,15 +68,19 @@ namespace Gallery.Patches.CommonSexPlayer
 			while (result.MoveNext())
 				yield return result.Current;
 
-			if (Plugin.InGallery)
-				yield break;
-
-			try {
+			try
+			{
 				GalleryLogger.SceneEnd("CommonSexPlayer", GetChars(pCommon, nCommon), GetInfos(sexType, state));
 
-				switch ((CommonSexPlayerState)state) {
+				switch ((CommonSexPlayerState)state)
+				{
 					case CommonSexPlayerState.Start:
-						OnEnd?.Invoke(new CommonSexPlayerInfo(pCommon, nCommon, sexType));
+						if (EventHandler.Npc.Id == nCommon.npcID)
+							EventHandler?.AfterSex(null, pCommon, nCommon);
+						else
+							GalleryLogger.LogError($"CommonSexPlayer: NPC changed between start and end. ({EventHandler.Npc.Id} != {nCommon.npcID})");
+
+						EventHandler = null;
 						break;
 
 					case CommonSexPlayerState.Caress:
@@ -110,13 +92,23 @@ namespace Gallery.Patches.CommonSexPlayer
 					case CommonSexPlayerState.SwitchPosition:
 						/* Nothing to do here */
 						break;
-				
+
 					default:
 						GalleryLogger.LogError($"CommonSexPlayer: Unknown state: {state}");
 						break;
 				}
-			} catch (Exception error) {
+			}
+			catch (Exception error)
+			{
 				GalleryLogger.SceneErrorToPlayer("CommonSexPlayer", error);
+			}
+			finally
+			{
+				if (state == (int)CommonSexPlayerState.Start)
+				{
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(pCommon);
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(nCommon);
+				}
 			}
 		}
 	}
