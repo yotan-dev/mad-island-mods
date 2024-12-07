@@ -27,6 +27,11 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		public virtual IEnumerable OnBusted(CommonStates from, CommonStates to, int specialFlag)
+		{
+			yield return null;
+		}
+
 		public virtual IEnumerable OnCreampie(CommonStates from, CommonStates to)
 		{
 			yield return null;

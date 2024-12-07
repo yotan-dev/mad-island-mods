@@ -9,9 +9,9 @@ namespace ExtendedHSystem.Scenes
 {
 	public class PlayerRaped : IScene
 	{
-		private CommonStates Player;
+		public readonly CommonStates Player;
 
-		private CommonStates Rapist;
+		public readonly CommonStates Rapist;
 
 		private NPCMove RapistMove;
 

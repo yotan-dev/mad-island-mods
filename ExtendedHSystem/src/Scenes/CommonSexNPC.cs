@@ -1,28 +1,28 @@
 using System.Collections;
+using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.Networking;
 using YotanModCore;
 using YotanModCore.Consts;
 
 namespace ExtendedHSystem.Scenes
 {
-	public class CommonSexNPC: IScene
+	public class CommonSexNPC : IScene
 	{
 		/// <summary>
 		/// First NPC in the Sex Scene.
 		/// If a female NPC is involved, this is the female one.
 		/// </summary>
-		private CommonStates NpcA;
+		public readonly CommonStates NpcA;
 
 		/// <summary>
 		/// Second NPC in the Sex Scene.
 		/// </summary>
-		private CommonStates NpcB;
+		public readonly CommonStates NpcB;
 
-		private SexPlace Place;
+		public readonly SexPlace Place;
 
-		private SexManager.SexCountState Type;
+		public readonly SexManager.SexCountState Type;
 
 		private NPCMove AMove, BMove;
 
@@ -31,12 +31,14 @@ namespace ExtendedHSystem.Scenes
 		private string SexType;
 
 		private GameObject TmpSex;
-		
+
 		private float AAngle;
-		
+
 		private float BAngle;
 
 		private ISceneController Controller;
+
+		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
 		{
@@ -55,6 +57,11 @@ namespace ExtendedHSystem.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+		}
+
+		public void AddEventHandler(SceneEventHandler handler)
+		{
+			this.EventHandlers.Add(handler);
 		}
 
 		private void PrepareNpc(CommonStates npc, out NPCMove npcMove)
@@ -210,7 +217,8 @@ namespace ExtendedHSystem.Scenes
 
 		private void SetupTmpSex()
 		{
-			if (this.NpcA.npcID == this.NpcB.npcID) { // Same NPC (usually girl x girl)
+			if (this.NpcA.npcID == this.NpcB.npcID)
+			{ // Same NPC (usually girl x girl)
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.NpcA, null);
 				CommonStates component2 = this.TmpSex.GetComponent<CommonStates>();
 				if (component2 != null)
@@ -218,7 +226,9 @@ namespace ExtendedHSystem.Scenes
 					Managers.mn.randChar.CopyParams(this.NpcB, component2);
 					Managers.mn.randChar.LoadGenGirl(this.TmpSex, false, RandomCharacter.LoadType.G);
 				}
-			} else { // Basic case, usually girl x men
+			}
+			else
+			{ // Basic case, usually girl x men
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.NpcA, this.NpcB);
 			}
 		}
@@ -232,15 +242,15 @@ namespace ExtendedHSystem.Scenes
 			if (coll != null)
 				coll.enabled = false;
 		}
-		
+
 		private void EnableLiveNpc(CommonStates npc)
 		{
 			CapsuleCollider coll = npc.GetComponent<CapsuleCollider>();
 			MeshRenderer mesh = npc.anim.GetComponent<MeshRenderer>();
-			
+
 			if (coll != null)
 				coll.enabled = true;
-			
+
 			mesh.enabled = true;
 		}
 
@@ -255,10 +265,13 @@ namespace ExtendedHSystem.Scenes
 				return false;
 
 			// @TODO: Check if we really need to those here or we can move to SetupTmpSex
-			if (this.NpcA.npcID == NpcID.UnderGroundWoman && this.NpcB.npcID == NpcID.YoungMan) {
+			if (this.NpcA.npcID == NpcID.UnderGroundWoman && this.NpcB.npcID == NpcID.YoungMan)
+			{
 				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.NpcB);
 				Managers.mn.randChar.LoadGenUnder(this.NpcA, this.TmpSex);
-			} else if (this.NpcA.npcID == NpcID.ElderSisterNative && this.NpcB.npcID == NpcID.YoungMan) {
+			}
+			else if (this.NpcA.npcID == NpcID.ElderSisterNative && this.NpcB.npcID == NpcID.YoungMan)
+			{
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.NpcA, this.NpcB);
 			}
 
@@ -305,30 +318,79 @@ namespace ExtendedHSystem.Scenes
 			yield return animTime > 0f;
 		}
 
+		private IEnumerable CallTypeEventHandlers(SexManager.SexCountState type)
+		{
+			switch (type) {
+				case SexManager.SexCountState.Normal:
+					foreach (var handler in this.EventHandlers)
+					{
+						foreach (var x in handler.OnNormalSex(this.NpcA, this.NpcB))
+							yield return x;
+					}
+					break;
+
+				// case SexManager.SexCountState.Rapes:
+				// 	foreach (var handler in this.EventHandlers)
+				// 	{
+				// 		foreach (var x in handler.OnRape(this.NpcB, this.NpcA))
+				// 			yield return x;
+				// 	}
+				// 	break;
+
+				// case SexManager.SexCountState.Toilet:
+				// 	foreach (var handler in this.EventHandlers)
+				// 	{
+				// 		foreach (var x in handler.OnToilet(this.NpcA, this.NpcB))
+				// 			yield return x;
+				// 	}
+				// 	break;
+
+				case SexManager.SexCountState.Creampie:
+					foreach (var handler in this.EventHandlers)
+					{
+						foreach (var x in handler.OnCreampie(this.NpcB, this.NpcA))
+							yield return x;
+					}
+					break;
+
+				default:
+					PLogger.LogError("CommonSexNPC::CallTypeEventHandlers: Unexpected sex type: " + this.Type);
+					break;
+			}
+		}
+
 		private IEnumerator Perform()
 		{
-			Managers.mn.sexMN.SexCountChange(this.NpcA, this.NpcB, this.Type);
+			foreach (var x in this.CallTypeEventHandlers(this.Type))
+				yield return x;
+
 			SkeletonAnimation tmpSexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			
+
 			foreach (var x in this.Controller.PlayTimedStep(this, tmpSexAnim, this.SexType + "Loop_01", 20f))
 				yield return x;
-			
+
 			foreach (var x in this.Controller.PlayTimedStep(this, tmpSexAnim, this.SexType + "Loop_02", 10f))
 				yield return x;
 
 			bool hasCompleted = false;
-			foreach (var x in this.Controller.PlayOnceStep(this, tmpSexAnim, this.SexType + "Finish")) {
+			foreach (var x in this.Controller.PlayOnceStep(this, tmpSexAnim, this.SexType + "Finish"))
+			{
 				hasCompleted = (bool)x;
 				yield return x;
 			}
 
 			if (hasCompleted)
 			{
-				this.NpcA.LoveChange(this.NpcB, 10f, false);
-				this.NpcB.LoveChange(this.NpcA, 10f, false);
 				if (this.Pregable)
 				{
-					Managers.mn.sexMN.SexCountChange(this.NpcA, this.NpcB, SexManager.SexCountState.Creampie);
+					foreach (var x in this.CallTypeEventHandlers(SexManager.SexCountState.Creampie))
+						yield return x;
+				}
+
+				foreach (var handler in this.EventHandlers)
+				{
+					foreach (var x in handler.AfterSex(this, this.NpcA, this.NpcB))
+						yield return x;
 				}
 			}
 
@@ -370,7 +432,8 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			if (!this.SetupScene()) {
+			if (!this.SetupScene())
+			{
 				this.NpcA.sex = CommonStates.SexState.None;
 				this.NpcB.sex = CommonStates.SexState.None;
 				if (this.TmpSex != null)
@@ -381,7 +444,7 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			yield return this.Perform();
-			
+
 			// Teardown
 			if (this.TmpSex != null)
 				Object.Destroy(this.TmpSex);
@@ -389,7 +452,7 @@ namespace ExtendedHSystem.Scenes
 			this.Place.user = null;
 			this.EnableLiveNpc(this.NpcA);
 			this.EnableLiveNpc(this.NpcB);
-			
+
 			if (this.AMove.actType == NPCMove.ActType.Wait && this.BMove.actType == NPCMove.ActType.Wait)
 			{
 				this.AMove.actType = NPCMove.ActType.Travel;

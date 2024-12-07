@@ -33,6 +33,12 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		/// <summary>
+		/// Called when a creampie is performed.
+		/// </summary>
+		/// <param name="from">The character who came</param>
+		/// <param name="to">The character being creampied</param>
+		/// <returns></returns>
 		public override IEnumerable OnCreampie(CommonStates from, CommonStates to)
 		{
 			Managers.mn.sexMN.SexCountChange(to, from, SexManager.SexCountState.Creampie);
@@ -60,7 +66,11 @@ namespace ExtendedHSystem
 					from.LoveChange(to, 10f, false);
 				else if (commonSexPlayer.GetSexMeterFillAmount() < 0.3f)
 					from.LoveChange(to, -5f, false);
+			} else if (scene is CommonSexNPC) {
+				from.LoveChange(to, 10f, false);
+				to.LoveChange(from, 10f, false);
 			}
+
 			yield return null;
 		}
 

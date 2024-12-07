@@ -11,11 +11,11 @@ namespace ExtendedHSystem.Scenes
 {
 	public class CommonSexPlayer : IScene
 	{
-		private CommonStates Player;
+		public readonly CommonStates Player;
 
-		private CommonStates Npc;
+		public readonly CommonStates Npc;
 
-		private int Type;
+		public readonly int Type;
 
 		private Vector3 Position;
 
@@ -39,9 +39,9 @@ namespace ExtendedHSystem.Scenes
 
 		private ISceneController Controller;
 
-		private List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
+		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
-		private CommonSexPlayerMenuPanel MenuPanel;
+		private readonly CommonSexPlayerMenuPanel MenuPanel;
 
 		public CommonSexPlayer(CommonStates playerCommon, CommonStates npcCommon, Vector3 pos, int sexType)
 		{
@@ -420,6 +420,24 @@ namespace ExtendedHSystem.Scenes
 			foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
 				yield return x;
 
+			CommonStates from, to;
+			if (CommonUtils.IsFemale(this.Player))
+			{
+				from = this.Npc;
+				to = this.Player;
+			}
+			else
+			{
+				from = this.Player;
+				to = this.Npc;
+			}
+
+			foreach (var handler in this.EventHandlers)
+			{
+				foreach (var x in handler.OnBusted(from, to, this.TmpSexCountType))
+					yield return x;
+			}
+
 			if (this.TmpCommonSub == 0)
 				animName = this.SexType + "Finish_idle";
 			else
@@ -429,18 +447,6 @@ namespace ExtendedHSystem.Scenes
 
 			if (this.TmpSexCountType == 0)
 			{
-				CommonStates from, to;
-				if (CommonUtils.IsFemale(this.Player))
-				{
-					from = this.Npc;
-					to = this.Player;
-				}
-				else
-				{
-					from = this.Player;
-					to = this.Npc;
-				}
-
 				foreach (var handler in this.EventHandlers)
 				{
 					foreach (var x in handler.OnCreampie(from, to))
