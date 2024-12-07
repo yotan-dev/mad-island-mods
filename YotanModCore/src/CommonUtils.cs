@@ -54,6 +54,10 @@ namespace YotanModCore
 			return Managers.mn.randChar.GetSexual(common.npcID) == Gender.Female;
 		}
 
+		public static bool IsMale(CommonStates common) {
+			return Managers.mn.randChar.GetSexual(common.npcID) == Gender.Male;
+		}
+
 		public static int GetGender(CommonStates common) {
 			switch (Managers.mn.randChar.GetSexual(common.npcID)) {
 			case Gender.Male:
