@@ -75,14 +75,18 @@ namespace ExtendedHSystem.Scenes
 			toMesh.enabled = false;
 		}
 
-		private void EnableLivePlayer(CommonStates player)
+		private void EnableLivePlayer(CommonStates player, bool isRespawn)
 		{
 			CapsuleCollider toColl = player.GetComponent<CapsuleCollider>();
 			toColl.enabled = true;
 
-			// We can't restore the mesh here or the respawn will have 2 sprites...
-			// MeshRenderer toMesh = player.anim.GetComponent<MeshRenderer>();
-			// toMesh.enabled = true;
+			// We can't restore the mesh here for respawn or we will have 2 sprites...
+			// but we need to do it if the player simply escaped the grapple.
+			if (!isRespawn) {
+				MeshRenderer toMesh = player.anim.GetComponent<MeshRenderer>();
+				toMesh.enabled = true;
+			}
+
 		}
 
 		private GameObject GetFightScene()
@@ -214,17 +218,11 @@ namespace ExtendedHSystem.Scenes
 				yield return x;
 			}
 
-			if (!hasFainted)
+			if (!hasFainted || this.Player.faint > 0.0)
 			{
-				Object.Destroy(this.TmpSex);
-				this.EnableLiveNpc(this.Rapist);
-				this.EnableLivePlayer(this.Player);
-				this.RapistMove.actType = NPCMove.ActType.Interval;
+				yield return false;
 				yield break;
 			}
-
-			if (this.Player.faint > 0.0)
-				yield break;
 
 			this.Player.sex = CommonStates.SexState.GameOver;
 			var defeatStepControl = this.Controller.PlayUntilInputStep(this, sexAnim, "A_Attack_giveup");
@@ -295,6 +293,9 @@ namespace ExtendedHSystem.Scenes
 
 		public IEnumerator Run()
 		{
+			// The original logic is weird, but we need to reset this ourselves or things will go crazy.
+			Managers.mn.uiMN.skip = false;
+
 			if (!this.SetupFightScene())
 			{
 				if (this.TmpSex != null)
@@ -302,8 +303,20 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			foreach (var x in this.PerformBattle())
+			var shouldContinue = true;
+			foreach (var x in this.PerformBattle()) {
+				if (x is bool v)
+					shouldContinue = v;
 				yield return x;
+			}
+			
+			if (!shouldContinue) {
+				Object.Destroy(this.TmpSex);
+				this.EnableLiveNpc(this.Rapist);
+				this.EnableLivePlayer(this.Player, false);
+				this.RapistMove.actType = NPCMove.ActType.Interval;
+				yield break;
+			}
 
 			foreach (var x in this.PerformSex())
 				yield return x;
@@ -324,7 +337,7 @@ namespace ExtendedHSystem.Scenes
 					yield return x;
 			}
 
-			this.EnableLivePlayer(this.Player);
+			this.EnableLivePlayer(this.Player, true);
 
 			foreach (var handler in this.EventHandlers)
 			{
