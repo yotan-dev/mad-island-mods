@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gallery.GalleryScenes.AssWall;
 using HarmonyLib;
 using YotanModCore;
 
@@ -8,26 +9,7 @@ namespace Gallery.Patches
 {
 	public class AssWallPatch
 	{
-		public struct AssWallInfo
-		{
-			public CommonStates Player;
-			
-			public CommonStates Girl;
-
-			public InventorySlot.Type WallType;
-
-			public AssWallInfo(CommonStates player, CommonStates girl, InventorySlot.Type wallType) {
-				this.Player = player;
-				this.Girl = girl;
-				this.WallType = wallType;
-			}
-		}
-
-		public delegate void OnSceneInfo(AssWallInfo info);
-
-		public static event OnSceneInfo OnStart;
-		
-		public static event OnSceneInfo OnEnd;
+		private static AssWallSceneEventHandler EventHandler = null;
 
 		[HarmonyPatch(typeof(SexManager), "AssWall")]
 		[HarmonyPrefix]
@@ -58,7 +40,9 @@ namespace Gallery.Patches
 				GalleryLogger.SceneStart("AssWall", charas, infos);
 			
 				if ((AssWallState) state == AssWallState.Start && tmpWall != null) {
-					OnStart?.Invoke(new AssWallInfo(player, girl, tmpWall.type));
+					EventHandler = new AssWallSceneEventHandler(player, girl, tmpWall.type);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(player, EventHandler);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(girl, EventHandler);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("AssWall", error);
@@ -76,11 +60,10 @@ namespace Gallery.Patches
 			if (Plugin.InGallery)
 				yield break;
 
+			CommonStates player = null;
+			CommonStates girl = null;
 			try {
 				Dictionary<string, CommonStates> charas = new Dictionary<string, CommonStates>() {};
-
-				CommonStates player = null;
-				CommonStates girl = null;
 
 				if ((AssWallState) state == AssWallState.Start) {
 					girl = Managers.mn?.inventory?.itemSlot?[50]?.common;
@@ -98,10 +81,18 @@ namespace Gallery.Patches
 				GalleryLogger.SceneEnd("AssWall", charas, infos);
 
 				if ((AssWallState) state == AssWallState.Start && tmpWall != null) {
-					OnEnd?.Invoke(new AssWallInfo(player, girl, tmpWall.type));
+					EventHandler?.AfterSex(null, player, girl);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("AssWall", error);
+			} finally {
+				if ((AssWallState) state == AssWallState.Start) {
+					if (player != null)
+						GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(player);
+					if (girl != null)
+						GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(girl);
+					EventHandler = null;
+				}
 			}
 		}
 	}

@@ -1,3 +1,4 @@
+using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.GalleryScenes.CommonSexPlayer;
 using Gallery.GalleryScenes.PlayerRaped;
@@ -10,6 +11,15 @@ namespace Gallery.Patches
 	/// </summary>
 	public class EHSWatcherPatch
 	{
+		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.AssWall), "Run")]
+		[HarmonyPrefix]
+		private static void Pre_AssWall_Run(ExtendedHSystem.Scenes.AssWall __instance)
+		{
+			__instance.AddEventHandler(
+				new AssWallSceneEventHandler(__instance.Player, __instance.Npc, __instance.TmpWall.type)
+			);
+		}
+
 		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.CommonSexNPC), "Run")]
 		[HarmonyPrefix]
 		private static void Pre_CommonSexNPC_Run(ExtendedHSystem.Scenes.CommonSexNPC __instance)

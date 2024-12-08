@@ -33,7 +33,7 @@ namespace Gallery
 			new SlaveSceneManager(),
 			CommonSexNPCSceneManager.Instance,
 			CommonSexPlayerSceneManager.Instance,
-			new AssWallSceneManager(),
+			AssWallSceneManager.Instance,
 			new DeliverySceneManager(),
 			new ManSleepRapeSceneManager(),
 			PlayerRapedSceneManager.Instance,

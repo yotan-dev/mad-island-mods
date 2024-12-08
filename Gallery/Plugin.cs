@@ -31,6 +31,7 @@ namespace Gallery
 			if (ExtendedHSystem.Config.Instance.ReplaceOriginalScenes.Value) {
 				Harmony.CreateAndPatchAll(typeof(EHSWatcherPatch));
 			} else {
+				Harmony.CreateAndPatchAll(typeof(AssWallPatch));
 				Harmony.CreateAndPatchAll(typeof(CommonSexNPCPatch));
 				if (GameInfo.GameVersion <= GameInfo.ToVersion("0.0.12"))
 					Harmony.CreateAndPatchAll(typeof(CommonSexPlayerPatchV0_012));
@@ -38,8 +39,7 @@ namespace Gallery
 					Harmony.CreateAndPatchAll(typeof(CommonSexPlayerPatchV1_006));
 				Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			}
-			
-			Harmony.CreateAndPatchAll(typeof(AssWallPatch));
+
 			Harmony.CreateAndPatchAll(typeof(CommonRapesNPCPatch));
 			Harmony.CreateAndPatchAll(typeof(DarumaSexPatch));
 			Harmony.CreateAndPatchAll(typeof(DeliveryPatch));

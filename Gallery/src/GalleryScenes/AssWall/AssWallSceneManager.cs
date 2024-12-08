@@ -9,12 +9,9 @@ namespace Gallery.GalleryScenes.AssWall
 {
 	public class AssWallSceneManager : ISceneManager
 	{
-		private readonly AssWallSceneTracker SceneTracker = new AssWallSceneTracker();
+		public static readonly AssWallSceneManager Instance = new AssWallSceneManager();
 
-		public AssWallSceneManager()
-		{
-			SceneTracker.OnUnlock += this.OnUnlock;
-		}
+		private AssWallSceneManager() { }
 
 		private bool IsUnlocked(int npcA, int npcB, InventorySlot.Type wallType)
 		{
@@ -27,7 +24,7 @@ namespace Gallery.GalleryScenes.AssWall
 			});
 		}
 
-		private void OnUnlock(GalleryChara player, GalleryChara girl, InventorySlot.Type wallType)
+		public void Unlock(GalleryChara player, GalleryChara girl, InventorySlot.Type wallType)
 		{
 			if (player == null || girl == null)
 			{
@@ -68,7 +65,7 @@ namespace Gallery.GalleryScenes.AssWall
 		// 			// Hide entities
 		// 			data.NpcA.gameObject.SetActive(false);
 		// 			data.NpcB.gameObject.SetActive(false);
-					
+
 		// 			// Add NpcB to AssWall slot[0]
 		// 			var invSlot = data.Prop.GetComponent<InventorySlot>();
 		// 			Managers.mn.inventory.SlotToSlot(
