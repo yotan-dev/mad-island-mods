@@ -33,6 +33,12 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		public override IEnumerable OnToilet(CommonStates from, CommonStates to)
+		{
+			Managers.mn.sexMN.SexCountChange(from, to, SexManager.SexCountState.Toilet);
+			yield return null;
+		}
+
 		/// <summary>
 		/// Called when a creampie is performed.
 		/// </summary>

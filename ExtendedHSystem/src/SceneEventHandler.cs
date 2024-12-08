@@ -27,6 +27,17 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		/// <summary>
+		/// Called when "from" character uses "to" in toilet
+		/// </summary>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
+		public virtual IEnumerable OnToilet(CommonStates from, CommonStates to)
+		{
+			yield return null;
+		}
+
 		public virtual IEnumerable OnBusted(CommonStates from, CommonStates to, int specialFlag)
 		{
 			yield return null;
