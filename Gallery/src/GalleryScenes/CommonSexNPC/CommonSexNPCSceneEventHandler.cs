@@ -41,8 +41,8 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 			this.NpcA = new GalleryChara(npcA);
 			this.NpcB = new GalleryChara(npcB);
 
-			this.PlaceGrade = sexPlace.grade;
-			this.PlaceType = sexPlace.placeType;
+			this.PlaceGrade = sexPlace?.grade ?? -1;
+			this.PlaceType = sexPlace?.placeType ?? SexPlace.SexPlaceType.Normal;
 			this.SexType = sexType;
 		}
 
