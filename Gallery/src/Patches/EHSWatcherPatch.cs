@@ -3,6 +3,7 @@ using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.GalleryScenes.CommonSexPlayer;
 using Gallery.GalleryScenes.PlayerRaped;
 using HarmonyLib;
+using YotanModCore;
 
 namespace Gallery.Patches
 {
@@ -24,9 +25,12 @@ namespace Gallery.Patches
 		[HarmonyPrefix]
 		private static void Pre_CommonSexNPC_Run(ExtendedHSystem.Scenes.CommonSexNPC __instance)
 		{
-			__instance.AddEventHandler(
-				new CommonSexNPCSceneEventHandler(__instance.NpcA, __instance.NpcB, __instance.Place, __instance.Type)
-			);
+			// We only track if at least one is friend, as we can get some weird results otherwise -- specially with herb village
+			if (CommonUtils.IsFriend(__instance.NpcA) || CommonUtils.IsFriend(__instance.NpcB)) {
+				__instance.AddEventHandler(
+					new CommonSexNPCSceneEventHandler(__instance.NpcA, __instance.NpcB, __instance.Place, __instance.Type)
+				);
+			}
 		}
 
 		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.CommonSexPlayer), "Run")]
