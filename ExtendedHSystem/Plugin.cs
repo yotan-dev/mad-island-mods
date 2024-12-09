@@ -17,6 +17,7 @@ namespace ExtendedHSystem
 			ExtendedHSystem.Config.Instance.Init(Config);
 
 			if (ExtendedHSystem.Config.Instance.ReplaceOriginalScenes.Value) {
+				Harmony.CreateAndPatchAll(typeof(SexManager_AssWallPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexNPCPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexPlayerPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_PlayerRapedPatch));

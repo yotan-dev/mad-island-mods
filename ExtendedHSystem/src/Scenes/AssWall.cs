@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Spine.Unity;
-using UnityEngine;
-using UnityEngine.UI;
 using YotanModCore;
-using YotanModCore.Consts;
+using YotanModCore.PropPanels;
 
 namespace ExtendedHSystem.Scenes
 {
@@ -164,7 +161,8 @@ namespace ExtendedHSystem.Scenes
 
 			sexPlace.user = null;
 
-			this.MenuPanel.Close();
+			// It is already closed by whoever called destroy
+			// this.MenuPanel.Close();
 
 			Managers.mn.gameMN.Controlable(true, true);
 			Managers.mn.gameMN.pMove.PlayerVisible(true);
@@ -182,12 +180,12 @@ namespace ExtendedHSystem.Scenes
 
 		public bool CanContinue()
 		{
-			return Managers.mn.uiMN.propActProgress == 1;
+			return PropPanelManager.Instance.IsOpen();
 		}
 
 		public void Destroy()
 		{
-			Managers.mn.uiMN.propActProgress = -1;
+			this.MenuPanel?.Close();
 		}
 	}
 }
