@@ -257,6 +257,8 @@ namespace ExtendedHSystem.Scenes
 		private bool SetupScene()
 		{
 			this.GetSceneInfo(out GameObject scene, out this.Pregable, out this.SexType);
+			if (scene == null)
+				return false;
 
 			var pos = this.Place.transform.position;
 			this.TmpSex = GameObject.Instantiate<GameObject>(scene, pos, Quaternion.identity);
