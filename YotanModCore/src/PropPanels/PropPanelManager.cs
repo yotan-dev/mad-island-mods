@@ -74,6 +74,7 @@ namespace YotanModCore.PropPanels
 			}
 
 			Managers.mn.uiMN.propPanel.SetActive(false);
+			Managers.mn.uiMN.propActProgress = PropPanelConst.Type.None;
 
 			CurrentPanel = null;
 		}
@@ -114,6 +115,15 @@ namespace YotanModCore.PropPanels
 				return;
 
 			this.CurrentPanel.Options[buttonId].Action();
+		}
+
+		/// <summary>
+		/// Checks whether a prop panel is open.
+		/// </summary>
+		/// <returns></returns>
+		public bool IsOpen()
+		{
+			return Managers.mn.uiMN.propActProgress != PropPanelConst.Type.None;
 		}
 	}
 }

@@ -4,6 +4,7 @@ namespace YotanModCore.Consts
 	{
 		public class Type
 		{
+			public const int None = -1;
 			public const int CommonSexPlayer = 2;
 			public const int SleepRape = 3;
 
