@@ -38,6 +38,17 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		/// <summary>
+		/// Called when "from" rapes "to"
+		/// </summary>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
+		public virtual IEnumerable OnRape(CommonStates from, CommonStates to)
+		{
+			yield return null;
+		}
+
 		public virtual IEnumerable OnBusted(CommonStates from, CommonStates to, int specialFlag)
 		{
 			yield return null;
