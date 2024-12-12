@@ -37,11 +37,11 @@ namespace Gallery
 					Harmony.CreateAndPatchAll(typeof(CommonSexPlayerPatchV0_012));
 				else // if (GameInfo.GameVersion <= GameInfo.ToVersion("0.1.6"))
 					Harmony.CreateAndPatchAll(typeof(CommonSexPlayerPatchV1_006));
+				Harmony.CreateAndPatchAll(typeof(DarumaSexPatch));
 				Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			}
 
 			Harmony.CreateAndPatchAll(typeof(CommonRapesNPCPatch));
-			Harmony.CreateAndPatchAll(typeof(DarumaSexPatch));
 			Harmony.CreateAndPatchAll(typeof(DeliveryPatch));
 			Harmony.CreateAndPatchAll(typeof(ManRapesPatch));
 			Harmony.CreateAndPatchAll(typeof(ManRapesSleepPatch));

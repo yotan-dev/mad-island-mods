@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gallery.GalleryScenes.Daruma;
 using HarmonyLib;
 using YotanModCore;
 using YotanModCore.Consts;
@@ -9,25 +10,7 @@ namespace Gallery.Patches
 {
 	public class DarumaSexPatch
 	{
-		public struct DarumaInfo
-		{
-			public CommonStates Player;
-			
-			public CommonStates Girl;
-
-			public DarumaInfo(CommonStates player, CommonStates girl) {
-				this.Player = player;
-				this.Girl = girl;
-			}
-		}
-
-		public delegate void OnSceneInfo(DarumaInfo info);
-
-		public static event OnSceneInfo OnStart;
-		
-		public static event OnSceneInfo OnBust;
-		
-		public static event OnSceneInfo OnEnd;
+		private static DarumaSceneEventHandler EventHandler;
 
 		[HarmonyPatch(typeof(SexManager), "DarumaSex")]
 		[HarmonyPrefix]
@@ -46,9 +29,14 @@ namespace Gallery.Patches
 			
 				GalleryLogger.SceneStart("DarumaSex", charas, infos);
 
-				// Place doesn't matter (v0.12)
+				// Place doesn't matter (v0.2.3)
 				if (state == DarumaSexState.MainLoop) {
-					OnStart?.Invoke(new DarumaInfo(Managers.mn.gameMN.playerCommons[1], Managers.mn.inventory.itemSlot[50].common));
+					var player = CommonUtils.GetActivePlayer();
+					var girl = Managers.mn.inventory.itemSlot[50].common;
+					EventHandler = new DarumaSceneEventHandler(player, girl);
+					
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(player, EventHandler);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(girl, EventHandler);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("DarumaSex", error);
@@ -77,10 +65,12 @@ namespace Gallery.Patches
 				GalleryLogger.SceneEnd("DarumaSex", charas, infos);
 				
 				if (state == DarumaSexState.Bust) {
-					OnBust?.Invoke(new DarumaInfo(Managers.mn.gameMN.playerCommons[1], Managers.mn.inventory.itemSlot[50].common));
+					EventHandler.OnBusted(null, null, 0);
 				}
 				if (state == DarumaSexState.MainLoop) {
-					OnEnd?.Invoke(new DarumaInfo(Managers.mn.gameMN.playerCommons[1], Managers.mn.inventory.itemSlot[50].common));
+					EventHandler.AfterSex(null, null, null);
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(CommonUtils.GetActivePlayer());
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(Managers.mn.inventory.itemSlot[50].common);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("DarumaSex", error);

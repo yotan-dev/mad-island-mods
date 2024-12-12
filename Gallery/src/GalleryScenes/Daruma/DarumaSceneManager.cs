@@ -1,19 +1,17 @@
 using System.Linq;
-using YotanModCore;
 using Gallery.SaveFile;
 using Gallery.SaveFile.Containers;
-using Gallery.UI;
 using YotanModCore.Consts;
 
 namespace Gallery.GalleryScenes.Daruma
 {
 	public class DarumaSceneManager : ISceneManager
 	{
-		private readonly DarumaSceneTracker SceneTracker = new DarumaSceneTracker();
+		public static readonly DarumaSceneManager Instance = new DarumaSceneManager();
 
-		public DarumaSceneManager()
+		private DarumaSceneManager()
 		{
-			SceneTracker.OnUnlock += this.OnUnlock;
+			
 		}
 
 		private bool IsUnlocked(int npcA, int npcB)
@@ -26,7 +24,7 @@ namespace Gallery.GalleryScenes.Daruma
 			});
 		}
 
-		private void OnUnlock(GalleryChara player, GalleryChara girl)
+		public void Unlock(GalleryChara player, GalleryChara girl)
 		{
 			if (player == null || girl == null)
 			{

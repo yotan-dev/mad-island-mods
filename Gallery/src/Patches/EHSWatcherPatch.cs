@@ -1,6 +1,7 @@
 using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.GalleryScenes.CommonSexPlayer;
+using Gallery.GalleryScenes.Daruma;
 using Gallery.GalleryScenes.PlayerRaped;
 using HarmonyLib;
 using YotanModCore;
@@ -39,6 +40,15 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new CommonSexPlayerSceneEventHandler(__instance.Player, __instance.Npc, __instance.Type)
+			);
+		}
+
+		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Daruma), "Run")]
+		[HarmonyPrefix]
+		private static void Pre_Daruma_Run(ExtendedHSystem.Scenes.Daruma __instance)
+		{
+			__instance.AddEventHandler(
+				new DarumaSceneEventHandler(__instance.Player, __instance.Npc)
 			);
 		}
 
