@@ -1,4 +1,5 @@
 using System;
+using ExtendedHSystem;
 using HarmonyLib;
 using YotanModCore;
 
@@ -46,8 +47,13 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SexCountChanged(from, to, sexState, "");
 
-				var handlerA = GalleryManager.GetSceneHandlerForCommon(from);
-				var handlerB = GalleryManager.GetSceneHandlerForCommon(to);
+				SceneEventHandler handlerA = null;
+				SceneEventHandler handlerB = null;
+				if (from != null)
+					handlerA = GalleryManager.GetSceneHandlerForCommon(from);
+				if (to != null)
+					handlerB = GalleryManager.GetSceneHandlerForCommon(to);
+
 				if (handlerA != handlerB) {
 					var charaAName = CommonUtils.DetailedString(from);
 					var charaBName = CommonUtils.DetailedString(to);
@@ -72,8 +78,10 @@ namespace Gallery.Patches
 						break;
 
 					case SexManager.SexCountState.Delivery:
-						// handlerA?.OnDelivery();
-						// handlerB?.OnDelivery();
+						handlerA?.OnDelivery(null, to);
+						if (handlerA != handlerB)
+							handlerB?.OnDelivery(null, to);
+						
 						OnDelivery?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 

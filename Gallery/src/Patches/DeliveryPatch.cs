@@ -1,19 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gallery.GalleryScenes.Delivery;
 using HarmonyLib;
-using Gallery.GalleryScenes;
 
 namespace Gallery.Patches
 {
 	public class DeliveryPatch
 	{
-		public delegate void OnSceneInfo(CommonStates girl);
-
-		public static event OnSceneInfo OnStart;
-
-		public static event OnSceneInfo OnEnd;
-
 		private static Dictionary<string, CommonStates> GetChars(CommonStates common) {
 			return new Dictionary<string, CommonStates>() { { "common", common } };
 		}
@@ -44,7 +38,8 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneStart("Delivery", GetChars(common), GetInfos(tmpWorkPlace, tmpSexPlace));
 
-				OnStart?.Invoke(common);
+				var handler = new DeliverySceneEventHandler(common);
+				GalleryScenesManager.Instance.AddSceneHandlerForCommon(common, handler);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("Delivery", error);
 			}
@@ -63,9 +58,14 @@ namespace Gallery.Patches
 
 			try {
 				GalleryLogger.SceneEnd("Delivery", GetChars(common), GetInfos(tmpWorkPlace, tmpSexPlace));
-				OnEnd?.Invoke(common);
+
+				var handler = GalleryScenesManager.Instance.GetSceneHandlerForCommon(common);
+				if (handler != null && handler is DeliverySceneEventHandler deliveryHandler)
+					deliveryHandler.AfterDelivery(null, common);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("Delivery", error);
+			} finally {
+				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(common);
 			}
 		}
 	}

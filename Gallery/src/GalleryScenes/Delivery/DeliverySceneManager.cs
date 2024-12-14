@@ -8,12 +8,9 @@ namespace Gallery.GalleryScenes.Delivery
 {
 	public class DeliverySceneManager : ISceneManager
 	{
-		private readonly DeliverySceneTracker SceneTracker = new DeliverySceneTracker();
+		public static readonly DeliverySceneManager Instance = new DeliverySceneManager();
 
-		public DeliverySceneManager()
-		{
-			SceneTracker.OnUnlock += this.OnUnlock;
-		}
+		private DeliverySceneManager() { }
 
 		private bool IsUnlocked(int npcA)
 		{
@@ -23,7 +20,7 @@ namespace Gallery.GalleryScenes.Delivery
 			});
 		}
 
-		private void OnUnlock(GalleryChara girl)
+		public void Unlock(GalleryChara girl)
 		{
 			if (girl == null)
 			{

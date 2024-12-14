@@ -34,7 +34,7 @@ namespace Gallery
 			CommonSexNPCSceneManager.Instance,
 			CommonSexPlayerSceneManager.Instance,
 			AssWallSceneManager.Instance,
-			new DeliverySceneManager(),
+			DeliverySceneManager.Instance,
 			new ManSleepRapeSceneManager(),
 			PlayerRapedSceneManager.Instance,
 			new ToiletNpcSceneManager(),
