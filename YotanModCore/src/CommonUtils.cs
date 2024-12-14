@@ -97,6 +97,16 @@ namespace YotanModCore
 		}
 
 		/// <summary>
+		/// Given common that is pregnant, gets the ID of the father of the kid
+		/// </summary>
+		/// <param name="common"></param>
+		/// <returns></returns>
+		public static int GetPregnantFatherId(CommonStates common)
+		{
+			return common.pregnant[1];
+		}
+
+		/// <summary>
 		/// Gets a display name for npc ID. This represents the type of NPC (not their "person name")
 		/// </summary>
 		/// <param name="npcId"></param>
