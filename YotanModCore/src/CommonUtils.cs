@@ -47,14 +47,23 @@ namespace YotanModCore
 		/// <param name="common"></param>
 		/// <returns></returns>
 		public static bool IsFriend(CommonStates common) {
+			if (common == null)
+				return false;
+
 			return common.employ != CommonStates.Employ.None;
 		}
 		
 		public static bool IsFemale(CommonStates common) {
+			if (common == null)
+				return false;
+
 			return Managers.mn.randChar.GetSexual(common.npcID) == Gender.Female;
 		}
 
 		public static bool IsMale(CommonStates common) {
+			if (common == null)
+				return false;
+
 			return Managers.mn.randChar.GetSexual(common.npcID) == Gender.Male;
 		}
 
