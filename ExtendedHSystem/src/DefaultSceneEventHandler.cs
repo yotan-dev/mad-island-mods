@@ -71,14 +71,26 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		public override IEnumerable OnDelivery(Delivery scene, CommonStates mother)
+		{
+			foreach (var x in scene.SpawnChild())
+				yield return x;
+
+			Managers.mn.sexMN.SexCountChange(mother, null, SexManager.SexCountState.Delivery);
+			mother.age++;
+		}
+
 		public override IEnumerable AfterSex(IScene scene, CommonStates from, CommonStates to)
 		{
-			if (scene is CommonSexPlayer commonSexPlayer) {
+			if (scene is CommonSexPlayer commonSexPlayer)
+			{
 				if (commonSexPlayer.GetSexMeterFillAmount() == 1f)
 					from.LoveChange(to, 10f, false);
 				else if (commonSexPlayer.GetSexMeterFillAmount() < 0.3f)
 					from.LoveChange(to, -5f, false);
-			} else if (scene is CommonSexNPC) {
+			}
+			else if (scene is CommonSexNPC)
+			{
 				from.LoveChange(to, 10f, false);
 				to.LoveChange(from, 10f, false);
 			}
@@ -92,7 +104,7 @@ namespace ExtendedHSystem
 			player.CommonLifeChange(0.0, 0);
 			player.faint = (int)(player.maxFaint * 0.2);
 			Managers.mn.gameMN.FaintImageChange();
-			
+
 			Managers.mn.sexMN.StartCoroutine(Managers.mn.sexMN.ReviveToNearPoint(other.npcID));
 			yield return null;
 		}

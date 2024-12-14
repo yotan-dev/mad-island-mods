@@ -59,12 +59,22 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		public virtual IEnumerable OnDelivery(Delivery scene, CommonStates mother)
+		{
+			yield return null;
+		}
+
 		public virtual IEnumerable AfterRape(CommonStates victim, CommonStates rapist)
 		{
 			yield return null;
 		}
 
 		public virtual IEnumerable AfterSex(IScene scene, CommonStates from, CommonStates to)
+		{
+			yield return null;
+		}
+
+		public virtual IEnumerable AfterDelivery(IScene scene, CommonStates mother)
 		{
 			yield return null;
 		}
