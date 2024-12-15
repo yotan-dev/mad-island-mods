@@ -112,6 +112,7 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 				this.BuildSceneInfo(CharGroups.Giant, NpcID.Giant, NpcID.Man, 0),
 				this.BuildSceneInfo(CharGroups.Mermaid, NpcID.Mermaid, NpcID.Man, 0),
 				this.BuildSceneInfo(CharGroups.Sally, NpcID.Sally, NpcID.Man, 0),
+				this.BuildSceneInfo(CharGroups.Merry, NpcID.Merry, NpcID.Man, 0, minVersion: GameInfo.ToVersion("0.2.4")),
 				new() {
 					CharGroup = CharGroups.Shino,
 					SceneType = SceneTypes.CommonSexPlayer,

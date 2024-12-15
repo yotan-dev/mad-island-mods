@@ -17,6 +17,7 @@ namespace Gallery
 			public static readonly string Sally = "Sally";
 			public static readonly string Mermaid = "Mermaid";
 			public static readonly string Shino = "Shino";
+			public static readonly string Merry = "Merry";
 			public static readonly string NativeMale = "Native Male";
 			public static readonly string BigNative = "Big Native";
 			public static readonly string NativeFemale = "Native Female";

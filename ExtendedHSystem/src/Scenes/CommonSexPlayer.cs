@@ -176,9 +176,13 @@ namespace ExtendedHSystem.Scenes
 								this.SexType = "B_";
 							break;
 
-						case NpcID.Sally:
+						case NpcID.Sally: // 115
 							scene = Managers.mn.sexMN.sexList[11].sexObj[0];
 							this.SexType = "Love_A_";
+							break;
+
+						case NpcID.Merry: // 116
+							scene = Managers.mn.sexMN.sexList[1].sexObj[25];
 							break;
 					}
 					break;
