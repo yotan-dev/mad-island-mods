@@ -213,8 +213,10 @@ namespace YotanModCore.Consts
 		public const int Shino = 114;
 		[StrVal("Sally")]
 		public const int Sally = 115;
-		[StrVal("Santa")]
-		public const int Santa = 116;
+		[StrVal("Merry")]
+		public const int Merry = 116;
+		[StrVal("Reindeer")]
+		public const int Reindeer = 117;
 		[StrVal("Ent King")]
 		public const int EntKing = 120;
 		[StrVal("Ent Queen")]
