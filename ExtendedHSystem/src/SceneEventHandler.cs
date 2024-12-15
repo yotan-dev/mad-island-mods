@@ -60,6 +60,11 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		public virtual IEnumerable OnSleepRapeTypeChange(IScene scene, ManRapeSleepState type)
+		{
+			yield return null;
+		}
+
 		public virtual IEnumerable OnBusted(CommonStates from, CommonStates to, int specialFlag)
 		{
 			yield return null;

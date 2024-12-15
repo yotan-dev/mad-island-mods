@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using ExtendedHSystem.Patches;
 using HarmonyLib;
-using UnityEngine;
 
 namespace ExtendedHSystem
 {
@@ -23,6 +22,7 @@ namespace ExtendedHSystem
 				Harmony.CreateAndPatchAll(typeof(SexManager_DarumaPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_DeliveryPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_ManRapesPatch));
+				Harmony.CreateAndPatchAll(typeof(SexManager_ManRapesSleepPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_PlayerRapedPatch));
 			}
 
