@@ -63,7 +63,7 @@ namespace Gallery
 		public SceneNpc NpcA { get; set; } = null;
 		public SceneNpc NpcB { get; set; } = null;
 		public string Prop { get; set; } = "";
-		public ManRapesSexType SleepRapeSexType { get; set; }
+		public ManRapeSleepState SleepRapeSexType { get; set; }
 
 		public bool IsUnlocked;
 

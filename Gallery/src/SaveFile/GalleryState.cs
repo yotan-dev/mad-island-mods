@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Xml.Serialization;
+using ExtendedHSystem.Scenes;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.SaveFile
@@ -29,7 +30,7 @@ namespace Gallery.SaveFile
 
 		public GalleryHashSet<NpcSexInteractions> CommonSexNpc = new();
 
-		public GalleryHashSet<SexTypeInteraction<ManRapesSexType>> SleepRapes = new();
+		public GalleryHashSet<SexTypeInteraction<ManRapeSleepState>> SleepRapes = new();
 
 		public GalleryHashSet<CommonSexPlayerInteraction> CommonSexPlayer = new ();
 	

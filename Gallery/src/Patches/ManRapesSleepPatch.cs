@@ -1,33 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedHSystem.Scenes;
+using Gallery.GalleryScenes.ManSleepRape;
 using HarmonyLib;
-using Gallery.GalleryScenes;
 
 namespace Gallery.Patches
 {
 	public class ManRapesSleepPatch
 	{
-		public struct ManSleepRapesInfo
-		{
-			public CommonStates man;
-			public CommonStates girl;
-
-			public ManSleepRapesInfo(CommonStates man, CommonStates girl) {
-				this.man = man;
-				this.girl = girl;
-			}
-		}
-
-		public delegate void OnSceneInfo(ManSleepRapesInfo info);
-
-		public delegate void SexTypeChangeInfo(int state, int sexType);
-
-		public static event OnSceneInfo OnStart;
-
-		public static event SexTypeChangeInfo OnSexTypeChange;
-		
-		public static event OnSceneInfo OnEnd;
+		private static ManSleepRapeSceneEventHandler EventHandler;
 
 		private static Dictionary<string, CommonStates> GetCharas(CommonStates girl, CommonStates man) {
 			return new Dictionary<string, CommonStates>() {
@@ -55,13 +37,24 @@ namespace Gallery.Patches
 
 				switch ((ManRapesState) state) {
 				case ManRapesState.Start: // Starting
-					OnStart?.Invoke(new ManSleepRapesInfo(man, girl));
+					EventHandler = new ManSleepRapeSceneEventHandler(man, girl);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(man, EventHandler);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(girl, EventHandler);
 					break;
 
 				case ManRapesState.StartRape: // Starting Rape
+					EventHandler?.OnSleepRapeTypeChange(null, ManRapeSleepState.ForcefullRape);
+					GalleryLogger.LogDebug($"ManSleepRapeScene: OnStart: mode = {(ManRapeSleepState) sexType}");
+					break;
+
 				case ManRapesState.StartDiscretlyRape: // Starting Discretly Rape
-					OnSexTypeChange?.Invoke(state, sexType);
-					GalleryLogger.LogDebug($"ManSleepRapeScene: OnStart: mode = {(ManRapesSexType) sexType}");
+					if (sexType == 0) {
+						EventHandler?.OnSleepRapeTypeChange(null, ManRapeSleepState.SleepPowder);
+					} else {
+						EventHandler?.OnSleepRapeTypeChange(null, ManRapeSleepState.GentlyRape);
+					}
+
+					GalleryLogger.LogDebug($"ManSleepRapeScene: OnStart: mode = {(ManRapeSleepState) sexType}");
 					break;
 
 				case ManRapesState.Insert: // Inserting
@@ -94,10 +87,16 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneEnd("ManRapesSleep", GetCharas(girl, man), GetInfos(sexType, state));
 				if ((ManRapesState) state == ManRapesState.Start) {
-					OnEnd?.Invoke(new ManSleepRapesInfo(man, girl));
+					EventHandler?.AfterManRape(girl, man);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("ManRapesSleep", error);
+			} finally {
+				if ((ManRapesState) state == ManRapesState.Start) {
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(man);
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(girl);
+					EventHandler = null;
+				}
 			}
 		}
 	}

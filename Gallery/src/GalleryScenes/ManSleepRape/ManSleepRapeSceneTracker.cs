@@ -1,93 +1,51 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using Gallery.Patches;
+using ExtendedHSystem;
+using ExtendedHSystem.Scenes;
 using Gallery.SaveFile.Containers;
-using YotanModCore.Consts;
 
 namespace Gallery.GalleryScenes.ManSleepRape
 {
-	public class ManSleepRapeSceneTracker
+	public class ManSleepRapeSceneEventHandler : SceneEventHandler
 	{
 		private class ModeInfo {
-			public ManRapesSexType Mode;
+			public ManRapeSleepState Mode;
 
 			public bool DidRape;
 
 			public bool DidCreampie;
 		}
 
-		public delegate void OnSceneInfo(GalleryChara man, GalleryChara girl, ManRapesSexType mode);
-
-		public event OnSceneInfo OnUnlock;
-
-		private GalleryChara man;
-		private GalleryChara girl;
+		private GalleryChara Man;
+		private GalleryChara Girl;
 
 		private List<ModeInfo> Modes = new List<ModeInfo>();
 
 		private ModeInfo CurrentMode = null;
 
-		public ManSleepRapeSceneTracker() {
-			ManRapesSleepPatch.OnStart += this.OnStart;
-			ManRapesSleepPatch.OnSexTypeChange += this.OnSexTypeChange;
-			ManRapesSleepPatch.OnEnd += this.OnEnd;
-
-			SexCountPatch.OnCreampie += this.OnCreampieCount;
-			SexCountPatch.OnRape += this.OnRapeCount;
+		public ManSleepRapeSceneEventHandler(CommonStates man, CommonStates girl) : base("yogallery_mansleeprape_handler") {
+			this.Man = new GalleryChara(man);
+			this.Girl = new GalleryChara(girl);
 		}
 
-		private void OnStart(ManRapesSleepPatch.ManSleepRapesInfo value)
+		public override IEnumerable OnCreampie(CommonStates from, CommonStates to)
 		{
-			GalleryLogger.LogDebug($"ManSleepRapeSceneTracker#OnStart");
-			if (this.man != null || this.girl != null) {
-				GalleryLogger.LogError($"ManSleepRapeSceneTracker#OnStart: Already active. Man: {this.man} / Girl: {this.girl} -- Dropping previous scene");
-			}
-
-			this.man = new GalleryChara(value.man);
-			this.girl = new GalleryChara(value.girl);
-			this.Modes = new List<ModeInfo>();
-			this.CurrentMode = null;
-		}
-
-		public void OnCreampieCount(object sender, SexCountPatch.SexCountChangeInfo value)
-		{
-			if (this.man?.OriginalChara != value.from || this.girl?.OriginalChara != value.to || this.CurrentMode == null) {
-				return;
-			}
+			if (this.CurrentMode == null)
+				yield break;
 
 			this.CurrentMode.DidCreampie = true;
 		}
 
-		public void OnRapeCount(object sender, SexCountPatch.SexCountChangeInfo value)
+		public override IEnumerable OnRape(CommonStates from, CommonStates to)
 		{
-			if (this.man?.OriginalChara != value.from || this.girl?.OriginalChara != value.to || this.CurrentMode == null) {
-				return;
-			}
+			if (this.CurrentMode == null)
+				yield break;
 
 			this.CurrentMode.DidRape = true;
 		}
 
-		private void OnSexTypeChange(int state, int sexType)
+		public override IEnumerable OnSleepRapeTypeChange(IScene scene, ManRapeSleepState type)
 		{
-			if (this.man == null || this.girl == null) {
-				GalleryLogger.LogDebug($"ManSleepRapeSceneTracker#OnSexTypeChange: Received sex type change while scene is not active?");
-				return;
-			}
-
-			ManRapesSexType type;
-			if (state == ManRapeSleepConst.StartRape) {
-				type = ManRapesSexType.Rape;
-			} else if (state == ManRapeSleepConst.StartDiscretlyRape) {
-				if (sexType == 0) {
-					type = ManRapesSexType.SleepPowder;
-				} else {
-					type = ManRapesSexType.DiscretlyRape;
-				}
-			} else {
-				GalleryLogger.LogDebug($"ManSleepRapeSceneTracker#OnSexTypeChange: Can't determine type from state: {state} / sexType: {sexType}");
-				return;
-			}
-
 			var newMode = this.Modes.Find((mode) => mode.Mode == type);
 			if (newMode == null) {
 				newMode = new ModeInfo();
@@ -96,32 +54,22 @@ namespace Gallery.GalleryScenes.ManSleepRape
 			}
 
 			CurrentMode = newMode;
+			
+			yield break;
 		}
 
-		private void OnEnd(ManRapesSleepPatch.ManSleepRapesInfo value)
+		public override IEnumerable AfterManRape(CommonStates victim, CommonStates rapist)
 		{
-			GalleryLogger.LogDebug($"ManSleepRapeSceneTracker#OnEnd");
-			if (value.man != man?.OriginalChara || value.girl != girl?.OriginalChara) {
-				GalleryLogger.SceneErrorToPlayer(
-					"ManRapes",
-					new Exception($"Unexpected sleep rapes without active characters. Man: {man} / Girl: {girl}")
-				);
-				return;
-			}
-
 			foreach (var mode in this.Modes) {
 				if (!mode.DidRape || !mode.DidCreampie) {
-					GalleryLogger.LogDebug($"ManRapeScene: OnEnd: mode {mode.Mode} 'raped' ({mode.DidRape}) or 'creampied' ({mode.DidCreampie}) not set -- event NOT unlocked for {girl}");
+					GalleryLogger.LogDebug($"ManRapeScene: OnEnd: mode {mode.Mode} 'raped' ({mode.DidRape}) or 'creampied' ({mode.DidCreampie}) not set -- event NOT unlocked for {Girl}");
 					continue;
 				}
 
-				OnUnlock(this.man, this.girl, mode.Mode);
+				ManSleepRapeSceneManager.Instance.Unlock(this.Man, this.Girl, mode.Mode);
 			}
 
-			this.man = null;
-			this.girl = null;
-			this.Modes = new List<ModeInfo>();
-			this.CurrentMode = null;
+			yield break;
 		}
 	}
 }

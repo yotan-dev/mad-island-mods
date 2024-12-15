@@ -48,14 +48,14 @@ namespace Gallery.UI
 			GalleryState.Instance.SleepRapes.Any((x) => (
 				x.Character1.UnlockCheck(npcA)
 				&& x.Character2.UnlockCheck(npcB)
-				&& x.SexType == ManRapesSexType.Rape
+				&& x.SexType == ManRapeSleepState.ForcefullRape
 			));
 
 		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> ManSleepRapesCheckDiscretly = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
 			GalleryState.Instance.SleepRapes.Any((x) => (
 				x.Character1.UnlockCheck(npcA)
 				&& x.Character2.UnlockCheck(npcB)
-				&& x.SexType == ManRapesSexType.DiscretlyRape
+				&& x.SexType == ManRapeSleepState.GentlyRape
 			));
 
 		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> CommonSexNpcCheck = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>

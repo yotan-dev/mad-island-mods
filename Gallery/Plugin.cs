@@ -40,13 +40,12 @@ namespace Gallery
 				Harmony.CreateAndPatchAll(typeof(DarumaSexPatch));
 				Harmony.CreateAndPatchAll(typeof(DeliveryPatch));
 				Harmony.CreateAndPatchAll(typeof(ManRapesPatch));
+				Harmony.CreateAndPatchAll(typeof(ManRapesSleepPatch));
 				Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			}
 
 			Harmony.CreateAndPatchAll(typeof(CommonRapesNPCPatch));
-			Harmony.CreateAndPatchAll(typeof(ManRapesSleepPatch));
 			Harmony.CreateAndPatchAll(typeof(PlaySexPatch));
-			Harmony.CreateAndPatchAll(typeof(PropPanelPatch)); // @TODO: Remove once PlayerRape is implemented in the new system
 			Harmony.CreateAndPatchAll(typeof(SexCountPatch));
 			Harmony.CreateAndPatchAll(typeof(SlavePatch));
 			Harmony.CreateAndPatchAll(typeof(StoryPatches));

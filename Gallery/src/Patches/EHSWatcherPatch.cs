@@ -72,6 +72,15 @@ namespace Gallery.Patches
 			);
 		}
 
+		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.ManRapesSleep), "Run")]
+		[HarmonyPrefix]
+		private static void Pre_ManRapesSleep_Run(ExtendedHSystem.Scenes.ManRapes __instance)
+		{
+			__instance.AddEventHandler(
+				new ManRapesSceneEventHandler(__instance.Man, __instance.Girl)
+			);
+		}
+
 		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.PlayerRaped), "Run")]
 		[HarmonyPrefix]
 		private static void Pre_PlayerRaped_Run(ExtendedHSystem.Scenes.PlayerRaped __instance)
