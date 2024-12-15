@@ -28,7 +28,7 @@ namespace Gallery
 
 		public List<ISceneManager> SceneManagers = new List<ISceneManager>()
 		{
-			new ManRapesSceneManager(),
+			ManRapesSceneManager.Instance,
 			DarumaSceneManager.Instance,
 			new SlaveSceneManager(),
 			CommonSexNPCSceneManager.Instance,

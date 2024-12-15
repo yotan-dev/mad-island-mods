@@ -3,6 +3,7 @@ using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.GalleryScenes.CommonSexPlayer;
 using Gallery.GalleryScenes.Daruma;
 using Gallery.GalleryScenes.Delivery;
+using Gallery.GalleryScenes.ManRapes;
 using Gallery.GalleryScenes.PlayerRaped;
 using HarmonyLib;
 using YotanModCore;
@@ -59,6 +60,15 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new DeliverySceneEventHandler(__instance.Girl)
+			);
+		}
+
+		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.ManRapes), "Run")]
+		[HarmonyPrefix]
+		private static void Pre_ManRapes_Run(ExtendedHSystem.Scenes.ManRapes __instance)
+		{
+			__instance.AddEventHandler(
+				new ManRapesSceneEventHandler(__instance.Man, __instance.Girl)
 			);
 		}
 

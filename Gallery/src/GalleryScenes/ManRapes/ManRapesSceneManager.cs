@@ -1,27 +1,21 @@
 using System.Linq;
 using Gallery.SaveFile.Containers;
-using YotanModCore;
-using YotanModCore.Consts;
-using static Gallery.GallerySceneInfo;
 
 namespace Gallery.GalleryScenes.ManRapes
 {
 	public class ManRapesSceneManager : ISceneManager
 	{
-		private readonly ManRapesSceneTracker Tracker = new ManRapesSceneTracker();
+		public static readonly ManRapesSceneManager Instance = new ManRapesSceneManager();
 
-		private ManRapesScenePlayer Player { get; } = new ManRapesScenePlayer();
-
-		public ManRapesSceneManager()
+		private ManRapesSceneManager()
 		{
-			this.Tracker.OnUnlock += this.OnUnlock;
+			
 		}
 
-		private bool IsUnlocked(int man, int girl, bool isFainted, bool isPregnant) {
+		private bool IsUnlocked(int man, int girl, bool isPregnant) {
 			return SaveFile.GalleryState.Instance.ManRapes.Any((interaction) => {
 				return interaction.Character1.Id == man
 					&& interaction.Character2.Id == girl
-					&& interaction.IsFainted == isFainted
 					&& interaction.Character2.IsPregnant == isPregnant;
 			});
 		}
@@ -64,15 +58,15 @@ namespace Gallery.GalleryScenes.ManRapes
 			};
 		}
 
-		private void OnUnlock(GalleryChara man, GalleryChara girl, bool isFainted, bool isPregnant)
+		public void Unlock(GalleryChara man, GalleryChara girl)
 		{
-			if (IsUnlocked(man.Id, girl.Id, isFainted, isPregnant)) {
-				GalleryLogger.LogDebug($"ManRapesSceneManager: OnEnd: event already unlocked for {man} x {girl} (IsFainted = {isFainted})");
+			if (IsUnlocked(man.Id, girl.Id, girl.IsPregnant)) {
+				GalleryLogger.LogDebug($"ManRapesSceneManager: OnEnd: event already unlocked for {man} x {girl}");
 				return;
 			}
 
-			GalleryLogger.LogDebug($"ManRapesSceneManager: OnEnd: event UNLOCKED for {man} x {girl} (IsFainted = {isFainted})");
-			SaveFile.GalleryState.Instance.ManRapes.Add(new ManRapesInteraction(man, girl, isFainted));
+			GalleryLogger.LogDebug($"ManRapesSceneManager: OnEnd: event UNLOCKED for {man} x {girl}");
+			SaveFile.GalleryState.Instance.ManRapes.Add(new ManRapesInteraction(man, girl));
 		}
 	}
 }
