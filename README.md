@@ -62,6 +62,34 @@ It will follow semantic versioning and I will write about deprecations/removals 
 Please let me know if you are depending on it :)
 
 
+### Extended H-System
+
+This mod rewrites the H-scenes in a pluggable way. It does not include new scenes (yet), and by itself it doesn't change anything,
+but it allows modders (myself included) to do some stuff with the scenes.
+
+You can configure whether you want it to replace the original scenes or not, but most mods will need you to replace it, and it is
+the default config. You can change that on `BepInEx/config/ExtendedHSystem.json`
+
+I plan to make certain scenes that are specific to some moments available in other, but no promises here...
+
+> ⚠️ When using the replacement mode, new scenes added to the game by the devs won't work until I update this mod.
+
+
+**For mod developers:**
+
+Please, don't use it yet, as I am still trying to figure out the best API for it ( suggestions are welcome :) )
+
+My idea is that you will be able to hook into certain parts of the scene and perform additional things over the scene,
+including removing the original "events" and adding new ones.
+
+You can also use it to trigger scenes by yourself.
+
+
+**Requirements:**
+
+1. Yotan Mod Core must be installed.
+
+
 ### Gallery
 
 By far the most ambitious of those mods. This implements a Gallery of game scenes.
@@ -79,6 +107,8 @@ By far the most ambitious of those mods. This implements a Gallery of game scene
 **Requirements:**
 
 1. Yotan Mod Core must be installed.
+2. Extended H-System must be installed.
+
 
 **Technical notes:**
 
