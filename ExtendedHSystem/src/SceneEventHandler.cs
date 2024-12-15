@@ -49,6 +49,17 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
+		/// <summary>
+		/// Called when "from" rapes "to"
+		/// </summary>
+		/// <param name="from"></param>
+		/// <param name="to"></param>
+		/// <returns></returns>
+		public virtual IEnumerable OnRape(IScene scene, CommonStates from, CommonStates to)
+		{
+			yield return null;
+		}
+
 		public virtual IEnumerable OnBusted(CommonStates from, CommonStates to, int specialFlag)
 		{
 			yield return null;
@@ -65,6 +76,11 @@ namespace ExtendedHSystem
 		}
 
 		public virtual IEnumerable AfterRape(CommonStates victim, CommonStates rapist)
+		{
+			yield return null;
+		}
+
+		public virtual IEnumerable AfterManRape(CommonStates victim, CommonStates rapist)
 		{
 			yield return null;
 		}

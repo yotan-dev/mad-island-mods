@@ -53,5 +53,11 @@ namespace ExtendedHSystem
 		{
 			tmpSexAnim.state.SetAnimation(0, name, true);
 		}
+
+		public IEnumerable PlayPlayerGrapplesStep(IScene scene, SkeletonAnimation sexAnim, string sexType, CommonStates man, CommonStates girl)
+		{
+			// The gallery path for this is quite weird, and does nothing in the overall logic
+			yield return false;
+		}
 	}
 }

@@ -22,6 +22,7 @@ namespace ExtendedHSystem
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexPlayerPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_DarumaPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_DeliveryPatch));
+				Harmony.CreateAndPatchAll(typeof(SexManager_ManRapesPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_PlayerRapedPatch));
 			}
 
