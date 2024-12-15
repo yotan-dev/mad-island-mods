@@ -10,7 +10,7 @@ namespace ExtendedHSystem
 
 		IEnumerable PlayTimedStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, float time);
 		
-		IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name);
+		IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skippable = false);
 
 		IEnumerable PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name);
 

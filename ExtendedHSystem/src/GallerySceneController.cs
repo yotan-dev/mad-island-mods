@@ -20,7 +20,7 @@ namespace ExtendedHSystem
 			yield return animTime <= 0f;
 		}
 
-		public IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
+		public IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skippable = true)
 		{
 			tmpSexAnim.state.SetAnimation(0, name, false);
 			float animTime = tmpSexAnim.state.GetCurrent(0).AnimationEnd;

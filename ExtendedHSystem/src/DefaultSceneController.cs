@@ -30,7 +30,7 @@ namespace ExtendedHSystem
 			yield return animTime <= 0f;
 		}
 
-		public IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
+		public IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skipable = false)
 		{
 			float animTime = 0;
 			if (tmpSexAnim.skeleton.Data.FindAnimation(name) != null) {
@@ -40,6 +40,11 @@ namespace ExtendedHSystem
 
 			while (animTime >= 0f && scene.CanContinue())
 			{
+				if (skipable && Input.GetMouseButtonDown(0)) {
+					yield return true;
+					yield break;
+				}
+				
 				animTime -= Time.deltaTime;
 				yield return false;
 			}
@@ -53,7 +58,7 @@ namespace ExtendedHSystem
 				tmpSexAnim.state.SetAnimation(0, name, true);
 
 			yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
-			yield return null;
+			yield return true;
 		}
 
 		public IEnumerable PlayPlayerGrappledStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, CommonStates player)
@@ -136,7 +141,7 @@ namespace ExtendedHSystem
 			breakTime.gameObject.transform.parent.gameObject.SetActive(true);
 			breakTime.fillAmount = 1f;
 			string attackAnimName = sexType + "Attack_attack";
-			while (animTime > 0f && scene.CanContinue())
+			while (animTime > 0f && girl.faint > 0.0 && scene.CanContinue())
 			{
 				bool flag = false;
 				animTime -= Time.deltaTime;

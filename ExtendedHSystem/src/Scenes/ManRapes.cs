@@ -321,7 +321,7 @@ namespace ExtendedHSystem.Scenes
 		private IEnumerable PerformFinish()
 		{
 			bool shouldContinue = false;
-			foreach (var x in this.Controller.PlayUntilInputStep(this, this.TmpSexAnim, this.SexType + "Finish"))
+			foreach (var x in this.Controller.PlayOnceStep(this, this.TmpSexAnim, this.SexType + "Finish", true))
 			{
 				if (x is bool b)
 					shouldContinue = b;
@@ -460,11 +460,12 @@ namespace ExtendedHSystem.Scenes
 
 		public bool CanContinue()
 		{
+			PLogger.LogInfo($">> Stage: {this.Stage} / Girl Faint: {this.Girl.faint} / Life: {this.Girl.life} / TmpSex: {this.TmpSex != null} / Man Life: {this.Man.life} / Input: {Input.GetKeyDown(KeyCode.R)}");
 			if (this.Aborted)
 				return false;
 
 			if (this.Stage == 1)
-				return this.Girl.faint > 0.0 && this.Girl.life > 0.0 && this.TmpSex != null && this.Man.life > 0.0 && !Input.GetKeyDown(KeyCode.R);
+				return this.Girl.life > 0.0 && this.TmpSex != null && this.Man.life > 0.0 && !Input.GetKeyDown(KeyCode.R);
 
 			return !Input.GetKeyDown(KeyCode.R) && this.Man.life > 0;
 		}
