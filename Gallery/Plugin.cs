@@ -41,13 +41,13 @@ namespace Gallery
 				Harmony.CreateAndPatchAll(typeof(DeliveryPatch));
 				Harmony.CreateAndPatchAll(typeof(ManRapesPatch));
 				Harmony.CreateAndPatchAll(typeof(ManRapesSleepPatch));
+				Harmony.CreateAndPatchAll(typeof(SlavePatch));
 				Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			}
 
 			Harmony.CreateAndPatchAll(typeof(CommonRapesNPCPatch));
 			Harmony.CreateAndPatchAll(typeof(PlaySexPatch));
 			Harmony.CreateAndPatchAll(typeof(SexCountPatch));
-			Harmony.CreateAndPatchAll(typeof(SlavePatch));
 			Harmony.CreateAndPatchAll(typeof(StoryPatches));
 			Harmony.CreateAndPatchAll(typeof(TitleScreenPatch));
 			Harmony.CreateAndPatchAll(typeof(ToiletNpcPatch));

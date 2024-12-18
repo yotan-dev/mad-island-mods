@@ -7,11 +7,11 @@ namespace Gallery.GalleryScenes.Slave
 {
 	public class SlaveSceneManager : ISceneManager
 	{
-		private readonly SlaveSceneTracker SceneTracker = new SlaveSceneTracker();
+		public static readonly SlaveSceneManager Instance = new SlaveSceneManager();
 
-		public SlaveSceneManager()
+		private SlaveSceneManager()
 		{
-			SceneTracker.OnUnlock += this.OnUnlock;
+			
 		}
 
 		private bool IsUnlocked(int npcA, int npcB)
@@ -24,7 +24,7 @@ namespace Gallery.GalleryScenes.Slave
 			});
 		}
 
-		private void OnUnlock(GalleryChara player, GalleryChara girl)
+		public void Unlock(GalleryChara player, GalleryChara girl)
 		{
 			if (player == null || girl == null)
 			{

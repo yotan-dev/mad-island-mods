@@ -30,7 +30,7 @@ namespace Gallery
 		{
 			ManRapesSceneManager.Instance,
 			DarumaSceneManager.Instance,
-			new SlaveSceneManager(),
+			SlaveSceneManager.Instance,
 			CommonSexNPCSceneManager.Instance,
 			CommonSexPlayerSceneManager.Instance,
 			AssWallSceneManager.Instance,

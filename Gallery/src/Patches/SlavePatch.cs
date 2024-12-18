@@ -1,20 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gallery.GalleryScenes.Slave;
 using HarmonyLib;
+using YotanModCore;
 
 namespace Gallery.Patches
 {
 	public class SlavePatch
 	{
-		public delegate void OnSceneInfo(string obj);
-		public delegate void OnBustEvent();
-
-		public static event OnSceneInfo OnStart;
-		
-		public static event OnBustEvent OnBust;
-
-		public static event OnSceneInfo OnEnd;
+		private static SlaveSceneEventHandler EventHandler = null;
 
 		private static Dictionary<string, CommonStates> GetCharas()
 		{
@@ -45,11 +40,11 @@ namespace Gallery.Patches
 			{
 				GalleryLogger.SceneStart("Slave", GetCharas(), GetInfos(state, tmpSlave));
 
-				if (state == 0) {
-					ItemInfo component = tmpSlave.GetComponent<ItemInfo>();
-					string itemKey = component.itemKey;
+				if (state == 0)
+				{
+					EventHandler = new SlaveSceneEventHandler(CommonUtils.GetActivePlayer(), tmpSlave);
 
-					OnStart?.Invoke(itemKey);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(CommonUtils.GetActivePlayer(), EventHandler);
 				}
 			}
 			catch (Exception error)
@@ -73,18 +68,28 @@ namespace Gallery.Patches
 			{
 				GalleryLogger.SceneEnd("Slave", GetCharas(), GetInfos(state, tmpSlave));
 
-				if (state == 0 && tmpSlave != null) {
+				if (state == 0 && tmpSlave != null)
+				{
 					ItemInfo component = tmpSlave.GetComponent<ItemInfo>();
 					string itemKey = component.itemKey;
 
-					OnEnd?.Invoke(itemKey);
-				} else if (state == 6) {
-					OnBust?.Invoke();
+					EventHandler.AfterSex(null, CommonUtils.GetActivePlayer(), null);
+				}
+				else if (state == 6)
+				{
+					EventHandler.OnBusted(CommonUtils.GetActivePlayer(), null, 0);
 				}
 			}
 			catch (Exception error)
 			{
 				GalleryLogger.SceneErrorToPlayer("Slave", error);
+			}
+			finally
+			{
+				if (state == 0)
+				{
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(CommonUtils.GetActivePlayer());
+				}
 			}
 		}
 	}

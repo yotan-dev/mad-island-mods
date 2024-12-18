@@ -6,6 +6,7 @@ using Gallery.GalleryScenes.Delivery;
 using Gallery.GalleryScenes.ManRapes;
 using Gallery.GalleryScenes.ManSleepRape;
 using Gallery.GalleryScenes.PlayerRaped;
+using Gallery.GalleryScenes.Slave;
 using HarmonyLib;
 using YotanModCore;
 
@@ -79,6 +80,15 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new ManSleepRapeSceneEventHandler(__instance.Man, __instance.Girl)
+			);
+		}
+
+		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Slave), "Run")]
+		[HarmonyPrefix]
+		private static void Pre_Slave_Run(ExtendedHSystem.Scenes.Slave __instance)
+		{
+			__instance.AddEventHandler(
+				new SlaveSceneEventHandler(__instance.Player, __instance.TmpSlave)
 			);
 		}
 
