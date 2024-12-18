@@ -298,8 +298,8 @@ namespace ExtendedHSystem.Scenes
 			Vector3 pos = place.position;
 			float animTime = 30f;
 
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.NpcA.gameObject, pos, 2f, "A_walk", true, false, 0.1f));
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.NpcB.gameObject, pos, 2f, "A_walk", true, false, 0.1f));
+			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.NpcA.gameObject, pos, 2f, "A_walk", true, false, 0.1f, 40f));
+			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.NpcB.gameObject, pos, 2f, "A_walk", true, false, 0.1f, 40f));
 
 			bool aReached = false;
 			bool bReached = false;

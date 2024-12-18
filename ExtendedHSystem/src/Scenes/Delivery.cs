@@ -63,7 +63,7 @@ namespace ExtendedHSystem.Scenes
 		private IEnumerable MoveToPosition()
 		{
 			float animTime = 30f;
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.Girl.gameObject, this.TargetPosObject.gameObject.transform.position, 2f, "A_walk", true, true, 0.1f));
+			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.Girl.gameObject, this.TargetPosObject.gameObject.transform.position, 2f, "A_walk", true, true, 0.1f, 40f));
 
 			NPCMove girlMove = this.Girl.nMove;
 			bool reached = false;
