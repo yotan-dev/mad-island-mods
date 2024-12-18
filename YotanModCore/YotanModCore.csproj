@@ -31,6 +31,9 @@
 		<Reference Include="MadIsland-Asssembly">
 			<HintPath>../Assemblies/Assembly-CSharp.dll</HintPath>
 		</Reference>
+		<Reference Include="Spine-Unity">
+			<HintPath>../Assemblies/spine-unity.dll</HintPath>
+		</Reference>
 		<Reference Include="Unity-TextMeshPro">
 			<HintPath>../Assemblies/Unity.TextMeshPro.dll</HintPath>
 		</Reference>
