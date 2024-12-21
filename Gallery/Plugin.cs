@@ -48,7 +48,6 @@ namespace Gallery
 			}
 
 			Harmony.CreateAndPatchAll(typeof(CommonRapesNPCPatch));
-			Harmony.CreateAndPatchAll(typeof(PlaySexPatch));
 			Harmony.CreateAndPatchAll(typeof(SexCountPatch));
 			Harmony.CreateAndPatchAll(typeof(StoryPatches));
 			Harmony.CreateAndPatchAll(typeof(TitleScreenPatch));
