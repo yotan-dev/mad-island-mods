@@ -8,11 +8,10 @@ namespace Gallery.GalleryScenes.Onani
 {
 	public class OnaniSceneManager : ISceneManager
 	{
-		private readonly OnaniSceneTracker SceneTracker = new OnaniSceneTracker();
+		public static readonly OnaniSceneManager Instance = new OnaniSceneManager();
 
-		public OnaniSceneManager()
+		private OnaniSceneManager()
 		{
-			SceneTracker.OnUnlock += this.OnUnlock;
 		}
 
 		private bool IsUnlocked(int npc, bool perfume)
@@ -25,7 +24,7 @@ namespace Gallery.GalleryScenes.Onani
 			});
 		}
 
-		private void OnUnlock(GalleryChara npc, bool perfume)
+		public void Unlock(GalleryChara npc, bool perfume)
 		{
 			if (npc == null)
 			{
@@ -49,7 +48,7 @@ namespace Gallery.GalleryScenes.Onani
 
 		// private GallerySceneInfo BuildSceneInfo(int npcB, bool dlc = false)
 		// {
-			
+
 		// }
 
 		public GallerySceneInfo[] GetScenes()

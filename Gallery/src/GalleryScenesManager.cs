@@ -44,7 +44,7 @@ namespace Gallery
 		public static void Init() {
 			Instance = new GalleryScenesManager();
 			if (GameInfo.GameVersion >= GameInfo.ToVersion("0.1.0")) {
-				Instance.SceneManagers.Add(new OnaniSceneManager());
+				Instance.SceneManagers.Add(OnaniSceneManager.Instance);
 			}
 		}
 

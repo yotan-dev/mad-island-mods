@@ -41,6 +41,8 @@ namespace Gallery
 				Harmony.CreateAndPatchAll(typeof(DeliveryPatch));
 				Harmony.CreateAndPatchAll(typeof(ManRapesPatch));
 				Harmony.CreateAndPatchAll(typeof(ManRapesSleepPatch));
+				if (GameInfo.GameVersion >= GameInfo.ToVersion("0.1.0"))
+					Harmony.CreateAndPatchAll(typeof(OnaniNpcPatch));
 				Harmony.CreateAndPatchAll(typeof(SlavePatch));
 				Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			}
@@ -53,9 +55,6 @@ namespace Gallery
 			Harmony.CreateAndPatchAll(typeof(ToiletNpcPatch));
 			Harmony.CreateAndPatchAll(typeof(ToiletPatch));
 			Harmony.CreateAndPatchAll(typeof(UseLivePlacePatch));
-
-			if (GameInfo.GameVersion >= GameInfo.ToVersion("0.1.0"))
-				Harmony.CreateAndPatchAll(typeof(OnaniNpcPatch));
 		
 			GalleryState.Load();
 
