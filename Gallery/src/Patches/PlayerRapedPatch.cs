@@ -2,28 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using HarmonyLib;
-using Gallery.GalleryScenes;
+using Gallery.GalleryScenes.PlayerRaped;
 
 namespace Gallery.Patches
 {
 	public class PlayerRapedPatch
 	{
-		public struct PlayerRapedInfo
-		{
-			public CommonStates player;
-			public CommonStates rapist;
-
-			public PlayerRapedInfo(CommonStates player, CommonStates rapist) {
-				this.player = player;
-				this.rapist = rapist;
-			}
-		}
-
-		public delegate void OnSceneInfo(PlayerRapedInfo info);
-
-		public static event OnSceneInfo OnStart;
-
-		public static event OnSceneInfo OnEnd;
+		private static PlayerRapedSceneEventHandler EventHandler;
 
 		private static Dictionary<string, CommonStates> GetChars(CommonStates from, CommonStates to)
 		{
@@ -49,8 +34,10 @@ namespace Gallery.Patches
 
 			try {
 				GalleryLogger.SceneStart("PlayerRaped", GetChars(from, to), GetInfos());
-
-				OnStart?.Invoke(new PlayerRapedInfo(to, from));
+				
+				EventHandler = new PlayerRapedSceneEventHandler(to, from);
+				GalleryScenesManager.Instance.AddSceneHandlerForCommon(from, EventHandler);
+				GalleryScenesManager.Instance.AddSceneHandlerForCommon(to, EventHandler);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("PlayerRaped", error);
 			}
@@ -69,9 +56,13 @@ namespace Gallery.Patches
 
 			try {
 				GalleryLogger.SceneEnd("PlayerRaped", GetChars(from, to), GetInfos());
-				OnEnd?.Invoke(new PlayerRapedInfo(to, from));
+
+				EventHandler?.PlayerRaped(to, from, false);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("PlayerRaped", error);
+			} finally {
+				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(from);
+				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(to);
 			}
 		}
 	}
