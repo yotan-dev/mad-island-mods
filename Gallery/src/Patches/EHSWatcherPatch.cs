@@ -5,6 +5,7 @@ using Gallery.GalleryScenes.Daruma;
 using Gallery.GalleryScenes.Delivery;
 using Gallery.GalleryScenes.ManRapes;
 using Gallery.GalleryScenes.ManSleepRape;
+using Gallery.GalleryScenes.Onani;
 using Gallery.GalleryScenes.PlayerRaped;
 using Gallery.GalleryScenes.Slave;
 using HarmonyLib;
@@ -80,6 +81,15 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new ManSleepRapeSceneEventHandler(__instance.Man, __instance.Girl)
+			);
+		}
+
+		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.OnaniNPC), nameof(ExtendedHSystem.Scenes.OnaniNPC.Run))]
+		[HarmonyPrefix]
+		private static void Pre_OnaniNPC_Run(ExtendedHSystem.Scenes.OnaniNPC __instance)
+		{
+			__instance.AddEventHandler(
+				new OnaniSceneEventHandler(__instance.Npc)
 			);
 		}
 
