@@ -8,6 +8,7 @@ using Gallery.GalleryScenes.ManSleepRape;
 using Gallery.GalleryScenes.Onani;
 using Gallery.GalleryScenes.PlayerRaped;
 using Gallery.GalleryScenes.Slave;
+using Gallery.GalleryScenes.Toilet;
 using HarmonyLib;
 using YotanModCore;
 
@@ -99,6 +100,15 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new SlaveSceneEventHandler(__instance.Player, __instance.TmpSlave)
+			);
+		}
+
+		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Toilet), nameof(ExtendedHSystem.Scenes.Toilet.Run))]
+		[HarmonyPrefix]
+		private static void Pre_Toilet_Run(ExtendedHSystem.Scenes.Toilet __instance)
+		{
+			__instance.AddEventHandler(
+				new ToiletSceneEventHandler(__instance.Player, __instance.Npc)
 			);
 		}
 

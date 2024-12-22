@@ -44,6 +44,7 @@ namespace Gallery
 				if (GameInfo.GameVersion >= GameInfo.ToVersion("0.1.0"))
 					Harmony.CreateAndPatchAll(typeof(OnaniNpcPatch));
 				Harmony.CreateAndPatchAll(typeof(SlavePatch));
+				Harmony.CreateAndPatchAll(typeof(ToiletPatch));
 				Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			}
 
@@ -52,7 +53,6 @@ namespace Gallery
 			Harmony.CreateAndPatchAll(typeof(StoryPatches));
 			Harmony.CreateAndPatchAll(typeof(TitleScreenPatch));
 			Harmony.CreateAndPatchAll(typeof(ToiletNpcPatch));
-			Harmony.CreateAndPatchAll(typeof(ToiletPatch));
 			Harmony.CreateAndPatchAll(typeof(UseLivePlacePatch));
 		
 			GalleryState.Load();

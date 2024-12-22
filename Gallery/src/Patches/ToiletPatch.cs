@@ -1,36 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gallery.GalleryScenes.Toilet;
 using HarmonyLib;
 using YotanModCore;
-using Gallery.GalleryScenes;
-using UnityEngine.UIElements.Collections;
 
 namespace Gallery.Patches
 {
 	public class ToiletPatch
 	{
-		public struct ToiletInfo
-		{
-			public CommonStates User;
-			public CommonStates Target;
-			public InventorySlot.Type ToiletType;
-			public int ToiletSize;
-
-			public ToiletInfo(CommonStates user, CommonStates target, InventorySlot.Type toiletType, int toiletSize)
-			{
-				this.User = user;
-				this.Target = target;
-				this.ToiletType = toiletType;
-				this.ToiletSize = toiletSize;
-			}
-		}
-
-		public delegate void OnSceneInfo(ToiletInfo info);
-
-		public static event OnSceneInfo OnStart;
-
-		public static event OnSceneInfo OnEnd;
+		private static ToiletSceneEventHandler EventHandler;
 
 		private static Dictionary<string, CommonStates> GetToiletCharas(SexManager manager, ToiletState state)
 		{
@@ -70,7 +49,9 @@ namespace Gallery.Patches
 
 				switch (state_) {
 				case ToiletState.Start:
-					OnStart?.Invoke(new ToiletInfo(chars["user"], chars["target"], tmpToile?.type ?? InventorySlot.Type.None, tmpToile?.size ?? -1));
+					EventHandler = new ToiletSceneEventHandler(chars["user"], chars["target"]);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(chars["user"], EventHandler);
+					GalleryScenesManager.Instance.AddSceneHandlerForCommon(chars["target"], EventHandler);
 					break;
 
 				case ToiletState.Insert:
@@ -103,6 +84,8 @@ namespace Gallery.Patches
 			if (Plugin.InGallery)
 				yield break;
 
+			CommonStates user = null;
+			CommonStates target = null;
 			ToiletState state_ = (ToiletState)state;
 			try {
 				var chars = GetToiletCharas(__instance, state_);
@@ -110,7 +93,9 @@ namespace Gallery.Patches
 
 				switch (state_) {
 				case ToiletState.Start:
-					OnEnd?.Invoke(new ToiletInfo(chars["user"], chars["target"], tmpToile?.type ?? InventorySlot.Type.None, tmpToile?.size ?? -1));
+					user = chars["user"];
+					target = chars["target"];
+					EventHandler?.AfterSex(null, user, target);
 					break;
 
 				case ToiletState.Insert:
@@ -129,6 +114,12 @@ namespace Gallery.Patches
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("Toilet", error);
+			} finally {
+				if (state_ == ToiletState.Start) {
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(user);
+					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(target);
+					EventHandler = null;
+				}
 			}
 		}
 	}

@@ -38,7 +38,7 @@ namespace Gallery
 			ManSleepRapeSceneManager.Instance,
 			PlayerRapedSceneManager.Instance,
 			new ToiletNpcSceneManager(),
-			new ToiletSceneManager(),
+			ToiletSceneManager.Instance,
 		};
 
 		public static void Init() {

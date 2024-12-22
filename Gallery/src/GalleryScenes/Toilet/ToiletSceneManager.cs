@@ -1,33 +1,26 @@
 using System.Linq;
-using YotanModCore;
 using Gallery.SaveFile;
 using Gallery.SaveFile.Containers;
-using Gallery.UI;
 
 namespace Gallery.GalleryScenes.Toilet
 {
 	public class ToiletSceneManager : ISceneManager
 	{
-		private readonly ToiletSceneTracker SceneTracker = new ToiletSceneTracker();
+		public static readonly ToiletSceneManager Instance = new ToiletSceneManager();
 
-		public ToiletSceneManager()
-		{
-			SceneTracker.OnUnlock += this.OnUnlock;
-		}
+		private ToiletSceneManager() { }
 
-		private bool IsUnlocked(int userNpcId, int targetNpcId, int toiletSize, InventorySlot.Type toiletType)
+		private bool IsUnlocked(int userNpcId, int targetNpcId)
 		{
 			return GalleryState.Instance.Toilet.Any((interaction) =>
 			{
 				return interaction.Character1.Id == userNpcId
 					&& interaction.Character2.Id == targetNpcId
-					&& interaction.ToiletSize == toiletSize
-					&& interaction.ToiletType == toiletType
 					;
 			});
 		}
 
-		private void OnUnlock(GalleryChara user, GalleryChara target, int toiletsize, InventorySlot.Type toiletType)
+		public void Unlock(GalleryChara user, GalleryChara target)
 		{
 			if (user == null || target == null)
 			{
@@ -35,9 +28,9 @@ namespace Gallery.GalleryScenes.Toilet
 				return;
 			}
 
-			var desc = $"{user} x {target} (Size: {toiletsize}, Type: {toiletType})";
+			var desc = $"{user} x {target}";
 
-			if (this.IsUnlocked(user.Id, target.Id, toiletsize, toiletType))
+			if (this.IsUnlocked(user.Id, target.Id))
 			{
 				GalleryLogger.LogDebug($"ToiletNpcScene#Unlock: already unlocked for {desc}");
 				return;
@@ -45,7 +38,7 @@ namespace Gallery.GalleryScenes.Toilet
 
 			GalleryLogger.LogDebug($"ToiletNpcScene#Unlock: event UNLOCKED for {desc}");
 			SaveFile.GalleryState.Instance.Toilet.Add(
-				new ToiletInteractions(user, target, toiletType, toiletsize)
+				new ToiletInteractions(user, target)
 			);
 		}
 
