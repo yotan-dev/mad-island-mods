@@ -34,6 +34,7 @@ namespace ExtendedHSystem.Scenes
 		public Toilet(CommonStates player, CommonStates girl, InventorySlot tmpToilet)
 		{
 			this.Player = player;
+			this.Npc = girl;
 			this.TmpToilet = tmpToilet;
 			this.SexPlace = this.TmpToilet.GetComponent<SexPlace>();
 
