@@ -105,9 +105,6 @@ namespace ExtendedHSystem.Scenes
 
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
-
-			Managers.mn.uiMN.PropPanelStateChange(0, 5, 4, true);
-			Managers.mn.uiMN.PropPanelStateChange(1, 3, 3, true);
 		}
 
 		private void OnMove(object sender, int e)
