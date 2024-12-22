@@ -8,9 +8,9 @@ using YotanModCore;
 
 namespace Gallery
 {
-	[BepInPlugin("Gallery", "Gallery", "0.2.0")]
-	[BepInDependency("YotanModCore", "1.4.0")]
-	[BepInDependency("ExtendedHSystem", "0.1.0")]
+	[BepInPlugin("Gallery", "Gallery", "0.3.0")]
+	[BepInDependency("YotanModCore", "1.5.0")]
+	[BepInDependency("ExtendedHSystem", "0.2.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;

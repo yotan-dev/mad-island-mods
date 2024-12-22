@@ -5,8 +5,8 @@ using HarmonyLib;
 namespace ExtendedHSystem
 {
 	
-	[BepInPlugin("ExtendedHSystem", "ExtendedHSystem", "0.1.0")]
-	[BepInDependency("YotanModCore", "1.0.0")]
+	[BepInPlugin("ExtendedHSystem", "ExtendedHSystem", "0.2.0")]
+	[BepInDependency("YotanModCore", "1.5.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		private void Awake()

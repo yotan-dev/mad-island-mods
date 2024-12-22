@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>ExtendedHSystem</AssemblyName>
 		<Product>Extended H System</Product>
-		<Version>0.1.0</Version>
+		<Version>0.2.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RestoreAdditionalProjectSources>
