@@ -52,6 +52,11 @@ namespace ExtendedHSystem
 			yield return animTime <= 0f;
 		}
 
+		public IEnumerator PlayOnceStep_New(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skipable = false)
+		{
+			return new PlayAnimationOnce(scene, tmpSexAnim, name, skipable).Handle();
+		}
+
 		public IEnumerable PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
 		{
 			if (tmpSexAnim.skeleton.Data.FindAnimation(name) != null)

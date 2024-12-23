@@ -415,8 +415,7 @@ namespace ExtendedHSystem.Scenes
 			else
 				animName = this.SexType + "Finish_00";
 
-			foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
-				yield return x;
+			yield return this.Controller.PlayOnceStep_New(this, this.CommonAnim, animName);
 
 			CommonStates from, to;
 			if (CommonUtils.IsFemale(this.Player))

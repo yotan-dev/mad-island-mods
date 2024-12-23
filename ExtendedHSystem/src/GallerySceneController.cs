@@ -33,6 +33,19 @@ namespace ExtendedHSystem
 			yield return animTime <= 0f;
 		}
 
+		public IEnumerator PlayOnceStep_New(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skippable = true)
+		{
+			tmpSexAnim.state.SetAnimation(0, name, false);
+			float animTime = tmpSexAnim.state.GetCurrent(0).AnimationEnd;
+			while (animTime >= 0f && scene.CanContinue())
+			{
+				animTime -= Time.deltaTime;
+				yield return false;
+			}
+
+			yield return animTime <= 0f;
+		}
+
 		public IEnumerable PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
 		{
 			tmpSexAnim.state.SetAnimation(0, name, true);
