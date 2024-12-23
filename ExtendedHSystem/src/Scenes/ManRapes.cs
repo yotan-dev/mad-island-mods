@@ -74,10 +74,10 @@ namespace ExtendedHSystem.Scenes
 			Managers.mn.randChar.HandItemHide(npc, true);
 		}
 
-		private void EnableLiveGirl(CommonStates npc)
+		private IEnumerator EnableLiveGirl(CommonStates npc)
 		{
 			if (npc == null)
-				return;
+				yield break;
 
 			CapsuleCollider coll = npc.GetComponent<CapsuleCollider>();
 			if (coll != null)
@@ -90,7 +90,7 @@ namespace ExtendedHSystem.Scenes
 			if (npc.faint > 0 && npc.life > 0)
 				npc.nMove.actType = NPCMove.ActType.Interval;
 			else
-				this.Controller.LoopAnimation(this, this.TmpSexAnim, "A_dead_idle");
+				yield return this.Controller.LoopAnimation(this, this.TmpSexAnim, "A_dead_idle");
 
 			if (npc.nMove.npcType == NPCMove.NPCType.Follow || npc.nMove.npcType == NPCMove.NPCType.Friend)
 				npc.nMove.tmpEnemy = null;
@@ -413,13 +413,13 @@ namespace ExtendedHSystem.Scenes
 				yield return x;
 		}
 
-		private void Teardown()
+		private IEnumerator Teardown()
 		{
 			Vector3 rot = this.TmpSexScale == null ? Vector3.left : Vector3.right;
 			this.Girl.nMove.Rot(this.Girl.transform.position + rot);
 			this.Girl.transform.position = this.Man.transform.position + new Vector3(0f, 0.01f, -0.01f);
 
-			this.EnableLiveGirl(this.Girl);
+			yield return this.EnableLiveGirl(this.Girl);
 			this.EnableLiveMan(this.Man);
 
 			Object.Destroy(this.TmpSex);
@@ -437,7 +437,7 @@ namespace ExtendedHSystem.Scenes
 
 			if (!this.CanContinue())
 			{
-				this.Teardown();
+				yield return this.Teardown();
 				yield break;
 			}
 
@@ -448,14 +448,14 @@ namespace ExtendedHSystem.Scenes
 
 			if (!this.CanContinue())
 			{
-				this.Teardown();
+				yield return this.Teardown();
 				yield break;
 			}
 
 			foreach (var x in this.PerformRape())
 				yield return x;
 
-			this.Teardown();
+			yield return this.Teardown();
 		}
 
 		public bool CanContinue()

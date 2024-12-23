@@ -38,18 +38,12 @@ namespace ExtendedHSystem.Scenes
 			this.TmpSlave = tmpSlave;
 
 			this.MenuPanel = new SlaveMenuPanel();
-			this.MenuPanel.OnInsertSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnInsert(sender, e));
-			};
-			this.MenuPanel.OnMoveSelected += this.OnMove;
-			this.MenuPanel.OnSpeedSelected += this.OnSpeed;
-			this.MenuPanel.OnFinishSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnFinish(sender, e));
-			};
-			this.MenuPanel.OnStopSelected += this.OnStop;
-			this.MenuPanel.OnLeaveSelected += this.OnLeave;
+			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
+			this.MenuPanel.OnMoveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnMove());
+			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
+			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
+			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
+			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
 		}
 
 		public void Init(ISceneController controller)
@@ -62,7 +56,7 @@ namespace ExtendedHSystem.Scenes
 			this.EventHandlers.Add(handler);
 		}
 
-		private IEnumerator OnInsert(object sender, int e)
+		private IEnumerator OnInsert()
 		{
 			this.MenuPanel.Hide();
 
@@ -99,39 +93,39 @@ namespace ExtendedHSystem.Scenes
 
 			this.MenuPanel.ShowInsertMenu();
 			if (this.CommonAnim.skeleton.Data.FindAnimation(this.TmpSexType + "start_idle") != null)
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "start_idle");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "start_idle");
 			else if (this.CommonAnim.skeleton.Data.FindAnimation(this.TmpSexType + "Start_idle") != null)
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Start_idle");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Start_idle");
 
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
 		}
 
-		private void OnMove(object sender, int e)
+		private IEnumerator OnMove()
 		{
 			this.MenuPanel.ShowMoveMenu();
-			this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_01");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_01");
 		}
 
-		private void OnSpeed(object sender, int e)
+		private IEnumerator OnSpeed()
 		{
 			if (this.CommonAnim.GetCurrentAnimName() == this.TmpSexType + "Loop_01")
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_02");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_02");
 			else if (this.CommonAnim.GetCurrentAnimName() == this.TmpSexType + "Loop_02")
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_01");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_01");
 		}
 
-		private void OnStop(object sender, int e)
+		private IEnumerator OnStop()
 		{
 			this.MenuPanel.ShowStopMenu();
 
 			if (this.CommonAnim.HasAnimation(this.TmpSexType + "start_idle"))
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "start_idle");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "start_idle");
 			else if (this.CommonAnim.HasAnimation(this.TmpSexType + "Start_idle"))
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Start_idle");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Start_idle");
 		}
 
-		private IEnumerator OnFinish(object sender, int e)
+		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
 
@@ -148,15 +142,16 @@ namespace ExtendedHSystem.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Finish_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Finish_idle");
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
 		}
 
-		private void OnLeave(object sender, int e)
+		private IEnumerator OnLeave()
 		{
 			this.Destroy();
+			yield break;
 		}
 
 		private bool GetScene(string itemKey, out GameObject scene, out int commonState, out string sexType)
@@ -261,7 +256,7 @@ namespace ExtendedHSystem.Scenes
 			Managers.mn.uiMN.MainCanvasView(false);
 			this.DisablePlayer();
 
-			this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "idle");
 
 			this.MenuPanel.Open(this.TmpSlave.transform.position);
 			this.MenuPanel.ShowInitialMenu();

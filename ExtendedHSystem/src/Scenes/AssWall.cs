@@ -35,13 +35,22 @@ namespace ExtendedHSystem.Scenes
 			{
 				Managers.mn.sexMN.StartCoroutine(this.OnInsert(sender, e));
 			};
-			this.MenuPanel.OnSpeedSelected += this.OnSpeed;
+			this.MenuPanel.OnSpeedSelected += (object sender, int e) =>
+			{
+				Managers.mn.sexMN.StartCoroutine(this.OnSpeed(sender, e));
+			};
 			this.MenuPanel.OnFinishSelected += (object sender, int e) =>
 			{
 				Managers.mn.sexMN.StartCoroutine(this.OnFinish(sender, e));
 			};
-			this.MenuPanel.OnStopSelected += this.OnStop;
-			this.MenuPanel.OnLeaveSelected += this.OnLeave;
+			this.MenuPanel.OnStopSelected += (object sender, int e) =>
+			{
+				Managers.mn.sexMN.StartCoroutine(this.OnStop(sender, e));
+			};
+			this.MenuPanel.OnLeaveSelected += (object sender, int e) =>
+			{
+				Managers.mn.sexMN.StartCoroutine(this.OnLeave(sender, e));
+			};
 		}
 
 		public void Init(ISceneController controller)
@@ -59,7 +68,7 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.ShowInsertMenu();
 
 			string animSt = this.Npc.npcID.ToString("") + "_";
-			this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_01");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_01");
 
 			if (!this.InsertCounted)
 			{
@@ -75,20 +84,20 @@ namespace ExtendedHSystem.Scenes
 			}
 		}
 
-		private void OnSpeed(object sender, int e)
+		private IEnumerator OnSpeed(object sender, int e)
 		{
 			string animSt = this.Npc.npcID.ToString("") + "_";
 
 			if (this.CommonAnim.state.GetCurrent(0).Animation.Name == animSt + "A_Loop_01")
-				this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_02");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_02");
 			else if (this.CommonAnim.state.GetCurrent(0).Animation.Name == animSt + "A_Loop_02")
-				this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_01");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_01");
 		}
 
-		private void OnStop(object sender, int e)
+		private IEnumerator OnStop(object sender, int e)
 		{
 			this.MenuPanel.ShowStopMenu();
-			this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
 		}
 
 		private IEnumerator OnFinish(object sender, int e)
@@ -114,15 +123,16 @@ namespace ExtendedHSystem.Scenes
 				}
 			}
 
-			this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Finish_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Finish_idle");
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
 		}
 
-		private void OnLeave(object sender, int e)
+		private IEnumerator OnLeave(object sender, int e)
 		{
 			this.Destroy();
+			yield break;
 		}
 
 		public IEnumerator Run()

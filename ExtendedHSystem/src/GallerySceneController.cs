@@ -49,9 +49,10 @@ namespace ExtendedHSystem
 			yield return true;
 		}
 
-		public void LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
+		public IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
 		{
 			tmpSexAnim.state.SetAnimation(0, name, true);
+			yield break;
 		}
 
 		public IEnumerable PlayPlayerGrapplesStep(IScene scene, SkeletonAnimation sexAnim, string sexType, CommonStates man, CommonStates girl)

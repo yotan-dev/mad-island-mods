@@ -37,33 +37,18 @@ namespace ExtendedHSystem.Scenes
 			this.Man = man;
 
 			this.MenuPanel = new ManRapesSleepMenuPanel();
-			this.MenuPanel.OnForcefullyRapeSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnForcefullyRape(sender, e));
-			};
-			this.MenuPanel.OnGentlyRapeSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnGentlyRape(sender, e));
-			};
-			this.MenuPanel.OnUseSleepPowderSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnUseSleepPowder(sender, e));
-			};
+			this.MenuPanel.OnForcefullyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnForcefullyRape());
+			this.MenuPanel.OnGentlyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnGentlyRape());
+			this.MenuPanel.OnUseSleepPowderSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnUseSleepPowder());
+			
+			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
 
-			this.MenuPanel.OnInsertSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnInsert(sender, e));
-			};
+			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
+			this.MenuPanel.OnSpeed2Selected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed2());
 
-			this.MenuPanel.OnSpeedSelected += this.OnSpeed;
-			this.MenuPanel.OnSpeed2Selected += this.OnSpeed2;
+			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
 
-			this.MenuPanel.OnFinishSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnFinish());
-			};
-
-			this.MenuPanel.OnLeaveSelected += this.OnLeave;
+			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
 		}
 
 		public void Init(ISceneController controller)
@@ -227,7 +212,7 @@ namespace ExtendedHSystem.Scenes
 			return true;
 		}
 
-		private IEnumerator OnForcefullyRape(object sender, int e)
+		private IEnumerator OnForcefullyRape()
 		{
 			foreach (var handler in this.EventHandlers) {
 				foreach (var x in handler.OnSleepRapeTypeChange(this, ManRapeSleepState.ForcefullRape))
@@ -235,7 +220,7 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.TmpCommonState = ManRapeSleepState.ForcefullRape; // 1
-			this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_idle");
 
 			if (this.Girl != null)
 				Managers.mn.sound.GoVoice(this.Girl.voiceID, "close", this.CommonAnim.transform.position);
@@ -243,7 +228,7 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.ShowRapeMenu();
 		}
 
-		private IEnumerator OnGentlyRape(object sender, int e)
+		private IEnumerator OnGentlyRape()
 		{
 			foreach (var handler in this.EventHandlers) {
 				foreach (var x in handler.OnSleepRapeTypeChange(this, ManRapeSleepState.GentlyRape))
@@ -251,12 +236,12 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.TmpCommonState = ManRapeSleepState.GentlyRape; // 3
-			this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
 
 			this.MenuPanel.ShowRapeMenu();
 		}
 
-		private IEnumerator OnUseSleepPowder(object sender, int e)
+		private IEnumerator OnUseSleepPowder()
 		{
 			this.ConsumeSleepPowder();
 
@@ -266,12 +251,12 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.TmpCommonState = ManRapeSleepState.SleepPowder; // 2
-			this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
 
 			this.MenuPanel.ShowRapeMenu();
 		}
 
-		private IEnumerator OnInsert(object sender, int e)
+		private IEnumerator OnInsert()
 		{
 			this.MenuPanel.Hide();
 
@@ -301,37 +286,37 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			animName = this.TmpCommonState == ManRapeSleepState.ForcefullRape ? "A_rapes_loop_01" : "A_sleep_loop_01";
-			this.Controller.LoopAnimation(this, this.CommonAnim, animName);
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowInsertMenu(this.TmpCommonState == ManRapeSleepState.SleepPowder);
 		}
 
-		private void OnSpeed(object sender, int e)
+		private IEnumerator OnSpeed()
 		{
 			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
 			{
 				if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_rapes_loop_02")
-					this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_02");
+					yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_02");
 				else
-					this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_01");
+					yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_01");
 			}
 			else if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_sleep_loop_02")
 			{
-				this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_02");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_02");
 			}
 			else
 			{
-				this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
 			}
 		}
 
-		private void OnSpeed2(object sender, int e)
+		private IEnumerator OnSpeed2()
 		{
 			if (this.CommonAnim.state.GetCurrent(0).Animation.Name == "A_sleep_loop_03")
-				this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
 			else
-				this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_03");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_03");
 		}
 
 		private IEnumerator OnFinish()
@@ -366,7 +351,7 @@ namespace ExtendedHSystem.Scenes
 			else
 				animName = "A_sleep_finish_idle";
 
-			this.Controller.LoopAnimation(this, this.CommonAnim, animName);
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
 			foreach (var handler in this.EventHandlers)
 			{
@@ -380,9 +365,10 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.ShowFinishMenu();
 		}
 
-		private void OnLeave(object sender, int e)
+		private IEnumerator OnLeave()
 		{
 			this.Destroy();
+			yield break;
 		}
 
 		private void WakeupCheck()

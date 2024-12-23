@@ -39,23 +39,17 @@ namespace ExtendedHSystem.Scenes
 			this.SexPlace = this.TmpToilet.GetComponent<SexPlace>();
 
 			this.MenuPanel = new ToiletMenuPanel();
-			this.MenuPanel.OnInsertSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnInsert(sender, e));
-			};
-			this.MenuPanel.OnMoveSelected += this.OnMove;
-			this.MenuPanel.OnSpeedSelected += this.OnSpeed;
-			this.MenuPanel.OnFinishSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnFinish(sender, e));
-			};
-			this.MenuPanel.OnStopSelected += this.OnStop;
-			this.MenuPanel.OnLeaveSelected += this.OnLeave;
+			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
+			this.MenuPanel.OnMoveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnMove());
+			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
+			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
+			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
+			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
 
-			this.MenuPanel.OnFaceRevealSelected += this.OnFaceReveal;
+			this.MenuPanel.OnFaceRevealSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFaceReveal());
 
-			this.MenuPanel.OnUrinateSelected += this.OnUrinate;
-			this.MenuPanel.OnStopUrinateSelected += this.OnStopUrinate;
+			this.MenuPanel.OnUrinateSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnUrinate());
+			this.MenuPanel.OnStopUrinateSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStopUrinate());
 		}
 
 		public void Init(ISceneController controller)
@@ -68,7 +62,7 @@ namespace ExtendedHSystem.Scenes
 			this.EventHandlers.Add(handler);
 		}
 
-		private IEnumerator OnInsert(object sender, int e)
+		private IEnumerator OnInsert()
 		{
 			this.MenuPanel.Hide();
 
@@ -87,35 +81,35 @@ namespace ExtendedHSystem.Scenes
 				}
 			}
 
-			this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
+			yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
 		}
 
-		private void OnMove(object sender, int e)
+		private IEnumerator OnMove()
 		{
 			if (this.Anim.state.GetCurrent(0).Animation.Name != "A_Loop_01" && this.Anim.state.GetCurrent(0).Animation.Name != "A_Loop_02")
 			{
 				this.MenuPanel.ShowMoveMenu();
-				this.Controller.LoopAnimation(this, this.Anim, "A_Loop_01");
+				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Loop_01");
 			}
 		}
 
-		private void OnSpeed(object sender, int e)
+		private IEnumerator OnSpeed()
 		{
 			if (this.Anim.GetCurrentAnimName() == "A_Loop_01")
-				this.Controller.LoopAnimation(this, this.Anim, "A_Loop_02");
+				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Loop_02");
 			else if (this.Anim.GetCurrentAnimName() == "A_Loop_02")
-				this.Controller.LoopAnimation(this, this.Anim, "A_Loop_01");
+				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Loop_01");
 		}
 
-		private void OnStop(object sender, int e)
+		private IEnumerator OnStop()
 		{
 			this.MenuPanel.ShowStopMenu();
-			this.Anim.state.SetAnimation(0, "A_Start_idle", true);
+			yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
 		}
 
-		private IEnumerator OnFinish(object sender, int e)
+		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
 
@@ -134,49 +128,50 @@ namespace ExtendedHSystem.Scenes
 				}
 			}
 
-			this.Controller.LoopAnimation(this, this.Anim, "A_Finish_idle");
+			yield return this.Controller.LoopAnimation(this, this.Anim, "A_Finish_idle");
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
 		}
 
-		private void OnLeave(object sender, int e)
+		private IEnumerator OnLeave()
 		{
 			this.Destroy();
+			yield break;
 		}
 
-		private void OnUrinate(object sender, int e)
+		private IEnumerator OnUrinate()
 		{
 			string currentAnim = this.Anim.GetCurrentAnimName();
 			if (currentAnim == "A_Start_idle")
 			{
-				this.Controller.LoopAnimation(this, this.Anim, "A_Start_pee");
+				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_pee");
 				this.MenuPanel.ChangeToStopUrinate();
 			}
 			else if (currentAnim == "A_idle2" || currentAnim == "A_Finish_idle")
 			{
-				this.Controller.LoopAnimation(this, this.Anim, "A_idle_pee");
+				yield return this.Controller.LoopAnimation(this, this.Anim, "A_idle_pee");
 				this.MenuPanel.ChangeToStopUrinate();
 			}
 		}
 
-		private void OnStopUrinate(object sender, int e)
+		private IEnumerator OnStopUrinate()
 		{
 			string currentAnim = this.Anim.GetCurrentAnimName();
 			if (currentAnim == "A_idle_pee")
 			{
-				this.Controller.LoopAnimation(this, this.Anim, "A_idle2");
+				yield return this.Controller.LoopAnimation(this, this.Anim, "A_idle2");
 				this.MenuPanel.ChangeStopToUrinate();
 			}
 			else if (currentAnim == "A_Start_pee")
 			{
-				this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
+				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
 				this.MenuPanel.ChangeStopToUrinate();
 			}
 		}
 
 
-		private void OnFaceReveal(object sender, int e)
+		private IEnumerator OnFaceReveal()
 		{
 			if (Managers.mn.inventory.itemSlot[50].attack == 1f)
 				Managers.mn.inventory.itemSlot[50].attack = 0f;
@@ -184,6 +179,7 @@ namespace ExtendedHSystem.Scenes
 				Managers.mn.inventory.itemSlot[50].attack = 1f;
 
 			Managers.mn.sexMN.ToiletFaceLoad(this.Anim, Managers.mn.inventory.itemSlot[50]);
+			yield break;
 		}
 
 		private bool SetupScene()
@@ -225,7 +221,7 @@ namespace ExtendedHSystem.Scenes
 		{
 			this.SetupScene();
 
-			this.Controller.LoopAnimation(this, this.Anim, "A_idle2");
+			yield return this.Controller.LoopAnimation(this, this.Anim, "A_idle2");
 
 			this.MenuPanel.Open(this.SexPlace.transform.position);
 			this.MenuPanel.ShowInitialMenu();

@@ -60,7 +60,7 @@ namespace ExtendedHSystem.Scenes
 			this.EventHandlers.Add(handler);
 		}
 
-		private IEnumerable MoveToPosition()
+		private IEnumerator MoveToPosition()
 		{
 			float animTime = 30f;
 			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.Girl.gameObject, this.TargetPosObject.gameObject.transform.position, 2f, "A_walk", true, true, 0.1f, 40f));
@@ -88,8 +88,7 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			this.Controller.LoopAnimation(this, this.Girl.anim, "A_idle");
-			yield return true;
+			yield return this.Controller.LoopAnimation(this, this.Girl.anim, "A_idle");
 		}
 
 		private IEnumerable StopGirl()
@@ -319,16 +318,9 @@ namespace ExtendedHSystem.Scenes
 
 			girlMove.searchAngle = 0f;
 			if (this.TargetPosObject != null)
-			{
-				foreach (var x in this.MoveToPosition())
-				{
-					if (x is bool v)
-						shouldContinue = v;
-					yield return x;
-				}
-			}
+				yield return this.MoveToPosition();
 
-			if (!shouldContinue)
+			if (!this.CanContinue())
 				yield break;
 
 			if (!this.OcuppyPlace())

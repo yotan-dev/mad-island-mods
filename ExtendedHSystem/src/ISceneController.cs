@@ -6,7 +6,7 @@ namespace ExtendedHSystem
 {
 	public interface ISceneController
 	{
-		void LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name);
+		IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name);
 
 		IEnumerable PlayTimedStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, float time);
 		

@@ -51,19 +51,13 @@ namespace ExtendedHSystem.Scenes
 			this.Position = pos;
 
 			this.MenuPanel = new CommonSexPlayerMenuPanel();
-			this.MenuPanel.OnCaressSelected += this.OnCaress;
-			this.MenuPanel.OnInsertSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnInsert(sender, e));
-			};
-			this.MenuPanel.OnSpeedSelected += this.OnSpeed;
-			this.MenuPanel.OnPose2Selected += this.OnPose2;
-			this.MenuPanel.OnFinishSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnFinish());
-			};
-			this.MenuPanel.OnStopSelected += this.OnStop;
-			this.MenuPanel.OnLeaveSelected += this.OnLeave;
+			this.MenuPanel.OnCaressSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnCaress());
+			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
+			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
+			this.MenuPanel.OnPose2Selected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnPose2());
+			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
+			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
+			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
 		}
 
 		public void Init(ISceneController controller)
@@ -310,7 +304,7 @@ namespace ExtendedHSystem.Scenes
 			return true;
 		}
 
-		private void OnCaress(object sender, int e)
+		private IEnumerator OnCaress()
 		{
 			this.TmpCommonState = 1;
 			this.TmpCommonSub = 0;
@@ -318,11 +312,11 @@ namespace ExtendedHSystem.Scenes
 			{
 				if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00")) != null)
 				{
-					this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00"));
+					yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00"));
 				}
 				else if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01") != null)
 				{
-					this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Contact_01");
+					yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Contact_01");
 				}
 				else
 				{
@@ -333,11 +327,11 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.ShowCaressMenu();
 		}
 
-		private IEnumerator OnInsert(object sender, int e)
+		private IEnumerator OnInsert()
 		{
 			this.TmpCommonState = 2;
 			this.TmpCommonSub = 0;
-			this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
 
 			bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
 			this.MenuPanel.ShowInsertMenu(hasAlternativePose);
@@ -352,25 +346,25 @@ namespace ExtendedHSystem.Scenes
 			}
 		}
 
-		private void OnSpeed(object sender, int e)
+		private IEnumerator OnSpeed()
 		{
 			if (this.CommonAnim.state.GetCurrent(0).Animation.Name == this.SexType + "Loop_01")
 			{
 				this.TmpCommonState = 3;
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02");
 				bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_02_00") != null;
 				this.MenuPanel.ShowInsertMenu(hasAlternativePose);
 			}
 			else
 			{
 				this.TmpCommonState = 2;
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
 				bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
 				this.MenuPanel.ShowInsertMenu(hasAlternativePose);
 			}
 		}
 
-		private void OnPose2(object sender, int e)
+		private IEnumerator OnPose2()
 		{
 			if (this.TmpCommonSub == 0)
 			{
@@ -380,12 +374,12 @@ namespace ExtendedHSystem.Scenes
 				{
 					if (a == "A_Loop_02" || a == "B_Loop_02")
 					{
-						this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02_" + this.Npc.parameters[6].ToString("00"));
+						yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02_" + this.Npc.parameters[6].ToString("00"));
 					}
 				}
 				else
 				{
-					this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01_" + this.Npc.parameters[6].ToString("00"));
+					yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01_" + this.Npc.parameters[6].ToString("00"));
 				}
 			}
 			else
@@ -399,12 +393,12 @@ namespace ExtendedHSystem.Scenes
 					{
 						if (a == "02")
 						{
-							this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02");
+							yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02");
 						}
 					}
 					else
 					{
-						this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
+						yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
 					}
 				}
 			}
@@ -447,7 +441,7 @@ namespace ExtendedHSystem.Scenes
 			else
 				animName = this.SexType + "Finish_idle_00";
 
-			this.Controller.LoopAnimation(this, this.CommonAnim, animName);
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
 			if (this.TmpSexCountType == 0)
 			{
@@ -462,18 +456,19 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.ShowFinishMenu();
 		}
 
-		private void OnStop(object sender, int e)
+		private IEnumerator OnStop()
 		{
 			this.TmpCommonState = 0;
 			this.TmpCommonSub = 0;
-			this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
 
 			this.MenuPanel.ShowStopMenu();
 		}
 
-		private void OnLeave(object sender, int e)
+		private IEnumerator OnLeave()
 		{
 			UnityEngine.Object.Destroy(this.TmpSex);
+			yield break;
 		}
 
 		public IEnumerator Run()
@@ -488,7 +483,7 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
 
 			while (this.CanContinue())
 			{

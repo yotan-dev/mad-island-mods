@@ -1,4 +1,5 @@
 using System.Collections;
+using ExtendedHSystem.Handlers.Animation;
 using ExtendedHSystem.Scenes;
 using Spine.Unity;
 using UnityEngine;
@@ -9,10 +10,9 @@ namespace ExtendedHSystem
 {
 	public class DefaultSceneController : ISceneController
 	{
-		public void LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
+		public IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
 		{
-			if (tmpSexAnim.skeleton.Data.FindAnimation(name) != null)
-				tmpSexAnim.state.SetAnimation(0, name, true);
+			yield return new LoopAnimation(scene, tmpSexAnim, name).Handle();
 		}
 
 		public IEnumerable PlayTimedStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, float time)

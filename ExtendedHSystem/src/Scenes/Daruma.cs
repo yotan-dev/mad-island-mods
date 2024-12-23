@@ -45,17 +45,11 @@ namespace ExtendedHSystem.Scenes
 			this.TmpDaruma = tmpDaruma;
 
 			this.MenuPanel = new DarumaMenuPanel();
-			this.MenuPanel.OnInsertSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnInsert(sender, e));
-			};
-			this.MenuPanel.OnSpeedSelected += this.OnSpeed;
-			this.MenuPanel.OnFinishSelected += (object sender, int e) =>
-			{
-				Managers.mn.sexMN.StartCoroutine(this.OnFinish(sender, e));
-			};
-			this.MenuPanel.OnStopSelected += this.OnStop;
-			this.MenuPanel.OnLeaveSelected += this.OnLeave;
+			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
+			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
+			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
+			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
+			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
 		}
 
 		public void Init(ISceneController controller)
@@ -68,7 +62,7 @@ namespace ExtendedHSystem.Scenes
 			this.EventHandlers.Add(handler);
 		}
 
-		private IEnumerator OnInsert(object sender, int e)
+		private IEnumerator OnInsert()
 		{
 			// Note: v0.2.3 counts many times, but this seems inconsistent with other scenes, so we will count once.
 			if (!this.InsertCounted)
@@ -87,29 +81,29 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.ShowInsertMenu();
 
 			if (this.CommonAnim.skeleton.Data.FindAnimation(this.Loop01Anim) != null)
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.Loop01Anim);
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.Loop01Anim);
 			else
 				PLogger.LogError("no loop01 animation");
 		}
 
-		private void OnSpeed(object sender, int e)
+		private IEnumerator OnSpeed()
 		{
 			var currentAnim = this.CommonAnim.state.GetCurrent(0).Animation.Name;
 			var newAnim = currentAnim == this.Loop01Anim ? this.Loop02Anim : this.Loop01Anim;
 
 			if (this.CommonAnim.skeleton.Data.FindAnimation(newAnim) != null)
-				this.Controller.LoopAnimation(this, this.CommonAnim, newAnim);
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, newAnim);
 			else
 				PLogger.LogError($"no '{newAnim}' animation");
 		}
 
-		private void OnStop(object sender, int e)
+		private IEnumerator OnStop()
 		{
 			this.MenuPanel.ShowStopMenu();
-			this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
 		}
 
-		private IEnumerator OnFinish(object sender, int e)
+		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
 
@@ -137,9 +131,9 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			if (this.CommonAnim.skeleton.Data.FindAnimation(this.FinishIdleAnim) != null)
-				this.Controller.LoopAnimation(this, this.CommonAnim, this.FinishIdleAnim);
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.FinishIdleAnim);
 			else if (this.CommonAnim.skeleton.Data.FindAnimation("A_Finish_idle") != null)
-				this.Controller.LoopAnimation(this, this.CommonAnim, "A_Finish_idle");
+				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_Finish_idle");
 			else
 				PLogger.LogError("no finish idle animation");
 
@@ -147,9 +141,10 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.Show();
 		}
 
-		private void OnLeave(object sender, int e)
+		private IEnumerator OnLeave()
 		{
 			this.Destroy();
+			yield break;
 		}
 
 		private GameObject GetScene()
@@ -211,7 +206,7 @@ namespace ExtendedHSystem.Scenes
 			Managers.mn.gameMN.Controlable(false, true);
 			Managers.mn.gameMN.pMove.PlayerVisible(false);
 
-			this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
+			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
 
 			this.MenuPanel.Open(this.TmpDaruma.transform.position);
 			this.MenuPanel.ShowInitialMenu();
