@@ -10,9 +10,7 @@ namespace ExtendedHSystem
 	{
 		public static readonly CommonHooks Instance = new CommonHooks();
 
-		private CommonHooks()
-		{
-		}
+		private CommonHooks() { }
 
 		public void InitHooks()
 		{
