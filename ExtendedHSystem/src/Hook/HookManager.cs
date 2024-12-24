@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExtendedHSystem.Scenes;
+using YotanModCore.Events;
 
 namespace ExtendedHSystem.Hook
 {
@@ -35,11 +36,23 @@ namespace ExtendedHSystem.Hook
 	/// </summary>
 	public class HookManager
 	{
+		public delegate void RegisterHooks();
+
+		public static event RegisterHooks RegisterHooksEvent;
+
 		public static HookManager Instance { get; set; } = new HookManager();
 
 		private Dictionary<string, HookQueue> HookDict = new Dictionary<string, HookQueue>();
 
-		private HookManager() { }
+		private HookManager()
+		{
+			GameLifecycleEvents.OnGameStartEvent += () =>
+			{
+				this.HookDict.Clear();
+				HookManager.RegisterHooksEvent?.Invoke();
+			};
+			GameLifecycleEvents.OnGameEndEvent += () => this.HookDict.Clear();
+		}
 
 		public void AddHook(string target, string uid, Func<IScene2, object, IEnumerator> handler)
 		{
