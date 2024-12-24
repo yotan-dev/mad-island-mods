@@ -2,6 +2,7 @@
 using HarmonyLib;
 using YotanModCore.Patches;
 using UnityEngine;
+using YotanModCore.Events;
 
 namespace YotanModCore
 {
@@ -23,6 +24,7 @@ namespace YotanModCore
 
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
+			Harmony.CreateAndPatchAll(typeof(GameLifecycleEvents));
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");
 		}
