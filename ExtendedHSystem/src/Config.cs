@@ -1,14 +1,17 @@
 using BepInEx.Configuration;
+using ExtendedHSystem.Configs;
 
 namespace ExtendedHSystem
 {
 	public class Config
 	{
-		public static Config Instance = new Config();
+		public static Config Instance { get; private set; } = new Config();
 
-		public ConfigEntry<bool> ReplaceOriginalScenes;
+		public ConfigEntry<bool> ReplaceOriginalScenes { get; private set; }
 
-		public void Init(ConfigFile conf)
+		public RequireForeplayConfig RequireForeplay { get; private set; } = RequireForeplayConfig.Instance;
+
+		internal void Init(ConfigFile conf)
 		{
 			this.ReplaceOriginalScenes = conf.Bind<bool>(
 				"General",
@@ -19,6 +22,8 @@ namespace ExtendedHSystem
 				+ "If false, the original game process will be used.\n"
 				+ "Most mods that expand the H System likely needs this set to True"
 			);
+
+			this.RequireForeplay.Init(conf);
 		}
 	}
 }

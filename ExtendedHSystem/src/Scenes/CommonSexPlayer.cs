@@ -38,7 +38,7 @@ namespace ExtendedHSystem.Scenes
 
 		private NPCMove NpcMove;
 
-		private string SexType;
+		public string SexType { get; private set; }
 
 		private GameObject TmpSex = null;
 
@@ -50,7 +50,7 @@ namespace ExtendedHSystem.Scenes
 
 		private float NpcAngle;
 
-		private SkeletonAnimation CommonAnim;
+		public SkeletonAnimation CommonAnim { get; private set; }
 
 		private ISceneController Controller;
 
@@ -303,7 +303,9 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.Open(this.Position);
 			this.MenuPanel.ShowInitialMenu();
 
-			this.GetSceneInfo(out GameObject scene, out this.SexType);
+			string sexType;
+			this.GetSceneInfo(out GameObject scene, out sexType);
+			this.SexType = sexType;
 			if (scene == null)
 				return false;
 
