@@ -40,15 +40,6 @@ namespace Gallery.Patches
 			}
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.CommonSexPlayer), "Run")]
-		[HarmonyPrefix]
-		private static void Pre_CommonSexPlayer_Run(ExtendedHSystem.Scenes.CommonSexPlayer __instance)
-		{
-			__instance.AddEventHandler(
-				new CommonSexPlayerSceneEventHandler(__instance.Player, __instance.Npc, __instance.Type)
-			);
-		}
-
 		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Daruma), "Run")]
 		[HarmonyPrefix]
 		private static void Pre_Daruma_Run(ExtendedHSystem.Scenes.Daruma __instance)

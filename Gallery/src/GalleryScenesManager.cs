@@ -26,6 +26,8 @@ namespace Gallery
 
 		private Dictionary<CommonStates, SceneEventHandler> SceneHandlers = new Dictionary<CommonStates, SceneEventHandler>();
 
+		private Dictionary<CommonStates, BaseTracker> Trackers = new Dictionary<CommonStates, BaseTracker>();
+
 		public List<ISceneManager> SceneManagers = new List<ISceneManager>()
 		{
 			ManRapesSceneManager.Instance,
@@ -121,6 +123,25 @@ namespace Gallery
 		{
 			if (this.SceneHandlers.ContainsKey(common))
 				this.SceneHandlers.Remove(common);
+		}
+
+		public BaseTracker GetTrackerForCommon(CommonStates common)
+		{
+			return this.Trackers.GetValueOrDefault(common, null);
+		}
+
+		public void AddTrackerForCommon(CommonStates common, BaseTracker tracker)
+		{
+			if (this.Trackers.ContainsKey(common))
+				this.Trackers[common] = tracker;
+			else
+				this.Trackers.Add(common, tracker);
+		}
+
+		public void RemoveTrackerForCommon(CommonStates common)
+		{
+			if (this.Trackers.ContainsKey(common))
+				this.Trackers.Remove(common);
 		}
 
 		public void AddScene(IGalleryScene scene)

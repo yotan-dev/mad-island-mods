@@ -27,6 +27,9 @@ namespace ExtendedHSystem
 				Harmony.CreateAndPatchAll(typeof(SexManager_PlayerRapedPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_SlavePatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_ToiletPatch));
+
+				// TODO: Properly initialize them once we have the system
+				ExtendedHSystem.CommonHooks.Instance.InitHooks();
 			}
 
 			PLogger.LogInfo($"Plugin ExtendedHSystem is loaded!");

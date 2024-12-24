@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using ExtendedHSystem.Hook;
+using ExtendedHSystem.ParamContainers;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +10,22 @@ using YotanModCore.Consts;
 
 namespace ExtendedHSystem.Scenes
 {
-	public class CommonSexPlayer : IScene
+	public class CommonSexPlayer : IScene, IScene2
 	{
+		public static readonly string Name = "CommonSexPlayer";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Caress = "Caress";
+			public const string Insert = "Insert";
+			public const string Speed = "Speed";
+			public const string Pose2 = "Pose2";
+			public const string Finish = "Finish";
+			public const string Stop = "Stop";
+			public const string Leave = "Leave";
+		}
+
 		public readonly CommonStates Player;
 
 		public readonly CommonStates Npc;
@@ -31,15 +46,13 @@ namespace ExtendedHSystem.Scenes
 
 		private int TmpCommonSub = 0;
 
-		private int TmpSexCountType = 0;
+		public int TmpSexCountType { get; private set; } = 0;
 
 		private float NpcAngle;
 
 		private SkeletonAnimation CommonAnim;
 
 		private ISceneController Controller;
-
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		private readonly CommonSexPlayerMenuPanel MenuPanel;
 
@@ -65,9 +78,9 @@ namespace ExtendedHSystem.Scenes
 			this.Controller = controller;
 		}
 
-		public void AddEventHandler(SceneEventHandler handler)
+		public string GetName()
 		{
-			this.EventHandlers.Add(handler);
+			return CommonSexPlayer.Name;
 		}
 
 		private bool AreActorsAlive()
@@ -306,6 +319,10 @@ namespace ExtendedHSystem.Scenes
 
 		private IEnumerator OnCaress()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Caress);
+			if (!this.CanContinue())
+				yield break;
+
 			this.TmpCommonState = 1;
 			this.TmpCommonSub = 0;
 			if (this.CommonAnim != null)
@@ -325,10 +342,15 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.MenuPanel.ShowCaressMenu();
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Caress);
 		}
 
 		private IEnumerator OnInsert()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+				yield break;
+
 			this.TmpCommonState = 2;
 			this.TmpCommonSub = 0;
 			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
@@ -337,17 +359,17 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.ShowInsertMenu(hasAlternativePose);
 
 			if (this.TmpSexCountType == 0)
-			{
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.OnNormalSex(this.Player, this.Npc))
-						yield return x;
-				}
-			}
+				yield return HookManager.Instance.RunEventHook(this, EventNames.OnPenetrate, new FromToParams(this.Player, this.Npc));
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnSpeed()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
+			if (!this.CanContinue())
+				yield break;
+
 			if (this.CommonAnim.state.GetCurrent(0).Animation.Name == this.SexType + "Loop_01")
 			{
 				this.TmpCommonState = 3;
@@ -362,10 +384,16 @@ namespace ExtendedHSystem.Scenes
 				bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
 				this.MenuPanel.ShowInsertMenu(hasAlternativePose);
 			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnPose2()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Pose2);
+			if (!this.CanContinue())
+				yield break;
+
 			if (this.TmpCommonSub == 0)
 			{
 				this.TmpCommonSub = 1;
@@ -402,10 +430,16 @@ namespace ExtendedHSystem.Scenes
 					}
 				}
 			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Pose2);
 		}
 
 		private IEnumerator OnFinish()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+				yield break;
+
 			this.TmpCommonState = 0;
 			this.MenuPanel.Hide();
 
@@ -429,12 +463,8 @@ namespace ExtendedHSystem.Scenes
 				to = this.Npc;
 			}
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnBusted(from, to, this.TmpSexCountType))
-					yield return x;
-			}
-
+			yield return HookManager.Instance.RunEventHook(this, EventNames.OnOrgasm, new FromToParams(from, to));
+			
 			if (this.TmpCommonSub == 0)
 				animName = this.SexType + "Finish_idle";
 			else
@@ -443,35 +473,44 @@ namespace ExtendedHSystem.Scenes
 			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
 			if (this.TmpSexCountType == 0)
-			{
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.OnCreampie(from, to))
-						yield return x;
-				}
-			}
+				yield return HookManager.Instance.RunEventHook(this,EventNames.OnCreampie, new FromToParams(from, to));
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowFinishMenu();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnStop()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Stop);
+			if (!this.CanContinue())
+				yield break;
+
 			this.TmpCommonState = 0;
 			this.TmpCommonSub = 0;
 			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
 
 			this.MenuPanel.ShowStopMenu();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
 
 		private IEnumerator OnLeave()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
+			if (!this.CanContinue())
+				yield break;
+
 			UnityEngine.Object.Destroy(this.TmpSex);
-			yield break;
+			
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 		}
 
 		public IEnumerator Run()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+
 			if (!this.SetupScene())
 			{
 				if (this.TmpSex != null)
@@ -518,13 +557,9 @@ namespace ExtendedHSystem.Scenes
 			Managers.mn.uiMN.MainCanvasView(true);
 			this.SexMeter.transform.parent.gameObject.SetActive(false);
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.AfterSex(this, this.Npc, this.Player))
-					yield return x;
-			}
-
 			Managers.mn.uiMN.StatusChange(null);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
 
 

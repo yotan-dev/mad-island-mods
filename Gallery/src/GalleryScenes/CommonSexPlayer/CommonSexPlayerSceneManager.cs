@@ -94,7 +94,6 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 				{
 					var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
 					scene.Init(new ExtendedHSystem.GallerySceneController());
-					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
 
 					return scene;
 				},
@@ -124,7 +123,6 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					GetScene = (PlayData data) => {
 						var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
 						scene.Init(new ExtendedHSystem.GallerySceneController());
-						scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
 
 						return scene;
 					},
@@ -140,7 +138,6 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					GetScene = (PlayData data) => {
 						var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 1);
 						scene.Init(new ExtendedHSystem.GallerySceneController());
-						scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
 						
 						return scene;
 					},
