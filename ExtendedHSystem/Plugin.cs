@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using ExtendedHSystem.Hook;
 using ExtendedHSystem.Patches;
 using HarmonyLib;
@@ -30,6 +30,9 @@ namespace ExtendedHSystem
 				Harmony.CreateAndPatchAll(typeof(SexManager_ToiletPatch));
 
 				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;
+				
+				if (ExtendedHSystem.Config.Instance.RequireForeplay.Enabled.Value)
+					HookManager.RegisterHooksEvent += new Mods.RequireForeplay().InitHooks;
 			}
 
 			PLogger.LogInfo($"Plugin ExtendedHSystem is loaded!");
