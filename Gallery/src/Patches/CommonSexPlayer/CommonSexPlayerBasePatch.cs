@@ -7,7 +7,7 @@ namespace Gallery.Patches.CommonSexPlayer
 {
 	public class CommonSexPlayerBasePatch
 	{
-		private static CommonSexPlayerSceneEventHandler EventHandler = null;
+		private static CommonSexPlayerTracker Tracker = null;
 
 		private static Dictionary<string, CommonStates> GetChars(CommonStates pCommon, CommonStates nCommon)
 		{
@@ -34,13 +34,17 @@ namespace Gallery.Patches.CommonSexPlayer
 				switch ((CommonSexPlayerState)state)
 				{
 					case CommonSexPlayerState.Start:
-						EventHandler = new CommonSexPlayerSceneEventHandler(pCommon, nCommon, sexType);
-						GalleryScenesManager.Instance.AddSceneHandlerForCommon(pCommon, EventHandler);
-						GalleryScenesManager.Instance.AddSceneHandlerForCommon(nCommon, EventHandler);
+						Tracker = new CommonSexPlayerTracker(pCommon, nCommon, sexType);
+						GalleryScenesManager.Instance.AddTrackerForCommon(pCommon, Tracker);
+						GalleryScenesManager.Instance.AddTrackerForCommon(nCommon, Tracker);
 						break;
 
 					case CommonSexPlayerState.Bust:
-						EventHandler?.OnBusted(null, null, __instance.tmpSexCountType);
+						if (Tracker != null)
+						{
+							Tracker.Busted = true;
+							Tracker.SpecialFlag = __instance.tmpSexCountType;
+						}
 						break;
 
 					case CommonSexPlayerState.Caress:
@@ -75,12 +79,12 @@ namespace Gallery.Patches.CommonSexPlayer
 				switch ((CommonSexPlayerState)state)
 				{
 					case CommonSexPlayerState.Start:
-						if (EventHandler.Npc.Id == nCommon.npcID)
-							EventHandler?.AfterSex(null, pCommon, nCommon);
+						if (Tracker.Npc.Id == nCommon.npcID)
+							Tracker?.End();
 						else
-							GalleryLogger.LogError($"CommonSexPlayer: NPC changed between start and end. ({EventHandler.Npc.Id} != {nCommon.npcID})");
+							GalleryLogger.LogError($"CommonSexPlayer: NPC changed between start and end. ({Tracker.Npc.Id} != {nCommon.npcID})");
 
-						EventHandler = null;
+						Tracker = null;
 						break;
 
 					case CommonSexPlayerState.Caress:
@@ -106,8 +110,8 @@ namespace Gallery.Patches.CommonSexPlayer
 			{
 				if (state == (int)CommonSexPlayerState.Start)
 				{
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(pCommon);
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(nCommon);
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(pCommon);
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(nCommon);
 				}
 			}
 		}
