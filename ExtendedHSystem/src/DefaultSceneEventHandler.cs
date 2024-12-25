@@ -94,9 +94,9 @@ namespace ExtendedHSystem
 		{
 			if (scene is CommonSexPlayer commonSexPlayer)
 			{
-				if (commonSexPlayer.GetSexMeterFillAmount() == 1f)
+				if (SexMeter.Instance.FillAmount == 1f)
 					from.LoveChange(to, 10f, false);
-				else if (commonSexPlayer.GetSexMeterFillAmount() < 0.3f)
+				else if (SexMeter.Instance.FillAmount < 0.3f)
 					from.LoveChange(to, -5f, false);
 			}
 			else if (scene is CommonSexNPC)

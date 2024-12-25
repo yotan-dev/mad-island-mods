@@ -34,8 +34,6 @@ namespace ExtendedHSystem.Scenes
 
 		private Vector3 Position;
 
-		private Image SexMeter;
-
 		private NPCMove NpcMove;
 
 		public string SexType { get; private set; }
@@ -289,11 +287,9 @@ namespace ExtendedHSystem.Scenes
 
 		private bool SetupScene()
 		{
-			this.SexMeter = Managers.mn.sexMN.sexMeter;
-
-			this.SexMeter.transform.parent.gameObject.transform.position = this.Position + new Vector3(1f, 1f, 0f);
-			this.SexMeter.transform.parent.gameObject.SetActive(true);
-			this.SexMeter.fillAmount = 0f;
+			SexMeter.Instance.Init(this.Position + new Vector3(1f, 1f, 0f), 0.3f);
+			SexMeter.Instance.Show();
+			
 			Managers.mn.uiMN.MainCanvasView(false);
 
 			this.TmpCommonState = 0;
@@ -530,22 +526,22 @@ namespace ExtendedHSystem.Scenes
 				switch (this.TmpCommonState)
 				{
 					case 1:
-						if (this.SexMeter.fillAmount <= 0.3f)
-							this.SexMeter.fillAmount += Time.deltaTime * 0.03f;
+						if (SexMeter.Instance.FillAmount <= 0.3f)
+							SexMeter.Instance.Fill(Time.deltaTime * 0.03f);
 						else
-							this.SexMeter.fillAmount += Time.deltaTime * 0.005f;
+							SexMeter.Instance.Fill(Time.deltaTime * 0.005f);
 						break;
 					case 2:
-						if (this.SexMeter.fillAmount <= 0.3f)
-							this.SexMeter.fillAmount += Time.deltaTime * 0.005f;
+						if (SexMeter.Instance.FillAmount <= 0.3f)
+							SexMeter.Instance.Fill(Time.deltaTime * 0.005f);
 						else
-							this.SexMeter.fillAmount += Time.deltaTime * 0.03f;
+							SexMeter.Instance.Fill(Time.deltaTime * 0.03f);
 						break;
 					case 3:
-						if (this.SexMeter.fillAmount <= 0.3f)
-							this.SexMeter.fillAmount += Time.deltaTime * 0.005f;
+						if (SexMeter.Instance.FillAmount <= 0.3f)
+							SexMeter.Instance.Fill(Time.deltaTime * 0.005f);
 						else
-							this.SexMeter.fillAmount += Time.deltaTime * 0.05f;
+							SexMeter.Instance.Fill(Time.deltaTime * 0.05f);
 						break;
 				}
 				yield return null;
@@ -557,7 +553,7 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.Close();
 
 			Managers.mn.uiMN.MainCanvasView(true);
-			this.SexMeter.transform.parent.gameObject.SetActive(false);
+			SexMeter.Instance.Hide();
 
 			Managers.mn.uiMN.StatusChange(null);
 
@@ -568,11 +564,6 @@ namespace ExtendedHSystem.Scenes
 		public bool CanContinue()
 		{
 			return this.TmpSex != null && this.AreActorsAlive();
-		}
-
-		public float GetSexMeterFillAmount()
-		{
-			return this.SexMeter.fillAmount;
 		}
 
 		public void Destroy()

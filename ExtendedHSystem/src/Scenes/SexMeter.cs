@@ -1,3 +1,5 @@
+using System;
+using UnityEngine;
 using UnityEngine.UI;
 using YotanModCore;
 
@@ -13,6 +15,8 @@ namespace ExtendedHSystem.Scenes
 
 		public float DividerPercent { get; private set; }
 
+		private GameObject Root;
+
 		private Image EmptyBg;
 
 		private Image HighValueFilledBg;
@@ -27,21 +31,33 @@ namespace ExtendedHSystem.Scenes
 		public void Reload()
 		{
 			var sexMeterBar = Managers.mn.sexMN.sexMeter;
+			this.Root = sexMeterBar.transform.parent.gameObject;
 			this.FillingBar = sexMeterBar;
 			this.EmptyBg = sexMeterBar.transform.parent.Find("Background (1)").GetComponent<Image>();
 			this.HighValueFilledBg = sexMeterBar.transform.Find("Background (1)").GetComponent<Image>();
 		}
 
-		public void Init(float dividerPercent)
+		public void Init(Vector3 position, float dividerPercent)
 		{
+			this.Root.transform.position = position;
 			this.SetFillAmount(0f);
 			this.RealValue = 0f;
 			this.SetDividerPercent(dividerPercent);
 		}
 
+		public void Show()
+		{
+			this.Root.SetActive(true);
+		}
+
+		public void Hide()
+		{
+			this.Root.SetActive(false);
+		}
+
 		public void SetFillAmount(float value)
 		{
-			this.FillingBar.fillAmount = value;
+			this.FillingBar.fillAmount = Math.Clamp(value, 0f, 1f);
 			this.RealValue = value;
 		}
 
