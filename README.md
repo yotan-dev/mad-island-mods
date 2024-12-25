@@ -64,20 +64,37 @@ Please let me know if you are depending on it :)
 
 ### Extended H-System
 
-This mod rewrites the H-scenes in a pluggable way. It does not include new scenes (yet), and by itself it doesn't change anything,
-but it allows modders (myself included) to do some stuff with the scenes.
+The main purpose of this mod is to rewrite the game original H-scenes into a pluggable and extensible structure, becoming kind of a framework for modders to interact with the H-System.
 
-You can configure whether you want it to replace the original scenes or not, but most mods will need you to replace it, and it is
-the default config. You can change that on `BepInEx/config/ExtendedHSystem.json`
+> ⚠️ When using the replacement mode (default), new scenes added to the game by the devs won't work until this mod is updated.
 
-I plan to make certain scenes that are specific to some moments available in other, but no promises here...
+By default, it will replace the developer shipped H-Scenes with similar ones that are coded in the mod.
+You can configure whether you want it to replace the original scenes or not, but most mods will need you to replace it.
+You can change that on `BepInEx/config/ExtendedHSystem.json`
 
-> ⚠️ When using the replacement mode, new scenes added to the game by the devs won't work until I update this mod.
+Additionally, it provides some customizations that you can opt in.
+Some of those customizations more on the side of showing how modders can use it than really something
+you will want in your game, but they are all functional, if you want to use them, feel free to.
+
+I plan to make certain scenes available in other contexts, but no promises here...
 
 
-**For mod developers:**
+#### Customizations
+
+##### Require Foreplay
+
+For H-Scenes with players, NPCs will refuse to continue if the player tries to "insert" before they are ready.
+
+To enable it, go to `BepInEx/config/ExtendedHSystem.json` and set `RequireForeplay` to `true`.
+
+In the same file you can customize the required bar level and whether you want age and some random factors to apply over it.
+
+
+#### For mod developers
 
 Please, don't use it yet, as I am still trying to figure out the best API for it ( suggestions are welcome :) )
+
+The most recent version is the one being used by CommonSexPlayer
 
 My idea is that you will be able to hook into certain parts of the scene and perform additional things over the scene,
 including removing the original "events" and adding new ones.
@@ -85,7 +102,7 @@ including removing the original "events" and adding new ones.
 You can also use it to trigger scenes by yourself.
 
 
-**Requirements:**
+#### Requirements
 
 1. Yotan Mod Core must be installed.
 
