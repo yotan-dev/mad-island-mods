@@ -289,7 +289,7 @@ namespace ExtendedHSystem.Scenes
 		{
 			SexMeter.Instance.Init(this.Position + new Vector3(1f, 1f, 0f), 0.3f);
 			SexMeter.Instance.Show();
-			
+
 			Managers.mn.uiMN.MainCanvasView(false);
 
 			this.TmpCommonState = 0;
@@ -462,7 +462,7 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			yield return HookManager.Instance.RunEventHook(this, EventNames.OnOrgasm, new FromToParams(from, to));
-			
+
 			if (this.TmpCommonSub == 0)
 				animName = this.SexType + "Finish_idle";
 			else
@@ -471,7 +471,7 @@ namespace ExtendedHSystem.Scenes
 			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
 			if (this.TmpSexCountType == 0)
-				yield return HookManager.Instance.RunEventHook(this,EventNames.OnCreampie, new FromToParams(from, to));
+				yield return HookManager.Instance.RunEventHook(this, EventNames.OnCreampie, new FromToParams(from, to));
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowFinishMenu();
@@ -501,20 +501,39 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			UnityEngine.Object.Destroy(this.TmpSex);
-			
+
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
+		}
+
+		private void Teardown()
+		{
+			this.EnableLiveNpc(this.Npc, this.NpcMove);
+			this.EnableLivePlayer(this.Player);
+
+			this.MenuPanel.Close();
+
+			Managers.mn.uiMN.MainCanvasView(true);
+			SexMeter.Instance.Hide();
+
+			Managers.mn.uiMN.StatusChange(null);
 		}
 
 		public IEnumerator Run()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
-
 			if (!this.SetupScene())
 			{
 				if (this.TmpSex != null)
 					UnityEngine.Object.Destroy(this.TmpSex);
 
 				Debug.LogError("sex not found");
+				yield break;
+			}
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				this.Teardown();
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 				yield break;
 			}
 
@@ -547,15 +566,7 @@ namespace ExtendedHSystem.Scenes
 				yield return null;
 			}
 
-			this.EnableLiveNpc(this.Npc, this.NpcMove);
-			this.EnableLivePlayer(this.Player);
-
-			this.MenuPanel.Close();
-
-			Managers.mn.uiMN.MainCanvasView(true);
-			SexMeter.Instance.Hide();
-
-			Managers.mn.uiMN.StatusChange(null);
+			this.Teardown();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}

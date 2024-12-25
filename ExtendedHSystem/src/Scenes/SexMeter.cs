@@ -69,7 +69,7 @@ namespace ExtendedHSystem.Scenes
 		public void SetDividerPercent(float value)
 		{
 			this.DividerPercent = value;
-			this.EmptyBg.fillAmount = value;
+			this.EmptyBg.fillAmount = 1f - value;
 			this.HighValueFilledBg.fillAmount = value;
 		}
 	}
