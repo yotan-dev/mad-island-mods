@@ -77,10 +77,23 @@ namespace ExtendedHSystem
 						.Build()
 				);
 				CommonSexPlayer.AddPerformer(
-					new SexPerformerInfoBuilder("EHS_Man_FemaleLargeNative_Friendly_Normal")
+					new SexPerformerInfoBuilder("EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal")
 						.SetSexPrefab(Managers.mn.sexMN.sexList[8].sexObj[1])
 						.SetActors(NpcID.Man /* 0 */, NpcID.FemaleLargeNative /* 17 */)
-						// .AddCondition(new PregnantCheck(NpcID.FemaleNative, true)) // Type == 0
+						.AddCondition(new SexTypeCheck(0))
+						.AddAnimation(ActionType.StartIdle, new ActionValue(PlayType.Loop, "Love_A_idle"))
+						.AddAnimation(ActionType.Caress, new ActionValue(PlayType.Loop, "Love_A_Contact_01"))
+						.AddAnimation(ActionType.Insert, new ActionValue(PlayType.Loop, "Love_A_Loop_01"))
+						.AddAnimation(ActionType.Speed, new ActionValue(PlayType.Loop, "Love_A_Loop_02"))
+						.AddAnimation(ActionType.Finish, new ActionValue(PlayType.Once, "Love_A_Finish"))
+						.AddAnimation(ActionType.FinishIdle, new ActionValue(PlayType.Loop, "Love_A_Finish_idle"))
+						.Build()
+				);
+				CommonSexPlayer.AddPerformer(
+					new SexPerformerInfoBuilder("EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal")
+						.SetSexPrefab(Managers.mn.sexMN.sexList[8].sexObj[15])
+						.SetActors(NpcID.Man /* 0 */, NpcID.FemaleLargeNative /* 17 */)
+						.AddCondition(new SexTypeCheck(1))
 						.AddAnimation(ActionType.StartIdle, new ActionValue(PlayType.Loop, "Love_A_idle"))
 						.AddAnimation(ActionType.Caress, new ActionValue(PlayType.Loop, "Love_A_Contact_01"))
 						.AddAnimation(ActionType.Insert, new ActionValue(PlayType.Loop, "Love_A_Loop_01"))
