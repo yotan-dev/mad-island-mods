@@ -11,6 +11,8 @@ namespace ExtendedHSystem
 
 		public RequireForeplayConfig RequireForeplay { get; private set; } = RequireForeplayConfig.Instance;
 
+		public ConfigEntry<bool> EnableDickPainter { get; private set; }
+
 		internal void Init(ConfigFile conf)
 		{
 			this.ReplaceOriginalScenes = conf.Bind<bool>(
@@ -24,6 +26,14 @@ namespace ExtendedHSystem
 			);
 
 			this.RequireForeplay.Init(conf);
+
+			this.EnableDickPainter = conf.Bind<bool>(
+				"DickPainter",
+				"Enabled",
+				false,
+				"Enables DickPainter mod.\n"
+				+ "This mod paints the male dick in red if the female is virgin or in pinky when using comdom.\n"
+			);
 		}
 	}
 }

@@ -33,6 +33,9 @@ namespace ExtendedHSystem
 				
 				if (ExtendedHSystem.Config.Instance.RequireForeplay.Enabled.Value)
 					HookManager.RegisterHooksEvent += new Mods.RequireForeplay().InitHooks;
+
+				if (ExtendedHSystem.Config.Instance.EnableDickPainter.Value)
+					HookManager.RegisterHooksEvent += new Mods.DickPainter().InitHooks;
 			}
 
 			PLogger.LogInfo($"Plugin ExtendedHSystem is loaded!");

@@ -4,7 +4,6 @@ using ExtendedHSystem.Hook;
 using ExtendedHSystem.ParamContainers;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.UI;
 using YotanModCore;
 using YotanModCore.Consts;
 
@@ -12,6 +11,8 @@ namespace ExtendedHSystem.Scenes
 {
 	public class CommonSexPlayer : IScene, IScene2
 	{
+		public static CommonSexPlayer Instance;
+
 		public static readonly string Name = "CommonSexPlayer";
 
 		public static class StepNames
@@ -69,6 +70,8 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
 			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
 			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
+
+			Instance = this;
 		}
 
 		public void Init(ISceneController controller)
@@ -529,6 +532,8 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
+			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())
 			{
@@ -537,7 +542,6 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
 
 			while (this.CanContinue())
@@ -581,6 +585,21 @@ namespace ExtendedHSystem.Scenes
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			if (CommonUtils.IsMale(this.Player))
+				return [this.Player, this.Npc];
+			else if (CommonUtils.IsMale(this.Npc))
+				return [this.Npc, this.Player];
+
+			return [this.Player, this.Npc];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.CommonAnim;
 		}
 	}
 }
