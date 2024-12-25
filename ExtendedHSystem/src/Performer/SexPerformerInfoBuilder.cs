@@ -7,16 +7,16 @@ namespace ExtendedHSystem.Performer
 {
 	public class SexPerformerInfoBuilder
 	{
-		public string Id { get; set; }
-		public GameObject SexPrefab { get; set; }
+		private string Id { get; set; }
+		private GameObject SexPrefab { get; set; }
 
-		public int FromNpcId { get; set; }
+		private int FromNpcId { get; set; }
 
-		public int? ToNpcId { get; set; }
+		private int? ToNpcId { get; set; }
 
-		public List<IConditional> Conditionals { get; set; } = [];
+		private List<IConditional> Conditionals { get; set; } = [];
 
-		public Dictionary<ActionType, Func<ISceneController, IEnumerator>> Actions { get; set; } = [];
+		private Dictionary<ActionKey, ActionValue> Actions { get; set; } = [];
 
 		public SexPerformerInfoBuilder(string id)
 		{
@@ -42,9 +42,15 @@ namespace ExtendedHSystem.Performer
 			return this;
 		}
 
-		public SexPerformerInfoBuilder AddAnimation(ActionType actionType, Func<ISceneController, IEnumerator> executor)
+		public SexPerformerInfoBuilder AddAnimation(ActionType actionType, int pose, ActionValue value)
 		{
-			this.Actions.Add(actionType, executor);
+			this.Actions.Add(new ActionKey(actionType, pose), value);
+			return this;
+		}
+
+		public SexPerformerInfoBuilder AddAnimation(ActionType actionType, ActionValue value)
+		{
+			this.AddAnimation(actionType, 1, value);
 			return this;
 		}
 

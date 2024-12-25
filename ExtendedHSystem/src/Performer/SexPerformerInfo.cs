@@ -16,14 +16,14 @@ namespace ExtendedHSystem.Performer
 
 		public readonly List<IConditional> Conditionals;
 
-		public readonly Dictionary<ActionType, Func<ISceneController, IEnumerator>> Actions = [];
+		public readonly Dictionary<ActionKey, ActionValue> Actions = [];
 
 		public SexPerformerInfo(
 			int from,
 			int? to,
 			GameObject sexPrefab,
 			List<IConditional> conditionals,
-			Dictionary<ActionType, Func<ISceneController, IEnumerator>> actions
+			Dictionary<ActionKey, ActionValue> actions
 		)
 		{
 			this.FromNpcId = from;
@@ -43,7 +43,5 @@ namespace ExtendedHSystem.Performer
 
 			return true;
 		}
-
-		public bool HasAction(ActionType action) => this.Actions.ContainsKey(action);
 	}
 }
