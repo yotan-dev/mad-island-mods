@@ -18,13 +18,18 @@ namespace ExtendedHSystem.Mods
 
 		public void InitHooks()
 		{
+			HookBuilder.New("EHSMods.RequireForeplay.Main")
+				.ForScenes(CommonSexPlayer.Name)
+				.HookStepStart(CommonSexPlayer.StepNames.Main)
+				.Call(this.OnStart);
+
 			HookBuilder.New("EHSMods.RequireForeplay.Insert")
 				.ForScenes(CommonSexPlayer.Name)
 				.HookStepStart(CommonSexPlayer.StepNames.Insert)
 				.Call(this.OnInsert);
 		}
 
-		private IEnumerator OnInsert(IScene2 scene, object param)
+		private IEnumerator OnStart(IScene2 scene, object param)
 		{
 			var commonSexPlayer = scene as CommonSexPlayer;
 			if (commonSexPlayer == null)
@@ -46,7 +51,16 @@ namespace ExtendedHSystem.Mods
 
 			requiredBarValue = Mathf.Clamp(requiredBarValue, 0f, 100f) / 100f;
 
-			if (commonSexPlayer.GetSexMeterFillAmount() < requiredBarValue)
+			SexMeter.Instance.SetDividerPercent(requiredBarValue);
+		}
+
+		private IEnumerator OnInsert(IScene2 scene, object param)
+		{
+			var commonSexPlayer = scene as CommonSexPlayer;
+			if (commonSexPlayer == null)
+				yield break;
+
+			if (SexMeter.Instance.FillAmount < SexMeter.Instance.DividerPercent)
 			{
 				string animName = commonSexPlayer.SexType + "Loop_01";
 				float partialDuration = commonSexPlayer.CommonAnim.skeleton.Data.FindAnimation(animName).Duration / 2;

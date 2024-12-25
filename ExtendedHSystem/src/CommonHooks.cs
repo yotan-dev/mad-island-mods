@@ -55,9 +55,9 @@ namespace ExtendedHSystem
 			if (commonSexPlayer == null)
 				yield break;
 
-			if (commonSexPlayer.GetSexMeterFillAmount() == 1f)
+			if (SexMeter.Instance.FillAmount == 1f)
 				commonSexPlayer.Npc.LoveChange(commonSexPlayer.Player, 10f, false);
-			else if (commonSexPlayer.GetSexMeterFillAmount() < 0.3f)
+			else if (SexMeter.Instance.FillAmount < 0.3f)
 				commonSexPlayer.Npc.LoveChange(commonSexPlayer.Player, -5f, false);
 
 			yield break;
