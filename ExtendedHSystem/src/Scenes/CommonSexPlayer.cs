@@ -398,7 +398,7 @@ namespace ExtendedHSystem.Scenes
 
 			this.TmpCommonState = 2;
 			this.TmpCommonSub = 0;
-			yield return this.Performer.Perform(ActionType.InsertPose1);
+			yield return this.Performer.Perform(ActionType.Insert);
 			// yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
 
 			bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
@@ -416,21 +416,18 @@ namespace ExtendedHSystem.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			ActionType altAction;
 			if (this.TmpCommonState == 2) /* Slow */
 			{
 				this.TmpCommonState = 3;
-				yield return this.Performer.Perform(ActionType.InsertSpeedPose1);
-				altAction = ActionType.InsertSpeedPose2;
+				yield return this.Performer.Perform(ActionType.Speed);
 			}
 			else // (this.TmpCommonState == 3 /* Fast */)
 			{
 				this.TmpCommonState = 2;
-				yield return this.Performer.Perform(ActionType.InsertPose1);
-				altAction = ActionType.InsertPose2;
+				yield return this.Performer.Perform(ActionType.Insert);
 			}
 
-			this.MenuPanel.ShowInsertMenu(this.Performer.Info.HasAction(altAction));
+			this.MenuPanel.ShowInsertMenu(this.Performer.HasAlternativePose());
 			// if (this.CommonAnim.state.GetCurrent(0).Animation.Name == this.SexType + "Loop_01")
 			// {
 			// 	this.TmpCommonState = 3;
@@ -458,11 +455,7 @@ namespace ExtendedHSystem.Scenes
 			if (this.TmpCommonSub == 0) /* Pose 1 */
 			{
 				this.TmpCommonSub = 1;
-				if (this.TmpCommonState == 2)
-					yield return this.Performer.Perform(ActionType.InsertPose2);
-				else // 3
-					yield return this.Performer.Perform(ActionType.InsertSpeedPose2);
-
+				yield return this.Performer.ChangePose();
 				// string a = this.CommonAnim.state.GetCurrent(0).Animation.Name;
 				// if ((a != "A_Loop_01") && (a != "B_Loop_01"))
 				// {
@@ -479,10 +472,7 @@ namespace ExtendedHSystem.Scenes
 			else /* TmpCommonSub == 1 -- Pose 2 */
 			{
 				this.TmpCommonSub = 0;
-				if (this.TmpCommonState == 2)
-					yield return this.Performer.Perform(ActionType.InsertPose1);
-				else // 3
-					yield return this.Performer.Perform(ActionType.InsertSpeedPose1);
+				yield return this.Performer.ChangePose();
 
 				// string[] array = this.CommonAnim.state.GetCurrent(0).Animation.Name.Split('_', StringSplitOptions.None);
 				// if (array.Length >= 2)
@@ -514,12 +504,7 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonState = 0;
 			this.MenuPanel.Hide();
 
-			string animName;
-
-			if (this.TmpCommonSub == 0)
-				yield return this.Performer.Perform(ActionType.FinishPose1);
-			else
-				yield return this.Performer.Perform(ActionType.FinishPose2);
+			yield return this.Performer.Perform(ActionType.Finish);
 			// if (this.TmpCommonSub == 0)
 			// 	animName = this.SexType + "Finish";
 			// else
@@ -541,10 +526,7 @@ namespace ExtendedHSystem.Scenes
 
 			yield return HookManager.Instance.RunEventHook(this, EventNames.OnOrgasm, new FromToParams(from, to));
 
-			if (this.TmpCommonSub == 0)
-				yield return this.Performer.Perform(ActionType.FinishIdlePose1);
-			else
-				yield return this.Performer.Perform(ActionType.FinishIdlePose2);
+			yield return this.Performer.Perform(ActionType.FinishIdle);
 			// if (this.TmpCommonSub == 0)
 			// 	animName = this.SexType + "Finish_idle";
 			// else
