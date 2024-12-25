@@ -73,5 +73,20 @@ namespace ExtendedHSystem
 			// The gallery path for this is quite weird, and does nothing in the overall logic
 			yield return false;
 		}
+
+		public void SetScene(IScene2 scene)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public IEnumerator LoopAnimation(string name)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public IEnumerator PlayOnceStep_New(string name, bool skippable = false)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

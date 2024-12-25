@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using ExtendedHSystem.Hook;
 using ExtendedHSystem.ParamContainers;
+using ExtendedHSystem.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
@@ -11,6 +13,8 @@ namespace ExtendedHSystem.Scenes
 {
 	public class CommonSexPlayer : IScene, IScene2
 	{
+		protected static Dictionary<int, Dictionary<int?, List<SexPerformerInfo>>> Performers = [];
+
 		public static CommonSexPlayer Instance;
 
 		public static readonly string Name = "CommonSexPlayer";
@@ -55,6 +59,27 @@ namespace ExtendedHSystem.Scenes
 
 		private readonly CommonSexPlayerMenuPanel MenuPanel;
 
+		private SexPerformer Performer;
+
+		public static void AddPerformer(SexPerformerInfo performer)
+		{
+			Dictionary<int?, List<SexPerformerInfo>> toPerformerList;
+			if (!Performers.TryGetValue(performer.FromNpcId, out toPerformerList))
+			{
+				toPerformerList = new Dictionary<int?, List<SexPerformerInfo>>();
+				Performers.Add(performer.FromNpcId, toPerformerList);
+			}
+
+			List<SexPerformerInfo> performerList;
+			if (!toPerformerList.TryGetValue(performer.ToNpcId, out performerList))
+			{
+				performerList = new List<SexPerformerInfo>();
+				toPerformerList.Add(performer.ToNpcId, performerList);
+			}
+
+			performerList.Add(performer);
+		}
+
 		public CommonSexPlayer(CommonStates playerCommon, CommonStates npcCommon, Vector3 pos, int sexType)
 		{
 			this.Player = playerCommon;
@@ -77,6 +102,7 @@ namespace ExtendedHSystem.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public string GetName()
@@ -94,107 +120,124 @@ namespace ExtendedHSystem.Scenes
 			scene = null;
 			sexType = "A_";
 
-			switch (this.Player.npcID)
+			if (Performers.TryGetValue(this.Player.npcID, out var toPerformerList))
 			{
-				case NpcID.Yona: // 0
-					switch (this.Npc.npcID)
+				if (toPerformerList.TryGetValue(this.Npc.npcID, out var performerList))
+				{
+					foreach (var performer in performerList)
 					{
-						case NpcID.MaleNative: // 10
-							scene = Managers.mn.sexMN.sexList[2].sexObj[4];
-							break;
-
-						case NpcID.BigNative: // 11
-							scene = Managers.mn.sexMN.sexList[14].sexObj[0];
-							break;
-
-						case NpcID.SmallNative: // 12
-							scene = Managers.mn.sexMN.sexList[12].sexObj[0];
-							break;
-
-						case NpcID.ElderBrotherNative: // 91
-							scene = Managers.mn.sexMN.sexList[13].sexObj[0];
-							break;
+						if (performer.CanPlay(this))
+						{
+							this.Performer = new SexPerformer(performer, this.Controller);
+							scene = this.Performer.Info.SexPrefab;
+						}
 					}
-					break;
 
-				case NpcID.Man: // 1
-					switch (this.Npc.npcID)
-					{
-						case NpcID.Reika: // 5
-							if (this.Type == 1 && Managers.mn.story.QuestProgress("Sub_Keigo") == 2)
-								scene = Managers.mn.sexMN.sexList[1].sexObj[17];
-							else
-								scene = Managers.mn.sexMN.sexList[1].sexObj[12];
-							break;
-
-						case NpcID.FemaleNative: // 15
-							if (CommonUtils.IsPregnant(this.Npc))
-								scene = Managers.mn.sexMN.sexList[1].sexObj[20];
-							else
-								scene = Managers.mn.sexMN.sexList[1].sexObj[1];
-							break;
-
-						case NpcID.NativeGirl: // 16
-							scene = Managers.mn.sexMN.sexList[1].sexObj[3];
-							break;
-
-						case NpcID.FemaleLargeNative: // 17
-							this.SexType = "Love_A_";
-							if (this.Type == 0)
-								scene = Managers.mn.sexMN.sexList[8].sexObj[1];
-							else
-								scene = Managers.mn.sexMN.sexList[1].sexObj[15];
-							break;
-
-						case NpcID.Mummy: // 42*
-							scene = Managers.mn.sexMN.sexList[1].sexObj[6];
-							this.TmpSexCountType = 1;
-							break;
-
-						case NpcID.UnderGroundWoman: // 44*
-							scene = Managers.mn.sexMN.sexList[1].sexObj[8];
-							this.SexType = "Love_A_";
-							break;
-
-						case NpcID.Mermaid: // 71*
-							scene = Managers.mn.sexMN.sexList[1].sexObj[9];
-							if (this.Type == 0)
-								this.TmpSexCountType = 1;
-							else
-								this.SexType = "B_";
-							break;
-
-						case NpcID.ElderSisterNative: // 90
-							scene = Managers.mn.sexMN.sexList[1].sexObj[11];
-							break;
-
-						case NpcID.Giant: // 110
-							scene = Managers.mn.sexMN.sexList[1].sexObj[7];
-							break;
-
-						case NpcID.Cassie2: // 113
-							scene = Managers.mn.sexMN.sexList[1].sexObj[16];
-							break;
-
-						case NpcID.Shino: // 114
-							scene = Managers.mn.sexMN.sexList[1].sexObj[19];
-							if (this.Type == 0)
-								this.TmpSexCountType = 1;
-							else
-								this.SexType = "B_";
-							break;
-
-						case NpcID.Sally: // 115
-							scene = Managers.mn.sexMN.sexList[11].sexObj[0];
-							this.SexType = "Love_A_";
-							break;
-
-						case NpcID.Merry: // 116
-							scene = Managers.mn.sexMN.sexList[1].sexObj[25];
-							break;
-					}
-					break;
+				}
 			}
+			/*
+						switch (this.Player.npcID)
+						{
+							case NpcID.Yona: // 0
+								switch (this.Npc.npcID)
+								{
+									case NpcID.MaleNative: // 10
+										scene = Managers.mn.sexMN.sexList[2].sexObj[4];
+										break;
+
+									case NpcID.BigNative: // 11
+										scene = Managers.mn.sexMN.sexList[14].sexObj[0];
+										break;
+
+									case NpcID.SmallNative: // 12
+										scene = Managers.mn.sexMN.sexList[12].sexObj[0];
+										break;
+
+									case NpcID.ElderBrotherNative: // 91
+										scene = Managers.mn.sexMN.sexList[13].sexObj[0];
+										break;
+								}
+								break;
+
+							case NpcID.Man: // 1
+								switch (this.Npc.npcID)
+								{
+									case NpcID.Reika: // 5
+										if (this.Type == 1 && Managers.mn.story.QuestProgress("Sub_Keigo") == 2)
+											scene = Managers.mn.sexMN.sexList[1].sexObj[17];
+										else
+											scene = Managers.mn.sexMN.sexList[1].sexObj[12];
+										break;
+
+									case NpcID.FemaleNative: // 15
+										if (CommonUtils.IsPregnant(this.Npc))
+											scene = Managers.mn.sexMN.sexList[1].sexObj[20];
+										else
+											scene = Managers.mn.sexMN.sexList[1].sexObj[1];
+										break;
+
+									case NpcID.NativeGirl: // 16
+										scene = Managers.mn.sexMN.sexList[1].sexObj[3];
+										break;
+
+									case NpcID.FemaleLargeNative: // 17
+										this.SexType = "Love_A_";
+										if (this.Type == 0)
+											scene = Managers.mn.sexMN.sexList[8].sexObj[1];
+										else
+											scene = Managers.mn.sexMN.sexList[1].sexObj[15];
+										break;
+
+									case NpcID.Mummy: // 42*
+										scene = Managers.mn.sexMN.sexList[1].sexObj[6];
+										this.TmpSexCountType = 1;
+										break;
+
+									case NpcID.UnderGroundWoman: // 44*
+										scene = Managers.mn.sexMN.sexList[1].sexObj[8];
+										this.SexType = "Love_A_";
+										break;
+
+									case NpcID.Mermaid: // 71*
+										scene = Managers.mn.sexMN.sexList[1].sexObj[9];
+										if (this.Type == 0)
+											this.TmpSexCountType = 1;
+										else
+											this.SexType = "B_";
+										break;
+
+									case NpcID.ElderSisterNative: // 90
+										scene = Managers.mn.sexMN.sexList[1].sexObj[11];
+										break;
+
+									case NpcID.Giant: // 110
+										scene = Managers.mn.sexMN.sexList[1].sexObj[7];
+										break;
+
+									case NpcID.Cassie2: // 113
+										scene = Managers.mn.sexMN.sexList[1].sexObj[16];
+										break;
+
+									case NpcID.Shino: // 114
+										scene = Managers.mn.sexMN.sexList[1].sexObj[19];
+										if (this.Type == 0)
+											this.TmpSexCountType = 1;
+										else
+											this.SexType = "B_";
+										break;
+
+									case NpcID.Sally: // 115
+										scene = Managers.mn.sexMN.sexList[11].sexObj[0];
+										this.SexType = "Love_A_";
+										break;
+
+									case NpcID.Merry: // 116
+										scene = Managers.mn.sexMN.sexList[1].sexObj[25];
+										break;
+								}
+								break;
+						}
+			*/
 		}
 
 		private void SetupTmpSex()
@@ -326,21 +369,22 @@ namespace ExtendedHSystem.Scenes
 
 			this.TmpCommonState = 1;
 			this.TmpCommonSub = 0;
-			if (this.CommonAnim != null)
-			{
-				if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00")) != null)
-				{
-					yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00"));
-				}
-				else if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01") != null)
-				{
-					yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Contact_01");
-				}
-				else
-				{
-					Debug.LogError("Animation not found");
-				}
-			}
+			yield return this.Performer.Perform(ActionType.Caress);
+			// if (this.CommonAnim != null)
+			// {
+			// 	if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00")) != null)
+			// 	{
+			// 		yield return this.Controller.LoopAnimation(this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00"));
+			// 	}
+			// 	else if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01") != null)
+			// 	{
+			// 		yield return this.Controller.LoopAnimation(this.SexType + "Contact_01");
+			// 	}
+			// 	else
+			// 	{
+			// 		Debug.LogError("Animation not found");
+			// 	}
+			// }
 
 			this.MenuPanel.ShowCaressMenu();
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Caress);
@@ -354,7 +398,8 @@ namespace ExtendedHSystem.Scenes
 
 			this.TmpCommonState = 2;
 			this.TmpCommonSub = 0;
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
+			yield return this.Performer.Perform(ActionType.InsertPose1);
+			// yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
 
 			bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
 			this.MenuPanel.ShowInsertMenu(hasAlternativePose);
@@ -371,20 +416,35 @@ namespace ExtendedHSystem.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			if (this.CommonAnim.state.GetCurrent(0).Animation.Name == this.SexType + "Loop_01")
+			ActionType altAction;
+			if (this.TmpCommonState == 2) /* Slow */
 			{
 				this.TmpCommonState = 3;
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02");
-				bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_02_00") != null;
-				this.MenuPanel.ShowInsertMenu(hasAlternativePose);
+				yield return this.Performer.Perform(ActionType.InsertSpeedPose1);
+				altAction = ActionType.InsertSpeedPose2;
 			}
-			else
+			else // (this.TmpCommonState == 3 /* Fast */)
 			{
 				this.TmpCommonState = 2;
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
-				bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
-				this.MenuPanel.ShowInsertMenu(hasAlternativePose);
+				yield return this.Performer.Perform(ActionType.InsertPose1);
+				altAction = ActionType.InsertPose2;
 			}
+
+			this.MenuPanel.ShowInsertMenu(this.Performer.Info.HasAction(altAction));
+			// if (this.CommonAnim.state.GetCurrent(0).Animation.Name == this.SexType + "Loop_01")
+			// {
+			// 	this.TmpCommonState = 3;
+			// 	yield return this.Controller.LoopAnimation(this.SexType + "Loop_02");
+			// 	bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_02_00") != null;
+			// 	this.MenuPanel.ShowInsertMenu(hasAlternativePose);
+			// }
+			// else
+			// {
+			// 	this.TmpCommonState = 2;
+			// 	yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
+			// 	bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
+			// 	this.MenuPanel.ShowInsertMenu(hasAlternativePose);
+			// }
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
@@ -395,41 +455,51 @@ namespace ExtendedHSystem.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			if (this.TmpCommonSub == 0)
+			if (this.TmpCommonSub == 0) /* Pose 1 */
 			{
 				this.TmpCommonSub = 1;
-				string a = this.CommonAnim.state.GetCurrent(0).Animation.Name;
-				if (!(a == "A_Loop_01") && !(a == "B_Loop_01"))
-				{
-					if (a == "A_Loop_02" || a == "B_Loop_02")
-					{
-						yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02_" + this.Npc.parameters[6].ToString("00"));
-					}
-				}
-				else
-				{
-					yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01_" + this.Npc.parameters[6].ToString("00"));
-				}
+				if (this.TmpCommonState == 2)
+					yield return this.Performer.Perform(ActionType.InsertPose2);
+				else // 3
+					yield return this.Performer.Perform(ActionType.InsertSpeedPose2);
+
+				// string a = this.CommonAnim.state.GetCurrent(0).Animation.Name;
+				// if ((a != "A_Loop_01") && (a != "B_Loop_01"))
+				// {
+				// 	if (a == "A_Loop_02" || a == "B_Loop_02")
+				// 	{
+				// 		yield return this.Controller.LoopAnimation(this.SexType + "Loop_02_" + this.Npc.parameters[6].ToString("00"));
+				// 	}
+				// }
+				// else
+				// {
+				// 	yield return this.Controller.LoopAnimation(this.SexType + "Loop_01_" + this.Npc.parameters[6].ToString("00"));
+				// }
 			}
-			else
+			else /* TmpCommonSub == 1 -- Pose 2 */
 			{
 				this.TmpCommonSub = 0;
-				string[] array = this.CommonAnim.state.GetCurrent(0).Animation.Name.Split('_', StringSplitOptions.None);
-				if (array.Length >= 2)
-				{
-					string a = array[2];
-					if (!(a == "01"))
-					{
-						if (a == "02")
-						{
-							yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_02");
-						}
-					}
-					else
-					{
-						yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "Loop_01");
-					}
-				}
+				if (this.TmpCommonState == 2)
+					yield return this.Performer.Perform(ActionType.InsertPose1);
+				else // 3
+					yield return this.Performer.Perform(ActionType.InsertSpeedPose1);
+
+				// string[] array = this.CommonAnim.state.GetCurrent(0).Animation.Name.Split('_', StringSplitOptions.None);
+				// if (array.Length >= 2)
+				// {
+				// 	string a = array[2];
+				// 	if (!(a == "01"))
+				// 	{
+				// 		if (a == "02")
+				// 		{
+				// 			yield return this.Controller.LoopAnimation(this.SexType + "Loop_02");
+				// 		}
+				// 	}
+				// 	else
+				// 	{
+				// 		yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
+				// 	}
+				// }
 			}
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Pose2);
@@ -445,12 +515,17 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.Hide();
 
 			string animName;
-			if (this.TmpCommonSub == 0)
-				animName = this.SexType + "Finish";
-			else
-				animName = this.SexType + "Finish_00";
 
-			yield return this.Controller.PlayOnceStep_New(this, this.CommonAnim, animName);
+			if (this.TmpCommonSub == 0)
+				yield return this.Performer.Perform(ActionType.FinishPose1);
+			else
+				yield return this.Performer.Perform(ActionType.FinishPose2);
+			// if (this.TmpCommonSub == 0)
+			// 	animName = this.SexType + "Finish";
+			// else
+			// 	animName = this.SexType + "Finish_00";
+
+			// yield return this.Controller.PlayOnceStep_New(this, this.CommonAnim, animName);
 
 			CommonStates from, to;
 			if (CommonUtils.IsFemale(this.Player))
@@ -467,11 +542,15 @@ namespace ExtendedHSystem.Scenes
 			yield return HookManager.Instance.RunEventHook(this, EventNames.OnOrgasm, new FromToParams(from, to));
 
 			if (this.TmpCommonSub == 0)
-				animName = this.SexType + "Finish_idle";
+				yield return this.Performer.Perform(ActionType.FinishIdlePose1);
 			else
-				animName = this.SexType + "Finish_idle_00";
+				yield return this.Performer.Perform(ActionType.FinishIdlePose2);
+			// if (this.TmpCommonSub == 0)
+			// 	animName = this.SexType + "Finish_idle";
+			// else
+			// 	animName = this.SexType + "Finish_idle_00";
 
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
+			// yield return this.Controller.LoopAnimation(animName);
 
 			if (this.TmpSexCountType == 0)
 				yield return HookManager.Instance.RunEventHook(this, EventNames.OnCreampie, new FromToParams(from, to));
@@ -490,7 +569,8 @@ namespace ExtendedHSystem.Scenes
 
 			this.TmpCommonState = 0;
 			this.TmpCommonSub = 0;
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
+			yield return this.Performer.Perform(ActionType.StartIdle);
+			// yield return this.Controller.LoopAnimation(this.SexType + "idle");
 
 			this.MenuPanel.ShowStopMenu();
 
@@ -542,7 +622,7 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.SexType + "idle");
+			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			while (this.CanContinue())
 			{
@@ -600,6 +680,11 @@ namespace ExtendedHSystem.Scenes
 		public SkeletonAnimation GetSkelAnimation()
 		{
 			return this.CommonAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName.Replace("<Tits>", this.Npc.parameters[6].ToString("00"));
 		}
 	}
 }
