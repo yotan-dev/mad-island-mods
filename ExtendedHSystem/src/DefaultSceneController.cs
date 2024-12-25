@@ -10,6 +10,21 @@ namespace ExtendedHSystem
 {
 	public class DefaultSceneController : ISceneController
 	{
+		private IScene2 Scene;
+
+		private SkeletonAnimation SexAnim { get { return this.Scene?.GetSkelAnimation(); } }
+
+		public void SetScene(IScene2 scene)
+		{
+			this.Scene = scene;
+		}
+
+		public IEnumerator LoopAnimation(string name)
+		{
+			PLogger.LogInfo($"LoopAnimation: {this.Scene.ExpandAnimationName(name)}");
+			yield return new LoopAnimation(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name)).Handle();
+		}
+
 		public IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
 		{
 			yield return new LoopAnimation(scene, tmpSexAnim, name).Handle();
@@ -33,23 +48,31 @@ namespace ExtendedHSystem
 		public IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skipable = false)
 		{
 			float animTime = 0;
-			if (tmpSexAnim.skeleton.Data.FindAnimation(name) != null) {
+			if (tmpSexAnim.skeleton.Data.FindAnimation(name) != null)
+			{
 				tmpSexAnim.state.SetAnimation(0, name, false);
 				animTime = tmpSexAnim.state.GetCurrent(0).AnimationEnd;
 			}
 
 			while (animTime >= 0f && scene.CanContinue())
 			{
-				if (skipable && Input.GetMouseButtonDown(0)) {
+				if (skipable && Input.GetMouseButtonDown(0))
+				{
 					yield return true;
 					yield break;
 				}
-				
+
 				animTime -= Time.deltaTime;
 				yield return false;
 			}
 
 			yield return animTime <= 0f;
+		}
+
+		public IEnumerator PlayOnceStep_New(string name, bool skipable = false)
+		{
+			PLogger.LogInfo($"PlayOnceStep_New: {this.Scene.ExpandAnimationName(name)}");
+			return new PlayAnimationOnce(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name), skipable).Handle();
 		}
 
 		public IEnumerator PlayOnceStep_New(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skipable = false)

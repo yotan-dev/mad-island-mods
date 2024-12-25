@@ -9,5 +9,6 @@ namespace ExtendedHSystem.Scenes
 		string GetName();
 		CommonStates[] GetActors();
 		SkeletonAnimation GetSkelAnimation();
+		string ExpandAnimationName(string originalName);
 	}
 }
