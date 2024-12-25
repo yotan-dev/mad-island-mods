@@ -1,0 +1,71 @@
+[[Performers]] # EHS_Man_FemaleNative_Friendly_Normal
+Id = "EHS_Man_FemaleNative_Friendly_Normal"
+Prefab = { Type = "SexList", Args = [1, 1] }
+Actors = ["Man#1", "FemaleNative#15"]
+Conditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+Animations = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1 },
+	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"          , Pose = 1 },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1 },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"      , Pose = 1 },
+	# Pose 2
+	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02_<Tits>"   , Pose = 2 },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_00"        , Pose = 2 },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_00_idle"   , Pose = 2 },
+]
+
+[[Performers]] # EHS_Man_FemaleNative_Friendly_Pregnant
+Id = "EHS_Man_FemaleNative_Friendly_Pregnant"
+Prefab = { Type = "SexList", Args = [1, 20] }
+Actors = ["Man#1", "FemaleNative#15"]
+Conditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
+Animations = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"           },
+	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"           },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"       },
+]
+
+[[Performers]] # EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal
+Id = "EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal"
+Prefab = { Type = "SexList", Args = [8, 1] }
+Actors = ["Man#1", "FemaleLargeNative#17"]
+Conditions = [
+	{ Type = "SexTypeCheck", Args = [0] },
+]
+Animations = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
+	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"     },
+	{ Action = "Speed"     , Play = "Loop", Name = "Love_A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"      },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
+]
+
+[[Performers]] # EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal
+Id = "EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal"
+Prefab = { Type = "SexList", Args = [8, 15] }
+Actors = ["Man#1", "FemaleLargeNative#17"]
+Conditions = [
+	{ Type = "SexTypeCheck", Args = [1] },
+]
+Animations = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
+	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"     },
+	{ Action = "Speed"     , Play = "Loop", Name = "Love_A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"      },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
+]

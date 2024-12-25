@@ -8,7 +8,7 @@ namespace ExtendedHSystem.Performer
 {
 	public class SexPerformerInfo
 	{
-		public readonly GameObject SexPrefab;
+		public readonly IPrefabSelector SexPrefabSelector;
 
 		public readonly int FromNpcId;
 
@@ -21,14 +21,14 @@ namespace ExtendedHSystem.Performer
 		public SexPerformerInfo(
 			int from,
 			int? to,
-			GameObject sexPrefab,
+			IPrefabSelector sexPrefabSelector,
 			List<IConditional> conditionals,
 			Dictionary<ActionKey, ActionValue> actions
 		)
 		{
 			this.FromNpcId = from;
 			this.ToNpcId = to;
-			this.SexPrefab = sexPrefab;
+			this.SexPrefabSelector = sexPrefabSelector;
 			this.Conditionals = conditionals;
 			this.Actions = actions;
 		}

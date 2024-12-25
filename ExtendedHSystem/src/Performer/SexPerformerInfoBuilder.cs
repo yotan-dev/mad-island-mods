@@ -8,7 +8,7 @@ namespace ExtendedHSystem.Performer
 	public class SexPerformerInfoBuilder
 	{
 		private string Id { get; set; }
-		private GameObject SexPrefab { get; set; }
+		private IPrefabSelector SexPrefabSeletor { get; set; }
 
 		private int FromNpcId { get; set; }
 
@@ -30,9 +30,9 @@ namespace ExtendedHSystem.Performer
 			return this;
 		}
 
-		public SexPerformerInfoBuilder SetSexPrefab(GameObject prefab)
+		public SexPerformerInfoBuilder SetSexPrefabSelector(IPrefabSelector selector)
 		{
-			this.SexPrefab = prefab;
+			this.SexPrefabSeletor = selector;
 			return this;
 		}
 
@@ -56,7 +56,7 @@ namespace ExtendedHSystem.Performer
 
 		public SexPerformerInfo Build()
 		{
-			return new SexPerformerInfo(this.FromNpcId, this.ToNpcId, this.SexPrefab, this.Conditionals, this.Actions);
+			return new SexPerformerInfo(this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.Conditionals, this.Actions);
 		}
 	}
 }

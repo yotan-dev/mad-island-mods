@@ -1,11 +1,13 @@
-﻿using BepInEx;
+﻿using System.IO;
+using BepInEx;
 using ExtendedHSystem.Hook;
 using ExtendedHSystem.Patches;
 using ExtendedHSystem.Performer;
 using ExtendedHSystem.Scenes;
+using ExtendedHSystem.ConfigFiles;
 using HarmonyLib;
-using YotanModCore;
-using YotanModCore.Consts;
+using Tomlyn;
+using UnityEngine.UIElements.Collections;
 using YotanModCore.Events;
 
 namespace ExtendedHSystem
@@ -43,66 +45,12 @@ namespace ExtendedHSystem
 					HookManager.RegisterHooksEvent += new Mods.DickPainter().InitHooks;
 			}
 
-			GameLifecycleEvents.OnGameStartEvent += () =>
-			{
-				CommonSexPlayer.AddPerformer(
-					new SexPerformerInfoBuilder("EHS_Man_FemaleNative_Friendly_Normal")
-						.SetSexPrefab(Managers.mn.sexMN.sexList[1].sexObj[1])
-						.SetActors(NpcID.Man /* 0 */, NpcID.FemaleNative /* 15 */)
-						.AddCondition(new PregnantCheck(NpcID.FemaleNative, false))
-						.AddAnimation(ActionType.StartIdle, new ActionValue(PlayType.Loop, "A_idle"))
-						.AddAnimation(ActionType.Caress, new ActionValue(PlayType.Loop, "A_Contact_01_<Tits>"))
-						// Sex pose 1
-						.AddAnimation(ActionType.Insert, 1, new ActionValue(PlayType.Loop, "A_Loop_01"))
-						.AddAnimation(ActionType.Speed, 1, new ActionValue(PlayType.Loop, "A_Loop_02"))
-						.AddAnimation(ActionType.Finish, 1, new ActionValue(PlayType.Once, "A_Finish"))
-						.AddAnimation(ActionType.FinishIdle, 1, new ActionValue(PlayType.Loop, "A_Finish_idle"))
-						// Sex pose 2
-						.AddAnimation(ActionType.Speed, 2, new ActionValue(PlayType.Loop, "A_Loop_02_<Tits>"))
-						.AddAnimation(ActionType.Finish, 2, new ActionValue(PlayType.Once, "A_Finish_00"))
-						.AddAnimation(ActionType.FinishIdle, 2, new ActionValue(PlayType.Loop, "A_Finish_00_idle"))
-						.Build()
-				);
-				CommonSexPlayer.AddPerformer(
-					new SexPerformerInfoBuilder("EHS_Man_FemaleNative_Friendly_Pregnant")
-						.SetSexPrefab(Managers.mn.sexMN.sexList[1].sexObj[20])
-						.SetActors(NpcID.Man /* 0 */, NpcID.FemaleNative /* 15 */)
-						.AddCondition(new PregnantCheck(NpcID.FemaleNative, true))
-						.AddAnimation(ActionType.StartIdle, new ActionValue(PlayType.Loop, "A_idle"))
-						.AddAnimation(ActionType.Caress, new ActionValue(PlayType.Loop, "A_Contact_01_<Tits>"))
-						.AddAnimation(ActionType.Insert, new ActionValue(PlayType.Loop, "A_Loop_01"))
-						.AddAnimation(ActionType.Speed, new ActionValue(PlayType.Loop, "A_Loop_02"))
-						.AddAnimation(ActionType.Finish, new ActionValue(PlayType.Once, "A_Finish"))
-						.AddAnimation(ActionType.FinishIdle, new ActionValue(PlayType.Loop, "A_Finish_idle"))
-						.Build()
-				);
-				CommonSexPlayer.AddPerformer(
-					new SexPerformerInfoBuilder("EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal")
-						.SetSexPrefab(Managers.mn.sexMN.sexList[8].sexObj[1])
-						.SetActors(NpcID.Man /* 0 */, NpcID.FemaleLargeNative /* 17 */)
-						.AddCondition(new SexTypeCheck(0))
-						.AddAnimation(ActionType.StartIdle, new ActionValue(PlayType.Loop, "Love_A_idle"))
-						.AddAnimation(ActionType.Caress, new ActionValue(PlayType.Loop, "Love_A_Contact_01"))
-						.AddAnimation(ActionType.Insert, new ActionValue(PlayType.Loop, "Love_A_Loop_01"))
-						.AddAnimation(ActionType.Speed, new ActionValue(PlayType.Loop, "Love_A_Loop_02"))
-						.AddAnimation(ActionType.Finish, new ActionValue(PlayType.Once, "Love_A_Finish"))
-						.AddAnimation(ActionType.FinishIdle, new ActionValue(PlayType.Loop, "Love_A_Finish_idle"))
-						.Build()
-				);
-				CommonSexPlayer.AddPerformer(
-					new SexPerformerInfoBuilder("EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal")
-						.SetSexPrefab(Managers.mn.sexMN.sexList[8].sexObj[15])
-						.SetActors(NpcID.Man /* 0 */, NpcID.FemaleLargeNative /* 17 */)
-						.AddCondition(new SexTypeCheck(1))
-						.AddAnimation(ActionType.StartIdle, new ActionValue(PlayType.Loop, "Love_A_idle"))
-						.AddAnimation(ActionType.Caress, new ActionValue(PlayType.Loop, "Love_A_Contact_01"))
-						.AddAnimation(ActionType.Insert, new ActionValue(PlayType.Loop, "Love_A_Loop_01"))
-						.AddAnimation(ActionType.Speed, new ActionValue(PlayType.Loop, "Love_A_Loop_02"))
-						.AddAnimation(ActionType.Finish, new ActionValue(PlayType.Once, "Love_A_Finish"))
-						.AddAnimation(ActionType.FinishIdle, new ActionValue(PlayType.Loop, "Love_A_Finish_idle"))
-						.Build()
-				);
-			};
+			PerformerLoader.Load();
+			// @TODO: Move this to a config file
+			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleNative_Friendly_Normal"]);
+			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleNative_Friendly_Pregnant"]);
+			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal"]);
+			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal"]);
 
 			PLogger.LogInfo($"Plugin ExtendedHSystem is loaded!");
 		}
