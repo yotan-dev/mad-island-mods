@@ -129,7 +129,7 @@ namespace ExtendedHSystem.Scenes
 						if (performer.CanPlay(this))
 						{
 							this.Performer = new SexPerformer(performer, this.Controller);
-							scene = this.Performer.Info.SexPrefab;
+							scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 						}
 					}
 
