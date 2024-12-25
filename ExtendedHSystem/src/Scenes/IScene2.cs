@@ -1,4 +1,5 @@
 using System.Collections;
+using Spine.Unity;
 
 namespace ExtendedHSystem.Scenes
 {
@@ -6,5 +7,7 @@ namespace ExtendedHSystem.Scenes
 	public interface IScene2 : IScene
 	{
 		string GetName();
+		CommonStates[] GetActors();
+		SkeletonAnimation GetSkelAnimation();
 	}
 }
