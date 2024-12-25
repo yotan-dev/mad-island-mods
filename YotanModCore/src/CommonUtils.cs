@@ -8,11 +8,14 @@ namespace YotanModCore
 	{
 		private static Dictionary<int, string> NPCNames = new Dictionary<int, string>();
 
+		private static Dictionary<string, int> NPCConstToId = new Dictionary<string, int>();
+
 		internal static void Init()
 		{
 			var fields = typeof(NpcID).GetFields();
 			foreach (var field in fields) {
-				field.GetValue(null);
+				NPCConstToId[field.Name] = (int)field.GetValue(null);
+				
 				if (field.GetCustomAttributes(typeof(StrValAttribute), false).FirstOrDefault() is StrValAttribute attr) {
 					NPCNames[(int)field.GetValue(null)] = (string)attr.StrVal;
 				}
@@ -121,6 +124,11 @@ namespace YotanModCore
 			}
 
 			return name;
+		}
+
+		public static int ConstToId(string constVal)
+		{
+			return NPCConstToId.GetValueOrDefault(constVal, -1);
 		}
 
 		/// <summary>
