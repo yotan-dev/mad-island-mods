@@ -3,6 +3,8 @@ namespace ExtendedHSystem.Performer
 	public enum ActionType
 	{
 		None,
+		Battle,
+		Defeat,
 		StartIdle,
 		Caress,
 		Insert,

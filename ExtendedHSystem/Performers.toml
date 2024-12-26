@@ -85,8 +85,22 @@ Conditions = [
 Animations = [
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"    ,  Events = ["OnPenetrate"] },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"    ,  Events = ["OnPenetrate"] },
-	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+[[Performers]] # EHS_MaleNative_Yona_Rape_Doggy_Normal
+Id = "EHS_MaleNative_Yona_Rape_Doggy_Normal"
+Scopes = ["Battle", "Sex"]
+Prefab = { Type = "SexObj", Args = [10] }
+Actors = ["MaleNative#10", "Yona#0"]
+Conditions = []
+Animations = [
+	{ Action = "Battle"    , Play = "Loop", Name = "A_Attack_loop" },
+	{ Action = "Defeat"    , Play = "Loop", Name = "A_Attack_giveup" },
+	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]

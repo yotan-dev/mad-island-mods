@@ -96,6 +96,11 @@ namespace ExtendedHSystem
 			yield return true;
 		}
 
+		public IEnumerator WaitForInput()
+		{
+			yield return new WaitUntil(() => Input.GetMouseButtonUp(0) || !this.Scene.CanContinue());
+		}
+
 		public IEnumerable PlayPlayerGrappledStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, CommonStates player)
 		{
 			PlayerMove pMove = player.GetComponent<PlayerMove>();

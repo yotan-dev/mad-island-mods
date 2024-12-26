@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedHSystem.Handlers;
+using ExtendedHSystem.Hook;
+using ExtendedHSystem.ParamContainers;
+using ExtendedHSystem.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
@@ -7,8 +11,12 @@ using YotanModCore.Consts;
 
 namespace ExtendedHSystem.Scenes
 {
-	public class PlayerRaped : IScene
+	public class PlayerRaped : IScene, IScene2
 	{
+		protected static Dictionary<int, Dictionary<int?, List<SexPerformerInfo>>> Performers = [];
+
+		public static readonly string Name = "PlayerRaped";
+
 		public readonly CommonStates Player;
 
 		public readonly CommonStates Rapist;
@@ -21,6 +29,29 @@ namespace ExtendedHSystem.Scenes
 
 		private List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
+		private SexPerformer Performer;
+
+		private SkeletonAnimation CommonAnim;
+
+		public static void AddPerformer(SexPerformerInfo performer)
+		{
+			Dictionary<int?, List<SexPerformerInfo>> toPerformerList;
+			if (!Performers.TryGetValue(performer.FromNpcId, out toPerformerList))
+			{
+				toPerformerList = new Dictionary<int?, List<SexPerformerInfo>>();
+				Performers.Add(performer.FromNpcId, toPerformerList);
+			}
+
+			List<SexPerformerInfo> performerList;
+			if (!toPerformerList.TryGetValue(performer.ToNpcId, out performerList))
+			{
+				performerList = new List<SexPerformerInfo>();
+				toPerformerList.Add(performer.ToNpcId, performerList);
+			}
+
+			performerList.Add(performer);
+		}
+
 		public PlayerRaped(CommonStates player, CommonStates rapist)
 		{
 			this.Player = player;
@@ -30,6 +61,12 @@ namespace ExtendedHSystem.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
+		}
+
+		public string GetName()
+		{
+			return PlayerRaped.Name;
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -82,15 +119,43 @@ namespace ExtendedHSystem.Scenes
 
 			// We can't restore the mesh here for respawn or we will have 2 sprites...
 			// but we need to do it if the player simply escaped the grapple.
-			if (!isRespawn) {
+			if (!isRespawn)
+			{
 				MeshRenderer toMesh = player.anim.GetComponent<MeshRenderer>();
 				toMesh.enabled = true;
 			}
 
 		}
 
+		private GameObject GetScene(PerformerScope scope)
+		{
+			GameObject scene = null;
+			var actors = this.GetActors();
+			if (Performers.TryGetValue(actors[0].npcID, out var toPerformerList))
+			{
+				if (toPerformerList.TryGetValue(actors[1].npcID, out var performerList))
+				{
+					foreach (var performer in performerList)
+					{
+						if (performer.CanPlay(this, PerformerScope.Battle))
+						{
+							if (performer.Id == this.Performer?.Info?.Id)
+								return null;
+
+							this.Performer = new SexPerformer(performer, this.Controller);
+							scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
+						}
+					}
+
+				}
+			}
+
+			return scene;
+		}
+
 		private GameObject GetFightScene()
 		{
+			/*
 			GameObject scene = null;
 			switch (this.Player.npcID)
 			{
@@ -119,12 +184,14 @@ namespace ExtendedHSystem.Scenes
 					PLogger.LogError("PlayerRaped#GetScene: Unexpected player npcID: " + this.Player.npcID);
 					break;
 			}
+			*/
 
-			return scene;
+			return this.GetScene(PerformerScope.Battle);
 		}
 
 		private GameObject GetSexScene()
 		{
+			/*
 			GameObject scene = null;
 			switch (this.Player.npcID)
 			{
@@ -139,6 +206,8 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			return scene;
+			*/
+			return this.GetScene(PerformerScope.Sex);
 		}
 
 		private bool SetupFightScene()
@@ -202,93 +271,96 @@ namespace ExtendedHSystem.Scenes
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Rapist);
 		}
 
-		private IEnumerable PerformBattle()
+		private IEnumerator PerformGrapple()
 		{
-			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			if (sexAnim.skeleton.Data.FindAnimation("A_Attack_loop") != null)
-			{
-				sexAnim.state.SetAnimation(0, "A_Attack_loop", true);
-			}
-
-			bool hasFainted = false;
-			foreach (var x in this.Controller.PlayPlayerGrappledStep(this, sexAnim, "A_Attack_loop", this.Player))
-			{
-				if (x is bool v)
-					hasFainted = v;
-				yield return x;
-			}
-
-			if (!hasFainted || this.Player.faint > 0.0)
-			{
-				yield return false;
-				yield break;
-			}
-
-			this.Player.sex = CommonStates.SexState.GameOver;
-			var defeatStepControl = this.Controller.PlayUntilInputStep(this, sexAnim, "A_Attack_giveup");
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.PlayerDefeated())
-					yield return x;
-			}
-
-			// Wait until the animation completes
-			foreach (var x in defeatStepControl)
-				yield return x;
+			yield return new PlayerGrappled(this, this.CommonAnim, this.Player).Handle();
 		}
 
-		private IEnumerable PerformSex()
+		private IEnumerator PerformBattle()
 		{
-			if (this.CanContinue())
-			{
-				this.SetupSexScene();
-				SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = sexAnim;
 
-				foreach (var x in this.Controller.PlayOnceStep(this, sexAnim, "A_AttackToSex"))
-					yield return x;
+			yield return this.Performer.Perform(ActionType.Battle);
+			// if (sexAnim.skeleton.Data.FindAnimation("A_Attack_loop") != null)
+			// {
+			// 	sexAnim.state.SetAnimation(0, "A_Attack_loop", true);
+			// }
 
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.PlayerRaped(this.Player, this.Rapist, false))
-						yield return x;
-				}
+			yield return this.PerformGrapple();
+			// bool hasFainted = false;
+			// foreach (var x in this.Controller.PlayPlayerGrappledStep(this, sexAnim, "A_Attack_loop", this.Player))
+			// {
+			// 	if (x is bool v)
+			// 		hasFainted = v;
+			// 	yield return x;
+			// }
 
-				if (this.CanContinue())
-				{
-					foreach (var x in this.Controller.PlayUntilInputStep(this, sexAnim, "A_Loop_01"))
-						yield return x;
+			if (!this.CanContinue() || this.Player.faint > 0.0)
+				yield break;
 
-					if (this.CanContinue())
-					{
-						foreach (var x in this.Controller.PlayUntilInputStep(this, sexAnim, "A_Loop_02"))
-							yield return x;
+			this.Player.sex = CommonStates.SexState.GameOver;
 
-						if (this.CanContinue())
-						{
-							foreach (var x in this.Controller.PlayOnceStep(this, sexAnim, "A_Finish"))
-								yield return x;
+			yield return this.Performer.Perform(ActionType.Defeat);
+			// var defeatStepControl = this.Controller.PlayUntilInputStep(this, sexAnim, "A_Attack_giveup");
 
-							if (this.CanContinue())
-							{
-								foreach (var x in this.Controller.PlayUntilInputStep(this, sexAnim, "A_Finish_idle"))
-									yield return x;
-							}
-						}
-					}
-				}
-			}
-			else
-			{
-				if (Managers.mn.uiMN.skip)
-				{
-					foreach (var handler in this.EventHandlers)
-					{
-						foreach (var x in handler.PlayerRaped(this.Player, this.Rapist, true))
-							yield return x;
-					}
-				}
-			}
+			yield return HookManager.Instance.RunEventHook(this, EventNames.OnPlayerDefeated, new FromToParams(this.Player, this.Rapist));
+			// foreach (var handler in this.EventHandlers)
+			// {
+			// 	foreach (var x in handler.PlayerDefeated())
+			// 		yield return x;
+			// }
+
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Controller.WaitForInput();
+			// Wait until the animation completes
+			// foreach (var x in defeatStepControl)
+			// 	yield return x;
+		}
+
+		private IEnumerator PerformSex()
+		{
+			this.SetupSexScene();
+			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = sexAnim;
+
+			yield return this.Performer.Perform(ActionType.Insert);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Speed1);
+			yield return this.Controller.WaitForInput();
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Speed2);
+			yield return this.Controller.WaitForInput();
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Finish);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.FinishIdle);
+			yield return this.Controller.WaitForInput();
+		}
+
+		private IEnumerator FadeOut()
+		{
+			yield return Managers.mn.eventMN.FadeOut(1f);
+		}
+
+		private void Respawn()
+		{
+			this.Player.life = (int)(this.Player.maxLife * 0.1);
+			this.Player.CommonLifeChange(0.0, 0);
+			this.Player.faint = (int)(this.Player.maxFaint * 0.2);
+			Managers.mn.gameMN.FaintImageChange();
+
+			Managers.mn.sexMN.StartCoroutine(Managers.mn.sexMN.ReviveToNearPoint(this.Rapist.npcID));
 		}
 
 		public IEnumerator Run()
@@ -303,14 +375,9 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			var shouldContinue = true;
-			foreach (var x in this.PerformBattle()) {
-				if (x is bool v)
-					shouldContinue = v;
-				yield return x;
-			}
-			
-			if (!shouldContinue) {
+			yield return this.PerformBattle();
+			if (!this.CanContinue())
+			{
 				Object.Destroy(this.TmpSex);
 				this.EnableLiveNpc(this.Rapist);
 				this.EnableLivePlayer(this.Player, false);
@@ -318,32 +385,25 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			foreach (var x in this.PerformSex())
-				yield return x;
+			yield return this.PerformSex();
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.BeforeRespawn())
-					yield return x;
-			}
+			Managers.mn.uiMN.SkipView(false);
+			yield return this.FadeOut();
 
 			Object.Destroy(this.TmpSex);
 
 			this.EnableLiveNpc(this.Rapist);
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.AfterRape(this.Player, this.Rapist))
-					yield return x;
-			}
+			// @TODO: Hook on scene end.
+			// foreach (var handler in this.EventHandlers)
+			// {
+			// 	foreach (var x in handler.AfterRape(this.Player, this.Rapist))
+			// 		yield return x;
+			// }
 
 			this.EnableLivePlayer(this.Player, true);
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.Respawn(this.Player, this.Rapist))
-					yield return x;
-			}
+			this.Respawn();
 
 			this.RapistMove.actType = NPCMove.ActType.Interval;
 		}
@@ -357,6 +417,27 @@ namespace ExtendedHSystem.Scenes
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			if (CommonUtils.IsMale(this.Player))
+				return [this.Player, this.Rapist];
+			else if (CommonUtils.IsMale(this.Rapist))
+				return [this.Rapist, this.Player];
+
+			return [this.Player, this.Rapist];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.CommonAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			var act = GetActors()[1];
+			return originalName.Replace("<Tits>", act.parameters[6].ToString("00"));
 		}
 	}
 }

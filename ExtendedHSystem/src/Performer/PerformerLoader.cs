@@ -11,6 +11,8 @@ namespace ExtendedHSystem.Performer
 		public static Dictionary<string, SexPerformerInfo> Performers = new Dictionary<string, SexPerformerInfo>();
 		private static Dictionary<string, ActionType> ConstToActionType = new Dictionary<string, ActionType>()
 		{
+			{ "Battle", ActionType.Battle },
+			{ "Defeat", ActionType.Defeat },
 			{ "StartIdle", ActionType.StartIdle },
 			{ "Caress", ActionType.Caress },
 			{ "Insert", ActionType.Insert },

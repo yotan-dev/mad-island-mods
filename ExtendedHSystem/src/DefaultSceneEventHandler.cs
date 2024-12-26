@@ -67,20 +67,6 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
-		public override IEnumerable BeforeRespawn()
-		{
-			Managers.mn.uiMN.SkipView(false);
-			yield return Managers.mn.eventMN.FadeOut(1f);
-		}
-
-		public override IEnumerable AfterRape(CommonStates victim, CommonStates rapist)
-		{
-			if (rapist.debuff.discontent == 4)
-				rapist.MoralChange(20f, null, NPCManager.MoralCause.None);
-
-			yield return null;
-		}
-
 		public override IEnumerable OnDelivery(Delivery scene, CommonStates mother)
 		{
 			foreach (var x in scene.SpawnChild())
@@ -105,17 +91,6 @@ namespace ExtendedHSystem
 			// 	to.LoveChange(from, 10f, false);
 			// }
 
-			yield return null;
-		}
-
-		public override IEnumerable Respawn(CommonStates player, CommonStates other)
-		{
-			player.life = (int)(player.maxLife * 0.1);
-			player.CommonLifeChange(0.0, 0);
-			player.faint = (int)(player.maxFaint * 0.2);
-			Managers.mn.gameMN.FaintImageChange();
-
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.sexMN.ReviveToNearPoint(other.npcID));
 			yield return null;
 		}
 	}
