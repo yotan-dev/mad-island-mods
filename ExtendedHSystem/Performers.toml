@@ -1,5 +1,6 @@
 [[Performers]] # EHS_Man_FemaleNative_Friendly_Normal
 Id = "EHS_Man_FemaleNative_Friendly_Normal"
+Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 1] }
 Actors = ["Man#1", "FemaleNative#15"]
 Conditions = [
@@ -21,6 +22,7 @@ Animations = [
 
 [[Performers]] # EHS_Man_FemaleNative_Friendly_Pregnant
 Id = "EHS_Man_FemaleNative_Friendly_Pregnant"
+Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 20] }
 Actors = ["Man#1", "FemaleNative#15"]
 Conditions = [
@@ -38,6 +40,7 @@ Animations = [
 
 [[Performers]] # EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal
 Id = "EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal"
+Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [8, 1] }
 Actors = ["Man#1", "FemaleLargeNative#17"]
 Conditions = [
@@ -55,6 +58,7 @@ Animations = [
 
 [[Performers]] # EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal
 Id = "EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal"
+Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 15] }
 Actors = ["Man#1", "FemaleLargeNative#17"]
 Conditions = [
@@ -72,6 +76,7 @@ Animations = [
 
 [[Performers]] # EHS_MaleNative_FemaleNative_Friendly_Doggy_Normal
 Id = "EHS_MaleNative_FemaleNative_Friendly_Doggy_Normal"
+Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [2, 0] }
 Actors = ["MaleNative#10", "FemaleNative#15"]
 Conditions = [

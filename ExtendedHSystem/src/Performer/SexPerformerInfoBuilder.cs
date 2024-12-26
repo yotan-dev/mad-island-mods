@@ -14,6 +14,8 @@ namespace ExtendedHSystem.Performer
 
 		private int? ToNpcId { get; set; }
 
+		private List<PerformerScope> Scopes { get; set; } = [];
+
 		private List<IConditional> Conditionals { get; set; } = [];
 
 		private Dictionary<ActionKey, ActionValue> Actions { get; set; } = [];
@@ -21,6 +23,12 @@ namespace ExtendedHSystem.Performer
 		public SexPerformerInfoBuilder(string id)
 		{
 			this.Id = id;
+		}
+
+		public SexPerformerInfoBuilder AddScope(PerformerScope scope)
+		{
+			this.Scopes.Add(scope);
+			return this;
 		}
 
 		public SexPerformerInfoBuilder SetActors(int fromNpcId, int? toNpcId = null)
@@ -56,7 +64,7 @@ namespace ExtendedHSystem.Performer
 
 		public SexPerformerInfo Build()
 		{
-			return new SexPerformerInfo(this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.Conditionals, this.Actions);
+			return new SexPerformerInfo(this.Id, this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.Conditionals, this.Actions, this.Scopes);
 		}
 	}
 }

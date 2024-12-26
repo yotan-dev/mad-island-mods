@@ -26,6 +26,12 @@ namespace ExtendedHSystem.Performer
 			{ "Once", PlayType.Once },
 		};
 
+		private static Dictionary<string, PerformerScope> ConstToScope = new Dictionary<string, PerformerScope>()
+		{
+			{ "Battle", PerformerScope.Battle },
+			{ "Sex", PerformerScope.Sex },
+		};
+
 		private static int ParseActor(string actor)
 		{
 			var parts = actor.Split('#');
@@ -71,6 +77,16 @@ namespace ExtendedHSystem.Performer
 						builder.SetSexPrefabSelector(new SexListPrefabSelector((int) (long)scene.Prefab.Args[0], (int) (long) scene.Prefab.Args[1]));
 					else
 						PLogger.LogError($"Unknown prefab type {scene.Prefab.Type}");
+
+					foreach (var scope in scene.Scopes)
+					{
+						errorMessage = $"Failed to load Scope {scope}";
+						var scopeType = ConstToScope.GetValueOrDefault(scope, PerformerScope.None);
+						if (scopeType != PerformerScope.None)
+							builder.AddScope(scopeType);
+						else
+							PLogger.LogError($"Unknown scope type {scope}");
+					}
 
 					errorMessage = $"Failed to load Actors";
 
