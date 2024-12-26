@@ -415,8 +415,9 @@ namespace ExtendedHSystem.Scenes
 			// 	yield return x;
 
 			this.SexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			yield return this.Performer.Perform(ActionType.Insert, 20f);
-			yield return this.Performer.Perform(ActionType.Speed, 10f);
+			yield return this.Performer.Perform(ActionType.Insert);
+			yield return this.Performer.Perform(ActionType.Speed1, 20f);
+			yield return this.Performer.Perform(ActionType.Speed2, 10f);
 			yield return this.Performer.Perform(ActionType.Finish);
 			// foreach (var x in this.Controller.PlayTimedStep(this, this.SexAnim, this.SexType + "Loop_01", 20f))
 			// 	yield return x;

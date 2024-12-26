@@ -9,12 +9,12 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1, Events = ["OnPenetrate"] },
-	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"          , Pose = 1 },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1, Events = ["OnPenetrate"] },
+	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"          , Pose = 1 },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1, Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"      , Pose = 1 },
 	# Pose 2
-	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02_<Tits>"   , Pose = 2 },
+	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02_<Tits>"   , Pose = 2 },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_00"        , Pose = 2, Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_00_idle"   , Pose = 2 },
 ]
@@ -30,8 +30,8 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"           , Events = ["OnPenetrate"] },
-	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"           },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"           , Events = ["OnPenetrate"] },
+	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"           },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            , Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"       },
 ]
@@ -47,8 +47,8 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"    ,  Events = ["OnPenetrate"] },
-	{ Action = "Speed"     , Play = "Loop", Name = "Love_A_Loop_02"     },
+	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed2"     , Play = "Loop", Name = "Love_A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
@@ -64,8 +64,8 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"    ,  Events = ["OnPenetrate"] },
-	{ Action = "Speed"     , Play = "Loop", Name = "Love_A_Loop_02"     },
+	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed2"     , Play = "Loop", Name = "Love_A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
@@ -78,6 +78,8 @@ Conditions = [
 	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
 ]
 Animations = [
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
 	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"    ,  Events = ["OnPenetrate"] },
 	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },

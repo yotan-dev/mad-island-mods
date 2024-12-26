@@ -395,6 +395,7 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonState = 2;
 			this.TmpCommonSub = 0;
 			yield return this.Performer.Perform(ActionType.Insert);
+			yield return this.Performer.Perform(ActionType.Speed1);
 			// yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
 
 			bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
@@ -415,12 +416,12 @@ namespace ExtendedHSystem.Scenes
 			if (this.TmpCommonState == 2) /* Slow */
 			{
 				this.TmpCommonState = 3;
-				yield return this.Performer.Perform(ActionType.Speed);
+				yield return this.Performer.Perform(ActionType.Speed2);
 			}
 			else // (this.TmpCommonState == 3 /* Fast */)
 			{
 				this.TmpCommonState = 2;
-				yield return this.Performer.Perform(ActionType.Insert);
+				yield return this.Performer.Perform(ActionType.Speed1);
 			}
 
 			this.MenuPanel.ShowInsertMenu(this.Performer.HasAlternativePose());
