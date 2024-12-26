@@ -158,7 +158,7 @@ namespace ExtendedHSystem.Scenes
 				{
 					foreach (var performer in performerList)
 					{
-						if (performer.CanPlay(this))
+						if (performer.CanPlay(this, PerformerScope.Sex))
 						{
 							this.Performer = new SexPerformer(performer, this.Controller);
 							scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
