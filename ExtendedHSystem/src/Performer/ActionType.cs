@@ -6,7 +6,8 @@ namespace ExtendedHSystem.Performer
 		StartIdle,
 		Caress,
 		Insert,
-		Speed,
+		Speed1,
+		Speed2,
 		Finish,
 		FinishIdle,
 	}
