@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedHSystem.Performer;
+using Mono.Cecil;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
@@ -7,8 +9,12 @@ using YotanModCore.Consts;
 
 namespace ExtendedHSystem.Scenes
 {
-	public class CommonSexNPC : IScene
+	public class CommonSexNPC : IScene, IScene2
 	{
+		protected static Dictionary<int, Dictionary<int?, List<SexPerformerInfo>>> Performers = [];
+
+		public static readonly string Name = "CommonSexNPC";
+
 		/// <summary>
 		/// First NPC in the Sex Scene.
 		/// If a female NPC is involved, this is the female one.
@@ -40,6 +46,29 @@ namespace ExtendedHSystem.Scenes
 
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
+		private SexPerformer Performer;
+
+		private SkeletonAnimation SexAnim;
+
+		public static void AddPerformer(SexPerformerInfo performer)
+		{
+			Dictionary<int?, List<SexPerformerInfo>> toPerformerList;
+			if (!Performers.TryGetValue(performer.FromNpcId, out toPerformerList))
+			{
+				toPerformerList = new Dictionary<int?, List<SexPerformerInfo>>();
+				Performers.Add(performer.FromNpcId, toPerformerList);
+			}
+
+			List<SexPerformerInfo> performerList;
+			if (!toPerformerList.TryGetValue(performer.ToNpcId, out performerList))
+			{
+				performerList = new List<SexPerformerInfo>();
+				toPerformerList.Add(performer.ToNpcId, performerList);
+			}
+
+			performerList.Add(performer);
+		}
+
 		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
 		{
 			this.Place = sexPlace;
@@ -57,6 +86,7 @@ namespace ExtendedHSystem.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -122,97 +152,114 @@ namespace ExtendedHSystem.Scenes
 			scene = null;
 			sexType = "A_";
 
-			switch (this.NpcA.npcID)
+			if (Performers.TryGetValue(this.NpcB.npcID, out var toPerformerList))
 			{
-				case NpcID.FemaleNative: // 15
-					switch (this.NpcB.npcID)
+				if (toPerformerList.TryGetValue(this.NpcA.npcID, out var performerList))
+				{
+					foreach (var performer in performerList)
 					{
-						case NpcID.MaleNative: // 10
-							if (this.NpcA.pregnant[0] == -1)
-							{
-								pregable = true;
-								scene = Managers.mn.sexMN.sexList[2].sexObj[0];
-							}
-							break;
-
-						case NpcID.FemaleNative: // 15
-							if (this.NpcA.pregnant[0] == -1 && this.NpcB.pregnant[0] == -1)
-							{
-								scene = Managers.mn.sexMN.sexList[9].sexObj[0];
-							}
-							break;
-
-						case NpcID.YoungMan: // 89
-							if (this.NpcA.pregnant[0] == -1)
-							{
-								scene = Managers.mn.sexMN.sexList[1].sexObj[1];
-								pregable = true;
-							}
-							else
-							{
-								scene = Managers.mn.sexMN.sexList[1].sexObj[20];
-							}
-							break;
+						if (performer.CanPlay(this))
+						{
+							this.Performer = new SexPerformer(performer, this.Controller);
+							scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
+						}
 					}
-					break;
 
-				case NpcID.NativeGirl: // 16
-					switch (this.NpcB.npcID)
-					{
-						case NpcID.MaleNative: // 10
-							if (this.NpcA.pregnant[0] == -1)
-							{
-								scene = Managers.mn.sexMN.sexList[2].sexObj[1];
-								pregable = true;
-							}
-							break;
-
-						case NpcID.NativeGirl: // 16
-							if (this.NpcA.pregnant[0] == -1 && this.NpcB.pregnant[0] == -1)
-							{
-								scene = Managers.mn.sexMN.sexList[10].sexObj[0];
-							}
-							break;
-
-						case NpcID.YoungMan: // 89
-							if (this.NpcA.pregnant[0] == -1)
-							{
-								scene = Managers.mn.sexMN.sexList[1].sexObj[3];
-								pregable = true;
-							}
-							break;
-					}
-					break;
-
-				case NpcID.FemaleLargeNative: // 17
-					switch (this.NpcB.npcID)
-					{
-						case NpcID.YoungMan: // 89
-							scene = Managers.mn.sexMN.sexList[1].sexObj[15];
-							sexType = "Love_A_";
-							break;
-					}
-					break;
-
-				case NpcID.UnderGroundWoman: // 44
-					switch (this.NpcB.npcID)
-					{
-						case NpcID.YoungMan: // 89
-							scene = Managers.mn.sexMN.sexList[1].sexObj[8];
-							sexType = "Love_A_";
-							break;
-					}
-					break;
-
-				case NpcID.ElderSisterNative: // 90
-					switch (this.NpcB.npcID)
-					{
-						case NpcID.YoungMan: // 89
-							scene = Managers.mn.sexMN.sexList[1].sexObj[11];
-							break;
-					}
-					break;
+				}
 			}
+			/*
+						switch (this.NpcA.npcID)
+						{
+							case NpcID.FemaleNative: // 15
+								switch (this.NpcB.npcID)
+								{
+									case NpcID.MaleNative: // 10
+										if (this.NpcA.pregnant[0] == -1)
+										{
+											pregable = true;
+											scene = Managers.mn.sexMN.sexList[2].sexObj[0];
+										}
+										break;
+
+									case NpcID.FemaleNative: // 15
+										if (this.NpcA.pregnant[0] == -1 && this.NpcB.pregnant[0] == -1)
+										{
+											scene = Managers.mn.sexMN.sexList[9].sexObj[0];
+										}
+										break;
+
+									case NpcID.YoungMan: // 89
+										if (this.NpcA.pregnant[0] == -1)
+										{
+											scene = Managers.mn.sexMN.sexList[1].sexObj[1];
+											pregable = true;
+										}
+										else
+										{
+											scene = Managers.mn.sexMN.sexList[1].sexObj[20];
+										}
+										break;
+								}
+								break;
+
+							case NpcID.NativeGirl: // 16
+								switch (this.NpcB.npcID)
+								{
+									case NpcID.MaleNative: // 10
+										if (this.NpcA.pregnant[0] == -1)
+										{
+											scene = Managers.mn.sexMN.sexList[2].sexObj[1];
+											pregable = true;
+										}
+										break;
+
+									case NpcID.NativeGirl: // 16
+										if (this.NpcA.pregnant[0] == -1 && this.NpcB.pregnant[0] == -1)
+										{
+											scene = Managers.mn.sexMN.sexList[10].sexObj[0];
+										}
+										break;
+
+									case NpcID.YoungMan: // 89
+										if (this.NpcA.pregnant[0] == -1)
+										{
+											scene = Managers.mn.sexMN.sexList[1].sexObj[3];
+											pregable = true;
+										}
+										break;
+								}
+								break;
+
+							case NpcID.FemaleLargeNative: // 17
+								switch (this.NpcB.npcID)
+								{
+									case NpcID.YoungMan: // 89
+										scene = Managers.mn.sexMN.sexList[1].sexObj[15];
+										sexType = "Love_A_";
+										break;
+								}
+								break;
+
+							case NpcID.UnderGroundWoman: // 44
+								switch (this.NpcB.npcID)
+								{
+									case NpcID.YoungMan: // 89
+										scene = Managers.mn.sexMN.sexList[1].sexObj[8];
+										sexType = "Love_A_";
+										break;
+								}
+								break;
+
+							case NpcID.ElderSisterNative: // 90
+								switch (this.NpcB.npcID)
+								{
+									case NpcID.YoungMan: // 89
+										scene = Managers.mn.sexMN.sexList[1].sexObj[11];
+										break;
+								}
+								break;
+						}
+			*/
 		}
 
 		private void SetupTmpSex()
@@ -320,84 +367,88 @@ namespace ExtendedHSystem.Scenes
 			yield return animTime > 0f;
 		}
 
-		private IEnumerable CallTypeEventHandlers(SexManager.SexCountState type)
-		{
-			switch (type) {
-				case SexManager.SexCountState.Normal:
-					foreach (var handler in this.EventHandlers)
-					{
-						foreach (var x in handler.OnNormalSex(this.NpcA, this.NpcB))
-							yield return x;
-					}
-					break;
+		// private IEnumerable CallTypeEventHandlers(SexManager.SexCountState type)
+		// {
+		// 	switch (type)
+		// 	{
+		// 		case SexManager.SexCountState.Normal:
+		// 			foreach (var handler in this.EventHandlers)
+		// 			{
+		// 				foreach (var x in handler.OnNormalSex(this.NpcA, this.NpcB))
+		// 					yield return x;
+		// 			}
+		// 			break;
 
-				// case SexManager.SexCountState.Rapes:
-				// 	foreach (var handler in this.EventHandlers)
-				// 	{
-				// 		foreach (var x in handler.OnRape(this.NpcB, this.NpcA))
-				// 			yield return x;
-				// 	}
-				// 	break;
+		// 		// case SexManager.SexCountState.Rapes:
+		// 		// 	foreach (var handler in this.EventHandlers)
+		// 		// 	{
+		// 		// 		foreach (var x in handler.OnRape(this.NpcB, this.NpcA))
+		// 		// 			yield return x;
+		// 		// 	}
+		// 		// 	break;
 
-				// case SexManager.SexCountState.Toilet:
-				// 	foreach (var handler in this.EventHandlers)
-				// 	{
-				// 		foreach (var x in handler.OnToilet(this.NpcA, this.NpcB))
-				// 			yield return x;
-				// 	}
-				// 	break;
+		// 		// case SexManager.SexCountState.Toilet:
+		// 		// 	foreach (var handler in this.EventHandlers)
+		// 		// 	{
+		// 		// 		foreach (var x in handler.OnToilet(this.NpcA, this.NpcB))
+		// 		// 			yield return x;
+		// 		// 	}
+		// 		// 	break;
 
-				case SexManager.SexCountState.Creampie:
-					foreach (var handler in this.EventHandlers)
-					{
-						foreach (var x in handler.OnCreampie(this.NpcB, this.NpcA))
-							yield return x;
-					}
-					break;
+		// 		case SexManager.SexCountState.Creampie:
+		// 			foreach (var handler in this.EventHandlers)
+		// 			{
+		// 				foreach (var x in handler.OnCreampie(this.NpcB, this.NpcA))
+		// 					yield return x;
+		// 			}
+		// 			break;
 
-				default:
-					PLogger.LogError("CommonSexNPC::CallTypeEventHandlers: Unexpected sex type: " + this.Type);
-					break;
-			}
-		}
+		// 		default:
+		// 			PLogger.LogError("CommonSexNPC::CallTypeEventHandlers: Unexpected sex type: " + this.Type);
+		// 			break;
+		// 	}
+		// }
 
 		private IEnumerator Perform()
 		{
-			foreach (var x in this.CallTypeEventHandlers(this.Type))
-				yield return x;
+			// foreach (var x in this.CallTypeEventHandlers(this.Type))
+			// 	yield return x;
 
-			SkeletonAnimation tmpSexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.SexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			yield return this.Performer.Perform(ActionType.Insert, 20f);
+			yield return this.Performer.Perform(ActionType.Speed, 10f);
+			yield return this.Performer.Perform(ActionType.Finish);
+			// foreach (var x in this.Controller.PlayTimedStep(this, this.SexAnim, this.SexType + "Loop_01", 20f))
+			// 	yield return x;
 
-			foreach (var x in this.Controller.PlayTimedStep(this, tmpSexAnim, this.SexType + "Loop_01", 20f))
-				yield return x;
+			// foreach (var x in this.Controller.PlayTimedStep(this, this.SexAnim, this.SexType + "Loop_02", 10f))
+			// 	yield return x;
 
-			foreach (var x in this.Controller.PlayTimedStep(this, tmpSexAnim, this.SexType + "Loop_02", 10f))
-				yield return x;
+			// bool hasCompleted = false;
+			// foreach (var x in this.Controller.PlayOnceStep(this, this.SexAnim, this.SexType + "Finish"))
+			// {
+			// 	hasCompleted = (bool)x;
+			// 	yield return x;
+			// }
 
-			bool hasCompleted = false;
-			foreach (var x in this.Controller.PlayOnceStep(this, tmpSexAnim, this.SexType + "Finish"))
-			{
-				hasCompleted = (bool)x;
-				yield return x;
-			}
+			// if (hasCompleted)
+			// {
+				// if (this.Pregable)
+				// {
+				// 	foreach (var x in this.CallTypeEventHandlers(SexManager.SexCountState.Creampie))
+				// 		yield return x;
+				// }
 
-			if (hasCompleted)
-			{
-				if (this.Pregable)
-				{
-					foreach (var x in this.CallTypeEventHandlers(SexManager.SexCountState.Creampie))
-						yield return x;
-				}
+				// foreach (var handler in this.EventHandlers)
+				// {
+				// 	foreach (var x in handler.AfterSex(this, this.NpcA, this.NpcB))
+				// 		yield return x;
+				// }
+			// }
 
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.AfterSex(this, this.NpcA, this.NpcB))
-						yield return x;
-				}
-			}
-
-			foreach (var x in this.Controller.PlayTimedStep(this, tmpSexAnim, this.SexType + "Finish_idle", 8f))
-				yield return x;
+			yield return this.Performer.Perform(ActionType.FinishIdle, 8f);
+			// foreach (var x in this.Controller.PlayTimedStep(this, this.SexAnim, this.SexType + "Finish_idle", 8f))
+			// 	yield return x;
 		}
 
 		public IEnumerator Run()
@@ -492,6 +543,27 @@ namespace ExtendedHSystem.Scenes
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
+		}
+
+		public string GetName()
+		{
+			return CommonSexNPC.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			// @TODO: Invert NPC A/B so male comes first
+			return [this.NpcB, this.NpcA];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.SexAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName; // @TODO:
 		}
 	}
 }

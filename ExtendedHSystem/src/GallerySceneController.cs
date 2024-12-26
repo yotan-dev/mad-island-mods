@@ -88,5 +88,10 @@ namespace ExtendedHSystem
 		{
 			throw new System.NotImplementedException();
 		}
+
+		public IEnumerator PlayTimedStep(string name, float time)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

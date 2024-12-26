@@ -15,8 +15,6 @@ namespace ExtendedHSystem.Scenes
 	{
 		protected static Dictionary<int, Dictionary<int?, List<SexPerformerInfo>>> Performers = [];
 
-		public static CommonSexPlayer Instance;
-
 		public static readonly string Name = "CommonSexPlayer";
 
 		public static class StepNames
@@ -95,8 +93,6 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
 			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
 			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
-
-			Instance = this;
 		}
 
 		public void Init(ISceneController controller)
@@ -404,8 +400,8 @@ namespace ExtendedHSystem.Scenes
 			bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
 			this.MenuPanel.ShowInsertMenu(hasAlternativePose);
 
-			if (this.TmpSexCountType == 0)
-				yield return HookManager.Instance.RunEventHook(this, EventNames.OnPenetrate, new FromToParams(this.Player, this.Npc));
+			// if (this.TmpSexCountType == 0)
+			// 	yield return HookManager.Instance.RunEventHook(this, EventNames.OnPenetrate, new FromToParams(this.Player, this.Npc));
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
@@ -524,7 +520,7 @@ namespace ExtendedHSystem.Scenes
 				to = this.Npc;
 			}
 
-			yield return HookManager.Instance.RunEventHook(this, EventNames.OnOrgasm, new FromToParams(from, to));
+			// yield return HookManager.Instance.RunEventHook(this, EventNames.OnOrgasm, new FromToParams(from, to));
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 			// if (this.TmpCommonSub == 0)
@@ -534,8 +530,8 @@ namespace ExtendedHSystem.Scenes
 
 			// yield return this.Controller.LoopAnimation(animName);
 
-			if (this.TmpSexCountType == 0)
-				yield return HookManager.Instance.RunEventHook(this, EventNames.OnCreampie, new FromToParams(from, to));
+			// if (this.TmpSexCountType == 0)
+			// 	yield return HookManager.Instance.RunEventHook(this, EventNames.OnCreampie, new FromToParams(from, to));
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowFinishMenu();

@@ -92,18 +92,18 @@ namespace ExtendedHSystem
 
 		public override IEnumerable AfterSex(IScene scene, CommonStates from, CommonStates to)
 		{
-			if (scene is CommonSexPlayer commonSexPlayer)
-			{
-				if (SexMeter.Instance.FillAmount == 1f)
-					from.LoveChange(to, 10f, false);
-				else if (SexMeter.Instance.FillAmount < 0.3f)
-					from.LoveChange(to, -5f, false);
-			}
-			else if (scene is CommonSexNPC)
-			{
-				from.LoveChange(to, 10f, false);
-				to.LoveChange(from, 10f, false);
-			}
+			// if (scene is CommonSexPlayer commonSexPlayer)
+			// {
+			// 	if (SexMeter.Instance.FillAmount == 1f)
+			// 		from.LoveChange(to, 10f, false);
+			// 	else if (SexMeter.Instance.FillAmount < 0.3f)
+			// 		from.LoveChange(to, -5f, false);
+			// }
+			// else if (scene is CommonSexNPC)
+			// {
+			// 	from.LoveChange(to, 10f, false);
+			// 	to.LoveChange(from, 10f, false);
+			// }
 
 			yield return null;
 		}

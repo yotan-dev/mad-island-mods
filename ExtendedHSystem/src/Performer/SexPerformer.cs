@@ -1,4 +1,6 @@
 using System.Collections;
+using ExtendedHSystem.Hook;
+using ExtendedHSystem.ParamContainers;
 
 namespace ExtendedHSystem.Performer
 {
@@ -18,7 +20,7 @@ namespace ExtendedHSystem.Performer
 			this.Controller = controller;
 		}
 
-		public IEnumerator Perform(ActionType action)
+		public IEnumerator Perform(ActionType action, float? loopTime = null)
 		{
 			this.CurrentAction = action;
 			if (!this.Info.Actions.TryGetValue(new ActionKey(action, this.CurrentPose), out var value))
@@ -35,7 +37,10 @@ namespace ExtendedHSystem.Performer
 			switch (value.PlayType)
 			{
 				case PlayType.Loop:
-					yield return this.Controller.LoopAnimation(value.AnimationName);
+					if (loopTime.HasValue)
+						yield return this.Controller.PlayTimedStep(value.AnimationName, loopTime.Value);
+					else
+						yield return this.Controller.LoopAnimation(value.AnimationName);
 					break;
 
 				case PlayType.Once:
@@ -46,6 +51,13 @@ namespace ExtendedHSystem.Performer
 					PLogger.LogError("Unknown play type " + value.PlayType);
 					break;
 			}
+
+			var actors = this.Controller.GetScene().GetActors();
+			var scene = this.Controller.GetScene();
+			var from = actors.Length >= 1 ? actors[0] : null;
+			var to = actors.Length >= 2 ? actors[1] : null;
+			foreach (var eventName in value.Events)
+				yield return HookManager.Instance.RunEventHook(scene, eventName, new FromToParams(from, to));
 		}
 
 		public bool HasAlternativePose()
