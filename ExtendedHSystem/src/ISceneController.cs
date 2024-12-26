@@ -20,7 +20,7 @@ namespace ExtendedHSystem
 		
 		IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skippable = false);
 		
-		IEnumerator PlayOnceStep_New(string name, bool skippable = false);
+		IEnumerator PlayOnceStep(string name, bool skippable = false);
 
 		IEnumerable PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name);
 

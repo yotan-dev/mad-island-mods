@@ -84,7 +84,7 @@ namespace ExtendedHSystem
 			throw new System.NotImplementedException();
 		}
 
-		public IEnumerator PlayOnceStep_New(string name, bool skippable = false)
+		public IEnumerator PlayOnceStep(string name, bool skippable = false)
 		{
 			throw new System.NotImplementedException();
 		}
