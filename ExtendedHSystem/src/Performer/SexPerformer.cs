@@ -44,7 +44,7 @@ namespace ExtendedHSystem.Performer
 					break;
 
 				case PlayType.Once:
-					yield return this.Controller.PlayOnceStep_New(value.AnimationName);
+					yield return this.Controller.PlayOnceStep(value.AnimationName);
 					break;
 
 				default:

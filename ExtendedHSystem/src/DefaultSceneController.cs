@@ -81,7 +81,7 @@ namespace ExtendedHSystem
 			yield return animTime <= 0f;
 		}
 
-		public IEnumerator PlayOnceStep_New(string name, bool skipable = false)
+		public IEnumerator PlayOnceStep(string name, bool skipable = false)
 		{
 			PLogger.LogInfo($"PlayOnceStep_New: {this.Scene.ExpandAnimationName(name)}");
 			yield return new PlayAnimationOnce(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name), skipable).Handle();
