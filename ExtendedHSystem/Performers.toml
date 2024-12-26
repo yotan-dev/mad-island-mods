@@ -9,13 +9,13 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1 },
+	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1, Events = ["OnPenetrate"] },
 	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"          , Pose = 1 },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1 },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1, Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"      , Pose = 1 },
 	# Pose 2
 	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02_<Tits>"   , Pose = 2 },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_00"        , Pose = 2 },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_00"        , Pose = 2, Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_00_idle"   , Pose = 2 },
 ]
 
@@ -30,9 +30,9 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"           },
+	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"           , Events = ["OnPenetrate"] },
 	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"           },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            , Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"       },
 ]
 
@@ -47,9 +47,9 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"     },
+	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"    ,  Events = ["OnPenetrate"] },
 	{ Action = "Speed"     , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"      },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
 
@@ -64,8 +64,22 @@ Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"     },
+	{ Action = "Insert"    , Play = "Loop", Name = "Love_A_Loop_01"    ,  Events = ["OnPenetrate"] },
 	{ Action = "Speed"     , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"      },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
+]
+
+[[Performers]] # EHS_MaleNative_FemaleNative_Friendly_Doggy_Normal
+Id = "EHS_MaleNative_FemaleNative_Friendly_Doggy_Normal"
+Prefab = { Type = "SexList", Args = [2, 0] }
+Actors = ["MaleNative#10", "FemaleNative#15"]
+Conditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+Animations = [
+	{ Action = "Insert"    , Play = "Loop", Name = "A_Loop_01"    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed"     , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]

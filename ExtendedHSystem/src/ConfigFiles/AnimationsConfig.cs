@@ -8,5 +8,6 @@ namespace ExtendedHSystem.ConfigFiles
 		public string Play { get; set; }
 		public string Name { get; set; }
 		public int? Pose { get; set; }
+		public string[] Events { get; set; } = [];
 	}
 }

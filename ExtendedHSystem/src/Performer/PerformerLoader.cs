@@ -116,7 +116,7 @@ namespace ExtendedHSystem.Performer
 
 						var pose = animation.Pose ?? 1;
 
-						builder.AddAnimation(action, pose, new ActionValue(playType, animation.Name));
+						builder.AddAnimation(action, pose, new ActionValue(playType, animation.Name, animation.Events));
 					}
 
 					Performers.Add(scene.Id, builder.Build());
