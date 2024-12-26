@@ -32,6 +32,11 @@ namespace ExtendedHSystem
 				.ForScenes(CommonSexNPC.Name)
 				.HookStepEnd(CommonSexPlayer.StepNames.Main)
 				.Call(this.OnCommonSexNPCAffection);
+
+			HookBuilder.New("EHS.PlayerRaped.Moral")
+				.ForScenes(PlayerRaped.Name)
+				.HookStepEnd(CommonSexPlayer.StepNames.Main)
+				.Call(this.OnPlayerRapedMoral);
 		}
 
 		private IEnumerator OnPenetrate(IScene2 scene, object param)
@@ -78,6 +83,16 @@ namespace ExtendedHSystem
 			commonSexNpc.NpcA.LoveChange(commonSexNpc.NpcB, 10f, false);
 
 			yield break;
+		}
+
+		private IEnumerator OnPlayerRapedMoral(IScene2 scene, object param)
+		{
+			var playerRaped = scene as PlayerRaped;
+			if (playerRaped == null)
+				yield break;
+
+			if (playerRaped.Rapist.debuff.discontent == 4)
+				playerRaped.Rapist.MoralChange(20f, null, NPCManager.MoralCause.None);
 		}
 	}
 }

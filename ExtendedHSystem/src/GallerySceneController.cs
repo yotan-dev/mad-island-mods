@@ -93,5 +93,15 @@ namespace ExtendedHSystem
 		{
 			throw new System.NotImplementedException();
 		}
+
+		public IScene2 GetScene()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public IEnumerator WaitForInput()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }
