@@ -45,7 +45,7 @@ namespace ExtendedHSystem.Performer
 				return new PregnantCheck(ParseActor((string)config.Args[0]), (bool)config.Args[1]);
 
 			if (config.Type == "SexTypeCheck")
-				return new SexTypeCheck((int)config.Args[0]);
+				return new SexTypeCheck((int) (long) config.Args[0]);
 
 			PLogger.LogError($"Unknown condition type {config.Type}. Ignoring...");
 			return null;
@@ -60,56 +60,72 @@ namespace ExtendedHSystem.Performer
 
 			foreach (var scene in scenesConfig.Performers)
 			{
+				string errorMessage = "";
 				var builder = new SexPerformerInfoBuilder(scene.Id);
 
-				if (scene.Prefab.Type == "SexList")
-					builder.SetSexPrefabSelector(new SexListPrefabSelector((int)scene.Prefab.Args[0], (int)scene.Prefab.Args[1]));
-				else
-					PLogger.LogError($"Unknown prefab type {scene.Prefab.Type}");
-
-				int fromNpc = -1;
-				int? toNpc = null;
-
-				if (scene.Actors.Length >= 1)
-					fromNpc = ParseActor(scene.Actors[0]);
-
-				if (scene.Actors.Length >= 2)
-					toNpc = ParseActor(scene.Actors[1]);
-
-				if (fromNpc != -1)
-					builder.SetActors(fromNpc, toNpc);
-				else
-					PLogger.LogError($"Unknown actora for scene {scene.Id}");
-
-				foreach (var condition in scene.Conditions)
+				try
 				{
-					var cond = ParseCondition(condition);
-					if (cond != null)
-						builder.AddCondition(cond);
-				}
+					errorMessage = $"Failed to load Prefab {scene.Prefab.Type}";
+					if (scene.Prefab.Type == "SexList")
+						builder.SetSexPrefabSelector(new SexListPrefabSelector((int) (long)scene.Prefab.Args[0], (int) (long) scene.Prefab.Args[1]));
+					else
+						PLogger.LogError($"Unknown prefab type {scene.Prefab.Type}");
 
-				foreach (var animation in scene.Animations)
-				{
-					var action = ConstToActionType.GetValueOrDefault(animation.Action, ActionType.None);
-					if (action == ActionType.None)
+					errorMessage = $"Failed to load Actors";
+
+					int fromNpc = -1;
+					int? toNpc = null;
+
+					if (scene.Actors.Length >= 1)
+						fromNpc = ParseActor(scene.Actors[0]);
+
+					if (scene.Actors.Length >= 2)
+						toNpc = ParseActor(scene.Actors[1]);
+
+					if (fromNpc != -1)
+						builder.SetActors(fromNpc, toNpc);
+					else
+						PLogger.LogError($"Unknown actora for scene {scene.Id}");
+
+					foreach (var condition in scene.Conditions)
 					{
-						PLogger.LogError($"Unknown action type {animation.Action}");
-						continue;
+						errorMessage = $"Failed to load Condition {condition.Type}";
+
+						var cond = ParseCondition(condition);
+						if (cond != null)
+							builder.AddCondition(cond);
 					}
 
-					var playType = ConstToPlayType.GetValueOrDefault(animation.Play, PlayType.None);
-					if (playType == PlayType.None)
+					foreach (var animation in scene.Animations)
 					{
-						PLogger.LogError($"Unknown play type {animation.Play}");
-						continue;
+						errorMessage = $"Failed to load Animation {animation.Action}";
+
+						var action = ConstToActionType.GetValueOrDefault(animation.Action, ActionType.None);
+						if (action == ActionType.None)
+						{
+							PLogger.LogError($"Unknown action type {animation.Action}");
+							continue;
+						}
+
+						var playType = ConstToPlayType.GetValueOrDefault(animation.Play, PlayType.None);
+						if (playType == PlayType.None)
+						{
+							PLogger.LogError($"Unknown play type {animation.Play}");
+							continue;
+						}
+
+						var pose = animation.Pose ?? 1;
+
+						builder.AddAnimation(action, pose, new ActionValue(playType, animation.Name));
 					}
 
-					var pose = animation.Pose ?? 1;
-
-					builder.AddAnimation(action, pose, new ActionValue(playType, animation.Name));
+					Performers.Add(scene.Id, builder.Build());
 				}
-
-				Performers.Add(scene.Id, builder.Build());
+				catch (System.Exception ex)
+				{
+					PLogger.LogError($"Failed to load performer {scene.Id}: {errorMessage}");
+					PLogger.LogError(ex.Message);
+				}
 			}
 
 			PLogger.LogInfo("Performers loaded");
