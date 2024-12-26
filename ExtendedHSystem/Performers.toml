@@ -55,7 +55,7 @@ Animations = [
 
 [[Performers]] # EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal
 Id = "EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal"
-Prefab = { Type = "SexList", Args = [8, 15] }
+Prefab = { Type = "SexList", Args = [1, 15] }
 Actors = ["Man#1", "FemaleLargeNative#17"]
 Conditions = [
 	{ Type = "SexTypeCheck", Args = [1] },
