@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExtendedHSystem.Hook;
-using ExtendedHSystem.ParamContainers;
 using ExtendedHSystem.Performer;
 using Spine.Unity;
 using UnityEngine;
@@ -102,109 +100,6 @@ namespace ExtendedHSystem.Scenes
 
 			this.Performer = new SexPerformer(performer, this.Controller);
 			scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
-			/*
-						switch (this.Player.npcID)
-						{
-							case NpcID.Yona: // 0
-								switch (this.Npc.npcID)
-								{
-									case NpcID.MaleNative: // 10
-										scene = Managers.mn.sexMN.sexList[2].sexObj[4];
-										break;
-
-									case NpcID.BigNative: // 11
-										scene = Managers.mn.sexMN.sexList[14].sexObj[0];
-										break;
-
-									case NpcID.SmallNative: // 12
-										scene = Managers.mn.sexMN.sexList[12].sexObj[0];
-										break;
-
-									case NpcID.ElderBrotherNative: // 91
-										scene = Managers.mn.sexMN.sexList[13].sexObj[0];
-										break;
-								}
-								break;
-
-							case NpcID.Man: // 1
-								switch (this.Npc.npcID)
-								{
-									case NpcID.Reika: // 5
-										if (this.Type == 1 && Managers.mn.story.QuestProgress("Sub_Keigo") == 2)
-											scene = Managers.mn.sexMN.sexList[1].sexObj[17];
-										else
-											scene = Managers.mn.sexMN.sexList[1].sexObj[12];
-										break;
-
-									case NpcID.FemaleNative: // 15
-										if (CommonUtils.IsPregnant(this.Npc))
-											scene = Managers.mn.sexMN.sexList[1].sexObj[20];
-										else
-											scene = Managers.mn.sexMN.sexList[1].sexObj[1];
-										break;
-
-									case NpcID.NativeGirl: // 16
-										scene = Managers.mn.sexMN.sexList[1].sexObj[3];
-										break;
-
-									case NpcID.FemaleLargeNative: // 17
-										this.SexType = "Love_A_";
-										if (this.Type == 0)
-											scene = Managers.mn.sexMN.sexList[8].sexObj[1];
-										else
-											scene = Managers.mn.sexMN.sexList[1].sexObj[15];
-										break;
-
-									case NpcID.Mummy: // 42*
-										scene = Managers.mn.sexMN.sexList[1].sexObj[6];
-										this.TmpSexCountType = 1;
-										break;
-
-									case NpcID.UnderGroundWoman: // 44*
-										scene = Managers.mn.sexMN.sexList[1].sexObj[8];
-										this.SexType = "Love_A_";
-										break;
-
-									case NpcID.Mermaid: // 71*
-										scene = Managers.mn.sexMN.sexList[1].sexObj[9];
-										if (this.Type == 0)
-											this.TmpSexCountType = 1;
-										else
-											this.SexType = "B_";
-										break;
-
-									case NpcID.ElderSisterNative: // 90
-										scene = Managers.mn.sexMN.sexList[1].sexObj[11];
-										break;
-
-									case NpcID.Giant: // 110
-										scene = Managers.mn.sexMN.sexList[1].sexObj[7];
-										break;
-
-									case NpcID.Cassie2: // 113
-										scene = Managers.mn.sexMN.sexList[1].sexObj[16];
-										break;
-
-									case NpcID.Shino: // 114
-										scene = Managers.mn.sexMN.sexList[1].sexObj[19];
-										if (this.Type == 0)
-											this.TmpSexCountType = 1;
-										else
-											this.SexType = "B_";
-										break;
-
-									case NpcID.Sally: // 115
-										scene = Managers.mn.sexMN.sexList[11].sexObj[0];
-										this.SexType = "Love_A_";
-										break;
-
-									case NpcID.Merry: // 116
-										scene = Managers.mn.sexMN.sexList[1].sexObj[25];
-										break;
-								}
-								break;
-						}
-			*/
 		}
 
 		private void SetupTmpSex()
