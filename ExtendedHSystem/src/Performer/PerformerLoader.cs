@@ -77,6 +77,8 @@ namespace ExtendedHSystem.Performer
 					errorMessage = $"Failed to load Prefab {scene.Prefab.Type}";
 					if (scene.Prefab.Type == "SexList")
 						builder.SetSexPrefabSelector(new SexListPrefabSelector((int) (long)scene.Prefab.Args[0], (int) (long) scene.Prefab.Args[1]));
+					else if (scene.Prefab.Type == "SexObj")
+						builder.SetSexPrefabSelector(new SexObjPrefabSelector((int) (long)scene.Prefab.Args[0]));
 					else
 						PLogger.LogError($"Unknown prefab type {scene.Prefab.Type}");
 
