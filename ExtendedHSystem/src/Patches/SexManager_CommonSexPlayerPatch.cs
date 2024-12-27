@@ -10,8 +10,6 @@ namespace ExtendedHSystem.Patches
 {
 	public class SexManager_CommonSexPlayerPatch
 	{
-		private static readonly ISceneController DefaultSceneController = new DefaultSceneController();
-
 		[HarmonyPatch(typeof(SexManager), "CommonSexPlayer")]
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_CommonSexPlayer(
@@ -24,7 +22,7 @@ namespace ExtendedHSystem.Patches
 		)
 		{
 			var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
-			scene.Init(DefaultSceneController);
+			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 			return false;
 		}

@@ -9,8 +9,6 @@ namespace ExtendedHSystem.Patches
 {
 	public class SexManager_CommonSexNPCPatch
 	{
-		private static readonly ISceneController DefaultSceneController = new DefaultSceneController();
-
 		[HarmonyPatch(typeof(SexManager), "CommonSexNPC")]
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_CommonSexNPC(
@@ -22,7 +20,7 @@ namespace ExtendedHSystem.Patches
 		)
 		{
 			var scene = new CommonSexNPC(npcA, npcB, sexPlace, sexType);
-			scene.Init(DefaultSceneController);
+			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 			return false;
 		}
