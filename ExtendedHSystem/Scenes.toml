@@ -1,10 +1,28 @@
 [[Scenes]] # EHS_CommonSexPlayer
 Id = "EHS_CommonSexPlayer"
 Performers = [
+	"EHS_Man_Reika_Friendly_Cowgirl",
+	"EHS_Man_Reika_Friendly_RevCowgirl",
 	"EHS_Man_FemaleNative_Friendly_Normal",
 	"EHS_Man_FemaleNative_Friendly_Pregnant",
+	"EHS_Man_NativeGirl_Friendly_Normal",
 	"EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal",
 	"EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal",
+	"EHS_Man_Mummy_Friendly_Normal",
+	"EHS_Man_UnderGroundWoman_Friendly_Normal",
+	"EHS_Man_Mermaid_Friendly_TittyFuck",
+	"EHS_Man_Mermaid_Friendly_Fuck",
+	"EHS_Man_ElderSisterNative_Friendly_Doggy_Normal",
+	"EHS_Man_Giant_Friendly_Normal",
+	"EHS_Man_Cassie2_Friendly_Normal",
+	"EHS_Man_Shino_Friendly_TittyFuck",
+	"EHS_Man_Shino_Friendly_Fuck",
+	"EHS_Man_Sally_Friendly_Normal",
+	"EHS_Man_Merry_Friendly_Normal",
+	"EHS_Yona_MaleNative_Friendly_Normal",
+	"EHS_Yona_BigNative_Friendly_Normal",
+	"EHS_Yona_SmallNative_Friendly_Normal",
+	"EHS_Yona_ElderBrotherNative_Friendly_Normal",
 ]
 
 [[Scenes]] # EHS_CommonSexNPC
