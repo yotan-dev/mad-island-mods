@@ -56,6 +56,9 @@ namespace ExtendedHSystem.Performer
 			if (config.Type == "SexTypeCheck")
 				return new SexTypeCheck((int) (long) config.Args[0]);
 
+			if (config.Type == "QuestProgressCheck")
+				return new QuestProgressCheck((string) config.Args[0], (string) config.Args[1], (int) (long) config.Args[2]);
+
 			PLogger.LogError($"Unknown condition type {config.Type}. Ignoring...");
 			return null;
 		}
