@@ -13,9 +13,7 @@ namespace ExtendedHSystem.Scenes
 {
 	public class CommonSexPlayer : IScene, IScene2
 	{
-		protected static Dictionary<int, Dictionary<int?, List<SexPerformerInfo>>> Performers = [];
-
-		public static readonly string Name = "CommonSexPlayer";
+		public static readonly string Name = "EHS_CommonSexPlayer";
 
 		public static class StepNames
 		{
@@ -59,25 +57,6 @@ namespace ExtendedHSystem.Scenes
 
 		private SexPerformer Performer;
 
-		public static void AddPerformer(SexPerformerInfo performer)
-		{
-			Dictionary<int?, List<SexPerformerInfo>> toPerformerList;
-			if (!Performers.TryGetValue(performer.FromNpcId, out toPerformerList))
-			{
-				toPerformerList = new Dictionary<int?, List<SexPerformerInfo>>();
-				Performers.Add(performer.FromNpcId, toPerformerList);
-			}
-
-			List<SexPerformerInfo> performerList;
-			if (!toPerformerList.TryGetValue(performer.ToNpcId, out performerList))
-			{
-				performerList = new List<SexPerformerInfo>();
-				toPerformerList.Add(performer.ToNpcId, performerList);
-			}
-
-			performerList.Add(performer);
-		}
-
 		public CommonSexPlayer(CommonStates playerCommon, CommonStates npcCommon, Vector3 pos, int sexType)
 		{
 			this.Player = playerCommon;
@@ -116,21 +95,13 @@ namespace ExtendedHSystem.Scenes
 			scene = null;
 			sexType = "A_";
 
-			if (Performers.TryGetValue(this.Player.npcID, out var toPerformerList))
-			{
-				if (toPerformerList.TryGetValue(this.Npc.npcID, out var performerList))
-				{
-					foreach (var performer in performerList)
-					{
-						if (performer.CanPlay(this, PerformerScope.Sex))
-						{
-							this.Performer = new SexPerformer(performer, this.Controller);
-							scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
-						}
-					}
+			var performer = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexPlayer.Name, null)
+				?.GetPerformerInfo(this, PerformerScope.Sex, this.Player.npcID, this.Npc.npcID);
+			if (performer == null)
+				return;
 
-				}
-			}
+			this.Performer = new SexPerformer(performer, this.Controller);
+			scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			/*
 						switch (this.Player.npcID)
 						{

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExtendedHSystem.Performer;
-using Mono.Cecil;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
@@ -11,9 +10,7 @@ namespace ExtendedHSystem.Scenes
 {
 	public class CommonSexNPC : IScene, IScene2
 	{
-		protected static Dictionary<int, Dictionary<int?, List<SexPerformerInfo>>> Performers = [];
-
-		public static readonly string Name = "CommonSexNPC";
+		public static readonly string Name = "EHS_CommonSexNPC";
 
 		/// <summary>
 		/// First NPC in the Sex Scene.
@@ -49,25 +46,6 @@ namespace ExtendedHSystem.Scenes
 		private SexPerformer Performer;
 
 		private SkeletonAnimation SexAnim;
-
-		public static void AddPerformer(SexPerformerInfo performer)
-		{
-			Dictionary<int?, List<SexPerformerInfo>> toPerformerList;
-			if (!Performers.TryGetValue(performer.FromNpcId, out toPerformerList))
-			{
-				toPerformerList = new Dictionary<int?, List<SexPerformerInfo>>();
-				Performers.Add(performer.FromNpcId, toPerformerList);
-			}
-
-			List<SexPerformerInfo> performerList;
-			if (!toPerformerList.TryGetValue(performer.ToNpcId, out performerList))
-			{
-				performerList = new List<SexPerformerInfo>();
-				toPerformerList.Add(performer.ToNpcId, performerList);
-			}
-
-			performerList.Add(performer);
-		}
 
 		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
 		{
@@ -152,21 +130,14 @@ namespace ExtendedHSystem.Scenes
 			scene = null;
 			sexType = "A_";
 
-			if (Performers.TryGetValue(this.NpcB.npcID, out var toPerformerList))
-			{
-				if (toPerformerList.TryGetValue(this.NpcA.npcID, out var performerList))
-				{
-					foreach (var performer in performerList)
-					{
-						if (performer.CanPlay(this, PerformerScope.Sex))
-						{
-							this.Performer = new SexPerformer(performer, this.Controller);
-							scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
-						}
-					}
+			var performer = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexNPC.Name, null)
+				?.GetPerformerInfo(this, PerformerScope.Sex, this.NpcB.npcID, this.NpcA.npcID);
+			if (performer == null)
+				return;
 
-				}
-			}
+			this.Performer = new SexPerformer(performer, this.Controller);
+			scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
+
 			/*
 						switch (this.NpcA.npcID)
 						{
@@ -434,17 +405,17 @@ namespace ExtendedHSystem.Scenes
 
 			// if (hasCompleted)
 			// {
-				// if (this.Pregable)
-				// {
-				// 	foreach (var x in this.CallTypeEventHandlers(SexManager.SexCountState.Creampie))
-				// 		yield return x;
-				// }
+			// if (this.Pregable)
+			// {
+			// 	foreach (var x in this.CallTypeEventHandlers(SexManager.SexCountState.Creampie))
+			// 		yield return x;
+			// }
 
-				// foreach (var handler in this.EventHandlers)
-				// {
-				// 	foreach (var x in handler.AfterSex(this, this.NpcA, this.NpcB))
-				// 		yield return x;
-				// }
+			// foreach (var handler in this.EventHandlers)
+			// {
+			// 	foreach (var x in handler.AfterSex(this, this.NpcA, this.NpcB))
+			// 		yield return x;
+			// }
 			// }
 
 			yield return this.Performer.Perform(ActionType.FinishIdle, 8f);

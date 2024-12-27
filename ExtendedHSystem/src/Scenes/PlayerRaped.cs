@@ -13,9 +13,7 @@ namespace ExtendedHSystem.Scenes
 {
 	public class PlayerRaped : IScene, IScene2
 	{
-		protected static Dictionary<int, Dictionary<int?, List<SexPerformerInfo>>> Performers = [];
-
-		public static readonly string Name = "PlayerRaped";
+		public static readonly string Name = "EHS_PlayerRaped";
 
 		public readonly CommonStates Player;
 
@@ -32,25 +30,6 @@ namespace ExtendedHSystem.Scenes
 		private SexPerformer Performer;
 
 		private SkeletonAnimation CommonAnim;
-
-		public static void AddPerformer(SexPerformerInfo performer)
-		{
-			Dictionary<int?, List<SexPerformerInfo>> toPerformerList;
-			if (!Performers.TryGetValue(performer.FromNpcId, out toPerformerList))
-			{
-				toPerformerList = new Dictionary<int?, List<SexPerformerInfo>>();
-				Performers.Add(performer.FromNpcId, toPerformerList);
-			}
-
-			List<SexPerformerInfo> performerList;
-			if (!toPerformerList.TryGetValue(performer.ToNpcId, out performerList))
-			{
-				performerList = new List<SexPerformerInfo>();
-				toPerformerList.Add(performer.ToNpcId, performerList);
-			}
-
-			performerList.Add(performer);
-		}
 
 		public PlayerRaped(CommonStates player, CommonStates rapist)
 		{
@@ -129,28 +108,15 @@ namespace ExtendedHSystem.Scenes
 
 		private GameObject GetScene(PerformerScope scope)
 		{
-			GameObject scene = null;
 			var actors = this.GetActors();
-			if (Performers.TryGetValue(actors[0].npcID, out var toPerformerList))
-			{
-				if (toPerformerList.TryGetValue(actors[1].npcID, out var performerList))
-				{
-					foreach (var performer in performerList)
-					{
-						if (performer.CanPlay(this, PerformerScope.Battle))
-						{
-							if (performer.Id == this.Performer?.Info?.Id)
-								return null;
 
-							this.Performer = new SexPerformer(performer, this.Controller);
-							scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
-						}
-					}
+			var performer = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexPlayer.Name, null)
+				?.GetPerformerInfo(this, scope, actors[0].npcID, actors[1].npcID);
+			if (performer == null)
+				return null;
 
-				}
-			}
-
-			return scene;
+			this.Performer = new SexPerformer(performer, this.Controller);
+			return this.Performer.Info.SexPrefabSelector.GetPrefab();
 		}
 
 		private GameObject GetFightScene()
@@ -441,3 +407,4 @@ namespace ExtendedHSystem.Scenes
 		}
 	}
 }
+
