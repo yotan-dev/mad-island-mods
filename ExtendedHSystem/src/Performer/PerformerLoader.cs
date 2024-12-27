@@ -80,6 +80,7 @@ namespace ExtendedHSystem.Performer
 					else
 						PLogger.LogError($"Unknown prefab type {scene.Prefab.Type}");
 
+					errorMessage = "Failed to load scopes";
 					foreach (var scope in scene.Scopes)
 					{
 						errorMessage = $"Failed to load Scope {scope}";
@@ -144,6 +145,7 @@ namespace ExtendedHSystem.Performer
 				{
 					PLogger.LogError($"Failed to load performer {scene.Id}: {errorMessage}");
 					PLogger.LogError(ex.Message);
+					PLogger.LogError(ex.StackTrace);
 				}
 			}
 

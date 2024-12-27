@@ -46,13 +46,7 @@ namespace ExtendedHSystem
 			}
 
 			PerformerLoader.Load();
-			// @TODO: Move this to a config file
-			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleNative_Friendly_Normal"]);
-			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleNative_Friendly_Pregnant"]);
-			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal"]);
-			CommonSexPlayer.AddPerformer(PerformerLoader.Performers["EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal"]);
-			
-			CommonSexNPC.AddPerformer(PerformerLoader.Performers["EHS_MaleNative_FemaleNative_Friendly_Doggy_Normal"]);
+			ScenesLoader.Load();
 
 			PLogger.LogInfo($"Plugin ExtendedHSystem is loaded!");
 		}

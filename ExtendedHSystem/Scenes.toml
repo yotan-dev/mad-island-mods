@@ -1,0 +1,20 @@
+[[Scenes]] # EHS_CommonSexPlayer
+Id = "EHS_CommonSexPlayer"
+Performers = [
+	"EHS_Man_FemaleNative_Friendly_Normal",
+	"EHS_Man_FemaleNative_Friendly_Pregnant",
+	"EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal",
+	"EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal",
+]
+
+[[Scenes]] # EHS_CommonSexNPC
+Id = "EHS_CommonSexNPC"
+Performers = [
+	"EHS_MaleNative_FemaleNative_Friendly_Doggy_Normal",
+]
+
+[[Scenes]] # EHS_PlayerRaped
+Id = "EHS_PlayerRaped"
+Performers = [
+	
+]
