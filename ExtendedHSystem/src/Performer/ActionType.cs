@@ -10,6 +10,7 @@ namespace ExtendedHSystem.Performer
 		Insert,
 		Speed1,
 		Speed2,
+		Speed3,
 		Finish,
 		FinishIdle,
 	}
