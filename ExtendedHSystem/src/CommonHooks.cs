@@ -18,6 +18,10 @@ namespace ExtendedHSystem
 				.ForScenes(CommonSexPlayer.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnPenetrate);
+			HookBuilder.New("EHS.Rape.OnPenetrate")
+				.ForScenes(ManRapesSleep.Name)
+				.HookEvent(EventNames.OnPenetrate)
+				.Call(this.OnRapePenetrate);
 			HookBuilder.New("EHS.Any.OnCreampie")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnCreampie)
@@ -46,6 +50,16 @@ namespace ExtendedHSystem
 				yield break;
 
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Normal);
+			yield break;
+		}
+
+		private IEnumerator OnRapePenetrate(IScene2 scene, object param)
+		{
+			FromToParams? fromTo = param as FromToParams?;
+			if (!fromTo.HasValue)
+				yield break;
+
+			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Rapes);
 			yield break;
 		}
 

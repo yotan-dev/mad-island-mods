@@ -12,7 +12,6 @@ namespace ExtendedHSystem.Patches
 		{
 			var scene = new ManRapesSleep(girl, man);
 			scene.Init(new DefaultSceneController());
-			scene.AddEventHandler(new DefaultSceneEventHandler());
 			__result = scene.Run();
 			return false;
 		}

@@ -44,6 +44,26 @@ namespace Gallery
 				.ForScenes("*")
 				.HookEvent(EventNames.OnCreampie)
 				.Call(this.SetCreampie);
+
+			HookBuilder.New("Gallery.ManRapesSleep.ForceRape")
+				.ForScenes(ManRapesSleep.Name)
+				.HookStepStart(ManRapesSleep.StepNames.ForceRape)
+				.Call((IScene2 scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.ForcefullRape));
+			HookBuilder.New("Gallery.ManRapesSleep.GentlyRape")
+				.ForScenes(ManRapesSleep.Name)
+				.HookStepStart(ManRapesSleep.StepNames.GentlyRape)
+				.Call((IScene2 scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.GentlyRape));
+			HookBuilder.New("Gallery.ManRapesSleep.PowderRape")
+				.ForScenes(ManRapesSleep.Name)
+				.HookStepStart(ManRapesSleep.StepNames.PowderRape)
+				.Call((IScene2 scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.SleepPowder));
+		}
+
+		private IEnumerator OnSetRapeMode(IScene2 scene, ManRapeSleepState gentlyRape)
+		{
+			// @TODO:
+			// throw new NotImplementedException();
+			yield break;
 		}
 
 		private IEnumerator OnCommonSexPlayerStart(IScene2 scene, object arg2)

@@ -33,12 +33,6 @@ namespace ExtendedHSystem
 			yield return null;
 		}
 
-		public override IEnumerable OnRape(CommonStates from, CommonStates to)
-		{
-			Managers.mn.sexMN.SexCountChange(to, from, SexManager.SexCountState.Rapes);
-			yield return null;
-		}
-
 		public override IEnumerable OnRape(IScene scene, CommonStates from, CommonStates to)
 		{
 			Managers.mn.sexMN.SexCountChange(to, from, SexManager.SexCountState.Rapes);

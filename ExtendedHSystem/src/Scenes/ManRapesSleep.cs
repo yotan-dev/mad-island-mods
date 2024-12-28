@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using ExtendedHSystem.Hook;
 using ExtendedHSystem.Performer;
 using Spine.Unity;
 using UnityEngine;
@@ -10,6 +10,19 @@ namespace ExtendedHSystem.Scenes
 	public class ManRapesSleep : IScene, IScene2
 	{
 		public static readonly string Name = "EHS_ManRapesSleep";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string ForceRape = "ForceRape";
+			public const string GentlyRape = "GentlyRape";
+			public const string PowderRape = "PowderRape";
+			public const string Insert = "Insert";
+			public const string Speed = "Speed";
+			public const string Speed2 = "Speed2";
+			public const string Finish = "Finish";
+			public const string Leave = "Leave";
+		}
 
 		public readonly CommonStates Girl;
 
@@ -29,8 +42,6 @@ namespace ExtendedHSystem.Scenes
 
 		private ISceneController Controller;
 
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
-
 		private readonly ManRapesSleepMenuPanel MenuPanel;
 
 		private SexPerformer Performer;
@@ -44,7 +55,7 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.OnForcefullyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnForcefullyRape());
 			this.MenuPanel.OnGentlyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnGentlyRape());
 			this.MenuPanel.OnUseSleepPowderSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnUseSleepPowder());
-			
+
 			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
 
 			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
@@ -59,11 +70,6 @@ namespace ExtendedHSystem.Scenes
 		{
 			this.Controller = controller;
 			this.Controller.SetScene(this);
-		}
-
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
 		}
 
 		private void DisableLiveNpc(CommonStates npc)
@@ -209,176 +215,134 @@ namespace ExtendedHSystem.Scenes
 
 		private IEnumerator OnForcefullyRape()
 		{
-			foreach (var handler in this.EventHandlers) {
-				foreach (var x in handler.OnSleepRapeTypeChange(this, ManRapeSleepState.ForcefullRape))
-					yield return x;
-			}
-
 			this.TmpCommonState = ManRapeSleepState.ForcefullRape; // 1
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.ForceRape);
+			if (!this.CanContinue())
+				yield break;
+
 			yield return this.Performer.ChangeSet("ForceRape");
-			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_idle");
 
 			if (this.Girl != null)
 				Managers.mn.sound.GoVoice(this.Girl.voiceID, "close", this.CommonAnim.transform.position);
 
 			this.MenuPanel.ShowRapeMenu();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.ForceRape);
 		}
 
 		private IEnumerator OnGentlyRape()
 		{
-			foreach (var handler in this.EventHandlers) {
-				foreach (var x in handler.OnSleepRapeTypeChange(this, ManRapeSleepState.GentlyRape))
-					yield return x;
-			}
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.GentlyRape);
+			if (!this.CanContinue())
+				yield break;
 
 			this.TmpCommonState = ManRapeSleepState.GentlyRape; // 3
 			yield return this.Performer.ChangeSet("GentlyRape");
-			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
 
 			this.MenuPanel.ShowRapeMenu();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.GentlyRape);
 		}
 
 		private IEnumerator OnUseSleepPowder()
 		{
 			this.ConsumeSleepPowder();
-
-			foreach (var handler in this.EventHandlers) {
-				foreach (var x in handler.OnSleepRapeTypeChange(this, ManRapeSleepState.SleepPowder))
-					yield return x;
-			}
-
 			this.TmpCommonState = ManRapeSleepState.SleepPowder; // 2
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.PowderRape);
+			if (!this.CanContinue())
+				yield break;
+
 			yield return this.Performer.ChangeSet("PowderRape");
-			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
 
 			this.MenuPanel.ShowRapeMenu();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.PowderRape);
 		}
 
 		private IEnumerator OnInsert()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+				yield break;
+
 			this.MenuPanel.Hide();
 
 			this.TmpCommonSub = 1;
 			yield return this.Performer.Perform(ActionType.Insert);
-			// string animName = this.TmpCommonState == ManRapeSleepState.ForcefullRape ? "A_rapes_start" : "A_sleep_start";
-
-			// bool canContinue = false;
-			// foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
-			// {
-			// 	if (x is bool b)
-			// 		canContinue = b;
-			// 	yield return x;
-			// }
-
-			// this.Aborted = !canContinue;
-
-			if (!this.CanContinue())
-				yield break;
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnRape(this.Man, this.Girl))
-					yield return x;
-			}
-
 			if (!this.CanContinue())
 				yield break;
 
 			yield return this.Performer.Perform(ActionType.Speed1);
-			// animName = this.TmpCommonState == ManRapeSleepState.ForcefullRape ? "A_rapes_loop_01" : "A_sleep_loop_01";
-			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowInsertMenu(this.TmpCommonState == ManRapeSleepState.SleepPowder);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnSpeed()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
+			if (!this.CanContinue())
+				yield break;
+
 			if (this.Performer.CurrentAction == ActionType.Speed2)
 				yield return this.Performer.Perform(ActionType.Speed1);
 			else
 				yield return this.Performer.Perform(ActionType.Speed2);
-			// if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
-			// {
-			// 	if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_rapes_loop_02")
-			// 		yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_02");
-			// 	else
-			// 		yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_01");
-			// }
-			// else if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_sleep_loop_02")
-			// {
-			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_02");
-			// }
-			// else
-			// {
-			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
-			// }
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnSpeed2()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
+			if (!this.CanContinue())
+				yield break;
+
 			if (this.Performer.HasAction(ActionType.Speed3))
 				yield return this.Performer.Perform(ActionType.Speed3);
 			else
 				yield return this.Performer.Perform(ActionType.Speed1);
-			// if (this.CommonAnim.state.GetCurrent(0).Animation.Name == "A_sleep_loop_03")
-			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
-			// else
-			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_03");				
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
 		}
 
 		private IEnumerator OnFinish()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+				yield break;
+
 			this.MenuPanel.Hide();
 
-			// string animName;
 			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
 				this.Girl.faint = 0.0;
 
 			yield return this.Performer.Perform(ActionType.Finish);
-			// if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
-			// 	animName = "A_rapes_finish";
-			// }
-			// else
-			// {
-			// 	animName = "A_sleep_finish";
-			// }
-
-			// bool canContinue = false;
-			// foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
-			// {
-			// 	if (x is bool b)
-			// 		canContinue = b;
-			// 	yield return x;
-			// }
-
 			if (!this.CanContinue())
 				yield break;
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
-			// if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
-			// 	animName = "A_rapes_finish_idle";
-			// else
-			// 	animName = "A_sleep_finish_idle";
-
-			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
-
-			// foreach (var handler in this.EventHandlers)
-			// {
-			// 	foreach (var x in handler.OnCreampie(this.Man, this.Girl))
-			// 		yield return x;
-			// }
 
 			this.TmpCommonSub = 0;
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowFinishMenu();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnLeave()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
+			if (!this.CanContinue())
+				yield break;
+
 			this.Destroy();
-			yield break;
+			
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 		}
 
 		private void WakeupCheck()
@@ -412,8 +376,15 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				yield break;
+			}
+
 			yield return this.Performer.Perform(ActionType.StartIdle);
-			// this.CommonAnim.state.SetAnimation(0, "A_idle", true);
 
 			while (this.CanContinue())
 			{
@@ -428,14 +399,10 @@ namespace ExtendedHSystem.Scenes
 			if (this.TmpSex != null)
 				UnityEngine.Object.Destroy(this.TmpSex);
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.AfterManRape(this.Man, this.Girl))
-					yield return x;
-			}
-
 			this.MenuPanel.Close();
 			Managers.mn.uiMN.MainCanvasView(true);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
 
 		public bool CanContinue()
