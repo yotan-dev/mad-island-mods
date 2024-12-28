@@ -418,6 +418,142 @@ Default = [
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
+[[Performers]] # EHS_FemaleNative_FemaleNative_Friendly_Normal
+Id = "EHS_FemaleNative_FemaleNative_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [9, 0] }
+Actors = ["FemaleNative#15", "FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = "" },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+[[Performers]] # EHS_YoungMan_FemaleNative_Friendly_Normal
+Id = "EHS_YoungMan_FemaleNative_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 1] }
+Actors = ["YoungMan#89", "FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+[[Performers]] # EHS_YoungMan_FemaleNative_Friendly_Pregnant
+Id = "EHS_YoungMan_FemaleNative_Friendly_Pregnant"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 20] }
+Actors = ["YoungMan#89", "FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+[[Performers]] # EHS_MaleNative_NativeGirl_Friendly_Normal
+Id = "EHS_MaleNative_NativeGirl_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [2, 1] }
+Actors = ["MaleNative#10", "NativeGirl#16"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+[[Performers]] # EHS_NativeGirl_NativeGirl_Friendly_Normal
+Id = "EHS_NativeGirl_NativeGirl_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [10, 0] }
+Actors = ["NativeGirl#16", "NativeGirl#16"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = "" },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+[[Performers]] # EHS_YoungMan_NativeGirl_Friendly_Normal
+Id = "EHS_YoungMan_NativeGirl_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 3] }
+Actors = ["YoungMan#89", "NativeGirl#16"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+
+[[Performers]] # EHS_YoungMan_FemaleLargeNative_Friendly_Normal
+Id = "EHS_YoungMan_FemaleLargeNative_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 15] }
+Actors = ["YoungMan#89", "FemaleLargeNative#17"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "Love_A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
+]
+
+
+[[Performers]] # EHS_YoungMan_UnderGroundWoman_Friendly_Normal
+Id = "EHS_YoungMan_UnderGroundWoman_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 8] }
+Actors = ["YoungMan#89", "UnderGroundWoman#44"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "Love_A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
+]
+
+[[Performers]] # EHS_YoungMan_ElderSisterNative_Friendly_Normal
+Id = "EHS_YoungMan_ElderSisterNative_Friendly_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 11] }
+Actors = ["YoungMan#89", "ElderSisterNative#90"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
 
 
 # ================ Man Rapes Sleep =============== #
@@ -430,11 +566,11 @@ Actors = ["Man#1", "FemaleNative#15"]
 
 [Performers.AnimationSets]
 Default = [
-	{ Action = "Idle"      , Play = "Loop", Name = "A_idle" },
+	{ Action = "StartIdle"      , Play = "Loop", Name = "A_idle" },
 ]
 
 ForceRape = [
-	{ Action = "Idle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
+	{ Action = "StartIdle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
 	{ Action = "Insert", Play = "Once", Name = "A_rapes_start", Events = ["OnPenetrate"] }, # TmpCommonState = 1
 	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
 	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
@@ -443,7 +579,7 @@ ForceRape = [
 ]
 
 GentlyRape = [
-	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
+	{ Action = "StartIdle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
 	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 3
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
@@ -452,7 +588,7 @@ GentlyRape = [
 ]
 
 PowderRape = [	
-	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
+	{ Action = "StartIdle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
 	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 2
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2
@@ -463,17 +599,17 @@ PowderRape = [
 
 [[Performers]] # EHS_Man_NativeGirl_SleepRape_Normal
 Id = "EHS_Man_NativeGirl_SleepRape_Normal"
-# Scopes = ["Battle", "Sex"]
+Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 5] }
 Actors = ["Man#1", "NativeGirl#16"]
 
 [Performers.AnimationSets]
 Default = [
-	{ Action = "Idle"      , Play = "Loop", Name = "A_idle" },
+	{ Action = "StartIdle"      , Play = "Loop", Name = "A_idle" },
 ]
 
 ForceRape = [
-	{ Action = "Idle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
+	{ Action = "StartIdle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
 	{ Action = "Insert", Play = "Once", Name = "A_rapes_start", Events = ["OnPenetrate"] }, # TmpCommonState = 1
 	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
 	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
@@ -482,7 +618,7 @@ ForceRape = [
 ]
 
 GentlyRape = [
-	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
+	{ Action = "StartIdle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
 	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 3
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
@@ -491,7 +627,7 @@ GentlyRape = [
 ]
 
 PowderRape = [	
-	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
+	{ Action = "StartIdle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
 	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 2
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2

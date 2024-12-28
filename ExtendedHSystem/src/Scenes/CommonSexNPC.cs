@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using ExtendedHSystem.Hook;
 using ExtendedHSystem.Performer;
 using Spine.Unity;
 using UnityEngine;
@@ -11,6 +11,11 @@ namespace ExtendedHSystem.Scenes
 	public class CommonSexNPC : IScene, IScene2
 	{
 		public static readonly string Name = "EHS_CommonSexNPC";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+		}
 
 		/// <summary>
 		/// First NPC in the Sex Scene.
@@ -29,10 +34,6 @@ namespace ExtendedHSystem.Scenes
 
 		private NPCMove AMove, BMove;
 
-		private bool Pregable;
-
-		private string SexType;
-
 		private GameObject TmpSex;
 
 		private float AAngle;
@@ -40,8 +41,6 @@ namespace ExtendedHSystem.Scenes
 		private float BAngle;
 
 		private ISceneController Controller;
-
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		private SexPerformer Performer;
 
@@ -65,11 +64,6 @@ namespace ExtendedHSystem.Scenes
 		{
 			this.Controller = controller;
 			this.Controller.SetScene(this);
-		}
-
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
 		}
 
 		private void PrepareNpc(CommonStates npc, out NPCMove npcMove)
@@ -124,111 +118,6 @@ namespace ExtendedHSystem.Scenes
 				move.common.anim.state.SetAnimation(0, "A_idle", true);
 		}
 
-		private void GetSceneInfo(out GameObject scene, out bool pregable, out string sexType)
-		{
-			pregable = false;
-			scene = null;
-			sexType = "A_";
-
-			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
-			if (this.Performer != null)
-				scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
-
-			/*
-						switch (this.NpcA.npcID)
-						{
-							case NpcID.FemaleNative: // 15
-								switch (this.NpcB.npcID)
-								{
-									case NpcID.MaleNative: // 10
-										if (this.NpcA.pregnant[0] == -1)
-										{
-											pregable = true;
-											scene = Managers.mn.sexMN.sexList[2].sexObj[0];
-										}
-										break;
-
-									case NpcID.FemaleNative: // 15
-										if (this.NpcA.pregnant[0] == -1 && this.NpcB.pregnant[0] == -1)
-										{
-											scene = Managers.mn.sexMN.sexList[9].sexObj[0];
-										}
-										break;
-
-									case NpcID.YoungMan: // 89
-										if (this.NpcA.pregnant[0] == -1)
-										{
-											scene = Managers.mn.sexMN.sexList[1].sexObj[1];
-											pregable = true;
-										}
-										else
-										{
-											scene = Managers.mn.sexMN.sexList[1].sexObj[20];
-										}
-										break;
-								}
-								break;
-
-							case NpcID.NativeGirl: // 16
-								switch (this.NpcB.npcID)
-								{
-									case NpcID.MaleNative: // 10
-										if (this.NpcA.pregnant[0] == -1)
-										{
-											scene = Managers.mn.sexMN.sexList[2].sexObj[1];
-											pregable = true;
-										}
-										break;
-
-									case NpcID.NativeGirl: // 16
-										if (this.NpcA.pregnant[0] == -1 && this.NpcB.pregnant[0] == -1)
-										{
-											scene = Managers.mn.sexMN.sexList[10].sexObj[0];
-										}
-										break;
-
-									case NpcID.YoungMan: // 89
-										if (this.NpcA.pregnant[0] == -1)
-										{
-											scene = Managers.mn.sexMN.sexList[1].sexObj[3];
-											pregable = true;
-										}
-										break;
-								}
-								break;
-
-							case NpcID.FemaleLargeNative: // 17
-								switch (this.NpcB.npcID)
-								{
-									case NpcID.YoungMan: // 89
-										scene = Managers.mn.sexMN.sexList[1].sexObj[15];
-										sexType = "Love_A_";
-										break;
-								}
-								break;
-
-							case NpcID.UnderGroundWoman: // 44
-								switch (this.NpcB.npcID)
-								{
-									case NpcID.YoungMan: // 89
-										scene = Managers.mn.sexMN.sexList[1].sexObj[8];
-										sexType = "Love_A_";
-										break;
-								}
-								break;
-
-							case NpcID.ElderSisterNative: // 90
-								switch (this.NpcB.npcID)
-								{
-									case NpcID.YoungMan: // 89
-										scene = Managers.mn.sexMN.sexList[1].sexObj[11];
-										break;
-								}
-								break;
-						}
-			*/
-		}
-
 		private void SetupTmpSex()
 		{
 			if (this.NpcA.npcID == this.NpcB.npcID)
@@ -270,7 +159,10 @@ namespace ExtendedHSystem.Scenes
 
 		private bool SetupScene()
 		{
-			this.GetSceneInfo(out GameObject scene, out this.Pregable, out this.SexType);
+			GameObject scene = null;
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer != null)
+				scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
 				return false;
 
@@ -334,89 +226,14 @@ namespace ExtendedHSystem.Scenes
 			yield return animTime > 0f;
 		}
 
-		// private IEnumerable CallTypeEventHandlers(SexManager.SexCountState type)
-		// {
-		// 	switch (type)
-		// 	{
-		// 		case SexManager.SexCountState.Normal:
-		// 			foreach (var handler in this.EventHandlers)
-		// 			{
-		// 				foreach (var x in handler.OnNormalSex(this.NpcA, this.NpcB))
-		// 					yield return x;
-		// 			}
-		// 			break;
-
-		// 		// case SexManager.SexCountState.Rapes:
-		// 		// 	foreach (var handler in this.EventHandlers)
-		// 		// 	{
-		// 		// 		foreach (var x in handler.OnRape(this.NpcB, this.NpcA))
-		// 		// 			yield return x;
-		// 		// 	}
-		// 		// 	break;
-
-		// 		// case SexManager.SexCountState.Toilet:
-		// 		// 	foreach (var handler in this.EventHandlers)
-		// 		// 	{
-		// 		// 		foreach (var x in handler.OnToilet(this.NpcA, this.NpcB))
-		// 		// 			yield return x;
-		// 		// 	}
-		// 		// 	break;
-
-		// 		case SexManager.SexCountState.Creampie:
-		// 			foreach (var handler in this.EventHandlers)
-		// 			{
-		// 				foreach (var x in handler.OnCreampie(this.NpcB, this.NpcA))
-		// 					yield return x;
-		// 			}
-		// 			break;
-
-		// 		default:
-		// 			PLogger.LogError("CommonSexNPC::CallTypeEventHandlers: Unexpected sex type: " + this.Type);
-		// 			break;
-		// 	}
-		// }
-
 		private IEnumerator Perform()
 		{
-			// foreach (var x in this.CallTypeEventHandlers(this.Type))
-			// 	yield return x;
-
 			this.SexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			yield return this.Performer.Perform(ActionType.Insert);
 			yield return this.Performer.Perform(ActionType.Speed1, 20f);
 			yield return this.Performer.Perform(ActionType.Speed2, 10f);
 			yield return this.Performer.Perform(ActionType.Finish);
-			// foreach (var x in this.Controller.PlayTimedStep(this, this.SexAnim, this.SexType + "Loop_01", 20f))
-			// 	yield return x;
-
-			// foreach (var x in this.Controller.PlayTimedStep(this, this.SexAnim, this.SexType + "Loop_02", 10f))
-			// 	yield return x;
-
-			// bool hasCompleted = false;
-			// foreach (var x in this.Controller.PlayOnceStep(this, this.SexAnim, this.SexType + "Finish"))
-			// {
-			// 	hasCompleted = (bool)x;
-			// 	yield return x;
-			// }
-
-			// if (hasCompleted)
-			// {
-			// if (this.Pregable)
-			// {
-			// 	foreach (var x in this.CallTypeEventHandlers(SexManager.SexCountState.Creampie))
-			// 		yield return x;
-			// }
-
-			// foreach (var handler in this.EventHandlers)
-			// {
-			// 	foreach (var x in handler.AfterSex(this, this.NpcA, this.NpcB))
-			// 		yield return x;
-			// }
-			// }
-
 			yield return this.Performer.Perform(ActionType.FinishIdle, 8f);
-			// foreach (var x in this.Controller.PlayTimedStep(this, this.SexAnim, this.SexType + "Finish_idle", 8f))
-			// 	yield return x;
 		}
 
 		public IEnumerator Run()
@@ -464,6 +281,13 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				yield break;
+			}
+
 			yield return this.Perform();
 
 			// Teardown
@@ -499,7 +323,7 @@ namespace ExtendedHSystem.Scenes
 			this.NpcA.MoralChange(3f, null, NPCManager.MoralCause.None);
 			this.NpcB.MoralChange(3f, null, NPCManager.MoralCause.None);
 
-			yield break;
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
 
 		public bool CanContinue()
