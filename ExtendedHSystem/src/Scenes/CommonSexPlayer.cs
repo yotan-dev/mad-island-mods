@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using ExtendedHSystem.Hook;
 using ExtendedHSystem.Performer;
 using Spine.Unity;
@@ -31,11 +30,11 @@ namespace ExtendedHSystem.Scenes
 
 		public readonly int Type;
 
+		private readonly CommonStates[] Actors;
+
 		private Vector3 Position;
 
 		private NPCMove NpcMove;
-
-		public string SexType { get; private set; }
 
 		private GameObject TmpSex = null;
 
@@ -61,6 +60,7 @@ namespace ExtendedHSystem.Scenes
 			this.Npc = npcCommon;
 			this.Type = sexType;
 			this.Position = pos;
+			this.Actors = Utils.SortActors(playerCommon, npcCommon);
 
 			this.MenuPanel = new CommonSexPlayerMenuPanel();
 			this.MenuPanel.OnCaressSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnCaress());
@@ -86,20 +86,6 @@ namespace ExtendedHSystem.Scenes
 		private bool AreActorsAlive()
 		{
 			return this.Player.life > 0.0 && this.Npc.life > 0.0;
-		}
-
-		private void GetSceneInfo(out GameObject scene, out string sexType)
-		{
-			scene = null;
-			sexType = "A_";
-
-			var performer = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexPlayer.Name, null)
-				?.GetPerformerInfo(this, PerformerScope.Sex, this.Player.npcID, this.Npc.npcID);
-			if (performer == null)
-				return;
-
-			this.Performer = new SexPerformer(performer, this.Controller);
-			scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 		}
 
 		private void SetupTmpSex()
@@ -207,9 +193,7 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.Open(this.Position);
 			this.MenuPanel.ShowInitialMenu();
 
-			string sexType;
-			this.GetSceneInfo(out GameObject scene, out sexType);
-			this.SexType = sexType;
+			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
 				return false;
 
@@ -264,8 +248,7 @@ namespace ExtendedHSystem.Scenes
 			yield return this.Performer.Perform(ActionType.Speed1);
 			// yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
 
-			bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
-			this.MenuPanel.ShowInsertMenu(hasAlternativePose);
+			this.MenuPanel.ShowInsertMenu(this.Performer.HasAlternativePose());
 
 			// if (this.TmpSexCountType == 0)
 			// 	yield return HookManager.Instance.RunEventHook(this, EventNames.OnPenetrate, new FromToParams(this.Player, this.Npc));
@@ -448,6 +431,13 @@ namespace ExtendedHSystem.Scenes
 
 		public IEnumerator Run()
 		{
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
+			{
+				PLogger.LogError("No performer found");
+				yield break;
+			}
+
 			if (!this.SetupScene())
 			{
 				if (this.TmpSex != null)
@@ -514,12 +504,7 @@ namespace ExtendedHSystem.Scenes
 
 		public CommonStates[] GetActors()
 		{
-			if (CommonUtils.IsMale(this.Player))
-				return [this.Player, this.Npc];
-			else if (CommonUtils.IsMale(this.Npc))
-				return [this.Npc, this.Player];
-
-			return [this.Player, this.Npc];
+			return this.Actors;
 		}
 
 		public SkeletonAnimation GetSkelAnimation()
@@ -530,6 +515,11 @@ namespace ExtendedHSystem.Scenes
 		public string ExpandAnimationName(string originalName)
 		{
 			return originalName.Replace("<Tits>", this.Npc.parameters[6].ToString("00"));
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }

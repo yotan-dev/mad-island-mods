@@ -130,13 +130,9 @@ namespace ExtendedHSystem.Scenes
 			scene = null;
 			sexType = "A_";
 
-			var performer = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexNPC.Name, null)
-				?.GetPerformerInfo(this, PerformerScope.Sex, this.NpcB.npcID, this.NpcA.npcID);
-			if (performer == null)
-				return;
-
-			this.Performer = new SexPerformer(performer, this.Controller);
-			scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer != null)
+				scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 
 			/*
 						switch (this.NpcA.npcID)
@@ -536,6 +532,11 @@ namespace ExtendedHSystem.Scenes
 		public string ExpandAnimationName(string originalName)
 		{
 			return originalName; // @TODO:
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }

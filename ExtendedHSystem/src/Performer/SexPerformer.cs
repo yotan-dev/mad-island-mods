@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Collections;
 using ExtendedHSystem.Hook;
 using ExtendedHSystem.ParamContainers;
@@ -20,19 +22,28 @@ namespace ExtendedHSystem.Performer
 			this.Controller = controller;
 		}
 
-		public IEnumerator Perform(ActionType action, float? loopTime = null)
+		public ActionValue? GetActionValue(ActionType action)
 		{
-			this.CurrentAction = action;
 			if (!this.Info.Actions.TryGetValue(new ActionKey(action, this.CurrentPose), out var value))
 			{
 				if (!this.Info.Actions.TryGetValue(new ActionKey(action, 1), out value))
 				{
 					PLogger.LogError($"No info found for action {action} / Pose {this.CurrentPose} (also not found for pose 1)");
-					yield break;
+					return null;
 				}
 
 				this.CurrentPose = 1;
 			}
+
+			return value;
+		}
+
+		public IEnumerator Perform(ActionType action, float? loopTime = null)
+		{
+			this.CurrentAction = action;
+			var value = this.GetActionValue(action);
+			if (value == null)
+				yield break;
 
 			switch (value.PlayType)
 			{
