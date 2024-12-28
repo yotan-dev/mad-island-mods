@@ -295,7 +295,7 @@ Animations = [
 Id = "EHS_Yona_MaleNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [2, 4] }
-Actors = ["Yona#0", "MaleNative#10"]
+Actors = ["MaleNative#10", "Yona#0"]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -311,7 +311,7 @@ Animations = [
 Id = "EHS_Yona_BigNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [14, 0] }
-Actors = ["Yona#0", "BigNative#11"]
+Actors = ["BigNative#11", "Yona#0"]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -327,7 +327,7 @@ Animations = [
 Id = "EHS_Yona_SmallNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [12, 0] }
-Actors = ["Yona#0", "SmallNative#12"]
+Actors = ["SmallNative#12", "Yona#0"]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -343,7 +343,7 @@ Animations = [
 Id = "EHS_Yona_ElderBrotherNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [13, 0] }
-Actors = ["Yona#0", "ElderBrotherNative#91"]
+Actors = ["ElderBrotherNative#91", "Yona#0"]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },

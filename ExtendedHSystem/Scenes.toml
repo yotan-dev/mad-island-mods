@@ -19,7 +19,6 @@ StartConditions = [
 	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "in", [0, 4, 5]] },
 ]
 PerformConditions = [
-	{ Type = "SexTypeCheck", Args = [1] },
 	# { Type = "QuestProgressCheck", Args = ["Sub_Keigo", "!=", 2] }, # Original code check, but we are covered
 ]
 
