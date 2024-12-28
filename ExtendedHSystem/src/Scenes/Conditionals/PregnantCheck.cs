@@ -1,7 +1,6 @@
-using ExtendedHSystem.Scenes;
 using YotanModCore;
 
-namespace ExtendedHSystem.Performer
+namespace ExtendedHSystem.Scenes.Conditionals
 {
 	public class PregnantCheck : IConditional
 	{
@@ -24,6 +23,18 @@ namespace ExtendedHSystem.Performer
 			}
 			
 			return isPregnant == this.ExpectedValue;
+		}
+
+		public bool Pass(CommonStates from, CommonStates to)
+		{
+			bool pass = true;
+			if (from.npcID == this.NpcId)
+				pass = pass && CommonUtils.IsPregnant(from) == this.ExpectedValue;
+
+			if (to?.npcID == this.NpcId)
+				pass = pass && CommonUtils.IsPregnant(to) == this.ExpectedValue;
+
+			return pass;
 		}
 	}
 }

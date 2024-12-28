@@ -5,10 +5,6 @@ Id = "EHS_Man_Reika_Friendly_Cowgirl"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 17] }
 Actors = ["Man#1", "Reika#5"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [1] },
-	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "==", 2] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01" },
@@ -25,10 +21,6 @@ Id = "EHS_Man_Reika_Friendly_RevCowgirl"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 12] }
 Actors = ["Man#1", "Reika#5"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [0] },
-	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "!=", 2] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01" },
@@ -45,9 +37,6 @@ Id = "EHS_Man_FemaleNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 1] }
 Actors = ["Man#1", "FemaleNative#15"]
-Conditions = [
-	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
@@ -68,9 +57,6 @@ Id = "EHS_Man_FemaleNative_Friendly_Pregnant"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 20] }
 Actors = ["Man#1", "FemaleNative#15"]
-Conditions = [
-	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01_<Tits>" },
@@ -87,7 +73,6 @@ Id = "EHS_Man_NativeGirl_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 3] }
 Actors = ["Man#1", "NativeGirl#16"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01" },
@@ -104,9 +89,6 @@ Id = "EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [8, 1] }
 Actors = ["Man#1", "FemaleLargeNative#17"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [0] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
@@ -123,9 +105,6 @@ Id = "EHS_Man_FemaleLargeNative_Friendly_Doggy_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 15] }
 Actors = ["Man#1", "FemaleLargeNative#17"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [1] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
@@ -142,7 +121,6 @@ Id = "EHS_Man_Mummy_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 6] }
 Actors = ["Man#1", "Mummy#42"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -158,7 +136,6 @@ Id = "EHS_Man_UnderGroundWoman_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 8] }
 Actors = ["Man#1", "UnderGroundWoman#44"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
@@ -175,9 +152,6 @@ Id = "EHS_Man_Mermaid_Friendly_TittyFuck"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 9] }
 Actors = ["Man#1", "Mermaid#71"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [0] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -193,9 +167,6 @@ Id = "EHS_Man_Mermaid_Friendly_Fuck"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 9] }
 Actors = ["Man#1", "Mermaid#71"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [0] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "B_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "B_Contact_01"  },
@@ -212,7 +183,6 @@ Id = "EHS_Man_ElderSisterNative_Friendly_Doggy_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 11] }
 Actors = ["Man#1", "ElderSisterNative#90"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -229,7 +199,6 @@ Id = "EHS_Man_Giant_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 7] }
 Actors = ["Man#1", "Giant#110"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -246,7 +215,6 @@ Id = "EHS_Man_Cassie2_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 16] }
 Actors = ["Man#1", "Cassie2#113"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -263,9 +231,6 @@ Id = "EHS_Man_Shino_Friendly_TittyFuck"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 19] }
 Actors = ["Man#1", "Shino#114"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [0] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -281,9 +246,6 @@ Id = "EHS_Man_Shino_Friendly_Fuck"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 19] }
 Actors = ["Man#1", "Shino#114"]
-Conditions = [
-	{ Type = "SexTypeCheck", Args = [0] },
-]
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "B_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "B_Contact_01"  },
@@ -300,7 +262,6 @@ Id = "EHS_Man_Sally_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [11, 0] }
 Actors = ["Man#1", "Sally#115"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Love_A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "Love_A_Contact_01"  },
@@ -317,7 +278,6 @@ Id = "EHS_Man_Merry_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [1, 25] }
 Actors = ["Man#1", "Merry#116"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -336,7 +296,6 @@ Id = "EHS_Yona_MaleNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [2, 4] }
 Actors = ["Yona#0", "MaleNative#10"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -353,7 +312,6 @@ Id = "EHS_Yona_BigNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [14, 0] }
 Actors = ["Yona#0", "BigNative#11"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -370,7 +328,6 @@ Id = "EHS_Yona_SmallNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [12, 0] }
 Actors = ["Yona#0", "SmallNative#12"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -387,7 +344,6 @@ Id = "EHS_Yona_ElderBrotherNative_Friendly_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [13, 0] }
 Actors = ["Yona#0", "ElderBrotherNative#91"]
-Conditions = []
 Animations = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
@@ -408,9 +364,6 @@ Id = "EHS_MaleNative_FemaleNative_Friendly_Doggy_Normal"
 Scopes = ["Sex"]
 Prefab = { Type = "SexList", Args = [2, 0] }
 Actors = ["MaleNative#10", "FemaleNative#15"]
-Conditions = [
-	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
-]
 Animations = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
@@ -427,7 +380,6 @@ Id = "EHS_MaleNative_Yona_Rape_Doggy_Normal"
 Scopes = ["Battle", "Sex"]
 Prefab = { Type = "SexObj", Args = [10] }
 Actors = ["MaleNative#10", "Yona#0"]
-Conditions = []
 Animations = [
 	{ Action = "Battle"    , Play = "Loop", Name = "A_Attack_loop" },
 	{ Action = "Defeat"    , Play = "Loop", Name = "A_Attack_giveup" },

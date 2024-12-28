@@ -48,21 +48,6 @@ namespace ExtendedHSystem.Performer
 			return npcId;
 		}
 
-		private static IConditional ParseCondition(ConditionsConfig config)
-		{
-			if (config.Type == "PregnantCheck")
-				return new PregnantCheck(ParseActor((string)config.Args[0]), (bool)config.Args[1]);
-
-			if (config.Type == "SexTypeCheck")
-				return new SexTypeCheck((int) (long) config.Args[0]);
-
-			if (config.Type == "QuestProgressCheck")
-				return new QuestProgressCheck((string) config.Args[0], (string) config.Args[1], (int) (long) config.Args[2]);
-
-			PLogger.LogError($"Unknown condition type {config.Type}. Ignoring...");
-			return null;
-		}
-
 		public static void Load()
 		{
 			PLogger.LogInfo("Loading performers");
@@ -111,15 +96,6 @@ namespace ExtendedHSystem.Performer
 						builder.SetActors(fromNpc, toNpc);
 					else
 						PLogger.LogError($"Unknown actora for scene {scene.Id}");
-
-					foreach (var condition in scene.Conditions)
-					{
-						errorMessage = $"Failed to load Condition {condition.Type}";
-
-						var cond = ParseCondition(condition);
-						if (cond != null)
-							builder.AddCondition(cond);
-					}
 
 					foreach (var animation in scene.Animations)
 					{
