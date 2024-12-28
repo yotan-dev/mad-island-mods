@@ -63,7 +63,7 @@ namespace ExtendedHSystem.Mods
 
 			if (SexMeter.Instance.FillAmount < SexMeter.Instance.DividerPercent)
 			{
-				var actionValue = scene.GetPerformer()?.GetActionValue(ActionType.Insert);
+				var actionValue = scene.GetPerformer()?.GetActionValue(ActionType.Insert, out _);
 				if (actionValue != null)
 				{
 					string animName = actionValue.AnimationName;

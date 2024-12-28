@@ -26,17 +26,31 @@ namespace ExtendedHSystem.Performer
 			this.Controller = controller;
 		}
 
-		public ActionValue? GetActionValue(ActionType action)
+		private bool TryGetActionValue(ActionType action, out ActionValue? value, out int pose)
 		{
-			if (!this.CurrentSet.Actions.TryGetValue(new ActionKey(action, this.CurrentPose), out var value))
+			pose = this.CurrentPose;
+			if (!this.CurrentSet.Actions.TryGetValue(new ActionKey(action, this.CurrentPose), out value))
 			{
 				if (!this.CurrentSet.Actions.TryGetValue(new ActionKey(action, 1), out value))
-				{
-					PLogger.LogError($"No info found for action {action} / Pose {this.CurrentPose} / set {this.CurrentSetName} (also not found for pose 1)");
-					return null;
-				}
+					return false;
 
-				this.CurrentPose = 1;
+				pose = 1;
+			}
+
+			return true;
+		}
+
+		public bool HasAction(ActionType action)
+		{
+			return this.TryGetActionValue(action, out _, out _);
+		}
+
+		public ActionValue? GetActionValue(ActionType action, out int pose)
+		{
+			if (!this.TryGetActionValue(action, out var value, out pose))
+			{
+				PLogger.LogError($"No info found for action {action} / Pose {this.CurrentPose} / set {this.CurrentSetName} (also not found for pose 1)");
+				return null;
 			}
 
 			return value;
@@ -45,9 +59,11 @@ namespace ExtendedHSystem.Performer
 		public IEnumerator Perform(ActionType action, float? loopTime = null)
 		{
 			this.CurrentAction = action;
-			var value = this.GetActionValue(action);
+			var value = this.GetActionValue(action, out var pose);
 			if (value == null)
 				yield break;
+
+			this.CurrentPose = pose;
 
 			switch (value.PlayType)
 			{
