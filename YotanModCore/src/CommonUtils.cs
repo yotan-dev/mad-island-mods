@@ -96,6 +96,9 @@ namespace YotanModCore
 		/// <returns></returns>
 		public static bool IsPregnant(CommonStates common)
 		{
+			if (common == null)
+				return false;
+
 			return common.pregnant[0] != -1;
 		}
 
