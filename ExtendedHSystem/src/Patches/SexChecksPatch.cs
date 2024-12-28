@@ -1,6 +1,5 @@
 #nullable enable
 
-using System.Collections.Generic;
 using ExtendedHSystem.Performer;
 using ExtendedHSystem.Scenes;
 using HarmonyLib;
@@ -26,9 +25,9 @@ namespace ExtendedHSystem.Patches
 
 			SceneInfo? sceneInfo;
 			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
-				sceneInfo = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexPlayer.Name, null);
+				sceneInfo = ScenesManager.Instance.GetSceneInfo(CommonSexPlayer.Name);
 			else
-				sceneInfo = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexNPC.Name, null);
+				sceneInfo = ScenesManager.Instance.GetSceneInfo(CommonSexNPC.Name);
 
 			__result = sceneInfo?.CanStart(PerformerScope.Sex, realFrom, realTo) ?? false;
 			return false;

@@ -108,15 +108,12 @@ namespace ExtendedHSystem.Scenes
 
 		private GameObject GetScene(PerformerScope scope)
 		{
-			var actors = this.GetActors();
+			GameObject scene = null;
+			this.Performer = ScenesManager.Instance.GetPerformer(this, scope, this.Controller);
+			if (this.Performer != null)
+				scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 
-			var performer = ScenesLoader.SceneInfos.GetValueOrDefault(CommonSexPlayer.Name, null)
-				?.GetPerformerInfo(this, scope, actors[0].npcID, actors[1].npcID);
-			if (performer == null)
-				return null;
-
-			this.Performer = new SexPerformer(performer, this.Controller);
-			return this.Performer.Info.SexPrefabSelector.GetPrefab();
+			return scene;
 		}
 
 		private GameObject GetFightScene()
@@ -404,6 +401,11 @@ namespace ExtendedHSystem.Scenes
 		{
 			var act = GetActors()[1];
 			return originalName.Replace("<Tits>", act.parameters[6].ToString("00"));
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }

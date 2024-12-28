@@ -1,4 +1,5 @@
 using System.Collections;
+using ExtendedHSystem.Performer;
 using Spine.Unity;
 
 namespace ExtendedHSystem.Scenes
@@ -10,5 +11,6 @@ namespace ExtendedHSystem.Scenes
 		CommonStates[] GetActors();
 		SkeletonAnimation GetSkelAnimation();
 		string ExpandAnimationName(string originalName);
+		SexPerformer GetPerformer();
 	}
 }
