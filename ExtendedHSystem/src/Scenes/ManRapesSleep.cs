@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExtendedHSystem.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
-using YotanModCore.Consts;
 
 namespace ExtendedHSystem.Scenes
 {
-	public class ManRapesSleep : IScene
+	public class ManRapesSleep : IScene, IScene2
 	{
+		public static readonly string Name = "EHS_ManRapesSleep";
+
 		public readonly CommonStates Girl;
 
 		public readonly CommonStates Man;
@@ -30,6 +32,8 @@ namespace ExtendedHSystem.Scenes
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		private readonly ManRapesSleepMenuPanel MenuPanel;
+
+		private SexPerformer Performer;
 
 		public ManRapesSleep(CommonStates girl, CommonStates man)
 		{
@@ -54,6 +58,7 @@ namespace ExtendedHSystem.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -61,19 +66,6 @@ namespace ExtendedHSystem.Scenes
 			this.EventHandlers.Add(handler);
 		}
 
-		private GameObject GetScene()
-		{
-			switch (this.Girl.npcID)
-			{
-				case NpcID.FemaleNative: // 15
-					return Managers.mn.sexMN.sexList[1].sexObj[4];
-
-				case NpcID.NativeGirl: // 16
-					return Managers.mn.sexMN.sexList[1].sexObj[5];
-			}
-
-			return null;
-		}
 		private void DisableLiveNpc(CommonStates npc)
 		{
 			NPCMove nMove = npc.nMove;
@@ -188,7 +180,9 @@ namespace ExtendedHSystem.Scenes
 		private bool SetupScene()
 		{
 			var pos = this.Girl.transform.position;
-			var scene = this.GetScene();
+
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			var scene = this.Performer?.Info?.SexPrefabSelector?.GetPrefab() ?? null;
 			if (scene == null)
 				return false;
 
@@ -204,7 +198,8 @@ namespace ExtendedHSystem.Scenes
 			Managers.mn.uiMN.MainCanvasView(false);
 
 			this.MenuPanel.Open(pos);
-			this.MenuPanel.ShowInitialMenu(this.HasSleepPowder());
+			var shouldShowSleepPowderMenu = this.HasSleepPowder() && this.Performer.HasSet("PowderRape");
+			this.MenuPanel.ShowInitialMenu(shouldShowSleepPowderMenu);
 
 			this.DisableLiveNpc(this.Girl);
 			this.DisableLivePlayer(this.Man);
@@ -220,7 +215,8 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.TmpCommonState = ManRapeSleepState.ForcefullRape; // 1
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_idle");
+			yield return this.Performer.ChangeSet("ForceRape");
+			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_idle");
 
 			if (this.Girl != null)
 				Managers.mn.sound.GoVoice(this.Girl.voiceID, "close", this.CommonAnim.transform.position);
@@ -236,7 +232,8 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.TmpCommonState = ManRapeSleepState.GentlyRape; // 3
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
+			yield return this.Performer.ChangeSet("GentlyRape");
+			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
 
 			this.MenuPanel.ShowRapeMenu();
 		}
@@ -251,7 +248,8 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.TmpCommonState = ManRapeSleepState.SleepPowder; // 2
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
+			yield return this.Performer.ChangeSet("PowderRape");
+			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_idle");
 
 			this.MenuPanel.ShowRapeMenu();
 		}
@@ -261,17 +259,18 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.Hide();
 
 			this.TmpCommonSub = 1;
-			string animName = this.TmpCommonState == ManRapeSleepState.ForcefullRape ? "A_rapes_start" : "A_sleep_start";
+			yield return this.Performer.Perform(ActionType.Insert);
+			// string animName = this.TmpCommonState == ManRapeSleepState.ForcefullRape ? "A_rapes_start" : "A_sleep_start";
 
-			bool canContinue = false;
-			foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
-			{
-				if (x is bool b)
-					canContinue = b;
-				yield return x;
-			}
+			// bool canContinue = false;
+			// foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
+			// {
+			// 	if (x is bool b)
+			// 		canContinue = b;
+			// 	yield return x;
+			// }
 
-			this.Aborted = !canContinue;
+			// this.Aborted = !canContinue;
 
 			if (!this.CanContinue())
 				yield break;
@@ -285,8 +284,9 @@ namespace ExtendedHSystem.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			animName = this.TmpCommonState == ManRapeSleepState.ForcefullRape ? "A_rapes_loop_01" : "A_sleep_loop_01";
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
+			yield return this.Performer.Perform(ActionType.Speed1);
+			// animName = this.TmpCommonState == ManRapeSleepState.ForcefullRape ? "A_rapes_loop_01" : "A_sleep_loop_01";
+			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowInsertMenu(this.TmpCommonState == ManRapeSleepState.SleepPowder);
@@ -294,70 +294,80 @@ namespace ExtendedHSystem.Scenes
 
 		private IEnumerator OnSpeed()
 		{
-			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
-			{
-				if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_rapes_loop_02")
-					yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_02");
-				else
-					yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_01");
-			}
-			else if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_sleep_loop_02")
-			{
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_02");
-			}
+			if (this.Performer.CurrentAction == ActionType.Speed2)
+				yield return this.Performer.Perform(ActionType.Speed1);
 			else
-			{
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
-			}
+				yield return this.Performer.Perform(ActionType.Speed2);
+			// if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
+			// {
+			// 	if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_rapes_loop_02")
+			// 		yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_02");
+			// 	else
+			// 		yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_rapes_loop_01");
+			// }
+			// else if (this.CommonAnim.state.GetCurrent(0).Animation.Name != "A_sleep_loop_02")
+			// {
+			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_02");
+			// }
+			// else
+			// {
+			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
+			// }
 		}
 
 		private IEnumerator OnSpeed2()
 		{
-			if (this.CommonAnim.state.GetCurrent(0).Animation.Name == "A_sleep_loop_03")
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
+			if (this.Performer.HasAction(ActionType.Speed3))
+				yield return this.Performer.Perform(ActionType.Speed3);
 			else
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_03");
+				yield return this.Performer.Perform(ActionType.Speed1);
+			// if (this.CommonAnim.state.GetCurrent(0).Animation.Name == "A_sleep_loop_03")
+			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_01");
+			// else
+			// 	yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_sleep_loop_03");				
 		}
 
 		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
 
-			string animName;
+			// string animName;
 			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
-			{
 				this.Girl.faint = 0.0;
-				animName = "A_rapes_finish";
-			}
-			else
-			{
-				animName = "A_sleep_finish";
-			}
 
-			bool canContinue = false;
-			foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
-			{
-				if (x is bool b)
-					canContinue = b;
-				yield return x;
-			}
+			yield return this.Performer.Perform(ActionType.Finish);
+			// if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
+			// 	animName = "A_rapes_finish";
+			// }
+			// else
+			// {
+			// 	animName = "A_sleep_finish";
+			// }
 
-			this.Aborted = !canContinue;
+			// bool canContinue = false;
+			// foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animName))
+			// {
+			// 	if (x is bool b)
+			// 		canContinue = b;
+			// 	yield return x;
+			// }
+
 			if (!this.CanContinue())
 				yield break;
 
-			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
-				animName = "A_rapes_finish_idle";
-			else
-				animName = "A_sleep_finish_idle";
+			yield return this.Performer.Perform(ActionType.FinishIdle);
+			// if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
+			// 	animName = "A_rapes_finish_idle";
+			// else
+			// 	animName = "A_sleep_finish_idle";
 
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
+			// yield return this.Controller.LoopAnimation(this, this.CommonAnim, animName);
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnCreampie(this.Man, this.Girl))
-					yield return x;
-			}
+			// foreach (var handler in this.EventHandlers)
+			// {
+			// 	foreach (var x in handler.OnCreampie(this.Man, this.Girl))
+			// 		yield return x;
+			// }
 
 			this.TmpCommonSub = 0;
 
@@ -402,7 +412,8 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			this.CommonAnim.state.SetAnimation(0, "A_idle", true);
+			yield return this.Performer.Perform(ActionType.StartIdle);
+			// this.CommonAnim.state.SetAnimation(0, "A_idle", true);
 
 			while (this.CanContinue())
 			{
@@ -427,7 +438,6 @@ namespace ExtendedHSystem.Scenes
 			Managers.mn.uiMN.MainCanvasView(true);
 		}
 
-
 		public bool CanContinue()
 		{
 			return this.TmpSex != null && !Input.GetKeyDown(KeyCode.R) && this.Man.life > 0 && !this.Aborted;
@@ -437,6 +447,31 @@ namespace ExtendedHSystem.Scenes
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
+		}
+
+		public string GetName()
+		{
+			return ManRapesSleep.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Man, this.Girl];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.CommonAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName.Replace("<Tits>", this.Girl.parameters[6].ToString("00"));
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }
