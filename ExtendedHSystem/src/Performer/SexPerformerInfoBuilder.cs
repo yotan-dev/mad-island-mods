@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace ExtendedHSystem.Performer
 {
@@ -15,8 +12,6 @@ namespace ExtendedHSystem.Performer
 		private int? ToNpcId { get; set; }
 
 		private List<PerformerScope> Scopes { get; set; } = [];
-
-		private List<IConditional> Conditionals { get; set; } = [];
 
 		private Dictionary<ActionKey, ActionValue> Actions { get; set; } = [];
 
@@ -44,12 +39,6 @@ namespace ExtendedHSystem.Performer
 			return this;
 		}
 
-		public SexPerformerInfoBuilder AddCondition(IConditional condition)
-		{
-			this.Conditionals.Add(condition);
-			return this;
-		}
-
 		public SexPerformerInfoBuilder AddAnimation(ActionType actionType, int pose, ActionValue value)
 		{
 			this.Actions.Add(new ActionKey(actionType, pose), value);
@@ -64,7 +53,7 @@ namespace ExtendedHSystem.Performer
 
 		public SexPerformerInfo Build()
 		{
-			return new SexPerformerInfo(this.Id, this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.Conditionals, this.Actions, this.Scopes);
+			return new SexPerformerInfo(this.Id, this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.Actions, this.Scopes);
 		}
 	}
 }

@@ -10,8 +10,6 @@ namespace ExtendedHSystem.ConfigFiles
 
 		public string[] Actors { get; set; }
 
-		public ConditionsConfig[] Conditions { get; set; }
-
 		public AnimationsConfig[] Animations { get; set; }
 	}
 }

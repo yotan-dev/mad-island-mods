@@ -1,6 +1,4 @@
-using ExtendedHSystem.Scenes;
-
-namespace ExtendedHSystem.Performer
+namespace ExtendedHSystem.Scenes.Conditionals
 {
 	public class SexTypeCheck : IConditional
 	{
@@ -17,6 +15,11 @@ namespace ExtendedHSystem.Performer
 				return false;
 
 			return commonSexPlayer.Type == this.ExpectedValue;
+		}
+
+		public bool Pass(CommonStates from, CommonStates to)
+		{
+			throw new System.NotImplementedException("SexTypeCheck can't be used outside a scene");
 		}
 	}
 }
