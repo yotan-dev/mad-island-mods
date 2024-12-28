@@ -435,7 +435,7 @@ Default = [
 
 ForceRape = [
 	{ Action = "Idle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
-	{ Action = "Insert", Play = "Once", Name = "A_rapes_start" }, # TmpCommonState = 1
+	{ Action = "Insert", Play = "Once", Name = "A_rapes_start", Events = ["OnPenetrate"] }, # TmpCommonState = 1
 	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
 	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
 	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 1
@@ -444,7 +444,7 @@ ForceRape = [
 
 GentlyRape = [
 	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
-	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 3
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 3
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
 	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 3
@@ -453,7 +453,7 @@ GentlyRape = [
 
 PowderRape = [	
 	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
-	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 2
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 2
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2
 	{ Action = "Speed3", Play = "Loop", Name = "A_sleep_loop_03" }, # TmpCommonState = 2
@@ -474,7 +474,7 @@ Default = [
 
 ForceRape = [
 	{ Action = "Idle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
-	{ Action = "Insert", Play = "Once", Name = "A_rapes_start" }, # TmpCommonState = 1
+	{ Action = "Insert", Play = "Once", Name = "A_rapes_start", Events = ["OnPenetrate"] }, # TmpCommonState = 1
 	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
 	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
 	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 1
@@ -483,7 +483,7 @@ ForceRape = [
 
 GentlyRape = [
 	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
-	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 3
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 3
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
 	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 3
@@ -492,7 +492,7 @@ GentlyRape = [
 
 PowderRape = [	
 	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
-	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 2
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate"] }, # TmpCommonState = 2
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2
 	{ Action = "Speed3", Play = "Loop", Name = "A_sleep_loop_03" }, # TmpCommonState = 2
