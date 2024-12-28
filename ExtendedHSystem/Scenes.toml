@@ -156,12 +156,69 @@ StartConditions = [
 ]
 PerformConditions = []
 
+[[Scenes.Performers]]
+Performer = "EHS_FemaleNative_FemaleNative_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_YoungMan_FemaleNative_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_YoungMan_FemaleNative_Friendly_Pregnant"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_MaleNative_NativeGirl_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_NativeGirl_NativeGirl_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_YoungMan_NativeGirl_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_YoungMan_FemaleLargeNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_YoungMan_UnderGroundWoman_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "EHS_YoungMan_ElderSisterNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
 
 
-# ================== EHS_ManSleepRapes ==================== #
 
-[[Scenes]] # EHS_ManSleepRapes
-Id = "EHS_ManSleepRapes"
+# ================== EHS_ManRapesSleep ==================== #
+
+[[Scenes]] # EHS_ManRapesSleep
+Id = "EHS_ManRapesSleep"
 
 [[Scenes.Performers]]
 Performer = "EHS_Man_FemaleNative_SleepRape_Normal"
