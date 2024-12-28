@@ -18,6 +18,7 @@ namespace ExtendedHSystem.Performer
 			{ "Insert", ActionType.Insert },
 			{ "Speed1", ActionType.Speed1 },
 			{ "Speed2", ActionType.Speed2 },
+			{ "Speed3", ActionType.Speed3 },
 			{ "Finish", ActionType.Finish },
 			{ "FinishIdle", ActionType.FinishIdle },
 		};
