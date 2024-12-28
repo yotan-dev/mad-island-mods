@@ -97,27 +97,33 @@ namespace ExtendedHSystem.Performer
 					else
 						PLogger.LogError($"Unknown actora for scene {scene.Id}");
 
-					foreach (var animation in scene.Animations)
+					foreach (var animSet in scene.AnimationSets)
 					{
-						errorMessage = $"Failed to load Animation {animation.Action}";
+						errorMessage = $"Failed to load Animation Set {animSet.Key}";
 
-						var action = ConstToActionType.GetValueOrDefault(animation.Action, ActionType.None);
-						if (action == ActionType.None)
+						var animSetBuilder = new AnimationSetBuilder(animSet.Key);
+						foreach (var anim in animSet.Value)
 						{
-							PLogger.LogError($"Unknown action type {animation.Action}");
-							continue;
+							errorMessage = $"Failed to load Animation {anim.Action}";
+
+							var action = ConstToActionType.GetValueOrDefault(anim.Action, ActionType.None);
+							if (action == ActionType.None)
+							{
+								PLogger.LogError($"Unknown action type {anim.Action} for set {animSet.Key}");
+								continue;
+							}
+
+							var playType = ConstToPlayType.GetValueOrDefault(anim.Play, PlayType.None);
+							if (playType == PlayType.None)
+							{
+								PLogger.LogError($"Unknown play type {anim.Play} for set {animSet.Key}");
+								continue;
+							}
+
+							var pose = anim.Pose ?? 1;
+							animSetBuilder.AddAnimation(action, pose, new ActionValue(playType, anim.Name, anim.Events));
 						}
-
-						var playType = ConstToPlayType.GetValueOrDefault(animation.Play, PlayType.None);
-						if (playType == PlayType.None)
-						{
-							PLogger.LogError($"Unknown play type {animation.Play}");
-							continue;
-						}
-
-						var pose = animation.Pose ?? 1;
-
-						builder.AddAnimation(action, pose, new ActionValue(playType, animation.Name, animation.Events));
+						builder.AddAnimationSet(animSetBuilder.Build());
 					}
 
 					Performers.Add(scene.Id, builder.Build());

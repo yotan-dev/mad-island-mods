@@ -4,14 +4,17 @@ namespace ExtendedHSystem.Performer
 {
 	public class SexPerformerInfo
 	{
+		public static readonly string DefaultSet = "Default";
+
 		public readonly string Id;
+
 		public readonly IPrefabSelector SexPrefabSelector;
 
 		public readonly int FromNpcId;
 
 		public readonly int? ToNpcId;
 
-		public readonly Dictionary<ActionKey, ActionValue> Actions = [];
+		public readonly Dictionary<string, AnimationSet> AnimationSets = [];
 
 		public readonly List<PerformerScope> Scopes;
 
@@ -20,7 +23,7 @@ namespace ExtendedHSystem.Performer
 			int from,
 			int? to,
 			IPrefabSelector sexPrefabSelector,
-			Dictionary<ActionKey, ActionValue> actions,
+			Dictionary<string, AnimationSet> animationSets,
 			List<PerformerScope> scopes
 		)
 		{
@@ -28,7 +31,7 @@ namespace ExtendedHSystem.Performer
 			this.FromNpcId = from;
 			this.ToNpcId = to;
 			this.SexPrefabSelector = sexPrefabSelector;
-			this.Actions = actions;
+			this.AnimationSets = animationSets;
 			this.Scopes = scopes;
 		}
 	}
