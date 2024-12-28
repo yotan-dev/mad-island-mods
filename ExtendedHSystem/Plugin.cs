@@ -1,14 +1,9 @@
-﻿using System.IO;
-using BepInEx;
+﻿using BepInEx;
 using ExtendedHSystem.Hook;
 using ExtendedHSystem.Patches;
 using ExtendedHSystem.Performer;
 using ExtendedHSystem.Scenes;
-using ExtendedHSystem.ConfigFiles;
 using HarmonyLib;
-using Tomlyn;
-using UnityEngine.UIElements.Collections;
-using YotanModCore.Events;
 
 namespace ExtendedHSystem
 {
@@ -35,6 +30,8 @@ namespace ExtendedHSystem
 				Harmony.CreateAndPatchAll(typeof(SexManager_PlayerRapedPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_SlavePatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_ToiletPatch));
+
+				Harmony.CreateAndPatchAll(typeof(SexChecksPatch));
 
 				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;
 				
