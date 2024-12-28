@@ -16,6 +16,10 @@ namespace ExtendedHSystem.Performer
 
 		public int CurrentPose { get; private set; } = 1;
 
+		public string CurrentSetName { get; private set; } = SexPerformerInfo.DefaultSet;
+
+		public AnimationSet CurrentSet => this.Info.AnimationSets[this.CurrentSetName];
+
 		public SexPerformer(SexPerformerInfo info, ISceneController controller)
 		{
 			this.Info = info;
@@ -24,11 +28,11 @@ namespace ExtendedHSystem.Performer
 
 		public ActionValue? GetActionValue(ActionType action)
 		{
-			if (!this.Info.Actions.TryGetValue(new ActionKey(action, this.CurrentPose), out var value))
+			if (!this.CurrentSet.Actions.TryGetValue(new ActionKey(action, this.CurrentPose), out var value))
 			{
-				if (!this.Info.Actions.TryGetValue(new ActionKey(action, 1), out value))
+				if (!this.CurrentSet.Actions.TryGetValue(new ActionKey(action, 1), out value))
 				{
-					PLogger.LogError($"No info found for action {action} / Pose {this.CurrentPose} (also not found for pose 1)");
+					PLogger.LogError($"No info found for action {action} / Pose {this.CurrentPose} / set {this.CurrentSetName} (also not found for pose 1)");
 					return null;
 				}
 
@@ -74,12 +78,29 @@ namespace ExtendedHSystem.Performer
 		public bool HasAlternativePose()
 		{
 			var newPose = this.CurrentPose == 1 ? 2 : 1;
-			return this.Info.Actions.ContainsKey(new ActionKey(this.CurrentAction, newPose));
+			return this.CurrentSet.Actions.ContainsKey(new ActionKey(this.CurrentAction, newPose));
 		}
 
 		public IEnumerator ChangePose()
 		{
 			this.CurrentPose = this.CurrentPose == 1 ? 2 : 1;
+			yield return this.Perform(this.CurrentAction);
+		}
+
+		public bool HasSet(string setName)
+		{
+			return this.Info.AnimationSets.ContainsKey(setName);
+		}
+
+		public IEnumerator ChangeSet(string setName)
+		{
+			if (!this.HasSet(setName))
+			{
+				PLogger.LogError($"Unknown animation set {setName}");
+				yield break;
+			}
+
+			this.CurrentSetName = setName;
 			yield return this.Perform(this.CurrentAction);
 		}
 	}

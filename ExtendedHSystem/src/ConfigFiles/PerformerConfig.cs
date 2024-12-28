@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ExtendedHSystem.ConfigFiles
 {
 	public class PerformerConfig
@@ -10,6 +12,6 @@ namespace ExtendedHSystem.ConfigFiles
 
 		public string[] Actors { get; set; }
 
-		public AnimationsConfig[] Animations { get; set; }
+		public Dictionary<string, AnimationsConfig[]> AnimationSets { get; set; }
 	}
 }

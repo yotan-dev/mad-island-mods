@@ -13,7 +13,7 @@ namespace ExtendedHSystem.Performer
 
 		private List<PerformerScope> Scopes { get; set; } = [];
 
-		private Dictionary<ActionKey, ActionValue> Actions { get; set; } = [];
+		private Dictionary<string, AnimationSet> AnimationSets { get; set; } = [];
 
 		public SexPerformerInfoBuilder(string id)
 		{
@@ -38,22 +38,16 @@ namespace ExtendedHSystem.Performer
 			this.SexPrefabSeletor = selector;
 			return this;
 		}
-
-		public SexPerformerInfoBuilder AddAnimation(ActionType actionType, int pose, ActionValue value)
+		
+		public SexPerformerInfoBuilder AddAnimationSet(AnimationSet animationSet)
 		{
-			this.Actions.Add(new ActionKey(actionType, pose), value);
-			return this;
-		}
-
-		public SexPerformerInfoBuilder AddAnimation(ActionType actionType, ActionValue value)
-		{
-			this.AddAnimation(actionType, 1, value);
+			this.AnimationSets.Add(animationSet.Name, animationSet);
 			return this;
 		}
 
 		public SexPerformerInfo Build()
 		{
-			return new SexPerformerInfo(this.Id, this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.Actions, this.Scopes);
+			return new SexPerformerInfo(this.Id, this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.AnimationSets, this.Scopes);
 		}
 	}
 }
