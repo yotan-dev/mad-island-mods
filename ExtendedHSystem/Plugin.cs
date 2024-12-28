@@ -43,7 +43,7 @@ namespace ExtendedHSystem
 			}
 
 			PerformerLoader.Load();
-			ScenesLoader.Load();
+			ScenesManager.Instance.Init();
 
 			PLogger.LogInfo($"Plugin ExtendedHSystem is loaded!");
 		}

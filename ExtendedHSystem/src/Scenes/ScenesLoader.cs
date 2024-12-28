@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,23 +13,11 @@ namespace ExtendedHSystem.Scenes
 {
 	public static class ScenesLoader
 	{
-		public delegate void RegisterScenes();
-
-		public static event RegisterScenes OnRegisterScenes;
-
-		public delegate void RegisterScenePerformers();
-
-		public static event RegisterScenePerformers OnRegisterScenePerformers;
-
-		public static Dictionary<string, SceneInfo> SceneInfos = new Dictionary<string, SceneInfo>();
-
-		private static void RegisterEHSScenes()
+		internal static void RegisterScenes()
 		{
-			SceneInfos.Add(CommonSexNPC.Name, new SceneInfo(CommonSexNPC.Name));
-			SceneInfos.Add(CommonSexPlayer.Name, new SceneInfo(CommonSexPlayer.Name));
-			SceneInfos.Add(PlayerRaped.Name, new SceneInfo(PlayerRaped.Name));
-
-			ScenesLoader.OnRegisterScenes?.Invoke();
+			ScenesManager.Instance.AddScene(CommonSexNPC.Name, new SceneInfo(CommonSexNPC.Name));
+			ScenesManager.Instance.AddScene(CommonSexPlayer.Name, new SceneInfo(CommonSexPlayer.Name));
+			ScenesManager.Instance.AddScene(PlayerRaped.Name, new SceneInfo(PlayerRaped.Name));
 		}
 
 		private static int ParseActor(string actor)
@@ -44,7 +34,7 @@ namespace ExtendedHSystem.Scenes
 			return npcId;
 		}
 
-		private static IConditional ParseCondition(ConditionsConfig config)
+		private static IConditional? ParseCondition(ConditionsConfig config)
 		{
 			if (config.Type == "PregnantCheck")
 				return new PregnantCheck(ParseActor((string)config.Args[0]), (bool)config.Args[1]);
@@ -57,7 +47,7 @@ namespace ExtendedHSystem.Scenes
 				if (config.Args[2].GetType() != typeof(long))
 				{
 					var vals = (Tomlyn.Model.TomlArray)config.Args[2];
-					var intVals = vals.Select((v) => (int)(long)v).ToArray();
+					var intVals = vals.Select((v) => (int)(long)v!).ToArray();
 					return new QuestProgressCheck((string)config.Args[0], (string)config.Args[1], intVals);
 				}
 
@@ -68,22 +58,17 @@ namespace ExtendedHSystem.Scenes
 			return null;
 		}
 
-		public static void Load()
+		internal static void RegisterScenePerformers()
 		{
 			string errorMessage = "";
 			try
 			{
-				PLogger.LogInfo("Registering scenes...");
-				ScenesLoader.RegisterEHSScenes();
-
-				PLogger.LogInfo("Loading scenes...");
-
 				var scenesConfigTxt = File.ReadAllText("BepInEx/plugins/ExtendedHSystem/Scenes.toml");
 				var scenesConfig = Toml.ToModel<ScenesConfig>(scenesConfigTxt, "Scenes.toml", new TomlModelOptions() { ConvertPropertyName = (name) => name });
 
 				foreach (var scene in scenesConfig.Scenes)
 				{
-					var sceneInfo = SceneInfos.GetValueOrDefault(scene.Id, null);
+					var sceneInfo = ScenesManager.Instance.GetSceneInfo(scene.Id);
 					if (sceneInfo == null)
 					{
 						PLogger.LogError($"Unknown scene: {scene.Id}");
@@ -128,10 +113,6 @@ namespace ExtendedHSystem.Scenes
 						sceneInfo.AddPerformer(performer, startConditions.ToArray(), performConditions.ToArray());
 					}
 				}
-
-				ScenesLoader.OnRegisterScenePerformers?.Invoke();
-
-				PLogger.LogInfo("Scenes loaded");
 			}
 			catch (Exception e)
 			{
