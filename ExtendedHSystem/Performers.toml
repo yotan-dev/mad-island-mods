@@ -420,6 +420,88 @@ Default = [
 
 
 
+# ================ Man Rapes Sleep =============== #
+
+[[Performers]] # EHS_Man_FemaleNative_SleepRape_Normal
+Id = "EHS_Man_FemaleNative_SleepRape_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 4] }
+Actors = ["Man#1", "FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Idle"      , Play = "Loop", Name = "A_idle" },
+]
+
+ForceRape = [
+	{ Action = "Idle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
+	{ Action = "Insert", Play = "Once", Name = "A_rapes_start" }, # TmpCommonState = 1
+	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
+	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
+	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 1
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_rapes_finish_idle" }, # TmpCommonState = 1
+]
+
+GentlyRape = [
+	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 3
+	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
+	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 3
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 3
+]
+
+PowderRape = [	
+	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 2
+	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
+	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2
+	{ Action = "Speed3", Play = "Loop", Name = "A_sleep_loop_03" }, # TmpCommonState = 2
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 2
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 2
+]
+
+[[Performers]] # EHS_Man_NativeGirl_SleepRape_Normal
+Id = "EHS_Man_NativeGirl_SleepRape_Normal"
+# Scopes = ["Battle", "Sex"]
+Prefab = { Type = "SexList", Args = [1, 5] }
+Actors = ["Man#1", "NativeGirl#16"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Idle"      , Play = "Loop", Name = "A_idle" },
+]
+
+ForceRape = [
+	{ Action = "Idle", Play = "Loop", Name = "A_rapes_idle" }, # TmpCommonState = 1
+	{ Action = "Insert", Play = "Once", Name = "A_rapes_start" }, # TmpCommonState = 1
+	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
+	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
+	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 1
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_rapes_finish_idle" }, # TmpCommonState = 1
+]
+
+GentlyRape = [
+	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 3
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 3
+	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
+	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 3
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 3
+]
+
+PowderRape = [	
+	{ Action = "Idle", Play = "Loop", Name = "A_sleep_idle" }, # TmpCommonState = 2
+	{ Action = "Insert", Play = "Once", Name = "A_sleep_start" }, # TmpCommonState = 2
+	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
+	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2
+	{ Action = "Speed3", Play = "Loop", Name = "A_sleep_loop_03" }, # TmpCommonState = 2
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 2
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 2
+]
+
+
+
 # ================ Player Raped =============== #
 
 [[Performers]] # EHS_MaleNative_Yona_Rape_Doggy_Normal

@@ -17,6 +17,7 @@ namespace ExtendedHSystem.Scenes
 		{
 			ScenesManager.Instance.AddScene(CommonSexNPC.Name, new SceneInfo(CommonSexNPC.Name));
 			ScenesManager.Instance.AddScene(CommonSexPlayer.Name, new SceneInfo(CommonSexPlayer.Name));
+			ScenesManager.Instance.AddScene(ManRapesSleep.Name, new SceneInfo(ManRapesSleep.Name));
 			ScenesManager.Instance.AddScene(PlayerRaped.Name, new SceneInfo(PlayerRaped.Name));
 		}
 
