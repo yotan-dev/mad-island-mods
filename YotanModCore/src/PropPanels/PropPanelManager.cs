@@ -16,12 +16,14 @@ namespace YotanModCore.PropPanels
 		/// <param name="pos"></param>
 		public void Open(BasePropPanel panel, Vector3 pos)
 		{
-			if (CurrentPanel == panel) {
+			if (CurrentPanel == panel)
+			{
 				PLogger.LogWarning("Open: panel is already opened");
 				return;
 			}
 
-			if (CurrentPanel != null) {
+			if (CurrentPanel != null)
+			{
 				PLogger.LogWarning("Open: another panel is already open");
 				this.Close(CurrentPanel);
 			}
@@ -40,7 +42,8 @@ namespace YotanModCore.PropPanels
 		/// <param name="panel"></param>
 		public void Hide(BasePropPanel panel)
 		{
-			if (CurrentPanel != panel) {
+			if (CurrentPanel != panel)
+			{
 				PLogger.LogWarning("Hide: trying to hide a panel that is not the current one.");
 				return;
 			}
@@ -54,7 +57,8 @@ namespace YotanModCore.PropPanels
 		/// <param name="panel"></param>
 		public void Show(BasePropPanel panel)
 		{
-			if (CurrentPanel != panel) {
+			if (CurrentPanel != panel)
+			{
 				PLogger.LogWarning("Show: trying to show a panel that is not the current one.");
 				return;
 			}
@@ -68,7 +72,8 @@ namespace YotanModCore.PropPanels
 		/// <param name="panel"></param>
 		public void Close(BasePropPanel panel)
 		{
-			if (CurrentPanel != panel) {
+			if (CurrentPanel != panel)
+			{
 				PLogger.LogWarning("Close: trying to close a panel that is not the current one.");
 				return;
 			}
@@ -84,7 +89,8 @@ namespace YotanModCore.PropPanels
 		/// </summary>
 		public void DrawOptions()
 		{
-			if (this.CurrentPanel == null) {
+			if (this.CurrentPanel == null)
+			{
 				PLogger.LogError("DrawOptions: CurrentPanel is null");
 				return;
 			}
@@ -92,10 +98,34 @@ namespace YotanModCore.PropPanels
 			Managers.mn.uiMN.PropPanelHideAll();
 
 			int btnCount = 0;
-			foreach (var option in this.CurrentPanel.Options) {
-				Managers.mn.uiMN.PropPanelStateChange(btnCount, option.TextId, btnCount, true);
+			foreach (var option in this.CurrentPanel.Options)
+			{
+				this.DrawButton(btnCount, option.Text, btnCount, true);
 				btnCount++;
 			}
+		}
+
+		/// <summary>
+		/// Draws the button to the UI. This is adapted from UIManager::PropPanelStateChange
+		/// </summary>
+		/// <param name="buttonID"></param>
+		/// <param name="text"></param>
+		/// <param name="state"></param>
+		/// <param name="active"></param>
+		private void DrawButton(int buttonID, string text, int state, bool active = true)
+		{
+			if (!active)
+			{
+				Managers.mn.uiMN.propActionText[buttonID].transform.parent.gameObject.SetActive(false);
+				return;
+			}
+
+			if (Managers.mn.buildMN.tmpBuildManager != null)
+				return;
+
+			Managers.mn.uiMN.propActionText[buttonID].text = text;
+			Managers.mn.uiMN.propActionState[buttonID] = state;
+			Managers.mn.uiMN.propActionText[buttonID].transform.parent.gameObject.SetActive(true);
 		}
 
 		/// <summary>
@@ -105,7 +135,8 @@ namespace YotanModCore.PropPanels
 		/// <param name="buttonId"></param>
 		public void OnButtonClicked(int buttonId)
 		{
-			if (this.CurrentPanel == null) {
+			if (this.CurrentPanel == null)
+			{
 				PLogger.LogError("OnButtonClicked: CurrentPanel is null");
 				return;
 			}
