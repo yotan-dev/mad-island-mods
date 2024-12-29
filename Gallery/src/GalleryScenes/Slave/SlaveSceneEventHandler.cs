@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using ExtendedHSystem;
-using ExtendedHSystem.Scenes;
+using HFramework;
+using HFramework.Scenes;
 using Gallery.SaveFile.Containers;
 using YotanModCore.Consts;
 

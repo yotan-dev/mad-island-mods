@@ -1,6 +1,6 @@
 using System.Linq;
 using Gallery.SaveFile.Containers;
-using ExtendedHSystem.Scenes;
+using HFramework.Scenes;
 
 namespace Gallery.GalleryScenes.ManSleepRape
 {

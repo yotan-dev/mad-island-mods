@@ -47,6 +47,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ExtendedHSystem\ExtendedHSystem.csproj" />
+		<ProjectReference Include="..\HFramework\HFramework.csproj" />
 	</ItemGroup>
 </Project>

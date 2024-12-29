@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Xml.Serialization;
-using ExtendedHSystem.Scenes;
+using HFramework.Scenes;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.SaveFile

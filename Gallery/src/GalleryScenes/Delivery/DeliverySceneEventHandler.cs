@@ -1,7 +1,7 @@
 using Gallery.SaveFile.Containers;
-using ExtendedHSystem;
+using HFramework;
 using System.Collections;
-using ExtendedHSystem.Scenes;
+using HFramework.Scenes;
 
 namespace Gallery.GalleryScenes.Delivery
 {
@@ -17,7 +17,7 @@ namespace Gallery.GalleryScenes.Delivery
 			this.Mother = new GalleryChara(mother);
 		}
 
-		public override IEnumerable OnDelivery(ExtendedHSystem.Scenes.Delivery scene, CommonStates mother)
+		public override IEnumerable OnDelivery(HFramework.Scenes.Delivery scene, CommonStates mother)
 		{
 			this.DidDelivery = true;
 			yield return null;

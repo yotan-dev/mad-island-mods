@@ -34,9 +34,9 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				RequireDLC = dlc,
 				GetScene = (PlayData data) =>
 				{
-					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
-					scene.Init(new ExtendedHSystem.GallerySceneController());
-					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
+					scene.Init(new HFramework.GallerySceneController());
+					scene.AddEventHandler(new HFramework.GallerySceneEventHandler());
 
 					return scene;
 				},
@@ -56,9 +56,9 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				RequireDLC = dlc,
 				GetScene = (PlayData data) =>
 				{
-					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
-					scene.Init(new ExtendedHSystem.GallerySceneController());
-					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
+					scene.Init(new HFramework.GallerySceneController());
+					scene.AddEventHandler(new HFramework.GallerySceneEventHandler());
 
 					return scene;
 				},

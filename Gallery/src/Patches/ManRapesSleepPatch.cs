@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ExtendedHSystem.Scenes;
+using HFramework.Scenes;
 using Gallery.GalleryScenes.ManSleepRape;
 using HarmonyLib;
 

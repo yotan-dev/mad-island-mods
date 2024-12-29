@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using ExtendedHSystem.Hook;
-using ExtendedHSystem.Performer;
-using ExtendedHSystem.Scenes;
+using HFramework.Hook;
+using HFramework.Performer;
+using HFramework.Scenes;
 using HarmonyLib;
 
 namespace HExtensions.ExtendedScenes
@@ -14,7 +14,7 @@ namespace HExtensions.ExtendedScenes
 			Harmony.CreateAndPatchAll(typeof(Main));
 			PerformerLoader.OnLoadPeformers += this.OnLoadPeformers;
 			HookManager.RegisterHooksEvent += () => {
-				HookBuilder.New("EHS.ExtendedScenes.ChangeAnim")
+				HookBuilder.New("HF.ExtendedScenes.ChangeAnim")
 					.ForScenes(CommonSexPlayer.Name)
 					.HookEvent(EventNames.OnAnimSetChanged)
 					.Call(this.OnAnimSetChanged);
@@ -27,16 +27,16 @@ namespace HExtensions.ExtendedScenes
 				yield break;
 
 			var performer = (SexPerformer) arg2;
-			if (performer.Info.Id == "EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal")
+			if (performer.Info.Id == "HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal")
 				yield return commonSexPlayer.Idle();
 		}
 
 		private void OnLoadPeformers()
 		{
-			var performer = PerformerLoader.Performers.GetValueOrDefault("EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal");
+			var performer = PerformerLoader.Performers.GetValueOrDefault("HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal");
 			if (performer == null)
 			{
-				PLogger.LogError("Failed to load performer EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal");
+				PLogger.LogError("Failed to load performer HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal");
 				return;
 			}
 
@@ -68,7 +68,7 @@ namespace HExtensions.ExtendedScenes
 				return true;
 			}
 
-			if (__instance.Info.Id == "EHS_Man_FemaleLargeNative_Friendly_Cowgirl_Normal")
+			if (__instance.Info.Id == "HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal")
 			{
 				__result = __instance.CurrentSetName == "Anal" ? "Pos: Vaginal": "Pos: Anal";
 				return false;

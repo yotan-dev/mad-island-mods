@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using ExtendedHSystem.Handlers.Animation;
-using ExtendedHSystem.Hook;
-using ExtendedHSystem.Performer;
-using ExtendedHSystem.Scenes;
+using HFramework.Handlers.Animation;
+using HFramework.Hook;
+using HFramework.Performer;
+using HFramework.Scenes;
 using UnityEngine;
 using YotanModCore;
 
@@ -24,12 +24,12 @@ namespace HExtensions.RequireForeplay
 
 		public void InitHooks()
 		{
-			HookBuilder.New("EHSMods.RequireForeplay.Main")
+			HookBuilder.New("HFMods.RequireForeplay.Main")
 				.ForScenes(CommonSexPlayer.Name)
 				.HookStepStart(CommonSexPlayer.StepNames.Main)
 				.Call(this.OnStart);
 
-			HookBuilder.New("EHSMods.RequireForeplay.Insert")
+			HookBuilder.New("HFMods.RequireForeplay.Insert")
 				.ForScenes(CommonSexPlayer.Name)
 				.HookStepStart(CommonSexPlayer.StepNames.Insert)
 				.Call(this.OnInsert);

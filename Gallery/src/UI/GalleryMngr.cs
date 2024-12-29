@@ -11,7 +11,7 @@ using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 using YotanModCore.Consts;
-using ExtendedHSystem.Scenes;
+using HFramework.Scenes;
 
 namespace Gallery.UI
 {

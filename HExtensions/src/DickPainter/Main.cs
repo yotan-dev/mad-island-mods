@@ -1,7 +1,7 @@
 using System.Collections;
-using ExtendedHSystem.Hook;
-using ExtendedHSystem.ParamContainers;
-using ExtendedHSystem.Scenes;
+using HFramework.Hook;
+using HFramework.ParamContainers;
+using HFramework.Scenes;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore.Consts;
@@ -23,15 +23,15 @@ namespace HExtensions.DickPainter
 
 		public void InitHooks()
 		{
-			HookBuilder.New("EHSMods.DickPainter.Main")
+			HookBuilder.New("HFMods.DickPainter.Main")
 				.ForScenes(CommonSexPlayer.Name)
 				.HookStepStart(CommonSexPlayer.StepNames.Main)
 				.Call(this.OnStart);
 
-			HookBuilder.New("EHSMods.DickPainter.Penetrate")
+			HookBuilder.New("HFMods.DickPainter.Penetrate")
 				.ForScenes(CommonSexPlayer.Name)
 				.HookEvent(EventNames.OnPenetrate)
-				.CallBefore("EHS.Friendly.OnPenetrate", this.OnPenetrate);
+				.CallBefore("HF.Friendly.OnPenetrate", this.OnPenetrate);
 		}
 
 		private IEnumerator OnStart(IScene2 scene, object param)

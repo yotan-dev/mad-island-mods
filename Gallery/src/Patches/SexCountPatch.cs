@@ -1,5 +1,5 @@
 using System;
-using ExtendedHSystem;
+using HFramework;
 using Gallery.GalleryScenes;
 using Gallery.GalleryScenes.CommonSexPlayer;
 using HarmonyLib;

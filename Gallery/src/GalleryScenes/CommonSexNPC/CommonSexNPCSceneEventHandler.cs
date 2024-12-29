@@ -1,8 +1,8 @@
 using YotanModCore;
 using Gallery.SaveFile.Containers;
-using ExtendedHSystem;
+using HFramework;
 using System.Collections;
-using ExtendedHSystem.Scenes;
+using HFramework.Scenes;
 
 namespace Gallery.GalleryScenes.CommonSexNPC
 {
