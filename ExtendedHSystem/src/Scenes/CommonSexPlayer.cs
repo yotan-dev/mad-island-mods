@@ -208,7 +208,7 @@ namespace ExtendedHSystem.Scenes
 		{
 			this.MenuPanel.Open(this.Position);
 			this.MenuPanel.ShowInitialMenu();
-			
+
 			this.TmpCommonState = 0;
 			this.TmpCommonSub = 0;
 
@@ -224,21 +224,6 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonState = 1;
 			this.TmpCommonSub = 0;
 			yield return this.Performer.Perform(ActionType.Caress);
-			// if (this.CommonAnim != null)
-			// {
-			// 	if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00")) != null)
-			// 	{
-			// 		yield return this.Controller.LoopAnimation(this.SexType + "Contact_01_" + this.Npc.parameters[6].ToString("00"));
-			// 	}
-			// 	else if (this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Contact_01") != null)
-			// 	{
-			// 		yield return this.Controller.LoopAnimation(this.SexType + "Contact_01");
-			// 	}
-			// 	else
-			// 	{
-			// 		Debug.LogError("Animation not found");
-			// 	}
-			// }
 
 			this.MenuPanel.ShowCaressMenu();
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Caress);
@@ -254,12 +239,8 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonSub = 0;
 			yield return this.Performer.Perform(ActionType.Insert);
 			yield return this.Performer.Perform(ActionType.Speed1);
-			// yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
 
 			this.MenuPanel.ShowInsertMenu(this.Performer.HasAlternativePose());
-
-			// if (this.TmpSexCountType == 0)
-			// 	yield return HookManager.Instance.RunEventHook(this, EventNames.OnPenetrate, new FromToParams(this.Player, this.Npc));
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
@@ -282,20 +263,6 @@ namespace ExtendedHSystem.Scenes
 			}
 
 			this.MenuPanel.ShowInsertMenu(this.Performer.HasAlternativePose());
-			// if (this.CommonAnim.state.GetCurrent(0).Animation.Name == this.SexType + "Loop_01")
-			// {
-			// 	this.TmpCommonState = 3;
-			// 	yield return this.Controller.LoopAnimation(this.SexType + "Loop_02");
-			// 	bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_02_00") != null;
-			// 	this.MenuPanel.ShowInsertMenu(hasAlternativePose);
-			// }
-			// else
-			// {
-			// 	this.TmpCommonState = 2;
-			// 	yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
-			// 	bool hasAlternativePose = this.CommonAnim.skeleton.Data.FindAnimation(this.SexType + "Loop_01_00") != null;
-			// 	this.MenuPanel.ShowInsertMenu(hasAlternativePose);
-			// }
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
@@ -310,40 +277,11 @@ namespace ExtendedHSystem.Scenes
 			{
 				this.TmpCommonSub = 1;
 				yield return this.Performer.ChangePose();
-				// string a = this.CommonAnim.state.GetCurrent(0).Animation.Name;
-				// if ((a != "A_Loop_01") && (a != "B_Loop_01"))
-				// {
-				// 	if (a == "A_Loop_02" || a == "B_Loop_02")
-				// 	{
-				// 		yield return this.Controller.LoopAnimation(this.SexType + "Loop_02_" + this.Npc.parameters[6].ToString("00"));
-				// 	}
-				// }
-				// else
-				// {
-				// 	yield return this.Controller.LoopAnimation(this.SexType + "Loop_01_" + this.Npc.parameters[6].ToString("00"));
-				// }
 			}
 			else /* TmpCommonSub == 1 -- Pose 2 */
 			{
 				this.TmpCommonSub = 0;
 				yield return this.Performer.ChangePose();
-
-				// string[] array = this.CommonAnim.state.GetCurrent(0).Animation.Name.Split('_', StringSplitOptions.None);
-				// if (array.Length >= 2)
-				// {
-				// 	string a = array[2];
-				// 	if (!(a == "01"))
-				// 	{
-				// 		if (a == "02")
-				// 		{
-				// 			yield return this.Controller.LoopAnimation(this.SexType + "Loop_02");
-				// 		}
-				// 	}
-				// 	else
-				// 	{
-				// 		yield return this.Controller.LoopAnimation(this.SexType + "Loop_01");
-				// 	}
-				// }
 			}
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Pose2);
@@ -359,37 +297,8 @@ namespace ExtendedHSystem.Scenes
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
-			// if (this.TmpCommonSub == 0)
-			// 	animName = this.SexType + "Finish";
-			// else
-			// 	animName = this.SexType + "Finish_00";
-
-			// yield return this.Controller.PlayOnceStep_New(this, this.CommonAnim, animName);
-
-			CommonStates from, to;
-			if (CommonUtils.IsFemale(this.Player))
-			{
-				from = this.Npc;
-				to = this.Player;
-			}
-			else
-			{
-				from = this.Player;
-				to = this.Npc;
-			}
-
-			// yield return HookManager.Instance.RunEventHook(this, EventNames.OnOrgasm, new FromToParams(from, to));
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
-			// if (this.TmpCommonSub == 0)
-			// 	animName = this.SexType + "Finish_idle";
-			// else
-			// 	animName = this.SexType + "Finish_idle_00";
-
-			// yield return this.Controller.LoopAnimation(animName);
-
-			// if (this.TmpSexCountType == 0)
-			// 	yield return HookManager.Instance.RunEventHook(this, EventNames.OnCreampie, new FromToParams(from, to));
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowFinishMenu();
@@ -406,7 +315,6 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonState = 0;
 			this.TmpCommonSub = 0;
 			yield return this.Performer.Perform(ActionType.StartIdle);
-			// yield return this.Controller.LoopAnimation(this.SexType + "idle");
 
 			this.MenuPanel.ShowStopMenu();
 
