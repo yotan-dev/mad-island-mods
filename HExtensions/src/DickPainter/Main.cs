@@ -6,7 +6,7 @@ using Spine.Unity;
 using UnityEngine;
 using YotanModCore.Consts;
 
-namespace ExtendedHSystem.Mods
+namespace HExtensions.DickPainter
 {
 	/// <summary>
 	/// Paints male dick in red if femaly is virgin.
@@ -14,8 +14,13 @@ namespace ExtendedHSystem.Mods
 	/// 
 	/// @TODO: Improve the coloring sheme to consider some sort of blending with skin/condom/blood. Maybe also use the "water" color.
 	/// </summary>
-	public class DickPainter
+	public class Main
 	{
+		public void Init()
+		{
+			this.InitHooks();
+		}
+
 		public void InitHooks()
 		{
 			HookBuilder.New("EHSMods.DickPainter.Main")
