@@ -81,7 +81,7 @@ namespace ExtendedHSystem.Scenes
 						var performerConst = performerConfig.Performer;
 						var desc = $"(Scene: {scene.Id} / Performer: {performerConst})";
 
-						var performer = Performer.PerformerLoader.Performers.GetValueOrDefault(performerConst, null);
+						var performer = Performer.PerformerLoader.Performers.GetValueOrDefault(performerConst);
 						if (performer == null)
 						{
 							PLogger.LogError($"Unknown performer: {performerConst} {desc}");
