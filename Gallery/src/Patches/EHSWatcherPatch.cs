@@ -28,18 +28,6 @@ namespace Gallery.Patches
 			);
 		}
 
-		[HarmonyPatch(typeof(HFramework.Scenes.CommonSexNPC), "Run")]
-		[HarmonyPrefix]
-		private static void Pre_CommonSexNPC_Run(HFramework.Scenes.CommonSexNPC __instance)
-		{
-			// We only track if at least one is friend, as we can get some weird results otherwise -- specially with herb village
-			if (CommonUtils.IsFriend(__instance.NpcA) || CommonUtils.IsFriend(__instance.NpcB)) {
-				__instance.AddEventHandler(
-					new CommonSexNPCSceneEventHandler(__instance.NpcA, __instance.NpcB, __instance.Place, __instance.Type)
-				);
-			}
-		}
-
 		[HarmonyPatch(typeof(HFramework.Scenes.Daruma), "Run")]
 		[HarmonyPrefix]
 		private static void Pre_Daruma_Run(HFramework.Scenes.Daruma __instance)

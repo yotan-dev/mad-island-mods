@@ -6,6 +6,8 @@ using HFramework.ParamContainers;
 using HFramework.Scenes;
 using Gallery.GalleryScenes;
 using Gallery.GalleryScenes.CommonSexPlayer;
+using Gallery.GalleryScenes.CommonSexNPC;
+using YotanModCore;
 
 namespace Gallery
 {
@@ -26,6 +28,10 @@ namespace Gallery
 				.ForScenes(CommonSexPlayer.Name)
 				.HookStepStart(CommonSexPlayer.StepNames.Main)
 				.Call(this.OnCommonSexPlayerStart);
+			HookBuilder.New("Gallery.CommonSexPlayer.Start")
+				.ForScenes(CommonSexNPC.Name)
+				.HookStepStart(CommonSexNPC.StepNames.Main)
+				.Call(this.OnCommonSexNPCStart);
 
 			HookBuilder.New("Gallery.Scene.End")
 				.ForScenes("*")
@@ -73,9 +79,21 @@ namespace Gallery
 			yield break;
 		}
 
+		private IEnumerator OnCommonSexNPCStart(IScene2 scene, object arg2)
+		{
+			var commonSexNpc = scene as CommonSexNPC;
+
+			// We only track if at least one is friend, as we can get some weird results otherwise -- specially with herb village
+			if (CommonUtils.IsFriend(commonSexNpc.NpcA) || CommonUtils.IsFriend(commonSexNpc.NpcB))
+				Trackers.Add(commonSexNpc, new CommonSexNPCTracker(commonSexNpc.NpcA, commonSexNpc.NpcB, commonSexNpc.Place, commonSexNpc.Type));
+
+			yield break;
+		}
+
 		private IEnumerator OnSceneEnd(IScene2 scene, object arg2)
 		{
 			Trackers.GetValueOrDefault(scene, null)?.End();
+			Trackers.Remove(scene);
 			yield break;
 		}
 
@@ -84,7 +102,7 @@ namespace Gallery
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
 				tracker.DidNormal = true;
-			
+
 			yield break;
 		}
 
@@ -100,7 +118,7 @@ namespace Gallery
 				if (tracker is CommonSexPlayerTracker commonSexPlayerTracker)
 					commonSexPlayerTracker.SpecialFlag = commonSexPlayer.TmpSexCountType;
 			}
-			
+
 			yield break;
 		}
 
@@ -109,7 +127,7 @@ namespace Gallery
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
 				tracker.DidCreampie = true;
-			
+
 			yield break;
 		}
 	}
