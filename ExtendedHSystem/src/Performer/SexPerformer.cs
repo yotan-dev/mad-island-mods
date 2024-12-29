@@ -20,6 +20,8 @@ namespace ExtendedHSystem.Performer
 
 		public AnimationSet CurrentSet => this.Info.AnimationSets[this.CurrentSetName];
 
+		private int LoopCount = 0;
+
 		public SexPerformer(SexPerformerInfo info, ISceneController controller)
 		{
 			this.Info = info;
@@ -58,10 +60,29 @@ namespace ExtendedHSystem.Performer
 
 		public IEnumerator Perform(ActionType action, float? loopTime = null)
 		{
+			this.LoopCount++;
+
+			if (this.LoopCount == 10)
+			{
+				PLogger.LogWarning("SexPerformer possibly infinite loop detected (Perform iterated 10 times without landing into an animation). Stopping it.");
+				this.LoopCount = 0;
+				yield break;
+			}
+
 			this.CurrentAction = action;
 			var value = this.GetActionValue(action, out var pose);
 			if (value == null)
 				yield break;
+
+			if (value.AnimationName.StartsWith($"{SexPerformerInfo.AnimSetChangeName}:"))
+			{
+				var parts = value.AnimationName.Split(':');
+				var newSetName = parts[1];
+				var newPoseId = parts.Length > 2 ? int.Parse(parts[2]) : this.CurrentPose;
+
+				this.ChangeSet(newSetName, newPoseId);
+				yield break;
+			}
 
 			this.CurrentPose = pose;
 
@@ -89,6 +110,8 @@ namespace ExtendedHSystem.Performer
 			var to = actors.Length >= 2 ? actors[1] : null;
 			foreach (var eventName in value.Events)
 				yield return HookManager.Instance.RunEventHook(scene, eventName, new FromToParams(from, to));
+
+			this.LoopCount = 0;
 		}
 
 		public bool HasAlternativePose()
@@ -108,7 +131,7 @@ namespace ExtendedHSystem.Performer
 			return this.Info.AnimationSets.ContainsKey(setName);
 		}
 
-		public IEnumerator ChangeSet(string setName)
+		public IEnumerator ChangeSet(string setName, int? pose = null)
 		{
 			if (!this.HasSet(setName))
 			{
@@ -117,6 +140,9 @@ namespace ExtendedHSystem.Performer
 			}
 
 			this.CurrentSetName = setName;
+			if (pose.HasValue)
+				this.CurrentPose = pose.Value;
+
 			yield return this.Perform(this.CurrentAction);
 		}
 	}
