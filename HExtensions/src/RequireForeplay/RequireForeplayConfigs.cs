@@ -1,6 +1,6 @@
 using BepInEx.Configuration;
 
-namespace ExtendedHSystem.Configs
+namespace HExtensions.RequireForeplay
 {
 	public class RequireForeplayConfig
 	{
@@ -19,7 +19,7 @@ namespace ExtendedHSystem.Configs
 			this.Enabled = conf.Bind<bool>(
 				"RequireForeplay",
 				"Enabled",
-				false,
+				true,
 				"Enables 'Require Foreplay' mod.\n"
 				+ "When enabled, player controlled scenes will require player to reach certain level in the bar before being able to 'Insert'\n"
 				+ "otherwise, the NPC will refuse to continue and abort the scene."

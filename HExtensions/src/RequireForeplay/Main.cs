@@ -7,15 +7,20 @@ using ExtendedHSystem.Scenes;
 using UnityEngine;
 using YotanModCore;
 
-namespace ExtendedHSystem.Mods
+namespace HExtensions.RequireForeplay
 {
 	/// <summary>
 	/// Characters refuses insertion if sex meter is not at least at some point.
 	/// Requiring "Foreplay" (Caressing) before being able to insert.
 	/// </summary>
-	public class RequireForeplay
+	public class Main
 	{
 		private Dictionary<int, float> RandomModifiers = new Dictionary<int, float>();
+
+		public void Init()
+		{
+			this.InitHooks();
+		}
 
 		public void InitHooks()
 		{
@@ -36,7 +41,7 @@ namespace ExtendedHSystem.Mods
 			if (commonSexPlayer == null)
 				yield break;
 
-			var config = ExtendedHSystem.Config.Instance.RequireForeplay;
+			var config = RequireForeplayConfig.Instance;
 			var requiredBarValue = config.BarLevel.Value * 100f;
 			
 			if (config.UseAgeModifier.Value)
