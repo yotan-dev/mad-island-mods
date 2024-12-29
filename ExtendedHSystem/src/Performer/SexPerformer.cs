@@ -80,7 +80,7 @@ namespace ExtendedHSystem.Performer
 				var newSetName = parts[1];
 				var newPoseId = parts.Length > 2 ? int.Parse(parts[2]) : this.CurrentPose;
 
-				this.ChangeSet(newSetName, newPoseId);
+				yield return this.ChangeSet(newSetName, newPoseId);
 				yield break;
 			}
 
@@ -144,6 +144,8 @@ namespace ExtendedHSystem.Performer
 				this.CurrentPose = pose.Value;
 
 			yield return this.Perform(this.CurrentAction);
+
+			yield return HookManager.Instance.RunEventHook(this.Controller.GetScene(), EventNames.OnAnimSetChanged, this);
 		}
 	}
 }
