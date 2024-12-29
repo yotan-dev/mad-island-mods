@@ -6,5 +6,6 @@ namespace ExtendedHSystem.Hook
 		public const string OnOrgasm = "OnOrgasm";
 		public const string OnCreampie = "OnCreampie";
 		public const string OnPlayerDefeated = "OnPlayerDefeated";
+		public const string OnAnimSetChanged = "OnAnimSetChanged";
 	}
 }
