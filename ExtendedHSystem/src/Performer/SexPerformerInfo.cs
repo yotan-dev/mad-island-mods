@@ -6,6 +6,8 @@ namespace ExtendedHSystem.Performer
 	{
 		public static readonly string DefaultSet = "Default";
 
+		public static readonly string AnimSetChangeName = "@AnimSetChange";
+
 		public readonly string Id;
 
 		public readonly IPrefabSelector SexPrefabSelector;
