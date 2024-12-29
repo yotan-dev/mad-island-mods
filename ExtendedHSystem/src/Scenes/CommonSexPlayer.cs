@@ -40,8 +40,6 @@ namespace ExtendedHSystem.Scenes
 
 		private int TmpCommonState = 0;
 
-		private int TmpCommonSub = 0;
-
 		public int TmpSexCountType { get; private set; } = 0;
 
 		private float NpcAngle;
@@ -187,7 +185,6 @@ namespace ExtendedHSystem.Scenes
 			Managers.mn.uiMN.MainCanvasView(false);
 
 			this.TmpCommonState = 0;
-			this.TmpCommonSub = 0;
 			this.TmpSexCountType = 0;
 
 			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
@@ -206,11 +203,10 @@ namespace ExtendedHSystem.Scenes
 
 		public IEnumerator Idle()
 		{
-			this.MenuPanel.Open(this.Position);
 			this.MenuPanel.ShowInitialMenu();
+			this.MenuPanel.Show();
 
 			this.TmpCommonState = 0;
-			this.TmpCommonSub = 0;
 
 			yield return this.Performer.Perform(ActionType.StartIdle);
 		}
@@ -222,7 +218,6 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			this.TmpCommonState = 1;
-			this.TmpCommonSub = 0;
 			yield return this.Performer.Perform(ActionType.Caress);
 
 			this.MenuPanel.ShowCaressMenu();
@@ -236,7 +231,6 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			this.TmpCommonState = 2;
-			this.TmpCommonSub = 0;
 			yield return this.Performer.Perform(ActionType.Insert);
 			yield return this.Performer.Perform(ActionType.Speed1);
 
@@ -273,16 +267,7 @@ namespace ExtendedHSystem.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			if (this.TmpCommonSub == 0) /* Pose 1 */
-			{
-				this.TmpCommonSub = 1;
-				yield return this.Performer.ChangePose();
-			}
-			else /* TmpCommonSub == 1 -- Pose 2 */
-			{
-				this.TmpCommonSub = 0;
-				yield return this.Performer.ChangePose();
-			}
+			yield return this.Performer.ChangePose();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Pose2);
 		}
@@ -313,7 +298,6 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 
 			this.TmpCommonState = 0;
-			this.TmpCommonSub = 0;
 			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			this.MenuPanel.ShowStopMenu();
@@ -373,6 +357,7 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
+			this.MenuPanel.Open(this.Position);
 			yield return this.Idle();
 
 			while (this.CanContinue())
