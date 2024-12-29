@@ -190,9 +190,6 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonSub = 0;
 			this.TmpSexCountType = 0;
 
-			this.MenuPanel.Open(this.Position);
-			this.MenuPanel.ShowInitialMenu();
-
 			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
 				return false;
@@ -205,6 +202,17 @@ namespace ExtendedHSystem.Scenes
 			this.DisableLivePlayer(this.Player);
 
 			return true;
+		}
+
+		public IEnumerator Idle()
+		{
+			this.MenuPanel.Open(this.Position);
+			this.MenuPanel.ShowInitialMenu();
+			
+			this.TmpCommonState = 0;
+			this.TmpCommonSub = 0;
+
+			yield return this.Performer.Perform(ActionType.StartIdle);
 		}
 
 		private IEnumerator OnCaress()
@@ -457,7 +465,7 @@ namespace ExtendedHSystem.Scenes
 				yield break;
 			}
 
-			yield return this.Performer.Perform(ActionType.StartIdle);
+			yield return this.Idle();
 
 			while (this.CanContinue())
 			{
