@@ -3,6 +3,8 @@
 using System.Collections;
 using ExtendedHSystem.Hook;
 using ExtendedHSystem.ParamContainers;
+using YotanModCore;
+using YotanModCore.Consts;
 
 namespace ExtendedHSystem.Performer
 {
@@ -118,6 +120,16 @@ namespace ExtendedHSystem.Performer
 		{
 			var newPose = this.CurrentPose == 1 ? 2 : 1;
 			return this.CurrentSet.Actions.ContainsKey(new ActionKey(this.CurrentAction, newPose));
+		}
+
+		public string? GetAlternativePoseName()
+		{
+			if (!this.HasAlternativePose())
+				return null;
+
+			/* Plugins can expand this */
+
+			return Managers.mn.textMN.actButtonTexts[PropPanelConst.Text.Pose2];
 		}
 
 		public IEnumerator ChangePose()

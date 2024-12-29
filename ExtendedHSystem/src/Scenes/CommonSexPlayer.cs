@@ -203,7 +203,7 @@ namespace ExtendedHSystem.Scenes
 
 		public IEnumerator Idle()
 		{
-			this.MenuPanel.ShowInitialMenu();
+			this.MenuPanel.ShowInitialMenu(this.Performer.GetAlternativePoseName());
 			this.MenuPanel.Show();
 
 			this.TmpCommonState = 0;
@@ -220,7 +220,7 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonState = 1;
 			yield return this.Performer.Perform(ActionType.Caress);
 
-			this.MenuPanel.ShowCaressMenu();
+			this.MenuPanel.ShowCaressMenu(this.Performer.GetAlternativePoseName());
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Caress);
 		}
 
@@ -234,7 +234,7 @@ namespace ExtendedHSystem.Scenes
 			yield return this.Performer.Perform(ActionType.Insert);
 			yield return this.Performer.Perform(ActionType.Speed1);
 
-			this.MenuPanel.ShowInsertMenu(this.Performer.HasAlternativePose());
+			this.MenuPanel.ShowInsertMenu(this.Performer.GetAlternativePoseName());
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
@@ -256,7 +256,7 @@ namespace ExtendedHSystem.Scenes
 				yield return this.Performer.Perform(ActionType.Speed1);
 			}
 
-			this.MenuPanel.ShowInsertMenu(this.Performer.HasAlternativePose());
+			this.MenuPanel.ShowInsertMenu(this.Performer.GetAlternativePoseName());
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
@@ -286,7 +286,7 @@ namespace ExtendedHSystem.Scenes
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 
 			this.MenuPanel.Show();
-			this.MenuPanel.ShowFinishMenu();
+			this.MenuPanel.ShowFinishMenu(this.Performer.GetAlternativePoseName());
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
@@ -300,7 +300,7 @@ namespace ExtendedHSystem.Scenes
 			this.TmpCommonState = 0;
 			yield return this.Performer.Perform(ActionType.StartIdle);
 
-			this.MenuPanel.ShowStopMenu();
+			this.MenuPanel.ShowStopMenu(this.Performer.GetAlternativePoseName());
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
