@@ -6,6 +6,10 @@ namespace ExtendedHSystem.Scenes
 {
 	public class ToiletMenuPanel : BasePropPanel
 	{
+		private const int UrinateMeta = 1;
+
+		private const int StopUrinateMeta = 2;
+
 		public event EventHandler<int> OnInsertSelected;
 		public event EventHandler<int> OnMoveSelected;
 		public event EventHandler<int> OnSpeedSelected;
@@ -32,23 +36,23 @@ namespace ExtendedHSystem.Scenes
 		{
 			this.Options.Clear();
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Move, () => { this.OnMoveSelected?.Invoke(this, 0); })); // 4
-			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); })); // 2
+			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta)); // 2
 			PropPanelManager.Instance.DrawOptions();
 		}
 
 		public void ChangeToStopUrinate()
 		{
-			var idx = this.Options.FindIndex((MenuItem item) => item.TextId == PropPanelConst.Text.Urinate);
+			var idx = this.Options.FindIndex((MenuItem item) => item.Meta == UrinateMeta);
 
 			if (idx != -1)
-				this.Options[idx] = new MenuItem(PropPanelConst.Text.Stop, () => { this.OnStopUrinateSelected?.Invoke(this, 0); }); // 2
+				this.Options[idx] = new MenuItem(PropPanelConst.Text.Stop, () => { this.OnStopUrinateSelected?.Invoke(this, 0); }, StopUrinateMeta); // 2
 
 			PropPanelManager.Instance.DrawOptions();
 		}
 
 		public void ChangeStopToUrinate()
 		{
-			var idx = this.Options.FindIndex((MenuItem item) => item.TextId == PropPanelConst.Text.Stop);
+			var idx = this.Options.FindIndex((MenuItem item) => item.Meta == StopUrinateMeta);
 
 			if (idx != -1)
 				this.Options[idx] = new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }); // 2
