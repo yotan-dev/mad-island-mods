@@ -9,7 +9,7 @@ namespace Gallery.Patches
 {
 	public class ManRapesSleepPatch
 	{
-		private static ManSleepRapeSceneEventHandler EventHandler;
+		private static ManSleepRapeTracker Tracker;
 
 		private static Dictionary<string, CommonStates> GetCharas(CommonStates girl, CommonStates man) {
 			return new Dictionary<string, CommonStates>() {
@@ -37,21 +37,21 @@ namespace Gallery.Patches
 
 				switch ((ManRapesState) state) {
 				case ManRapesState.Start: // Starting
-					EventHandler = new ManSleepRapeSceneEventHandler(man, girl);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(man, EventHandler);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(girl, EventHandler);
+					Tracker = new ManSleepRapeTracker(man, girl);
+					GalleryScenesManager.Instance.AddTrackerForCommon(man, Tracker);
+					GalleryScenesManager.Instance.AddTrackerForCommon(girl, Tracker);
 					break;
 
 				case ManRapesState.StartRape: // Starting Rape
-					EventHandler?.OnSleepRapeTypeChange(null, ManRapeSleepState.ForcefullRape);
+					Tracker?.OnSleepRapeTypeChange(ManRapeSleepState.ForcefullRape);
 					GalleryLogger.LogDebug($"ManSleepRapeScene: OnStart: mode = {(ManRapeSleepState) sexType}");
 					break;
 
 				case ManRapesState.StartDiscretlyRape: // Starting Discretly Rape
 					if (sexType == 0) {
-						EventHandler?.OnSleepRapeTypeChange(null, ManRapeSleepState.SleepPowder);
+						Tracker?.OnSleepRapeTypeChange(ManRapeSleepState.SleepPowder);
 					} else {
-						EventHandler?.OnSleepRapeTypeChange(null, ManRapeSleepState.GentlyRape);
+						Tracker?.OnSleepRapeTypeChange(ManRapeSleepState.GentlyRape);
 					}
 
 					GalleryLogger.LogDebug($"ManSleepRapeScene: OnStart: mode = {(ManRapeSleepState) sexType}");
@@ -87,15 +87,15 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneEnd("ManRapesSleep", GetCharas(girl, man), GetInfos(sexType, state));
 				if ((ManRapesState) state == ManRapesState.Start) {
-					EventHandler?.AfterManRape(girl, man);
+					Tracker?.End();
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("ManRapesSleep", error);
 			} finally {
 				if ((ManRapesState) state == ManRapesState.Start) {
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(man);
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(girl);
-					EventHandler = null;
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(man);
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(girl);
+					Tracker = null;
 				}
 			}
 		}

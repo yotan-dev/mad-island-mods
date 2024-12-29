@@ -2,19 +2,19 @@ namespace Gallery.GalleryScenes
 {
 	public abstract class BaseTracker
 	{
-		public bool DidNormal = false;
+		public virtual bool DidNormal { get; set; } = false;
 
-		public bool DidCreampie = false;
+		public virtual bool DidCreampie { get; set; } = false;
 
-		public bool DidDelivery = false;
+		public virtual bool DidDelivery { get; set; } = false;
 
-		public bool DidToilet = false;
+		public virtual bool DidToilet { get; set; }= false;
 
-		public bool Raped = false;
+		public virtual bool Raped { get; set; } = false;
 
-		public bool Pregnant = false;
+		public virtual bool Pregnant { get; set; } = false;
 
-		public bool Busted = false;
+		public virtual bool Busted { get; set; } = false;
 
 		public abstract void End();
 	}

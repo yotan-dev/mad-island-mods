@@ -55,15 +55,6 @@ namespace Gallery.Patches
 			);
 		}
 
-		[HarmonyPatch(typeof(HFramework.Scenes.ManRapesSleep), "Run")]
-		[HarmonyPrefix]
-		private static void Pre_ManRapesSleep_Run(HFramework.Scenes.ManRapesSleep __instance)
-		{
-			__instance.AddEventHandler(
-				new ManSleepRapeSceneEventHandler(__instance.Man, __instance.Girl)
-			);
-		}
-
 		[HarmonyPatch(typeof(HFramework.Scenes.OnaniNPC), nameof(HFramework.Scenes.OnaniNPC.Run))]
 		[HarmonyPrefix]
 		private static void Pre_OnaniNPC_Run(HFramework.Scenes.OnaniNPC __instance)

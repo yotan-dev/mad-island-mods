@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using HFramework.Hook;
-using HFramework.ParamContainers;
 using HFramework.Scenes;
 using Gallery.GalleryScenes;
 using Gallery.GalleryScenes.CommonSexPlayer;
 using Gallery.GalleryScenes.CommonSexNPC;
 using YotanModCore;
+using Gallery.GalleryScenes.ManSleepRape;
 
 namespace Gallery
 {
@@ -65,10 +64,12 @@ namespace Gallery
 				.Call((IScene2 scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.SleepPowder));
 		}
 
-		private IEnumerator OnSetRapeMode(IScene2 scene, ManRapeSleepState gentlyRape)
+		private IEnumerator OnSetRapeMode(IScene2 scene, ManRapeSleepState rapeType)
 		{
-			// @TODO:
-			// throw new NotImplementedException();
+			var tracker = Trackers.GetValueOrDefault(scene, null);
+			if (tracker != null && tracker is ManSleepRapeTracker manSleepRapeTracker)
+				manSleepRapeTracker.OnSleepRapeTypeChange(rapeType);
+
 			yield break;
 		}
 
