@@ -1,0 +1,245 @@
+# ================== HF_CommonSexPlayer ==================== #
+
+[[Scenes]] # HF_CommonSexPlayer
+Id = "HF_CommonSexPlayer"
+
+[[Scenes.Performers]]
+Performer = "HF_Man_Reika_Friendly_Cowgirl"
+StartConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Main_Reika1", "==", 3] },
+	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "==", 2] },
+]
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [1] },
+	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "==", 2] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_Reika_Friendly_RevCowgirl"
+StartConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Main_Reika1", "==", 3] },
+	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "in", [0, 4, 5]] },
+]
+PerformConditions = [
+	# { Type = "QuestProgressCheck", Args = ["Sub_Keigo", "!=", 2] }, # Original code check, but we are covered
+]
+
+[[Scenes.Performers]] # HF_Man_FemaleNative_Friendly_Normal
+Performer = "HF_Man_FemaleNative_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_FemaleNative_Friendly_Pregnant
+Performer = "HF_Man_FemaleNative_Friendly_Pregnant"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_NativeGirl_Friendly_Normal
+Performer = "HF_Man_NativeGirl_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal
+Performer = "HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal"
+StartConditions = []
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [0] },
+]
+
+[[Scenes.Performers]] # HF_Man_FemaleLargeNative_Friendly_Doggy_Normal
+Performer = "HF_Man_FemaleLargeNative_Friendly_Doggy_Normal"
+StartConditions = []
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [1] },
+]
+
+[[Scenes.Performers]] # HF_Man_Mummy_Friendly_Normal
+Performer = "HF_Man_Mummy_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_UnderGroundWoman_Friendly_Normal
+Performer = "HF_Man_UnderGroundWoman_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_Mermaid_Friendly_TittyFuck
+Performer = "HF_Man_Mermaid_Friendly_TittyFuck"
+StartConditions = []
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [0] },
+]
+
+[[Scenes.Performers]] # HF_Man_Mermaid_Friendly_Fuck
+Performer = "HF_Man_Mermaid_Friendly_Fuck"
+StartConditions = []
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [1] },
+]
+
+[[Scenes.Performers]] # HF_Man_ElderSisterNative_Friendly_Doggy_Normal
+Performer = "HF_Man_ElderSisterNative_Friendly_Doggy_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_Giant_Friendly_Normal
+Performer = "HF_Man_Giant_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_Cassie2_Friendly_Normal
+Performer = "HF_Man_Cassie2_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_Shino_Friendly_TittyFuck
+Performer = "HF_Man_Shino_Friendly_TittyFuck"
+StartConditions = []
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [0] },
+]
+
+[[Scenes.Performers]] # HF_Man_Shino_Friendly_Fuck
+Performer = "HF_Man_Shino_Friendly_Fuck"
+StartConditions = []
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [1] },
+]
+
+[[Scenes.Performers]] # HF_Man_Sally_Friendly_Normal
+Performer = "HF_Man_Sally_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Man_Merry_Friendly_Normal
+Performer = "HF_Man_Merry_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+### ======= Yona
+
+[[Scenes.Performers]] # HF_Yona_MaleNative_Friendly_Normal
+Performer = "HF_Yona_MaleNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Yona_BigNative_Friendly_Normal
+Performer = "HF_Yona_BigNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Yona_SmallNative_Friendly_Normal
+Performer = "HF_Yona_SmallNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]] # HF_Yona_ElderBrotherNative_Friendly_Normal
+Performer = "HF_Yona_ElderBrotherNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+
+
+# ================== HF_CommonSexNPC ==================== #
+
+[[Scenes]] # HF_CommonSexNPC
+Id = "HF_CommonSexNPC"
+
+[[Scenes.Performers]]
+Performer = "HF_MaleNative_FemaleNative_Friendly_Doggy_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_FemaleNative_FemaleNative_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_YoungMan_FemaleNative_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_YoungMan_FemaleNative_Friendly_Pregnant"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_MaleNative_NativeGirl_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_NativeGirl_NativeGirl_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_YoungMan_NativeGirl_Friendly_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_YoungMan_FemaleLargeNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_YoungMan_UnderGroundWoman_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_YoungMan_ElderSisterNative_Friendly_Normal"
+StartConditions = []
+PerformConditions = []
+
+
+
+# ================== HF_ManRapesSleep ==================== #
+
+[[Scenes]] # HF_ManRapesSleep
+Id = "HF_ManRapesSleep"
+
+[[Scenes.Performers]]
+Performer = "HF_Man_FemaleNative_SleepRape_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Man_NativeGirl_SleepRape_Normal"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = []
+
+
+
+# ================== HF_PlayerRaped ==================== #
+
+[[Scenes]] # HF_PlayerRaped
+Id = "HF_PlayerRaped"
+
+[[Scenes.Performers]]
+Performer = "HF_MaleNative_Yona_Rape_Doggy_Normal"
+StartConditions = []
+PerformConditions = []
