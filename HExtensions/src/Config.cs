@@ -11,6 +11,8 @@ namespace HExtensions
 
 		public ConfigEntry<bool> EnableDickPainter { get; private set; }
 
+		public ConfigEntry<bool> EnableExtendedScenes { get; private set; }
+
 		internal void Init(ConfigFile conf)
 		{
 			this.RequireForeplay.Init(conf);
@@ -21,6 +23,14 @@ namespace HExtensions
 				true,
 				"Enables DickPainter mod.\n"
 				+ "This mod paints the male dick in red if the female is virgin or in pinky when using comdom.\n"
+			);
+
+			this.EnableExtendedScenes = conf.Bind<bool>(
+				"ExtendedScenes",
+				"Enabled",
+				true,
+				"Enables ExtendedScenes mod.\n"
+				+ "This enables more scenes in the game, specially for Player x NPC, by making scenes that happens in specific contexts available in others.\n"
 			);
 		}
 	}
