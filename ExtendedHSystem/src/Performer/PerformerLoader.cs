@@ -1,3 +1,5 @@
+#nullable enable
+
 using System.Collections.Generic;
 using System.IO;
 using ExtendedHSystem.ConfigFiles;
@@ -8,6 +10,10 @@ namespace ExtendedHSystem.Performer
 {
 	public class PerformerLoader
 	{
+		public delegate void LoadPeformers();
+
+		public static event LoadPeformers? OnLoadPeformers;
+
 		public static Dictionary<string, SexPerformerInfo> Performers = new Dictionary<string, SexPerformerInfo>();
 		private static Dictionary<string, ActionType> ConstToActionType = new Dictionary<string, ActionType>()
 		{
@@ -136,6 +142,8 @@ namespace ExtendedHSystem.Performer
 					PLogger.LogError(ex.StackTrace);
 				}
 			}
+
+			OnLoadPeformers?.Invoke();
 
 			PLogger.LogInfo("Performers loaded");
 		}
