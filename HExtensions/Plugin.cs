@@ -21,6 +21,9 @@ namespace HExtensions
 			if (HExtensions.Config.Instance.EnableDickPainter.Value)
 				new DickPainter.Main().Init();
 
+			if (HExtensions.Config.Instance.EnableExtendedScenes.Value)
+				new ExtendedScenes.Main().Init();
+
 			PLogger.LogInfo($"Plugin HExtensions is loaded!");
 		}
 	}
