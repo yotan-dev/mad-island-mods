@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using ExtendedHSystem.Hook;
-using ExtendedHSystem.ParamContainers;
-using ExtendedHSystem.Scenes;
+using HFramework.Hook;
+using HFramework.ParamContainers;
+using HFramework.Scenes;
 using Gallery.GalleryScenes;
 using Gallery.GalleryScenes.CommonSexPlayer;
 

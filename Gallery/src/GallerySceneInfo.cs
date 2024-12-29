@@ -4,7 +4,7 @@ using YotanModCore;
 using Gallery.SaveFile.Containers;
 using UnityEngine;
 using UnityEngine.UIElements;
-using ExtendedHSystem.Scenes;
+using HFramework.Scenes;
 
 namespace Gallery
 {

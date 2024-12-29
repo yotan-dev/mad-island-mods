@@ -17,20 +17,20 @@ namespace Gallery.Patches
 	/// <summary>
 	/// Patch to integrate with Extended H-System mod and watch its scenes
 	/// </summary>
-	public class EHSWatcherPatch
+	public class HFWatcherPatch
 	{
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.AssWall), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.AssWall), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_AssWall_Run(ExtendedHSystem.Scenes.AssWall __instance)
+		private static void Pre_AssWall_Run(HFramework.Scenes.AssWall __instance)
 		{
 			__instance.AddEventHandler(
 				new AssWallSceneEventHandler(__instance.Player, __instance.Npc, __instance.TmpWall.type)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.CommonSexNPC), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.CommonSexNPC), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_CommonSexNPC_Run(ExtendedHSystem.Scenes.CommonSexNPC __instance)
+		private static void Pre_CommonSexNPC_Run(HFramework.Scenes.CommonSexNPC __instance)
 		{
 			// We only track if at least one is friend, as we can get some weird results otherwise -- specially with herb village
 			if (CommonUtils.IsFriend(__instance.NpcA) || CommonUtils.IsFriend(__instance.NpcB)) {
@@ -40,72 +40,72 @@ namespace Gallery.Patches
 			}
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Daruma), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.Daruma), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_Daruma_Run(ExtendedHSystem.Scenes.Daruma __instance)
+		private static void Pre_Daruma_Run(HFramework.Scenes.Daruma __instance)
 		{
 			__instance.AddEventHandler(
 				new DarumaSceneEventHandler(__instance.Player, __instance.Npc)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Delivery), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.Delivery), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_Delivery_Run(ExtendedHSystem.Scenes.Delivery __instance)
+		private static void Pre_Delivery_Run(HFramework.Scenes.Delivery __instance)
 		{
 			__instance.AddEventHandler(
 				new DeliverySceneEventHandler(__instance.Girl)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.ManRapes), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.ManRapes), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_ManRapes_Run(ExtendedHSystem.Scenes.ManRapes __instance)
+		private static void Pre_ManRapes_Run(HFramework.Scenes.ManRapes __instance)
 		{
 			__instance.AddEventHandler(
 				new ManRapesSceneEventHandler(__instance.Man, __instance.Girl)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.ManRapesSleep), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.ManRapesSleep), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_ManRapesSleep_Run(ExtendedHSystem.Scenes.ManRapesSleep __instance)
+		private static void Pre_ManRapesSleep_Run(HFramework.Scenes.ManRapesSleep __instance)
 		{
 			__instance.AddEventHandler(
 				new ManSleepRapeSceneEventHandler(__instance.Man, __instance.Girl)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.OnaniNPC), nameof(ExtendedHSystem.Scenes.OnaniNPC.Run))]
+		[HarmonyPatch(typeof(HFramework.Scenes.OnaniNPC), nameof(HFramework.Scenes.OnaniNPC.Run))]
 		[HarmonyPrefix]
-		private static void Pre_OnaniNPC_Run(ExtendedHSystem.Scenes.OnaniNPC __instance)
+		private static void Pre_OnaniNPC_Run(HFramework.Scenes.OnaniNPC __instance)
 		{
 			__instance.AddEventHandler(
 				new OnaniSceneEventHandler(__instance.Npc)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Slave), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.Slave), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_Slave_Run(ExtendedHSystem.Scenes.Slave __instance)
+		private static void Pre_Slave_Run(HFramework.Scenes.Slave __instance)
 		{
 			__instance.AddEventHandler(
 				new SlaveSceneEventHandler(__instance.Player, __instance.TmpSlave)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.Toilet), nameof(ExtendedHSystem.Scenes.Toilet.Run))]
+		[HarmonyPatch(typeof(HFramework.Scenes.Toilet), nameof(HFramework.Scenes.Toilet.Run))]
 		[HarmonyPrefix]
-		private static void Pre_Toilet_Run(ExtendedHSystem.Scenes.Toilet __instance)
+		private static void Pre_Toilet_Run(HFramework.Scenes.Toilet __instance)
 		{
 			__instance.AddEventHandler(
 				new ToiletSceneEventHandler(__instance.Player, __instance.Npc)
 			);
 		}
 
-		[HarmonyPatch(typeof(ExtendedHSystem.Scenes.PlayerRaped), "Run")]
+		[HarmonyPatch(typeof(HFramework.Scenes.PlayerRaped), "Run")]
 		[HarmonyPrefix]
-		private static void Pre_PlayerRaped_Run(ExtendedHSystem.Scenes.PlayerRaped __instance)
+		private static void Pre_PlayerRaped_Run(HFramework.Scenes.PlayerRaped __instance)
 		{
 			__instance.AddEventHandler(
 				new PlayerRapedSceneEventHandler(__instance.Player, __instance.Rapist)

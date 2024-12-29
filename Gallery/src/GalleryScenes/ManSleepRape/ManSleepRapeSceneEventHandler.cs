@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using ExtendedHSystem;
-using ExtendedHSystem.Scenes;
+using HFramework;
+using HFramework.Scenes;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.GalleryScenes.ManSleepRape

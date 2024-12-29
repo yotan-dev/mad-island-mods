@@ -70,7 +70,7 @@ The main purpose of this mod is to rewrite the game original H-scenes into a plu
 
 By default, it will replace the developer shipped H-Scenes with similar ones that are coded in the mod.
 You can configure whether you want it to replace the original scenes or not, but most mods will need you to replace it.
-You can change that on `BepInEx/config/ExtendedHSystem.json`
+You can change that on `BepInEx/config/HFramework.json`
 
 Additionally, it provides some customizations that you can opt in.
 Some of those customizations more on the side of showing how modders can use it than really something
@@ -85,7 +85,7 @@ I plan to make certain scenes available in other contexts, but no promises here.
 
 For H-Scenes with players, NPCs will refuse to continue if the player tries to "insert" before they are ready.
 
-To enable it, go to `BepInEx/config/ExtendedHSystem.json` and set `RequireForeplay` to `true`.
+To enable it, go to `BepInEx/config/HFramework.json` and set `RequireForeplay` to `true`.
 
 In the same file you can customize the required bar level and whether you want age and some random factors to apply over it.
 

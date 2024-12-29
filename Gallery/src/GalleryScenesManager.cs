@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ExtendedHSystem;
+using HFramework;
 using Gallery.GalleryScenes;
 using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.CommonSexNPC;

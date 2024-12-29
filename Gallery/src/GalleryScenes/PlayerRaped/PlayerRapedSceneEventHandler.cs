@@ -2,7 +2,7 @@ using System;
 using YotanModCore;
 using Gallery.Patches;
 using Gallery.SaveFile.Containers;
-using ExtendedHSystem;
+using HFramework;
 using System.Collections;
 
 namespace Gallery.GalleryScenes.PlayerRaped
