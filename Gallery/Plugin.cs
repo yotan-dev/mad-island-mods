@@ -3,6 +3,7 @@ using Gallery.Patches;
 using Gallery.Patches.CommonSexPlayer;
 using Gallery.SaveFile;
 using HarmonyLib;
+using HFramework.Hook;
 using UnityEngine;
 using YotanModCore;
 
@@ -31,8 +32,7 @@ namespace Gallery
 			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value) {
 				Harmony.CreateAndPatchAll(typeof(HFWatcherPatch));
 				
-				// TODO: Properly initialize them once we have the system
-				GalleryHooks.Instance.InitHooks();
+				HookManager.RegisterHooksEvent += GalleryHooks.Instance.InitHooks;
 			} else {
 				Harmony.CreateAndPatchAll(typeof(AssWallPatch));
 				Harmony.CreateAndPatchAll(typeof(CommonSexNPCPatch));
