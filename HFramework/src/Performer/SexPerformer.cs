@@ -116,15 +116,19 @@ namespace HFramework.Performer
 			this.LoopCount = 0;
 		}
 
-		public bool HasAlternativePose()
+		public bool CanSwitchPose()
 		{
+			var action = this.GetActionValue(this.CurrentAction, out _);
+			if (action != null && !action.CanChangePose)
+				return false;
+
 			var newPose = this.CurrentPose == 1 ? 2 : 1;
 			return this.CurrentSet.Actions.ContainsKey(new ActionKey(this.CurrentAction, newPose));
 		}
 
 		public string? GetAlternativePoseName()
 		{
-			if (!this.HasAlternativePose())
+			if (!this.CanSwitchPose())
 				return null;
 
 			/* Plugins can expand this */

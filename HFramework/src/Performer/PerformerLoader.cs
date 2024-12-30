@@ -128,7 +128,8 @@ namespace HFramework.Performer
 							}
 
 							var pose = anim.Pose ?? 1;
-							animSetBuilder.AddAnimation(action, pose, new ActionValue(playType, anim.Name, anim.Events));
+							var canChangePose = anim.ChangePose ?? true;
+							animSetBuilder.AddAnimation(action, pose, new ActionValue(playType, anim.Name, anim.Events, canChangePose));
 						}
 						builder.AddAnimationSet(animSetBuilder.Build());
 					}

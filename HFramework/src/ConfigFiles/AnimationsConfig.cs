@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace HFramework.ConfigFiles
 {
 	public class AnimationsConfig
@@ -9,5 +7,6 @@ namespace HFramework.ConfigFiles
 		public string Name { get; set; }
 		public int? Pose { get; set; }
 		public string[] Events { get; set; } = [];
+		public bool? ChangePose { get; set; } = true;
 	}
 }
