@@ -34,7 +34,7 @@ namespace Gallery
 
 			HookBuilder.New("Gallery.Scene.End")
 				.ForScenes("*")
-				.HookStepStart("Main")
+				.HookStepEnd(CommonSexNPC.StepNames.Main)
 				.Call(this.OnSceneEnd);
 
 			HookBuilder.New("Gallery.Friendly.OnPenetrate")
