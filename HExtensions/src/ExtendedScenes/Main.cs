@@ -62,7 +62,7 @@ namespace HExtensions.ExtendedScenes
 		[HarmonyPrefix]
 		private static bool SexPerformer_Pre_GetAlternativePoseName(SexPerformer __instance, out string __result)
 		{
-			if (!__instance.HasAlternativePose())
+			if (!__instance.CanSwitchPose())
 			{
 				__result = null;
 				return true;
