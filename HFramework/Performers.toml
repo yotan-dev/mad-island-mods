@@ -49,13 +49,13 @@ Default = [
 	# Pose 1
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1 },
-	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"          , Pose = 1 },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"         , Pose = 1 },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1, Events = ["OnOrgasm", "OnCreampie"] },
-	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"      , Pose = 1 },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"      , Pose = 1, ChangePose = false },
 	# Pose 2
-	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02_<Tits>"   , Pose = 2 },
+	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02_<Tits>"  , Pose = 2 },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_00"        , Pose = 2, Events = ["OnOrgasm", "OnCreampie"] },
-	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_00_idle"   , Pose = 2 },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_00_idle"   , Pose = 2, ChangePose = false },
 ]
 
 [[Performers]] # HF_Man_FemaleNative_Friendly_Pregnant
@@ -141,8 +141,9 @@ Default = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
 	# Pose 1
-	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01" },
-	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Insert"    , Play = "Once", Name = ""              },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"    },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
