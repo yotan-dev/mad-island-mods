@@ -116,66 +116,9 @@ namespace HFramework.Scenes
 			return scene;
 		}
 
-		private GameObject GetFightScene()
-		{
-			/*
-			GameObject scene = null;
-			switch (this.Player.npcID)
-			{
-				case NpcID.Yona: // 0
-					scene = Managers.mn.sexMN.sexObj[this.Rapist.npcID];
-					break;
-
-				case NpcID.Man: // 1
-					switch (this.Rapist.npcID)
-					{
-						case NpcID.FemaleLargeNative: // 17
-							scene = Managers.mn.sexMN.sexList[8].sexObj[0];
-							break;
-
-						case NpcID.Mummy: // 42
-							scene = Managers.mn.sexMN.sexList[1].sexObj[6];
-							break;
-
-						default:
-							PLogger.LogError("PlayerRaped#GetScene: Unexpected Man rapist npcID: " + this.Rapist.npcID);
-							break;
-					}
-					break;
-
-				default:
-					PLogger.LogError("PlayerRaped#GetScene: Unexpected player npcID: " + this.Player.npcID);
-					break;
-			}
-			*/
-
-			return this.GetScene(PerformerScope.Battle);
-		}
-
-		private GameObject GetSexScene()
-		{
-			/*
-			GameObject scene = null;
-			switch (this.Player.npcID)
-			{
-				case NpcID.Man: // 1
-					switch (this.Rapist.npcID)
-					{
-						case NpcID.FemaleLargeNative: // 17
-							scene = Managers.mn.sexMN.sexList[8].sexObj[1];
-							break;
-					}
-					break;
-			}
-
-			return scene;
-			*/
-			return this.GetScene(PerformerScope.Sex);
-		}
-
 		private bool SetupFightScene()
 		{
-			var scene = this.GetFightScene();
+			var scene = this.GetScene(PerformerScope.Battle);
 			if (scene == null)
 				return false;
 
@@ -218,7 +161,7 @@ namespace HFramework.Scenes
 
 		private void SetupSexScene()
 		{
-			var scene = this.GetSexScene();
+			var scene = this.GetScene(PerformerScope.Sex);
 			if (scene == null)
 				return;
 
@@ -245,42 +188,18 @@ namespace HFramework.Scenes
 			this.CommonAnim = sexAnim;
 
 			yield return this.Performer.Perform(ActionType.Battle);
-			// if (sexAnim.skeleton.Data.FindAnimation("A_Attack_loop") != null)
-			// {
-			// 	sexAnim.state.SetAnimation(0, "A_Attack_loop", true);
-			// }
-
 			yield return this.PerformGrapple();
-			// bool hasFainted = false;
-			// foreach (var x in this.Controller.PlayPlayerGrappledStep(this, sexAnim, "A_Attack_loop", this.Player))
-			// {
-			// 	if (x is bool v)
-			// 		hasFainted = v;
-			// 	yield return x;
-			// }
-
 			if (!this.CanContinue() || this.Player.faint > 0.0)
 				yield break;
 
 			this.Player.sex = CommonStates.SexState.GameOver;
 
 			yield return this.Performer.Perform(ActionType.Defeat);
-			// var defeatStepControl = this.Controller.PlayUntilInputStep(this, sexAnim, "A_Attack_giveup");
-
 			yield return HookManager.Instance.RunEventHook(this, EventNames.OnPlayerDefeated, new FromToParams(this.Player, this.Rapist));
-			// foreach (var handler in this.EventHandlers)
-			// {
-			// 	foreach (var x in handler.PlayerDefeated())
-			// 		yield return x;
-			// }
-
 			if (!this.CanContinue())
 				yield break;
 
 			yield return this.Controller.WaitForInput();
-			// Wait until the animation completes
-			// foreach (var x in defeatStepControl)
-			// 	yield return x;
 		}
 
 		private IEnumerator PerformSex()
@@ -356,13 +275,6 @@ namespace HFramework.Scenes
 			Object.Destroy(this.TmpSex);
 
 			this.EnableLiveNpc(this.Rapist);
-
-			// @TODO: Hook on scene end.
-			// foreach (var handler in this.EventHandlers)
-			// {
-			// 	foreach (var x in handler.AfterRape(this.Player, this.Rapist))
-			// 		yield return x;
-			// }
 
 			this.EnableLivePlayer(this.Player, true);
 
