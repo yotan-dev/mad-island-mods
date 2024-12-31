@@ -325,3 +325,54 @@ Id = "HF_PlayerRaped"
 Performer = "HF_MaleNative_Yona_Rape_Doggy_Normal"
 StartConditions = []
 PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_BigNative_Yona_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Bigfoot_Yona_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Werewolf_Yona_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Oldguy_Yona_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Spike_Yona_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Planton_Yona_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_BossNative_Yona_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_FemaleLargeNative_Man_Rape_Battle"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_FemaleLargeNative_Man_Rape_Sex"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Mummy_Man_Rape_Battle_Sex"
+StartConditions = []
+PerformConditions = []
+
