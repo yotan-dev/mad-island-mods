@@ -3,6 +3,15 @@
 [[Scenes]] # HF_CommonSexPlayer
 Id = "HF_CommonSexPlayer"
 
+# -------------------------------------
+
+# Man x Reika is complex...
+# - Main_Reika1 == 3 means they are lovers (initial condition)
+# - Sub_Keigo   == 2 means you have defeated Keigo but not killed him.
+#                  Unlocks special scene on SexType = 1
+# - Sub_Keigo   in 0, 4, 5 means you either didn't face Keigo or killed him
+#                  Only has base scene.
+# - Sub_Keigo   == 1 means you gave up on Reika, so can't sex her anymore
 [[Scenes.Performers]]
 Performer = "HF_Man_Reika_Friendly_Cowgirl"
 StartConditions = [
@@ -18,11 +27,24 @@ PerformConditions = [
 Performer = "HF_Man_Reika_Friendly_RevCowgirl"
 StartConditions = [
 	{ Type = "QuestProgressCheck", Args = ["Main_Reika1", "==", 3] },
+	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "==", 2] },
+]
+PerformConditions = [
+	{ Type = "SexTypeCheck", Args = [0] },
+	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "==", 2] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_Reika_Friendly_RevCowgirl"
+StartConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Main_Reika1", "==", 3] },
 	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "in", [0, 4, 5]] },
 ]
 PerformConditions = [
-	# { Type = "QuestProgressCheck", Args = ["Sub_Keigo", "!=", 2] }, # Original code check, but we are covered
+	{ Type = "QuestProgressCheck", Args = ["Sub_Keigo", "!=", 2] },
 ]
+
+# ---------------------------------
 
 [[Scenes.Performers]] # HF_Man_FemaleNative_Friendly_Normal
 Performer = "HF_Man_FemaleNative_Friendly_Normal"
@@ -40,55 +62,73 @@ PerformConditions = []
 
 [[Scenes.Performers]] # HF_Man_NativeGirl_Friendly_Normal
 Performer = "HF_Man_NativeGirl_Friendly_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
 PerformConditions = []
 
 [[Scenes.Performers]] # HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal
 Performer = "HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleLargeNative#17", false] },
+]
 PerformConditions = [
 	{ Type = "SexTypeCheck", Args = [0] },
 ]
 
 [[Scenes.Performers]] # HF_Man_FemaleLargeNative_Friendly_Doggy_Normal
 Performer = "HF_Man_FemaleLargeNative_Friendly_Doggy_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleLargeNative#17", false] },
+]
 PerformConditions = [
 	{ Type = "SexTypeCheck", Args = [1] },
 ]
 
 [[Scenes.Performers]] # HF_Man_Mummy_Friendly_Normal
 Performer = "HF_Man_Mummy_Friendly_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["Mummy#42", false] },
+]
 PerformConditions = []
 
 [[Scenes.Performers]] # HF_Man_UnderGroundWoman_Friendly_Normal
 Performer = "HF_Man_UnderGroundWoman_Friendly_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["UnderGroundWoman#44", false] },
+]
 PerformConditions = []
 
 [[Scenes.Performers]] # HF_Man_Mermaid_Friendly_TittyFuck
 Performer = "HF_Man_Mermaid_Friendly_TittyFuck"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["Mermaid#71", false] },
+]
 PerformConditions = [
 	{ Type = "SexTypeCheck", Args = [0] },
 ]
 
 [[Scenes.Performers]] # HF_Man_Mermaid_Friendly_Fuck
 Performer = "HF_Man_Mermaid_Friendly_Fuck"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["Mermaid#71", false] },
+]
 PerformConditions = [
 	{ Type = "SexTypeCheck", Args = [1] },
 ]
 
 [[Scenes.Performers]] # HF_Man_ElderSisterNative_Friendly_Doggy_Normal
 Performer = "HF_Man_ElderSisterNative_Friendly_Doggy_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["ElderSisterNative#90", false] },
+]
 PerformConditions = []
 
 [[Scenes.Performers]] # HF_Man_Giant_Friendly_Normal
 Performer = "HF_Man_Giant_Friendly_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Sub_Giant", "==", 4] },
+]
 PerformConditions = []
 
 [[Scenes.Performers]] # HF_Man_Cassie2_Friendly_Normal
@@ -110,10 +150,30 @@ PerformConditions = [
 	{ Type = "SexTypeCheck", Args = [1] },
 ]
 
+# -------- Man x Sally -------- #
+# It is a special case, as there are 2 paths for it to happen.
+
 [[Scenes.Performers]] # HF_Man_Sally_Friendly_Normal
 Performer = "HF_Man_Sally_Friendly_Normal"
-StartConditions = []
-PerformConditions = []
+StartConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Sub_Prison", "in", [2, 4]] },
+]
+PerformConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Sub_Prison", "in", [2, 4]] },
+]
+
+[[Scenes.Performers]] # HF_Man_Sally_Friendly_Normal
+Performer = "HF_Man_Sally_Friendly_Normal"
+StartConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Sub_Prison", "==", 3] },
+	{ Type = "LibidoCheck", Args = ["Sally#115", ">", 80.0] },
+]
+PerformConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Sub_Prison", "==", 3] },
+	{ Type = "LibidoCheck", Args = ["Sally#115", ">", 80.0] },
+]
+
+# ----------------------------- #
 
 [[Scenes.Performers]] # HF_Man_Merry_Friendly_Normal
 Performer = "HF_Man_Merry_Friendly_Normal"
@@ -200,17 +260,39 @@ PerformConditions = []
 
 [[Scenes.Performers]]
 Performer = "HF_YoungMan_FemaleLargeNative_Friendly_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleLargeNative#17", false] },
+]
 PerformConditions = []
+
+# SexCheck suggests this is possible, but CommonSexNPC does not support it
+# [[Scenes.Performers]]
+# Performer = "HF_YoungMan_Mummy_Friendly_Normal"
+# StartConditions = [
+# 	{ Type = "PregnantCheck", Args = ["Mummy#42", false] },
+# ]
+# PerformConditions = []
 
 [[Scenes.Performers]]
 Performer = "HF_YoungMan_UnderGroundWoman_Friendly_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["UnderGroundWoman#44", false] },
+]
 PerformConditions = []
+
+# SexCheck suggests this is possible, but CommonSexNPC does not support it
+# [[Scenes.Performers]]
+# Performer = "HF_YoungMan_Mermaid_Friendly_Normal"
+# StartConditions = [
+# 	{ Type = "PregnantCheck", Args = ["Mermaid#71", false] },
+# ]
+# PerformConditions = []
 
 [[Scenes.Performers]]
 Performer = "HF_YoungMan_ElderSisterNative_Friendly_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["ElderSisterNative#90", false] },
+]
 PerformConditions = []
 
 
