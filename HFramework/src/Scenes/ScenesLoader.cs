@@ -43,6 +43,9 @@ namespace HFramework.Scenes
 			if (config.Type == "SexTypeCheck")
 				return new SexTypeCheck((int)(long)config.Args[0]);
 
+			if (config.Type == "LibidoCheck")
+				return new LibidoCheck(ParseActor((string) config.Args[0]), (string) config.Args[1], (float)(double)config.Args[2]);
+
 			if (config.Type == "QuestProgressCheck")
 			{
 				if (config.Args[2].GetType() != typeof(long))
