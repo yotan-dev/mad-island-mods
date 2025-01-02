@@ -18,6 +18,7 @@ namespace HFramework.Performer
 		private static Dictionary<string, ActionType> ConstToActionType = new Dictionary<string, ActionType>()
 		{
 			{ "Battle", ActionType.Battle },
+			{ "Attack", ActionType.Attack },
 			{ "Defeat", ActionType.Defeat },
 			{ "StartIdle", ActionType.StartIdle },
 			{ "Caress", ActionType.Caress },

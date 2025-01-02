@@ -17,6 +17,7 @@ namespace HFramework.Scenes
 		{
 			ScenesManager.Instance.AddScene(CommonSexNPC.Name, new SceneInfo(CommonSexNPC.Name));
 			ScenesManager.Instance.AddScene(CommonSexPlayer.Name, new SceneInfo(CommonSexPlayer.Name));
+			ScenesManager.Instance.AddScene(ManRapes.Name, new SceneInfo(ManRapes.Name));
 			ScenesManager.Instance.AddScene(ManRapesSleep.Name, new SceneInfo(ManRapesSleep.Name));
 			ScenesManager.Instance.AddScene(PlayerRaped.Name, new SceneInfo(PlayerRaped.Name));
 		}
@@ -57,6 +58,15 @@ namespace HFramework.Scenes
 
 				return new QuestProgressCheck((string)config.Args[0], (string)config.Args[1], (int)(long)config.Args[2]);
 			}
+
+			if (config.Type == "FaintCheck")
+				return new FaintCheck(ParseActor((string)config.Args[0]), (bool)config.Args[1]);
+
+			if (config.Type == "FriendCheck")
+				return new FriendCheck(ParseActor((string)config.Args[0]), (bool)config.Args[1]);
+
+			if (config.Type == "JokeCheck")
+				return new JokeCheck((bool)config.Args[0]);
 
 			PLogger.LogError($"Unknown condition type {config.Type}. Ignoring...");
 			return null;
