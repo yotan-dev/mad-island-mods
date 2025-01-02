@@ -1,5 +1,6 @@
 using System.Collections;
 using HFramework.Handlers;
+using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
@@ -11,6 +12,17 @@ namespace HFramework.Scenes
 	public class ManRapes : IScene, IScene2
 	{
 		public static readonly string Name = "HF_ManRapes";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Battle = "Battle";
+			public const string Giveup = "Giveup";
+			public const string Insert = "Insert";
+			public const string Speed1 = "Speed1";
+			public const string Speed2 = "Speed2";
+			public const string Finish = "Finish";
+		}
 
 		public readonly CommonStates Man;
 
@@ -157,6 +169,13 @@ namespace HFramework.Scenes
 
 		private IEnumerator PerformBattle()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Battle);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
+				yield break;
+			}
+
 			yield return this.Performer.Perform(ActionType.Battle);
 			// string text = this.SexType + "Attack_loop";
 			// if (this.TmpSexAnim.skeleton.Data.FindAnimation(text) != null)
@@ -166,10 +185,19 @@ namespace HFramework.Scenes
 			// }
 
 			yield return this.PerformGrapple();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
 		}
 
 		private IEnumerator PerformGiveup()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Giveup);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Giveup);
+				yield break;
+			}
+
 			yield return this.Performer.PerformBg(ActionType.Defeat);
 			yield return new WaitForSeconds(0.5f);
 
@@ -178,15 +206,26 @@ namespace HFramework.Scenes
 			yield return this.Controller.WaitForInput();
 
 			Managers.mn.uiMN.ControlTextActive(false, "");
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Giveup);
 		}
 
 		private IEnumerator PerformRape()
 		{
 			this.Stage = 3;
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
+				yield break;
+			}
+
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 
 			this.Stage = 4;
 
@@ -195,28 +234,59 @@ namespace HFramework.Scenes
 
 			this.Stage = 5;
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed1);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
+				yield break;
+			}
+
 			yield return this.Performer.PerformBg(ActionType.Speed1);
 			yield return this.Controller.WaitForInput();
 			if (!this.CanContinue())
 				yield break;
 
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
+			
 			this.Stage = 6;
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
+				yield break;
+			}
 
 			yield return this.Performer.PerformBg(ActionType.Speed2);
 			yield return this.Controller.WaitForInput();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
+
 			if (!this.CanContinue())
 				yield break;
 
 			this.Stage = 7;
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+				yield break;
+			}
+
 			yield return this.Performer.Perform(ActionType.Finish);
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 				yield break;
+			}
 
 			this.Stage = 8;
 
 			yield return this.Performer.PerformBg(ActionType.FinishIdle);
 			yield return this.Controller.WaitForInput();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator Teardown()
@@ -245,9 +315,18 @@ namespace HFramework.Scenes
 
 			this.Stage = 1;
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				yield return this.Teardown();
+				yield break;
+			}
+
 			yield return this.PerformBattle();
 			if (!this.CanContinue())
 			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 				yield return this.Teardown();
 				yield break;
 			}
@@ -257,11 +336,14 @@ namespace HFramework.Scenes
 			yield return this.PerformGiveup();
 			if (!this.CanContinue())
 			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 				yield return this.Teardown();
 				yield break;
 			}
 
 			yield return this.PerformRape();
+			
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 			yield return this.Teardown();
 		}
 
