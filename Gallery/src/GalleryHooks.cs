@@ -7,6 +7,8 @@ using Gallery.GalleryScenes.CommonSexPlayer;
 using Gallery.GalleryScenes.CommonSexNPC;
 using YotanModCore;
 using Gallery.GalleryScenes.ManSleepRape;
+using System;
+using Gallery.GalleryScenes.ManRapes;
 
 namespace Gallery
 {
@@ -27,10 +29,18 @@ namespace Gallery
 				.ForScenes(CommonSexPlayer.Name)
 				.HookStepStart(CommonSexPlayer.StepNames.Main)
 				.Call(this.OnCommonSexPlayerStart);
-			HookBuilder.New("Gallery.CommonSexPlayer.Start")
+			HookBuilder.New("Gallery.CommonSexNPC.Start")
 				.ForScenes(CommonSexNPC.Name)
 				.HookStepStart(CommonSexNPC.StepNames.Main)
 				.Call(this.OnCommonSexNPCStart);
+			HookBuilder.New("Gallery.ManRapes.Start")
+				.ForScenes(ManRapes.Name)
+				.HookStepStart(ManRapes.StepNames.Main)
+				.Call(this.OnManRapesStart);
+			HookBuilder.New("Gallery.ManRapesSleep.Start")
+				.ForScenes(ManRapesSleep.Name)
+				.HookStepStart(ManRapesSleep.StepNames.Main)
+				.Call(this.OnManRapesSleepStart);
 
 			HookBuilder.New("Gallery.Scene.End")
 				.ForScenes("*")
@@ -41,6 +51,10 @@ namespace Gallery
 				.ForScenes(CommonSexPlayer.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.SetNormal);
+			HookBuilder.New("Gallery.Rape.OnPenetrate")
+				.ForScenes(ManRapes.Name, ManRapesSleep.Name, PlayerRaped.Name)
+				.HookEvent(EventNames.OnPenetrate)
+				.Call(this.SetRaped);
 			HookBuilder.New("Gallery.Any.OnOrgasm")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnOrgasm)
@@ -91,6 +105,20 @@ namespace Gallery
 			yield break;
 		}
 
+		private IEnumerator OnManRapesStart(IScene2 scene, object arg2)
+		{
+			var manRapes = scene as ManRapes;
+			Trackers.Add(manRapes, new ManRapesTracker(manRapes.Man, manRapes.Girl));
+			yield break;
+		}
+
+		private IEnumerator OnManRapesSleepStart(IScene2 scene, object arg2)
+		{
+			var manRapes = scene as ManRapesSleep;
+			Trackers.Add(manRapes, new ManSleepRapeTracker(manRapes.Man, manRapes.Girl));
+			yield break;
+		}
+
 		private IEnumerator OnSceneEnd(IScene2 scene, object arg2)
 		{
 			Trackers.GetValueOrDefault(scene, null)?.End();
@@ -103,6 +131,15 @@ namespace Gallery
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
 				tracker.DidNormal = true;
+
+			yield break;
+		}
+
+		private IEnumerator SetRaped(IScene2 scene, object param)
+		{
+			var tracker = Trackers.GetValueOrDefault(scene, null);
+			if (tracker != null)
+				tracker.Raped = true;
 
 			yield break;
 		}
