@@ -46,7 +46,7 @@ namespace HFramework
 			yield return animTime <= 0f;
 		}
 
-		public IEnumerable PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
+		public IEnumerator PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
 		{
 			tmpSexAnim.state.SetAnimation(0, name, true);
 			yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
@@ -100,6 +100,21 @@ namespace HFramework
 		}
 
 		public IEnumerator WaitForInput()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public bool IsAnimRunning()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public void LoopAnimationBg(string name)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public void PlayOnceStepBg(string name)
 		{
 			throw new System.NotImplementedException();
 		}

@@ -14,7 +14,7 @@ namespace HFramework.Handlers
 
 		private readonly CommonStates Player;
 
-		public PlayerGrappled(IScene scene, SkeletonAnimation animation, CommonStates player) : base(scene)
+		public PlayerGrappled(IScene2 scene, SkeletonAnimation animation, CommonStates player) : base(scene)
 		{
 			this.Anim = animation;
 			this.Player = player;

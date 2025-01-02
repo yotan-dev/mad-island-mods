@@ -36,10 +36,6 @@ namespace HFramework
 		public override IEnumerable OnRape(IScene scene, CommonStates from, CommonStates to)
 		{
 			Managers.mn.sexMN.SexCountChange(to, from, SexManager.SexCountState.Rapes);
-			if (scene is ManRapes manRapes) {
-				float changeRate = manRapes.LoveChange ? -10f : 0f;
-				to.LoveChange(from, changeRate, false);
-			}
 			yield return null;
 		}
 

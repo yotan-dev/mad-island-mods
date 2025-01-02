@@ -4,6 +4,7 @@ namespace HFramework.Performer
 	{
 		None,
 		Battle,
+		Attack,
 		Defeat,
 		StartIdle,
 		Caress,

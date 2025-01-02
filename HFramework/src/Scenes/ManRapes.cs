@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Spine;
+using HFramework.Handlers;
+using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
@@ -8,8 +8,10 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class ManRapes : IScene
+	public class ManRapes : IScene, IScene2
 	{
+		public static readonly string Name = "HF_ManRapes";
+
 		public readonly CommonStates Man;
 
 		public readonly CommonStates Girl;
@@ -24,13 +26,7 @@ namespace HFramework.Scenes
 
 		private ISceneController Controller;
 
-		private List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
-
-		public bool LoveChange { get; private set; } = true;
-
-		private string SexType = "A_";
-
-		private bool Pregable = true;
+		private SexPerformer Performer;
 
 		private int Stage = 0;
 
@@ -45,11 +41,7 @@ namespace HFramework.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
-		}
-
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
+			this.Controller.SetScene(this);
 		}
 
 		private void PrepareGirl(CommonStates npc, out NPCMove npcMove)
@@ -113,90 +105,9 @@ namespace HFramework.Scenes
 			Managers.mn.randChar.HandItemHide(player, false);
 		}
 
-		private GameObject GetScene()
-		{
-			GameObject scene = null;
-
-			switch (this.Girl.npcID)
-			{
-				case NpcID.Yona: // 0
-					if (this.Girl.faint > 0.0 || this.Girl.life > 0.0)
-						break;
-
-					scene = Managers.mn.sexMN.sexObj[23];
-					this.LoveChange = false;
-					break;
-
-				case NpcID.FemaleNative: // 15
-					if (this.Girl.faint <= 0.0 || this.Girl.life <= 0.0)
-					{
-						scene = Managers.mn.sexMN.sexList[1].sexObj[21];
-						this.LoveChange = false;
-					}
-					else if (!CommonUtils.IsPregnant(this.Girl))
-					{
-						if (this.Girl.dissect[4] == 1 && this.Girl.dissect[5] == 1)
-							this.SexType = "DisLeg_A_";
-
-						scene = Managers.mn.sexMN.sexList[1].sexObj[0];
-					}
-					else
-					{
-						scene = Managers.mn.sexMN.sexList[1].sexObj[24];
-					}
-					break;
-
-				case NpcID.NativeGirl: // 16
-					if (this.Girl.faint <= 0.0 || this.Girl.life <= 0.0)
-					{
-						scene = Managers.mn.sexMN.sexList[1].sexObj[22];
-						this.LoveChange = false;
-					}
-					else
-					{
-						scene = Managers.mn.sexMN.sexList[1].sexObj[2];
-					}
-					break;
-
-				case NpcID.FemaleLargeNative: // 17
-					scene = Managers.mn.sexMN.sexList[1].sexObj[15];
-					break;
-
-				case NpcID.OldManNative: // 18 ??
-					break;
-
-				case NpcID.OldWomanNative: // 19
-					scene = Managers.mn.sexMN.sexList[1].sexObj[10];
-					break;
-
-				case NpcID.Mummy: // 42
-					scene = Managers.mn.sexMN.sexList[1].sexObj[6];
-
-					this.SexType = "Rape_A_";
-					// this.SexCountType = 1; // official code sets it but does not use
-					this.Pregable = false;
-					break;
-
-				case NpcID.UnderGroundWoman: // 44
-					scene = Managers.mn.sexMN.sexList[1].sexObj[8];
-					break;
-
-				case NpcID.ElderSisterNative: // 90
-					scene = Managers.mn.sexMN.sexList[1].sexObj[18];
-					break;
-
-				case NpcID.Shino: // 114
-					scene = Managers.mn.sexMN.sexList[1].sexObj[19];
-					this.SexType = "Rape_A_";
-					break;
-			}
-
-			return scene;
-		}
-
 		private bool SetupScene()
 		{
-			var scene = this.GetScene();
+			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
 				return false;
 
@@ -239,178 +150,73 @@ namespace HFramework.Scenes
 			return true;
 		}
 
-		private IEnumerable PerformBattle()
+		private IEnumerator PerformGrapple()
 		{
-			string text = this.SexType + "Attack_loop";
-			if (this.TmpSexAnim.skeleton.Data.FindAnimation(text) != null)
-			{
-				this.TmpSexAnim.state.SetAnimation(0, text, true);
-				this.TmpSexAnim.state.Data.SetMix(text, this.SexType + "Attack_attack", 0f);
-			}
-
-			bool shouldContinue = false;
-			foreach (var x in this.Controller.PlayPlayerGrapplesStep(this, this.TmpSexAnim, this.SexType, this.Man, this.Girl))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			this.Aborted = !shouldContinue;
+			yield return new ManPlayerGrapples(this, this.TmpSexAnim, this.Man, this.Girl).Handle();
 		}
 
-		private IEnumerable PerformGiveup()
+		private IEnumerator PerformBattle()
 		{
-			var giveupAnimTracker = this.Controller.PlayUntilInputStep(this, this.TmpSexAnim, "Attack_giveup");
+			yield return this.Performer.Perform(ActionType.Battle);
+			// string text = this.SexType + "Attack_loop";
+			// if (this.TmpSexAnim.skeleton.Data.FindAnimation(text) != null)
+			// {
+			// 	this.TmpSexAnim.state.SetAnimation(0, text, true);
+			// 	this.TmpSexAnim.state.Data.SetMix(text, this.SexType + "Attack_attack", 0f);
+			// }
+
+			yield return this.PerformGrapple();
+		}
+
+		private IEnumerator PerformGiveup()
+		{
+			yield return this.Performer.PerformBg(ActionType.Defeat);
 			yield return new WaitForSeconds(0.5f);
 
 			Managers.mn.uiMN.ControlTextActive(true, Managers.mn.textMN.texts[24] + "/n" + Managers.mn.textMN.texts[25]);
 
-			bool shouldContinue = false;
-			foreach (var x in giveupAnimTracker)
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
+			yield return this.Controller.WaitForInput();
 
 			Managers.mn.uiMN.ControlTextActive(false, "");
-
-			this.Aborted = !shouldContinue;
 		}
 
-		private IEnumerable PerformAttackToSex()
-		{
-			bool shouldContinue = false;
-			foreach (var x in this.Controller.PlayOnceStep(this, this.TmpSexAnim, this.SexType + "AttackToSex"))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			this.Aborted = !shouldContinue;
-		}
-
-		private IEnumerable PerformSexLoop1()
-		{
-			bool shouldContinue = false;
-			foreach (var x in this.Controller.PlayUntilInputStep(this, this.TmpSexAnim, this.SexType + "Loop_01"))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			this.Aborted = !shouldContinue;
-		}
-
-		private IEnumerable PerformSexLoop2()
-		{
-			bool shouldContinue = false;
-			foreach (var x in this.Controller.PlayUntilInputStep(this, this.TmpSexAnim, this.SexType + "Loop_02"))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			this.Aborted = !shouldContinue;
-		}
-
-		private IEnumerable PerformFinish()
-		{
-			bool shouldContinue = false;
-			foreach (var x in this.Controller.PlayOnceStep(this, this.TmpSexAnim, this.SexType + "Finish", true))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			this.Aborted = !shouldContinue;
-
-			if (this.Aborted || !this.Pregable)
-				yield break;
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnCreampie(this.Man, this.Girl))
-					yield return x;
-			}
-		}
-
-		private IEnumerable PerformFinishIdle()
-		{
-			bool shouldContinue = false;
-			foreach (var x in this.Controller.PlayUntilInputStep(this, this.TmpSexAnim, this.SexType + "Finish_idle"))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			this.Aborted = !shouldContinue;
-
-			if (this.Aborted || !this.Pregable)
-				yield break;
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnCreampie(this.Man, this.Girl))
-					yield return x;
-			}
-		}
-
-		private IEnumerable PerformRape()
+		private IEnumerator PerformRape()
 		{
 			this.Stage = 3;
 
-			foreach (var x in this.PerformAttackToSex())
-				yield return x;
-
+			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
 
 			this.Stage = 4;
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnRape(this, this.Man, this.Girl))
-					yield return x;
-			}
 
 			if (!this.CanContinue())
 				yield break;
 
 			this.Stage = 5;
 
-			foreach (var x in this.PerformSexLoop1())
-				yield return x;
-
+			yield return this.Performer.PerformBg(ActionType.Speed1);
+			yield return this.Controller.WaitForInput();
 			if (!this.CanContinue())
 				yield break;
 
 			this.Stage = 6;
 
-			foreach (var x in this.PerformSexLoop2())
-				yield return x;
-
+			yield return this.Performer.PerformBg(ActionType.Speed2);
+			yield return this.Controller.WaitForInput();
 			if (!this.CanContinue())
 				yield break;
 
 			this.Stage = 7;
 
-			foreach (var x in this.PerformFinish())
-				yield return x;
-
+			yield return this.Performer.Perform(ActionType.Finish);
 			if (!this.CanContinue())
 				yield break;
 
 			this.Stage = 8;
 
-			foreach (var x in this.PerformFinishIdle())
-				yield return x;
+			yield return this.Performer.PerformBg(ActionType.FinishIdle);
+			yield return this.Controller.WaitForInput();
 		}
 
 		private IEnumerator Teardown()
@@ -427,14 +233,19 @@ namespace HFramework.Scenes
 
 		public IEnumerator Run()
 		{
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
+			{
+				PLogger.LogError("No performer found");
+				yield break;
+			}
+
 			if (!this.SetupScene())
 				yield break;
 
 			this.Stage = 1;
 
-			foreach (var x in this.PerformBattle())
-				yield return x;
-
+			yield return this.PerformBattle();
 			if (!this.CanContinue())
 			{
 				yield return this.Teardown();
@@ -443,18 +254,14 @@ namespace HFramework.Scenes
 
 			this.Stage = 2;
 
-			foreach (var x in this.PerformGiveup())
-				yield return x;
-
+			yield return this.PerformGiveup();
 			if (!this.CanContinue())
 			{
 				yield return this.Teardown();
 				yield break;
 			}
 
-			foreach (var x in this.PerformRape())
-				yield return x;
-
+			yield return this.PerformRape();
 			yield return this.Teardown();
 		}
 
@@ -473,6 +280,35 @@ namespace HFramework.Scenes
 		public void Destroy()
 		{
 			this.Aborted = true;
+		}
+
+		public string GetName()
+		{
+			return ManRapes.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Man, this.Girl];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.TmpSexAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			var missingLegs = (this.Girl.dissect[4] == 1 && this.Girl.dissect[5] == 1);
+
+			return originalName
+				.Replace("<Tits>", this.Girl.parameters[6].ToString("00"))
+				.Replace("<DisLeg>", missingLegs ? "DisLeg_" : "");
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }

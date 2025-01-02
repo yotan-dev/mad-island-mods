@@ -296,6 +296,95 @@ StartConditions = [
 PerformConditions = []
 
 
+# ================== HF_ManRapes ==================== #
+
+[[Scenes]] # HF_ManRapes
+Id = "HF_ManRapes"
+
+[[Scenes.Performers]]
+Performer = "HF_Man_Yona_Rape"
+StartConditions = [
+	{ Type = "FaintCheck", Args = ["Yona#0", true] },
+]
+PerformConditions = [
+	{ Type = "FaintCheck", Args = ["Yona#0", true] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_FemaleNative_Rape_Fainted"
+StartConditions = [
+	{ Type = "FaintCheck", Args = ["FemaleNative#15", true] },
+]
+PerformConditions = [
+	{ Type = "FaintCheck", Args = ["FemaleNative#15", true] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_FemaleNative_Rape_Grapple"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+PerformConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_FemaleNative_Rape_Grapple_Pregnant"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
+PerformConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_NativeGirl_Rape_Fainted"
+StartConditions = [
+	{ Type = "FaintCheck", Args = ["NativeGirl#16", true] },
+]
+PerformConditions = [
+	{ Type = "FaintCheck", Args = ["NativeGirl#16", true] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_NativeGirl_Rape_Grapple"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+PerformConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", false] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Man_FemaleLargeNative_Rape"
+StartConditions = [
+	{ Type = "FaintCheck", Args = ["FemaleLargeNative#17", true] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Man_FemaleLargeNative_Rape"
+StartConditions = [
+	{ Type = "FriendCheck", Args = ["FemaleLargeNative#17", true] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Man_OldWomanNative_Rape"
+StartConditions = [
+	{ Type = "JokeCheck", Args = [true] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Man_Mummy_Rape"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Man_ElderSisterNative_Rape"
+StartConditions = []
+PerformConditions = []
 
 # ================== HF_ManRapesSleep ==================== #
 

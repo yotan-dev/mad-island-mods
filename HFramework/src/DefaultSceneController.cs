@@ -24,10 +24,21 @@ namespace HFramework
 			return this.Scene;
 		}
 
+		public bool IsAnimRunning()
+		{
+			return this.SexAnim.AnimationState.GetCurrent(0).TrackTime < this.SexAnim.state.GetCurrent(0).AnimationEnd;
+		}
+
 		public IEnumerator LoopAnimation(string name)
 		{
 			PLogger.LogDebug($"LoopAnimation: {this.Scene.ExpandAnimationName(name)}");
 			yield return new LoopAnimation(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name)).Handle();
+		}
+
+		public void LoopAnimationBg(string name)
+		{
+			PLogger.LogDebug($"LoopAnimation: {this.Scene.ExpandAnimationName(name)}");
+			this.SexAnim.state.SetAnimation(0, name, true);
 		}
 
 		public IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
@@ -87,7 +98,13 @@ namespace HFramework
 			yield return new PlayAnimationOnce(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name), skipable).Handle();
 		}
 
-		public IEnumerable PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
+		public void PlayOnceStepBg(string name)
+		{
+			PLogger.LogInfo($"PlayOnceStepBg: {this.Scene.ExpandAnimationName(name)}");
+			this.SexAnim.state.SetAnimation(0, name, true);
+		}
+
+		public IEnumerator PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name)
 		{
 			if (tmpSexAnim.skeleton.Data.FindAnimation(name) != null)
 				tmpSexAnim.state.SetAnimation(0, name, true);
