@@ -53,14 +53,9 @@ namespace HFramework.Patches
 			else if (from.npcID == activePlayer)
 			{
 				if (to.nMove.actType == NPCMove.ActType.Sleep && to.anim.state.GetCurrent(0).Animation.Name == "A_sleep")
-				{
 					sceneInfo = ScenesManager.Instance.GetSceneInfo(ManRapesSleep.Name);
-				}
 				else
-				{
-					// ManRapes
-					return true; // @TODO: We don't have this yet
-				}
+					sceneInfo = ScenesManager.Instance.GetSceneInfo(ManRapes.Name);
 			}
 			else
 			{
