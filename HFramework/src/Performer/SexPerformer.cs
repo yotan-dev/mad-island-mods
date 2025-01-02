@@ -60,6 +60,65 @@ namespace HFramework.Performer
 			return value;
 		}
 
+		public bool IsPerformanceRunning()
+		{
+			return this.Controller.IsAnimRunning();
+			//  sexAnim.AnimationState.GetCurrent(0).TrackTime >= sexAnim.state.GetCurrent(0).AnimationEnd)
+		}
+
+		public IEnumerator PerformBg(ActionType action)
+		{
+			this.LoopCount++;
+
+			if (this.LoopCount == 10)
+			{
+				PLogger.LogWarning("SexPerformer possibly infinite loop detected (Perform iterated 10 times without landing into an animation). Stopping it.");
+				this.LoopCount = 0;
+				yield break;
+			}
+
+			this.CurrentAction = action;
+			var value = this.GetActionValue(action, out var pose);
+			if (value == null)
+				yield break;
+
+			if (value.AnimationName.StartsWith($"{SexPerformerInfo.AnimSetChangeName}:"))
+			{
+				var parts = value.AnimationName.Split(':');
+				var newSetName = parts[1];
+				var newPoseId = parts.Length > 2 ? int.Parse(parts[2]) : this.CurrentPose;
+
+				yield return this.ChangeSet(newSetName, newPoseId);
+				yield break;
+			}
+
+			this.CurrentPose = pose;
+
+			switch (value.PlayType)
+			{
+				case PlayType.Loop:
+					this.Controller.LoopAnimationBg(value.AnimationName);
+					break;
+
+				case PlayType.Once:
+					this.Controller.PlayOnceStepBg(value.AnimationName);
+					break;
+
+				default:
+					PLogger.LogError("Unknown play type " + value.PlayType);
+					break;
+			}
+
+			var actors = this.Controller.GetScene().GetActors();
+			var scene = this.Controller.GetScene();
+			var from = actors.Length >= 1 ? actors[0] : null;
+			var to = actors.Length >= 2 ? actors[1] : null;
+			foreach (var eventName in value.Events)
+				yield return HookManager.Instance.RunEventHook(scene, eventName, new FromToParams(from, to));
+
+			this.LoopCount = 0;
+		}
+
 		public IEnumerator Perform(ActionType action, float? loopTime = null)
 		{
 			this.LoopCount++;

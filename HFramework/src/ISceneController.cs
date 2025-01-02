@@ -10,7 +10,11 @@ namespace HFramework
 
 		IScene2 GetScene();
 
+		bool IsAnimRunning();
+
 		IEnumerator LoopAnimation(string name);
+		
+		void LoopAnimationBg(string name);
 		
 		IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name);
 
@@ -21,8 +25,10 @@ namespace HFramework
 		IEnumerable PlayOnceStep(IScene scene, SkeletonAnimation tmpSexAnim, string name, bool skippable = false);
 		
 		IEnumerator PlayOnceStep(string name, bool skippable = false);
+		
+		void PlayOnceStepBg(string name);
 
-		IEnumerable PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name);
+		IEnumerator PlayUntilInputStep(IScene scene, SkeletonAnimation tmpSexAnim, string name);
 
 		IEnumerator WaitForInput();
 

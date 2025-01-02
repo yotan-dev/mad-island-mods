@@ -19,9 +19,13 @@ namespace HFramework
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnPenetrate);
 			HookBuilder.New("HF.Rape.OnPenetrate")
-				.ForScenes(ManRapesSleep.Name)
+				.ForScenes(ManRapes.Name, ManRapesSleep.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnRapePenetrate);
+			HookBuilder.New("HF.ManRapes.OnPenetrate")
+				.ForScenes(ManRapes.Name)
+				.HookEvent(EventNames.OnPenetrate)
+				.Call(this.OnManRapesPenetrate);
 			HookBuilder.New("HF.Any.OnCreampie")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnCreampie)
@@ -60,6 +64,20 @@ namespace HFramework
 				yield break;
 
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Rapes);
+			yield break;
+		}
+
+		private IEnumerator OnManRapesPenetrate(IScene2 scene, object param)
+		{
+			FromToParams? fromTo = param as FromToParams?;
+			if (!fromTo.HasValue)
+				yield break;
+
+			// Note: on original code, faint is only checked for Yona, Female Native and Native Girl,
+			//       but doesn't make sense to check only for them... so we check for every NPC
+			if (fromTo.Value.To.faint >= 0 && fromTo.Value.To.life >= 0)
+				fromTo.Value.To.LoveChange(fromTo.Value.From, -10f, false);
+
 			yield break;
 		}
 
