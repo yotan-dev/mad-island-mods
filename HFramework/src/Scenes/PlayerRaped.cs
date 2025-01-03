@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.ParamContainers;
@@ -15,6 +14,17 @@ namespace HFramework.Scenes
 	{
 		public static readonly string Name = "HF_PlayerRaped";
 
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Battle = "Battle";
+			public const string Defeat = "Defeat";
+			public const string Insert = "Insert";
+			public const string Speed1 = "Speed";
+			public const string Speed2 = "Speed2";
+			public const string Finish = "Finish";
+		}
+
 		public readonly CommonStates Player;
 
 		public readonly CommonStates Rapist;
@@ -24,8 +34,6 @@ namespace HFramework.Scenes
 		private GameObject TmpSex;
 
 		private ISceneController Controller;
-
-		private List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		private SexPerformer Performer;
 
@@ -46,11 +54,6 @@ namespace HFramework.Scenes
 		public string GetName()
 		{
 			return PlayerRaped.Name;
-		}
-
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
 		}
 
 		private void PrepareNpc(CommonStates npc, out NPCMove npcMove)
@@ -103,7 +106,6 @@ namespace HFramework.Scenes
 				MeshRenderer toMesh = player.anim.GetComponent<MeshRenderer>();
 				toMesh.enabled = true;
 			}
-
 		}
 
 		private GameObject GetScene(PerformerScope scope)
@@ -184,22 +186,48 @@ namespace HFramework.Scenes
 
 		private IEnumerator PerformBattle()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Battle);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
+				yield break;
+			}
+
 			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			this.CommonAnim = sexAnim;
 
 			yield return this.Performer.Perform(ActionType.Battle);
 			yield return this.PerformGrapple();
 			if (!this.CanContinue() || this.Player.faint > 0.0)
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
 				yield break;
+			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Defeat);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
+				yield break;
+			}
 
 			this.Player.sex = CommonStates.SexState.GameOver;
 
 			yield return this.Performer.Perform(ActionType.Defeat);
 			yield return HookManager.Instance.RunEventHook(this, EventNames.OnPlayerDefeated, new FromToParams(this.Player, this.Rapist));
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
 				yield break;
+			}
 
 			yield return this.Controller.WaitForInput();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
 		}
 
 		private IEnumerator PerformSex()
@@ -208,19 +236,54 @@ namespace HFramework.Scenes
 			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			this.CommonAnim = sexAnim;
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
+				yield break;
+			}
+
 			yield return this.Performer.Perform(ActionType.Insert);
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 			if (!this.CanContinue())
 				yield break;
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed1);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
+				yield break;
+			}
 
 			yield return this.Performer.Perform(ActionType.Speed1);
 			yield return this.Controller.WaitForInput();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
 			if (!this.CanContinue())
 				yield break;
 
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
+				yield break;
+			}
+
 			yield return this.Performer.Perform(ActionType.Speed2);
 			yield return this.Controller.WaitForInput();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
 			if (!this.CanContinue())
 				yield break;
+
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+				yield break;
+			}
 
 			yield return this.Performer.Perform(ActionType.Finish);
 			if (!this.CanContinue())
@@ -228,6 +291,8 @@ namespace HFramework.Scenes
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 			yield return this.Controller.WaitForInput();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator FadeOut()
@@ -257,6 +322,17 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				Object.Destroy(this.TmpSex);
+				this.EnableLiveNpc(this.Rapist);
+				this.EnableLivePlayer(this.Player, false);
+				this.RapistMove.actType = NPCMove.ActType.Interval;
+				yield break;
+			}
+
 			yield return this.PerformBattle();
 			if (!this.CanContinue())
 			{
@@ -268,6 +344,8 @@ namespace HFramework.Scenes
 			}
 
 			yield return this.PerformSex();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 
 			Managers.mn.uiMN.SkipView(false);
 			yield return this.FadeOut();
