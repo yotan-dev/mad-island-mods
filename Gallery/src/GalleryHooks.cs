@@ -7,10 +7,10 @@ using Gallery.GalleryScenes.CommonSexPlayer;
 using Gallery.GalleryScenes.CommonSexNPC;
 using YotanModCore;
 using Gallery.GalleryScenes.ManSleepRape;
-using System;
 using Gallery.GalleryScenes.ManRapes;
 using Gallery.GalleryScenes.PlayerRaped;
 using Gallery.GalleryScenes.AssWall;
+using Gallery.GalleryScenes.Toilet;
 
 namespace Gallery
 {
@@ -51,6 +51,10 @@ namespace Gallery
 				.ForScenes(PlayerRaped.Name)
 				.HookStepStart(PlayerRaped.StepNames.Main)
 				.Call(this.OnPlayerRapedStart);
+			HookBuilder.New("Gallery.Toilet.Start")
+				.ForScenes(Toilet.Name)
+				.HookStepStart(Toilet.StepNames.Main)
+				.Call(this.OnToiletStart);
 
 			HookBuilder.New("Gallery.Scene.End")
 				.ForScenes("*")
@@ -66,9 +70,10 @@ namespace Gallery
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.SetRaped);
 			HookBuilder.New("Gallery.Toilet.OnPenetrate")
-				.ForScenes(AssWall.Name)
+				.ForScenes(AssWall.Name, Toilet.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.SetToilet);
+
 			HookBuilder.New("Gallery.Any.OnOrgasm")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnOrgasm)
@@ -144,6 +149,13 @@ namespace Gallery
 		{
 			var manRapes = scene as PlayerRaped;
 			Trackers.Add(manRapes, new PlayerRapedTracker(manRapes.Player, manRapes.Rapist));
+			yield break;
+		}
+
+		private IEnumerator OnToiletStart(IScene2 scene, object arg2)
+		{
+			var toilet = scene as Toilet;
+			Trackers.Add(toilet, new ToiletTracker(toilet.Player, toilet.Npc));
 			yield break;
 		}
 
