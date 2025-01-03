@@ -1,11 +1,8 @@
 using Gallery.SaveFile.Containers;
-using HFramework;
-using System.Collections;
-using HFramework.Scenes;
 
 namespace Gallery.GalleryScenes.AssWall
 {
-	public class AssWallSceneEventHandler : SceneEventHandler
+	public class AssWallTracker : BaseTracker
 	{
 		private readonly GalleryChara Player = null;
 
@@ -13,34 +10,18 @@ namespace Gallery.GalleryScenes.AssWall
 
 		private readonly InventorySlot.Type WallType = InventorySlot.Type.None;
 
-		private bool DidToilet = false;
-
-		private bool DidCreampie = false;
-
-		public AssWallSceneEventHandler(
+		public AssWallTracker(
 			CommonStates player,
 			CommonStates girl,
 			InventorySlot.Type wallType
-		) : base("yogallery_asswall_handler")
+		) : base()
 		{
 			this.Player = new GalleryChara(player);
 			this.Girl = new GalleryChara(girl);
 			this.WallType = wallType;
 		}
 
-		public override IEnumerable OnToilet(CommonStates from, CommonStates to)
-		{
-			this.DidToilet = true;
-			yield return null;
-		}
-
-		public override IEnumerable OnCreampie(CommonStates from, CommonStates to)
-		{
-			this.DidCreampie = true;
-			yield return null;
-		}
-
-		public override IEnumerable AfterSex(IScene scene, CommonStates from, CommonStates to)
+		public override void End()
 		{
 			if (!this.DidToilet || !this.DidCreampie)
 			{
@@ -51,8 +32,6 @@ namespace Gallery.GalleryScenes.AssWall
 				var desc = $"{this.Player} x {this.Girl} (WallType: {this.WallType})";
 				GalleryLogger.LogDebug($"AssWallSceneTracker#OnEnd: 'DidToilet' ({this.DidToilet}) or 'DidCreampie' ({this.DidCreampie}) not set -- event NOT unlocked for {desc}");
 			}
-
-			yield return null;
 		}
 	}
 }

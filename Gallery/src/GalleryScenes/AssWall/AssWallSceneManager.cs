@@ -1,9 +1,6 @@
 using System.Linq;
-using YotanModCore;
 using Gallery.SaveFile;
 using Gallery.SaveFile.Containers;
-using YotanModCore.Consts;
-using static Gallery.GallerySceneInfo;
 
 namespace Gallery.GalleryScenes.AssWall
 {
