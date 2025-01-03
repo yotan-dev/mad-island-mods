@@ -947,6 +947,38 @@ PowderRape = [
 
 
 
+# ================ Onani/Masturbation =============== #
+
+[[Performers]] # HF_Onani_FemaleNative_Normal
+Id = "HF_Onani_FemaleNative_Normal"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [9, 1] }
+Actors = ["FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
+]
+
+[[Performers]] # HF_Onani_FemaleNative_Perfume
+Id = "HF_Onani_FemaleNative_Perfume"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [9, 1] }
+Actors = ["FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "Speed1"    , Play = "Loop", Name = "Perfume_A_Loop_01"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "Perfume_A_Loop_02"     },
+	{ Action = "Finish"    , Play = "Once", Name = "Perfume_A_Finish"     ,  Events = ["OnOrgasm"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Perfume_A_Finish_idle" },
+]
+
+
+
 # ================ Player Raped =============== #
 
 [[Performers]] # HF_MaleNative_Yona_Rape_Doggy_Normal
