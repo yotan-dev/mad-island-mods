@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
 using YotanModCore.Consts;
-using YotanModCore.Extensions;
 using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class Toilet : IScene
+	public class Toilet : IScene, IScene2
 	{
+		public static readonly string Name = "Toilet";
+
 		public readonly CommonStates Player;
 
 		public readonly CommonStates Npc;
@@ -28,6 +30,8 @@ namespace HFramework.Scenes
 		private readonly ToiletMenuPanel MenuPanel;
 
 		private ISceneController Controller;
+
+		private SexPerformer Performer;
 
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
@@ -55,6 +59,7 @@ namespace HFramework.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -66,11 +71,7 @@ namespace HFramework.Scenes
 		{
 			this.MenuPanel.Hide();
 
-			foreach (var x in this.Controller.PlayOnceStep(this, this.Anim, "A_Start"))
-				yield return x;
-
-			if (!this.CanContinue())
-				yield break;
+			yield return this.Performer.Perform(ActionType.Insert);
 
 			if (this.Npc != null)
 			{
@@ -81,43 +82,45 @@ namespace HFramework.Scenes
 				}
 			}
 
-			yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.InsertIdle);
+			if (!this.CanContinue())
+				yield break;
+
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
 		}
 
 		private IEnumerator OnMove()
 		{
-			if (this.Anim.state.GetCurrent(0).Animation.Name != "A_Loop_01" && this.Anim.state.GetCurrent(0).Animation.Name != "A_Loop_02")
+			if (this.Performer.CurrentAction != ActionType.Speed1 && this.Performer.CurrentAction != ActionType.Speed2)
 			{
 				this.MenuPanel.ShowMoveMenu();
-				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Loop_01");
+				yield return this.Performer.Perform(ActionType.Speed1);
 			}
 		}
 
 		private IEnumerator OnSpeed()
 		{
-			if (this.Anim.GetCurrentAnimName() == "A_Loop_01")
-				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Loop_02");
-			else if (this.Anim.GetCurrentAnimName() == "A_Loop_02")
-				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Loop_01");
+			if (this.Performer.CurrentAction == ActionType.Speed1)
+				yield return this.Performer.Perform(ActionType.Speed2);
+			else if (this.Performer.CurrentAction == ActionType.Speed2)
+				yield return this.Performer.Perform(ActionType.Speed1);
 		}
 
 		private IEnumerator OnStop()
 		{
 			this.MenuPanel.ShowStopMenu();
-			yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
+			yield return this.Performer.Perform(ActionType.InsertIdle);
 		}
 
 		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
 
-			foreach (var x in this.Controller.PlayOnceStep(this, this.Anim, "A_Finish"))
-				yield return x;
-
-			if (!this.CanContinue())
-				yield break;
+			yield return this.Performer.Perform(ActionType.Finish);
 
 			if (this.Npc != null)
 			{
@@ -127,8 +130,11 @@ namespace HFramework.Scenes
 						yield return x;
 				}
 			}
+			
+			if (!this.CanContinue())
+				yield break;
 
-			yield return this.Controller.LoopAnimation(this, this.Anim, "A_Finish_idle");
+			yield return this.Performer.Perform(ActionType.FinishIdle);
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
@@ -142,30 +148,27 @@ namespace HFramework.Scenes
 
 		private IEnumerator OnUrinate()
 		{
-			string currentAnim = this.Anim.GetCurrentAnimName();
-			if (currentAnim == "A_Start_idle")
+			if (this.Performer.CurrentAction == ActionType.StartIdle)
 			{
-				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_pee");
+				yield return this.Performer.Perform(ActionType.IdlePee);
 				this.MenuPanel.ChangeToStopUrinate();
 			}
-			else if (currentAnim == "A_idle2" || currentAnim == "A_Finish_idle")
+			else if (this.Performer.CurrentAction == ActionType.StartIdle || this.Performer.CurrentAction == ActionType.FinishIdle)
 			{
-				yield return this.Controller.LoopAnimation(this, this.Anim, "A_idle_pee");
+				yield return this.Performer.Perform(ActionType.InsertPee);
 				this.MenuPanel.ChangeToStopUrinate();
 			}
 		}
 
 		private IEnumerator OnStopUrinate()
 		{
-			string currentAnim = this.Anim.GetCurrentAnimName();
-			if (currentAnim == "A_idle_pee")
+			if (this.Performer.CurrentAction == ActionType.IdlePee)
 			{
-				yield return this.Controller.LoopAnimation(this, this.Anim, "A_idle2");
-				this.MenuPanel.ChangeStopToUrinate();
+				yield return this.Performer.Perform(ActionType.StartIdle);
 			}
-			else if (currentAnim == "A_Start_pee")
+			else if (this.Performer.CurrentAction == ActionType.InsertPee)
 			{
-				yield return this.Controller.LoopAnimation(this, this.Anim, "A_Start_idle");
+				yield return this.Performer.Perform(ActionType.InsertIdle);
 				this.MenuPanel.ChangeStopToUrinate();
 			}
 		}
@@ -190,6 +193,13 @@ namespace HFramework.Scenes
 			Managers.mn.gameMN.Controlable(false, false);
 
 			Managers.mn.gameMN.pMove.PlayerVisible(false);
+
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
+			{
+				PLogger.LogError("No performer found");
+				return false;
+			}
 
 			this.Anim = Managers.mn.inventory.tmpSubInventory.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			this.Anim.skeleton.SetSkin("Man");
@@ -221,7 +231,7 @@ namespace HFramework.Scenes
 		{
 			this.SetupScene();
 
-			yield return this.Controller.LoopAnimation(this, this.Anim, "A_idle2");
+			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			this.MenuPanel.Open(this.SexPlace.transform.position);
 			this.MenuPanel.ShowInitialMenu();
@@ -234,13 +244,12 @@ namespace HFramework.Scenes
 
 			while (this.CanContinue())
 			{
-				string currentAnim = this.Anim.GetCurrentAnimName();
-				if (currentAnim == "A_idle_pee")
+				if (this.Performer.CurrentAction == ActionType.IdlePee)
 				{
 					if (!this.Pee1Audio.isPlaying)
 						this.Pee1Audio.UnPause();
 				}
-				else if (currentAnim == "A_Start_pee")
+				else if (this.Performer.CurrentAction == ActionType.InsertPee)
 				{
 					if (!this.Pee2Audio.isPlaying)
 						this.Pee2Audio.UnPause();
@@ -274,6 +283,31 @@ namespace HFramework.Scenes
 		public void Destroy()
 		{
 			this.MenuPanel?.Close();
+		}
+
+		public string GetName()
+		{
+			return Toilet.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Player, this.Npc];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.Anim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName;
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }

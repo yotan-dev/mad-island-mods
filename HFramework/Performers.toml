@@ -1128,3 +1128,106 @@ Default = [
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
+
+
+# ================ Toilet =============== #
+
+[[Performers]] # HF_Toilet_Man_FemaleNative
+Id = "HF_Toilet_Man_FemaleNative"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 0] } # Not really accurate
+Actors = ["Man#1", "FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle2"          },
+	{ Action = "IdlePee"   , Play = "Loop", Name = "A_idle_pee"       },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "A_Start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "A_Start_idle"    },
+	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
+]
+
+[[Performers]] # HF_Toilet_Man_NativeGirl
+Id = "HF_Toilet_Man_NativeGirl"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 1] } # Not really accurate
+Actors = ["Man#1", "NativeGirl#16"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle2"          },
+	{ Action = "IdlePee"   , Play = "Loop", Name = "A_idle_pee"       },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "A_Start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "A_Start_idle"    },
+	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
+]
+
+[[Performers]] # HF_Toilet_Man_FemaleLargeNative
+Id = "HF_Toilet_Man_FemaleLargeNative"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 0] } # Not really accurate
+Actors = ["Man#1", "FemaleLargeNative#17"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle2"          },
+	{ Action = "IdlePee"   , Play = "Loop", Name = "A_idle_pee"       },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "A_Start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "A_Start_idle"    },
+	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
+]
+
+[[Performers]] # HF_Toilet_Man_UnderGroundWoman
+Id = "HF_Toilet_Man_UnderGroundWoman"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 0] } # Not really accurate
+Actors = ["Man#1", "UnderGroundWoman#44"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle2"          },
+	{ Action = "IdlePee"   , Play = "Loop", Name = "A_idle_pee"       },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "A_Start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "A_Start_idle"    },
+	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
+]
+
+[[Performers]] # HF_Toilet_Man_ElderSisterNative
+Id = "HF_Toilet_Man_ElderSisterNative"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 0] } # Not really accurate
+Actors = ["Man#1", "ElderSisterNative#90"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle2"          },
+	{ Action = "IdlePee"   , Play = "Loop", Name = "A_idle_pee"       },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "A_Start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "A_Start_idle"    },
+	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
+]
