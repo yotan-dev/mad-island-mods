@@ -29,6 +29,11 @@ namespace HFramework
 				.ForScenes(ManRapes.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnManRapesPenetrate);
+			HookBuilder.New("HF.Toilet.OnPenetrate")
+				.ForScenes(AssWall.Name, Toilet.Name)
+				.HookEvent(EventNames.OnPenetrate)
+				.Call(this.OnToiletsPenetrate);
+
 			HookBuilder.New("HF.Any.OnCreampie")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnCreampie)

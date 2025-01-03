@@ -13,7 +13,6 @@ namespace HFramework.Patches
 		{
 			var scene = new Toilet(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpToile);
 			scene.Init(new DefaultSceneController());
-			scene.AddEventHandler(new DefaultSceneEventHandler());
 			__result = scene.Run();
 			return false;
 		}

@@ -48,8 +48,6 @@ namespace HFramework.Scenes
 
 		private SexPerformer Performer;
 
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
-
 		public Toilet(CommonStates player, CommonStates girl, InventorySlot tmpToilet)
 		{
 			this.Player = player;
@@ -77,11 +75,6 @@ namespace HFramework.Scenes
 			this.Controller.SetScene(this);
 		}
 
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
-		}
-
 		private IEnumerator OnInsert()
 		{
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
@@ -94,16 +87,6 @@ namespace HFramework.Scenes
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Insert);
-
-			if (this.Npc != null)
-			{
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.OnToilet(this.Player, this.Npc))
-						yield return x;
-				}
-			}
-
 			if (!this.CanContinue())
 			{
 				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
@@ -185,16 +168,6 @@ namespace HFramework.Scenes
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
-
-			if (this.Npc != null)
-			{
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.OnCreampie(this.Player, this.Npc))
-						yield return x;
-				}
-			}
-			
 			if (!this.CanContinue())
 			{
 				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
@@ -375,12 +348,6 @@ namespace HFramework.Scenes
 				}
 
 				yield return null;
-			}
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.AfterSex(this, this.Player, this.Npc))
-					yield return x;
 			}
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
