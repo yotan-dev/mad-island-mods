@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using HFramework.Hook;
 using HFramework.ParamContainers;
 using HFramework.Scenes;
@@ -9,6 +10,8 @@ namespace HFramework
 	public class CommonHooks
 	{
 		public static readonly CommonHooks Instance = new CommonHooks();
+
+		private Dictionary<IScene2, bool> ToiletCounted = new Dictionary<IScene2, bool>();
 
 		private CommonHooks() { }
 
@@ -45,6 +48,11 @@ namespace HFramework
 				.ForScenes(PlayerRaped.Name)
 				.HookStepEnd(CommonSexPlayer.StepNames.Main)
 				.Call(this.OnPlayerRapedMoral);
+
+			HookBuilder.New("HF.OnEnd")
+				.ForScenes(AssWall.Name)
+				.HookStepEnd(AssWall.StepNames.Main)
+				.Call(this.OnEnd);
 		}
 
 		private IEnumerator OnPenetrate(IScene2 scene, object param)
@@ -64,6 +72,16 @@ namespace HFramework
 				yield break;
 
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Rapes);
+			yield break;
+		}
+
+		private IEnumerator OnToiletsPenetrate(IScene2 scene, object param)
+		{
+			FromToParams? fromTo = param as FromToParams?;
+			if (!fromTo.HasValue)
+				yield break;
+
+			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Toilet);
 			yield break;
 		}
 
@@ -125,6 +143,13 @@ namespace HFramework
 
 			if (playerRaped.Rapist.debuff.discontent == 4)
 				playerRaped.Rapist.MoralChange(20f, null, NPCManager.MoralCause.None);
+		}
+
+		private IEnumerator OnEnd(IScene2 scene, object param)
+		{
+			if (this.ToiletCounted.ContainsKey(scene))
+				this.ToiletCounted.Remove(scene);
+			yield break;
 		}
 	}
 }
