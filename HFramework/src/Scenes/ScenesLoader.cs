@@ -69,6 +69,9 @@ namespace HFramework.Scenes
 			if (config.Type == "JokeCheck")
 				return new JokeCheck((bool)config.Args[0]);
 
+			if (config.Type == "PerfumeCheck")
+				return new PerfumeCheck(ParseActor((string)config.Args[0]), (bool)config.Args[1]);
+
 			PLogger.LogError($"Unknown condition type {config.Type}. Ignoring...");
 			return null;
 		}

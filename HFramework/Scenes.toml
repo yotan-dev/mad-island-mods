@@ -437,6 +437,27 @@ PerformConditions = []
 
 
 
+# ================ Onani/Masturbation =============== #
+
+[[Scenes]] # HF_Onani
+Id = "HF_Onani"
+
+[[Scenes.Performers]]
+Performer = "HF_Onani_FemaleNative_Normal"
+StartConditions = []
+PerformConditions = [
+	{ Type = "PerfumeCheck", Args = ["FemaleNative#15", false] },
+]
+
+[[Scenes.Performers]]
+Performer = "HF_Onani_FemaleNative_Perfume"
+StartConditions = []
+PerformConditions = [
+	{ Type = "PerfumeCheck", Args = ["FemaleNative#15", true] },
+]
+
+
+
 # ================== HF_PlayerRaped ==================== #
 
 [[Scenes]] # HF_PlayerRaped

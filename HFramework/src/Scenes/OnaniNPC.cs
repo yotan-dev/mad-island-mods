@@ -1,6 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.Hook;
+using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
@@ -12,21 +13,33 @@ namespace HFramework.Scenes
 	/// <summary>
 	/// Onani stands for Masturbation
 	/// </summary>
-	public class OnaniNPC : IScene
+	public class OnaniNPC : IScene, IScene2
 	{
+		public static readonly string Name = "OnaniNPC";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Speed1 = "Speed1";
+			public const string Speed2 = "Speed2";
+			public const string Finish = "Finish";
+		}
+
 		public readonly CommonStates Npc;
 
 		public readonly SexPlace Place;
 
 		public readonly float UpMoral;
 
-		private string SexType;
-
 		private float? SearchAngle;
 
 		private GameObject TmpSex;
 
 		private ISceneController Controller;
+
+		private SkeletonAnimation Anim;
+
+		private SexPerformer Performer;
 
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
@@ -40,6 +53,7 @@ namespace HFramework.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -78,21 +92,6 @@ namespace HFramework.Scenes
 			return true;
 		}
 
-		private void GetSceneInfo(out GameObject scene, out string sexType)
-		{
-			scene = null;
-			sexType = "A_";
-
-			switch (this.Npc.npcID)
-			{
-				case NpcID.FemaleNative: // 15
-					scene = Managers.mn.sexMN.sexList[9].sexObj[1];
-					if (this.Npc.debuff.perfume > 0f)
-						sexType = "Rapes2_A_";
-					break;
-			}
-		}
-
 		private void DisableLiveNpc()
 		{
 			this.Npc.nMove.RBState(false);
@@ -119,14 +118,16 @@ namespace HFramework.Scenes
 
 		private bool SetupScene()
 		{
-			this.GetSceneInfo(out GameObject scene, out this.SexType);
-			if (scene == null)
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
 				return false;
 
 			var sexPos = this.Place?.transform?.position ?? this.Npc.transform.position;
-			this.TmpSex = GameObject.Instantiate<GameObject>(scene, sexPos, Quaternion.identity);
+			this.TmpSex = GameObject.Instantiate<GameObject>(this.Performer.Info.SexPrefabSelector.GetPrefab(), sexPos, Quaternion.identity);
 			if (this.TmpSex == null)
 				return false;
+
+			this.Anim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 
 			this.Npc.transform.position = sexPos;
 			this.SearchAngle = this.Npc.nMove.searchAngle;
@@ -157,7 +158,7 @@ namespace HFramework.Scenes
 			return true;
 		}
 
-		private IEnumerable MoveToPlace(Vector3 pos)
+		private IEnumerator MoveToPlace(Vector3 pos)
 		{
 			float animTime = 30f;
 
@@ -177,7 +178,8 @@ namespace HFramework.Scenes
 				yield return false;
 			}
 
-			yield return animTime > 0f;
+			if (animTime <= 0f)
+				this.Destroy();
 		}
 
 		private void Teardown()
@@ -203,41 +205,36 @@ namespace HFramework.Scenes
 				this.Npc.nMove.searchAngle = this.SearchAngle.Value;
 		}
 
-		private IEnumerable Perform()
+		private IEnumerator Perform()
 		{
-			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-
-			var completed = false;
-			foreach (var x in this.Controller.PlayTimedStep(this, sexAnim, this.SexType + "Loop_01", 10f))
-			{
-				if (x is bool b)
-					completed = b;
-				yield return x;
-			}
-
-			if (!completed)
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed1);
+			if (!this.CanContinue())
 				yield break;
 
-			completed = false;
-			foreach (var x in this.Controller.PlayTimedStep(this, sexAnim, this.SexType + "Loop_02", 10f))
-			{
-				if (x is bool b)
-					completed = b;
-				yield return x;
-			}
+			yield return this.Performer.Perform(ActionType.Speed1);
 
-			if (!completed)
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
+			if (!this.CanContinue())
 				yield break;
 
-			completed = false;
-			foreach (var x in this.Controller.PlayOnceStep(this, sexAnim, this.SexType + "Finish", false))
-			{
-				if (x is bool b)
-					completed = b;
-				yield return x;
-			}
 
-			if (!completed)
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Speed2);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
+			if (!this.CanContinue())
+				yield break;
+
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Finish);
+			if (!this.CanContinue())
 				yield break;
 
 			if (this.Npc.debuff.perfume <= 0f)
@@ -246,15 +243,10 @@ namespace HFramework.Scenes
 				this.Npc.MoralChange(this.UpMoral, null, NPCManager.MoralCause.None);
 			}
 
-			completed = false;
-			foreach (var x in this.Controller.PlayTimedStep(this, sexAnim, this.SexType + "Finish_idle", 5f))
-			{
-				if (x is bool b)
-					completed = b;
-				yield return x;
-			}
+			yield return this.Performer.Perform(ActionType.FinishIdle);
 
-			if (!completed)
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+			if (!this.CanContinue())
 				yield break;
 
 			foreach (var handler in this.EventHandlers) {
@@ -276,11 +268,9 @@ namespace HFramework.Scenes
 			GameObject emoA = Managers.mn.fxMN.GoEmotion(13, this.Npc.gameObject, Vector3.zero);
 
 			var reachedPos = false;
-			foreach (bool x in this.MoveToPlace(pos))
-			{
-				reachedPos = x;
-				yield return x;
-			}
+			yield return this.MoveToPlace(pos);
+			if (!this.CanContinue())
+				yield break;
 
 			emoA.SetActive(false);
 
@@ -296,8 +286,17 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			foreach (var x in this.Perform())
-				yield return x;
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				this.Teardown();
+				yield break;
+			}
+
+			yield return this.Perform();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 
 			this.Teardown();
 		}
@@ -311,6 +310,31 @@ namespace HFramework.Scenes
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
+		}
+
+		public string GetName()
+		{
+			return OnaniNPC.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Npc];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.Anim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName;
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }
