@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
@@ -12,6 +13,20 @@ namespace HFramework.Scenes
 	public class Toilet : IScene, IScene2
 	{
 		public static readonly string Name = "Toilet";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Insert = "Insert";
+			public const string Move = "Move";
+			public const string Stop = "Stop";
+			public const string Speed = "Speed";
+			public const string Finish = "Finish";
+			public const string Urinate = "Urinate";
+			public const string StopUrinate = "StopUrinate";
+			public const string Leave = "Leave";
+			public const string FaceReveal = "FaceReveal";
+		}
 
 		public readonly CommonStates Player;
 
@@ -69,6 +84,13 @@ namespace HFramework.Scenes
 
 		private IEnumerator OnInsert()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
+				yield break;
+			}
+
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Insert);
@@ -83,41 +105,83 @@ namespace HFramework.Scenes
 			}
 
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 				yield break;
+			}
 
 			yield return this.Performer.Perform(ActionType.InsertIdle);
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 				yield break;
+			}
 
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnMove()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Move);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Move);
+				yield break;
+			}
+			
 			if (this.Performer.CurrentAction != ActionType.Speed1 && this.Performer.CurrentAction != ActionType.Speed2)
 			{
 				this.MenuPanel.ShowMoveMenu();
 				yield return this.Performer.Perform(ActionType.Speed1);
 			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Move);
 		}
 
 		private IEnumerator OnSpeed()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
+				yield break;
+			}
+
 			if (this.Performer.CurrentAction == ActionType.Speed1)
 				yield return this.Performer.Perform(ActionType.Speed2);
 			else if (this.Performer.CurrentAction == ActionType.Speed2)
 				yield return this.Performer.Perform(ActionType.Speed1);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnStop()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Stop);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
+				yield break;
+			}
+
 			this.MenuPanel.ShowStopMenu();
 			yield return this.Performer.Perform(ActionType.InsertIdle);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
 
 		private IEnumerator OnFinish()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+				yield break;
+			}
+
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
@@ -132,22 +196,42 @@ namespace HFramework.Scenes
 			}
 			
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 				yield break;
+			}
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnLeave()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
+				yield break;
+			}
+
 			this.Destroy();
-			yield break;
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 		}
 
 		private IEnumerator OnUrinate()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Urinate);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Urinate);
+				yield break;
+			}
+
 			if (this.Performer.CurrentAction == ActionType.StartIdle)
 			{
 				yield return this.Performer.Perform(ActionType.IdlePee);
@@ -158,10 +242,19 @@ namespace HFramework.Scenes
 				yield return this.Performer.Perform(ActionType.InsertPee);
 				this.MenuPanel.ChangeToStopUrinate();
 			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Urinate);
 		}
 
 		private IEnumerator OnStopUrinate()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.StopUrinate);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.StopUrinate);
+				yield break;
+			}
+
 			if (this.Performer.CurrentAction == ActionType.IdlePee)
 			{
 				yield return this.Performer.Perform(ActionType.StartIdle);
@@ -171,18 +264,28 @@ namespace HFramework.Scenes
 				yield return this.Performer.Perform(ActionType.InsertIdle);
 				this.MenuPanel.ChangeStopToUrinate();
 			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.StopUrinate);
 		}
 
 
 		private IEnumerator OnFaceReveal()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.FaceReveal);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.FaceReveal);
+				yield break;
+			}
+
 			if (Managers.mn.inventory.itemSlot[50].attack == 1f)
 				Managers.mn.inventory.itemSlot[50].attack = 0f;
 			else
 				Managers.mn.inventory.itemSlot[50].attack = 1f;
 
 			Managers.mn.sexMN.ToiletFaceLoad(this.Anim, Managers.mn.inventory.itemSlot[50]);
-			yield break;
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.FaceReveal);
 		}
 
 		private bool SetupScene()
@@ -229,7 +332,16 @@ namespace HFramework.Scenes
 
 		public IEnumerator Run()
 		{
-			this.SetupScene();
+			if (!this.SetupScene())
+				yield break;
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				this.Teardown();
+				yield break;
+			}
 
 			yield return this.Performer.Perform(ActionType.StartIdle);
 
@@ -270,6 +382,8 @@ namespace HFramework.Scenes
 				foreach (var x in handler.AfterSex(this, this.Player, this.Npc))
 					yield return x;
 			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 
 			this.Teardown();
 		}
