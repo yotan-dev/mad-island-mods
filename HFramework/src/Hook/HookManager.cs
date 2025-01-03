@@ -104,11 +104,15 @@ namespace HFramework.Hook
 
 		private IEnumerator RunHooks(IScene2 scene, string target, object param)
 		{
+			PLogger.LogDebug($"RunHooks: Running target - {target}");
 			if (!this.HookDict.TryGetValue(target, out var queue))
 				yield break;
 
 			foreach (var hook in queue.GetEnumerable())
+			{
+				PLogger.LogDebug($"RunHooks: Running UID - {hook.UID}");
 				yield return hook.Handler(scene, param);
+			}
 		}
 
 		public IEnumerator RunStepStartHook(IScene2 scene, string stepName)
