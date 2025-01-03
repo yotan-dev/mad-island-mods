@@ -15,6 +15,7 @@ namespace HFramework.Scenes
 	{
 		internal static void RegisterScenes()
 		{
+			ScenesManager.Instance.AddScene(AssWall.Name, new SceneInfo(AssWall.Name));
 			ScenesManager.Instance.AddScene(CommonSexNPC.Name, new SceneInfo(CommonSexNPC.Name));
 			ScenesManager.Instance.AddScene(CommonSexPlayer.Name, new SceneInfo(CommonSexPlayer.Name));
 			ScenesManager.Instance.AddScene(ManRapes.Name, new SceneInfo(ManRapes.Name));
