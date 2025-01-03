@@ -9,7 +9,7 @@ namespace Gallery.Patches
 {
 	public class ToiletPatch
 	{
-		private static ToiletSceneEventHandler EventHandler;
+		private static ToiletTracker Tracker;
 
 		private static Dictionary<string, CommonStates> GetToiletCharas(SexManager manager, ToiletState state)
 		{
@@ -49,9 +49,9 @@ namespace Gallery.Patches
 
 				switch (state_) {
 				case ToiletState.Start:
-					EventHandler = new ToiletSceneEventHandler(chars["user"], chars["target"]);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(chars["user"], EventHandler);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(chars["target"], EventHandler);
+					Tracker = new ToiletTracker(chars["user"], chars["target"]);
+					GalleryScenesManager.Instance.AddTrackerForCommon(chars["user"], Tracker);
+					GalleryScenesManager.Instance.AddTrackerForCommon(chars["target"], Tracker);
 					break;
 
 				case ToiletState.Insert:
@@ -95,7 +95,7 @@ namespace Gallery.Patches
 				case ToiletState.Start:
 					user = chars["user"];
 					target = chars["target"];
-					EventHandler?.AfterSex(null, user, target);
+					Tracker?.End();
 					break;
 
 				case ToiletState.Insert:
@@ -116,9 +116,9 @@ namespace Gallery.Patches
 				GalleryLogger.SceneErrorToPlayer("Toilet", error);
 			} finally {
 				if (state_ == ToiletState.Start) {
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(user);
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(target);
-					EventHandler = null;
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(user);
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(target);
+					Tracker = null;
 				}
 			}
 		}

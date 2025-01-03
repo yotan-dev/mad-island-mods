@@ -2,7 +2,6 @@ using Gallery.GalleryScenes.Daruma;
 using Gallery.GalleryScenes.Delivery;
 using Gallery.GalleryScenes.Onani;
 using Gallery.GalleryScenes.Slave;
-using Gallery.GalleryScenes.Toilet;
 using HarmonyLib;
 
 namespace Gallery.Patches
@@ -45,15 +44,6 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new SlaveSceneEventHandler(__instance.Player, __instance.TmpSlave)
-			);
-		}
-
-		[HarmonyPatch(typeof(HFramework.Scenes.Toilet), nameof(HFramework.Scenes.Toilet.Run))]
-		[HarmonyPrefix]
-		private static void Pre_Toilet_Run(HFramework.Scenes.Toilet __instance)
-		{
-			__instance.AddEventHandler(
-				new ToiletSceneEventHandler(__instance.Player, __instance.Npc)
 			);
 		}
 	}
