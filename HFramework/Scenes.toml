@@ -1,32 +1,32 @@
 # ================== HF_AssWall ==================== #
 
-[[Scenes]] # HF_AssWall
-Id = "HF_AssWall"
+# [[Scenes]] # HF_AssWall
+# Id = "HF_AssWall"
 
-[[Scenes.Performers]]
-Performer = "HF_AssWall_Man_FemaleNative"
-StartConditions = []
-PerformConditions = []
+# [[Scenes.Performers]]
+# Performer = "HF_AssWall_Man_FemaleNative"
+# StartConditions = []
+# PerformConditions = []
 
-[[Scenes.Performers]]
-Performer = "HF_AssWall_Man_NativeGirl"
-StartConditions = []
-PerformConditions = []
+# [[Scenes.Performers]]
+# Performer = "HF_AssWall_Man_NativeGirl"
+# StartConditions = []
+# PerformConditions = []
 
-[[Scenes.Performers]]
-Performer = "HF_AssWall_Man_FemaleLargeNative"
-StartConditions = []
-PerformConditions = []
+# [[Scenes.Performers]]
+# Performer = "HF_AssWall_Man_FemaleLargeNative"
+# StartConditions = []
+# PerformConditions = []
 
-[[Scenes.Performers]]
-Performer = "HF_AssWall_Man_UnderGroundWoman"
-StartConditions = []
-PerformConditions = []
+# [[Scenes.Performers]]
+# Performer = "HF_AssWall_Man_UnderGroundWoman"
+# StartConditions = []
+# PerformConditions = []
 
-[[Scenes.Performers]]
-Performer = "HF_AssWall_Man_ElderSisterNative"
-StartConditions = []
-PerformConditions = []
+# [[Scenes.Performers]]
+# Performer = "HF_AssWall_Man_ElderSisterNative"
+# StartConditions = []
+# PerformConditions = []
 
 
 
@@ -497,3 +497,39 @@ Performer = "HF_Mummy_Man_Rape_Battle_Sex"
 StartConditions = []
 PerformConditions = []
 
+
+
+# ================== HF_Toilet ==================== #
+
+[[Scenes]] # HF_Toilet
+Id = "HF_Toilet"
+
+[[Scenes.Performers]]
+Performer = "HF_MaleNative_Yona_Rape_Doggy_Normal"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Toilet_Man_FemaleNative"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Toilet_Man_NativeGirl"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Toilet_Man_FemaleLargeNative"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Toilet_Man_UnderGroundWoman"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Toilet_Man_ElderSisterNative"
+StartConditions = []
+PerformConditions = []
