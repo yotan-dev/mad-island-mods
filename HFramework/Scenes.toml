@@ -1,3 +1,35 @@
+# ================== HF_AssWall ==================== #
+
+[[Scenes]] # HF_AssWall
+Id = "HF_AssWall"
+
+[[Scenes.Performers]]
+Performer = "HF_AssWall_Man_FemaleNative"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_AssWall_Man_NativeGirl"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_AssWall_Man_FemaleLargeNative"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_AssWall_Man_UnderGroundWoman"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_AssWall_Man_ElderSisterNative"
+StartConditions = []
+PerformConditions = []
+
+
+
 # ================== HF_CommonSexPlayer ==================== #
 
 [[Scenes]] # HF_CommonSexPlayer

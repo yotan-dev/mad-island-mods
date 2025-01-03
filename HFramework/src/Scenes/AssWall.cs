@@ -25,6 +25,8 @@ namespace HFramework.Scenes
 
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
+		private SexPerformer Performer;
+
 		private readonly AssWallMenuPanel MenuPanel;
 
 		public AssWall(CommonStates playerCommon, CommonStates npcCommon, InventorySlot tmpWall = null)
@@ -59,6 +61,7 @@ namespace HFramework.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -70,8 +73,13 @@ namespace HFramework.Scenes
 		{
 			this.MenuPanel.ShowInsertMenu();
 
-			string animSt = this.Npc.npcID.ToString("") + "_";
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_01");
+			yield return this.Performer.Perform(ActionType.Insert);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Speed1);
+			if (!this.CanContinue())
+				yield break;
 
 			if (!this.InsertCounted)
 			{
@@ -89,44 +97,26 @@ namespace HFramework.Scenes
 
 		private IEnumerator OnSpeed(object sender, int e)
 		{
-			string animSt = this.Npc.npcID.ToString("") + "_";
-
-			if (this.CommonAnim.state.GetCurrent(0).Animation.Name == animSt + "A_Loop_01")
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_02");
-			else if (this.CommonAnim.state.GetCurrent(0).Animation.Name == animSt + "A_Loop_02")
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Loop_01");
+			if (this.Performer.CurrentAction == ActionType.Speed1)
+				yield return this.Performer.Perform(ActionType.Speed2);
+			else
+				yield return this.Performer.Perform(ActionType.Speed1);
 		}
 
 		private IEnumerator OnStop(object sender, int e)
 		{
 			this.MenuPanel.ShowStopMenu();
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
+			yield return this.Performer.Perform(ActionType.StartIdle);
 		}
 
 		private IEnumerator OnFinish(object sender, int e)
 		{
 			this.MenuPanel.Hide();
 
-			string animSt = this.Npc.npcID.ToString("") + "_";
-
-			foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, animSt + "A_Finish"))
-				yield return x;
-
+			yield return this.Performer.Perform(ActionType.Finish);
+			yield return this.Performer.Perform(ActionType.FinishIdle);
 			if (!this.CanContinue())
 				yield break;
-
-			if (this.Npc != null)
-			{
-				// Note: This assumes the player is always a male and the NPC is always a female,
-				// which is true as of beta 0.2.3
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.OnCreampie(this.Player, this.Npc))
-						yield return x;
-				}
-			}
-
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, animSt + "A_Finish_idle");
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
@@ -140,6 +130,13 @@ namespace HFramework.Scenes
 
 		public IEnumerator Run()
 		{
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
+			{
+				PLogger.LogError($"AssWall: Failed to get sex performer for {this.Player.npcID} x {this.Npc.npcID}");
+				yield break;
+			}
+
 			// Lock place
 			SexPlace sexPlace = this.TmpWall.GetComponent<SexPlace>();
 			sexPlace.user = Managers.mn.gameMN.player;
@@ -157,7 +154,7 @@ namespace HFramework.Scenes
 			Managers.mn.randChar.SetAssWall(this.Npc, this.CommonAnim.gameObject);
 
 			// Start animation
-			this.CommonAnim.state.SetAnimation(0, "A_idle", true);
+			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			// Show UI
 			this.MenuPanel.Open(TmpWall.transform.position);

@@ -1,3 +1,91 @@
+# ================ AssWall =============== #
+[[Performers]] # HF_AssWall_Man_FemaleNative
+Id = "HF_AssWall_Man_FemaleNative"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 4] } # Not really accurate
+Actors = ["Man#1", "FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "15_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "15_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "15_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "15_A_Finish_idle"   },
+]
+
+[[Performers]] # HF_AssWall_Man_NativeGirl
+Id = "HF_AssWall_Man_NativeGirl"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 4] } # Not really accurate
+Actors = ["Man#1", "NativeGirl#16"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "16_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "16_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "16_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "16_A_Finish_idle"   },
+]
+
+[[Performers]] # HF_AssWall_Man_FemaleLargeNative
+Id = "HF_AssWall_Man_FemaleLargeNative"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 4] } # Not really accurate
+Actors = ["Man#1", "FemaleLargeNative#17"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "17_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "17_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "17_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "17_A_Finish_idle"   },
+]
+
+[[Performers]] # HF_AssWall_Man_UnderGroundWoman
+Id = "HF_AssWall_Man_UnderGroundWoman"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 4] } # Not really accurate
+Actors = ["Man#1", "UnderGroundWoman#44"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "44_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "44_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "44_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "44_A_Finish_idle"   },
+]
+
+[[Performers]] # HF_AssWall_Man_ElderSisterNative
+Id = "HF_AssWall_Man_ElderSisterNative"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [3, 4] } # Not really accurate
+Actors = ["Man#1", "ElderSisterNative#90"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "90_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "90_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "90_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "90_A_Finish_idle"   },
+]
+
+
+
 # ================ Common Sex Player =============== #
 
 [[Performers]] # HF_Man_Reika_Friendly_Cowgirl
