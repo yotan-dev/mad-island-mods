@@ -2,11 +2,9 @@ using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.Daruma;
 using Gallery.GalleryScenes.Delivery;
 using Gallery.GalleryScenes.Onani;
-using Gallery.GalleryScenes.PlayerRaped;
 using Gallery.GalleryScenes.Slave;
 using Gallery.GalleryScenes.Toilet;
 using HarmonyLib;
-using YotanModCore;
 
 namespace Gallery.Patches
 {
@@ -66,15 +64,6 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new ToiletSceneEventHandler(__instance.Player, __instance.Npc)
-			);
-		}
-
-		[HarmonyPatch(typeof(HFramework.Scenes.PlayerRaped), "Run")]
-		[HarmonyPrefix]
-		private static void Pre_PlayerRaped_Run(HFramework.Scenes.PlayerRaped __instance)
-		{
-			__instance.AddEventHandler(
-				new PlayerRapedSceneEventHandler(__instance.Player, __instance.Rapist)
 			);
 		}
 	}

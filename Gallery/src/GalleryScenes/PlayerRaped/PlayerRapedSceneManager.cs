@@ -1,5 +1,4 @@
 using System.Linq;
-using YotanModCore;
 using Gallery.SaveFile.Containers;
 using YotanModCore.Consts;
 using static Gallery.GallerySceneInfo;
@@ -36,7 +35,6 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				{
 					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
 					scene.Init(new HFramework.GallerySceneController());
-					scene.AddEventHandler(new HFramework.GallerySceneEventHandler());
 
 					return scene;
 				},
@@ -58,7 +56,6 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				{
 					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
 					scene.Init(new HFramework.GallerySceneController());
-					scene.AddEventHandler(new HFramework.GallerySceneEventHandler());
 
 					return scene;
 				},
