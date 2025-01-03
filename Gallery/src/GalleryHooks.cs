@@ -10,6 +10,7 @@ using Gallery.GalleryScenes.ManSleepRape;
 using System;
 using Gallery.GalleryScenes.ManRapes;
 using Gallery.GalleryScenes.PlayerRaped;
+using Gallery.GalleryScenes.AssWall;
 
 namespace Gallery
 {
@@ -26,6 +27,10 @@ namespace Gallery
 		public void InitHooks()
 		{
 			Trackers = new Dictionary<IScene2, BaseTracker>();
+			HookBuilder.New("Gallery.AssWall.Start")
+				.ForScenes(AssWall.Name)
+				.HookStepStart(AssWall.StepNames.Main)
+				.Call(this.OnAssWallStart);
 			HookBuilder.New("Gallery.CommonSexPlayer.Start")
 				.ForScenes(CommonSexPlayer.Name)
 				.HookStepStart(CommonSexPlayer.StepNames.Main)
@@ -60,6 +65,10 @@ namespace Gallery
 				.ForScenes(ManRapes.Name, ManRapesSleep.Name, PlayerRaped.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.SetRaped);
+			HookBuilder.New("Gallery.Toilet.OnPenetrate")
+				.ForScenes(AssWall.Name)
+				.HookEvent(EventNames.OnPenetrate)
+				.Call(this.SetToilet);
 			HookBuilder.New("Gallery.Any.OnOrgasm")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnOrgasm)
@@ -89,6 +98,13 @@ namespace Gallery
 			if (tracker != null && tracker is ManSleepRapeTracker manSleepRapeTracker)
 				manSleepRapeTracker.OnSleepRapeTypeChange(rapeType);
 
+			yield break;
+		}
+
+		private IEnumerator OnAssWallStart(IScene2 scene, object arg2)
+		{
+			var asswall = scene as AssWall;
+			Trackers.Add(asswall, new AssWallTracker(asswall.Player, asswall.Npc, asswall.TmpWall.type));
 			yield break;
 		}
 
@@ -143,6 +159,15 @@ namespace Gallery
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
 				tracker.DidNormal = true;
+
+			yield break;
+		}
+
+		private IEnumerator SetToilet(IScene2 scene, object param)
+		{
+			var tracker = Trackers.GetValueOrDefault(scene, null);
+			if (tracker != null)
+				tracker.DidToilet = true;
 
 			yield break;
 		}

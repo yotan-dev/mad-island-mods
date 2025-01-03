@@ -1,4 +1,3 @@
-using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.Daruma;
 using Gallery.GalleryScenes.Delivery;
 using Gallery.GalleryScenes.Onani;
@@ -13,15 +12,6 @@ namespace Gallery.Patches
 	/// </summary>
 	public class HFWatcherPatch
 	{
-		[HarmonyPatch(typeof(HFramework.Scenes.AssWall), "Run")]
-		[HarmonyPrefix]
-		private static void Pre_AssWall_Run(HFramework.Scenes.AssWall __instance)
-		{
-			__instance.AddEventHandler(
-				new AssWallSceneEventHandler(__instance.Player, __instance.Npc, __instance.TmpWall.type)
-			);
-		}
-
 		[HarmonyPatch(typeof(HFramework.Scenes.Daruma), "Run")]
 		[HarmonyPrefix]
 		private static void Pre_Daruma_Run(HFramework.Scenes.Daruma __instance)
