@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.Performer;
 using Spine.Unity;
 using YotanModCore;
 using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class AssWall : IScene
+	public class AssWall : IScene, IScene2
 	{
+		public static readonly string Name = "HF_AssWall";
+
 		public readonly CommonStates Player;
 
 		public readonly CommonStates Npc;
@@ -196,6 +199,31 @@ namespace HFramework.Scenes
 		public void Destroy()
 		{
 			this.MenuPanel?.Close();
+		}
+
+		public string GetName()
+		{
+			return AssWall.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Player, this.Npc];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.CommonAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName;
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return null;
 		}
 	}
 }
