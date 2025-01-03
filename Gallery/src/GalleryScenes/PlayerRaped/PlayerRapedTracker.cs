@@ -1,0 +1,31 @@
+using Gallery.SaveFile.Containers;
+
+namespace Gallery.GalleryScenes.PlayerRaped
+{
+	public class PlayerRapedTracker : BaseTracker
+	{
+		private readonly GalleryChara Player;
+		private readonly GalleryChara Rapist;
+
+		public PlayerRapedTracker(
+			CommonStates player,
+			CommonStates rapist
+		) : base()
+		{
+			this.Player = new GalleryChara(player);
+			this.Rapist = new GalleryChara(rapist);
+		}
+
+		public override void End()
+		{
+			if (this.Raped)
+			{
+				PlayerRapedSceneManager.Instance.Unlock(this.Player, this.Rapist);
+			}
+			else
+			{
+				GalleryLogger.LogDebug($"PlayerRapedTracker: AfterRape: 'DidRape' not set -- event NOT unlocked for {Rapist}");
+			}
+		}
+	}
+}

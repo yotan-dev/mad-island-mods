@@ -9,6 +9,7 @@ using YotanModCore;
 using Gallery.GalleryScenes.ManSleepRape;
 using System;
 using Gallery.GalleryScenes.ManRapes;
+using Gallery.GalleryScenes.PlayerRaped;
 
 namespace Gallery
 {
@@ -41,6 +42,10 @@ namespace Gallery
 				.ForScenes(ManRapesSleep.Name)
 				.HookStepStart(ManRapesSleep.StepNames.Main)
 				.Call(this.OnManRapesSleepStart);
+			HookBuilder.New("Gallery.PlayerRaped.Start")
+				.ForScenes(PlayerRaped.Name)
+				.HookStepStart(PlayerRaped.StepNames.Main)
+				.Call(this.OnPlayerRapedStart);
 
 			HookBuilder.New("Gallery.Scene.End")
 				.ForScenes("*")
@@ -116,6 +121,13 @@ namespace Gallery
 		{
 			var manRapes = scene as ManRapesSleep;
 			Trackers.Add(manRapes, new ManSleepRapeTracker(manRapes.Man, manRapes.Girl));
+			yield break;
+		}
+
+		private IEnumerator OnPlayerRapedStart(IScene2 scene, object arg2)
+		{
+			var manRapes = scene as PlayerRaped;
+			Trackers.Add(manRapes, new PlayerRapedTracker(manRapes.Player, manRapes.Rapist));
 			yield break;
 		}
 
