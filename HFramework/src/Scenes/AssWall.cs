@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 using YotanModCore;
@@ -11,19 +11,25 @@ namespace HFramework.Scenes
 	{
 		public static readonly string Name = "HF_AssWall";
 
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Stop = "Stop";
+			public const string Insert = "Insert";
+			public const string Speed = "Speed";
+			public const string Finish = "Finish";
+			public const string Leave = "Leave";
+		}
+
 		public readonly CommonStates Player;
 
 		public readonly CommonStates Npc;
 
 		public readonly InventorySlot TmpWall;
 
-		private bool InsertCounted = false;
-
 		private SkeletonAnimation CommonAnim;
 
 		private ISceneController Controller;
-
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		private SexPerformer Performer;
 
@@ -64,68 +70,100 @@ namespace HFramework.Scenes
 			controller.SetScene(this);
 		}
 
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
-		}
-
 		private IEnumerator OnInsert(object sender, int e)
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+				yield break;
+
 			this.MenuPanel.ShowInsertMenu();
 
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 				yield break;
+			}
 
 			yield return this.Performer.Perform(ActionType.Speed1);
 			if (!this.CanContinue())
-				yield break;
-
-			if (!this.InsertCounted)
 			{
-				this.InsertCounted = true;
-
-				// Note: This assumes the player is always a male and the NPC is always a female,
-				// which is true as of beta 0.2.3
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.OnToilet(this.Player, this.Npc))
-						yield return x;
-				}
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
+				yield break;
 			}
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnSpeed(object sender, int e)
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
+				yield break;
+			}
+
 			if (this.Performer.CurrentAction == ActionType.Speed1)
 				yield return this.Performer.Perform(ActionType.Speed2);
 			else
 				yield return this.Performer.Perform(ActionType.Speed1);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnStop(object sender, int e)
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Stop);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
+				yield break;
+			}
+
 			this.MenuPanel.ShowStopMenu();
 			yield return this.Performer.Perform(ActionType.StartIdle);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
 
 		private IEnumerator OnFinish(object sender, int e)
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+				yield break;
+			}
+
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 				yield break;
+			}
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnLeave(object sender, int e)
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
+				yield break;
+			}
+
 			this.Destroy();
-			yield break;
+			
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 		}
 
 		public IEnumerator Run()
@@ -178,13 +216,7 @@ namespace HFramework.Scenes
 			Managers.mn.gameMN.pMove.PlayerVisible(true);
 			Managers.mn.uiMN.MainCanvasView(true);
 
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.AfterSex(this, this.Player, this.Npc))
-					yield return x;
-			}
-
-			yield break;
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 
@@ -220,7 +252,7 @@ namespace HFramework.Scenes
 
 		public SexPerformer GetPerformer()
 		{
-			return null;
+			return this.Performer;
 		}
 	}
 }

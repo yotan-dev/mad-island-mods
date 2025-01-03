@@ -15,7 +15,6 @@ namespace HFramework.Patches
 			var girlCommon = Managers.mn.inventory.itemSlot[50].common;
 			var scene = new AssWall(pCommon, girlCommon, tmpWall);
 			scene.Init(new DefaultSceneController());
-			scene.AddEventHandler(new DefaultSceneEventHandler());
 			__result = scene.Run();
 			return false;
 		}
