@@ -11,7 +11,7 @@ namespace HFramework.Scenes
 {
 	public class Toilet : IScene
 	{
-		public static readonly string Name = "Toilet";
+		public static readonly string Name = "HF_Toilet";
 
 		public static class StepNames
 		{

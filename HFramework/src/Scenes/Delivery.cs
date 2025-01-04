@@ -10,7 +10,7 @@ namespace HFramework.Scenes
 {
 	public class Delivery : IScene
 	{
-		public static readonly string Name = "Delivery";
+		public static readonly string Name = "HF_Delivery";
 
 		public static class StepNames
 		{

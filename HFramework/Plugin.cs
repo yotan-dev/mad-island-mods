@@ -19,7 +19,6 @@ namespace HFramework
 			HFramework.Config.Instance.Init(Config);
 
 			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value) {
-				// @TODO: Rework these scenes.
 				Harmony.CreateAndPatchAll(typeof(SexManager_AssWallPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexNPCPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexPlayerPatch));

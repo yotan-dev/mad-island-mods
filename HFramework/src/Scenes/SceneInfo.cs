@@ -54,7 +54,7 @@ namespace HFramework.Scenes
 
 		public string Name { get; private set; }
 
-		protected static Dictionary<int, Dictionary<int?, List<ScenePerformer>>> Performers = [];
+		protected Dictionary<int, Dictionary<int, List<ScenePerformer>>> Performers = [];
 
 		public SceneInfo(string name)
 		{
@@ -63,18 +63,18 @@ namespace HFramework.Scenes
 
 		public void AddPerformer(SexPerformerInfo performer, IConditional[] StartConditions, IConditional[] PerformConditions)
 		{
-			Dictionary<int?, List<ScenePerformer>> toPerformerList;
+			Dictionary<int, List<ScenePerformer>> toPerformerList;
 			if (!Performers.TryGetValue(performer.FromNpcId, out toPerformerList))
 			{
-				toPerformerList = new Dictionary<int?, List<ScenePerformer>>();
+				toPerformerList = new Dictionary<int, List<ScenePerformer>>();
 				Performers.Add(performer.FromNpcId, toPerformerList);
 			}
 
 			List<ScenePerformer> performerList;
-			if (!toPerformerList.TryGetValue(performer.ToNpcId, out performerList))
+			if (!toPerformerList.TryGetValue(performer.ToNpcId ?? -1, out performerList))
 			{
 				performerList = new List<ScenePerformer>();
-				toPerformerList.Add(performer.ToNpcId, performerList);
+				toPerformerList.Add(performer.ToNpcId ?? -1, performerList);
 			}
 
 			performerList.Add(new ScenePerformer(performer, StartConditions, PerformConditions));
@@ -84,7 +84,7 @@ namespace HFramework.Scenes
 		{
 			if (Performers.TryGetValue(from.npcID, out var toPerformerList))
 			{
-				if (toPerformerList.TryGetValue(to?.npcID, out var performerList))
+				if (toPerformerList.TryGetValue(to?.npcID ?? -1, out var performerList))
 				{
 					foreach (var performer in performerList)
 					{
@@ -102,7 +102,7 @@ namespace HFramework.Scenes
 		{
 			if (Performers.TryGetValue(fromNpcId, out var toPerformerList))
 			{
-				if (toPerformerList.TryGetValue(toNpcId, out var performerList))
+				if (toPerformerList.TryGetValue(toNpcId ?? -1, out var performerList))
 				{
 					foreach (var performer in performerList)
 					{
