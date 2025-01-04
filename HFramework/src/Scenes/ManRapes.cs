@@ -94,7 +94,7 @@ namespace HFramework.Scenes
 			if (npc.faint > 0 && npc.life > 0)
 				npc.nMove.actType = NPCMove.ActType.Interval;
 			else
-				yield return this.Controller.LoopAnimation(this, this.TmpSexAnim, "A_dead_idle");
+				yield return this.Controller.LoopAnimation("A_dead_idle");
 
 			if (npc.nMove.npcType == NPCMove.NPCType.Follow || npc.nMove.npcType == NPCMove.NPCType.Friend)
 				npc.nMove.tmpEnemy = null;

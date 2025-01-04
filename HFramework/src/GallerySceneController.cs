@@ -6,12 +6,6 @@ namespace HFramework
 {
 	public class GallerySceneController: ISceneController
 	{
-		public IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
-		{
-			tmpSexAnim.state.SetAnimation(0, name, true);
-			yield break;
-		}
-
 		public void SetScene(IScene scene)
 		{
 			throw new System.NotImplementedException();

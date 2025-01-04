@@ -98,7 +98,7 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			yield return this.Controller.LoopAnimation(this, this.Girl.anim, "A_idle");
+			yield return this.Controller.LoopAnimation("A_idle");
 		}
 
 		private IEnumerator StopGirl()

@@ -1,6 +1,5 @@
 using System.Collections;
 using HFramework.Scenes;
-using Spine.Unity;
 
 namespace HFramework
 {
@@ -16,8 +15,6 @@ namespace HFramework
 		
 		void LoopAnimationBg(string name);
 		
-		IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name);
-
 		IEnumerator PlayTimedStep(string name, float time);
 		
 		IEnumerator PlayOnceStep(string name, bool skippable = false);
