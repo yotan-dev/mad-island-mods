@@ -14,6 +14,7 @@ using Gallery.GalleryScenes.Toilet;
 using Gallery.GalleryScenes.Onani;
 using Gallery.GalleryScenes.Delivery;
 using Gallery.GalleryScenes.Slave;
+using Gallery.GalleryScenes.Daruma;
 
 namespace Gallery
 {
@@ -42,6 +43,10 @@ namespace Gallery
 				.ForScenes(CommonSexNPC.Name)
 				.HookStepStart(CommonSexNPC.StepNames.Main)
 				.Call(this.OnCommonSexNPCStart);
+			HookBuilder.New("Gallery.Daruma.Start")
+				.ForScenes(Daruma.Name)
+				.HookStepStart(Daruma.StepNames.Main)
+				.Call(this.OnDarumaStart);
 			HookBuilder.New("Gallery.Delivery.Start")
 				.ForScenes(Delivery.Name)
 				.HookStepStart(Delivery.StepNames.Main)
@@ -81,7 +86,7 @@ namespace Gallery
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.SetNormal);
 			HookBuilder.New("Gallery.Rape.OnPenetrate")
-				.ForScenes(ManRapes.Name, ManRapesSleep.Name, PlayerRaped.Name)
+				.ForScenes(Daruma.Name, ManRapes.Name, ManRapesSleep.Name, PlayerRaped.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.SetRaped);
 			HookBuilder.New("Gallery.Toilet.OnPenetrate")
@@ -146,6 +151,14 @@ namespace Gallery
 			// We only track if at least one is friend, as we can get some weird results otherwise -- specially with herb village
 			if (CommonUtils.IsFriend(commonSexNpc.NpcA) || CommonUtils.IsFriend(commonSexNpc.NpcB))
 				Trackers.Add(commonSexNpc, new CommonSexNPCTracker(commonSexNpc.NpcA, commonSexNpc.NpcB, commonSexNpc.Place, commonSexNpc.Type));
+
+			yield break;
+		}
+
+		private IEnumerator OnDarumaStart(IScene2 scene, object arg2)
+		{
+			var daruma = scene as Daruma;
+			Trackers.Add(daruma, new DarumaTracker(daruma.Player, daruma.Npc));
 
 			yield break;
 		}
