@@ -20,14 +20,15 @@ namespace HFramework.Scenes
 
 		/// <summary>
 		/// First NPC in the Sex Scene.
-		/// If a female NPC is involved, this is the female one.
+		/// If a non-female NPC is involved, this is it.
 		/// </summary>
-		public readonly CommonStates NpcA;
+		public readonly CommonStates Npc1;
 
 		/// <summary>
 		/// Second NPC in the Sex Scene.
+		/// Usually, a female NPC
 		/// </summary>
-		public readonly CommonStates NpcB;
+		public readonly CommonStates Npc2;
 
 		public readonly SexPlace Place;
 
@@ -52,12 +53,12 @@ namespace HFramework.Scenes
 			this.Place = sexPlace;
 			this.Type = sexType;
 
-			this.NpcA = npcA;
-			this.NpcB = npcB;
-			if (!CommonUtils.IsFemale(npcA) && CommonUtils.IsFemale(npcB))
+			this.Npc2 = npcA;
+			this.Npc1 = npcB;
+			if (CommonUtils.IsFemale(npcA) && !CommonUtils.IsFemale(npcB))
 			{
-				this.NpcA = npcB;
-				this.NpcB = npcA;
+				this.Npc2 = npcA;
+				this.Npc1 = npcB;
 			}
 		}
 
@@ -87,7 +88,7 @@ namespace HFramework.Scenes
 
 		private bool AreActorsAlive()
 		{
-			return this.NpcA.dead == 0 && this.NpcB.dead == 0;
+			return this.Npc2.dead == 0 && this.Npc1.dead == 0;
 		}
 
 		private bool AreActorsWaiting()
@@ -102,19 +103,19 @@ namespace HFramework.Scenes
 
 		private void SetupTmpSex()
 		{
-			if (this.NpcA.npcID == this.NpcB.npcID)
+			if (this.Npc2.npcID == this.Npc1.npcID)
 			{ // Same NPC (usually girl x girl)
-				Managers.mn.randChar.SetCharacter(this.TmpSex, this.NpcA, null);
+				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, null);
 				CommonStates component2 = this.TmpSex.GetComponent<CommonStates>();
 				if (component2 != null)
 				{
-					Managers.mn.randChar.CopyParams(this.NpcB, component2);
+					Managers.mn.randChar.CopyParams(this.Npc1, component2);
 					Managers.mn.randChar.LoadGenGirl(this.TmpSex, false, RandomCharacter.LoadType.G);
 				}
 			}
 			else
 			{ // Basic case, usually girl x men
-				Managers.mn.randChar.SetCharacter(this.TmpSex, this.NpcA, this.NpcB);
+				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, this.Npc1);
 			}
 		}
 
@@ -155,14 +156,14 @@ namespace HFramework.Scenes
 				return false;
 
 			// @TODO: Check if we really need to those here or we can move to SetupTmpSex
-			if (this.NpcA.npcID == NpcID.UnderGroundWoman && this.NpcB.npcID == NpcID.YoungMan)
+			if (this.Npc2.npcID == NpcID.UnderGroundWoman && this.Npc1.npcID == NpcID.YoungMan)
 			{
-				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.NpcB);
-				Managers.mn.randChar.LoadGenUnder(this.NpcA, this.TmpSex);
+				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Npc1);
+				Managers.mn.randChar.LoadGenUnder(this.Npc2, this.TmpSex);
 			}
-			else if (this.NpcA.npcID == NpcID.ElderSisterNative && this.NpcB.npcID == NpcID.YoungMan)
+			else if (this.Npc2.npcID == NpcID.ElderSisterNative && this.Npc1.npcID == NpcID.YoungMan)
 			{
-				Managers.mn.randChar.SetCharacter(this.TmpSex, this.NpcA, this.NpcB);
+				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, this.Npc1);
 			}
 
 			this.Place.user = this.TmpSex;
@@ -171,12 +172,12 @@ namespace HFramework.Scenes
 			this.BAngle = this.BMove.searchAngle;
 			this.AMove.searchAngle = 180f;
 			this.BMove.searchAngle = 180f;
-			this.NpcA.gameObject.transform.position = pos;
-			this.NpcB.gameObject.transform.position = pos;
+			this.Npc2.gameObject.transform.position = pos;
+			this.Npc1.gameObject.transform.position = pos;
 
 			this.SetupTmpSex();
-			this.DisableLiveNpc(this.NpcA, this.AMove);
-			this.DisableLiveNpc(this.NpcB, this.BMove);
+			this.DisableLiveNpc(this.Npc2, this.AMove);
+			this.DisableLiveNpc(this.Npc1, this.BMove);
 
 			return true;
 		}
@@ -203,27 +204,27 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			this.PrepareNpc(this.NpcA, out this.AMove);
-			this.PrepareNpc(this.NpcB, out this.BMove);
+			this.PrepareNpc(this.Npc2, out this.AMove);
+			this.PrepareNpc(this.Npc1, out this.BMove);
 
-			GameObject emotionA = this.SetEmotion(this.NpcA);
-			GameObject emotionB = this.SetEmotion(this.NpcB);
+			GameObject emotionA = this.SetEmotion(this.Npc2);
+			GameObject emotionB = this.SetEmotion(this.Npc1);
 
-			yield return new MoveToPlace(this, [this.NpcA, this.NpcB], transform.position, this.Place);
+			yield return new MoveToPlace(this, [this.Npc2, this.Npc1], transform.position, this.Place);
 
 			emotionA.SetActive(false);
 			emotionB.SetActive(false);
 			if (!this.CanContinue())
 			{
-				this.ResetNpc(this.NpcA, this.AMove);
-				this.ResetNpc(this.NpcB, this.BMove);
+				this.ResetNpc(this.Npc2, this.AMove);
+				this.ResetNpc(this.Npc1, this.BMove);
 				yield break;
 			}
 
 			if (!this.SetupScene())
 			{
-				this.NpcA.sex = CommonStates.SexState.None;
-				this.NpcB.sex = CommonStates.SexState.None;
+				this.Npc2.sex = CommonStates.SexState.None;
+				this.Npc1.sex = CommonStates.SexState.None;
 				if (this.TmpSex != null)
 					Object.Destroy(this.TmpSex);
 				this.AMove.actType = NPCMove.ActType.Travel;
@@ -245,8 +246,8 @@ namespace HFramework.Scenes
 				Object.Destroy(this.TmpSex);
 
 			this.Place.user = null;
-			this.EnableLiveNpc(this.NpcA);
-			this.EnableLiveNpc(this.NpcB);
+			this.EnableLiveNpc(this.Npc2);
+			this.EnableLiveNpc(this.Npc1);
 
 			if (this.AMove.actType == NPCMove.ActType.Wait && this.BMove.actType == NPCMove.ActType.Wait)
 			{
@@ -260,18 +261,18 @@ namespace HFramework.Scenes
 			}
 			this.AMove.searchAngle = this.AAngle;
 			this.BMove.searchAngle = this.BAngle;
-			this.NpcA.sex = CommonStates.SexState.None;
-			this.NpcB.sex = CommonStates.SexState.None;
-			if (this.NpcA.debuff.perfume <= 0f)
+			this.Npc2.sex = CommonStates.SexState.None;
+			this.Npc1.sex = CommonStates.SexState.None;
+			if (this.Npc2.debuff.perfume <= 0f)
 			{
-				this.NpcA.libido -= 20f;
+				this.Npc2.libido -= 20f;
 			}
-			if (this.NpcB.debuff.perfume <= 0f)
+			if (this.Npc1.debuff.perfume <= 0f)
 			{
-				this.NpcB.libido -= 20f;
+				this.Npc1.libido -= 20f;
 			}
-			this.NpcA.MoralChange(3f, null, NPCManager.MoralCause.None);
-			this.NpcB.MoralChange(3f, null, NPCManager.MoralCause.None);
+			this.Npc2.MoralChange(3f, null, NPCManager.MoralCause.None);
+			this.Npc1.MoralChange(3f, null, NPCManager.MoralCause.None);
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
@@ -294,8 +295,7 @@ namespace HFramework.Scenes
 
 		public CommonStates[] GetActors()
 		{
-			// @TODO: Invert NPC A/B so male comes first
-			return [this.NpcB, this.NpcA];
+			return [this.Npc1, this.Npc2];
 		}
 
 		public SkeletonAnimation GetSkelAnimation()
