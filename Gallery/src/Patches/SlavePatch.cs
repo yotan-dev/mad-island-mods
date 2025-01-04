@@ -9,7 +9,7 @@ namespace Gallery.Patches
 {
 	public class SlavePatch
 	{
-		private static SlaveSceneEventHandler EventHandler = null;
+		private static SlaveTracker Tracker = null;
 
 		private static Dictionary<string, CommonStates> GetCharas()
 		{
@@ -42,9 +42,9 @@ namespace Gallery.Patches
 
 				if (state == 0)
 				{
-					EventHandler = new SlaveSceneEventHandler(CommonUtils.GetActivePlayer(), tmpSlave);
+					Tracker = new SlaveTracker(CommonUtils.GetActivePlayer(), tmpSlave);
 
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(CommonUtils.GetActivePlayer(), EventHandler);
+					GalleryScenesManager.Instance.AddTrackerForCommon(CommonUtils.GetActivePlayer(), Tracker);
 				}
 			}
 			catch (Exception error)
@@ -73,11 +73,11 @@ namespace Gallery.Patches
 					ItemInfo component = tmpSlave.GetComponent<ItemInfo>();
 					string itemKey = component.itemKey;
 
-					EventHandler.AfterSex(null, CommonUtils.GetActivePlayer(), null);
+					Tracker?.End();
 				}
-				else if (state == 6)
+				else if (state == 6 && Tracker != null)
 				{
-					EventHandler.OnBusted(CommonUtils.GetActivePlayer(), null, 0);
+					Tracker.Busted = true;
 				}
 			}
 			catch (Exception error)
@@ -88,7 +88,7 @@ namespace Gallery.Patches
 			{
 				if (state == 0)
 				{
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(CommonUtils.GetActivePlayer());
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(CommonUtils.GetActivePlayer());
 				}
 			}
 		}

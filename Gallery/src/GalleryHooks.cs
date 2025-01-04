@@ -13,6 +13,7 @@ using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.Toilet;
 using Gallery.GalleryScenes.Onani;
 using Gallery.GalleryScenes.Delivery;
+using Gallery.GalleryScenes.Slave;
 
 namespace Gallery
 {
@@ -61,6 +62,10 @@ namespace Gallery
 				.ForScenes(PlayerRaped.Name)
 				.HookStepStart(PlayerRaped.StepNames.Main)
 				.Call(this.OnPlayerRapedStart);
+			HookBuilder.New("Gallery.Slave.Start")
+				.ForScenes(Slave.Name)
+				.HookStepStart(Slave.StepNames.Main)
+				.Call(this.OnSlaveStart);
 			HookBuilder.New("Gallery.Toilet.Start")
 				.ForScenes(Toilet.Name)
 				.HookStepStart(Toilet.StepNames.Main)
@@ -177,6 +182,13 @@ namespace Gallery
 		{
 			var manRapes = scene as PlayerRaped;
 			Trackers.Add(manRapes, new PlayerRapedTracker(manRapes.Player, manRapes.Rapist));
+			yield break;
+		}
+
+		private IEnumerator OnSlaveStart(IScene2 scene, object arg2)
+		{
+			var slave = scene as Slave;
+			Trackers.Add(slave, new SlaveTracker(slave.Player, slave.TmpSlave));
 			yield break;
 		}
 
