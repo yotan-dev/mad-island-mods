@@ -1,22 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
-using YotanModCore.Extensions;
+using YotanModCore.Consts;
 using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class Slave : IScene
+	public class Slave : IScene, IScene2
 	{
+		public static readonly string Name = "Slave";
+
+		private static readonly Dictionary<string, int> ItemKeyToNpcID = new Dictionary<string, int>()
+		{
+			{ "slave_giant_01", NpcID.Giant /* 110 */ },
+			{ "slave_shino_01", NpcID.Shino /* 114 */ },
+			{ "slave_sally_01", NpcID.Sally /* 115 */ },
+		};
+
 		public readonly CommonStates Player;
 
-		public readonly CommonStates Npc;
 
 		public readonly InventorySlot TmpSlave;
-
-		private string TmpSexType = "";
+		
+		private CommonStates Npc;
 
 		private int TmpCommonState = 0;
 
@@ -30,12 +39,26 @@ namespace HFramework.Scenes
 
 		private ISceneController Controller;
 
+		private SexPerformer Performer;
+
+		private string ItemKey;
+
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		public Slave(CommonStates player, InventorySlot tmpSlave)
 		{
 			this.Player = player;
 			this.TmpSlave = tmpSlave;
+
+			ItemInfo component = this.TmpSlave?.GetComponent<ItemInfo>();
+			this.ItemKey = component?.itemKey ?? "";
+			
+			this.Npc = null;
+			if (ItemKeyToNpcID.TryGetValue(this.ItemKey, out var npcId))
+			{
+				this.TmpCommonState = npcId;
+				this.Npc = CommonUtils.MakeTempCommon(npcId);
+			}
 
 			this.MenuPanel = new SlaveMenuPanel();
 			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
@@ -46,9 +69,19 @@ namespace HFramework.Scenes
 			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
 		}
 
+		~Slave()
+		{
+			if (this.Npc != null)
+			{
+				Object.Destroy(this.Npc);
+				this.Npc = null;
+			}
+		}
+
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -60,17 +93,7 @@ namespace HFramework.Scenes
 		{
 			this.MenuPanel.Hide();
 
-			IEnumerable startAnimHandler = null;
-			if (this.CommonAnim.skeleton.Data.FindAnimation(this.TmpSexType + "start") != null)
-				startAnimHandler = this.Controller.PlayOnceStep(this, this.CommonAnim, this.TmpSexType + "start");
-			else if (this.CommonAnim.skeleton.Data.FindAnimation(this.TmpSexType + "Start") != null)
-				startAnimHandler = this.Controller.PlayOnceStep(this, this.CommonAnim, this.TmpSexType + "Start");
-
-			if (startAnimHandler != null)
-			{
-				foreach (var x in startAnimHandler)
-					yield return x;
-			}
+			yield return this.Performer.Perform(ActionType.Insert);
 
 			CommonStates to = Managers.mn.npcMN.MakeTempCommon(this.TmpCommonState);
 
@@ -92,10 +115,8 @@ namespace HFramework.Scenes
 				yield break;
 
 			this.MenuPanel.ShowInsertMenu();
-			if (this.CommonAnim.skeleton.Data.FindAnimation(this.TmpSexType + "start_idle") != null)
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "start_idle");
-			else if (this.CommonAnim.skeleton.Data.FindAnimation(this.TmpSexType + "Start_idle") != null)
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Start_idle");
+
+			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
@@ -104,33 +125,29 @@ namespace HFramework.Scenes
 		private IEnumerator OnMove()
 		{
 			this.MenuPanel.ShowMoveMenu();
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_01");
+			yield return this.Performer.Perform(ActionType.Speed1);
 		}
 
 		private IEnumerator OnSpeed()
 		{
-			if (this.CommonAnim.GetCurrentAnimName() == this.TmpSexType + "Loop_01")
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_02");
-			else if (this.CommonAnim.GetCurrentAnimName() == this.TmpSexType + "Loop_02")
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Loop_01");
+			if (this.Performer.CurrentAction == ActionType.Speed1)
+				yield return this.Performer.Perform(ActionType.Speed2);
+			else if (this.Performer.CurrentAction == ActionType.Speed2)
+				yield return this.Performer.Perform(ActionType.Speed1);
 		}
 
 		private IEnumerator OnStop()
 		{
 			this.MenuPanel.ShowStopMenu();
 
-			if (this.CommonAnim.HasAnimation(this.TmpSexType + "start_idle"))
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "start_idle");
-			else if (this.CommonAnim.HasAnimation(this.TmpSexType + "Start_idle"))
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Start_idle");
+			yield return this.Performer.Perform(ActionType.InsertIdle);
 		}
 
 		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
 
-			foreach (var x in this.Controller.PlayOnceStep(this, this.CommonAnim, this.TmpSexType + "Finish"))
-				yield return x;
+			yield return this.Performer.Perform(ActionType.Finish);
 
 			CommonStates to = Managers.mn.npcMN.MakeTempCommon(this.TmpCommonState);
 			foreach (var handler in this.EventHandlers)
@@ -142,7 +159,7 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "Finish_idle");
+			yield return this.Performer.Perform(ActionType.FinishIdle);
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
@@ -154,51 +171,24 @@ namespace HFramework.Scenes
 			yield break;
 		}
 
-		private bool GetScene(string itemKey, out GameObject scene, out int commonState, out string sexType)
-		{
-			if (itemKey == "slave_giant_01")
-			{
-				sexType = "Rape_A_";
-				commonState = 110;
-				scene = Managers.mn.sexMN.sexList[1].sexObj[7];
-			}
-			else if (itemKey == "slave_shino_01")
-			{
-				sexType = "Rape_A_";
-				commonState = 114;
-				scene = Managers.mn.sexMN.sexList[1].sexObj[19];
-			}
-			else if (itemKey == "slave_sally_01")
-			{
-				sexType = "Rapes2_A_";
-				commonState = 115;
-				scene = Managers.mn.sexMN.sexList[11].sexObj[0];
-			}
-			else
-			{
-				sexType = "";
-				scene = null;
-				commonState = 0;
-			}
-
-			return true;
-		}
-
 		private bool SetupScene()
 		{
 			if (this.TmpSlave == null)
 				return true;
 
-			ItemInfo component = this.TmpSlave.GetComponent<ItemInfo>();
-			string itemKey = component.itemKey;
-			if (!this.GetScene(component.itemKey, out GameObject scene, out this.TmpCommonState, out this.TmpSexType))
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
+			{
+				PLogger.LogError("No performer found");
 				return false;
-
+			}
+			
+			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
 				return false;
 
 			Vector3 position = this.TmpSlave.transform.position;
-			if (itemKey == "slave_sally_01")
+			if (this.ItemKey == "slave_sally_01")
 				position = this.TmpSlave.transform.Find("Anim").gameObject.transform.position;
 
 			this.SexObject = GameObject.Instantiate(scene, position, Quaternion.identity);
@@ -209,7 +199,7 @@ namespace HFramework.Scenes
 
 			Managers.mn.randChar.SetCharacter(this.SexObject, null, this.Player);
 
-			if (itemKey == "slave_giant_01")
+			if (this.ItemKey == "slave_giant_01")
 			{
 				this.CommonAnim.skeleton.SetAttachment("slave_ring", "slave_ring");
 				this.CommonAnim.skeleton.SetAttachment("slave_chain", "slave_chain");
@@ -243,6 +233,12 @@ namespace HFramework.Scenes
 
 			if (this.TmpSlave?.gameObject != null)
 				this.TmpSlave.gameObject.SetActive(true);
+
+			if (this.Npc != null)
+			{
+				Object.Destroy(this.Npc);
+				this.Npc = null;
+			}
 		}
 
 		public IEnumerator Run()
@@ -256,7 +252,7 @@ namespace HFramework.Scenes
 			Managers.mn.uiMN.MainCanvasView(false);
 			this.DisablePlayer();
 
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.TmpSexType + "idle");
+			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			this.MenuPanel.Open(this.TmpSlave.transform.position);
 			this.MenuPanel.ShowInitialMenu();
@@ -278,7 +274,6 @@ namespace HFramework.Scenes
 			Managers.mn.uiMN.MainCanvasView(true);
 		}
 
-
 		public bool CanContinue()
 		{
 			// Managers.mn.uiMN.propActProgress == 5
@@ -288,6 +283,31 @@ namespace HFramework.Scenes
 		public void Destroy()
 		{
 			this.MenuPanel?.Close();
+		}
+
+		public string GetName()
+		{
+			return Slave.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Player, this.Npc];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.CommonAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName;
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }

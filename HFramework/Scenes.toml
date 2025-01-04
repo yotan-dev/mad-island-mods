@@ -540,6 +540,28 @@ PerformConditions = []
 
 
 
+# ================== HF_Slave ==================== #
+
+[[Scenes]] # HF_Slave
+Id = "HF_Slave"
+
+[[Scenes.Performers]]
+Performer = "HF_Slave_Man_Giant"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Slave_Man_Shino"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Slave_Man_Sally"
+StartConditions = []
+PerformConditions = []
+
+
+
 # ================== HF_Toilet ==================== #
 
 [[Scenes]] # HF_Toilet
