@@ -5,6 +5,8 @@ namespace HFramework.Hook
 		public const string OnPenetrate = "OnPenetrate";
 		public const string OnMasturbate = "OnMasturbate";
 		public const string OnDelivery = "OnDelivery";
+		public const string OnBirth = "OnBirth";
+		public const string OnStillbirth = "OnStillbirth";
 		public const string OnOrgasm = "OnOrgasm";
 		public const string OnCreampie = "OnCreampie";
 		public const string OnPlayerDefeated = "OnPlayerDefeated";
