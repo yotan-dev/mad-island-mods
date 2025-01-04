@@ -16,7 +16,6 @@ namespace HFramework.Patches
 			
 			var scene = new Daruma(pCommon, girlCommon, tmpDaruma);
 			scene.Init(new DefaultSceneController());
-			scene.AddEventHandler(new DefaultSceneEventHandler());
 			__result = scene.Run();
 
 			return false;

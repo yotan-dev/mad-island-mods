@@ -24,7 +24,7 @@ namespace HFramework
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnPenetrate);
 			HookBuilder.New("HF.Rape.OnPenetrate")
-				.ForScenes(ManRapes.Name, ManRapesSleep.Name, Slave.Name)
+				.ForScenes(Daruma.Name, ManRapes.Name, ManRapesSleep.Name, Slave.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnRapePenetrate);
 			HookBuilder.New("HF.ManRapes.OnPenetrate")

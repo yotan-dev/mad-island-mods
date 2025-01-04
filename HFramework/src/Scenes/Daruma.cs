@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
-using YotanModCore.Consts;
 using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
@@ -23,15 +21,11 @@ namespace HFramework.Scenes
 
 		private GameObject DarumaObj;
 
-		private bool InsertCounted = false;
-
 		private SkeletonAnimation CommonAnim;
 
 		private ISceneController Controller;
 
 		private SexPerformer Performer;
-
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		private readonly DarumaMenuPanel MenuPanel;
 
@@ -55,27 +49,8 @@ namespace HFramework.Scenes
 			this.Controller.SetScene(this);
 		}
 
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
-		}
-
 		private IEnumerator OnInsert()
 		{
-			// Note: v0.2.3 counts many times, but this seems inconsistent with other scenes, so we will count once.
-			if (!this.InsertCounted)
-			{
-				this.InsertCounted = true;
-
-				// Note: This assumes the player is always a male and the NPC is always a female,
-				// which is true as of beta 0.2.3
-				foreach (var handler in this.EventHandlers)
-				{
-					foreach (var x in handler.OnRape(this.Player, this.Npc))
-						yield return x;
-				}
-			}
-
 			this.MenuPanel.ShowInsertMenu();
 
 			yield return this.Performer.Perform(ActionType.Speed1);
@@ -100,12 +75,6 @@ namespace HFramework.Scenes
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnBusted(this.Player, this.Npc, 0))
-					yield return x;
-			}
 
 			if (!this.CanContinue())
 				yield break;
@@ -176,11 +145,6 @@ namespace HFramework.Scenes
 
 			if (this.DarumaObj != null)
 				this.DarumaObj.SetActive(true);
-
-			foreach (var handler in this.EventHandlers) {
-				foreach (var x in handler.AfterSex(this, this.Player, this.Npc))
-					yield return x;
-			}
 
 			Managers.mn.gameMN.Controlable(true, true);
 			Managers.mn.gameMN.pMove.PlayerVisible(true);
