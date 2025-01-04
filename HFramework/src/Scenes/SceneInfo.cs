@@ -37,7 +37,7 @@ namespace HFramework.Scenes
 				return true;
 			}
 
-			public bool CanPerform(IScene2 scene, PerformerScope scope)
+			public bool CanPerform(IScene scene, PerformerScope scope)
 			{
 				if (!this.Performer.Scopes.Contains(scope))
 					return false;
@@ -98,7 +98,7 @@ namespace HFramework.Scenes
 			return false;
 		}
 
-		public SexPerformerInfo? GetPerformerInfo(IScene2 scene, PerformerScope scope, int fromNpcId, int? toNpcId = null)
+		public SexPerformerInfo? GetPerformerInfo(IScene scene, PerformerScope scope, int fromNpcId, int? toNpcId = null)
 		{
 			if (Performers.TryGetValue(fromNpcId, out var toPerformerList))
 			{

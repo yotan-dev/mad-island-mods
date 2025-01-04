@@ -10,7 +10,7 @@ namespace HFramework.Hook
 
 		public string Target { get; private set; }
 
-		public Func<IScene2, object, IEnumerator> Handler { get; private set; }
+		public Func<IScene, object, IEnumerator> Handler { get; private set; }
 
 		public Hook(string uid)
 		{
@@ -18,12 +18,12 @@ namespace HFramework.Hook
 			this.Handler = this.DummyHandler;
 		}
 
-		private IEnumerator DummyHandler(IScene2 scene, object param)
+		private IEnumerator DummyHandler(IScene scene, object param)
 		{
 			yield break;
 		}
 
-		public Hook(string uid, string target, Func<IScene2, object, IEnumerator> handler)
+		public Hook(string uid, string target, Func<IScene, object, IEnumerator> handler)
 		{
 			this.UID = uid;
 			this.Target = target;

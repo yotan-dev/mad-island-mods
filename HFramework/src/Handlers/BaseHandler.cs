@@ -16,20 +16,13 @@ namespace HFramework.Handlers
 	/// </summary>
 	public abstract class BaseHandler
 	{
-		protected readonly IScene2 Scene;
-		
-		protected readonly IScene OldScene;
+		protected readonly IScene Scene;
 
 		protected bool ShouldStop = false;
 
-		public BaseHandler(IScene2 scene)
-		{
-			this.Scene = scene;
-		}
-
 		public BaseHandler(IScene scene)
 		{
-			this.OldScene = scene;
+			this.Scene = scene;
 		}
 
 		/// <summary>
@@ -45,7 +38,6 @@ namespace HFramework.Handlers
 			if (this.ShouldStop)
 			{
 				this.Scene?.Destroy();
-				this.OldScene?.Destroy();
 			}
 		}
 	}

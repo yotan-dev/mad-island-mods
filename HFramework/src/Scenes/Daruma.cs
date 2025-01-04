@@ -8,7 +8,7 @@ using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class Daruma : IScene, IScene2
+	public class Daruma : IScene
 	{
 		public static readonly string Name = "Daruma";
 

@@ -12,7 +12,7 @@ namespace HFramework.Handlers.Animation
 
 		private readonly string Name;
 
-		public LoopAnimationUntilInput(IScene2 scene, SkeletonAnimation animation, string name) : base(scene)
+		public LoopAnimationUntilInput(IScene scene, SkeletonAnimation animation, string name) : base(scene)
 		{
 			this.Anim = animation;
 			this.Name = name;

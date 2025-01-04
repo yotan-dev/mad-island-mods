@@ -13,7 +13,7 @@ namespace HFramework.Scenes.Conditionals
 			this.ExpectedValue = expectedValue;
 		}
 
-		public bool Pass(IScene2 scene)
+		public bool Pass(IScene scene)
 		{
 			bool isPregnant = false;
 			foreach (var actor in scene.GetActors())

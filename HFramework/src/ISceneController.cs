@@ -6,9 +6,9 @@ namespace HFramework
 {
 	public interface ISceneController
 	{
-		void SetScene(IScene2 scene);
+		void SetScene(IScene scene);
 
-		IScene2 GetScene();
+		IScene GetScene();
 
 		bool IsAnimRunning();
 

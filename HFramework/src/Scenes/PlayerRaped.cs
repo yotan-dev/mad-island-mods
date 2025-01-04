@@ -10,7 +10,7 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class PlayerRaped : IScene, IScene2
+	public class PlayerRaped : IScene
 	{
 		public static readonly string Name = "HF_PlayerRaped";
 

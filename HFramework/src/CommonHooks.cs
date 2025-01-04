@@ -13,7 +13,7 @@ namespace HFramework
 	{
 		public static readonly CommonHooks Instance = new CommonHooks();
 
-		private Dictionary<IScene2, bool> ToiletCounted = new Dictionary<IScene2, bool>();
+		private Dictionary<IScene, bool> ToiletCounted = new Dictionary<IScene, bool>();
 
 		private CommonHooks() { }
 
@@ -73,7 +73,7 @@ namespace HFramework
 				.Call(this.OnEnd);
 		}
 
-		private IEnumerator OnPenetrate(IScene2 scene, object param)
+		private IEnumerator OnPenetrate(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
@@ -83,7 +83,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnRapePenetrate(IScene2 scene, object param)
+		private IEnumerator OnRapePenetrate(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
@@ -93,7 +93,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnToiletsPenetrate(IScene2 scene, object param)
+		private IEnumerator OnToiletsPenetrate(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
@@ -103,7 +103,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnDelivery(IScene2 scene, object param)
+		private IEnumerator OnDelivery(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
@@ -134,7 +134,7 @@ namespace HFramework
 			Managers.mn.sexMN.Pregnancy(mother, null, false);
 		}
 
-		private IEnumerator OnMasturbate(IScene2 scene, object param)
+		private IEnumerator OnMasturbate(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
@@ -144,7 +144,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnManRapesPenetrate(IScene2 scene, object param)
+		private IEnumerator OnManRapesPenetrate(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
@@ -158,7 +158,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnCreampie(IScene2 scene, object param)
+		private IEnumerator OnCreampie(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
@@ -168,7 +168,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnCommonSexPlayerAffection(IScene2 scene, object param)
+		private IEnumerator OnCommonSexPlayerAffection(IScene scene, object param)
 		{
 			var commonSexPlayer = scene as CommonSexPlayer;
 			if (commonSexPlayer == null)
@@ -182,7 +182,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnCommonSexNPCAffection(IScene2 scene, object param)
+		private IEnumerator OnCommonSexNPCAffection(IScene scene, object param)
 		{
 			var commonSexNpc = scene as CommonSexNPC;
 			if (commonSexNpc == null)
@@ -194,7 +194,7 @@ namespace HFramework
 			yield break;
 		}
 
-		private IEnumerator OnPlayerRapedMoral(IScene2 scene, object param)
+		private IEnumerator OnPlayerRapedMoral(IScene scene, object param)
 		{
 			var playerRaped = scene as PlayerRaped;
 			if (playerRaped == null)
@@ -204,7 +204,7 @@ namespace HFramework
 				playerRaped.Rapist.MoralChange(20f, null, NPCManager.MoralCause.None);
 		}
 
-		private IEnumerator OnEnd(IScene2 scene, object param)
+		private IEnumerator OnEnd(IScene scene, object param)
 		{
 			if (this.ToiletCounted.ContainsKey(scene))
 				this.ToiletCounted.Remove(scene);

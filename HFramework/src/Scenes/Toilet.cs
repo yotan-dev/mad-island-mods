@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -10,7 +9,7 @@ using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class Toilet : IScene, IScene2
+	public class Toilet : IScene
 	{
 		public static readonly string Name = "Toilet";
 

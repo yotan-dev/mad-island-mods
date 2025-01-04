@@ -46,7 +46,7 @@ namespace HFramework.Scenes
 			return SceneInfos.GetValueOrDefault(name);
 		}
 
-		public SexPerformer? GetPerformer(IScene2 scene, PerformerScope scope, ISceneController controller)
+		public SexPerformer? GetPerformer(IScene scene, PerformerScope scope, ISceneController controller)
 		{
 			var actors = scene.GetActors();
 			if (actors.Length == 0)

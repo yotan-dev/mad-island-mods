@@ -7,7 +7,7 @@ using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class AssWall : IScene, IScene2
+	public class AssWall : IScene
 	{
 		public static readonly string Name = "HF_AssWall";
 

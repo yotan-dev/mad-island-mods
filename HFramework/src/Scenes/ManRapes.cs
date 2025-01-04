@@ -9,7 +9,7 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class ManRapes : IScene, IScene2
+	public class ManRapes : IScene
 	{
 		public static readonly string Name = "HF_ManRapes";
 
