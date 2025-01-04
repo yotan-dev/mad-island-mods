@@ -1,11 +1,11 @@
 using System.Collections;
+using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
 using YotanModCore.Consts;
-using YotanModCore.Extensions;
 
 namespace HFramework.Scenes
 {
@@ -67,22 +67,6 @@ namespace HFramework.Scenes
 		private bool IsPlaceFree()
 		{
 			return this.Place?.user == null;
-		}
-
-		private bool IsNpcAtPos(CommonStates npc, Vector3 pos)
-		{
-			if (Vector3.Distance(npc.gameObject.transform.position, pos) > 1f)
-			{
-				if (npc.anim.GetCurrentAnimName() != "A_walk")
-					npc.anim.state.SetAnimation(0, "A_walk", true);
-
-				return false;
-			}
-
-			if (npc.nMove.common.anim.GetCurrentAnimName() != "A_idle")
-				npc.nMove.common.anim.state.SetAnimation(0, "A_idle", true);
-
-			return true;
 		}
 
 		private void DisableLiveNpc()
@@ -149,30 +133,6 @@ namespace HFramework.Scenes
 			Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, null);
 
 			return true;
-		}
-
-		private IEnumerator MoveToPlace(Vector3 pos)
-		{
-			float animTime = 30f;
-
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.Npc.gameObject, pos, 2f, "A_walk", true, false, 0.1f, 40f));
-
-			bool reached = false;
-			while (
-				animTime > 0f
-				&& this.IsActorWaiting()
-				&& !reached
-				&& this.IsPlaceFree()
-				&& this.IsActorAlive()
-			)
-			{
-				animTime -= Time.deltaTime;
-				reached = this.IsNpcAtPos(this.Npc, pos);
-				yield return false;
-			}
-
-			if (animTime <= 0f)
-				this.Destroy();
 		}
 
 		private void Teardown()
@@ -267,7 +227,7 @@ namespace HFramework.Scenes
 			GameObject emoA = Managers.mn.fxMN.GoEmotion(13, this.Npc.gameObject, Vector3.zero);
 
 			var reachedPos = false;
-			yield return this.MoveToPlace(pos);
+			yield return new MoveToPlace(this, [this.Npc], pos, this.Place).Handle();
 			if (!this.CanContinue())
 				yield break;
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -99,25 +100,6 @@ namespace HFramework.Scenes
 			return this.Place.user == null;
 		}
 
-		private void NpcAtPosCheck(CommonStates npc, NPCMove move, Vector3 pos, ref bool reached)
-		{
-			if (reached)
-				return;
-
-
-			if (Vector3.Distance(npc.gameObject.transform.position, pos) > 1f)
-			{
-				if (npc.anim.state.GetCurrent(0).Animation.Name != "A_walk")
-					npc.anim.state.SetAnimation(0, "A_walk", true);
-
-				return;
-			}
-
-			reached = true;
-			if (move.common.anim.state.GetCurrent(0).Animation.Name != "A_idle")
-				move.common.anim.state.SetAnimation(0, "A_idle", true);
-		}
-
 		private void SetupTmpSex()
 		{
 			if (this.NpcA.npcID == this.NpcB.npcID)
@@ -199,33 +181,6 @@ namespace HFramework.Scenes
 			return true;
 		}
 
-		private IEnumerable MoveToPlace(Transform place)
-		{
-			Vector3 pos = place.position;
-			float animTime = 30f;
-
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.NpcA.gameObject, pos, 2f, "A_walk", true, false, 0.1f, 40f));
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.NpcB.gameObject, pos, 2f, "A_walk", true, false, 0.1f, 40f));
-
-			bool aReached = false;
-			bool bReached = false;
-			while (
-				animTime > 0f
-				&& this.AreActorsWaiting()
-				&& (!aReached || !bReached)
-				&& this.IsPlaceFree()
-				&& this.AreActorsAlive()
-			)
-			{
-				animTime -= Time.deltaTime;
-				this.NpcAtPosCheck(this.NpcA, this.AMove, pos, ref aReached);
-				this.NpcAtPosCheck(this.NpcB, this.BMove, pos, ref bReached);
-				yield return false;
-			}
-
-			yield return animTime > 0f;
-		}
-
 		private IEnumerator Perform()
 		{
 			this.SexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
@@ -254,16 +209,11 @@ namespace HFramework.Scenes
 			GameObject emotionA = this.SetEmotion(this.NpcA);
 			GameObject emotionB = this.SetEmotion(this.NpcB);
 
-			bool isAtPlace = false;
-			foreach (var x in this.MoveToPlace(transform))
-			{
-				isAtPlace = (bool)x;
-				yield return x;
-			}
+			yield return new MoveToPlace(this, [this.NpcA, this.NpcB], transform.position, this.Place);
 
 			emotionA.SetActive(false);
 			emotionB.SetActive(false);
-			if (!isAtPlace)
+			if (!this.CanContinue())
 			{
 				this.ResetNpc(this.NpcA, this.AMove);
 				this.ResetNpc(this.NpcB, this.BMove);
