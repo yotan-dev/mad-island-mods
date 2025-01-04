@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
@@ -11,6 +11,14 @@ namespace HFramework.Scenes
 	public class Delivery : IScene, IScene2
 	{
 		public static readonly string Name = "Delivery";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Idle = "Idle";
+			public const string Loop = "Loop";
+			public const string Finish = "Finish";
+		}
 
 		/// <summary>
 		/// Girl delivering
@@ -217,18 +225,47 @@ namespace HFramework.Scenes
 
 		private IEnumerator Perform()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Idle);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Idle);
+				yield break;
+			}
+
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "damage", this.Girl.transform.position);
 			yield return this.Performer.Perform(ActionType.DeliveryIdle, 20f);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Idle);
 			if (!this.CanContinue())
 				yield break;
 			
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Loop);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Loop);
+				yield break;
+			}
+
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "finish", this.Girl.transform.position);
 			yield return this.Performer.Perform(ActionType.DeliveryLoop, 10f);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Loop);
 			if (!this.CanContinue())
 				yield break;
 
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+				yield break;
+			}
+
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "faint", this.Girl.transform.position);
 			yield return this.Performer.Perform(ActionType.DeliveryEnd);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 			if (!this.CanContinue())
 				yield break;
 		}
@@ -266,7 +303,7 @@ namespace HFramework.Scenes
 
 		public IEnumerator Run()
 		{
-			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Delivery, this.Controller);
 			if (this.Performer == null)
 			{
 				PLogger.LogError("Delivery.Performer is null");
@@ -295,7 +332,16 @@ namespace HFramework.Scenes
 
 			this.DisableLiveGirl();
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				yield break;
+			}
+
 			yield return this.Perform();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 			
 			this.FreePlace();
 
