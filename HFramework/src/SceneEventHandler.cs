@@ -95,11 +95,6 @@ namespace HFramework
 			yield return null;
 		}
 
-		public virtual IEnumerable AfterMasturbate(IScene scene, CommonStates common)
-		{
-			yield return null;
-		}
-
 		public virtual IEnumerable AfterDelivery(IScene scene, CommonStates mother)
 		{
 			yield return null;
