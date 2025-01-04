@@ -328,6 +328,26 @@ StartConditions = [
 PerformConditions = []
 
 
+# ================== HF_Delivery ==================== #
+
+[[Scenes]] # HF_Delivery
+Id = "HF_Delivery"
+
+[[Scenes.Performers]]
+Performer = "HF_FemaleNative_Delivery"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_NativeGirl_Delivery"
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["NativeGirl#16", true] },
+]
+PerformConditions = []
+
+
 # ================== HF_ManRapes ==================== #
 
 [[Scenes]] # HF_ManRapes

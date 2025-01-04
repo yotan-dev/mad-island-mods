@@ -43,6 +43,7 @@ namespace HFramework.Performer
 		{
 			{ "Battle", PerformerScope.Battle },
 			{ "Sex", PerformerScope.Sex },
+			{ "Delivery", PerformerScope.Delivery },
 		};
 
 		private static int ParseActor(string actor)

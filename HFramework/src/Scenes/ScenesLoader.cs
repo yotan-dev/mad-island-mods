@@ -18,6 +18,7 @@ namespace HFramework.Scenes
 			ScenesManager.Instance.AddScene(AssWall.Name, new SceneInfo(AssWall.Name));
 			ScenesManager.Instance.AddScene(CommonSexNPC.Name, new SceneInfo(CommonSexNPC.Name));
 			ScenesManager.Instance.AddScene(CommonSexPlayer.Name, new SceneInfo(CommonSexPlayer.Name));
+			ScenesManager.Instance.AddScene(Delivery.Name, new SceneInfo(Delivery.Name));
 			ScenesManager.Instance.AddScene(ManRapes.Name, new SceneInfo(ManRapes.Name));
 			ScenesManager.Instance.AddScene(ManRapesSleep.Name, new SceneInfo(ManRapesSleep.Name));
 			ScenesManager.Instance.AddScene(OnaniNPC.Name, new SceneInfo(OnaniNPC.Name));
