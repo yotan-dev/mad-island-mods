@@ -10,6 +10,8 @@ namespace Gallery.GalleryScenes
 
 		public virtual bool DidToilet { get; set; }= false;
 
+		public virtual bool DidMasturbation { get; set; } = false;
+
 		public virtual bool Raped { get; set; } = false;
 
 		public virtual bool Pregnant { get; set; } = false;

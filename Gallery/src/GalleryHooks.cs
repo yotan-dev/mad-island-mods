@@ -11,6 +11,7 @@ using Gallery.GalleryScenes.ManRapes;
 using Gallery.GalleryScenes.PlayerRaped;
 using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.Toilet;
+using Gallery.GalleryScenes.Onani;
 
 namespace Gallery
 {
@@ -47,6 +48,10 @@ namespace Gallery
 				.ForScenes(ManRapesSleep.Name)
 				.HookStepStart(ManRapesSleep.StepNames.Main)
 				.Call(this.OnManRapesSleepStart);
+			HookBuilder.New("Gallery.Onani.Start")
+				.ForScenes(OnaniNPC.Name)
+				.HookStepStart(OnaniNPC.StepNames.Main)
+				.Call(this.OnOnaniNPCStart);
 			HookBuilder.New("Gallery.PlayerRaped.Start")
 				.ForScenes(PlayerRaped.Name)
 				.HookStepStart(PlayerRaped.StepNames.Main)
@@ -74,6 +79,10 @@ namespace Gallery
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.SetToilet);
 
+			HookBuilder.New("Gallery.Any.OnMasturbate")
+				.ForScenes("*")
+				.HookEvent(EventNames.OnMasturbate)
+				.Call(this.SetMasturbate);
 			HookBuilder.New("Gallery.Any.OnOrgasm")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnOrgasm)
@@ -145,6 +154,13 @@ namespace Gallery
 			yield break;
 		}
 
+		private IEnumerator OnOnaniNPCStart(IScene2 scene, object arg2)
+		{
+			var onani = scene as OnaniNPC;
+			Trackers.Add(onani, new OnaniTracker(onani.Npc));
+			yield break;
+		}
+
 		private IEnumerator OnPlayerRapedStart(IScene2 scene, object arg2)
 		{
 			var manRapes = scene as PlayerRaped;
@@ -189,6 +205,15 @@ namespace Gallery
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
 				tracker.Raped = true;
+
+			yield break;
+		}
+
+		private IEnumerator SetMasturbate(IScene2 scene, object param)
+		{
+			var tracker = Trackers.GetValueOrDefault(scene, null);
+			if (tracker != null)
+				tracker.DidMasturbation = true;
 
 			yield break;
 		}
