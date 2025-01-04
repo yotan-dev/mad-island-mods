@@ -34,7 +34,7 @@ namespace HExtensions.DickPainter
 				.CallBefore("HF.Friendly.OnPenetrate", this.OnPenetrate);
 		}
 
-		private IEnumerator OnStart(IScene2 scene, object param)
+		private IEnumerator OnStart(IScene scene, object param)
 		{
 			var actors = scene.GetActors();
 			bool hasComdom = false;
@@ -57,7 +57,7 @@ namespace HExtensions.DickPainter
 			yield break;
 		}
 
-		private IEnumerator OnPenetrate(IScene2 scene, object param)
+		private IEnumerator OnPenetrate(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)

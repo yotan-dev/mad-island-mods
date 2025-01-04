@@ -35,7 +35,7 @@ namespace HExtensions.RequireForeplay
 				.Call(this.OnInsert);
 		}
 
-		private IEnumerator OnStart(IScene2 scene, object param)
+		private IEnumerator OnStart(IScene scene, object param)
 		{
 			var commonSexPlayer = scene as CommonSexPlayer;
 			if (commonSexPlayer == null)
@@ -60,7 +60,7 @@ namespace HExtensions.RequireForeplay
 			SexMeter.Instance.SetDividerPercent(requiredBarValue);
 		}
 
-		private IEnumerator OnInsert(IScene2 scene, object param)
+		private IEnumerator OnInsert(IScene scene, object param)
 		{
 			var commonSexPlayer = scene as CommonSexPlayer;
 			if (commonSexPlayer == null)
