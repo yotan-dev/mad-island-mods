@@ -23,6 +23,7 @@ namespace HFramework.Scenes
 			ScenesManager.Instance.AddScene(ManRapesSleep.Name, new SceneInfo(ManRapesSleep.Name));
 			ScenesManager.Instance.AddScene(OnaniNPC.Name, new SceneInfo(OnaniNPC.Name));
 			ScenesManager.Instance.AddScene(PlayerRaped.Name, new SceneInfo(PlayerRaped.Name));
+			ScenesManager.Instance.AddScene(Slave.Name, new SceneInfo(Slave.Name));
 			ScenesManager.Instance.AddScene(Toilet.Name, new SceneInfo(Toilet.Name));
 		}
 
