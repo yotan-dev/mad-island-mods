@@ -1195,6 +1195,64 @@ Default = [
 ]
 
 
+# ================ Slave =============== #
+
+[[Performers]] # HF_Slave_Man_Giant
+Id = "HF_Slave_Man_Giant"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 7] }
+Actors = ["Man#1", "Giant#110"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "Rape_A_idle"          },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "Rape_A_start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "Rape_A_start_idle"    },
+	{ Action = "Speed1"    , Play = "Loop", Name = "Rape_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "Rape_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Rape_A_Finish_idle"   },
+]
+
+[[Performers]] # HF_Slave_Man_Shino
+Id = "HF_Slave_Man_Shino"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 19] }
+Actors = ["Man#1", "Shino#114"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "Rape_A_idle"          },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "Rape_A_start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "Rape_A_start_idle"    },
+	{ Action = "Speed1"    , Play = "Loop", Name = "Rape_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "Rape_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Rape_A_Finish_idle"   },
+]
+
+[[Performers]] # HF_Slave_Man_Sally
+Id = "HF_Slave_Man_Sally"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [11, 0] }
+Actors = ["Man#1", "Sally#115"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "Rapes2_A_idle"          },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = "Rapes2_A_Start"    ,  Events = ["OnPenetrate"] },
+	{ Action = "InsertIdle", Play = "Loop", Name = "Rapes2_A_Start_idle"    },
+	{ Action = "Speed1"    , Play = "Loop", Name = "Rapes2_A_Loop_01"       },
+	{ Action = "Speed2"    , Play = "Loop", Name = "Rapes2_A_Loop_02"       },
+	{ Action = "Finish"    , Play = "Once", Name = "Rapes2_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "Rapes2_A_Finish_idle"   },
+]
+
+
+
 # ================ Toilet =============== #
 
 [[Performers]] # HF_Toilet_Man_FemaleNative
