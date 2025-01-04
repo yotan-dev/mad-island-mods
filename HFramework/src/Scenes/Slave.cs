@@ -27,13 +27,9 @@ namespace HFramework.Scenes
 		
 		private CommonStates Npc;
 
-		private int TmpCommonState = 0;
-
 		private SkeletonAnimation CommonAnim;
 
 		private GameObject SexObject;
-
-		private bool RapeCounted = false;
 
 		private readonly SlaveMenuPanel MenuPanel;
 
@@ -42,8 +38,6 @@ namespace HFramework.Scenes
 		private SexPerformer Performer;
 
 		private string ItemKey;
-
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		public Slave(CommonStates player, InventorySlot tmpSlave)
 		{
@@ -55,10 +49,7 @@ namespace HFramework.Scenes
 			
 			this.Npc = null;
 			if (ItemKeyToNpcID.TryGetValue(this.ItemKey, out var npcId))
-			{
-				this.TmpCommonState = npcId;
 				this.Npc = CommonUtils.MakeTempCommon(npcId);
-			}
 
 			this.MenuPanel = new SlaveMenuPanel();
 			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
@@ -84,32 +75,11 @@ namespace HFramework.Scenes
 			this.Controller.SetScene(this);
 		}
 
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
-		}
-
 		private IEnumerator OnInsert()
 		{
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Insert);
-
-			CommonStates to = Managers.mn.npcMN.MakeTempCommon(this.TmpCommonState);
-
-			// While original game doesn't do that, it is weird to count several times
-			if (!this.RapeCounted)
-			{
-				foreach (var handler in this.EventHandlers)
-				{
-					// Note: This assumes the player is always a male and the NPC is always a female,
-					// which is true as of beta 0.2.4
-					foreach (var x in handler.OnRape(this, this.Player, to))
-						yield return x;
-				}
-
-				this.RapeCounted = true;
-			}
 
 			if (!this.CanContinue())
 				yield break;
@@ -148,13 +118,6 @@ namespace HFramework.Scenes
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
-
-			CommonStates to = Managers.mn.npcMN.MakeTempCommon(this.TmpCommonState);
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnBusted(this.Player, to, 0))
-					yield return x;
-			}
 
 			if (!this.CanContinue())
 				yield break;
@@ -261,14 +224,6 @@ namespace HFramework.Scenes
 				yield return null;
 
 			this.Teardown();
-
-			// MakeTempCommon is quite unsafe... but it is fine as long as it doesn't take 5 seconds to run
-			var to = Managers.mn.npcMN.MakeTempCommon(this.TmpCommonState);
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.AfterSex(this, this.Player, to))
-					yield return x;
-			}
 
 			this.EnablePlayer();
 			Managers.mn.uiMN.MainCanvasView(true);
