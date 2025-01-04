@@ -328,6 +328,23 @@ StartConditions = [
 PerformConditions = []
 
 
+# ================== HF_Daruma ==================== #
+
+[[Scenes]] # HF_Daruma
+Id = "HF_Daruma"
+
+[[Scenes.Performers]]
+Performer = "HF_Man_FemaleNative_Daruma"
+StartConditions = []
+PerformConditions = []
+
+[[Scenes.Performers]]
+Performer = "HF_Man_NativeGirl_Daruma"
+StartConditions = []
+PerformConditions = []
+
+
+
 # ================== HF_Delivery ==================== #
 
 [[Scenes]] # HF_Delivery

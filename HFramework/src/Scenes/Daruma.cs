@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
@@ -8,8 +9,10 @@ using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class Daruma : IScene
+	public class Daruma : IScene, IScene2
 	{
+		public static readonly string Name = "Daruma";
+
 		public readonly CommonStates Player;
 
 		public readonly CommonStates Npc;
@@ -20,19 +23,13 @@ namespace HFramework.Scenes
 
 		private GameObject DarumaObj;
 
-		private string Loop01Anim;
-
-		private string Loop02Anim;
-
-		private string FinishAnim;
-
-		private string FinishIdleAnim;
-
 		private bool InsertCounted = false;
 
 		private SkeletonAnimation CommonAnim;
 
 		private ISceneController Controller;
+
+		private SexPerformer Performer;
 
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
@@ -55,6 +52,7 @@ namespace HFramework.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -80,46 +78,28 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.ShowInsertMenu();
 
-			if (this.CommonAnim.skeleton.Data.FindAnimation(this.Loop01Anim) != null)
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.Loop01Anim);
-			else
-				PLogger.LogError("no loop01 animation");
+			yield return this.Performer.Perform(ActionType.Speed1);
 		}
 
 		private IEnumerator OnSpeed()
 		{
-			var currentAnim = this.CommonAnim.state.GetCurrent(0).Animation.Name;
-			var newAnim = currentAnim == this.Loop01Anim ? this.Loop02Anim : this.Loop01Anim;
-
-			if (this.CommonAnim.skeleton.Data.FindAnimation(newAnim) != null)
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, newAnim);
+			if (this.Performer.CurrentAction == ActionType.Speed1)
+				yield return this.Performer.Perform(ActionType.Speed2);
 			else
-				PLogger.LogError($"no '{newAnim}' animation");
+				yield return this.Performer.Perform(ActionType.Speed1);
 		}
 
 		private IEnumerator OnStop()
 		{
 			this.MenuPanel.ShowStopMenu();
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
+			yield return this.Performer.Perform(ActionType.StartIdle);
 		}
 
 		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
 
-			IEnumerable animController = null;
-			if (this.CommonAnim.skeleton.Data.FindAnimation(this.FinishAnim) != null)
-				animController = this.Controller.PlayOnceStep(this, this.CommonAnim, this.FinishAnim);
-			else if (this.CommonAnim.skeleton.Data.FindAnimation("A_Finish") != null)
-				animController = this.Controller.PlayOnceStep(this, this.CommonAnim, "A_Finish");
-			else
-				PLogger.LogError("no Finish animation");
-
-			if (animController != null)
-			{
-				foreach (var x in animController)
-					yield return x;
-			}
+			yield return this.Performer.Perform(ActionType.Finish);
 
 			foreach (var handler in this.EventHandlers)
 			{
@@ -130,12 +110,7 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			if (this.CommonAnim.skeleton.Data.FindAnimation(this.FinishIdleAnim) != null)
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, this.FinishIdleAnim);
-			else if (this.CommonAnim.skeleton.Data.FindAnimation("A_Finish_idle") != null)
-				yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_Finish_idle");
-			else
-				PLogger.LogError("no finish idle animation");
+			yield return this.Performer.Perform(ActionType.FinishIdle);
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
@@ -145,24 +120,6 @@ namespace HFramework.Scenes
 		{
 			this.Destroy();
 			yield break;
-		}
-
-		private GameObject GetScene()
-		{
-			GameObject scene = null;
-
-			switch (this.Npc.npcID)
-			{
-				case NpcID.FemaleNative:
-					scene = Managers.mn.sexMN.sexList[1].sexObj[13];
-					break;
-
-				case NpcID.NativeGirl:
-					scene = Managers.mn.sexMN.sexList[1].sexObj[14];
-					break;
-			}
-
-			return scene;
 		}
 
 		private bool SetupScene()
@@ -178,13 +135,14 @@ namespace HFramework.Scenes
 
 			this.DarumaObj.SetActive(false);
 
-			string suffix = this.Npc.parameters[6].ToString("00");
-			this.Loop01Anim = "A_Loop_01_" + suffix;
-			this.Loop02Anim = "A_Loop_02_" + suffix;
-			this.FinishAnim = "A_Finish_" + suffix;
-			this.FinishIdleAnim = "A_Finish_idle_" + suffix;
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
+			{
+				PLogger.LogError("Performer not found.");
+				return false;
+			}
 
-			var scene = this.GetScene();
+			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
 				return false;
 
@@ -195,7 +153,6 @@ namespace HFramework.Scenes
 			return true;
 		}
 
-		// int state, InventorySlot tmpDaruma = null
 		public IEnumerator Run()
 		{
 			// Scene setup
@@ -206,7 +163,7 @@ namespace HFramework.Scenes
 			Managers.mn.gameMN.Controlable(false, true);
 			Managers.mn.gameMN.pMove.PlayerVisible(false);
 
-			yield return this.Controller.LoopAnimation(this, this.CommonAnim, "A_idle");
+			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			this.MenuPanel.Open(this.TmpDaruma.transform.position);
 			this.MenuPanel.ShowInitialMenu();
@@ -239,6 +196,31 @@ namespace HFramework.Scenes
 		public void Destroy()
 		{
 			this.MenuPanel?.Close();
+		}
+
+		public string GetName()
+		{
+			return Daruma.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Player, this.Npc];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.CommonAnim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName.Replace("<Tits>", this.Npc.parameters[6].ToString("00"));
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }

@@ -646,13 +646,51 @@ Default = [
 
 
 
+# ================ Daruma =============== #
+
+[[Performers]] # HF_Man_FemaleNative_Daruma
+Id = "HF_Man_FemaleNative_Daruma"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 13] }
+Actors = ["Man#1", "FemaleNative#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""                      , Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01_<Tits>"      },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02_<Tits>"      },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_<Tits>"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle_<Tits>" },
+]
+
+[[Performers]] # HF_Man_NativeGirl_Daruma
+Id = "HF_Man_NativeGirl_Daruma"
+Scopes = ["Sex"]
+Prefab = { Type = "SexList", Args = [1, 14] }
+Actors = ["Man#1", "NativeGirl#16"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"              },
+	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""                     , Events = ["OnPenetrate"] },
+	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01_<Tits>"     },
+	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02_<Tits>"     },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_<Tits>"      , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle_<Tits>" },
+]
+
+
+
 # ================ Delivery =============== #
 
 [[Performers]] # HF_FemaleNative_Delivery
 Id = "HF_FemaleNative_Delivery"
 Scopes = ["Delivery"]
 Prefab = { Type = "SexObj", Args = [10] } # Not accurate
-Actors = ["FemaleNative#10"]
+Actors = ["FemaleNative#15"]
 
 [Performers.AnimationSets]
 Default = [
@@ -665,7 +703,7 @@ Default = [
 Id = "HF_NativeGirl_Delivery"
 Scopes = ["Delivery"]
 Prefab = { Type = "SexObj", Args = [10] } # Not accurate
-Actors = ["NativeGirl#15"]
+Actors = ["NativeGirl#16"]
 
 [Performers.AnimationSets]
 Default = [
