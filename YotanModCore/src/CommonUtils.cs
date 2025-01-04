@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using YotanModCore.Consts;
 
 namespace YotanModCore
@@ -169,6 +170,30 @@ namespace YotanModCore
 			}
 
 			return $"{common.charaName} ({CommonUtils.GetName(common.npcID)})";
+		}
+
+		/// <summary>
+		/// Creates a 'dangling' CommonStates for npcId. This NPC is not really in the game,
+		/// but can be used as if it was.
+		/// It is the caller's responsibility to destroy this GameObject after it finishes using it.
+		/// </summary>
+		/// <param name="npcId"></param>
+		/// <returns></returns>
+		public static CommonStates MakeTempCommon(int npcId)
+		{
+			var statsData = Managers.mn.npcMN.GetStatsData(npcId);
+			if (statsData == null)
+			{
+				PLogger.LogWarning($"No stats data for NPC {npcId}");
+				return null;
+			}
+
+			var tempCommon = new GameObject("TempCommon")
+				.AddComponent<CommonStates>();
+			tempCommon.lovers = new List<CommonStates.Lovers>();
+			tempCommon.charaName = statsData.GetLocalizedCharaName();
+			tempCommon.friendID = -npcId;
+			return tempCommon;
 		}
 	}
 }
