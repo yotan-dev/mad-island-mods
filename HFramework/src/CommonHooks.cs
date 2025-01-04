@@ -178,8 +178,8 @@ namespace HFramework
 			if (commonSexNpc == null)
 				yield break;
 
-			commonSexNpc.NpcB.LoveChange(commonSexNpc.NpcA, 10f, false);
-			commonSexNpc.NpcA.LoveChange(commonSexNpc.NpcB, 10f, false);
+			commonSexNpc.Npc1.LoveChange(commonSexNpc.Npc2, 10f, false);
+			commonSexNpc.Npc2.LoveChange(commonSexNpc.Npc1, 10f, false);
 
 			yield break;
 		}
