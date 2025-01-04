@@ -59,8 +59,7 @@ namespace HFramework
 
 		public override IEnumerable OnDelivery(Delivery scene, CommonStates mother)
 		{
-			foreach (var x in scene.SpawnChild())
-				yield return x;
+			yield return scene.SpawnChild();
 
 			Managers.mn.sexMN.SexCountChange(mother, null, SexManager.SexCountState.Delivery);
 			mother.age++;

@@ -645,6 +645,37 @@ Default = [
 ]
 
 
+
+# ================ Delivery =============== #
+
+[[Performers]] # HF_FemaleNative_Delivery
+Id = "HF_FemaleNative_Delivery"
+Scopes = ["Delivery"]
+Prefab = { Type = "SexObj", Args = [10] } # Not accurate
+Actors = ["FemaleNative#10"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "DeliveryIdle", Play = "Loop", Name = "A_delivery_idle" },
+	{ Action = "DeliveryLoop", Play = "Loop", Name = "A_delivery_loop" },
+	{ Action = "DeliveryEnd" , Play = "Once", Name = "A_delivery_end" ,  Events = ["OnDelivery"] },
+]
+
+[[Performers]] # HF_NativeGirl_Delivery
+Id = "HF_NativeGirl_Delivery"
+Scopes = ["Delivery"]
+Prefab = { Type = "SexObj", Args = [10] } # Not accurate
+Actors = ["NativeGirl#15"]
+
+[Performers.AnimationSets]
+Default = [
+	{ Action = "DeliveryIdle", Play = "Loop", Name = "A_delivery_idle" },
+	{ Action = "DeliveryLoop", Play = "Loop", Name = "A_delivery_loop" },
+	{ Action = "DeliveryEnd" , Play = "Once", Name = "A_delivery_end" ,  Events = ["OnDelivery"] },
+]
+
+
+
 # ================ Man Rapes ===================== #
 
 [[Performers]] # HF_Man_Yona_Rape

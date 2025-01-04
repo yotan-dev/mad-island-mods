@@ -17,5 +17,9 @@ namespace HFramework.Performer
 		Speed3,
 		Finish,
 		FinishIdle,
+
+		DeliveryIdle,
+		DeliveryLoop,
+		DeliveryEnd,
 	}
 }

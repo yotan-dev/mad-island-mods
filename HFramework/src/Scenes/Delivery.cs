@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.Performer;
+using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
 using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class Delivery : IScene
+	public class Delivery : IScene, IScene2
 	{
+		public static readonly string Name = "Delivery";
+
 		/// <summary>
 		/// Girl delivering
 		/// </summary>
@@ -22,6 +26,10 @@ namespace HFramework.Scenes
 		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
 
 		private readonly GameObject TargetPosObject;
+
+		private SexPerformer Performer;
+
+		private SkeletonAnimation Anim;
 
 		private float SuccessRate = 100f;
 
@@ -53,6 +61,7 @@ namespace HFramework.Scenes
 		public void Init(ISceneController controller)
 		{
 			this.Controller = controller;
+			this.Controller.SetScene(this);
 		}
 
 		public void AddEventHandler(SceneEventHandler handler)
@@ -91,7 +100,7 @@ namespace HFramework.Scenes
 			yield return this.Controller.LoopAnimation(this, this.Girl.anim, "A_idle");
 		}
 
-		private IEnumerable StopGirl()
+		private IEnumerator StopGirl()
 		{
 			NPCMove girlMove = this.Girl.nMove;
 			if (girlMove.actType == NPCMove.ActType.Wait)
@@ -103,7 +112,8 @@ namespace HFramework.Scenes
 			girlMove.actType = NPCMove.ActType.Wait;
 			yield return new WaitForSeconds(0.1f);
 
-			yield return girlMove.actType == NPCMove.ActType.Wait;
+			if (girlMove.actType != NPCMove.ActType.Wait)
+				this.Destroy();
 		}
 
 		private void DisableLiveGirl()
@@ -190,7 +200,7 @@ namespace HFramework.Scenes
 			}
 		}
 
-		public IEnumerable SpawnChild()
+		public IEnumerator SpawnChild()
 		{
 			this.GetChildGender(out int gender, out string addText);
 			int npcId = this.GetChildNpcId(gender);
@@ -212,40 +222,21 @@ namespace HFramework.Scenes
 			Managers.mn.uiMN.GoLogText(log);
 		}
 
-		private IEnumerable Perform()
+		private IEnumerator Perform()
 		{
-			bool shouldContinue = true;
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "damage", this.Girl.transform.position);
-			foreach (var x in this.Controller.PlayTimedStep(this, this.Girl.anim, "A_delivery_idle", 20f))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			if (!shouldContinue)
+			yield return this.Performer.Perform(ActionType.DeliveryIdle, 20f);
+			if (!this.CanContinue())
 				yield break;
-
+			
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "finish", this.Girl.transform.position);
-			foreach (var x in this.Controller.PlayTimedStep(this, this.Girl.anim, "A_delivery_loop", 10f))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			if (!shouldContinue)
+			yield return this.Performer.Perform(ActionType.DeliveryLoop, 10f);
+			if (!this.CanContinue())
 				yield break;
 
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "faint", this.Girl.transform.position);
-			foreach (var x in this.Controller.PlayOnceStep(this, this.Girl.anim, "A_delivery_end"))
-			{
-				if (x is bool b)
-					shouldContinue = b;
-				yield return x;
-			}
-
-			if (!shouldContinue)
+			yield return this.Performer.Perform(ActionType.DeliveryEnd);
+			if (!this.CanContinue())
 				yield break;
 
 			if (!CommonUtils.IsPregnant(this.Girl))
@@ -302,17 +293,17 @@ namespace HFramework.Scenes
 
 		public IEnumerator Run()
 		{
-			bool shouldContinue = true;
-			foreach (var x in this.StopGirl())
+			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			if (this.Performer == null)
 			{
-				if (x is bool v)
-					shouldContinue = v;
-				yield return x;
+				PLogger.LogError("Delivery.Performer is null");
+				yield break;
 			}
 
-			if (!shouldContinue)
-				yield break;
+			this.Anim = this.Girl.anim;
 
+			yield return this.StopGirl();
+			
 			NPCMove girlMove = this.Girl.nMove;
 			float tmpSearchAngle = girlMove.searchAngle;
 
@@ -331,9 +322,8 @@ namespace HFramework.Scenes
 
 			this.DisableLiveGirl();
 
-			foreach (var x in this.Perform())
-				yield return x;
-
+			yield return this.Perform();
+			
 			this.FreePlace();
 
 			girlMove.searchAngle = tmpSearchAngle;
@@ -356,6 +346,31 @@ namespace HFramework.Scenes
 		public void Destroy()
 		{
 			this.Destroyed = true;
+		}
+
+		public string GetName()
+		{
+			return Delivery.Name;
+		}
+
+		public CommonStates[] GetActors()
+		{
+			return [this.Girl];
+		}
+
+		public SkeletonAnimation GetSkelAnimation()
+		{
+			return this.Anim;
+		}
+
+		public string ExpandAnimationName(string originalName)
+		{
+			return originalName;
+		}
+
+		public SexPerformer GetPerformer()
+		{
+			return this.Performer;
 		}
 	}
 }
