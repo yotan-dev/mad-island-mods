@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 using UnityEngine;
@@ -10,6 +11,16 @@ namespace HFramework.Scenes
 	public class Daruma : IScene, IScene2
 	{
 		public static readonly string Name = "Daruma";
+
+		public static class StepNames
+		{
+			public const string Main = "Main";
+			public const string Insert = "Insert";
+			public const string Speed = "Speed";
+			public const string Finish = "Finish";
+			public const string Stop = "Stop";
+			public const string Leave = "Leave";
+		}
 
 		public readonly CommonStates Player;
 
@@ -51,44 +62,91 @@ namespace HFramework.Scenes
 
 		private IEnumerator OnInsert()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
+				yield break;
+			}
+
 			this.MenuPanel.ShowInsertMenu();
 
 			yield return this.Performer.Perform(ActionType.Speed1);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnSpeed()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
+				yield break;
+			}
+
 			if (this.Performer.CurrentAction == ActionType.Speed1)
 				yield return this.Performer.Perform(ActionType.Speed2);
 			else
 				yield return this.Performer.Perform(ActionType.Speed1);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnStop()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Stop);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
+				yield break;
+			}
+
 			this.MenuPanel.ShowStopMenu();
 			yield return this.Performer.Perform(ActionType.StartIdle);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
 
 		private IEnumerator OnFinish()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+				yield break;
+			}
+
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
 
 			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 				yield break;
+			}
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnLeave()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
+				yield break;
+			}
+
 			this.Destroy();
-			yield break;
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 		}
 
 		private bool SetupScene()
@@ -128,6 +186,14 @@ namespace HFramework.Scenes
 			if (!this.SetupScene())
 				yield break;
 
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+				this.Destroy();
+				yield break;
+			}
+
 			Managers.mn.uiMN.MainCanvasView(false);
 			Managers.mn.gameMN.Controlable(false, true);
 			Managers.mn.gameMN.pMove.PlayerVisible(false);
@@ -149,8 +215,9 @@ namespace HFramework.Scenes
 			Managers.mn.gameMN.Controlable(true, true);
 			Managers.mn.gameMN.pMove.PlayerVisible(true);
 			Managers.mn.uiMN.MainCanvasView(true);
-		}
 
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+		}
 
 		public bool CanContinue()
 		{
