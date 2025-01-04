@@ -21,7 +21,7 @@ namespace HExtensions.ExtendedScenes
 			};
 		}
 
-		private IEnumerator OnAnimSetChanged(IScene2 scene, object arg2)
+		private IEnumerator OnAnimSetChanged(IScene scene, object arg2)
 		{
 			if (scene is not CommonSexPlayer commonSexPlayer)
 				yield break;
