@@ -5,10 +5,6 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 {
 	public class CommonSexNPCTracker : BaseTracker
 	{
-		/// <summary>
-		/// First NPC in the Sex Scene.
-		/// If a female NPC is involved, this is the female one.
-		/// </summary>
 		private readonly GalleryChara NpcA;
 
 		private readonly GalleryChara NpcB;
@@ -28,7 +24,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 		) : base()
 		{
 			// @TODO: Revert this so male comes first
-			if (!CommonUtils.IsFemale(npcA) && CommonUtils.IsFemale(npcB))
+			if (CommonUtils.IsFemale(npcA) && !CommonUtils.IsFemale(npcB))
 			{
 				CommonStates temp = npcA;
 				npcA = npcB;
