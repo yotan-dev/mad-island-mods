@@ -47,7 +47,14 @@ namespace HFramework.Handlers
 			foreach (var actor in this.Actors)
 			{
 				if (actor != player)
-					waiting = waiting && actor.nMove.actType == NPCMove.ActType.Wait;
+				{
+					// Official code only checks for Interval in delivery, but it looks like
+					// Interval is set in MovePosition , so it would be safer to check here too..
+					waiting = waiting && (
+						actor.nMove.actType == NPCMove.ActType.Wait
+						|| actor.nMove.actType == NPCMove.ActType.Interval
+					);
+				}
 			}
 
 			return waiting;
@@ -60,9 +67,10 @@ namespace HFramework.Handlers
 
 		private bool IsNpcAtPos(CommonStates npc)
 		{
+			// Delivery checks for 0.5 instead of 1, but 1 for everything should be good enough.
 			if (Vector3.Distance(npc.gameObject.transform.position, this.Position) > 1f)
 			{
-				if (npc.anim.GetCurrentAnimName() != "A_walk")
+				if (npc.anim.GetCurrentAnimName() != "A_walk" && npc.nMove.actType != NPCMove.ActType.Interval)
 					npc.anim.state.SetAnimation(0, "A_walk", true);
 
 				return false;
@@ -107,7 +115,13 @@ namespace HFramework.Handlers
 			}
 
 			if (animTime <= 0f)
+			{
 				this.ShouldStop = true;
+				yield break;
+			}
+
+			foreach (var actor in this.Actors)
+				actor.gameObject.transform.position = this.Position;
 		}
 	}
 }

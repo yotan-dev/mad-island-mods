@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -67,37 +68,6 @@ namespace HFramework.Scenes
 		{
 			this.Controller = controller;
 			this.Controller.SetScene(this);
-		}
-
-		private IEnumerator MoveToPosition()
-		{
-			float animTime = 30f;
-			Managers.mn.sexMN.StartCoroutine(Managers.mn.story.MovePosition(this.Girl.gameObject, this.TargetPosObject.gameObject.transform.position, 2f, "A_walk", true, true, 0.1f, 40f));
-
-			NPCMove girlMove = this.Girl.nMove;
-			bool reached = false;
-			while (
-				animTime > 0f
-				&& (girlMove.actType == NPCMove.ActType.Wait || girlMove.actType == NPCMove.ActType.Interval)
-				&& !reached
-			)
-			{
-				animTime -= Time.deltaTime;
-				if (Vector3.Distance(this.Girl.gameObject.transform.position, this.TargetPosObject.transform.position) <= 0.5f)
-					reached = true;
-				else if (this.Girl.anim.state.GetCurrent(0).Animation.Name != "A_walk" && girlMove.actType != NPCMove.ActType.Interval)
-					this.Girl.anim.state.SetAnimation(0, "A_walk", true);
-				yield return null;
-			}
-
-			this.Girl.gameObject.transform.position = this.TargetPosObject.gameObject.transform.position;
-			if (animTime <= 0f)
-			{
-				yield return false;
-				yield break;
-			}
-
-			yield return this.Controller.LoopAnimation("A_idle");
 		}
 
 		private IEnumerator StopGirl()
@@ -240,7 +210,7 @@ namespace HFramework.Scenes
 
 			girlMove.searchAngle = 0f;
 			if (this.TargetPosObject != null)
-				yield return this.MoveToPosition();
+				yield return new MoveToPlace(this, [this.Girl], this.TargetPosObject.transform.position, this.SexPlace);
 
 			if (!this.CanContinue())
 				yield break;
