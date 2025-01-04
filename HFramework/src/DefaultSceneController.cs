@@ -3,8 +3,6 @@ using HFramework.Handlers.Animation;
 using HFramework.Scenes;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.UI;
-using YotanModCore;
 
 namespace HFramework
 {
@@ -39,11 +37,6 @@ namespace HFramework
 		{
 			PLogger.LogDebug($"LoopAnimation: {this.Scene.ExpandAnimationName(name)}");
 			this.SexAnim.state.SetAnimation(0, name, true);
-		}
-
-		public IEnumerator LoopAnimation(IScene scene, SkeletonAnimation tmpSexAnim, string name)
-		{
-			yield return new LoopAnimation(scene, tmpSexAnim, name).Handle();
 		}
 
 		public IEnumerator PlayTimedStep(string name, float time)
