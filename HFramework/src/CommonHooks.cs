@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HFramework.Hook;
 using HFramework.ParamContainers;
 using HFramework.Scenes;
+using UnityEngine;
 using YotanModCore;
 using YotanModCore.Consts;
 
@@ -34,6 +35,13 @@ namespace HFramework
 				.ForScenes(AssWall.Name, Toilet.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnToiletsPenetrate);
+
+			HookBuilder.New("HF.Delivery.OnDelivery")
+				.ForScenes(Delivery.Name)
+				.HookEvent(EventNames.OnDelivery)
+				.Call(this.OnDelivery);
+
+
 			HookBuilder.New("HF.Masturbation.OnMasturbate")
 				.ForScenes("*")
 				.HookEvent(EventNames.OnMasturbate)
@@ -93,6 +101,37 @@ namespace HFramework
 
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Toilet);
 			yield break;
+		}
+
+		private IEnumerator OnDelivery(IScene2 scene, object param)
+		{
+			FromToParams? fromTo = param as FromToParams?;
+			if (!fromTo.HasValue)
+				yield break;
+
+			if (scene is not Delivery delivery)
+				yield break;
+
+			var mother = fromTo.Value.From;
+			if (!CommonUtils.IsPregnant(mother))
+				yield break;
+
+			// @TODO: Move to handler
+			if (Random.Range(0, 100) > delivery.SuccessRate)
+			{
+				Managers.mn.itemMN.GetItem(Managers.mn.itemMN.FindItem("orb_life_01"), 1);
+				string failureLog = Managers.mn.textMN.texts[15].Replace("XXXX", mother.charaName);
+				Managers.mn.uiMN.GoLogText(failureLog);
+				Managers.mn.sexMN.Pregnancy(mother, null, false);
+				yield break;
+			}
+
+			yield return delivery.SpawnChild(); 
+
+			Managers.mn.sexMN.SexCountChange(mother, null, SexManager.SexCountState.Delivery);
+			mother.age++;
+
+			Managers.mn.sexMN.Pregnancy(mother, null, false);
 		}
 
 		private IEnumerator OnMasturbate(IScene2 scene, object param)
