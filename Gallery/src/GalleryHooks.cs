@@ -22,7 +22,7 @@ namespace Gallery
 	{
 		public static readonly GalleryHooks Instance = new GalleryHooks();
 
-		private Dictionary<IScene2, BaseTracker> Trackers;
+		private Dictionary<IScene, BaseTracker> Trackers;
 
 		private GalleryHooks()
 		{
@@ -30,7 +30,7 @@ namespace Gallery
 
 		public void InitHooks()
 		{
-			Trackers = new Dictionary<IScene2, BaseTracker>();
+			Trackers = new Dictionary<IScene, BaseTracker>();
 			HookBuilder.New("Gallery.AssWall.Start")
 				.ForScenes(AssWall.Name)
 				.HookStepStart(AssWall.StepNames.Main)
@@ -110,18 +110,18 @@ namespace Gallery
 			HookBuilder.New("Gallery.ManRapesSleep.ForceRape")
 				.ForScenes(ManRapesSleep.Name)
 				.HookStepStart(ManRapesSleep.StepNames.ForceRape)
-				.Call((IScene2 scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.ForcefullRape));
+				.Call((IScene scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.ForcefullRape));
 			HookBuilder.New("Gallery.ManRapesSleep.GentlyRape")
 				.ForScenes(ManRapesSleep.Name)
 				.HookStepStart(ManRapesSleep.StepNames.GentlyRape)
-				.Call((IScene2 scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.GentlyRape));
+				.Call((IScene scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.GentlyRape));
 			HookBuilder.New("Gallery.ManRapesSleep.PowderRape")
 				.ForScenes(ManRapesSleep.Name)
 				.HookStepStart(ManRapesSleep.StepNames.PowderRape)
-				.Call((IScene2 scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.SleepPowder));
+				.Call((IScene scene, object param) => this.OnSetRapeMode(scene, ManRapeSleepState.SleepPowder));
 		}
 
-		private IEnumerator OnSetRapeMode(IScene2 scene, ManRapeSleepState rapeType)
+		private IEnumerator OnSetRapeMode(IScene scene, ManRapeSleepState rapeType)
 		{
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null && tracker is ManSleepRapeTracker manSleepRapeTracker)
@@ -130,21 +130,21 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator OnAssWallStart(IScene2 scene, object arg2)
+		private IEnumerator OnAssWallStart(IScene scene, object arg2)
 		{
 			var asswall = scene as AssWall;
 			Trackers.Add(asswall, new AssWallTracker(asswall.Player, asswall.Npc, asswall.TmpWall.type));
 			yield break;
 		}
 
-		private IEnumerator OnCommonSexPlayerStart(IScene2 scene, object arg2)
+		private IEnumerator OnCommonSexPlayerStart(IScene scene, object arg2)
 		{
 			var commonSexPlayer = scene as CommonSexPlayer;
 			Trackers.Add(commonSexPlayer, new CommonSexPlayerTracker(commonSexPlayer.Player, commonSexPlayer.Npc, commonSexPlayer.Type));
 			yield break;
 		}
 
-		private IEnumerator OnCommonSexNPCStart(IScene2 scene, object arg2)
+		private IEnumerator OnCommonSexNPCStart(IScene scene, object arg2)
 		{
 			var commonSexNpc = scene as CommonSexNPC;
 
@@ -155,7 +155,7 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator OnDarumaStart(IScene2 scene, object arg2)
+		private IEnumerator OnDarumaStart(IScene scene, object arg2)
 		{
 			var daruma = scene as Daruma;
 			Trackers.Add(daruma, new DarumaTracker(daruma.Player, daruma.Npc));
@@ -163,63 +163,63 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator OnDeliveryStart(IScene2 scene, object arg2)
+		private IEnumerator OnDeliveryStart(IScene scene, object arg2)
 		{
 			var delivery = scene as Delivery;
 			Trackers.Add(delivery, new DeliveryTracker(delivery.Girl));
 			yield break;
 		}
 
-		private IEnumerator OnManRapesStart(IScene2 scene, object arg2)
+		private IEnumerator OnManRapesStart(IScene scene, object arg2)
 		{
 			var manRapes = scene as ManRapes;
 			Trackers.Add(manRapes, new ManRapesTracker(manRapes.Man, manRapes.Girl));
 			yield break;
 		}
 
-		private IEnumerator OnManRapesSleepStart(IScene2 scene, object arg2)
+		private IEnumerator OnManRapesSleepStart(IScene scene, object arg2)
 		{
 			var manRapes = scene as ManRapesSleep;
 			Trackers.Add(manRapes, new ManSleepRapeTracker(manRapes.Man, manRapes.Girl));
 			yield break;
 		}
 
-		private IEnumerator OnOnaniNPCStart(IScene2 scene, object arg2)
+		private IEnumerator OnOnaniNPCStart(IScene scene, object arg2)
 		{
 			var onani = scene as OnaniNPC;
 			Trackers.Add(onani, new OnaniTracker(onani.Npc));
 			yield break;
 		}
 
-		private IEnumerator OnPlayerRapedStart(IScene2 scene, object arg2)
+		private IEnumerator OnPlayerRapedStart(IScene scene, object arg2)
 		{
 			var manRapes = scene as PlayerRaped;
 			Trackers.Add(manRapes, new PlayerRapedTracker(manRapes.Player, manRapes.Rapist));
 			yield break;
 		}
 
-		private IEnumerator OnSlaveStart(IScene2 scene, object arg2)
+		private IEnumerator OnSlaveStart(IScene scene, object arg2)
 		{
 			var slave = scene as Slave;
 			Trackers.Add(slave, new SlaveTracker(slave.Player, slave.TmpSlave));
 			yield break;
 		}
 
-		private IEnumerator OnToiletStart(IScene2 scene, object arg2)
+		private IEnumerator OnToiletStart(IScene scene, object arg2)
 		{
 			var toilet = scene as Toilet;
 			Trackers.Add(toilet, new ToiletTracker(toilet.Player, toilet.Npc));
 			yield break;
 		}
 
-		private IEnumerator OnSceneEnd(IScene2 scene, object arg2)
+		private IEnumerator OnSceneEnd(IScene scene, object arg2)
 		{
 			Trackers.GetValueOrDefault(scene, null)?.End();
 			Trackers.Remove(scene);
 			yield break;
 		}
 
-		private IEnumerator SetNormal(IScene2 scene, object param)
+		private IEnumerator SetNormal(IScene scene, object param)
 		{
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
@@ -228,7 +228,7 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator SetToilet(IScene2 scene, object param)
+		private IEnumerator SetToilet(IScene scene, object param)
 		{
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
@@ -237,7 +237,7 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator SetRaped(IScene2 scene, object param)
+		private IEnumerator SetRaped(IScene scene, object param)
 		{
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
@@ -246,7 +246,7 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator SetMasturbate(IScene2 scene, object param)
+		private IEnumerator SetMasturbate(IScene scene, object param)
 		{
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
@@ -255,7 +255,7 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator SetBusted(IScene2 scene, object param)
+		private IEnumerator SetBusted(IScene scene, object param)
 		{
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
@@ -271,7 +271,7 @@ namespace Gallery
 			yield break;
 		}
 
-		private IEnumerator SetCreampie(IScene2 scene, object param)
+		private IEnumerator SetCreampie(IScene scene, object param)
 		{
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
