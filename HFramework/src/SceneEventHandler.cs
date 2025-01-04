@@ -95,11 +95,6 @@ namespace HFramework
 			yield return null;
 		}
 
-		public virtual IEnumerable AfterDelivery(IScene scene, CommonStates mother)
-		{
-			yield return null;
-		}
-
 		public virtual IEnumerable BeforeRespawn()
 		{
 			yield return null;

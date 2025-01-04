@@ -23,15 +23,13 @@ namespace HFramework.Scenes
 
 		private ISceneController Controller;
 
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
-
 		private readonly GameObject TargetPosObject;
 
 		private SexPerformer Performer;
 
 		private SkeletonAnimation Anim;
 
-		private float SuccessRate = 100f;
+		public float SuccessRate = 100f;
 
 		private bool Destroyed = false;
 
@@ -62,11 +60,6 @@ namespace HFramework.Scenes
 		{
 			this.Controller = controller;
 			this.Controller.SetScene(this);
-		}
-
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
 		}
 
 		private IEnumerator MoveToPosition()
@@ -238,26 +231,6 @@ namespace HFramework.Scenes
 			yield return this.Performer.Perform(ActionType.DeliveryEnd);
 			if (!this.CanContinue())
 				yield break;
-
-			if (!CommonUtils.IsPregnant(this.Girl))
-				yield break;
-
-			if (Random.Range(0, 100) > this.SuccessRate)
-			{
-				Managers.mn.itemMN.GetItem(Managers.mn.itemMN.FindItem("orb_life_01"), 1);
-				string failureLog = Managers.mn.textMN.texts[15].Replace("XXXX", this.Girl.charaName);
-				Managers.mn.uiMN.GoLogText(failureLog);
-				Managers.mn.sexMN.Pregnancy(this.Girl, null, false);
-				yield break;
-			}
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.OnDelivery(this, this.Girl))
-					yield return x;
-			}
-
-			Managers.mn.sexMN.Pregnancy(this.Girl, null, false);
 		}
 
 
@@ -328,14 +301,6 @@ namespace HFramework.Scenes
 
 			girlMove.searchAngle = tmpSearchAngle;
 			this.EnableLiveGirl();
-
-			foreach (var handler in this.EventHandlers)
-			{
-				foreach (var x in handler.AfterDelivery(this, this.Girl))
-					yield return x;
-			}
-
-			yield break;
 		}
 
 		public bool CanContinue()
