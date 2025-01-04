@@ -12,6 +12,7 @@ using Gallery.GalleryScenes.PlayerRaped;
 using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.Toilet;
 using Gallery.GalleryScenes.Onani;
+using Gallery.GalleryScenes.Delivery;
 
 namespace Gallery
 {
@@ -40,6 +41,10 @@ namespace Gallery
 				.ForScenes(CommonSexNPC.Name)
 				.HookStepStart(CommonSexNPC.StepNames.Main)
 				.Call(this.OnCommonSexNPCStart);
+			HookBuilder.New("Gallery.Delivery.Start")
+				.ForScenes(Delivery.Name)
+				.HookStepStart(Delivery.StepNames.Main)
+				.Call(this.OnDeliveryStart);
 			HookBuilder.New("Gallery.ManRapes.Start")
 				.ForScenes(ManRapes.Name)
 				.HookStepStart(ManRapes.StepNames.Main)
@@ -137,6 +142,13 @@ namespace Gallery
 			if (CommonUtils.IsFriend(commonSexNpc.NpcA) || CommonUtils.IsFriend(commonSexNpc.NpcB))
 				Trackers.Add(commonSexNpc, new CommonSexNPCTracker(commonSexNpc.NpcA, commonSexNpc.NpcB, commonSexNpc.Place, commonSexNpc.Type));
 
+			yield break;
+		}
+
+		private IEnumerator OnDeliveryStart(IScene2 scene, object arg2)
+		{
+			var delivery = scene as Delivery;
+			Trackers.Add(delivery, new DeliveryTracker(delivery.Girl));
 			yield break;
 		}
 

@@ -1,5 +1,4 @@
 using Gallery.GalleryScenes.Daruma;
-using Gallery.GalleryScenes.Delivery;
 using Gallery.GalleryScenes.Slave;
 using HarmonyLib;
 
@@ -16,15 +15,6 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new DarumaSceneEventHandler(__instance.Player, __instance.Npc)
-			);
-		}
-
-		[HarmonyPatch(typeof(HFramework.Scenes.Delivery), "Run")]
-		[HarmonyPrefix]
-		private static void Pre_Delivery_Run(HFramework.Scenes.Delivery __instance)
-		{
-			__instance.AddEventHandler(
-				new DeliverySceneEventHandler(__instance.Girl)
 			);
 		}
 
