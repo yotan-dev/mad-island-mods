@@ -8,7 +8,7 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class CommonSexNPC : IScene, IScene2
+	public class CommonSexNPC : IScene
 	{
 		public static readonly string Name = "HF_CommonSexNPC";
 

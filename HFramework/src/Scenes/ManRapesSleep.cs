@@ -7,7 +7,7 @@ using YotanModCore;
 
 namespace HFramework.Scenes
 {
-	public class ManRapesSleep : IScene, IScene2
+	public class ManRapesSleep : IScene
 	{
 		public static readonly string Name = "HF_ManRapesSleep";
 

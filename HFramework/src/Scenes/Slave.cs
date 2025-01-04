@@ -10,7 +10,7 @@ using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class Slave : IScene, IScene2
+	public class Slave : IScene
 	{
 		public static readonly string Name = "Slave";
 

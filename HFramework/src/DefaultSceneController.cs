@@ -10,16 +10,16 @@ namespace HFramework
 {
 	public class DefaultSceneController : ISceneController
 	{
-		private IScene2 Scene;
+		private IScene Scene;
 
 		private SkeletonAnimation SexAnim { get { return this.Scene?.GetSkelAnimation(); } }
 
-		public void SetScene(IScene2 scene)
+		public void SetScene(IScene scene)
 		{
 			this.Scene = scene;
 		}
 
-		public IScene2 GetScene()
+		public IScene GetScene()
 		{
 			return this.Scene;
 		}

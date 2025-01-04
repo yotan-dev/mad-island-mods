@@ -43,7 +43,7 @@ namespace HFramework.Scenes.Conditionals
 			return false;
 		}
 
-		public bool Pass(IScene2 scene)
+		public bool Pass(IScene scene)
 		{
 			return this.Pass();
 		}

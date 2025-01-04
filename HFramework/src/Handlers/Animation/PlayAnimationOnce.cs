@@ -20,7 +20,7 @@ namespace HFramework.Handlers.Animation
 		private readonly bool Skipable;
 
 		public PlayAnimationOnce(
-			IScene2 scene,
+			IScene scene,
 			SkeletonAnimation animation,
 			string name,
 			bool skipable = false

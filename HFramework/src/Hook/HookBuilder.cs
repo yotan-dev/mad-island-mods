@@ -66,7 +66,7 @@ namespace HFramework.Hook
 			return this;
 		}
 
-		public void Call(Func<IScene2, object, IEnumerator> handler)
+		public void Call(Func<IScene, object, IEnumerator> handler)
 		{
 			string hookPrefix;
 			switch (this.Type)
@@ -96,13 +96,13 @@ namespace HFramework.Hook
 			}
 		}
 
-		public void CallBefore(string beforeUID, Func<IScene2, object, IEnumerator> handler)
+		public void CallBefore(string beforeUID, Func<IScene, object, IEnumerator> handler)
 		{
 			this.BeforeUID = beforeUID;
 			this.Call(handler);
 		}
 
-		public void CallAfter(string afterUID, Func<IScene2, object, IEnumerator> handler)
+		public void CallAfter(string afterUID, Func<IScene, object, IEnumerator> handler)
 		{
 			this.BeforeUID = afterUID;
 			this.Call(handler);

@@ -54,7 +54,7 @@ namespace HFramework.Hook
 			GameLifecycleEvents.OnGameEndEvent += () => this.HookDict.Clear();
 		}
 
-		public void AddHook(string target, string uid, Func<IScene2, object, IEnumerator> handler)
+		public void AddHook(string target, string uid, Func<IScene, object, IEnumerator> handler)
 		{
 			Hook hook = new Hook(uid, target, handler);
 			HookQueue queue;
@@ -68,7 +68,7 @@ namespace HFramework.Hook
 			queue.Add(hook);
 		}
 
-		public void AddHookBefore(string target, string beforeUid, string uid, Func<IScene2, object, IEnumerator> handler)
+		public void AddHookBefore(string target, string beforeUid, string uid, Func<IScene, object, IEnumerator> handler)
 		{
 			Hook hook = new Hook(uid, target, handler);
 			HookQueue queue;
@@ -82,7 +82,7 @@ namespace HFramework.Hook
 			queue.AddBefore(beforeUid, hook);
 		}
 
-		public void AddHookAfter(string target, string afterUid, string uid, Func<IScene2, object, IEnumerator> handler)
+		public void AddHookAfter(string target, string afterUid, string uid, Func<IScene, object, IEnumerator> handler)
 		{
 			Hook hook = new Hook(uid, target, handler);
 			HookQueue queue;
@@ -102,7 +102,7 @@ namespace HFramework.Hook
 				queue.Remove(uid);
 		}
 
-		private IEnumerator RunHooks(IScene2 scene, string target, object param)
+		private IEnumerator RunHooks(IScene scene, string target, object param)
 		{
 			PLogger.LogDebug($"RunHooks: Running target - {target}");
 			if (!this.HookDict.TryGetValue(target, out var queue))
@@ -115,7 +115,7 @@ namespace HFramework.Hook
 			}
 		}
 
-		public IEnumerator RunStepStartHook(IScene2 scene, string stepName)
+		public IEnumerator RunStepStartHook(IScene scene, string stepName)
 		{
 			var prefix = "StepStart";
 			var sceneName = scene.GetName();
@@ -126,7 +126,7 @@ namespace HFramework.Hook
 			yield return this.RunHooks(scene, $"{prefix}::*::*", null);
 		}
 
-		public IEnumerator RunStepEndHook(IScene2 scene, string stepName)
+		public IEnumerator RunStepEndHook(IScene scene, string stepName)
 		{
 			var prefix = "StepEnd";
 			var sceneName = scene.GetName();
@@ -137,7 +137,7 @@ namespace HFramework.Hook
 			yield return this.RunHooks(scene, $"{prefix}::*::*", null);
 		}
 
-		public IEnumerator RunEventHook(IScene2 scene, string eventName, object param)
+		public IEnumerator RunEventHook(IScene scene, string eventName, object param)
 		{
 			var prefix = "Event";
 			var sceneName = scene.GetName();

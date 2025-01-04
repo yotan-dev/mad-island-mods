@@ -74,7 +74,7 @@ namespace HFramework
 			yield return false;
 		}
 
-		public void SetScene(IScene2 scene)
+		public void SetScene(IScene scene)
 		{
 			throw new System.NotImplementedException();
 		}
@@ -94,7 +94,7 @@ namespace HFramework
 			throw new System.NotImplementedException();
 		}
 
-		public IScene2 GetScene()
+		public IScene GetScene()
 		{
 			throw new System.NotImplementedException();
 		}

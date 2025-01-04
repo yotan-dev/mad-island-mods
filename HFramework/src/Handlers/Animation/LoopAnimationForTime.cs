@@ -14,7 +14,7 @@ namespace HFramework.Handlers.Animation
 
 		private readonly float Duration;
 
-		public LoopAnimationForTime(IScene2 scene, SkeletonAnimation animation, string name, float duration) : base(scene)
+		public LoopAnimationForTime(IScene scene, SkeletonAnimation animation, string name, float duration) : base(scene)
 		{
 			this.Anim = animation;
 			this.Name = name;

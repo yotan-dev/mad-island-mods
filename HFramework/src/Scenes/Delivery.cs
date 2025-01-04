@@ -8,7 +8,7 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class Delivery : IScene, IScene2
+	public class Delivery : IScene
 	{
 		public static readonly string Name = "Delivery";
 

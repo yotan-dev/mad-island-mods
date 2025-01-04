@@ -12,7 +12,7 @@ namespace HFramework.Scenes
 	/// <summary>
 	/// Onani stands for Masturbation
 	/// </summary>
-	public class OnaniNPC : IScene, IScene2
+	public class OnaniNPC : IScene
 	{
 		public static readonly string Name = "OnaniNPC";
 

@@ -29,7 +29,7 @@ namespace HFramework.Scenes.Conditionals
 			return false;
 		}
 
-		public bool Pass(IScene2 scene)
+		public bool Pass(IScene scene)
 		{
 			bool pass = false;
 			foreach (var actor in scene.GetActors())

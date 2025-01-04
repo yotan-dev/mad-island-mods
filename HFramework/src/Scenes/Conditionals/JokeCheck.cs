@@ -12,7 +12,7 @@ namespace HFramework.Scenes.Conditionals
 			this.ExpectedValue = expectedValue;
 		}
 
-		public bool Pass(IScene2 scene)
+		public bool Pass(IScene scene)
 		{
 			return GameInfo.JokeMode == this.ExpectedValue;
 		}

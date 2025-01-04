@@ -9,7 +9,7 @@ namespace HFramework.Scenes.Conditionals
 			this.ExpectedValue = expectedValue;
 		}
 
-		public bool Pass(IScene2 scene)
+		public bool Pass(IScene scene)
 		{
 			if (scene is not CommonSexPlayer commonSexPlayer)
 				return false;

@@ -1,4 +1,6 @@
 using System.Collections;
+using HFramework.Performer;
+using Spine.Unity;
 
 namespace HFramework.Scenes
 {
@@ -8,5 +10,10 @@ namespace HFramework.Scenes
 		void Init(ISceneController controller);
 		bool CanContinue();
 		void Destroy();
+		string GetName();
+		CommonStates[] GetActors();
+		SkeletonAnimation GetSkelAnimation();
+		string ExpandAnimationName(string originalName);
+		SexPerformer GetPerformer();
 	}
 }

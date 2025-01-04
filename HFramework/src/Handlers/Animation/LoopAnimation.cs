@@ -14,13 +14,7 @@ namespace HFramework.Handlers.Animation
 
 		private readonly string Name;
 
-		public LoopAnimation(IScene2 scene, SkeletonAnimation animation, string name) : base(scene)
-		{
-			this.Anim = animation;
-			this.Name = name;
-		}
-
-		public LoopAnimation(IScene oldScene, SkeletonAnimation animation, string name) : base(oldScene)
+		public LoopAnimation(IScene scene, SkeletonAnimation animation, string name) : base(scene)
 		{
 			this.Anim = animation;
 			this.Name = name;
