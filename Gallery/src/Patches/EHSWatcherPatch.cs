@@ -1,6 +1,5 @@
 using Gallery.GalleryScenes.Daruma;
 using Gallery.GalleryScenes.Delivery;
-using Gallery.GalleryScenes.Onani;
 using Gallery.GalleryScenes.Slave;
 using HarmonyLib;
 
@@ -26,15 +25,6 @@ namespace Gallery.Patches
 		{
 			__instance.AddEventHandler(
 				new DeliverySceneEventHandler(__instance.Girl)
-			);
-		}
-
-		[HarmonyPatch(typeof(HFramework.Scenes.OnaniNPC), nameof(HFramework.Scenes.OnaniNPC.Run))]
-		[HarmonyPrefix]
-		private static void Pre_OnaniNPC_Run(HFramework.Scenes.OnaniNPC __instance)
-		{
-			__instance.AddEventHandler(
-				new OnaniSceneEventHandler(__instance.Npc)
 			);
 		}
 
