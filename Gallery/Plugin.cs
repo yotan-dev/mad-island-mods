@@ -30,8 +30,6 @@ namespace Gallery
 
 			// If using Extended H-System replace mode, we don't have to patch the original code
 			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value) {
-				Harmony.CreateAndPatchAll(typeof(HFWatcherPatch));
-				
 				HookManager.RegisterHooksEvent += GalleryHooks.Instance.InitHooks;
 			} else {
 				Harmony.CreateAndPatchAll(typeof(AssWallPatch));

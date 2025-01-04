@@ -10,7 +10,7 @@ namespace Gallery.Patches
 {
 	public class DarumaSexPatch
 	{
-		private static DarumaSceneEventHandler EventHandler;
+		private static DarumaTracker Tracker;
 
 		[HarmonyPatch(typeof(SexManager), "DarumaSex")]
 		[HarmonyPrefix]
@@ -33,10 +33,10 @@ namespace Gallery.Patches
 				if (state == DarumaSexState.MainLoop) {
 					var player = CommonUtils.GetActivePlayer();
 					var girl = Managers.mn.inventory.itemSlot[50].common;
-					EventHandler = new DarumaSceneEventHandler(player, girl);
+					Tracker = new DarumaTracker(player, girl);
 					
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(player, EventHandler);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(girl, EventHandler);
+					GalleryScenesManager.Instance.AddTrackerForCommon(player, Tracker);
+					GalleryScenesManager.Instance.AddTrackerForCommon(girl, Tracker);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("DarumaSex", error);
@@ -65,12 +65,12 @@ namespace Gallery.Patches
 				GalleryLogger.SceneEnd("DarumaSex", charas, infos);
 				
 				if (state == DarumaSexState.Bust) {
-					EventHandler.OnBusted(null, null, 0);
+					Tracker.Busted = true;
 				}
 				if (state == DarumaSexState.MainLoop) {
-					EventHandler.AfterSex(null, null, null);
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(CommonUtils.GetActivePlayer());
-					GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(Managers.mn.inventory.itemSlot[50].common);
+					Tracker.End();
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(CommonUtils.GetActivePlayer());
+					GalleryScenesManager.Instance.RemoveTrackerForCommon(Managers.mn.inventory.itemSlot[50].common);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("DarumaSex", error);
