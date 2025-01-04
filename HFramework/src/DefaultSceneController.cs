@@ -47,13 +47,13 @@ namespace HFramework
 
 		public IEnumerator PlayOnceStep(string name, bool skipable = false)
 		{
-			PLogger.LogInfo($"PlayOnceStep_New: {this.Scene.ExpandAnimationName(name)}");
+			PLogger.LogDebug($"PlayOnceStep: {this.Scene.ExpandAnimationName(name)}");
 			yield return new PlayAnimationOnce(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name), skipable).Handle();
 		}
 
 		public void PlayOnceStepBg(string name)
 		{
-			PLogger.LogInfo($"PlayOnceStepBg: {this.Scene.ExpandAnimationName(name)}");
+			PLogger.LogDebug($"PlayOnceStepBg: {this.Scene.ExpandAnimationName(name)}");
 			this.SexAnim.state.SetAnimation(0, name, true);
 		}
 

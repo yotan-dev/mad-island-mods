@@ -12,7 +12,7 @@ namespace HFramework.Scenes
 {
 	public class Slave : IScene
 	{
-		public static readonly string Name = "Slave";
+		public static readonly string Name = "HF_Slave";
 
 		public static class StepNames
 		{

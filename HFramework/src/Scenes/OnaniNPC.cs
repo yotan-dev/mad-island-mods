@@ -14,7 +14,7 @@ namespace HFramework.Scenes
 	/// </summary>
 	public class OnaniNPC : IScene
 	{
-		public static readonly string Name = "OnaniNPC";
+		public static readonly string Name = "HF_OnaniNPC";
 
 		public static class StepNames
 		{

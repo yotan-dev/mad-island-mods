@@ -10,7 +10,7 @@ namespace HFramework.Scenes
 {
 	public class Daruma : IScene
 	{
-		public static readonly string Name = "Daruma";
+		public static readonly string Name = "HF_Daruma";
 
 		public static class StepNames
 		{

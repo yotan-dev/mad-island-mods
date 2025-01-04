@@ -91,6 +91,7 @@ namespace HFramework.Scenes
 
 				foreach (var scene in scenesConfig.Scenes)
 				{
+					PLogger.LogDebug($"Loading info for scene {scene.Id}");
 					var sceneInfo = ScenesManager.Instance.GetSceneInfo(scene.Id);
 					if (sceneInfo == null)
 					{
@@ -102,6 +103,7 @@ namespace HFramework.Scenes
 					{
 						var performerConst = performerConfig.Performer;
 						var desc = $"(Scene: {scene.Id} / Performer: {performerConst})";
+						PLogger.LogDebug($"Loading performer {desc}");
 
 						var performer = Performer.PerformerLoader.Performers.GetValueOrDefault(performerConst);
 						if (performer == null)

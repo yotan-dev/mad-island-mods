@@ -31,6 +31,9 @@ namespace HFramework.Performer
 			{ "Speed3", ActionType.Speed3 },
 			{ "Finish", ActionType.Finish },
 			{ "FinishIdle", ActionType.FinishIdle },
+			{ "DeliveryIdle", ActionType.DeliveryIdle },
+			{ "DeliveryLoop", ActionType.DeliveryLoop },
+			{ "DeliveryEnd", ActionType.DeliveryEnd },
 		};
 
 		private static Dictionary<string, PlayType> ConstToPlayType = new Dictionary<string, PlayType>()
