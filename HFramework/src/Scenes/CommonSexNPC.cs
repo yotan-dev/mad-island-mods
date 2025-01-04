@@ -34,8 +34,6 @@ namespace HFramework.Scenes
 
 		public readonly SexManager.SexCountState Type;
 
-		private NPCMove AMove, BMove;
-
 		private GameObject TmpSex;
 
 		private float AAngle;
@@ -68,17 +66,16 @@ namespace HFramework.Scenes
 			this.Controller.SetScene(this);
 		}
 
-		private void PrepareNpc(CommonStates npc, out NPCMove npcMove)
+		private void PrepareNpc(CommonStates npc)
 		{
-			npcMove = npc.GetComponent<NPCMove>();
-			npcMove.actType = NPCMove.ActType.Wait;
+			npc.nMove.actType = NPCMove.ActType.Wait;
 			npc.sex = CommonStates.SexState.Playing;
 		}
 
-		private void ResetNpc(CommonStates npc, NPCMove npcMove)
+		private void ResetNpc(CommonStates npc)
 		{
 			npc.sex = CommonStates.SexState.None;
-			npcMove.actType = NPCMove.ActType.Travel;
+			npc.nMove.actType = NPCMove.ActType.Travel;
 		}
 
 		private GameObject SetEmotion(CommonStates npc)
@@ -93,7 +90,7 @@ namespace HFramework.Scenes
 
 		private bool AreActorsWaiting()
 		{
-			return this.AMove.actType == NPCMove.ActType.Wait && this.BMove.actType == NPCMove.ActType.Wait;
+			return this.Npc1.nMove.actType == NPCMove.ActType.Wait && this.Npc2.nMove.actType == NPCMove.ActType.Wait;
 		}
 
 		private bool IsPlaceFree()
@@ -119,9 +116,9 @@ namespace HFramework.Scenes
 			}
 		}
 
-		private void DisableLiveNpc(CommonStates npc, NPCMove npcMove)
+		private void DisableLiveNpc(CommonStates npc)
 		{
-			npcMove.RBState(false);
+			npc.nMove.RBState(false);
 			CapsuleCollider coll = npc.GetComponent<CapsuleCollider>();
 			MeshRenderer mesh = npc.anim.GetComponent<MeshRenderer>();
 			mesh.enabled = false;
@@ -168,16 +165,16 @@ namespace HFramework.Scenes
 
 			this.Place.user = this.TmpSex;
 			this.TmpSex.transform.position += new Vector3(0f, 0f, 0.02f);
-			this.AAngle = this.AMove.searchAngle;
-			this.BAngle = this.BMove.searchAngle;
-			this.AMove.searchAngle = 180f;
-			this.BMove.searchAngle = 180f;
+			this.AAngle = this.Npc1.nMove.searchAngle;
+			this.BAngle = this.Npc2.nMove.searchAngle;
+			this.Npc1.nMove.searchAngle = 180f;
+			this.Npc2.nMove.searchAngle = 180f;
 			this.Npc2.gameObject.transform.position = pos;
 			this.Npc1.gameObject.transform.position = pos;
 
 			this.SetupTmpSex();
-			this.DisableLiveNpc(this.Npc2, this.AMove);
-			this.DisableLiveNpc(this.Npc1, this.BMove);
+			this.DisableLiveNpc(this.Npc2);
+			this.DisableLiveNpc(this.Npc1);
 
 			return true;
 		}
@@ -204,8 +201,8 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			this.PrepareNpc(this.Npc2, out this.AMove);
-			this.PrepareNpc(this.Npc1, out this.BMove);
+			this.PrepareNpc(this.Npc2);
+			this.PrepareNpc(this.Npc1);
 
 			GameObject emotionA = this.SetEmotion(this.Npc2);
 			GameObject emotionB = this.SetEmotion(this.Npc1);
@@ -216,8 +213,8 @@ namespace HFramework.Scenes
 			emotionB.SetActive(false);
 			if (!this.CanContinue())
 			{
-				this.ResetNpc(this.Npc2, this.AMove);
-				this.ResetNpc(this.Npc1, this.BMove);
+				this.ResetNpc(this.Npc2);
+				this.ResetNpc(this.Npc1);
 				yield break;
 			}
 
@@ -227,8 +224,8 @@ namespace HFramework.Scenes
 				this.Npc1.sex = CommonStates.SexState.None;
 				if (this.TmpSex != null)
 					Object.Destroy(this.TmpSex);
-				this.AMove.actType = NPCMove.ActType.Travel;
-				this.BMove.actType = NPCMove.ActType.Travel;
+				this.Npc1.nMove.actType = NPCMove.ActType.Travel;
+				this.Npc2.nMove.actType = NPCMove.ActType.Travel;
 				yield break;
 			}
 
@@ -249,18 +246,18 @@ namespace HFramework.Scenes
 			this.EnableLiveNpc(this.Npc2);
 			this.EnableLiveNpc(this.Npc1);
 
-			if (this.AMove.actType == NPCMove.ActType.Wait && this.BMove.actType == NPCMove.ActType.Wait)
+			if (this.Npc1.nMove.actType == NPCMove.ActType.Wait && this.Npc2.nMove.actType == NPCMove.ActType.Wait)
 			{
-				this.AMove.actType = NPCMove.ActType.Travel;
-				this.BMove.actType = NPCMove.ActType.Travel;
+				this.Npc1.nMove.actType = NPCMove.ActType.Travel;
+				this.Npc2.nMove.actType = NPCMove.ActType.Travel;
 			}
 			else
 			{
-				this.AMove.actType = NPCMove.ActType.Interval;
-				this.BMove.actType = NPCMove.ActType.Interval;
+				this.Npc1.nMove.actType = NPCMove.ActType.Interval;
+				this.Npc2.nMove.actType = NPCMove.ActType.Interval;
 			}
-			this.AMove.searchAngle = this.AAngle;
-			this.BMove.searchAngle = this.BAngle;
+			this.Npc1.nMove.searchAngle = this.AAngle;
+			this.Npc2.nMove.searchAngle = this.BAngle;
 			this.Npc2.sex = CommonStates.SexState.None;
 			this.Npc1.sex = CommonStates.SexState.None;
 			if (this.Npc2.debuff.perfume <= 0f)
