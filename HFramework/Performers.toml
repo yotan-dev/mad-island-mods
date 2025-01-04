@@ -957,6 +957,7 @@ Actors = ["FemaleNative#15"]
 
 [Performers.AnimationSets]
 Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""             , Events = ["OnMasturbate"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
@@ -971,6 +972,7 @@ Actors = ["FemaleNative#15"]
 
 [Performers.AnimationSets]
 Default = [
+	{ Action = "Insert"    , Play = "Once", Name = ""             , Events = ["OnMasturbate"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Perfume_A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Perfume_A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "Perfume_A_Finish"     ,  Events = ["OnOrgasm"] },

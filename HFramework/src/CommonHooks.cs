@@ -4,6 +4,7 @@ using HFramework.Hook;
 using HFramework.ParamContainers;
 using HFramework.Scenes;
 using YotanModCore;
+using YotanModCore.Consts;
 
 namespace HFramework
 {
@@ -33,6 +34,10 @@ namespace HFramework
 				.ForScenes(AssWall.Name, Toilet.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnToiletsPenetrate);
+			HookBuilder.New("HF.Masturbation.OnMasturbate")
+				.ForScenes("*")
+				.HookEvent(EventNames.OnMasturbate)
+				.Call(this.OnMasturbate);
 
 			HookBuilder.New("HF.Any.OnCreampie")
 				.ForScenes("*")
@@ -87,6 +92,16 @@ namespace HFramework
 				yield break;
 
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Toilet);
+			yield break;
+		}
+
+		private IEnumerator OnMasturbate(IScene2 scene, object param)
+		{
+			FromToParams? fromTo = param as FromToParams?;
+			if (!fromTo.HasValue)
+				yield break;
+
+			fromTo.Value.From.sexInfo[SexInfoIndex.Masturbation]++;
 			yield break;
 		}
 

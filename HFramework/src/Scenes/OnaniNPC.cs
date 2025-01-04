@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -20,6 +19,7 @@ namespace HFramework.Scenes
 		public static class StepNames
 		{
 			public const string Main = "Main";
+			public const string Insert = "Insert";
 			public const string Speed1 = "Speed1";
 			public const string Speed2 = "Speed2";
 			public const string Finish = "Finish";
@@ -41,8 +41,6 @@ namespace HFramework.Scenes
 
 		private SexPerformer Performer;
 
-		private readonly List<SceneEventHandler> EventHandlers = new List<SceneEventHandler>();
-
 		public OnaniNPC(CommonStates npc, SexPlace sexPlace, float upMoral)
 		{
 			this.Place = sexPlace;
@@ -54,11 +52,6 @@ namespace HFramework.Scenes
 		{
 			this.Controller = controller;
 			this.Controller.SetScene(this);
-		}
-
-		public void AddEventHandler(SceneEventHandler handler)
-		{
-			this.EventHandlers.Add(handler);
 		}
 
 		private bool IsActorAlive()
@@ -207,11 +200,22 @@ namespace HFramework.Scenes
 
 		private IEnumerator Perform()
 		{
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Insert);
+
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
+			if (!this.CanContinue())
+				yield break;
+
+
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed1);
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Performer.Perform(ActionType.Speed1);
+			yield return this.Performer.Perform(ActionType.Speed1, 10f);
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
 			if (!this.CanContinue())
@@ -222,7 +226,7 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Performer.Perform(ActionType.Speed2);
+			yield return this.Performer.Perform(ActionType.Speed2, 10f);
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
 			if (!this.CanContinue())
@@ -248,11 +252,6 @@ namespace HFramework.Scenes
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 			if (!this.CanContinue())
 				yield break;
-
-			foreach (var handler in this.EventHandlers) {
-				foreach (var x in handler.AfterMasturbate(this, this.Npc))
-					yield return x;
-			}
 		}
 
 		public IEnumerator Run()

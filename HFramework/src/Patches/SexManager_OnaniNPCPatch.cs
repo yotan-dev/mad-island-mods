@@ -12,7 +12,6 @@ namespace HFramework.Patches
 		{
 			var scene = new OnaniNPC(common, sexPlace, upMoral);
 			scene.Init(new DefaultSceneController());
-			scene.AddEventHandler(new DefaultSceneEventHandler());
 			__result = scene.Run();
 			return false;
 		}
