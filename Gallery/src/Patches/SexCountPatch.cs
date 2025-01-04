@@ -1,7 +1,5 @@
 using System;
-using HFramework;
 using Gallery.GalleryScenes;
-using Gallery.GalleryScenes.CommonSexPlayer;
 using HarmonyLib;
 using YotanModCore;
 
@@ -32,14 +30,6 @@ namespace Gallery.Patches
 
 		public static event OnSexCount OnCreampie;
 
-		public static event OnSexCount OnDelivery;
-
-		public static event OnSexCount OnNormal;
-
-		public static event OnSexCount OnPregnant;
-
-		public static event OnSexCount OnRape;
-
 		public static event OnSexCount OnToilet;
 
 		private static GalleryScenesManager GalleryManager { get { return GalleryScenesManager.Instance; } }
@@ -57,20 +47,6 @@ namespace Gallery.Patches
 			try
 			{
 				GalleryLogger.SexCountChanged(from, to, sexState, "");
-
-				SceneEventHandler handlerA = null;
-				SceneEventHandler handlerB = null;
-				if (from != null)
-					handlerA = GalleryManager.GetSceneHandlerForCommon(from);
-				if (to != null)
-					handlerB = GalleryManager.GetSceneHandlerForCommon(to);
-
-				if (handlerA != handlerB)
-				{
-					var charaAName = CommonUtils.DetailedString(from);
-					var charaBName = CommonUtils.DetailedString(to);
-					GalleryLogger.LogError($"Pre_SexManager_SexCountChange: Found different scenes for {charaAName} and {charaBName} while changing sex count.");
-				}
 
 				var trackerA = (from != null ? GalleryManager.GetTrackerForCommon(from) : null) ?? DummyTrackerVal;
 				var trackerB = (to != null ? GalleryManager.GetTrackerForCommon(to) : null) ?? DummyTrackerVal;
@@ -93,10 +69,6 @@ namespace Gallery.Patches
 				switch (sexState)
 				{
 					case SexManager.SexCountState.Creampie:
-						handlerA?.OnCreampie(realFrom, realTo);
-						if (handlerA != handlerB)
-							handlerB?.OnCreampie(realFrom, realTo);
-
 						trackerA.DidCreampie = true;
 						trackerB.DidCreampie = true;
 
@@ -104,37 +76,23 @@ namespace Gallery.Patches
 						break;
 
 					case SexManager.SexCountState.Delivery:
-						handlerA?.OnDelivery(null, to);
-						if (handlerA != handlerB)
-							handlerB?.OnDelivery(null, to);
-
 						trackerA.DidDelivery = true;
 						trackerB.DidDelivery = true;
-
-						OnDelivery?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Normal:
-						handlerA?.OnNormalSex(realFrom, realTo);
-						if (handlerA != handlerB)
-							handlerB?.OnNormalSex(realFrom, realTo);
-
 						trackerA.DidNormal = true;
 						trackerB.DidNormal = true;
-
-						OnNormal?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Pregnant:
 						trackerA.Pregnant = true;
 						trackerB.Pregnant = true;
-						OnPregnant?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Rapes:
 						trackerA.Raped = true;
 						trackerB.Raped = true;
-						OnRape?.Invoke(null, new SexCountChangeInfo(from, to));
 						break;
 
 					case SexManager.SexCountState.Toilet:
