@@ -1,21 +1,16 @@
 using System;
-using System.Collections;
-using HFramework;
-using HFramework.Scenes;
 using Gallery.SaveFile.Containers;
 using YotanModCore.Consts;
 
 namespace Gallery.GalleryScenes.Slave
 {
-	public class SlaveSceneEventHandler : SceneEventHandler
+	public class SlaveTracker : BaseTracker
 	{
 		private readonly GalleryChara Player = null;
 
 		private readonly GalleryChara Girl = null;
 
-		private bool DidBust = false;
-
-		public SlaveSceneEventHandler(CommonStates player, InventorySlot slaveObject) : base("yogallery_slave_handler")
+		public SlaveTracker(CommonStates player, InventorySlot slaveObject) : base()
 		{
 			this.Player = new GalleryChara(player);
 			this.Girl = new GalleryChara(this.Object2Npc(slaveObject.GetComponent<ItemInfo>().itemKey));
@@ -32,25 +27,18 @@ namespace Gallery.GalleryScenes.Slave
 			}
 		}
 
-		public override IEnumerable OnBusted(CommonStates from, CommonStates to, int specialFlag)
-		{
-			this.DidBust = true;
-			return base.OnBusted(from, to, specialFlag);
-		}
 
-		public override IEnumerable AfterSex(IScene scene, CommonStates from, CommonStates to)
+		public override void End()
 		{
-			if (this.DidBust)
+			if (this.Busted)
 			{
 				SlaveSceneManager.Instance.Unlock(this.Player, this.Girl);
 			}
 			else
 			{
 				var desc = $"{this.Player} x {this.Girl}";
-				GalleryLogger.LogDebug($"SlaveSceneTracker#OnEnd: 'DidBust' ({this.DidBust}) not set -- event NOT unlocked for {desc}");
+				GalleryLogger.LogDebug($"SlaveSceneTracker#OnEnd: 'Busted' ({this.Busted}) not set -- event NOT unlocked for {desc}");
 			}
-
-			yield break;
 		}
 	}
 }
