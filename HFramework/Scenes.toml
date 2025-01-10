@@ -83,14 +83,18 @@ Performer = "HF_Man_FemaleNative_Friendly_Normal"
 StartConditions = [
 	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
 ]
-PerformConditions = []
+PerformConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
 
 [[Scenes.Performers]] # HF_Man_FemaleNative_Friendly_Pregnant
 Performer = "HF_Man_FemaleNative_Friendly_Pregnant"
 StartConditions = [
 	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
 ]
-PerformConditions = []
+PerformConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
 
 [[Scenes.Performers]] # HF_Man_NativeGirl_Friendly_Normal
 Performer = "HF_Man_NativeGirl_Friendly_Normal"
@@ -260,14 +264,18 @@ Performer = "HF_YoungMan_FemaleNative_Friendly_Normal"
 StartConditions = [
 	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
 ]
-PerformConditions = []
+PerformConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
 
 [[Scenes.Performers]]
 Performer = "HF_YoungMan_FemaleNative_Friendly_Pregnant"
 StartConditions = [
 	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
 ]
-PerformConditions = []
+PerformConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", true] },
+]
 
 [[Scenes.Performers]]
 Performer = "HF_MaleNative_NativeGirl_Friendly_Normal"
@@ -462,7 +470,9 @@ Id = "HF_ManRapesSleep"
 
 [[Scenes.Performers]]
 Performer = "HF_Man_FemaleNative_SleepRape_Normal"
-StartConditions = []
+StartConditions = [
+	{ Type = "PregnantCheck", Args = ["FemaleNative#15", false] },
+]
 PerformConditions = []
 
 [[Scenes.Performers]]
