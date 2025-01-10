@@ -24,5 +24,21 @@ namespace HFramework.Patches
 			__result = scene.Run();
 			return false;
 		}
+
+		[HarmonyPatch(typeof(SexManager), "CommonSexNPC")]
+		[HarmonyPostfix]
+		private static IEnumerator Post_SexManager_CommonSexNPC(
+			IEnumerator __result
+		)
+		{
+			PLogger.LogDebug("Post_SexManager_CommonSexNPC Start");
+
+			while (__result.MoveNext())
+				yield return __result.Current;
+
+			PLogger.LogDebug("Post_SexManager_CommonSexNPC End");
+		}
+
+
 	}
 }
