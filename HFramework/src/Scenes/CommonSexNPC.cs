@@ -52,6 +52,8 @@ namespace HFramework.Scenes
 
 		private CommonStates NpcB;
 
+		private bool Success = false;
+
 		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
 		{
 			this.Place = sexPlace;
@@ -192,6 +194,9 @@ namespace HFramework.Scenes
 
 		private IEnumerator Perform()
 		{
+			if (!this.CanContinue())
+				yield break;
+
 			this.SexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
@@ -212,6 +217,8 @@ namespace HFramework.Scenes
 			yield return this.Performer.Perform(ActionType.FinishIdle, 2f);
 			if (!this.CanContinue())
 				yield break;
+
+			this.Success = true;
 		}
 
 		public IEnumerator Run()
@@ -267,11 +274,6 @@ namespace HFramework.Scenes
 			}
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
-				yield break;
-			}
 
 			yield return this.Perform();
 
@@ -300,16 +302,20 @@ namespace HFramework.Scenes
 			this.Npc2.nMove.searchAngle = this.BAngle;
 			this.Npc2.sex = CommonStates.SexState.None;
 			this.Npc1.sex = CommonStates.SexState.None;
-			if (this.Npc2.debuff.perfume <= 0f)
+
+			if (this.Success)
 			{
-				this.Npc2.libido -= 20f;
+				if (this.Npc2.debuff.perfume <= 0f)
+				{
+					this.Npc2.libido -= 20f;
+				}
+				if (this.Npc1.debuff.perfume <= 0f)
+				{
+					this.Npc1.libido -= 20f;
+				}
+				this.Npc2.MoralChange(3f, null, NPCManager.MoralCause.None);
+				this.Npc1.MoralChange(3f, null, NPCManager.MoralCause.None);
 			}
-			if (this.Npc1.debuff.perfume <= 0f)
-			{
-				this.Npc1.libido -= 20f;
-			}
-			this.Npc2.MoralChange(3f, null, NPCManager.MoralCause.None);
-			this.Npc1.MoralChange(3f, null, NPCManager.MoralCause.None);
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
