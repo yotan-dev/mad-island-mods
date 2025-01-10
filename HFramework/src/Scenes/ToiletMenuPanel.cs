@@ -26,7 +26,7 @@ namespace HFramework.Scenes
 		{
 			this.Options.Clear();
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Insert, () => { this.OnInsertSelected?.Invoke(this, 0); })); // 1
-			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); })); // 2
+			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta)); // 2
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 3
 			this.Options.Add(new MenuItem(PropPanelConst.Text.FaceReveal, () => { this.OnFaceRevealSelected?.Invoke(this, 0); })); // 7
 			PropPanelManager.Instance.DrawOptions();
@@ -55,7 +55,7 @@ namespace HFramework.Scenes
 			var idx = this.Options.FindIndex((MenuItem item) => item.Meta == StopUrinateMeta);
 
 			if (idx != -1)
-				this.Options[idx] = new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }); // 2
+				this.Options[idx] = new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta); // 2
 
 			PropPanelManager.Instance.DrawOptions();
 		}
@@ -74,7 +74,7 @@ namespace HFramework.Scenes
 		{
 			this.Options.Clear();
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Move, () => { this.OnMoveSelected?.Invoke(this, 0); })); // 4
-			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); })); // 2
+			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta)); // 2
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 3
 			PropPanelManager.Instance.DrawOptions();
 		}
@@ -83,7 +83,7 @@ namespace HFramework.Scenes
 		{
 			this.Options.Clear();
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Insert, () => { this.OnInsertSelected?.Invoke(this, 0); })); // 1
-			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); })); // 2
+			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta)); // 2
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 3
 			PropPanelManager.Instance.DrawOptions();
 		}

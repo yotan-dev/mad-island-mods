@@ -230,6 +230,7 @@ namespace HFramework.Scenes
 			if (this.Performer.CurrentAction == ActionType.IdlePee)
 			{
 				yield return this.Performer.Perform(ActionType.StartIdle);
+				this.MenuPanel.ChangeStopToUrinate();
 			}
 			else if (this.Performer.CurrentAction == ActionType.InsertPee)
 			{
@@ -250,7 +251,9 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			if (Managers.mn.inventory.itemSlot[50].attack == 1f)
+			// While official checks for == 1, in-game tests has shown that usually the start value is higher, like "16f", without board,
+			// so checking for == 1 would make one click "do nothing" for the next one to work. switching to > 0.99f does the trick
+			if (Managers.mn.inventory.itemSlot[50].attack > 0.99f)
 				Managers.mn.inventory.itemSlot[50].attack = 0f;
 			else
 				Managers.mn.inventory.itemSlot[50].attack = 1f;
