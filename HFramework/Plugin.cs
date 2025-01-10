@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using HFramework.Hook;
 using HFramework.Patches;
 using HFramework.Performer;
@@ -35,6 +35,8 @@ namespace HFramework
 
 				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;
 			}
+
+			Harmony.CreateAndPatchAll(typeof(NpcMovePatches));
 
 			PerformerLoader.Load();
 			ScenesManager.Instance.Init();

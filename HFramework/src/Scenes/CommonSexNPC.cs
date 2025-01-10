@@ -46,18 +46,22 @@ namespace HFramework.Scenes
 
 		private SkeletonAnimation SexAnim;
 
+		private bool Destroyed = false;
+
+		private CommonStates NpcA;
+
+		private CommonStates NpcB;
+
 		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
 		{
 			this.Place = sexPlace;
 			this.Type = sexType;
+			this.NpcA = npcA;
+			this.NpcB = npcB;
+			var actors = Utils.SortActors(npcA, npcB);
 
-			this.Npc2 = npcA;
-			this.Npc1 = npcB;
-			if (CommonUtils.IsFemale(npcA) && !CommonUtils.IsFemale(npcB))
-			{
-				this.Npc2 = npcA;
-				this.Npc1 = npcB;
-			}
+			this.Npc1 = actors[0];
+			this.Npc2 = actors[1];
 		}
 
 		public void Init(ISceneController controller)
@@ -139,12 +143,19 @@ namespace HFramework.Scenes
 
 		private bool SetupScene()
 		{
-			GameObject scene = null;
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
-			if (this.Performer != null)
-				scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
-			if (scene == null)
+			if (this.Performer == null)
+			{
+				PLogger.LogError($"Failed to get performer for {this.Npc1.npcID} and {this.Npc2.npcID}");
 				return false;
+			}
+
+			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
+			if (scene == null)
+			{
+				PLogger.LogError($"Failed to get prefab for {this.Npc1.npcID} and {this.Npc2.npcID}");
+				return false;
+			}
 
 			var pos = this.Place.transform.position;
 			this.TmpSex = GameObject.Instantiate<GameObject>(scene, pos, Quaternion.identity);
@@ -183,16 +194,33 @@ namespace HFramework.Scenes
 		{
 			this.SexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			yield return this.Performer.Perform(ActionType.Insert);
-			yield return this.Performer.Perform(ActionType.Speed1, 20f);
-			yield return this.Performer.Perform(ActionType.Speed2, 10f);
+			if (!this.CanContinue())
+				yield break;
+			
+			yield return this.Performer.Perform(ActionType.Speed1, 2f);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.Speed2, 2f);
+			if (!this.CanContinue())
+				yield break;
+
 			yield return this.Performer.Perform(ActionType.Finish);
-			yield return this.Performer.Perform(ActionType.FinishIdle, 8f);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.Performer.Perform(ActionType.FinishIdle, 2f);
+			if (!this.CanContinue())
+				yield break;
 		}
 
 		public IEnumerator Run()
 		{
 			if (this.Place == null)
+			{
+				Debug.LogError($"CommonSexNPC - Place is null");
 				yield break;
+			}
 
 			Transform transform = this.Place.transform.Find("pos");
 			if (transform == null)
@@ -201,17 +229,26 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			this.PrepareNpc(this.Npc2);
-			this.PrepareNpc(this.Npc1);
+			// Npc A (the one that initiated the Sex) must have their actType forced, but not waited for,
+			// as they will be locked in the NPCMove.Live process.
+			// But we should wait for Npc B to switch to Wait or it may switch state in the middle of the
+			// scene and fall through the world.
+			this.NpcA.nMove.actType = NPCMove.ActType.Wait;
+			this.NpcA.sex = CommonStates.SexState.Playing;
+
+			this.NpcB.sex = CommonStates.SexState.Playing;
+			yield return new MakeNpcWait(this, [this.NpcB]).Handle();
 
 			GameObject emotionA = this.SetEmotion(this.Npc2);
 			GameObject emotionB = this.SetEmotion(this.Npc1);
 
-			yield return new MoveToPlace(this, [this.Npc2, this.Npc1], transform.position, this.Place);
+			yield return new MoveToPlace(this, [this.Npc2, this.Npc1], transform.position, this.Place).Handle();
 
 			emotionA.SetActive(false);
 			emotionB.SetActive(false);
-			if (!this.CanContinue())
+			
+			// Check for destroyed only, as CanContinue is still false at this point as the scene is not ready.
+			if (this.Destroyed)
 			{
 				this.ResetNpc(this.Npc2);
 				this.ResetNpc(this.Npc1);
@@ -240,7 +277,10 @@ namespace HFramework.Scenes
 
 			// Teardown
 			if (this.TmpSex != null)
+			{
 				Object.Destroy(this.TmpSex);
+				this.TmpSex = null;
+			}
 
 			this.Place.user = null;
 			this.EnableLiveNpc(this.Npc2);
@@ -276,13 +316,31 @@ namespace HFramework.Scenes
 
 		public bool CanContinue()
 		{
-			return this.TmpSex != null && this.AreActorsWaiting() && this.AreActorsAlive();
+			return !this.Destroyed && this.TmpSex != null && this.AreActorsWaiting() && this.AreActorsAlive();
 		}
 
 		public void Destroy()
 		{
-			GameObject.Destroy(this.TmpSex);
-			this.TmpSex = null;
+			// Re-enable the collider ASAP or the NPC *may* fall through the world
+			// For some reason, the game AI sometimes simply breaks the current play and forces
+			// the Rigidbody to switch gravity to on in the middle of the scene.
+			// But as far as I can tell, it always causes the scene Destroy before they start falling
+			// so while we deviate from the original process, this will ensure characters don't fall
+			// out of the world.
+			var col1 = this.Npc1.GetComponent<CapsuleCollider>();
+			if (col1 != null)
+				col1.enabled = true;
+			
+			var col2 = this.Npc2.GetComponent<CapsuleCollider>();
+			if (col2 != null)
+				col2.enabled = true;
+
+			this.Destroyed = true;
+			if (this.TmpSex != null)
+			{
+				GameObject.Destroy(this.TmpSex);
+				this.TmpSex = null;
+			}
 		}
 
 		public string GetName()

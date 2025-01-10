@@ -120,8 +120,12 @@ namespace HFramework.Handlers
 				yield break;
 			}
 
+			// Force the position so StoryManager.MovePosition properly finishes
 			foreach (var actor in this.Actors)
 				actor.gameObject.transform.position = this.Position;
+
+			// Let StoryManager finish its work.
+			yield return null;
 		}
 	}
 }
