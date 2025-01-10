@@ -349,7 +349,10 @@ namespace HFramework.Scenes
 
 		public bool CanContinue()
 		{
-			PLogger.LogInfo($">> Stage: {this.Stage} / Girl Faint: {this.Girl.faint} / Life: {this.Girl.life} / TmpSex: {this.TmpSex != null} / Man Life: {this.Man.life} / Input: {Input.GetKeyDown(KeyCode.R)}");
+			PLogger.LogDebug($">> Stage: {this.Stage} / Girl Faint: {this.Girl.faint} / Life: {this.Girl.life} / TmpSex: {this.TmpSex != null} / Man Life: {this.Man.life} / Input: {Input.GetKeyDown(KeyCode.R)}");
+			if (Input.GetKeyDown(KeyCode.R))
+				this.Aborted = true;
+
 			if (this.Aborted)
 				return false;
 
