@@ -103,6 +103,12 @@ namespace HFramework
 			if (!fromTo.HasValue)
 				yield break;
 
+			// Official code counts toilet once for AssWall but several times for Toilet, which is inconsistent.
+			// We count once always, as IMO it means the start of the "interaction", not how many times you did
+			if (ToiletCounted.ContainsKey(scene))
+				yield break;
+
+			ToiletCounted.Add(scene, true);
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.To, fromTo.Value.From, SexManager.SexCountState.Toilet);
 			yield break;
 		}

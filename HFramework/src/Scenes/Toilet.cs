@@ -204,12 +204,12 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			if (this.Performer.CurrentAction == ActionType.StartIdle)
+			if (this.Performer.CurrentAction == ActionType.StartIdle || this.Performer.CurrentAction == ActionType.FinishIdle)
 			{
 				yield return this.Performer.Perform(ActionType.IdlePee);
 				this.MenuPanel.ChangeToStopUrinate();
 			}
-			else if (this.Performer.CurrentAction == ActionType.StartIdle || this.Performer.CurrentAction == ActionType.FinishIdle)
+			else if (this.Performer.CurrentAction == ActionType.InsertIdle)
 			{
 				yield return this.Performer.Perform(ActionType.InsertPee);
 				this.MenuPanel.ChangeToStopUrinate();

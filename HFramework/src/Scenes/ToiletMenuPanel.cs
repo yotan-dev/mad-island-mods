@@ -37,6 +37,8 @@ namespace HFramework.Scenes
 			this.Options.Clear();
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Move, () => { this.OnMoveSelected?.Invoke(this, 0); })); // 4
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta)); // 2
+			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 3
+			this.Options.Add(new MenuItem(PropPanelConst.Text.FaceReveal, () => { this.OnFaceRevealSelected?.Invoke(this, 0); })); // 7
 			PropPanelManager.Instance.DrawOptions();
 		}
 
@@ -67,6 +69,7 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Speed, () => { this.OnSpeedSelected?.Invoke(this, 0); })); // 5
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Finish, () => { this.OnFinishSelected?.Invoke(this, 0); })); // 6
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 3
+			this.Options.Add(new MenuItem(PropPanelConst.Text.FaceReveal, () => { this.OnFaceRevealSelected?.Invoke(this, 0); })); // 7
 			PropPanelManager.Instance.DrawOptions();
 		}
 
@@ -76,6 +79,7 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Move, () => { this.OnMoveSelected?.Invoke(this, 0); })); // 4
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta)); // 2
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 3
+			this.Options.Add(new MenuItem(PropPanelConst.Text.FaceReveal, () => { this.OnFaceRevealSelected?.Invoke(this, 0); })); // 7
 			PropPanelManager.Instance.DrawOptions();
 		}
 
@@ -85,6 +89,7 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Insert, () => { this.OnInsertSelected?.Invoke(this, 0); })); // 1
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Urinate, () => { this.OnUrinateSelected?.Invoke(this, 0); }, UrinateMeta)); // 2
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 3
+			this.Options.Add(new MenuItem(PropPanelConst.Text.FaceReveal, () => { this.OnFaceRevealSelected?.Invoke(this, 0); })); // 7
 			PropPanelManager.Instance.DrawOptions();
 		}
 	}
