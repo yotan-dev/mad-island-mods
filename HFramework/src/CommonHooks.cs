@@ -20,9 +20,13 @@ namespace HFramework
 		public void InitHooks()
 		{
 			HookBuilder.New("HF.Friendly.OnPenetrate")
-				.ForScenes(CommonSexPlayer.Name)
+				.ForScenes(CommonSexNPC.Name, CommonSexPlayer.Name)
 				.HookEvent(EventNames.OnPenetrate)
-				.Call(this.OnPenetrate);
+				.Call(this.CountNormal);
+			HookBuilder.New("Gallery.Friendly.OnScissor")
+				.ForScenes(CommonSexNPC.Name)
+				.HookEvent(EventNames.OnScissor)
+				.Call(this.CountNormal);
 			HookBuilder.New("HF.Rape.OnPenetrate")
 				.ForScenes(Daruma.Name, ManRapes.Name, ManRapesSleep.Name, Slave.Name)
 				.HookEvent(EventNames.OnPenetrate)
@@ -73,13 +77,13 @@ namespace HFramework
 				.Call(this.OnEnd);
 		}
 
-		private IEnumerator OnPenetrate(IScene scene, object param)
+		private IEnumerator CountNormal(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
 			if (!fromTo.HasValue)
 				yield break;
 
-			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Normal);
+			Managers.mn.sexMN.SexCountChange(fromTo.Value.To, fromTo.Value.From, SexManager.SexCountState.Normal);
 			yield break;
 		}
 
@@ -89,7 +93,7 @@ namespace HFramework
 			if (!fromTo.HasValue)
 				yield break;
 
-			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Rapes);
+			Managers.mn.sexMN.SexCountChange(fromTo.Value.To, fromTo.Value.From, SexManager.SexCountState.Rapes);
 			yield break;
 		}
 
@@ -99,7 +103,7 @@ namespace HFramework
 			if (!fromTo.HasValue)
 				yield break;
 
-			Managers.mn.sexMN.SexCountChange(fromTo.Value.From, fromTo.Value.To, SexManager.SexCountState.Toilet);
+			Managers.mn.sexMN.SexCountChange(fromTo.Value.To, fromTo.Value.From, SexManager.SexCountState.Toilet);
 			yield break;
 		}
 
@@ -175,7 +179,7 @@ namespace HFramework
 		private IEnumerator OnCommonSexNPCAffection(IScene scene, object param)
 		{
 			var commonSexNpc = scene as CommonSexNPC;
-			if (commonSexNpc == null)
+			if (commonSexNpc == null || !commonSexNpc.Success)
 				yield break;
 
 			commonSexNpc.Npc1.LoveChange(commonSexNpc.Npc2, 10f, false);

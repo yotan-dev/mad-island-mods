@@ -515,7 +515,7 @@ Actors = ["FemaleNative#15", "FemaleNative#15"]
 
 [Performers.AnimationSets]
 Default = [
-	{ Action = "Insert"    , Play = "Once", Name = "" },
+	{ Action = "Insert"    , Play = "Once", Name = ""             , Events = ["OnScissor"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
@@ -575,7 +575,7 @@ Actors = ["NativeGirl#16", "NativeGirl#16"]
 
 [Performers.AnimationSets]
 Default = [
-	{ Action = "Insert"    , Play = "Once", Name = "" },
+	{ Action = "Insert"    , Play = "Once", Name = ""              , Events = ["OnScissor"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
