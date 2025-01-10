@@ -28,6 +28,10 @@ namespace HFramework.Scenes
 
 		public readonly CommonStates Girl;
 
+		public readonly double InitialLife;
+
+		public readonly double InitialFaint;
+
 		private NPCMove GirlMove;
 
 		private GameObject TmpSex;
@@ -48,6 +52,8 @@ namespace HFramework.Scenes
 		{
 			this.Man = man;
 			this.Girl = girl;
+			this.InitialLife = girl.life;
+			this.InitialFaint = girl.faint;
 		}
 
 		public void Init(ISceneController controller)

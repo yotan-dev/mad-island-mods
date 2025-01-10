@@ -137,12 +137,12 @@ namespace HFramework
 		private IEnumerator OnManRapesPenetrate(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
-			if (!fromTo.HasValue)
+			if (!fromTo.HasValue || scene is not ManRapes manRapes)
 				yield break;
 
 			// Note: on original code, faint is only checked for Yona, Female Native and Native Girl,
 			//       but doesn't make sense to check only for them... so we check for every NPC
-			if (fromTo.Value.To.faint >= 0 && fromTo.Value.To.life >= 0)
+			if (manRapes.InitialFaint > 0 && manRapes.InitialLife > 0)
 				fromTo.Value.To.LoveChange(fromTo.Value.From, -10f, false);
 
 			yield break;
