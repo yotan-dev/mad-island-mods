@@ -3,6 +3,7 @@ using HFramework.Handlers.Animation;
 using HFramework.Scenes;
 using Spine.Unity;
 using UnityEngine;
+using YotanModCore.Extensions;
 
 namespace HFramework
 {
@@ -36,7 +37,9 @@ namespace HFramework
 		public void LoopAnimationBg(string name)
 		{
 			PLogger.LogDebug($"LoopAnimation: {this.Scene.ExpandAnimationName(name)}");
-			this.SexAnim.state.SetAnimation(0, name, true);
+			name = this.Scene.ExpandAnimationName(name);
+			if (this.SexAnim.HasAnimation(name))
+				this.SexAnim.state.SetAnimation(0, name, true);
 		}
 
 		public IEnumerator PlayTimedStep(string name, float time)
@@ -54,7 +57,9 @@ namespace HFramework
 		public void PlayOnceStepBg(string name)
 		{
 			PLogger.LogDebug($"PlayOnceStepBg: {this.Scene.ExpandAnimationName(name)}");
-			this.SexAnim.state.SetAnimation(0, name, true);
+			name = this.Scene.ExpandAnimationName(name);
+			if (this.SexAnim.HasAnimation(name))
+				this.SexAnim.state.SetAnimation(0, name, true);
 		}
 
 		public IEnumerator WaitForInput()
