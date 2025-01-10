@@ -3,6 +3,7 @@ namespace HFramework.Hook
 	public static class EventNames
 	{
 		public const string OnPenetrate = "OnPenetrate";
+		public const string OnScissor = "OnScissor";
 		public const string OnMasturbate = "OnMasturbate";
 		public const string OnDelivery = "OnDelivery";
 		public const string OnBirth = "OnBirth";

@@ -52,7 +52,7 @@ namespace HFramework.Scenes
 
 		private CommonStates NpcB;
 
-		private bool Success = false;
+		public bool Success { get; private set; } = false;
 
 		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
 		{
