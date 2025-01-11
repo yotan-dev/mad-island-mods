@@ -7,7 +7,7 @@ using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class AssWall : IScene
+	public class AssWall : BaseScene
 	{
 		public static readonly string Name = "HF_AssWall";
 
@@ -27,15 +27,10 @@ namespace HFramework.Scenes
 
 		public readonly InventorySlot TmpWall;
 
-		private SkeletonAnimation CommonAnim;
-
-		private ISceneController Controller;
-
-		private SexPerformer Performer;
-
 		private readonly AssWallMenuPanel MenuPanel;
 
 		public AssWall(CommonStates playerCommon, CommonStates npcCommon, InventorySlot tmpWall = null)
+			: base(AssWall.Name)
 		{
 			this.Player = playerCommon;
 			this.Npc = npcCommon;
@@ -62,12 +57,6 @@ namespace HFramework.Scenes
 			{
 				Managers.mn.sexMN.StartCoroutine(this.OnLeave(sender, e));
 			};
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			controller.SetScene(this);
 		}
 
 		private IEnumerator OnInsert(object sender, int e)
@@ -166,7 +155,7 @@ namespace HFramework.Scenes
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
 			if (this.Performer == null)
@@ -219,40 +208,20 @@ namespace HFramework.Scenes
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
-
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
-			return PropPanelManager.Instance.IsOpen();
+			return !this.Destroyed && PropPanelManager.Instance.IsOpen();
 		}
 
-		public void Destroy()
+		public override void Destroy()
 		{
+			this.Destroyed = true;
 			this.MenuPanel?.Close();
 		}
 
-		public string GetName()
-		{
-			return AssWall.Name;
-		}
-
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return [this.Player, this.Npc];
-		}
-
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.CommonAnim;
-		}
-
-		public string ExpandAnimationName(string originalName)
-		{
-			return originalName;
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }
