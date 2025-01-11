@@ -41,6 +41,8 @@ namespace HFramework.Scenes
 
 		private GameObject SexObject;
 
+		private GameObject SlaveObject;
+
 		private readonly SlaveMenuPanel MenuPanel;
 
 		private string ItemKey;
@@ -56,6 +58,8 @@ namespace HFramework.Scenes
 			this.Npc = null;
 			if (ItemKeyToNpcID.TryGetValue(this.ItemKey, out var npcId))
 				this.Npc = CommonUtils.MakeTempCommon(npcId);
+
+			PLogger.LogDebug($"Slave: {this.ItemKey} / {this.Npc.npcID}");
 
 			this.MenuPanel = new SlaveMenuPanel();
 			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
@@ -91,7 +95,7 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.ShowInsertMenu();
 
-			yield return this.Performer.Perform(ActionType.StartIdle);
+			yield return this.Performer.Perform(ActionType.InsertIdle);
 
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
@@ -155,9 +159,13 @@ namespace HFramework.Scenes
 			if (scene == null)
 				return false;
 
+			this.SlaveObject  = this.TmpSlave.gameObject;
 			Vector3 position = this.TmpSlave.transform.position;
 			if (this.ItemKey == "slave_sally_01")
-				position = this.TmpSlave.transform.Find("Anim").gameObject.transform.position;
+			{
+				this.SlaveObject = this.TmpSlave.transform.Find("Anim").gameObject;
+				position = this.SlaveObject.transform.position;
+			}
 
 			this.SexObject = GameObject.Instantiate(scene, position, Quaternion.identity);
 			if (this.SexObject == null)
@@ -174,7 +182,7 @@ namespace HFramework.Scenes
 				this.CommonAnim.skeleton.SetAttachment("slave_stone", "slave_stone");
 			}
 
-			this.TmpSlave.gameObject.SetActive(false);
+			this.SlaveObject.gameObject.SetActive(false);
 
 			return true;
 		}
@@ -199,8 +207,8 @@ namespace HFramework.Scenes
 				this.SexObject = null;
 			}
 
-			if (this.TmpSlave?.gameObject != null)
-				this.TmpSlave.gameObject.SetActive(true);
+			if (this.SlaveObject != null)
+				this.SlaveObject.SetActive(true);
 
 			if (this.Npc != null)
 			{
@@ -216,6 +224,10 @@ namespace HFramework.Scenes
 				this.Teardown();
 				yield break;
 			}
+
+			// Ensure the first animation is put right at the beggining to avoid visual glitches
+			// at the startup while yields are resolved
+			this.Performer.PreparePerform(ActionType.StartIdle);
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())

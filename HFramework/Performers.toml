@@ -1280,14 +1280,15 @@ Prefab = { Type = "SexList", Args = [11, 0] }
 Actors = ["Man#1", "Sally#115"]
 
 [Performers.AnimationSets]
+# It is not very clear whether this is an Anal or not, but in the uncensored version the pussy seems unafected.
 Default = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "Rapes2_A_idle"          },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Once", Name = "Rapes2_A_Start"    ,  Events = ["OnPenetrate:Vag"] },
+	{ Action = "Insert"    , Play = "Once", Name = "Rapes2_A_Start"    ,  Events = ["OnPenetrate:Ass"] },
 	{ Action = "InsertIdle", Play = "Loop", Name = "Rapes2_A_Start_idle"    },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Rapes2_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Rapes2_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "Rapes2_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Rapes2_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Ass"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Rapes2_A_Finish_idle"   },
 ]
 
