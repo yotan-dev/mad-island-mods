@@ -202,11 +202,11 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 			
-			yield return this.Performer.Perform(ActionType.Speed1, 20f);
+			yield return this.Performer.Perform(ActionType.Speed1, new PerformModifiers() { Duration = 20f });
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Performer.Perform(ActionType.Speed2, 10f);
+			yield return this.Performer.Perform(ActionType.Speed2, new PerformModifiers() { Duration = 10f });
 			if (!this.CanContinue())
 				yield break;
 
@@ -214,7 +214,7 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Performer.Perform(ActionType.FinishIdle, 8f);
+			yield return this.Performer.Perform(ActionType.FinishIdle, new PerformModifiers() { Duration = 8f });
 			if (!this.CanContinue())
 				yield break;
 

@@ -119,7 +119,7 @@ namespace HFramework.Performer
 			this.LoopCount = 0;
 		}
 
-		public IEnumerator Perform(ActionType action, float? loopTime = null)
+		public IEnumerator Perform(ActionType action, PerformModifiers? modifiers = null)
 		{
 			this.LoopCount++;
 
@@ -147,22 +147,26 @@ namespace HFramework.Performer
 
 			this.CurrentPose = pose;
 
-			switch (value.PlayType)
+			bool isSilent = modifiers?.Silent ?? false;
+			if (!isSilent)
 			{
-				case PlayType.Loop:
-					if (loopTime.HasValue)
-						yield return this.Controller.PlayTimedStep(value.AnimationName, loopTime.Value);
-					else
-						yield return this.Controller.LoopAnimation(value.AnimationName);
-					break;
+				switch (value.PlayType)
+				{
+					case PlayType.Loop:
+						if (modifiers?.Duration != null)
+							yield return this.Controller.PlayTimedStep(value.AnimationName, modifiers.Duration.Value);
+						else
+							yield return this.Controller.LoopAnimation(value.AnimationName);
+						break;
 
-				case PlayType.Once:
-					yield return this.Controller.PlayOnceStep(value.AnimationName);
-					break;
+					case PlayType.Once:
+						yield return this.Controller.PlayOnceStep(value.AnimationName);
+						break;
 
-				default:
-					PLogger.LogError("Unknown play type " + value.PlayType);
-					break;
+					default:
+						PLogger.LogError("Unknown play type " + value.PlayType);
+						break;
+				}
 			}
 
 			var actors = this.Controller.GetScene().GetActors();
