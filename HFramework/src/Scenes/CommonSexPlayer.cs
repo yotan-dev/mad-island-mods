@@ -56,13 +56,20 @@ namespace HFramework.Scenes
 			this.Actors = Utils.SortActors(playerCommon, npcCommon);
 
 			this.MenuPanel = new CommonSexPlayerMenuPanel();
-			this.MenuPanel.OnCaressSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnCaress());
-			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
-			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
-			this.MenuPanel.OnPose2Selected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnPose2());
-			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
-			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
-			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
+			this.MenuPanel.OnCaressSelected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Caress, this.OnCaress));
+			this.MenuPanel.OnInsertSelected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Insert, this.OnInsert));
+			this.MenuPanel.OnSpeedSelected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Speed, this.OnSpeed));
+			this.MenuPanel.OnPose2Selected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Pose2, this.OnPose2));
+			this.MenuPanel.OnFinishSelected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Finish, this.OnFinish));
+			this.MenuPanel.OnStopSelected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Stop, this.OnStop));
+			this.MenuPanel.OnLeaveSelected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.RunStep(StepNames.Leave, this.OnLeave));
 		}
 
 		private bool AreActorsAlive()
@@ -197,38 +204,23 @@ namespace HFramework.Scenes
 
 		private IEnumerator OnCaress()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Caress);
-			if (!this.CanContinue())
-				yield break;
-
 			this.TmpCommonState = 1;
 			yield return this.Performer.Perform(ActionType.Caress);
 
 			this.MenuPanel.ShowCaressMenu(this.Performer.GetAlternativePoseName());
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Caress);
 		}
 
 		private IEnumerator OnInsert()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-				yield break;
-
 			this.TmpCommonState = 2;
 			yield return this.Performer.Perform(ActionType.Insert);
 			yield return this.Performer.Perform(ActionType.Speed1);
 
 			this.MenuPanel.ShowInsertMenu(this.Performer.GetAlternativePoseName());
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnSpeed()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
-			if (!this.CanContinue())
-				yield break;
-
 			if (this.TmpCommonState == 2) /* Slow */
 			{
 				this.TmpCommonState = 3;
@@ -241,27 +233,15 @@ namespace HFramework.Scenes
 			}
 
 			this.MenuPanel.ShowInsertMenu(this.Performer.GetAlternativePoseName());
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnPose2()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Pose2);
-			if (!this.CanContinue())
-				yield break;
-
 			yield return this.Performer.ChangePose();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Pose2);
 		}
 
 		private IEnumerator OnFinish()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-				yield break;
-
 			this.TmpCommonState = 0;
 			this.MenuPanel.Hide();
 
@@ -271,33 +251,20 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowFinishMenu(this.Performer.GetAlternativePoseName());
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnStop()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Stop);
-			if (!this.CanContinue())
-				yield break;
-
 			this.TmpCommonState = 0;
 			yield return this.Performer.Perform(ActionType.StartIdle);
 
 			this.MenuPanel.ShowStopMenu(this.Performer.GetAlternativePoseName());
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
 
 		private IEnumerator OnLeave()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
-			if (!this.CanContinue())
-				yield break;
-
 			UnityEngine.Object.Destroy(this.TmpSex);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
+			yield break;
 		}
 
 		private void Teardown()
