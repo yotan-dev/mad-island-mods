@@ -12,7 +12,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "15_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "15_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "15_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "15_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "15_A_Finish_idle"   },
 ]
 
@@ -29,7 +29,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "16_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "16_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "16_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "16_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "16_A_Finish_idle"   },
 ]
 
@@ -46,7 +46,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "17_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "17_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "17_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "17_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "17_A_Finish_idle"   },
 ]
 
@@ -63,7 +63,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "44_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "44_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "44_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "44_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "44_A_Finish_idle"   },
 ]
 
@@ -80,7 +80,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "90_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "90_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "90_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "90_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "90_A_Finish_idle"   },
 ]
 
@@ -102,7 +102,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1 },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"          , Pose = 1 },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1, Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1, Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"      , Pose = 1 },
 ]
 
@@ -120,7 +120,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"    },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"   },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -138,11 +138,11 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"          , Pose = 1 },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"         , Pose = 1 },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1, Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"           , Pose = 1, Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"      , Pose = 1, ChangePose = false },
 	# Pose 2
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02_<Tits>"  , Pose = 2 },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_00"        , Pose = 2, Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_00"        , Pose = 2, Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_00_idle"   , Pose = 2, ChangePose = false },
 ]
 
@@ -160,7 +160,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01" },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"           },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"       },
 ]
 
@@ -178,7 +178,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"           },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"           },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"            , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"       },
 ]
 
@@ -196,7 +196,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"     },
 	{ Action = "Speed2"     , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
 
@@ -214,7 +214,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
 
@@ -229,7 +229,7 @@ Default = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
 	# Pose 1
-	{ Action = "Insert"    , Play = "Once", Name = ""              },
+	{ Action = "Insert"    , Play = "Once", Name = ""             ,  Events = ["OnHandJob"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"    },
 	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
@@ -250,7 +250,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "",  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01" },
 	{ Action = "Speed2"     , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
 
@@ -265,9 +265,10 @@ Default = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
 	# Pose 1
+	{ Action = "Insert",    Play = "Once", Name = "",  Events = ["OnTitFuck"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01" },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCumOnTits"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -285,7 +286,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "",  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "B_Loop_01" },
 	{ Action = "Speed2"     , Play = "Loop", Name = "B_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "B_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "B_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "B_Finish_idle" },
 ]
 
@@ -298,12 +299,12 @@ Actors = ["Man#1", "ElderSisterNative#90"]
 [Performers.AnimationSets]
 Default = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
-	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
+	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01", Events = ["OnPusyLick"]  },
 	# Pose 1
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -321,7 +322,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -339,7 +340,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -354,9 +355,10 @@ Default = [
 	{ Action = "StartIdle" , Play = "Loop", Name = "A_idle"        },
 	{ Action = "Caress"    , Play = "Loop", Name = "A_Contact_01"  },
 	# Pose 1
+	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnTitFuck"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01" },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCumOnTits"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -374,7 +376,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "",  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "B_Loop_01" },
 	{ Action = "Speed2"     , Play = "Loop", Name = "B_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "B_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "B_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "B_Finish_idle" },
 ]
 
@@ -392,7 +394,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
 
@@ -410,7 +412,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -430,7 +432,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -448,7 +450,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -466,7 +468,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -484,7 +486,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"   },
 	{ Action = "Speed2"     , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -503,7 +505,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -533,7 +535,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -548,7 +550,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -563,7 +565,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -593,7 +595,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -609,7 +611,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
 
@@ -625,7 +627,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Love_A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Love_A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Love_A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Love_A_Finish_idle" },
 ]
 
@@ -640,7 +642,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -661,7 +663,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""                      , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01_<Tits>"      },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02_<Tits>"      },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_<Tits>"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_<Tits>"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle_<Tits>" },
 ]
 
@@ -678,7 +680,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = ""                     , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01_<Tits>"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02_<Tits>"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_<Tits>"      , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish_<Tits>"      , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle_<Tits>" },
 ]
 
@@ -730,7 +732,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -748,7 +750,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -766,7 +768,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "<DisLeg>A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "<DisLeg>A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "<DisLeg>A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "<DisLeg>A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "<DisLeg>A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "<DisLeg>A_Finish_idle"   },
 ]
 
@@ -784,7 +786,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -802,7 +804,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -820,7 +822,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -838,7 +840,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -856,7 +858,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -871,10 +873,10 @@ Default = [
 	{ Action = "Battle"    , Play = "Loop", Name = "Rape_A_Attack_loop"   },
 	{ Action = "Attack"    , Play = "Once", Name = "Rape_A_Attack_attack" },
 	{ Action = "Defeat"    , Play = "Loop", Name = "Rape_A_Attack_giveup" },
-	{ Action = "Insert"    , Play = "Once", Name = "Rape_A_AttackToSex"   },
+	{ Action = "Insert"    , Play = "Once", Name = "Rape_A_AttackToSex" , Events = ["OnPenetrate:Mouth"]},
 	{ Action = "Speed1"    , Play = "Loop", Name = "Rape_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Rape_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"      , Events = ["OnOrgasm"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"      , Events = ["OnOrgasm", "OnCumOnMouth"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Rape_A_Finish_idle"   },
 ]
 
@@ -892,7 +894,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -910,7 +912,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -924,11 +926,11 @@ Actors = ["Man#1", "Shino#114"]
 Default = [
 	{ Action = "Battle"    , Play = "Loop", Name = "Rape_A_Attack_loop"   },
 	{ Action = "Attack"    , Play = "Once", Name = "Rape_A_Attack_attack" },
-	{ Action = "Defeat"    , Play = "Loop", Name = "A_Attack_giveup"   },
+	{ Action = "Defeat"    , Play = "Loop", Name = "Rape_A_Attack_giveup"   },
 	{ Action = "Insert"    , Play = "Once", Name = "Rape_A_AttackToSex"  , Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Rape_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Rape_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Rape_A_Finish_idle"   },
 ]
 
@@ -952,7 +954,7 @@ ForceRape = [
 	{ Action = "Insert", Play = "Once", Name = "A_rapes_start", Events = ["OnPenetrate:Vag"] }, # TmpCommonState = 1
 	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
 	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
-	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 1
+	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie:Vag"] }, # TmpCommonState = 1
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_rapes_finish_idle" }, # TmpCommonState = 1
 ]
 
@@ -961,7 +963,7 @@ GentlyRape = [
 	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate:Vag"] }, # TmpCommonState = 3
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
-	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 3
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie:Vag"] }, # TmpCommonState = 3
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 3
 ]
 
@@ -971,7 +973,7 @@ PowderRape = [
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2
 	{ Action = "Speed3", Play = "Loop", Name = "A_sleep_loop_03" }, # TmpCommonState = 2
-	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 2
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie:Vag"] }, # TmpCommonState = 2
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 2
 ]
 
@@ -991,7 +993,7 @@ ForceRape = [
 	{ Action = "Insert", Play = "Once", Name = "A_rapes_start", Events = ["OnPenetrate:Vag"] }, # TmpCommonState = 1
 	{ Action = "Speed1", Play = "Loop", Name = "A_rapes_loop_01" }, # TmpCommonState = 1
 	{ Action = "Speed2", Play = "Loop", Name = "A_rapes_loop_02" }, # TmpCommonState = 1
-	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 1
+	{ Action = "Finish", Play = "Once", Name = "A_rapes_finish", Events = ["OnOrgasm", "OnCreampie:Vag"] }, # TmpCommonState = 1
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_rapes_finish_idle" }, # TmpCommonState = 1
 ]
 
@@ -1000,7 +1002,7 @@ GentlyRape = [
 	{ Action = "Insert", Play = "Once", Name = "A_sleep_start", Events = ["OnPenetrate:Vag"] }, # TmpCommonState = 3
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 3
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 3
-	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 3
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie:Vag"] }, # TmpCommonState = 3
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 3
 ]
 
@@ -1010,7 +1012,7 @@ PowderRape = [
 	{ Action = "Speed1", Play = "Loop", Name = "A_sleep_loop_01" }, # TmpCommonState = 2
 	{ Action = "Speed2", Play = "Loop", Name = "A_sleep_loop_02" }, # TmpCommonState = 2
 	{ Action = "Speed3", Play = "Loop", Name = "A_sleep_loop_03" }, # TmpCommonState = 2
-	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie"] }, # TmpCommonState = 2
+	{ Action = "Finish", Play = "Once", Name = "A_sleep_finish", Events = ["OnOrgasm", "OnCreampie:Vag"] }, # TmpCommonState = 2
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_sleep_finish_idle" }, # TmpCommonState = 2
 ]
 
@@ -1065,7 +1067,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1082,7 +1084,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1099,7 +1101,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1116,7 +1118,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1133,7 +1135,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1150,7 +1152,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1167,7 +1169,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1184,7 +1186,7 @@ Default = [
 	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1208,10 +1210,10 @@ Actors = ["FemaleLargeNative#17", "Man#1"]
 
 [Performers.AnimationSets]
 Default = [
-	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
+	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Ass"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie:Ass"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1225,10 +1227,10 @@ Actors = ["Mummy#42", "Man#1"]
 Default = [
 	{ Action = "Battle"    , Play = "Loop", Name = "A_Attack_loop" },
 	{ Action = "Defeat"    , Play = "Loop", Name = "A_Attack_giveup" },
-	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"    ,  Events = ["OnPenetrate:Vag"] },
+	{ Action = "Insert"    , Play = "Once", Name = "A_AttackToSex"   ,  Events = ["OnHandJob"] },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"     },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"     },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"     ,  Events = ["OnOrgasm"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle" },
 ]
 
@@ -1249,7 +1251,7 @@ Default = [
 	{ Action = "InsertIdle", Play = "Loop", Name = "Rape_A_start_idle"    },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Rape_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Rape_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Rape_A_Finish_idle"   },
 ]
 
@@ -1267,7 +1269,7 @@ Default = [
 	{ Action = "InsertIdle", Play = "Loop", Name = "Rape_A_start_idle"    },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Rape_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Rape_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Rape_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Rape_A_Finish_idle"   },
 ]
 
@@ -1285,7 +1287,7 @@ Default = [
 	{ Action = "InsertIdle", Play = "Loop", Name = "Rapes2_A_Start_idle"    },
 	{ Action = "Speed1"    , Play = "Loop", Name = "Rapes2_A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "Rapes2_A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "Rapes2_A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "Rapes2_A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "Rapes2_A_Finish_idle"   },
 ]
 
@@ -1309,7 +1311,7 @@ Default = [
 	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -1329,7 +1331,7 @@ Default = [
 	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -1349,7 +1351,7 @@ Default = [
 	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -1369,7 +1371,7 @@ Default = [
 	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
 
@@ -1389,6 +1391,6 @@ Default = [
 	{ Action = "InsertPee" , Play = "Loop", Name = "A_Start_pee"     },
 	{ Action = "Speed1"    , Play = "Loop", Name = "A_Loop_01"       },
 	{ Action = "Speed2"    , Play = "Loop", Name = "A_Loop_02"       },
-	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie"] },
+	{ Action = "Finish"    , Play = "Once", Name = "A_Finish"       , Events = ["OnOrgasm", "OnCreampie:Vag"] },
 	{ Action = "FinishIdle", Play = "Loop", Name = "A_Finish_idle"   },
 ]
