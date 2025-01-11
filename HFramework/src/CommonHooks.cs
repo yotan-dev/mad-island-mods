@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.ParamContainers;
 using HFramework.Scenes;
+using UnityEngine;
+using UnityEngine.UI;
 using YotanModCore;
 using YotanModCore.Consts;
 
@@ -31,6 +34,10 @@ namespace HFramework
 				.ForScenes(Daruma.Name, ManRapes.Name, ManRapesSleep.Name, Slave.Name)
 				.HookEvent(EventNames.OnPenetrate)
 				.Call(this.OnRapePenetrate);
+			HookBuilder.New("HF.PlayerRaped.OnPenetrate")
+				.ForScenes(PlayerRaped.Name)
+				.HookEvent(EventNames.OnPenetrate)
+				.Call(this.OnPlayerRapedPenetrate);
 			HookBuilder.New("HF.ManRapes.OnPenetrate")
 				.ForScenes(ManRapes.Name)
 				.HookEvent(EventNames.OnPenetrate)
@@ -44,6 +51,12 @@ namespace HFramework
 				.ForScenes(Delivery.Name)
 				.HookEvent(EventNames.OnDelivery)
 				.Call(this.OnDelivery);
+
+
+			HookBuilder.New("HF.PlayerRaped.OnDefeated")
+				.ForScenes(PlayerRaped.Name)
+				.HookEvent(EventNames.OnPlayerDefeated)
+				.Call(this.OnPlayerRapedDefeated);
 
 
 			HookBuilder.New("HF.Masturbation.OnMasturbate")
@@ -77,6 +90,15 @@ namespace HFramework
 				.Call(this.OnEnd);
 		}
 
+		private IEnumerator OnPlayerRapedDefeated(IScene scene, object arg2)
+		{
+			Managers.mn.uiMN.MainCanvasView(false);
+			yield return Managers.mn.sexMN.StartCoroutine(Managers.mn.sound.GoBGMFade(1));
+			GameObject.Find("UIFXPool").transform.Find("ReviveSlider").GetComponent<Slider>().gameObject.SetActive(false);
+			yield return new WaitForSeconds(1f);
+			Managers.mn.uiMN.SkipView(true);
+		}
+
 		private IEnumerator CountNormal(IScene scene, object param)
 		{
 			FromToParams? fromTo = param as FromToParams?;
@@ -94,6 +116,15 @@ namespace HFramework
 				yield break;
 
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.To, fromTo.Value.From, SexManager.SexCountState.Rapes);
+			yield break;
+		}
+
+		private IEnumerator OnPlayerRapedPenetrate(IScene scene, object param)
+		{
+			if (!(scene is PlayerRaped playerRaped))
+				yield break;
+
+			Managers.mn.sexMN.SexCountChange(playerRaped.Player, playerRaped.Rapist, SexManager.SexCountState.Rapes);
 			yield break;
 		}
 

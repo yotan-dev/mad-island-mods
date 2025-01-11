@@ -29,6 +29,8 @@ namespace HFramework.Scenes
 
 		public readonly CommonStates Rapist;
 
+		public bool Skipped { get { return Managers.mn.uiMN.skip; } }
+
 		private NPCMove RapistMove;
 
 		private GameObject TmpSex;
@@ -198,7 +200,11 @@ namespace HFramework.Scenes
 
 			yield return this.Performer.Perform(ActionType.Battle);
 			yield return this.PerformGrapple();
-			if (!this.CanContinue() || this.Player.faint > 0.0)
+
+			if (this.Player.faint > 0f)
+				this.Destroy();
+
+			if (!this.CanContinue())
 			{
 				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
 				yield break;
@@ -215,17 +221,16 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			this.Player.sex = CommonStates.SexState.GameOver;
-
 			yield return this.Performer.Perform(ActionType.Defeat);
-			yield return HookManager.Instance.RunEventHook(this, EventNames.OnPlayerDefeated, new FromToParams(this.Player, this.Rapist));
+			yield return HookManager.Instance.RunEventHook(this, EventNames.OnPlayerDefeated, new FromToParams(this.Rapist, this.Player));
 			if (!this.CanContinue())
 			{
 				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
 				yield break;
 			}
 
-			yield return this.Controller.WaitForInput();
+			if (!this.Skipped)
+				yield return this.Controller.WaitForInput();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
 		}
@@ -243,7 +248,7 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			yield return this.Performer.Perform(ActionType.Insert);
+			yield return this.Performer.Perform(ActionType.Insert, new PerformModifiers() { Silent = this.Skipped });
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 			if (!this.CanContinue())
 				yield break;
@@ -255,8 +260,9 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			yield return this.Performer.Perform(ActionType.Speed1);
-			yield return this.Controller.WaitForInput();
+			yield return this.Performer.Perform(ActionType.Speed1, new PerformModifiers() { Silent = this.Skipped });
+			if (!this.Skipped)
+				yield return this.Controller.WaitForInput();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
 			if (!this.CanContinue())
@@ -270,8 +276,9 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			yield return this.Performer.Perform(ActionType.Speed2);
-			yield return this.Controller.WaitForInput();
+			yield return this.Performer.Perform(ActionType.Speed2, new PerformModifiers() { Silent = this.Skipped });
+			if (!this.Skipped)
+				yield return this.Controller.WaitForInput();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
 			if (!this.CanContinue())
@@ -285,12 +292,13 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			yield return this.Performer.Perform(ActionType.Finish);
+			yield return this.Performer.Perform(ActionType.Finish, new PerformModifiers() { Silent = this.Skipped });
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Performer.Perform(ActionType.FinishIdle);
-			yield return this.Controller.WaitForInput();
+			yield return this.Performer.Perform(ActionType.FinishIdle, new PerformModifiers() { Silent = this.Skipped });
+			if (!this.Skipped)
+				yield return this.Controller.WaitForInput();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
@@ -343,6 +351,7 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
+			this.Player.sex = CommonStates.SexState.GameOver;
 			yield return this.PerformSex();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
@@ -363,7 +372,7 @@ namespace HFramework.Scenes
 
 		public bool CanContinue()
 		{
-			return this.TmpSex != null && !Managers.mn.uiMN.skip;
+			return this.TmpSex != null;
 		}
 
 		public void Destroy()
