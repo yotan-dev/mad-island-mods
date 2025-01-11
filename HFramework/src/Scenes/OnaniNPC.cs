@@ -35,6 +35,8 @@ namespace HFramework.Scenes
 
 		private GameObject TmpSex;
 
+		private bool SceneSet = false;
+
 		public OnaniNPC(CommonStates npc, SexPlace sexPlace, float upMoral) : base(Name)
 		{
 			this.Place = sexPlace;
@@ -205,14 +207,13 @@ namespace HFramework.Scenes
 
 			GameObject emoA = Managers.mn.fxMN.GoEmotion(13, this.Npc.gameObject, Vector3.zero);
 
-			var reachedPos = false;
 			yield return new MoveToPlace(this, [this.Npc], pos, this.Place).Handle();
 			if (!this.CanContinue())
 				yield break;
 
 			emoA.SetActive(false);
 
-			if (!reachedPos || !this.IsPlaceFree())
+			if (!this.IsPlaceFree())
 			{
 				this.Teardown();
 				yield break;
@@ -223,6 +224,8 @@ namespace HFramework.Scenes
 				this.Teardown();
 				yield break;
 			}
+
+			this.SceneSet = true;
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())
@@ -241,7 +244,7 @@ namespace HFramework.Scenes
 
 		public override bool CanContinue()
 		{
-			return this.TmpSex != null && this.IsActorWaiting() && this.IsActorAlive();
+			return ((this.SceneSet && this.TmpSex != null) || !this.SceneSet) && this.IsActorWaiting() && this.IsActorAlive();
 		}
 
 		public override void Destroy()
