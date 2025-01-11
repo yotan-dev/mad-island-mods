@@ -10,7 +10,7 @@ using YotanModCore.PropPanels;
 
 namespace HFramework.Scenes
 {
-	public class Slave : IScene
+	public class Slave : BaseScene
 	{
 		public static readonly string Name = "HF_Slave";
 
@@ -39,19 +39,13 @@ namespace HFramework.Scenes
 		
 		private CommonStates Npc;
 
-		private SkeletonAnimation CommonAnim;
-
 		private GameObject SexObject;
 
 		private readonly SlaveMenuPanel MenuPanel;
 
-		private ISceneController Controller;
-
-		private SexPerformer Performer;
-
 		private string ItemKey;
 
-		public Slave(CommonStates player, InventorySlot tmpSlave)
+		public Slave(CommonStates player, InventorySlot tmpSlave) : base(Name)
 		{
 			this.Player = player;
 			this.TmpSlave = tmpSlave;
@@ -64,12 +58,18 @@ namespace HFramework.Scenes
 				this.Npc = CommonUtils.MakeTempCommon(npcId);
 
 			this.MenuPanel = new SlaveMenuPanel();
-			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
-			this.MenuPanel.OnMoveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnMove());
-			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
-			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
-			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
-			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
+			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Insert, this.OnInsert));
+			this.MenuPanel.OnMoveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Move, this.OnMove));
+			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Speed, this.OnSpeed));
+			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Finish, this.OnFinish));
+			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Stop, this.OnStop));
+			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.RunStep(StepNames.Leave, this.OnLeave));
 		}
 
 		~Slave()
@@ -81,29 +81,13 @@ namespace HFramework.Scenes
 			}
 		}
 
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
-		}
-
 		private IEnumerator OnInsert()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
-				yield break;
-			}
-
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 				yield break;
-			}
 
 			this.MenuPanel.ShowInsertMenu();
 
@@ -111,67 +95,31 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnMove()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Move);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Move);
-				yield break;
-			}
-
 			this.MenuPanel.ShowMoveMenu();
 			yield return this.Performer.Perform(ActionType.Speed1);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Move);
 		}
 
 		private IEnumerator OnSpeed()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
-				yield break;
-			}
-
 			if (this.Performer.CurrentAction == ActionType.Speed1)
 				yield return this.Performer.Perform(ActionType.Speed2);
 			else if (this.Performer.CurrentAction == ActionType.Speed2)
 				yield return this.Performer.Perform(ActionType.Speed1);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnStop()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Stop);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
-				yield break;
-			}
-
 			this.MenuPanel.ShowStopMenu();
 
 			yield return this.Performer.Perform(ActionType.InsertIdle);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
 
 		private IEnumerator OnFinish()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
-				yield break;
-			}
-
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
@@ -183,22 +131,12 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnLeave()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
-				yield break;
-			}
-
 			this.Destroy();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
+			yield break;
 		}
 
 		private bool SetupScene()
@@ -271,7 +209,7 @@ namespace HFramework.Scenes
 			}
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			if (!this.SetupScene())
 			{
@@ -298,6 +236,8 @@ namespace HFramework.Scenes
 			while (this.CanContinue())
 				yield return null;
 
+			yield return this.EndLongLivedStep();
+
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 			this.Teardown();
 
@@ -305,40 +245,21 @@ namespace HFramework.Scenes
 			Managers.mn.uiMN.MainCanvasView(true);
 		}
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
 			// Managers.mn.uiMN.propActProgress == 5
-			return PropPanelManager.Instance.IsOpen();
+			return !this.Destroyed && PropPanelManager.Instance.IsOpen();
 		}
 
-		public void Destroy()
+		public override void Destroy()
 		{
+			this.Destroyed = true;
 			this.MenuPanel?.Close();
 		}
 
-		public string GetName()
-		{
-			return Slave.Name;
-		}
-
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return [this.Player, this.Npc];
-		}
-
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.CommonAnim;
-		}
-
-		public string ExpandAnimationName(string originalName)
-		{
-			return originalName;
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }

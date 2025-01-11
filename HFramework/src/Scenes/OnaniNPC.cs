@@ -12,7 +12,7 @@ namespace HFramework.Scenes
 	/// <summary>
 	/// Onani stands for Masturbation
 	/// </summary>
-	public class OnaniNPC : IScene
+	public class OnaniNPC : BaseScene
 	{
 		public static readonly string Name = "HF_OnaniNPC";
 
@@ -35,23 +35,11 @@ namespace HFramework.Scenes
 
 		private GameObject TmpSex;
 
-		private ISceneController Controller;
-
-		private SkeletonAnimation Anim;
-
-		private SexPerformer Performer;
-
-		public OnaniNPC(CommonStates npc, SexPlace sexPlace, float upMoral)
+		public OnaniNPC(CommonStates npc, SexPlace sexPlace, float upMoral) : base(Name)
 		{
 			this.Place = sexPlace;
 			this.Npc = npc;
 			this.UpMoral = upMoral;
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
 		}
 
 		private bool IsActorAlive()
@@ -87,7 +75,7 @@ namespace HFramework.Scenes
 			CapsuleCollider coll = this.Npc.GetComponent<CapsuleCollider>();
 			if (coll != null)
 				coll.enabled = true;
-			
+
 			MeshRenderer mesh = this.Npc.anim.GetComponent<MeshRenderer>();
 			if (mesh != null)
 				mesh.enabled = true;
@@ -104,7 +92,7 @@ namespace HFramework.Scenes
 			if (this.TmpSex == null)
 				return false;
 
-			this.Anim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 
 			this.Npc.transform.position = sexPos;
 			this.SearchAngle = this.Npc.nMove.searchAngle;
@@ -158,45 +146,23 @@ namespace HFramework.Scenes
 				this.Npc.nMove.searchAngle = this.SearchAngle.Value;
 		}
 
-		private IEnumerator Perform()
+		private IEnumerator Insert()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-				yield break;
-
 			yield return this.Performer.Perform(ActionType.Insert);
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-				yield break;
-
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed1);
-			if (!this.CanContinue())
-				yield break;
-
+		private IEnumerator Speed1()
+		{
 			yield return this.Performer.Perform(ActionType.Speed1, new PerformModifiers() { Duration = 10f });
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
-			if (!this.CanContinue())
-				yield break;
-
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
-			if (!this.CanContinue())
-				yield break;
-
+		private IEnumerator Speed2()
+		{
 			yield return this.Performer.Perform(ActionType.Speed2, new PerformModifiers() { Duration = 10f });
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
-			if (!this.CanContinue())
-				yield break;
-
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-				yield break;
-
+		private IEnumerator Finish()
+		{
 			yield return this.Performer.Perform(ActionType.Finish);
 			if (!this.CanContinue())
 				yield break;
@@ -208,13 +174,26 @@ namespace HFramework.Scenes
 			}
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-				yield break;
 		}
 
-		public IEnumerator Run()
+		private IEnumerator Perform()
+		{
+			yield return this.RunStep(StepNames.Insert, this.Insert);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.RunStep(StepNames.Speed1, this.Speed1);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.RunStep(StepNames.Speed2, this.Speed2);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.RunStep(StepNames.Finish, this.Finish);
+		}
+
+		public override IEnumerator Run()
 		{
 			NPCMove nMove = this.Npc.nMove;
 			Vector3 pos = this.Npc.transform.position;
@@ -260,40 +239,20 @@ namespace HFramework.Scenes
 			this.Teardown();
 		}
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
 			return this.TmpSex != null && this.IsActorWaiting() && this.IsActorAlive();
 		}
 
-		public void Destroy()
+		public override void Destroy()
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
 		}
 
-		public string GetName()
-		{
-			return OnaniNPC.Name;
-		}
-
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return [this.Npc];
-		}
-
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.Anim;
-		}
-
-		public string ExpandAnimationName(string originalName)
-		{
-			return originalName;
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }

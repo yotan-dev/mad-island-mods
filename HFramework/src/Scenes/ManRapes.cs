@@ -10,7 +10,7 @@ using YotanModCore.Extensions;
 
 namespace HFramework.Scenes
 {
-	public class ManRapes : IScene
+	public class ManRapes : BaseScene
 	{
 		public static readonly string Name = "HF_ManRapes";
 
@@ -35,30 +35,17 @@ namespace HFramework.Scenes
 
 		private GameObject TmpSex;
 
-		private SkeletonAnimation TmpSexAnim;
-
 		private GameObject TmpSexScale;
-
-		private ISceneController Controller;
-
-		private SexPerformer Performer;
 
 		private int Stage = 0;
 
-		private bool Aborted = false;
-
 		public ManRapes(CommonStates girl, CommonStates man)
+			: base(Name)
 		{
 			this.Man = man;
 			this.Girl = girl;
 			this.InitialLife = girl.life;
 			this.InitialFaint = girl.faint;
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
 		}
 
 		private void PrepareGirl(CommonStates npc)
@@ -147,10 +134,10 @@ namespace HFramework.Scenes
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Girl, this.Man);
 			}
 
-			this.TmpSexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			
-			if (this.Girl.npcID == NpcID.Yona && string.IsNullOrEmpty(this.Girl.equip[3].itemKey) && this.TmpSexAnim.skeleton.FindSlot("Panty") != null)
-				this.TmpSexAnim.skeleton.SetAttachment("Panty", null);
+			if (this.Girl.npcID == NpcID.Yona && string.IsNullOrEmpty(this.Girl.equip[3].itemKey) && this.CommonAnim.skeleton.FindSlot("Panty") != null)
+				this.CommonAnim.skeleton.SetAttachment("Panty", null);
 
 			this.TmpSexScale = null;
 			if (this.Man.pMove.scale.transform.localScale.x == -1f)
@@ -168,36 +155,17 @@ namespace HFramework.Scenes
 
 		private IEnumerator PerformGrapple()
 		{
-			yield return new ManPlayerGrapples(this, this.TmpSexAnim, this.Man, this.Girl).Handle();
+			yield return new ManPlayerGrapples(this, this.CommonAnim, this.Man, this.Girl).Handle();
 		}
 
 		private IEnumerator PerformBattle()
 		{
-			if (this.Girl.faint == 0)
-				yield break;
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Battle);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
-				yield break;
-			}
-
 			yield return this.Performer.Perform(ActionType.Battle);
 			yield return this.PerformGrapple();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
 		}
 
 		private IEnumerator PerformGiveup()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Giveup);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Giveup);
-				yield break;
-			}
-
 			yield return this.Performer.PerformBg(ActionType.Defeat);
 			yield return new WaitForSeconds(0.5f);
 
@@ -206,87 +174,58 @@ namespace HFramework.Scenes
 			yield return this.Controller.WaitForInput();
 
 			Managers.mn.uiMN.ControlTextActive(false, "");
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Giveup);
+		private IEnumerator Insert()
+		{
+			yield return this.Performer.Perform(ActionType.Insert);
+		}
+
+		private IEnumerator Speed1()
+		{
+			yield return this.Performer.PerformBg(ActionType.Speed1);
+			yield return this.Controller.WaitForInput();
+		}
+
+		private IEnumerator Speed2()
+		{
+			yield return this.Performer.PerformBg(ActionType.Speed2);
+			yield return this.Controller.WaitForInput();
+		}
+
+		private IEnumerator Finish()
+		{
+			yield return this.Performer.Perform(ActionType.Finish);
+
+			this.Stage = 7;
+
+			yield return this.Performer.PerformBg(ActionType.FinishIdle);
+			yield return this.Controller.WaitForInput();
 		}
 
 		private IEnumerator PerformRape()
 		{
 			this.Stage = 3;
 
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
-				yield break;
-			}
-
-			yield return this.Performer.Perform(ActionType.Insert);
+			yield return this.RunStep(StepNames.Insert, this.Insert);
 			if (!this.CanContinue())
 				yield break;
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 
 			this.Stage = 4;
 
+			yield return this.RunStep(StepNames.Speed1, this.Speed1);
 			if (!this.CanContinue())
 				yield break;
 
 			this.Stage = 5;
 
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed1);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
-				yield break;
-			}
-
-			yield return this.Performer.PerformBg(ActionType.Speed1);
-			yield return this.Controller.WaitForInput();
+			yield return this.RunStep(StepNames.Speed2, this.Speed2);
 			if (!this.CanContinue())
 				yield break;
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
-			
 			this.Stage = 6;
 
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
-				yield break;
-			}
-
-			yield return this.Performer.PerformBg(ActionType.Speed2);
-			yield return this.Controller.WaitForInput();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
-
-			if (!this.CanContinue())
-				yield break;
-
-			this.Stage = 7;
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
-				yield break;
-			}
-
-			yield return this.Performer.Perform(ActionType.Finish);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
-				yield break;
-			}
-
-			this.Stage = 8;
-
-			yield return this.Performer.PerformBg(ActionType.FinishIdle);
-			yield return this.Controller.WaitForInput();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+			yield return this.RunStep(StepNames.Finish, this.Finish);
 		}
 
 		private IEnumerator Teardown()
@@ -301,7 +240,7 @@ namespace HFramework.Scenes
 			Object.Destroy(this.TmpSex);
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
 			if (this.Performer == null)
@@ -329,17 +268,20 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			yield return this.PerformBattle();
-			if (!this.CanContinue())
+			if (this.Girl.faint != 0)
 			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
-				yield return this.Teardown();
-				yield break;
+				yield return this.RunStep(StepNames.Battle, this.PerformBattle);
+				if (!this.CanContinue())
+				{
+					yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
+					yield return this.Teardown();
+					yield break;
+				}
 			}
 
 			this.Stage = 2;
 
-			yield return this.PerformGiveup();
+			yield return this.RunStep(StepNames.Giveup, this.PerformGiveup);
 			if (!this.CanContinue())
 			{
 				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
@@ -353,13 +295,13 @@ namespace HFramework.Scenes
 			yield return this.Teardown();
 		}
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
 			PLogger.LogDebug($">> Stage: {this.Stage} / Girl Faint: {this.Girl.faint} / Life: {this.Girl.life} / TmpSex: {this.TmpSex != null} / Man Life: {this.Man.life} / Input: {Input.GetKeyDown(KeyCode.R)}");
 			if (Input.GetKeyDown(KeyCode.R))
-				this.Aborted = true;
+				this.Destroyed = true;
 
-			if (this.Aborted)
+			if (this.Destroyed)
 				return false;
 
 			if (this.Stage == 1)
@@ -375,38 +317,18 @@ namespace HFramework.Scenes
 			return !Input.GetKeyDown(KeyCode.R) && this.Man.life > 0;
 		}
 
-		public void Destroy()
-		{
-			this.Aborted = true;
-		}
-
-		public string GetName()
-		{
-			return ManRapes.Name;
-		}
-
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return [this.Man, this.Girl];
 		}
 
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.TmpSexAnim;
-		}
-
-		public string ExpandAnimationName(string originalName)
+		public override string ExpandAnimationName(string originalName)
 		{
 			var missingLegs = (this.Girl.dissect[4] == 1 && this.Girl.dissect[5] == 1);
 
 			return originalName
 				.Replace("<Tits>", this.Girl.parameters[6].ToString("00"))
 				.Replace("<DisLeg>", missingLegs ? "DisLeg_" : "");
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }
