@@ -22,5 +22,7 @@ namespace HFramework
 		void PlayOnceStepBg(string name);
 
 		IEnumerator WaitForInput();
+		
+		void SetLockedAnimation(string name);
 	}
 }

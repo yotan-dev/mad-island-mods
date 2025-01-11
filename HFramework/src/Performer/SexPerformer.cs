@@ -119,6 +119,15 @@ namespace HFramework.Performer
 			this.LoopCount = 0;
 		}
 
+		public void PreparePerform(ActionType action)
+		{
+			var value = this.GetActionValue(action, out var pose);
+			if (value == null)
+				return;
+
+			this.Controller.SetLockedAnimation(value.AnimationName);
+		}
+
 		public IEnumerator Perform(ActionType action, PerformModifiers? modifiers = null)
 		{
 			this.LoopCount++;

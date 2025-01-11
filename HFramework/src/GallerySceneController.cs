@@ -50,5 +50,10 @@ namespace HFramework
 		{
 			throw new System.NotImplementedException();
 		}
+
+		public void SetLockedAnimation(string name)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }
