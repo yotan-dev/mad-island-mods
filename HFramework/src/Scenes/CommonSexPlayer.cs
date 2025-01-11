@@ -8,7 +8,7 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class CommonSexPlayer : IScene
+	public class CommonSexPlayer : BaseScene
 	{
 		public static readonly string Name = "HF_CommonSexPlayer";
 
@@ -44,15 +44,10 @@ namespace HFramework.Scenes
 
 		private float NpcAngle;
 
-		public SkeletonAnimation CommonAnim { get; private set; }
-
-		private ISceneController Controller;
-
 		private readonly CommonSexPlayerMenuPanel MenuPanel;
 
-		private SexPerformer Performer;
-
 		public CommonSexPlayer(CommonStates playerCommon, CommonStates npcCommon, Vector3 pos, int sexType)
+			: base(Name)
 		{
 			this.Player = playerCommon;
 			this.Npc = npcCommon;
@@ -68,17 +63,6 @@ namespace HFramework.Scenes
 			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
 			this.MenuPanel.OnStopSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnStop());
 			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
-		}
-
-		public string GetName()
-		{
-			return CommonSexPlayer.Name;
 		}
 
 		private bool AreActorsAlive()
@@ -329,7 +313,7 @@ namespace HFramework.Scenes
 			Managers.mn.uiMN.StatusChange(null);
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
 			if (this.Performer == null)
@@ -392,35 +376,25 @@ namespace HFramework.Scenes
 		}
 
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
-			return this.TmpSex != null && this.AreActorsAlive();
+			return !this.Destroyed && this.TmpSex != null && this.AreActorsAlive();
 		}
 
-		public void Destroy()
+		public override void Destroy()
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
 		}
 
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return this.Actors;
 		}
 
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.CommonAnim;
-		}
-
-		public string ExpandAnimationName(string originalName)
+		public override string ExpandAnimationName(string originalName)
 		{
 			return originalName.Replace("<Tits>", this.Npc.parameters[6].ToString("00"));
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }
