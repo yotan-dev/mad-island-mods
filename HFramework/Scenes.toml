@@ -463,6 +463,13 @@ Performer = "HF_Man_ElderSisterNative_Rape"
 StartConditions = []
 PerformConditions = []
 
+[[Scenes.Performers]]
+Performer = "HF_Man_Shino_Rape"
+StartConditions = [
+	{ Type = "QuestProgressCheck", Args = ["Sub_Shino", "==", 7] },
+]
+PerformConditions = []
+
 # ================== HF_ManRapesSleep ==================== #
 
 [[Scenes]] # HF_ManRapesSleep
