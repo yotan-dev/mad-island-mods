@@ -595,11 +595,6 @@ PerformConditions = []
 Id = "HF_Toilet"
 
 [[Scenes.Performers]]
-Performer = "HF_MaleNative_Yona_Rape_Doggy_Normal"
-StartConditions = []
-PerformConditions = []
-
-[[Scenes.Performers]]
 Performer = "HF_Toilet_Man_FemaleNative"
 StartConditions = []
 PerformConditions = []
