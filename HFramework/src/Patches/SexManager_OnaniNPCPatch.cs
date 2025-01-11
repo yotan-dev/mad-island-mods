@@ -8,7 +8,7 @@ namespace HFramework.Patches
 	{
 		[HarmonyPatch(typeof(SexManager), nameof(SexManager.OnaniNPC))]
 		[HarmonyPrefix]
-		private static bool Pre_SexManager_Slave(CommonStates common, SexPlace sexPlace, float upMoral, ref IEnumerator __result)
+		private static bool Pre_SexManager_OnaniNPC(CommonStates common, SexPlace sexPlace, float upMoral, ref IEnumerator __result)
 		{
 			var scene = new OnaniNPC(common, sexPlace, upMoral);
 			scene.Init(new DefaultSceneController());
