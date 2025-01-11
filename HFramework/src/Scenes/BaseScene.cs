@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 
@@ -18,6 +20,8 @@ namespace HFramework.Scenes
 		protected SexPerformer Performer;
 
 		protected bool Destroyed = false;
+
+		private string CurrentLongLivedStepName = "";
 
 		public BaseScene(string name)
 		{
@@ -63,5 +67,56 @@ namespace HFramework.Scenes
 		public abstract CommonStates[] GetActors();
 
 		public abstract IEnumerator Run();
+
+		protected IEnumerator EndLongLivedStep()
+		{
+			if (this.CurrentLongLivedStepName == "")
+				yield break;
+
+			yield return HookManager.Instance.RunStepEndHook(this, this.CurrentLongLivedStepName);
+			this.CurrentLongLivedStepName = "";
+		}
+
+		protected IEnumerator StartLongLivedStep(string stepName, Func<IEnumerator> runner)
+		{
+			if (this.CurrentLongLivedStepName != "")
+				yield return this.EndLongLivedStep();
+
+			if (!this.CanContinue())
+				yield break;
+
+			yield return HookManager.Instance.RunStepStartHook(this, stepName);
+
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, stepName);
+				yield break;
+			}
+
+			this.CurrentLongLivedStepName = stepName;
+
+			yield return runner();
+		}
+
+		protected IEnumerator RunStep(string stepName, Func<IEnumerator> runner)
+		{
+			if (this.CurrentLongLivedStepName != "")
+				yield return this.EndLongLivedStep();
+
+			if (!this.CanContinue())
+				yield break;
+
+			yield return HookManager.Instance.RunStepStartHook(this, stepName);
+
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, stepName);
+				yield break;
+			}
+
+			yield return runner();
+
+			yield return HookManager.Instance.RunStepEndHook(this, stepName);
+		}
 	}
 }
