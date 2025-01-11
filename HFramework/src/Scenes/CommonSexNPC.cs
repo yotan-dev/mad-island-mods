@@ -9,7 +9,7 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class CommonSexNPC : IScene
+	public class CommonSexNPC : BaseScene
 	{
 		public static readonly string Name = "HF_CommonSexNPC";
 
@@ -40,14 +40,6 @@ namespace HFramework.Scenes
 
 		private float BAngle;
 
-		private ISceneController Controller;
-
-		private SexPerformer Performer;
-
-		private SkeletonAnimation SexAnim;
-
-		private bool Destroyed = false;
-
 		private CommonStates NpcA;
 
 		private CommonStates NpcB;
@@ -55,6 +47,7 @@ namespace HFramework.Scenes
 		public bool Success { get; private set; } = false;
 
 		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
+			: base(Name)
 		{
 			this.Place = sexPlace;
 			this.Type = sexType;
@@ -64,18 +57,6 @@ namespace HFramework.Scenes
 
 			this.Npc1 = actors[0];
 			this.Npc2 = actors[1];
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
-		}
-
-		private void PrepareNpc(CommonStates npc)
-		{
-			npc.nMove.actType = NPCMove.ActType.Wait;
-			npc.sex = CommonStates.SexState.Playing;
 		}
 
 		private void ResetNpc(CommonStates npc)
@@ -197,7 +178,7 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			this.SexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
@@ -221,7 +202,7 @@ namespace HFramework.Scenes
 			this.Success = true;
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			if (this.Place == null)
 			{
@@ -320,12 +301,12 @@ namespace HFramework.Scenes
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
 			return !this.Destroyed && this.TmpSex != null && this.AreActorsWaiting() && this.AreActorsAlive();
 		}
 
-		public void Destroy()
+		public override void Destroy()
 		{
 			// Re-enable the collider ASAP or the NPC *may* fall through the world
 			// For some reason, the game AI sometimes simply breaks the current play and forces
@@ -349,29 +330,9 @@ namespace HFramework.Scenes
 			}
 		}
 
-		public string GetName()
-		{
-			return CommonSexNPC.Name;
-		}
-
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return [this.Npc1, this.Npc2];
-		}
-
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.SexAnim;
-		}
-
-		public string ExpandAnimationName(string originalName)
-		{
-			return originalName; // @TODO:
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }
