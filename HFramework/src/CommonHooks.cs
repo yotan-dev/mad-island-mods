@@ -26,7 +26,15 @@ namespace HFramework
 				.ForScenes(CommonSexNPC.Name, CommonSexPlayer.Name)
 				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.CountNormal);
-			HookBuilder.New("Gallery.Friendly.OnScissor")
+			HookBuilder.New("HF.Friendly.OnHandJob")
+				.ForScenes(CommonSexPlayer.Name)
+				.HookEvent(EventNames.OnHandJob)
+				.Call(this.CountNormal);
+			HookBuilder.New("HF.Friendly.OnTitFuck")
+				.ForScenes(CommonSexPlayer.Name)
+				.HookEvent(EventNames.OnTitFuck)
+				.Call(this.CountNormal);
+			HookBuilder.New("HF.Friendly.OnScissor")
 				.ForScenes(CommonSexNPC.Name)
 				.HookEvent(EventNames.OnScissor)
 				.Call(this.CountNormal);
@@ -34,9 +42,21 @@ namespace HFramework
 				.ForScenes(Daruma.Name, ManRapes.Name, ManRapesSleep.Name, Slave.Name)
 				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.OnRapePenetrate);
+			HookBuilder.New("HF.Rape.OnPenetrateMouth")
+				.ForScenes(ManRapes.Name)
+				.HookEvent(EventNames.OnPenetrateMouth)
+				.Call(this.OnRapePenetrate);
 			HookBuilder.New("HF.PlayerRaped.OnPenetrate")
 				.ForScenes(PlayerRaped.Name)
 				.HookEvent(EventNames.OnPenetrateVag)
+				.Call(this.OnPlayerRapedPenetrate);
+			HookBuilder.New("HF.PlayerRaped.OnPenetrateAss")
+				.ForScenes(PlayerRaped.Name)
+				.HookEvent(EventNames.OnPenetrateAss)
+				.Call(this.OnPlayerRapedPenetrate);
+			HookBuilder.New("HF.PlayerRaped.OnHandJob")
+				.ForScenes(PlayerRaped.Name)
+				.HookEvent(EventNames.OnHandJob)
 				.Call(this.OnPlayerRapedPenetrate);
 			HookBuilder.New("HF.ManRapes.OnPenetrate")
 				.ForScenes(ManRapes.Name)
@@ -66,7 +86,7 @@ namespace HFramework
 
 			HookBuilder.New("HF.Any.OnCreampie")
 				.ForScenes("*")
-				.HookEvent(EventNames.OnCreampie)
+				.HookEvent(EventNames.OnCreampieVag)
 				.Call(this.OnCreampie);
 
 			HookBuilder.New("HF.CommonSexPlayer.Affection")
