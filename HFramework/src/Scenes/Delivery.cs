@@ -2,13 +2,12 @@ using System.Collections;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
-using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
 
 namespace HFramework.Scenes
 {
-	public class Delivery : IScene
+	public class Delivery : BaseScene
 	{
 		public static readonly string Name = "HF_Delivery";
 
@@ -29,19 +28,12 @@ namespace HFramework.Scenes
 
 		public readonly SexPlace SexPlace;
 
-		private ISceneController Controller;
-
 		private readonly GameObject TargetPosObject;
-
-		private SexPerformer Performer;
-
-		private SkeletonAnimation Anim;
 
 		public float SuccessRate = 100f;
 
-		private bool Destroyed = false;
-
 		public Delivery(CommonStates girl, WorkPlace workPlace, SexPlace sexPlace)
+			: base(Name)
 		{
 			this.Girl = girl;
 			this.WorkPlace = workPlace;
@@ -62,12 +54,6 @@ namespace HFramework.Scenes
 				this.TargetPosObject = null;
 				this.SuccessRate = 20f;
 			}
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
 		}
 
 		private IEnumerator StopGirl()
@@ -114,51 +100,35 @@ namespace HFramework.Scenes
 			}
 		}
 
-		private IEnumerator Perform()
+		private IEnumerator Idle()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Idle);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Idle);
-				yield break;
-			}
-
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "damage", this.Girl.transform.position);
 			yield return this.Performer.Perform(ActionType.DeliveryIdle, new PerformModifiers() { Duration = 20f });
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Idle);
-			if (!this.CanContinue())
-				yield break;
-			
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Loop);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Loop);
-				yield break;
-			}
-
+		private IEnumerator DeliveryLoop()
+		{
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "finish", this.Girl.transform.position);
 			yield return this.Performer.Perform(ActionType.DeliveryLoop, new PerformModifiers() { Duration = 10f });
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Loop);
-			if (!this.CanContinue())
-				yield break;
-
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
-				yield break;
-			}
-
+		private IEnumerator Finish()
+		{
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "faint", this.Girl.transform.position);
 			yield return this.Performer.Perform(ActionType.DeliveryEnd);
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+		private IEnumerator Perform()
+		{
+			yield return this.RunStep(StepNames.Idle, this.Idle);
 			if (!this.CanContinue())
 				yield break;
+
+			yield return this.RunStep(StepNames.Loop, this.DeliveryLoop);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.RunStep(StepNames.Finish, this.Finish);
 		}
 
 
@@ -192,7 +162,7 @@ namespace HFramework.Scenes
 				this.SexPlace.user = null;
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Delivery, this.Controller);
 			if (this.Performer == null)
@@ -201,10 +171,10 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			this.Anim = this.Girl.anim;
+			this.CommonAnim = this.Girl.anim;
 
 			yield return this.StopGirl();
-			
+
 			NPCMove girlMove = this.Girl.nMove;
 			float tmpSearchAngle = girlMove.searchAngle;
 
@@ -233,46 +203,21 @@ namespace HFramework.Scenes
 			yield return this.Perform();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
-			
+
 			this.FreePlace();
 
 			girlMove.searchAngle = tmpSearchAngle;
 			this.EnableLiveGirl();
 		}
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
 			return this.Girl.nMove.actType == NPCMove.ActType.Wait && !this.Destroyed;
 		}
 
-		public void Destroy()
-		{
-			this.Destroyed = true;
-		}
-
-		public string GetName()
-		{
-			return Delivery.Name;
-		}
-
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return [this.Girl];
-		}
-
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.Anim;
-		}
-
-		public string ExpandAnimationName(string originalName)
-		{
-			return originalName;
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }

@@ -10,7 +10,7 @@ using YotanModCore.Consts;
 
 namespace HFramework.Scenes
 {
-	public class PlayerRaped : IScene
+	public class PlayerRaped : BaseScene
 	{
 		public static readonly string Name = "HF_PlayerRaped";
 
@@ -35,27 +35,10 @@ namespace HFramework.Scenes
 
 		private GameObject TmpSex;
 
-		private ISceneController Controller;
-
-		private SexPerformer Performer;
-
-		private SkeletonAnimation CommonAnim;
-
-		public PlayerRaped(CommonStates player, CommonStates rapist)
+		public PlayerRaped(CommonStates player, CommonStates rapist) : base(Name)
 		{
 			this.Player = player;
 			this.Rapist = rapist;
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
-		}
-
-		public string GetName()
-		{
-			return PlayerRaped.Name;
 		}
 
 		private void PrepareNpc(CommonStates npc, out NPCMove npcMove)
@@ -186,15 +169,8 @@ namespace HFramework.Scenes
 			yield return new PlayerGrappled(this, this.CommonAnim, this.Player).Handle();
 		}
 
-		private IEnumerator PerformBattle()
+		private IEnumerator Battle()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Battle);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
-				yield break;
-			}
-
 			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			this.CommonAnim = sexAnim;
 
@@ -203,95 +179,49 @@ namespace HFramework.Scenes
 
 			if (this.Player.faint > 0f)
 				this.Destroy();
+		}
 
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
-				yield break;
-			}
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
-			if (!this.CanContinue())
-				yield break;
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Defeat);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
-				yield break;
-			}
-
+		private IEnumerator Defeat()
+		{
 			yield return this.Performer.Perform(ActionType.Defeat);
 			yield return HookManager.Instance.RunEventHook(this, EventNames.OnPlayerDefeated, new FromToParams(this.Rapist, this.Player));
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
 				yield break;
-			}
 
 			if (!this.Skipped)
 				yield return this.Controller.WaitForInput();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Defeat);
 		}
 
-		private IEnumerator PerformSex()
+		private IEnumerator PerformBattle()
 		{
-			this.SetupSexScene();
-			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			this.CommonAnim = sexAnim;
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
+			yield return this.RunStep(StepNames.Battle, this.Battle);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 				yield break;
-			}
 
+			yield return this.RunStep(StepNames.Defeat, this.Defeat);
+		}
+
+		private IEnumerator Insert()
+		{
 			yield return this.Performer.Perform(ActionType.Insert, new PerformModifiers() { Silent = this.Skipped });
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-				yield break;
+		}
 
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed1);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
-				yield break;
-			}
-
+		private IEnumerator Speed1()
+		{
 			yield return this.Performer.Perform(ActionType.Speed1, new PerformModifiers() { Silent = this.Skipped });
 			if (!this.Skipped)
 				yield return this.Controller.WaitForInput();
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
-			if (!this.CanContinue())
-				yield break;
-
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
-				yield break;
-			}
-
+		private IEnumerator Speed2()
+		{
 			yield return this.Performer.Perform(ActionType.Speed2, new PerformModifiers() { Silent = this.Skipped });
 			if (!this.Skipped)
 				yield return this.Controller.WaitForInput();
+		}
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
-			if (!this.CanContinue())
-				yield break;
-
-
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
-				yield break;
-			}
-
+		private IEnumerator Finish()
+		{
 			yield return this.Performer.Perform(ActionType.Finish, new PerformModifiers() { Silent = this.Skipped });
 			if (!this.CanContinue())
 				yield break;
@@ -300,7 +230,27 @@ namespace HFramework.Scenes
 			if (!this.Skipped)
 				yield return this.Controller.WaitForInput();
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+		}
+
+		private IEnumerator PerformSex()
+		{
+			this.SetupSexScene();
+			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = sexAnim;
+
+			yield return this.RunStep(StepNames.Insert, this.Insert);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.RunStep(StepNames.Speed1, this.Speed1);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.RunStep(StepNames.Speed2, this.Speed2);
+			if (!this.CanContinue())
+				yield break;
+
+			yield return this.RunStep(StepNames.Finish, this.Finish);
 		}
 
 		private IEnumerator FadeOut()
@@ -318,7 +268,7 @@ namespace HFramework.Scenes
 			Managers.mn.sexMN.StartCoroutine(Managers.mn.sexMN.ReviveToNearPoint(this.Rapist.npcID));
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			// The original logic is weird, but we need to reset this ourselves or things will go crazy.
 			Managers.mn.uiMN.skip = false;
@@ -370,18 +320,19 @@ namespace HFramework.Scenes
 			this.RapistMove.actType = NPCMove.ActType.Interval;
 		}
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
-			return this.TmpSex != null;
+			return !this.Destroyed && this.TmpSex != null;
 		}
 
-		public void Destroy()
+		public override void Destroy()
 		{
+			this.Destroyed = true;
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
 		}
 
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			if (CommonUtils.IsMale(this.Player))
 				return [this.Player, this.Rapist];
@@ -391,20 +342,10 @@ namespace HFramework.Scenes
 			return [this.Player, this.Rapist];
 		}
 
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.CommonAnim;
-		}
-
-		public string ExpandAnimationName(string originalName)
+		public override string ExpandAnimationName(string originalName)
 		{
 			var act = GetActors()[1];
 			return originalName.Replace("<Tits>", act.parameters[6].ToString("00"));
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }

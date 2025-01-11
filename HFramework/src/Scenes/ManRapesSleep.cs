@@ -7,7 +7,7 @@ using YotanModCore;
 
 namespace HFramework.Scenes
 {
-	public class ManRapesSleep : IScene
+	public class ManRapesSleep : BaseScene
 	{
 		public static readonly string Name = "HF_ManRapesSleep";
 
@@ -30,46 +30,41 @@ namespace HFramework.Scenes
 
 		private float NoticeTime = 0f;
 
-		private bool Aborted = false;
-
 		private GameObject TmpSex = null;
 
 		private ManRapeSleepState TmpCommonState = ManRapeSleepState.None;
 
 		private int TmpCommonSub = 0;
 
-		private SkeletonAnimation CommonAnim;
-
-		private ISceneController Controller;
-
 		private readonly ManRapesSleepMenuPanel MenuPanel;
 
-		private SexPerformer Performer;
-
 		public ManRapesSleep(CommonStates girl, CommonStates man)
+			: base(Name)
 		{
 			this.Girl = girl;
 			this.Man = man;
 
 			this.MenuPanel = new ManRapesSleepMenuPanel();
-			this.MenuPanel.OnForcefullyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnForcefullyRape());
-			this.MenuPanel.OnGentlyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnGentlyRape());
-			this.MenuPanel.OnUseSleepPowderSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnUseSleepPowder());
+			this.MenuPanel.OnForcefullyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.ForceRape, this.OnForcefullyRape));
+			this.MenuPanel.OnGentlyRapeSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.GentlyRape, this.OnGentlyRape));
+			this.MenuPanel.OnUseSleepPowderSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.PowderRape, this.OnUseSleepPowder));
 
-			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnInsert());
+			this.MenuPanel.OnInsertSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Insert, this.OnInsert));
 
-			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed());
-			this.MenuPanel.OnSpeed2Selected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnSpeed2());
+			this.MenuPanel.OnSpeedSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Speed, this.OnSpeed));
+			this.MenuPanel.OnSpeed2Selected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Speed2, this.OnSpeed2));
 
-			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnFinish());
+			this.MenuPanel.OnFinishSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.StartLongLivedStep(StepNames.Finish, this.OnFinish));
 
-			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(this.OnLeave());
-		}
-
-		public void Init(ISceneController controller)
-		{
-			this.Controller = controller;
-			this.Controller.SetScene(this);
+			this.MenuPanel.OnLeaveSelected += (object s, int e) => Managers.mn.sexMN.StartCoroutine(
+				this.RunStep(StepNames.Leave, this.OnLeave));
 		}
 
 		private void DisableLiveNpc(CommonStates npc)
@@ -216,32 +211,21 @@ namespace HFramework.Scenes
 		private IEnumerator OnForcefullyRape()
 		{
 			this.TmpCommonState = ManRapeSleepState.ForcefullRape; // 1
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.ForceRape);
-			if (!this.CanContinue())
-				yield break;
-
+			
 			yield return this.Performer.ChangeSet("ForceRape");
 
 			if (this.Girl != null)
 				Managers.mn.sound.GoVoice(this.Girl.voiceID, "close", this.CommonAnim.transform.position);
 
 			this.MenuPanel.ShowRapeMenu();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.ForceRape);
 		}
 
 		private IEnumerator OnGentlyRape()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.GentlyRape);
-			if (!this.CanContinue())
-				yield break;
-
 			this.TmpCommonState = ManRapeSleepState.GentlyRape; // 3
 			yield return this.Performer.ChangeSet("GentlyRape");
 
 			this.MenuPanel.ShowRapeMenu();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.GentlyRape);
 		}
 
 		private IEnumerator OnUseSleepPowder()
@@ -249,23 +233,13 @@ namespace HFramework.Scenes
 			this.ConsumeSleepPowder();
 			this.TmpCommonState = ManRapeSleepState.SleepPowder; // 2
 
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.PowderRape);
-			if (!this.CanContinue())
-				yield break;
-
 			yield return this.Performer.ChangeSet("PowderRape");
 
 			this.MenuPanel.ShowRapeMenu();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.PowderRape);
 		}
 
 		private IEnumerator OnInsert()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-				yield break;
-
 			this.MenuPanel.Hide();
 
 			this.TmpCommonSub = 1;
@@ -277,44 +251,26 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowInsertMenu(this.TmpCommonState == ManRapeSleepState.SleepPowder);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
 		private IEnumerator OnSpeed()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
-			if (!this.CanContinue())
-				yield break;
-
 			if (this.Performer.CurrentAction == ActionType.Speed2)
 				yield return this.Performer.Perform(ActionType.Speed1);
 			else
 				yield return this.Performer.Perform(ActionType.Speed2);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
 		private IEnumerator OnSpeed2()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed2);
-			if (!this.CanContinue())
-				yield break;
-
 			if (this.Performer.HasAction(ActionType.Speed3))
 				yield return this.Performer.Perform(ActionType.Speed3);
 			else
 				yield return this.Performer.Perform(ActionType.Speed1);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
 		}
 
 		private IEnumerator OnFinish()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
-			if (!this.CanContinue())
-				yield break;
-
 			this.MenuPanel.Hide();
 
 			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
@@ -330,19 +286,12 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowFinishMenu();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
 		private IEnumerator OnLeave()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
-			if (!this.CanContinue())
-				yield break;
-
 			this.Destroy();
-			
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
+			yield break;
 		}
 
 		private void WakeupCheck()
@@ -362,7 +311,7 @@ namespace HFramework.Scenes
 					if (UnityEngine.Random.Range(0, 100) <= 10)
 					{
 						Managers.mn.uiMN.GoLogText(Managers.mn.textMN.logTexts[10].Replace("XXXX", this.Girl.charaName));
-						this.Aborted = true;
+						this.Destroyed = true;
 						this.TmpCommonSub = 5;
 					}
 					this.NoticeTime = 0f;
@@ -370,7 +319,7 @@ namespace HFramework.Scenes
 			}
 		}
 
-		public IEnumerator Run()
+		public override IEnumerator Run()
 		{
 			if (!this.SetupScene())
 				yield break;
@@ -405,40 +354,25 @@ namespace HFramework.Scenes
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
 
-		public bool CanContinue()
+		public override bool CanContinue()
 		{
-			return this.TmpSex != null && !Input.GetKeyDown(KeyCode.R) && this.Man.life > 0 && !this.Aborted;
+			return this.TmpSex != null && !Input.GetKeyDown(KeyCode.R) && this.Man.life > 0 && !this.Destroyed;
 		}
 
-		public void Destroy()
+		public override void Destroy()
 		{
 			GameObject.Destroy(this.TmpSex);
 			this.TmpSex = null;
 		}
 
-		public string GetName()
-		{
-			return ManRapesSleep.Name;
-		}
-
-		public CommonStates[] GetActors()
+		public override CommonStates[] GetActors()
 		{
 			return [this.Man, this.Girl];
 		}
 
-		public SkeletonAnimation GetSkelAnimation()
-		{
-			return this.CommonAnim;
-		}
-
-		public string ExpandAnimationName(string originalName)
+		public override string ExpandAnimationName(string originalName)
 		{
 			return originalName.Replace("<Tits>", this.Girl.parameters[6].ToString("00"));
-		}
-
-		public SexPerformer GetPerformer()
-		{
-			return this.Performer;
 		}
 	}
 }
