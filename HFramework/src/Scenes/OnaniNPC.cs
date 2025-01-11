@@ -175,7 +175,7 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Performer.Perform(ActionType.Speed1, 10f);
+			yield return this.Performer.Perform(ActionType.Speed1, new PerformModifiers() { Duration = 10f });
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed1);
 			if (!this.CanContinue())
@@ -186,7 +186,7 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			yield return this.Performer.Perform(ActionType.Speed2, 10f);
+			yield return this.Performer.Perform(ActionType.Speed2, new PerformModifiers() { Duration = 10f });
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed2);
 			if (!this.CanContinue())

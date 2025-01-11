@@ -124,7 +124,7 @@ namespace HFramework.Scenes
 			}
 
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "damage", this.Girl.transform.position);
-			yield return this.Performer.Perform(ActionType.DeliveryIdle, 20f);
+			yield return this.Performer.Perform(ActionType.DeliveryIdle, new PerformModifiers() { Duration = 20f });
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Idle);
 			if (!this.CanContinue())
@@ -139,7 +139,7 @@ namespace HFramework.Scenes
 			}
 
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "finish", this.Girl.transform.position);
-			yield return this.Performer.Perform(ActionType.DeliveryLoop, 10f);
+			yield return this.Performer.Perform(ActionType.DeliveryLoop, new PerformModifiers() { Duration = 10f });
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Loop);
 			if (!this.CanContinue())
