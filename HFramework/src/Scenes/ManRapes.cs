@@ -33,8 +33,6 @@ namespace HFramework.Scenes
 
 		public readonly double InitialFaint;
 
-		private NPCMove GirlMove;
-
 		private GameObject TmpSex;
 
 		private SkeletonAnimation TmpSexAnim;
@@ -63,16 +61,15 @@ namespace HFramework.Scenes
 			this.Controller.SetScene(this);
 		}
 
-		private void PrepareGirl(CommonStates npc, out NPCMove npcMove)
+		private void PrepareGirl(CommonStates npc)
 		{
-			npcMove = npc.GetComponent<NPCMove>();
-			if (npcMove.actType != NPCMove.ActType.Dead)
-				npcMove.actType = NPCMove.ActType.Wait;
+			if (npc.nMove.actType != NPCMove.ActType.Dead)
+				npc.nMove.actType = NPCMove.ActType.Wait;
 		}
 
-		private void DisableLiveGirl(CommonStates npc, NPCMove npcMove)
+		private void DisableLiveGirl(CommonStates npc)
 		{
-			npcMove.RBState(false);
+			npc.nMove.RBState(false);
 
 			CapsuleCollider coll = npc.GetComponent<CapsuleCollider>();
 			if (coll != null)
@@ -151,7 +148,7 @@ namespace HFramework.Scenes
 			}
 
 			this.TmpSexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-
+			
 			if (this.Girl.npcID == NpcID.Yona && string.IsNullOrEmpty(this.Girl.equip[3].itemKey) && this.TmpSexAnim.skeleton.FindSlot("Panty") != null)
 				this.TmpSexAnim.skeleton.SetAttachment("Panty", null);
 
@@ -162,8 +159,8 @@ namespace HFramework.Scenes
 				this.TmpSexScale.transform.localScale = new Vector3(-1f, 1f, 1f);
 			}
 
-			this.PrepareGirl(this.Girl, out this.GirlMove);
-			this.DisableLiveGirl(this.Girl, this.GirlMove);
+			this.PrepareGirl(this.Girl);
+			this.DisableLiveGirl(this.Girl);
 			this.DisableLiveMan(this.Man);
 
 			return true;
@@ -187,13 +184,6 @@ namespace HFramework.Scenes
 			}
 
 			yield return this.Performer.Perform(ActionType.Battle);
-			// string text = this.SexType + "Attack_loop";
-			// if (this.TmpSexAnim.skeleton.Data.FindAnimation(text) != null)
-			// {
-			// 	this.TmpSexAnim.state.SetAnimation(0, text, true);
-			// 	this.TmpSexAnim.state.Data.SetMix(text, this.SexType + "Attack_attack", 0f);
-			// }
-
 			yield return this.PerformGrapple();
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Battle);
@@ -325,6 +315,12 @@ namespace HFramework.Scenes
 
 			this.Stage = 1;
 
+			// If we don't put the prepare here, Shino animation gets messed up
+			// and they do a roll at the beggining due to the yields for before Main and before Battle
+			// other scenes would work fine as far as I can tell, but since this is the "original code"
+			// let's make it for everyone.
+			this.Performer.PreparePerform(ActionType.Battle);
+
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())
 			{
@@ -367,7 +363,14 @@ namespace HFramework.Scenes
 				return false;
 
 			if (this.Stage == 1)
+			{
+				// For some reason, Shino is killed once the battle ends...
+				// but before Stage 1 ends. so bypass the life check in this case.
+				if (this.Girl.npcID == NpcID.Shino && this.Girl.faint == 0f)
+					return this.TmpSex != null && this.Man.life > 0.0 && !Input.GetKeyDown(KeyCode.R);
+				
 				return this.Girl.life > 0.0 && this.TmpSex != null && this.Man.life > 0.0 && !Input.GetKeyDown(KeyCode.R);
+			}
 
 			return !Input.GetKeyDown(KeyCode.R) && this.Man.life > 0;
 		}
