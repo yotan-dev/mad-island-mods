@@ -8,7 +8,7 @@ namespace YotanModCore.PropPanels
 	/// </summary>
 	public abstract class BasePropPanel
 	{
-		public List<ConstMenuItem> Options { get; private set; } = new List<ConstMenuItem>();
+		public List<MenuItem> Options { get; private set; } = new List<MenuItem>();
 
 		public BasePropPanel()
 		{

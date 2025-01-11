@@ -32,6 +32,11 @@ namespace YotanModCore
 		public static bool HasDLC { get { return Instance._HasDLC; } }
 
 		/// <summary>
+		/// True if Joke mode is enabled
+		/// </summary>
+		public static bool JokeMode { get { return SaveManager.SaveSettingStatic.joke == 1; } }
+
+		/// <summary>
 		/// Converts major/minor/patch version to GameVersion
 		/// </summary>
 		/// <param name="major"></param>

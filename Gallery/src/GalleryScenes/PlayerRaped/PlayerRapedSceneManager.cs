@@ -1,5 +1,4 @@
 using System.Linq;
-using YotanModCore;
 using Gallery.SaveFile.Containers;
 using YotanModCore.Consts;
 using static Gallery.GallerySceneInfo;
@@ -34,9 +33,8 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				RequireDLC = dlc,
 				GetScene = (PlayData data) =>
 				{
-					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
-					scene.Init(new ExtendedHSystem.GallerySceneController());
-					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
+					scene.Init(new HFramework.GallerySceneController());
 
 					return scene;
 				},
@@ -56,9 +54,8 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				RequireDLC = dlc,
 				GetScene = (PlayData data) =>
 				{
-					var scene = new ExtendedHSystem.Scenes.PlayerRaped(data.NpcA, data.NpcB);
-					scene.Init(new ExtendedHSystem.GallerySceneController());
-					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
+					scene.Init(new HFramework.GallerySceneController());
 
 					return scene;
 				},

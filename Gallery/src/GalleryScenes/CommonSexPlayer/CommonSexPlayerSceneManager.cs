@@ -92,9 +92,8 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 				RequireDLC = dlc,
 				GetScene = (PlayData data) =>
 				{
-					var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
-					scene.Init(new ExtendedHSystem.GallerySceneController());
-					scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+					var scene = new HFramework.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
+					scene.Init(new HFramework.GallerySceneController());
 
 					return scene;
 				},
@@ -122,9 +121,8 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					IsUnlocked = this.IsUnlocked(NpcID.Man, false, NpcID.Shino, false, 1),
 					RequireDLC = false,
 					GetScene = (PlayData data) => {
-						var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
-						scene.Init(new ExtendedHSystem.GallerySceneController());
-						scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+						var scene = new HFramework.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
+						scene.Init(new HFramework.GallerySceneController());
 
 						return scene;
 					},
@@ -138,9 +136,8 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					IsUnlocked = this.IsUnlocked(NpcID.Man, false, NpcID.Shino, false, 0),
 					RequireDLC = false,
 					GetScene = (PlayData data) => {
-						var scene = new ExtendedHSystem.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 1);
-						scene.Init(new ExtendedHSystem.GallerySceneController());
-						scene.AddEventHandler(new ExtendedHSystem.GallerySceneEventHandler());
+						var scene = new HFramework.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 1);
+						scene.Init(new HFramework.GallerySceneController());
 						
 						return scene;
 					},

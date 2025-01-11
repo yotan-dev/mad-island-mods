@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ExtendedHSystem;
+using HFramework;
 using Gallery.GalleryScenes;
 using Gallery.GalleryScenes.AssWall;
 using Gallery.GalleryScenes.CommonSexNPC;
@@ -22,9 +22,7 @@ namespace Gallery
 	{
 		public static GalleryScenesManager Instance { get; set; }
 
-		private List<IGalleryScene> ActiveScenes = new List<IGalleryScene>();
-
-		private Dictionary<CommonStates, SceneEventHandler> SceneHandlers = new Dictionary<CommonStates, SceneEventHandler>();
+		private Dictionary<CommonStates, BaseTracker> Trackers = new Dictionary<CommonStates, BaseTracker>();
 
 		public List<ISceneManager> SceneManagers = new List<ISceneManager>()
 		{
@@ -48,87 +46,23 @@ namespace Gallery
 			}
 		}
 
-		public IGalleryScene GetSceneWithChara(CommonStates chara, Type sceneType = null)
+		public BaseTracker GetTrackerForCommon(CommonStates common)
 		{
-			if (sceneType == null) {
-				return this.ActiveScenes.Find((scn) => scn.IsCharacterInScene(chara));
-			} else {
-				return this.ActiveScenes.Find((scn) => scn.IsCharacterInScene(chara) && scn.GetType() == sceneType);
-			}
+			return this.Trackers.GetValueOrDefault(common, null);
 		}
 
-		public IGalleryScene[] GetScenesByType(Type sceneType) {
-			return ActiveScenes.FindAll((scn) => scn.GetType() == sceneType).ToArray();
-		}
-
-		public void CheckExistingScenes(CommonStates chara, string scene)
+		public void AddTrackerForCommon(CommonStates common, BaseTracker tracker)
 		{
-			var sceneWithChara = GetSceneWithChara(chara);
-			if (sceneWithChara != null) {
-				var charaName = CommonUtils.DetailedString(chara);
-				GalleryLogger.LogError($"CheckForExistingScenes: Found existing scene for {charaName} while creating {scene}. Existing: {sceneWithChara}");
-			}
-		}
-
-		public void EndScene(Type sceneType, CommonStates charaA, CommonStates charaB = null) {
-			var sceneA = GetSceneWithChara(charaA, sceneType);
-			IGalleryScene sceneB;
-			if (charaB != null) {
-				sceneB = GetSceneWithChara(charaB, sceneType);
-			} else {
-				sceneB = sceneA;
-			}
-
-			if (sceneA == null) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneA == null ({CommonUtils.LogName(charaA)})");
-			}
-
-			if (sceneA != sceneB) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneA != sceneB: {sceneA} != {sceneB}");
-			}
-
-			if (sceneA != null && !sceneA.GetType().IsEquivalentTo(sceneType)) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneA.GetType() != sceneType: {sceneA.GetType()} != {sceneType}");
-			}
-
-			if (sceneB != null && !sceneB.GetType().IsEquivalentTo(sceneType)) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneB.GetType() != sceneType: {sceneB.GetType()} != {sceneType}");
-			}
-
-			sceneA?.OnEnd();
-			ActiveScenes.Remove(sceneA);
-		
-			if (sceneA != sceneB) {
-				sceneB?.OnEnd();
-				ActiveScenes.Remove(sceneB);
-			}
-		}
-
-		public SceneEventHandler GetSceneHandlerForCommon(CommonStates common)
-		{
-			return this.SceneHandlers.GetValueOrDefault(common, null);
-		}
-
-		public void AddSceneHandlerForCommon(CommonStates common, SceneEventHandler handler)
-		{
-			if (this.SceneHandlers.ContainsKey(common))
-				this.SceneHandlers[common] = handler;
+			if (this.Trackers.ContainsKey(common))
+				this.Trackers[common] = tracker;
 			else
-				this.SceneHandlers.Add(common, handler);
+				this.Trackers.Add(common, tracker);
 		}
 
-		public void RemoveSceneHandlerForCommon(CommonStates common)
+		public void RemoveTrackerForCommon(CommonStates common)
 		{
-			if (this.SceneHandlers.ContainsKey(common))
-				this.SceneHandlers.Remove(common);
-		}
-
-		public void AddScene(IGalleryScene scene)
-		{
-			this.CheckExistingScenes(scene.GetCharacter1(), scene.GetType().Name);
-			this.CheckExistingScenes(scene.GetCharacter2(), scene.GetType().Name);
-
-			ActiveScenes.Add(scene);
+			if (this.Trackers.ContainsKey(common))
+				this.Trackers.Remove(common);
 		}
 	}
 }

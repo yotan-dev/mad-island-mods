@@ -3,6 +3,7 @@ using Gallery.Patches;
 using Gallery.Patches.CommonSexPlayer;
 using Gallery.SaveFile;
 using HarmonyLib;
+using HFramework.Hook;
 using UnityEngine;
 using YotanModCore;
 
@@ -10,7 +11,7 @@ namespace Gallery
 {
 	[BepInPlugin("Gallery", "Gallery", "0.3.0")]
 	[BepInDependency("YotanModCore", "1.5.0")]
-	[BepInDependency("ExtendedHSystem", "0.2.0")]
+	[BepInDependency("HFramework", "0.2.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
@@ -28,8 +29,8 @@ namespace Gallery
 			GalleryScenesManager.Init();
 
 			// If using Extended H-System replace mode, we don't have to patch the original code
-			if (ExtendedHSystem.Config.Instance.ReplaceOriginalScenes.Value) {
-				Harmony.CreateAndPatchAll(typeof(EHSWatcherPatch));
+			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value) {
+				HookManager.RegisterHooksEvent += GalleryHooks.Instance.InitHooks;
 			} else {
 				Harmony.CreateAndPatchAll(typeof(AssWallPatch));
 				Harmony.CreateAndPatchAll(typeof(CommonSexNPCPatch));

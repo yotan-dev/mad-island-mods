@@ -3,30 +3,22 @@ using System;
 namespace YotanModCore.PropPanels
 {
 	/// <summary>
-	/// Defines a Prop Panel menu item that uses the text from the constants list.
-	/// See PropPanelConst.Text
+	/// Defines a MenuItem for PropPanels.
 	/// </summary>
-	public class ConstMenuItem
+	[Obsolete("Use MenuItem instead. It supports the same features and more. 'Meta' may be used to replace 'TextId'")]
+	public class ConstMenuItem : MenuItem
 	{
-		/// <summary>
-		/// Text ID to be shown. See PropPanelConst.Text
-		/// </summary>
 		public int TextId;
 
 		/// <summary>
-		/// Action ran when this menu item is clicked
-		/// </summary>
-		public Action Action;
-
-		/// <summary>
-		/// 
+		/// Creates a menu item using a text from actButtonTexts from Text Manager (original messages)
 		/// </summary>
 		/// <param name="textId">See PropPanelConst.Text</param>
 		/// <param name="action">Action ran when this menu item is clicked</param>
-		public ConstMenuItem(int textId, Action action)
+		public ConstMenuItem(int textId, Action action) : base(Managers.mn.textMN.actButtonTexts[textId], action)
 		{
-			TextId = textId;
-			Action = action;
+			this.TextId = textId;
 		}
+
 	}
 }

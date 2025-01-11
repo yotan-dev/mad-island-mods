@@ -2,11 +2,12 @@
 using HarmonyLib;
 using YotanModCore.Patches;
 using UnityEngine;
+using YotanModCore.Events;
 
 namespace YotanModCore
 {
 	
-	[BepInPlugin("YotanModCore", "YotanModCore", "1.5.0")]
+	[BepInPlugin("YotanModCore", "YotanModCore", "1.6.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
@@ -23,6 +24,7 @@ namespace YotanModCore
 
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
+			Harmony.CreateAndPatchAll(typeof(GameLifecycleEvents));
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");
 		}

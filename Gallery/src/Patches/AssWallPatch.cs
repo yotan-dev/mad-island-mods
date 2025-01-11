@@ -9,7 +9,7 @@ namespace Gallery.Patches
 {
 	public class AssWallPatch
 	{
-		private static AssWallSceneEventHandler EventHandler = null;
+		private static AssWallTracker Tracker = null;
 
 		[HarmonyPatch(typeof(SexManager), "AssWall")]
 		[HarmonyPrefix]
@@ -40,9 +40,9 @@ namespace Gallery.Patches
 				GalleryLogger.SceneStart("AssWall", charas, infos);
 			
 				if ((AssWallState) state == AssWallState.Start && tmpWall != null) {
-					EventHandler = new AssWallSceneEventHandler(player, girl, tmpWall.type);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(player, EventHandler);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(girl, EventHandler);
+					Tracker = new AssWallTracker(player, girl, tmpWall.type);
+					GalleryScenesManager.Instance.AddTrackerForCommon(player, Tracker);
+					GalleryScenesManager.Instance.AddTrackerForCommon(girl, Tracker);
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("AssWall", error);
@@ -81,17 +81,17 @@ namespace Gallery.Patches
 				GalleryLogger.SceneEnd("AssWall", charas, infos);
 
 				if ((AssWallState) state == AssWallState.Start && tmpWall != null) {
-					EventHandler?.AfterSex(null, player, girl);
+					Tracker?.End();
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("AssWall", error);
 			} finally {
 				if ((AssWallState) state == AssWallState.Start) {
 					if (player != null)
-						GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(player);
+						GalleryScenesManager.Instance.RemoveTrackerForCommon(player);
 					if (girl != null)
-						GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(girl);
-					EventHandler = null;
+						GalleryScenesManager.Instance.RemoveTrackerForCommon(girl);
+					Tracker = null;
 				}
 			}
 		}
