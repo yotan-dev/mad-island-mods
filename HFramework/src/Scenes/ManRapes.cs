@@ -6,6 +6,7 @@ using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
 using YotanModCore.Consts;
+using YotanModCore.Extensions;
 
 namespace HFramework.Scenes
 {
@@ -99,8 +100,8 @@ namespace HFramework.Scenes
 
 			if (npc.faint > 0 && npc.life > 0)
 				npc.nMove.actType = NPCMove.ActType.Interval;
-			else
-				yield return this.Controller.LoopAnimation("A_dead_idle");
+			else if (npc.anim.HasAnimation("A_dead_idle"))
+				npc.anim.state.SetAnimation(0, "A_dead_idle", true);
 
 			if (npc.nMove.npcType == NPCMove.NPCType.Follow || npc.nMove.npcType == NPCMove.NPCType.Friend)
 				npc.nMove.tmpEnemy = null;
@@ -175,6 +176,9 @@ namespace HFramework.Scenes
 
 		private IEnumerator PerformBattle()
 		{
+			if (this.Girl.faint == 0)
+				yield break;
+
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Battle);
 			if (!this.CanContinue())
 			{
