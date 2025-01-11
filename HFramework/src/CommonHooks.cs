@@ -24,7 +24,7 @@ namespace HFramework
 		{
 			HookBuilder.New("HF.Friendly.OnPenetrate")
 				.ForScenes(CommonSexNPC.Name, CommonSexPlayer.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.CountNormal);
 			HookBuilder.New("Gallery.Friendly.OnScissor")
 				.ForScenes(CommonSexNPC.Name)
@@ -32,19 +32,19 @@ namespace HFramework
 				.Call(this.CountNormal);
 			HookBuilder.New("HF.Rape.OnPenetrate")
 				.ForScenes(Daruma.Name, ManRapes.Name, ManRapesSleep.Name, Slave.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.OnRapePenetrate);
 			HookBuilder.New("HF.PlayerRaped.OnPenetrate")
 				.ForScenes(PlayerRaped.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.OnPlayerRapedPenetrate);
 			HookBuilder.New("HF.ManRapes.OnPenetrate")
 				.ForScenes(ManRapes.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.OnManRapesPenetrate);
 			HookBuilder.New("HF.Toilet.OnPenetrate")
 				.ForScenes(AssWall.Name, Toilet.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.OnToiletsPenetrate);
 
 			HookBuilder.New("HF.Delivery.OnDelivery")
