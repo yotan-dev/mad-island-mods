@@ -39,120 +39,81 @@ namespace HFramework.Scenes
 			this.MenuPanel = new AssWallMenuPanel();
 			this.MenuPanel.OnInsertSelected += (object sender, int e) =>
 			{
-				Managers.mn.sexMN.StartCoroutine(this.OnInsert(sender, e));
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Insert, this.OnInsert));
 			};
 			this.MenuPanel.OnSpeedSelected += (object sender, int e) =>
 			{
-				Managers.mn.sexMN.StartCoroutine(this.OnSpeed(sender, e));
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Speed, this.OnSpeed));
 			};
 			this.MenuPanel.OnFinishSelected += (object sender, int e) =>
 			{
-				Managers.mn.sexMN.StartCoroutine(this.OnFinish(sender, e));
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Finish, this.OnFinish));
 			};
 			this.MenuPanel.OnStopSelected += (object sender, int e) =>
 			{
-				Managers.mn.sexMN.StartCoroutine(this.OnStop(sender, e));
+				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Stop, this.OnStop));
 			};
 			this.MenuPanel.OnLeaveSelected += (object sender, int e) =>
 			{
-				Managers.mn.sexMN.StartCoroutine(this.OnLeave(sender, e));
+				Managers.mn.sexMN.StartCoroutine(this.RunStep(StepNames.Leave, this.OnLeave));
 			};
 		}
 
-		private IEnumerator OnInsert(object sender, int e)
+		private IEnumerator OnInsert()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Insert);
-			if (!this.CanContinue())
-				yield break;
-
 			this.MenuPanel.ShowInsertMenu();
 
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 				yield break;
-			}
 
 			yield return this.Performer.Perform(ActionType.Speed1);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 				yield break;
-			}
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Insert);
 		}
 
-		private IEnumerator OnSpeed(object sender, int e)
+		private IEnumerator OnSpeed()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Speed);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 				yield break;
-			}
 
 			if (this.Performer.CurrentAction == ActionType.Speed1)
 				yield return this.Performer.Perform(ActionType.Speed2);
 			else
 				yield return this.Performer.Perform(ActionType.Speed1);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Speed);
 		}
 
-		private IEnumerator OnStop(object sender, int e)
+		private IEnumerator OnStop()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Stop);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 				yield break;
-			}
 
 			this.MenuPanel.ShowStopMenu();
 			yield return this.Performer.Perform(ActionType.StartIdle);
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Stop);
 		}
 
-		private IEnumerator OnFinish(object sender, int e)
+		private IEnumerator OnFinish()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Finish);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 				yield break;
-			}
 
 			this.MenuPanel.Hide();
 
 			yield return this.Performer.Perform(ActionType.Finish);
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 				yield break;
-			}
 
 			this.MenuPanel.ShowFinishMenu();
 			this.MenuPanel.Show();
-
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
 		}
 
-		private IEnumerator OnLeave(object sender, int e)
+		private IEnumerator OnLeave()
 		{
-			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Leave);
 			if (!this.CanContinue())
-			{
-				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 				yield break;
-			}
 
 			this.Destroy();
-			
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Leave);
 		}
 
 		public override IEnumerator Run()
@@ -161,6 +122,13 @@ namespace HFramework.Scenes
 			if (this.Performer == null)
 			{
 				PLogger.LogError($"AssWall: Failed to get sex performer for {this.Player.npcID} x {this.Npc.npcID}");
+				yield break;
+			}
+
+			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
+			if (!this.CanContinue())
+			{
+				yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 				yield break;
 			}
 
@@ -205,7 +173,7 @@ namespace HFramework.Scenes
 			Managers.mn.gameMN.pMove.PlayerVisible(true);
 			Managers.mn.uiMN.MainCanvasView(true);
 
-			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Finish);
+			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
 
 		public override bool CanContinue()
