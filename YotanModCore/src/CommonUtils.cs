@@ -192,6 +192,7 @@ namespace YotanModCore
 				.AddComponent<CommonStates>();
 			tempCommon.lovers = new List<CommonStates.Lovers>();
 			tempCommon.charaName = statsData.GetLocalizedCharaName();
+			tempCommon.npcID = npcId;
 			tempCommon.friendID = -npcId;
 			return tempCommon;
 		}
