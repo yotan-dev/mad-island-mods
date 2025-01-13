@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Gallery.GalleryScenes.AssWall;
 using HarmonyLib;
 using YotanModCore;
+using YotanModCore.Consts;
 
 namespace Gallery.Patches
 {
@@ -24,7 +25,7 @@ namespace Gallery.Patches
 				CommonStates player = null;
 				CommonStates girl = null;
 
-				if ((AssWallState) state == AssWallState.Start) {
+				if (state == AssWallState.Start) {
 					girl = Managers.mn?.inventory?.itemSlot?[50]?.common;
 					charas.Add("girl", girl);
 
@@ -39,7 +40,7 @@ namespace Gallery.Patches
 			
 				GalleryLogger.SceneStart("AssWall", charas, infos);
 			
-				if ((AssWallState) state == AssWallState.Start && tmpWall != null) {
+				if (state == AssWallState.Start && tmpWall != null) {
 					Tracker = new AssWallTracker(player, girl, tmpWall.type);
 					GalleryScenesManager.Instance.AddTrackerForCommon(player, Tracker);
 					GalleryScenesManager.Instance.AddTrackerForCommon(girl, Tracker);
@@ -65,7 +66,7 @@ namespace Gallery.Patches
 			try {
 				Dictionary<string, CommonStates> charas = new Dictionary<string, CommonStates>() {};
 
-				if ((AssWallState) state == AssWallState.Start) {
+				if (state == AssWallState.Start) {
 					girl = Managers.mn?.inventory?.itemSlot?[50]?.common;
 					charas.Add("girl", girl);
 
@@ -80,13 +81,13 @@ namespace Gallery.Patches
 
 				GalleryLogger.SceneEnd("AssWall", charas, infos);
 
-				if ((AssWallState) state == AssWallState.Start && tmpWall != null) {
+				if (state == AssWallState.Start && tmpWall != null) {
 					Tracker?.End();
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("AssWall", error);
 			} finally {
-				if ((AssWallState) state == AssWallState.Start) {
+				if (state == AssWallState.Start) {
 					if (player != null)
 						GalleryScenesManager.Instance.RemoveTrackerForCommon(player);
 					if (girl != null)

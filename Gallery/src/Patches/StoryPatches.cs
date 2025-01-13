@@ -46,7 +46,7 @@ namespace Gallery.Patches
 				yield break;
 
 			GalleryLogger.LogDebug($"StoryManager: BossCyborg00: {__instance.bossBattleState}");
-			if ((BossBattleState) __instance.bossBattleState == BossBattleState.PlayerDefeated) {
+			if (__instance.bossBattleState == BossBattleState.PlayerDefeated) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
 						new GalleryChara(Managers.mn?.gameMN?.playerCommons?[GameManager.selectPlayer]),
@@ -56,7 +56,7 @@ namespace Gallery.Patches
 				);
 
 				GalleryLogger.LogDebug("StoryManager: BossCyborg00: PlayerDefeated event UNLOCKED");
-			} else if ((BossBattleState) __instance.bossBattleState == BossBattleState.BossDefeated) {
+			} else if (__instance.bossBattleState == BossBattleState.BossDefeated) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
 						new GalleryChara(Managers.mn?.gameMN?.playerCommons?[GameManager.selectPlayer]),
@@ -286,7 +286,7 @@ namespace Gallery.Patches
 			if (Plugin.InGallery)
 				yield break;
 
-			if ((BossBattleState) __instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
+			if (__instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
 						new GalleryChara(NpcID.Yona),
@@ -309,7 +309,7 @@ namespace Gallery.Patches
 			if (Plugin.InGallery)
 				yield break;
 
-			if ((BossBattleState) __instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
+			if (__instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
 						new GalleryChara(NpcID.Yona),
