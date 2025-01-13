@@ -58,7 +58,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 				IsUnlocked = this.IsUnlocked(npcA, npcB, 0, SexPlace.SexPlaceType.Normal, SexManager.SexCountState.Normal),
 				GetScene = (PlayData data) => {
 					var scene = new HFramework.Scenes.CommonSexNPC(data.NpcA, data.NpcB, data.Prop.GetComponent<SexPlace>(), SexManager.SexCountState.Normal);
-					scene.Init(new HFramework.GallerySceneController());
+					scene.Init(new GallerySceneController());
 					// scene.AddEventHandler(new HFramework.GallerySceneEventHandler());
 					
 					return scene;

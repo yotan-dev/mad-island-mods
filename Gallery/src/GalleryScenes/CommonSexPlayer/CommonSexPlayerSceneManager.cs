@@ -93,7 +93,7 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 				GetScene = (PlayData data) =>
 				{
 					var scene = new HFramework.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
-					scene.Init(new HFramework.GallerySceneController());
+					scene.Init(new GallerySceneController());
 
 					return scene;
 				},
@@ -122,7 +122,7 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					RequireDLC = false,
 					GetScene = (PlayData data) => {
 						var scene = new HFramework.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 0);
-						scene.Init(new HFramework.GallerySceneController());
+						scene.Init(new GallerySceneController());
 
 						return scene;
 					},
@@ -137,7 +137,7 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 					RequireDLC = false,
 					GetScene = (PlayData data) => {
 						var scene = new HFramework.Scenes.CommonSexPlayer(data.NpcB, data.NpcA, Managers.mn.sexMN.transform.position, 1);
-						scene.Init(new HFramework.GallerySceneController());
+						scene.Init(new GallerySceneController());
 						
 						return scene;
 					},
