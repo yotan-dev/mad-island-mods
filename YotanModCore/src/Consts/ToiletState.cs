@@ -1,4 +1,4 @@
-namespace Gallery
+namespace YotanModCore.Consts
 {
 	public enum ToiletState
 	{

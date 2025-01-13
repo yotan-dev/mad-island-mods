@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Gallery.GalleryScenes.Toilet;
 using HarmonyLib;
 using YotanModCore;
+using YotanModCore.Consts;
 
 namespace Gallery.Patches
 {

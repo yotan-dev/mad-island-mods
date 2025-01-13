@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HFramework.Scenes;
 using Gallery.GalleryScenes.ManSleepRape;
 using HarmonyLib;
+using YotanModCore.Consts;
 
 namespace Gallery.Patches
 {
@@ -35,7 +36,7 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneStart("ManRapesSleep", GetCharas(girl, man), GetInfos(sexType, state));
 
-				switch ((ManRapesState) state) {
+				switch (state) {
 				case ManRapesState.Start: // Starting
 					Tracker = new ManSleepRapeTracker(man, girl);
 					GalleryScenesManager.Instance.AddTrackerForCommon(man, Tracker);
@@ -86,13 +87,13 @@ namespace Gallery.Patches
 
 			try {
 				GalleryLogger.SceneEnd("ManRapesSleep", GetCharas(girl, man), GetInfos(sexType, state));
-				if ((ManRapesState) state == ManRapesState.Start) {
+				if (state == ManRapesState.Start) {
 					Tracker?.End();
 				}
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("ManRapesSleep", error);
 			} finally {
-				if ((ManRapesState) state == ManRapesState.Start) {
+				if (state == ManRapesState.Start) {
 					GalleryScenesManager.Instance.RemoveTrackerForCommon(man);
 					GalleryScenesManager.Instance.RemoveTrackerForCommon(girl);
 					Tracker = null;

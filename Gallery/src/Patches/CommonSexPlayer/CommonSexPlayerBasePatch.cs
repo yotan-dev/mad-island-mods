@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Gallery.GalleryScenes.CommonSexPlayer;
+using YotanModCore.Consts;
 
 namespace Gallery.Patches.CommonSexPlayer
 {
@@ -31,7 +32,7 @@ namespace Gallery.Patches.CommonSexPlayer
 			{
 				GalleryLogger.SceneStart("CommonSexPlayer", GetChars(pCommon, nCommon), GetInfos(sexType, state));
 
-				switch ((CommonSexPlayerState)state)
+				switch (state)
 				{
 					case CommonSexPlayerState.Start:
 						Tracker = new CommonSexPlayerTracker(pCommon, nCommon, sexType);
@@ -76,7 +77,7 @@ namespace Gallery.Patches.CommonSexPlayer
 			{
 				GalleryLogger.SceneEnd("CommonSexPlayer", GetChars(pCommon, nCommon), GetInfos(sexType, state));
 
-				switch ((CommonSexPlayerState)state)
+				switch (state)
 				{
 					case CommonSexPlayerState.Start:
 						if (Tracker.Npc.Id == nCommon.npcID)
