@@ -83,15 +83,19 @@ namespace Gallery
 
 			HookBuilder.New("Gallery.Friendly.OnPenetrate")
 				.ForScenes(CommonSexPlayer.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
+				.Call(this.SetNormal);
+			HookBuilder.New("Gallery.Friendly.OnScissor")
+				.ForScenes(CommonSexNPC.Name)
+				.HookEvent(EventNames.OnScissor)
 				.Call(this.SetNormal);
 			HookBuilder.New("Gallery.Rape.OnPenetrate")
 				.ForScenes(Daruma.Name, ManRapes.Name, ManRapesSleep.Name, PlayerRaped.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.SetRaped);
 			HookBuilder.New("Gallery.Toilet.OnPenetrate")
 				.ForScenes(AssWall.Name, Toilet.Name)
-				.HookEvent(EventNames.OnPenetrate)
+				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.SetToilet);
 
 			HookBuilder.New("Gallery.Any.OnMasturbate")
@@ -104,7 +108,7 @@ namespace Gallery
 				.Call(this.SetBusted);
 			HookBuilder.New("Gallery.Any.OnCreampie")
 				.ForScenes("*")
-				.HookEvent(EventNames.OnCreampie)
+				.HookEvent(EventNames.OnCreampieVag)
 				.Call(this.SetCreampie);
 
 			HookBuilder.New("Gallery.ManRapesSleep.ForceRape")
