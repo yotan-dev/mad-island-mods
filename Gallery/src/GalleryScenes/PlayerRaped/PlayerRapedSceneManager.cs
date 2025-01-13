@@ -34,7 +34,7 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				GetScene = (PlayData data) =>
 				{
 					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
-					scene.Init(new HFramework.GallerySceneController());
+					scene.Init(new GallerySceneController());
 
 					return scene;
 				},
@@ -55,7 +55,7 @@ namespace Gallery.GalleryScenes.PlayerRaped
 				GetScene = (PlayData data) =>
 				{
 					var scene = new HFramework.Scenes.PlayerRaped(data.NpcA, data.NpcB);
-					scene.Init(new HFramework.GallerySceneController());
+					scene.Init(new GallerySceneController());
 
 					return scene;
 				},
