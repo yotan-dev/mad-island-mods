@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HF_Slave scene config.
+	That's when a NPC was enslaved and is locked into some sort of object (history-related)
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HF_Slave">
+			<Performers>
+				<Performer id="HF_Slave_Man_Giant" />
+				<Performer id="HF_Slave_Man_Shino" />
+				<Performer id="HF_Slave_Man_Sally" />
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>

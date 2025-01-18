@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HF_Toilet scene config.
+	This is for the normal toilet (the ones the girl is sitted looking to the camera)
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HF_Toilet">
+			<Performers>
+				<Performer id="HF_Toilet_Man_FemaleNative" />
+				<Performer id="HF_Toilet_Man_NativeGirl" />
+				<Performer id="HF_Toilet_Man_FemaleLargeNative" />
+				<Performer id="HF_Toilet_Man_UnderGroundWoman" />
+				<Performer id="HF_Toilet_Man_ElderSisterNative" />
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>
