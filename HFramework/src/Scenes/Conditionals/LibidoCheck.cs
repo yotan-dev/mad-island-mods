@@ -1,11 +1,33 @@
+using System.Xml.Serialization;
+using HFramework.ConfigFiles;
+using YotanModCore;
+using YotanModCore.Consts;
+
 namespace HFramework.Scenes.Conditionals
 {
-	public class LibidoCheck : IConditional
+	public class LibidoCheck : BaseConditional, IConditional
 	{
-		public int NpcId { get; private set; }
-		public string Compare { get; private set; }
-		public float ExpectedValue { get; private set; }
+		[XmlAttribute("actor")]
+		public string Actor
+		{
+			get { return $"#{this.NpcId}"; }
+			set
+			{
+				var act = new ConfigActor(value);
+				this.NpcId = act.NpcId;
+			}
+		}
 
+		[XmlIgnore]
+		public int NpcId { get; set; } = NpcID.None;
+
+		[XmlAttribute("compare")]
+		public string Compare { get; set; } = "==";
+
+		[XmlAttribute("value")]
+		public float ExpectedValue { get; set; } = 0f;
+
+		public LibidoCheck() { }
 
 		public LibidoCheck(int npcId, string compare, float expectedValue)
 		{
@@ -29,7 +51,7 @@ namespace HFramework.Scenes.Conditionals
 			return false;
 		}
 
-		public bool Pass(IScene scene)
+		public override bool Pass(IScene scene)
 		{
 			bool pass = false;
 			foreach (var actor in scene.GetActors())
@@ -41,7 +63,7 @@ namespace HFramework.Scenes.Conditionals
 			return pass;
 		}
 
-		public bool Pass(CommonStates from, CommonStates to)
+		public override bool Pass(CommonStates from, CommonStates to)
 		{
 			bool pass = true;
 			if (from.npcID == this.NpcId)

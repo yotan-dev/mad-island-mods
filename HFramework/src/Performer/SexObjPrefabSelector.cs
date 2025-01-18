@@ -3,16 +3,18 @@ using YotanModCore;
 
 namespace HFramework.Performer
 {
-	public class SexObjPrefabSelector : IPrefabSelector
+	public class SexObjPrefabSelector : BasePrefabSelector, IPrefabSelector
 	{
 		private int ObjIndex;
+
+		public SexObjPrefabSelector() { }
 
 		public SexObjPrefabSelector(int objIndex)
 		{
 			this.ObjIndex = objIndex;
 		}
 
-		public GameObject GetPrefab()
+		public override GameObject GetPrefab()
 		{
 			return Managers.mn.sexMN.sexObj[this.ObjIndex];
 		}

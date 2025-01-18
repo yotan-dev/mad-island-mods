@@ -361,7 +361,7 @@ namespace HFramework.Scenes
 
 		public override string ExpandAnimationName(string originalName)
 		{
-			return originalName.Replace("<Tits>", this.Npc.parameters[6].ToString("00"));
+			return originalName.Replace("[Tits]", this.Npc.parameters[6].ToString("00"));
 		}
 	}
 }

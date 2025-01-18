@@ -327,8 +327,8 @@ namespace HFramework.Scenes
 			var missingLegs = (this.Girl.dissect[4] == 1 && this.Girl.dissect[5] == 1);
 
 			return originalName
-				.Replace("<Tits>", this.Girl.parameters[6].ToString("00"))
-				.Replace("<DisLeg>", missingLegs ? "DisLeg_" : "");
+				.Replace("[Tits]", this.Girl.parameters[6].ToString("00"))
+				.Replace("[DisLeg]", missingLegs ? "DisLeg_" : "");
 		}
 	}
 }

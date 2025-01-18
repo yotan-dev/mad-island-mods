@@ -1,10 +1,14 @@
+using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace HFramework.ConfigFiles
 {
+	[Serializable]
 	public class ScenesConfig
 	{
-		public IList<SceneConfig> Scenes { get; set; }
+		[XmlArrayItem("Scene")]
+		public List<SceneConfig> Scenes { get; set; }
 
 		public ScenesConfig()
 		{

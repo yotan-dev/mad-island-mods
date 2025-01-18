@@ -1,13 +1,22 @@
-using System.Collections.Generic;
+using System.ComponentModel;
+using System.Xml.Serialization;
+using HFramework.Scenes.Conditionals;
 
 namespace HFramework.ConfigFiles
 {
 	public class ScenePerformerConfig
 	{
+		[XmlAttribute("id")]
 		public string Performer { get; set; }
 
-		public List<ConditionsConfig> StartConditions { get; set; } = [];
+		[XmlArray("StartConditions")]
+		[XmlArrayItem("Condition")]
+		[DefaultValue(null)]
+		public BaseConditional[] StartConditions { get; set; } = [];
 		
-		public List<ConditionsConfig> PerformConditions { get; set; } = [];
+		[XmlArray("PerformConditions")]
+		[XmlArrayItem("Condition")]
+		[DefaultValue(null)]
+		public BaseConditional[] PerformConditions { get; set; } = [];
 	}
 }

@@ -2,8 +2,8 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 using HFramework.ConfigFiles;
-using Tomlyn;
 using YotanModCore;
 
 namespace HFramework.Performer
@@ -15,39 +15,6 @@ namespace HFramework.Performer
 		public static event LoadPeformers? OnLoadPeformers;
 
 		public static Dictionary<string, SexPerformerInfo> Performers = new Dictionary<string, SexPerformerInfo>();
-		private static Dictionary<string, ActionType> ConstToActionType = new Dictionary<string, ActionType>()
-		{
-			{ "Battle", ActionType.Battle },
-			{ "Attack", ActionType.Attack },
-			{ "Defeat", ActionType.Defeat },
-			{ "StartIdle", ActionType.StartIdle },
-			{ "IdlePee", ActionType.IdlePee },
-			{ "Caress", ActionType.Caress },
-			{ "Insert", ActionType.Insert },
-			{ "InsertIdle", ActionType.InsertIdle },
-			{ "InsertPee", ActionType.InsertPee },
-			{ "Speed1", ActionType.Speed1 },
-			{ "Speed2", ActionType.Speed2 },
-			{ "Speed3", ActionType.Speed3 },
-			{ "Finish", ActionType.Finish },
-			{ "FinishIdle", ActionType.FinishIdle },
-			{ "DeliveryIdle", ActionType.DeliveryIdle },
-			{ "DeliveryLoop", ActionType.DeliveryLoop },
-			{ "DeliveryEnd", ActionType.DeliveryEnd },
-		};
-
-		private static Dictionary<string, PlayType> ConstToPlayType = new Dictionary<string, PlayType>()
-		{
-			{ "Loop", PlayType.Loop },
-			{ "Once", PlayType.Once },
-		};
-
-		private static Dictionary<string, PerformerScope> ConstToScope = new Dictionary<string, PerformerScope>()
-		{
-			{ "Battle", PerformerScope.Battle },
-			{ "Sex", PerformerScope.Sex },
-			{ "Delivery", PerformerScope.Delivery },
-		};
 
 		private static int ParseActor(string actor)
 		{
@@ -67,91 +34,81 @@ namespace HFramework.Performer
 		{
 			PLogger.LogInfo("Loading performers");
 
-			var scenesConfigTxt = File.ReadAllText("BepInEx/plugins/HFramework/Performers.toml");
-			var scenesConfig = Toml.ToModel<PerformersConfig>(scenesConfigTxt, "Performers.toml", new TomlModelOptions() { ConvertPropertyName = (name) => name });
+			var serializer = new XmlSerializer(typeof(PerformersConfig));
+			var fileStream = new FileStream("BepInEx/plugins/HFramework/Performers.xml", FileMode.Open);
+			var performersConfig = (PerformersConfig)serializer.Deserialize(fileStream);
+			fileStream.Close();
 
-			foreach (var scene in scenesConfig.Performers)
+			foreach (var performerConfig in performersConfig.Performers)
 			{
 				string errorMessage = "";
-				var builder = new SexPerformerInfoBuilder(scene.Id);
+				var builder = new SexPerformerInfoBuilder(performerConfig.Id);
 
 				try
 				{
-					errorMessage = $"Failed to load Prefab {scene.Prefab.Type}";
-					if (scene.Prefab.Type == "SexList")
-						builder.SetSexPrefabSelector(new SexListPrefabSelector((int) (long)scene.Prefab.Args[0], (int) (long) scene.Prefab.Args[1]));
-					else if (scene.Prefab.Type == "SexObj")
-						builder.SetSexPrefabSelector(new SexObjPrefabSelector((int) (long)scene.Prefab.Args[0]));
+					errorMessage = $"Failed to load Prefab {performerConfig.PrefabSelector?.GetType()}";
+					if (performerConfig.PrefabSelector != null)
+						builder.SetSexPrefabSelector(performerConfig.PrefabSelector);
 					else
-						PLogger.LogError($"Unknown prefab type {scene.Prefab.Type}");
-
+						PLogger.LogError($"No PrefabSelector for Performer {performerConfig.Id}");
+					
 					errorMessage = "Failed to load scopes";
-					foreach (var scope in scene.Scopes)
+					foreach (var scope in performerConfig.Scopes)
 					{
 						errorMessage = $"Failed to load Scope {scope}";
-						var scopeType = ConstToScope.GetValueOrDefault(scope, PerformerScope.None);
-						if (scopeType != PerformerScope.None)
-							builder.AddScope(scopeType);
+						if (scope != PerformerScope.None)
+							builder.AddScope(scope);
 						else
 							PLogger.LogError($"Unknown scope type {scope}");
 					}
-
+					
 					errorMessage = $"Failed to load Actors";
 
-					int fromNpc = -1;
-					int? toNpc = null;
-
-					if (scene.Actors.Length >= 1)
-						fromNpc = ParseActor(scene.Actors[0]);
-
-					if (scene.Actors.Length >= 2)
-						toNpc = ParseActor(scene.Actors[1]);
+					int fromNpc = performerConfig.Actors.Length >= 1 ? performerConfig.Actors[0].NpcId : -1;
+					int? toNpc = performerConfig.Actors.Length >= 2 ? performerConfig.Actors[1].NpcId : null;
 
 					if (fromNpc != -1)
 						builder.SetActors(fromNpc, toNpc);
 					else
-						PLogger.LogError($"Unknown actora for scene {scene.Id}");
+						PLogger.LogError($"Unknown actora for scene {performerConfig.Id}");
 
-					foreach (var animSet in scene.AnimationSets)
+					foreach (var animSet in performerConfig.AnimationSets)
 					{
-						errorMessage = $"Failed to load Animation Set {animSet.Key}";
+						errorMessage = $"Failed to load Animation Set {animSet.Id}";
 
-						var animSetBuilder = new AnimationSetBuilder(animSet.Key);
-						foreach (var anim in animSet.Value)
+						var animSetBuilder = new AnimationSetBuilder(animSet.Id);
+						foreach (var anim in animSet.Animations)
 						{
 							errorMessage = $"Failed to load Animation {anim.Action}";
 
-							var action = ConstToActionType.GetValueOrDefault(anim.Action, ActionType.None);
-							if (action == ActionType.None)
+							if (anim.Action == ActionType.None)
 							{
-								PLogger.LogError($"Unknown action type {anim.Action} for set {animSet.Key}");
+								PLogger.LogError($"Unknown action type {anim.Action} for set {animSet.Id}");
 								continue;
 							}
 
-							var playType = ConstToPlayType.GetValueOrDefault(anim.Play, PlayType.None);
-							if (playType == PlayType.None)
+							if (anim.Play == PlayType.None)
 							{
-								PLogger.LogError($"Unknown play type {anim.Play} for set {animSet.Key}");
+								PLogger.LogError($"Unknown play type {anim.Play} for set {animSet.Id}");
 								continue;
 							}
 
-							var pose = anim.Pose ?? 1;
-							var canChangePose = anim.ChangePose ?? true;
-							animSetBuilder.AddAnimation(action, pose, new ActionValue(playType, anim.Name, anim.Events, canChangePose));
+							var pose = anim.Pose;
+							var canChangePose = anim.ChangePose;
+							animSetBuilder.AddAnimation(anim.Action, pose, new ActionValue(anim.Play, anim.Name, anim.Events, canChangePose));
 						}
 						builder.AddAnimationSet(animSetBuilder.Build());
 					}
 
-					Performers.Add(scene.Id, builder.Build());
+					Performers.Add(performerConfig.Id, builder.Build());
 				}
 				catch (System.Exception ex)
 				{
-					PLogger.LogError($"Failed to load performer {scene.Id}: {errorMessage}");
+					PLogger.LogError($"Failed to load performer {performerConfig.Id}: {errorMessage}");
 					PLogger.LogError(ex.Message);
 					PLogger.LogError(ex.StackTrace);
 				}
 			}
-
 			OnLoadPeformers?.Invoke();
 
 			PLogger.LogInfo("Performers loaded");

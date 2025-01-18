@@ -1,23 +1,26 @@
+using System.Xml.Serialization;
 using YotanModCore;
 
 namespace HFramework.Scenes.Conditionals
 {
-	public class JokeCheck : IConditional
+	public class JokeCheck : BaseConditional, IConditional
 	{
-		public bool ExpectedValue { get; private set; }
+		[XmlAttribute("value")]
+		public bool ExpectedValue { get; set; } = false;
 
+		public JokeCheck() {}
 
 		public JokeCheck(bool expectedValue)
 		{
 			this.ExpectedValue = expectedValue;
 		}
 
-		public bool Pass(IScene scene)
+		public override bool Pass(IScene scene)
 		{
 			return GameInfo.JokeMode == this.ExpectedValue;
 		}
 
-		public bool Pass(CommonStates from, CommonStates to)
+		public override bool Pass(CommonStates from, CommonStates to)
 		{
 			return GameInfo.JokeMode == this.ExpectedValue;
 		}

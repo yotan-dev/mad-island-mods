@@ -1,15 +1,27 @@
+using System.ComponentModel;
 using System.Linq;
+using System.Xml.Serialization;
 using YotanModCore;
 
 namespace HFramework.Scenes.Conditionals
 {
-	public class QuestProgressCheck : IConditional
+	public class QuestProgressCheck : BaseConditional, IConditional
 	{
-		public string QuestName { get; private set; }
-		public string Compare { get; private set; }
-		public int? ExpectedValue { get; private set; } = null;
-		public int[] ExpectedValues { get; private set; } = [];
+		[XmlAttribute("questName")]
+		public string QuestName { get; set; } = "";
 
+		[XmlAttribute("compare")]
+		public string Compare { get; set; } = "eq";
+
+		[XmlAttribute("value")]
+		[DefaultValue(0)]
+		public int ExpectedValue { get; set; } = 0;
+
+		[XmlArray("Values")]
+		[XmlArrayItem("Value")]
+		public int[] ExpectedValues { get; set; } = [];
+
+		public QuestProgressCheck() { }
 
 		public QuestProgressCheck(string questName, string compare, int expectedValue)
 		{
@@ -28,14 +40,14 @@ namespace HFramework.Scenes.Conditionals
 		private bool Pass()
 		{
 			var progress = Managers.mn.story.QuestProgress(this.QuestName);
-			if (this.Compare == "==")
-				return progress == this.ExpectedValue.GetValueOrDefault(0);
-			else if (this.Compare == "!=")
-				return progress != this.ExpectedValue.GetValueOrDefault(0);
-			else if (this.Compare == ">=")
-				return progress >= this.ExpectedValue.GetValueOrDefault(0);
-			else if (this.Compare == "<=")
-				return progress <= this.ExpectedValue.GetValueOrDefault(0);
+			if (this.Compare == "eq")
+				return progress == this.ExpectedValue;
+			else if (this.Compare == "neq")
+				return progress != this.ExpectedValue;
+			else if (this.Compare == "gte")
+				return progress >= this.ExpectedValue;
+			else if (this.Compare == "lte")
+				return progress <= this.ExpectedValue;
 			else if (this.Compare == "in")
 				return this.ExpectedValues.Contains(progress);
 
@@ -43,12 +55,12 @@ namespace HFramework.Scenes.Conditionals
 			return false;
 		}
 
-		public bool Pass(IScene scene)
+		public override bool Pass(IScene scene)
 		{
 			return this.Pass();
 		}
 
-		public bool Pass(CommonStates from, CommonStates to)
+		public override bool Pass(CommonStates from, CommonStates to)
 		{
 			return this.Pass();
 		}
