@@ -112,14 +112,28 @@ namespace HFramework.Scenes
 		/// </summary>
 		internal static void RegisterScenePerformers()
 		{
-			string errorMessage = "";
 			try
 			{
-				LoadScenesFromFile("BepInEx/plugins/HFramework/Scenes.xml");
+				string[] definitions = [
+					"AssWall_Scenes.xml",
+					"CommonSexNPC_Scenes.xml",
+					"CommonSexPlayer_Scenes.xml",
+					"Daruma_Scenes.xml",
+					"Delivery_Scenes.xml",
+					"ManRapesSleep_Scenes.xml",
+					"ManRapes_Scenes.xml",
+					"Onani_Scenes.xml",
+					"PlayerRaped_Scenes.xml",
+					"Slave_Scenes.xml",
+					"Toilet_Scenes.xml",
+				];
+
+				foreach (var definition in definitions)
+					LoadScenesFromFile($"BepInEx/plugins/HFramework/definitions/{definition}");
 			}
 			catch (Exception e)
 			{
-				PLogger.LogError($"Failed to load scenes: {errorMessage}. {e.Message}");
+				PLogger.LogError($"Failed to load scenes. {e.Message}");
 				PLogger.LogError(e.StackTrace);
 			}
 		}

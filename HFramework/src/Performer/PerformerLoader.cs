@@ -136,7 +136,24 @@ namespace HFramework.Performer
 		{
 			PLogger.LogInfo("Loading performers");
 
-			AddPerformersFromFile("BepInEx/plugins/HFramework/Performers.xml");
+			string[] definitions = [
+				"AssWall_Performers.xml",
+				"CommonSexNPC_Performers.xml",
+				"CommonSexPlayer_Performers.xml",
+				"Daruma_Performers.xml",
+				"Delivery_Performers.xml",
+				"ManRapesSleep_Performers.xml",
+				"ManRapes_Performers.xml",
+				"Onani_Performers.xml",
+				"PlayerRaped_Performers.xml",
+				"Slave_Performers.xml",
+				"Toilet_Performers.xml"
+			];
+
+			foreach (var definition in definitions)
+			{
+				AddPerformersFromFile($"BepInEx/plugins/HFramework/definitions/{definition}");
+			}
 
 			OnLoadPeformers?.Invoke();
 

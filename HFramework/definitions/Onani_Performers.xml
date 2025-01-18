@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+	Performers for Onani (Masturbation) scenes
+	That's when female NPCs masturbates by themselves
+-->
+<PerformersConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Performers>
+		<Performer id="HF_Onani_FemaleNative_Normal">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="9" objIndex="1" />
+			<Actors>
+				<Actor val="FemaleNative#15" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnMasturbate</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Onani_FemaleNative_Perfume">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="9" objIndex="1" />
+			<Actors>
+				<Actor val="FemaleNative#15" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnMasturbate</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Perfume_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Perfume_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Perfume_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Perfume_A_Finish_idle"
+							pose="1" changePose="true" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+	</Performers>
+</PerformersConfig>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HF_Daruma scene config.
+	This is when player uses the Daruma cushion
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HF_Daruma">
+			<Performers>
+				<Performer id="HF_Man_FemaleNative_Daruma" />
+				<Performer id="HF_Man_NativeGirl_Daruma" />
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>

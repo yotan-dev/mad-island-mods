@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HF_CommonSexNPC scene config.
+	This is for when NPC makes friendly sex with another NPC
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HF_CommonSexNPC">
+			<Performers>
+				<Performer id="HF_MaleNative_FemaleNative_Friendly_Doggy_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_FemaleNative_FemaleNative_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_FemaleNative_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_FemaleNative_Friendly_Pregnant">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_MaleNative_NativeGirl_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_NativeGirl_NativeGirl_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_NativeGirl_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_FemaleLargeNative_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleLargeNative#17" value="false" />
+					</StartConditions>
+				</Performer>
+				<!-- SexCheck suggests this is possible, but CommonSexNPC does not support it
+				<Performer id="HF_YoungMan_Mummy_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="Mummy#42" value="false" />
+					</StartConditions>
+				</Performer>
+				-->
+				<Performer id="HF_YoungMan_UnderGroundWoman_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="UnderGroundWoman#44" value="false" />
+					</StartConditions>
+				</Performer>
+				<!-- SexCheck suggests this is possible, but CommonSexNPC does not support it
+				<Performer id="HF_YoungMan_Mermaid_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="Mermaid#71" value="false" />
+					</StartConditions>
+				</Performer>
+				-->
+				<Performer id="HF_YoungMan_ElderSisterNative_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="ElderSisterNative#90" value="false" />
+					</StartConditions>
+				</Performer>
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>
