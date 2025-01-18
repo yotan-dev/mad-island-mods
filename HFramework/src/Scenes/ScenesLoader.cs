@@ -10,6 +10,9 @@ namespace HFramework.Scenes
 {
 	public static class ScenesLoader
 	{
+		/// <summary>
+		/// Registers HFramework scenes
+		/// </summary>
 		internal static void RegisterScenes()
 		{
 			ScenesManager.Instance.AddScene(AssWall.Name, new SceneInfo(AssWall.Name));
@@ -25,43 +28,94 @@ namespace HFramework.Scenes
 			ScenesManager.Instance.AddScene(Toilet.Name, new SceneInfo(Toilet.Name));
 		}
 
+		/// <summary>
+		/// Parses a Scenes definition file and return the data, without adding it to the game.
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		public static ScenesConfig ParseScenesConfigDefinitionFile(string path)
+		{
+			var serializer = new XmlSerializer(typeof(ScenesConfig));
+			var fileStream = new FileStream(path, FileMode.Open);
+			var scenesConfig = (ScenesConfig)serializer.Deserialize(fileStream);
+			fileStream.Close();
+
+			return scenesConfig;
+		}
+
+		/// <summary>
+		/// Loads a single scene config into the game
+		/// </summary>
+		/// <param name="scene"></param>
+		public static void LoadSceneFromConfig(SceneConfig scene)
+		{
+			string errorMessage = "";
+
+			try
+			{
+				PLogger.LogDebug($"Loading info for scene {scene.Id}");
+				var sceneInfo = ScenesManager.Instance.GetSceneInfo(scene.Id);
+				if (sceneInfo == null)
+				{
+					PLogger.LogError($"Unknown scene: {scene.Id}");
+					return;
+				}
+
+				foreach (var performerConfig in scene.Performers)
+				{
+					var performerConst = performerConfig.Performer;
+					var desc = $"(Scene: {scene.Id} / Performer: {performerConst})";
+					PLogger.LogDebug($"Loading performer {desc}");
+
+					var performer = Performer.PerformerLoader.Performers.GetValueOrDefault(performerConst);
+					if (performer == null)
+					{
+						PLogger.LogError($"Unknown performer: {performerConst} {desc}");
+						continue;
+					}
+
+					errorMessage = $"Failed to load Performer {performerConst} {desc}";
+					sceneInfo.AddPerformer(performer, performerConfig.StartConditions, performerConfig.PerformConditions);
+				}
+			}
+			catch (Exception e)
+			{
+				PLogger.LogError($"Failed to load scenes: {errorMessage}. {e.Message}");
+				PLogger.LogError(e.StackTrace);
+			}
+		}
+
+		/// <summary>
+		/// Loads all the scenes from a scenes config into the game
+		/// </summary>
+		/// <param name="scenesConfig"></param>
+		public static void LoadScenesFromConfig(ScenesConfig scenesConfig)
+		{
+			foreach (var scene in scenesConfig.Scenes)
+			{
+				LoadSceneFromConfig(scene);
+			}
+		}
+
+		/// <summary>
+		/// Loads all the scenes from a scenes config file into the game
+		/// </summary>
+		/// <param name="path"></param>
+		public static void LoadScenesFromFile(string path)
+		{
+			var scenesConfig = ParseScenesConfigDefinitionFile(path);
+			LoadScenesFromConfig(scenesConfig);
+		}
+
+		/// <summary>
+		/// Register the framework provided performers
+		/// </summary>
 		internal static void RegisterScenePerformers()
 		{
 			string errorMessage = "";
 			try
 			{
-				var serializer = new XmlSerializer(typeof(ScenesConfig));
-				var fileStream = new FileStream("BepInEx/plugins/HFramework/Scenes.xml", FileMode.Open);
-				var scenesConfig = (ScenesConfig)serializer.Deserialize(fileStream);
-				fileStream.Close();
-
-				foreach (var scene in scenesConfig.Scenes)
-				{
-					PLogger.LogDebug($"Loading info for scene {scene.Id}");
-					var sceneInfo = ScenesManager.Instance.GetSceneInfo(scene.Id);
-					if (sceneInfo == null)
-					{
-						PLogger.LogError($"Unknown scene: {scene.Id}");
-						continue;
-					}
-
-					foreach (var performerConfig in scene.Performers)
-					{
-						var performerConst = performerConfig.Performer;
-						var desc = $"(Scene: {scene.Id} / Performer: {performerConst})";
-						PLogger.LogDebug($"Loading performer {desc}");
-
-						var performer = Performer.PerformerLoader.Performers.GetValueOrDefault(performerConst);
-						if (performer == null)
-						{
-							PLogger.LogError($"Unknown performer: {performerConst} {desc}");
-							continue;
-						}
-
-						errorMessage = $"Failed to load Performer {performerConst} {desc}";
-						sceneInfo.AddPerformer(performer, performerConfig.StartConditions, performerConfig.PerformConditions);
-					}
-				}
+				LoadScenesFromFile("BepInEx/plugins/HFramework/Scenes.xml");
 			}
 			catch (Exception e)
 			{
