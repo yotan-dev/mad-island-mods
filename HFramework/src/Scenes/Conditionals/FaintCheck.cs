@@ -1,10 +1,27 @@
+using System.Xml.Serialization;
+using HFramework.ConfigFiles;
+using YotanModCore.Consts;
+
 namespace HFramework.Scenes.Conditionals
 {
-	public class FaintCheck : IConditional
+	public class FaintCheck : BaseConditional, IConditional
 	{
-		public int NpcId { get; private set; }
-		public bool ExpectedValue { get; private set; }
+		[XmlAttribute("actor")]
+		public string Actor {
+			get { return $"#{this.NpcId}"; }
+			set {
+				var act = new ConfigActor(value);
+				this.NpcId = act.NpcId;
+			}
+		}
 
+		[XmlIgnore]
+		public int NpcId { get; set; } = NpcID.None;
+
+		[XmlAttribute("value")]
+		public bool ExpectedValue { get; set; } = false;
+
+		public FaintCheck() {}
 
 		public FaintCheck(int npcId, bool expectedValue)
 		{
@@ -12,7 +29,7 @@ namespace HFramework.Scenes.Conditionals
 			this.ExpectedValue = expectedValue;
 		}
 
-		public bool Pass(IScene scene)
+		public override bool Pass(IScene scene)
 		{
 			bool isFainted = true;
 			foreach (var actor in scene.GetActors())
@@ -24,7 +41,7 @@ namespace HFramework.Scenes.Conditionals
 			return isFainted == this.ExpectedValue;
 		}
 
-		public bool Pass(CommonStates from, CommonStates to)
+		public override bool Pass(CommonStates from, CommonStates to)
 		{
 			bool pass = true;
 			if (from.npcID == this.NpcId)

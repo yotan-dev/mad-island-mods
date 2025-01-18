@@ -1,12 +1,18 @@
+using System.Xml.Serialization;
 using UnityEngine;
 using YotanModCore;
 
 namespace HFramework.Performer
 {
-	public class SexListPrefabSelector : IPrefabSelector
+	public class SexListPrefabSelector : BasePrefabSelector, IPrefabSelector
 	{
-		private int ListIndex;
-		private int ObjIndex;
+		[XmlAttribute("listIndex")]
+		public int ListIndex { get; set; }
+
+		[XmlAttribute("objIndex")]
+		public int ObjIndex { get; set; }
+
+		public SexListPrefabSelector() {}
 
 		public SexListPrefabSelector(int listIndex, int objIndex)
 		{
@@ -14,7 +20,7 @@ namespace HFramework.Performer
 			this.ObjIndex = objIndex;
 		}
 
-		public GameObject GetPrefab()
+		public override GameObject GetPrefab()
 		{
 			return Managers.mn.sexMN.sexList[this.ListIndex].sexObj[this.ObjIndex];
 		}

@@ -1,15 +1,20 @@
+using System.Xml.Serialization;
+
 namespace HFramework.Scenes.Conditionals
 {
-	public class SexTypeCheck : IConditional
+	public class SexTypeCheck : BaseConditional, IConditional
 	{
-		public int ExpectedValue { get; private set; }
+		[XmlAttribute("value")]
+		public int ExpectedValue { get; set; } = 0;
+
+		public SexTypeCheck() { }
 
 		public SexTypeCheck(int expectedValue)
 		{
 			this.ExpectedValue = expectedValue;
 		}
 
-		public bool Pass(IScene scene)
+		public override bool Pass(IScene scene)
 		{
 			if (scene is not CommonSexPlayer commonSexPlayer)
 				return false;
@@ -17,7 +22,7 @@ namespace HFramework.Scenes.Conditionals
 			return commonSexPlayer.Type == this.ExpectedValue;
 		}
 
-		public bool Pass(CommonStates from, CommonStates to)
+		public override bool Pass(CommonStates from, CommonStates to)
 		{
 			throw new System.NotImplementedException("SexTypeCheck can't be used outside a scene");
 		}

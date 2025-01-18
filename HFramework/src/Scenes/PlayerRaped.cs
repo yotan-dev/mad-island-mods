@@ -345,7 +345,7 @@ namespace HFramework.Scenes
 		public override string ExpandAnimationName(string originalName)
 		{
 			var act = GetActors()[1];
-			return originalName.Replace("<Tits>", act.parameters[6].ToString("00"));
+			return originalName.Replace("[Tits]", act.parameters[6].ToString("00"));
 		}
 	}
 }
