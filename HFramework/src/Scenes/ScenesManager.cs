@@ -15,6 +15,10 @@ namespace HFramework.Scenes
 
 		public static event RegisterScenePerformers? OnRegisterScenePerformers;
 
+		public delegate void RegisterConditionals();
+
+		public static event RegisterConditionals? OnRegisterConditionals;
+
 		public static ScenesManager Instance = new ScenesManager();
 
 		private Dictionary<string, SceneInfo> SceneInfos = [];
@@ -24,6 +28,10 @@ namespace HFramework.Scenes
 		internal void Init()
 		{
 			// Always load HF system first, so modders can change them.
+
+			PLogger.LogInfo("Registering conditionals...");
+			ScenesLoader.RegisterConditionals();
+			OnRegisterConditionals?.Invoke();
 
 			PLogger.LogInfo("Registering scenes...");
 			ScenesLoader.RegisterScenes();
