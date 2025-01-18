@@ -9,30 +9,6 @@ namespace HFramework.Patches
 {
 	public class SexChecksPatch
 	{
-		[HarmonyPatch(typeof(NPCManager), nameof(NPCManager.ShallWeSex))]
-		[HarmonyPostfix]
-		private static void Post_NPCManager_ShallWeSex(CommonStates commonA, CommonStates commonB, ref SexManager.SexInviteState __result)
-		{
-			if (__result != SexManager.SexInviteState.Yes)
-				return;
-
-			if (!Config.Instance.DontStartInvalidSex.Value)
-				return;
-
-			var actors = Utils.SortActors(commonA, commonB);
-
-			var realFrom = actors[0];
-			var realTo = actors.Length >= 2 ? actors[1] : null;
-
-			SceneInfo? sceneInfo = ScenesManager.Instance.GetSceneInfo(CommonSexNPC.Name);
-
-			var canSex = sceneInfo?.CanStart(PerformerScope.Sex, realFrom, realTo) ?? false;
-			if (!canSex)
-				__result = SexManager.SexInviteState.Cant;
-
-			return;
-		}
-
 		[HarmonyPatch(typeof(SexManager), nameof(SexManager.SexCheck))]
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_SexCheck(CommonStates from, CommonStates to, ref bool __result)

@@ -8,7 +8,7 @@ using HarmonyLib;
 namespace HFramework
 {
 	
-	[BepInPlugin("HFramework", "HFramework", "0.2.0")]
+	[BepInPlugin("HFramework", "HFramework", "1.0.0")]
 	[BepInDependency("YotanModCore", "1.5.0")]
 	public class Plugin : BaseUnityPlugin
 	{
