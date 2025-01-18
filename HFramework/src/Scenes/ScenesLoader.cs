@@ -5,11 +5,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using HFramework.ConfigFiles;
+using HFramework.Scenes.Conditionals;
 
 namespace HFramework.Scenes
 {
 	public static class ScenesLoader
 	{
+		private static XmlSerializer? Serializer = null;
+
+		private static List<Type> ConditionalTypes = [];
+
+		/// <summary>
+		/// Register HFramework-provided conditionals
+		/// </summary>
+		internal static void RegisterConditionals()
+		{
+			AddConditional(typeof(FaintCheck));
+			AddConditional(typeof(FriendCheck));
+			AddConditional(typeof(JokeCheck));
+			AddConditional(typeof(LibidoCheck));
+			AddConditional(typeof(PerfumeCheck));
+			AddConditional(typeof(PregnantCheck));
+			AddConditional(typeof(QuestProgressCheck));
+			AddConditional(typeof(SexTypeCheck));
+		}
+
 		/// <summary>
 		/// Registers HFramework scenes
 		/// </summary>
@@ -35,9 +55,14 @@ namespace HFramework.Scenes
 		/// <returns></returns>
 		public static ScenesConfig ParseScenesConfigDefinitionFile(string path)
 		{
-			var serializer = new XmlSerializer(typeof(ScenesConfig));
+			if (Serializer == null)
+			{
+				Serializer = new XmlSerializer(typeof(ScenesConfig), ConditionalTypes.ToArray());
+				ConditionalTypes.Clear();
+			}
+
 			var fileStream = new FileStream(path, FileMode.Open);
-			var scenesConfig = (ScenesConfig)serializer.Deserialize(fileStream);
+			var scenesConfig = (ScenesConfig)Serializer.Deserialize(fileStream);
 			fileStream.Close();
 
 			return scenesConfig;
@@ -105,6 +130,19 @@ namespace HFramework.Scenes
 		{
 			var scenesConfig = ParseScenesConfigDefinitionFile(path);
 			LoadScenesFromConfig(scenesConfig);
+		}
+
+		/// <summary>
+		/// Register a new conditional that may be used by definition files
+		/// </summary>
+		/// <param name="type"></param>
+		/// <exception cref="Exception"></exception>
+		public static void AddConditional(Type type)
+		{
+			if (Serializer != null)
+				throw new Exception("The serializer was already built. New conditionals can't be added.");
+
+			ScenesLoader.ConditionalTypes.Add(type);
 		}
 
 		/// <summary>

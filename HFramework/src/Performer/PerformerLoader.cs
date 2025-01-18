@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
@@ -13,7 +14,21 @@ namespace HFramework.Performer
 
 		public static event LoadPeformers? OnLoadPeformers;
 
-		public static Dictionary<string, SexPerformerInfo> Performers = new Dictionary<string, SexPerformerInfo>();
+		public delegate void RegisterPrefabSelectors();
+
+		public static event RegisterPrefabSelectors? OnRegisterPrefabSelectors;
+
+		private static readonly List<Type> PrefabSelectors = [];
+
+		private static XmlSerializer? Serializer = null;
+
+		public static Dictionary<string, SexPerformerInfo> Performers = [];
+
+		internal static void RegisterHFPrefabSelectors()
+		{
+			AddPrefabSelector(typeof(SexListPrefabSelector));
+			AddPrefabSelector(typeof(SexObjPrefabSelector));	
+		}
 
 		/// <summary>
 		/// Reads a performer definition file and returns the parsed data.
@@ -23,12 +38,30 @@ namespace HFramework.Performer
 		/// <returns></returns>
 		public static PerformersConfig ParsePerformersDefinitionFile(string path)
 		{
-			var serializer = new XmlSerializer(typeof(PerformersConfig));
+			if (Serializer == null)
+			{
+				Serializer = new XmlSerializer(typeof(PerformersConfig), PrefabSelectors.ToArray());
+				PrefabSelectors.Clear();
+			}
+
 			var fileStream = new FileStream(path, FileMode.Open);
-			var performersConfig = (PerformersConfig)serializer.Deserialize(fileStream);
+			var performersConfig = (PerformersConfig)Serializer.Deserialize(fileStream);
 			fileStream.Close();
 
 			return performersConfig;
+		}
+
+		/// <summary>
+		/// Adds a new type as a possible PrefabSelector that may used in definition files
+		/// </summary>
+		/// <param name="selector"></param>
+		/// <exception cref="Exception"></exception>
+		public static void AddPrefabSelector(Type selector)
+		{
+			if (Serializer != null)
+				throw new Exception("The serializer was already built. New prefab selectors can't be added.");
+
+			PrefabSelectors.Add(selector);
 		}
 
 		/// <summary>
@@ -134,6 +167,12 @@ namespace HFramework.Performer
 		/// </summary>
 		internal static void Load()
 		{
+			PLogger.LogInfo("Registering Prefab Selectors...");
+
+			OnRegisterPrefabSelectors += PerformerLoader.RegisterHFPrefabSelectors;
+
+			OnRegisterPrefabSelectors?.Invoke();
+
 			PLogger.LogInfo("Loading performers");
 
 			string[] definitions = [
