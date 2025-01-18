@@ -54,6 +54,8 @@
 						<Condition xsi:type="QuestProgressCheck" questName="Sub_Keigo" compare="neq" value="2" />
 					</PerformConditions>
 				</Performer>
+				<!-- End of Man x Reika -->
+
 				<Performer id="HF_Man_FemaleNative_Friendly_Normal">
 					<StartConditions>
 						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
@@ -138,6 +140,14 @@
 						<Condition xsi:type="SexTypeCheck" value="1" />
 					</PerformConditions>
 				</Performer>
+
+				<!--
+					Man x Sally is a special case with 2 possible paths:
+					- when Sub_Prison is 2 (Lover) or 4 (Sally is a Fleshlight)
+						Player can start sex anytime.
+					- When Sub_Prison is 3 (Man is a Dildo)
+						Player can only start sex when Sally's Libido >= 80
+				-->
 				<Performer id="HF_Man_Sally_Friendly_Normal">
 					<StartConditions>
 						<Condition xsi:type="QuestProgressCheck" questName="Sub_Prison" compare="in">
@@ -146,7 +156,6 @@
 								<Value>4</Value>
 							</Values>
 						</Condition>
-						<Condition xsi:type="LibidoCheck" actor="Sally#115" compare="gte" value="80" />
 					</StartConditions>
 					<PerformConditions>
 						<Condition xsi:type="QuestProgressCheck" questName="Sub_Prison" compare="in">
@@ -155,7 +164,6 @@
 								<Value>4</Value>
 							</Values>
 						</Condition>
-						<Condition xsi:type="LibidoCheck" actor="Sally#115" compare="gte" value="80" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Man_Sally_Friendly_Normal">
@@ -168,6 +176,8 @@
 						<Condition xsi:type="LibidoCheck" actor="Sally#115" compare="gte" value="80" />
 					</PerformConditions>
 				</Performer>
+				<!-- End of Sally -->
+
 				<Performer id="HF_Man_Merry_Friendly_Normal" />
 				<Performer id="HF_Yona_MaleNative_Friendly_Normal" />
 				<Performer id="HF_Yona_BigNative_Friendly_Normal" />
