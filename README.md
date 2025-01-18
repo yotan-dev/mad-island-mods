@@ -1,9 +1,21 @@
+> [!CAUTION]
+> This repository contains mods for the **ADULT GAME** Mad Island.
+>
+> Thus, **BEWARE** that when browsing this repository content you are likely to find text, code and _maybe_ images that are not suitable for a general audience.
+>
+> As much as possible, I tried to keep images either zipped or not in the repository at all, but be cautios.
+> 
+
 # Mad Island Mods
 
 Mods for Mad Island game.
 
 
 ## Before you begin
+
+> [!WARNING]
+> Read this before you continue. Don't report a bug to the developers if you can't reproduce it without mods.
+> 
 
 Before you start, you need to know and understand that:
 
@@ -62,26 +74,30 @@ It will follow semantic versioning and I will write about deprecations/removals 
 Please let me know if you are depending on it :)
 
 
-### Extended H-System
+### HFramework
 
-The main purpose of this mod is to rewrite the game original H-scenes into a pluggable and extensible structure, becoming kind of a framework for modders to interact with the H-System.
+Rewrites the game H-Scenes/system into a pluggable framework. This allows modders to interact with the H-System and expand it much easily.
 
-> ⚠️ When using the replacement mode (default), new scenes added to the game by the devs won't work until this mod is updated.
+> [!WARNING]
+> When using the replacement mode (default), new scenes added to the game by the devs won't work until this mod is updated.
 
 By default, it will replace the developer shipped H-Scenes with similar ones that are coded in the mod.
 You can configure whether you want it to replace the original scenes or not, but most mods will need you to replace it.
 You can change that on `BepInEx/config/HFramework.json`
 
-Additionally, it provides some customizations that you can opt in.
-Some of those customizations more on the side of showing how modders can use it than really something
-you will want in your game, but they are all functional, if you want to use them, feel free to.
+HExtensions and Gallery plugins makes extensive use of it.
 
-I plan to make certain scenes available in other contexts, but no promises here...
+**For mod developers:**
+
+- [Documentation](./HFramework/README.md)
+- See HExtensions and Gallery plugins for examples
 
 
-#### Customizations
+### HExtensions
 
-##### Require Foreplay
+Provides some modifications for H-Scenes. As explained below.
+
+#### Require Foreplay
 
 For H-Scenes with players, NPCs will refuse to continue if the player tries to "insert" before they are ready.
 
@@ -89,22 +105,10 @@ To enable it, go to `BepInEx/config/HFramework.json` and set `RequireForeplay` t
 
 In the same file you can customize the required bar level and whether you want age and some random factors to apply over it.
 
-
-#### For mod developers
-
-Please, don't use it yet, as I am still trying to figure out the best API for it ( suggestions are welcome :) )
-
-The most recent version is the one being used by CommonSexPlayer
-
-My idea is that you will be able to hook into certain parts of the scene and perform additional things over the scene,
-including removing the original "events" and adding new ones.
-
-You can also use it to trigger scenes by yourself.
-
-
 #### Requirements
 
 1. Yotan Mod Core must be installed.
+2. HFramework must be installed.
 
 
 ### Gallery
@@ -208,7 +212,13 @@ Adds item color marker to item slots. Only for items that are dyeable.
 
 ### NPC Stats
 
+> [!TIP]
+> If you are playing on Mad Island version earlier than v0.2.7, you will need to compile it yourself.
+> Or search for the right release.
+> 
+
 Properly give stats points to NPCs in different moments.
+
 
 I made this mod because I noticed that high level captured NPCs or new borns were too weak,
 making more sense to level one from the scratch.
@@ -277,11 +287,14 @@ Bug fixes implemented via modding. Let me know if there are other bugs that coul
 
 Included:
 
-- Translation of some boss names from Japanese to English
-- Translation of Quest UI titles to english
-- Translation of Surgery table / Cute Mirror to english
-- Translation of Craft "Ingredients", Shop "Buy", and "Paused" texts
-- Translation of Dye table UI from Japanese to English
+- Translation (always on)
+  - Translation of some boss names from Japanese to English
+  - Translation of Quest UI titles to english
+  - Translation of Surgery table / Cute Mirror to english
+  - Translation of Craft "Ingredients", Shop "Buy", and "Paused" texts
+  - Translation of Dye table UI from Japanese to English
+- Prevent NPCs from starting H-Scenes if they don't have one
+  - Enabled by default, can be disabled by changing `DontStartInvalidSex` in the config
 
 
 I won't fix:
