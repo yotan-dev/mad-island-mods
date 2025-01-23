@@ -134,12 +134,12 @@ namespace HFramework.Scenes
 
 			// Lock place
 			SexPlace sexPlace = this.TmpWall.GetComponent<SexPlace>();
-			sexPlace.user = Managers.mn.gameMN.player;
+			sexPlace.user = this.Player.gameObject;
 
 			// Disabe UI
-			Managers.mn.uiMN.MainCanvasView(false);
-			Managers.mn.gameMN.Controlable(false, false);
-			Managers.mn.gameMN.pMove.PlayerVisible(false);
+			this.Controller.SetMainCanvasVisible(false);
+			this.Controller.SetGameControllable(false, false);
+			this.Controller.SetPlayerVisible(false);
 
 			// Setup scene
 			this.CommonAnim = Managers.mn.inventory.tmpSubInventory.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
@@ -169,9 +169,9 @@ namespace HFramework.Scenes
 			// It is already closed by whoever called destroy
 			// this.MenuPanel.Close();
 
-			Managers.mn.gameMN.Controlable(true, true);
-			Managers.mn.gameMN.pMove.PlayerVisible(true);
-			Managers.mn.uiMN.MainCanvasView(true);
+			this.Controller.SetGameControllable(true, true);
+			this.Controller.SetPlayerVisible(true);
+			this.Controller.SetMainCanvasVisible(true);
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}

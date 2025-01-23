@@ -189,14 +189,14 @@ namespace HFramework.Scenes
 
 		private void DisablePlayer()
 		{
-			Managers.mn.gameMN.Controlable(false, true);
-			Managers.mn.gameMN.pMove.PlayerVisible(false);
+			this.Controller.SetGameControllable(false, true);
+			this.Controller.SetPlayerVisible(false);
 		}
 
 		private void EnablePlayer()
 		{
-			Managers.mn.gameMN.Controlable(true, true);
-			Managers.mn.gameMN.pMove.PlayerVisible(true);
+			this.Controller.SetGameControllable(true, true);
+			this.Controller.SetPlayerVisible(true);
 		}
 
 		private void Teardown()
@@ -237,7 +237,7 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			Managers.mn.uiMN.MainCanvasView(false);
+			this.Controller.SetMainCanvasVisible(false);
 			this.DisablePlayer();
 
 			yield return this.Performer.Perform(ActionType.StartIdle);
@@ -254,7 +254,7 @@ namespace HFramework.Scenes
 			this.Teardown();
 
 			this.EnablePlayer();
-			Managers.mn.uiMN.MainCanvasView(true);
+			this.Controller.SetMainCanvasVisible(true);
 		}
 
 		public override bool CanContinue()

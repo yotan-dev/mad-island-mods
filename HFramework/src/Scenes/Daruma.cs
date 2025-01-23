@@ -141,9 +141,9 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			Managers.mn.uiMN.MainCanvasView(false);
-			Managers.mn.gameMN.Controlable(false, true);
-			Managers.mn.gameMN.pMove.PlayerVisible(false);
+			this.Controller.SetMainCanvasVisible(false);
+			this.Controller.SetGameControllable(false, true);
+			this.Controller.SetPlayerVisible(false);
 
 			yield return this.Performer.Perform(ActionType.StartIdle);
 
@@ -161,9 +161,9 @@ namespace HFramework.Scenes
 			if (this.DarumaObj != null)
 				this.DarumaObj.SetActive(true);
 
-			Managers.mn.gameMN.Controlable(true, true);
-			Managers.mn.gameMN.pMove.PlayerVisible(true);
-			Managers.mn.uiMN.MainCanvasView(true);
+			this.Controller.SetGameControllable(true, true);
+			this.Controller.SetPlayerVisible(true);
+			this.Controller.SetMainCanvasVisible(true);
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 		}
