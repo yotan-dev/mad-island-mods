@@ -43,7 +43,10 @@ namespace HFramework.Handlers.Animation
 			while (animTime >= 0f && this.Scene.CanContinue())
 			{
 				if (this.Skipable && Input.GetMouseButtonDown(0))
+				{
+					yield return false; // Give it a frame or the next animation may still get the mouse input
 					yield break;
+				}
 
 				animTime -= Time.deltaTime;
 				yield return false;
