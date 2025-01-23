@@ -3,6 +3,7 @@ using HFramework.Handlers.Animation;
 using HFramework.Scenes;
 using Spine.Unity;
 using UnityEngine;
+using YotanModCore;
 using YotanModCore.Extensions;
 
 namespace HFramework
@@ -90,6 +91,21 @@ namespace HFramework
 			this.SexAnim.state.SetAnimation(0, this.Scene.ExpandAnimationName(name), false);
 			this.OriginalScale = this.SexAnim.timeScale;
 			this.SexAnim.timeScale = 0f;
+		}
+
+		public void SetMainCanvasVisible(bool visible)
+		{
+			Managers.mn.uiMN.MainCanvasView(visible);
+		}
+
+		public void SetGameControllable(bool controllable, bool invincible = true)
+		{
+			Managers.mn.gameMN.Controlable(controllable, invincible);
+		}
+
+		public void SetPlayerVisible(bool visible)
+		{
+			Managers.mn.gameMN.pMove.PlayerVisible(visible);
 		}
 	}
 }

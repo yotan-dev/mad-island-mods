@@ -175,10 +175,9 @@ namespace HFramework.Scenes
 		{
 			this.SexPlace.user = Managers.mn.gameMN.player;
 
-			Managers.mn.uiMN.MainCanvasView(false);
-			Managers.mn.gameMN.Controlable(false, false);
-
-			Managers.mn.gameMN.pMove.PlayerVisible(false);
+			this.Controller.SetMainCanvasVisible(false);
+			this.Controller.SetGameControllable(false, false);
+			this.Controller.SetPlayerVisible(false);
 
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
 			if (this.Performer == null)
@@ -208,9 +207,9 @@ namespace HFramework.Scenes
 			this.Pee2Audio?.Stop();
 			this.SexPlace.user = null;
 
-			Managers.mn.gameMN.Controlable(true, true);
-			Managers.mn.gameMN.pMove.PlayerVisible(true);
-			Managers.mn.uiMN.MainCanvasView(true);
+			this.Controller.SetGameControllable(true, true);
+			this.Controller.SetPlayerVisible(true);
+			this.Controller.SetMainCanvasVisible(true);
 		}
 
 		public override IEnumerator Run()

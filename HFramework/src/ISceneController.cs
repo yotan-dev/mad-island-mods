@@ -24,5 +24,11 @@ namespace HFramework
 		IEnumerator WaitForInput();
 		
 		void SetLockedAnimation(string name);
+
+		void SetMainCanvasVisible(bool visible);
+
+		void SetGameControllable(bool controllable, bool invincible = true);
+
+		void SetPlayerVisible(bool visible);
 	}
 }
