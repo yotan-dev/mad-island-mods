@@ -58,6 +58,7 @@ namespace HFramework.Scenes
 		{
 			this.MenuPanel.ShowInsertMenu();
 
+			yield return this.Performer.Perform(ActionType.Insert);
 			yield return this.Performer.Perform(ActionType.Speed1);
 		}
 
