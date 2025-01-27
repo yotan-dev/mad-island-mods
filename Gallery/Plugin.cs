@@ -9,9 +9,9 @@ using YotanModCore;
 
 namespace Gallery
 {
-	[BepInPlugin("Gallery", "Gallery", "0.3.0")]
+	[BepInPlugin("Gallery", "Gallery", "1.0.0")]
 	[BepInDependency("YotanModCore", "1.5.0")]
-	[BepInDependency("HFramework", "0.2.0")]
+	[BepInDependency("HFramework", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
@@ -49,12 +49,15 @@ namespace Gallery
 				Harmony.CreateAndPatchAll(typeof(PlayerRapedPatch));
 			}
 
+			// Those are not handled by HFramework
 			Harmony.CreateAndPatchAll(typeof(CommonRapesNPCPatch));
+			Harmony.CreateAndPatchAll(typeof(ToiletNpcPatch));
 			Harmony.CreateAndPatchAll(typeof(SexCountPatch));
+
 			Harmony.CreateAndPatchAll(typeof(StoryPatches));
 			Harmony.CreateAndPatchAll(typeof(TitleScreenPatch));
-			Harmony.CreateAndPatchAll(typeof(ToiletNpcPatch));
 			Harmony.CreateAndPatchAll(typeof(UseLivePlacePatch));
+			Harmony.CreateAndPatchAll(typeof(GalleryScenePatch));
 		
 			GalleryState.Load();
 

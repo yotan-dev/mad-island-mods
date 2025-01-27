@@ -1,20 +1,11 @@
 using System;
 using System.Collections.Generic;
-using HFramework;
 using Gallery.GalleryScenes;
-using Gallery.GalleryScenes.AssWall;
-using Gallery.GalleryScenes.CommonSexNPC;
-using Gallery.GalleryScenes.CommonSexPlayer;
 using Gallery.GalleryScenes.Daruma;
-using Gallery.GalleryScenes.Delivery;
-using Gallery.GalleryScenes.ManRapes;
-using Gallery.GalleryScenes.ManSleepRape;
-using Gallery.GalleryScenes.Onani;
-using Gallery.GalleryScenes.PlayerRaped;
-using Gallery.GalleryScenes.Slave;
-using Gallery.GalleryScenes.Toilet;
 using Gallery.GalleryScenes.ToiletNpc;
-using YotanModCore;
+using System.Xml.Serialization;
+using Gallery.ConfigFiles;
+using System.IO;
 
 namespace Gallery
 {
@@ -24,26 +15,11 @@ namespace Gallery
 
 		private Dictionary<CommonStates, BaseTracker> Trackers = new Dictionary<CommonStates, BaseTracker>();
 
-		public List<ISceneManager> SceneManagers = new List<ISceneManager>()
-		{
-			ManRapesSceneManager.Instance,
-			DarumaSceneManager.Instance,
-			SlaveSceneManager.Instance,
-			CommonSexNPCSceneManager.Instance,
-			CommonSexPlayerSceneManager.Instance,
-			AssWallSceneManager.Instance,
-			DeliverySceneManager.Instance,
-			ManSleepRapeSceneManager.Instance,
-			PlayerRapedSceneManager.Instance,
-			new ToiletNpcSceneManager(),
-			ToiletSceneManager.Instance,
-		};
+		public Dictionary<string, GalleryGroupConfig> SceneGroups = [];
 
-		public static void Init() {
+		public static void Init()
+		{
 			Instance = new GalleryScenesManager();
-			if (GameInfo.GameVersion >= GameInfo.ToVersion("0.1.0")) {
-				Instance.SceneManagers.Add(OnaniSceneManager.Instance);
-			}
 		}
 
 		public BaseTracker GetTrackerForCommon(CommonStates common)
@@ -63,6 +39,23 @@ namespace Gallery
 		{
 			if (this.Trackers.ContainsKey(common))
 				this.Trackers.Remove(common);
+		}
+
+		public void LoadGallery()
+		{
+			if (this.SceneGroups.Count > 0)
+				return;
+
+
+			XmlSerializer serializer = new XmlSerializer(typeof(GalleryGroupsConfig));
+			var fileStream = new FileStream("BepInEx/plugins/Gallery/GalleryList.xml", FileMode.Open);
+			var scenesConfig = (GalleryGroupsConfig)serializer.Deserialize(fileStream);
+			fileStream.Close();
+
+			foreach (var group in scenesConfig.Groups)
+			{
+				this.SceneGroups.Add(group.Name, group);
+			}
 		}
 	}
 }

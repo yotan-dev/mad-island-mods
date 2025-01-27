@@ -1,7 +1,5 @@
-using System.Linq;
 using System.Xml.Serialization;
 using YotanModCore;
-using Gallery.UI;
 
 namespace Gallery.SaveFile.Containers
 {
@@ -15,6 +13,9 @@ namespace Gallery.SaveFile.Containers
 
 		[XmlAttribute("Pregnant")]
 		public bool IsPregnant { get; set; } = false;
+
+		[XmlAttribute("IsFainted")]
+		public bool IsFainted { get; set; } = false;
 
 		[XmlIgnore]
 		public CommonStates OriginalChara = null;
@@ -30,6 +31,7 @@ namespace Gallery.SaveFile.Containers
 			this.Id = commonStates.npcID;
 			this.Name = CommonUtils.GetName(commonStates.npcID);
 			this.IsPregnant = commonStates.pregnant[0] != -1;
+			this.IsFainted = commonStates.faint == 0.0f;
 			this.OriginalChara = commonStates;
 		}
 
@@ -44,30 +46,19 @@ namespace Gallery.SaveFile.Containers
 		
 			return this.Id == other.Id
 				&& this.Name == other.Name
-				&& this.IsPregnant == other.IsPregnant;
+				&& this.IsPregnant == other.IsPregnant
+				&& this.IsFainted == other.IsFainted;
 		}
 	
 		// override object.GetHashCode
 		public override int GetHashCode()
 		{
-			return (this.IsPregnant ? 1 : 0) << 16 + this.Id << 8 + this.Name.GetHashCode();
+			return (this.IsFainted ? 1 : 0) << 17 + (this.IsPregnant ? 1 : 0) << 16 + this.Id << 8 + this.Name.GetHashCode();
 		}
 
 		public override string ToString()
 		{
 			return $"{this.Name} (ID: {this.Id}, Pregnant: {this.IsPregnant})";
-		}
-
-		public bool UnlockCheck(int id, bool isPregnant) {
-			if (this.Id != id) {
-				return false;
-			}
-
-			return isPregnant == this.IsPregnant;
-		}
-
-		public bool UnlockCheck(GallerySceneInfo.SceneNpc sceneNpc) {
-			return this.UnlockCheck(sceneNpc.NpcID, sceneNpc.Pregnant);
 		}
 	}
 }

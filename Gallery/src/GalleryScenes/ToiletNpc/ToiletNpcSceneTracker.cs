@@ -5,6 +5,7 @@ using Gallery.SaveFile.Containers;
 
 namespace Gallery.GalleryScenes.ToiletNpc
 {
+	// @TODO: Rewrite this as new trackers once HFramework supports it.
 	public class ToiletNpcSceneTracker
 	{
 		private struct RunningScene
@@ -21,10 +22,6 @@ namespace Gallery.GalleryScenes.ToiletNpc
 
 			public bool DidCreampie;
 		}
-
-		public delegate void UnlockInfo(GalleryChara user, GalleryChara target, int placeGrade, SexPlace.SexPlaceType placeType);
-
-		public event UnlockInfo OnUnlock;
 
 		// friendId => Scene (Friend ID from NPC A, then NPC B, first comes, first pick)
 		private readonly Dictionary<int, RunningScene> runningScenes = new Dictionary<int, RunningScene>();
@@ -106,7 +103,7 @@ namespace Gallery.GalleryScenes.ToiletNpc
 			this.runningScenes.Remove(info.User.friendID);
 			
 			if (scene.DidToilet && scene.DidCreampie) {
-				this.OnUnlock?.Invoke(scene.User, scene.Target, scene.PlaceGrade, scene.PlaceType);
+				new ToiletNpcController() { Grade = scene.PlaceGrade, PlaceType = scene.PlaceType }.Unlock([scene.User, scene.Target]);
 			} else {
 				var desc = $"{scene.User} x {scene.Target} (Grade: {scene.PlaceGrade}, Place Type: {scene.PlaceType})";
 				GalleryLogger.LogDebug($"ToiletNpcSceneTracker#OnEnd: 'DidCreampie'/'DidToilet' not set -- event NOT unlocked for {desc}");

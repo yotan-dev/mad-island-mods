@@ -92,5 +92,20 @@ namespace Gallery.GalleryScenes
 			this.OriginalScale = this.SexAnim.timeScale;
 			this.SexAnim.timeScale = 0f;
 		}
+
+		public void SetMainCanvasVisible(bool visible)
+		{
+			/* Do nothing */
+		}
+
+		public void SetGameControllable(bool controllable, bool invincible = true)
+		{
+			/* Do nothing */
+		}
+
+		public void SetPlayerVisible(bool visible)
+		{
+			/* Do nothing */
+		}
 	}
 }

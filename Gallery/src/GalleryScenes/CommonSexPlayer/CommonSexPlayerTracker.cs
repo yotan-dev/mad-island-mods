@@ -1,3 +1,4 @@
+using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.GalleryScenes.CommonSexPlayer
@@ -32,10 +33,15 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 				return;
 			}
 
+			var ctrler = new CommonSexPlayerController() {
+				SexType = this.SexType,
+				SpecialFlag = this.SpecialFlag,
+			};
+
 			if (this.SpecialFlag > 0 && this.Busted)
-				CommonSexPlayerSceneManager.Instance.Unlock(this.Player, this.Npc, this.SexType, this.SpecialFlag);
+				ctrler.Unlock([this.Player, this.Npc]);
 			else if (this.SpecialFlag == 0 && this.DidCreampie && this.DidNormal)
-				CommonSexPlayerSceneManager.Instance.Unlock(this.Player, this.Npc, this.SexType, this.SpecialFlag);
+				ctrler.Unlock([this.Player, this.Npc]);
 			else
 				GalleryLogger.LogDebug($"CommonSexPlayerSceneTracker#OnEnd: Conditions not matched (SpecialFlag: {this.SpecialFlag}) / DidNormal: {this.DidNormal} / DidCreampie: {this.DidCreampie} / Busted: {this.Busted}) -- event NOT unlocked for {this.Npc}");
 		}

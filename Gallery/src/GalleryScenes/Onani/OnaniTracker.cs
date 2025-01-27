@@ -1,3 +1,4 @@
+using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.GalleryScenes.Onani
@@ -23,7 +24,7 @@ namespace Gallery.GalleryScenes.Onani
 				return;
 			}
 
-			OnaniSceneManager.Instance.Unlock(this.Npc, this.Perfume);
+			new OnaniController() { Perfume = this.Perfume }.Unlock([this.Npc]);
 		}
 	}
 }

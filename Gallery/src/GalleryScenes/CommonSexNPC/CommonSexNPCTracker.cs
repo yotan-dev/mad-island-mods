@@ -44,7 +44,11 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 			// Same sex (based on being same npc type... I guess) won't have creampie, but it is a success anyway. Creampie is always success
 			if (this.NpcA.Id == this.NpcB.Id || this.DidCreampie)
 			{
-				CommonSexNPCSceneManager.Instance.Unlock(this.NpcA, this.NpcB, this.PlaceGrade, this.PlaceType, this.SexType);
+				new CommonSexNPCController() {
+					PlaceGrade = this.PlaceGrade,
+					PlaceType = this.PlaceType,
+					SexType = this.SexType
+				}.Unlock([this.NpcA, this.NpcB]);
 			}
 			else
 			{

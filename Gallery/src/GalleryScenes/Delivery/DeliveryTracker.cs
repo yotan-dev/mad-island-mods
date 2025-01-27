@@ -1,3 +1,4 @@
+using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.GalleryScenes.Delivery
@@ -14,7 +15,7 @@ namespace Gallery.GalleryScenes.Delivery
 		public override void End()
 		{
 			if (this.DidDelivery)
-				DeliverySceneManager.Instance.Unlock(this.Mother);
+				new DeliveryController().Unlock([this.Mother]);
 			else
 				GalleryLogger.LogDebug($"DeliverySceneEventHandler: OnEnd: 'DidDelivery' not set -- event NOT unlocked for {this.Mother}");
 		}
