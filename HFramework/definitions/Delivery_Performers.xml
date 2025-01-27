@@ -11,7 +11,7 @@
 			<Scopes>
 				<Scope>Delivery</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
 			<Actors>
 				<Actor val="FemaleNative#15" />
 			</Actors>
@@ -33,7 +33,7 @@
 			<Scopes>
 				<Scope>Delivery</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
 			<Actors>
 				<Actor val="NativeGirl#16" />
 			</Actors>

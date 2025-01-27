@@ -12,7 +12,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" />
 			<Actors>
 				<Actor val="MaleNative#10" />
 				<Actor val="Yona#0" />
@@ -45,7 +45,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="11" />
 			<Actors>
 				<Actor val="BigNative#11" />
 				<Actor val="Yona#0" />
@@ -78,7 +78,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="25" />
 			<Actors>
 				<Actor val="Bigfoot#25" />
 				<Actor val="Yona#0" />
@@ -111,7 +111,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="35" />
 			<Actors>
 				<Actor val="Werewolf#35" />
 				<Actor val="Yona#0" />
@@ -144,7 +144,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="100" />
 			<Actors>
 				<Actor val="Oldguy#100" />
 				<Actor val="Yona#0" />
@@ -177,7 +177,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="101" />
 			<Actors>
 				<Actor val="Spike#101" />
 				<Actor val="Yona#0" />
@@ -210,7 +210,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="103" />
 			<Actors>
 				<Actor val="Planton#103" />
 				<Actor val="Yona#0" />
@@ -243,7 +243,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="104" />
 			<Actors>
 				<Actor val="BossNative#104" />
 				<Actor val="Yona#0" />
