@@ -47,6 +47,8 @@ namespace HFramework.Scenes
 
 		private string ItemKey;
 
+		private bool ShouldCheckMenu = false;
+
 		public Slave(CommonStates player, InventorySlot tmpSlave) : base(Name)
 		{
 			this.Player = player;
@@ -157,9 +159,12 @@ namespace HFramework.Scenes
 			
 			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
+			{
+				PLogger.LogError("No prefab found");
 				return false;
+			}
 
-			this.SlaveObject  = this.TmpSlave.gameObject;
+			this.SlaveObject = this.TmpSlave.gameObject;
 			Vector3 position = this.TmpSlave.transform.position;
 			if (this.ItemKey == "slave_sally_01")
 			{
@@ -244,6 +249,7 @@ namespace HFramework.Scenes
 
 			this.MenuPanel.Open(this.TmpSlave.transform.position);
 			this.MenuPanel.ShowInitialMenu();
+			this.ShouldCheckMenu = true;
 
 			while (this.CanContinue())
 				yield return null;
@@ -259,7 +265,10 @@ namespace HFramework.Scenes
 
 		public override bool CanContinue()
 		{
-			// Managers.mn.uiMN.propActProgress == 5
+			// original: Managers.mn.uiMN.propActProgress == 5
+			if (!this.ShouldCheckMenu)
+				return !this.Destroyed;
+
 			return !this.Destroyed && PropPanelManager.Instance.IsOpen();
 		}
 
