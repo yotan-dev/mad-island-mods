@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 using YotanModCore;
 
@@ -5,7 +6,8 @@ namespace HFramework.Performer
 {
 	public class SexObjPrefabSelector : BasePrefabSelector, IPrefabSelector
 	{
-		private int ObjIndex;
+		[XmlAttribute("objIndex")]
+		public int ObjIndex { get; set; }
 
 		public SexObjPrefabSelector() { }
 
