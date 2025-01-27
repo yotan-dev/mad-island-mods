@@ -32,7 +32,10 @@ namespace HFramework.Handlers.Animation
 				animTime -= Time.deltaTime;
 
 				if (Input.GetMouseButtonUp(0))
+				{
+					yield return null; // Give it a frame or the next animation may still get the mouse input
 					yield break;
+				}
 				
 				yield return null;
 			}

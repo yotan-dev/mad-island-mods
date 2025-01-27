@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Xml.Serialization;
-using HFramework.Scenes;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.SaveFile
@@ -14,35 +13,35 @@ namespace Gallery.SaveFile
 
 		private static bool IsLoading = false;
 
-		private const string FileName = "GalleryState.xml";
+		private const string FileName = "GalleryState.v2.xml";
 
-		public int Version = 1;
+		public int Version = 2;
 
-		public GalleryHashSet<AssWallInteractions> AssWall = new ();
+		public GalleryHashSet<AssWallInteractions> AssWall = [];
 
-		public GalleryHashSet<CharacterInteraction> Daruma = new ();
+		public GalleryHashSet<CharacterInteraction> Daruma = [];
 
-		public GalleryHashSet<CharacterInteraction> Slave = new ();
+		public GalleryHashSet<CharacterInteraction> Slave = [];
 
-		public GalleryHashSet<CharacterInteraction> PlayerRaped = new();
+		public GalleryHashSet<CharacterInteraction> PlayerRaped = [];
 
-		public GalleryHashSet<ManRapesInteraction> ManRapes = new();
+		public GalleryHashSet<ManRapesInteraction> ManRapes = [];
 
-		public GalleryHashSet<NpcSexInteractions> CommonSexNpc = new();
+		public GalleryHashSet<NpcSexInteractions> CommonSexNpc = [];
 
-		public GalleryHashSet<SexTypeInteraction<ManRapeSleepState>> SleepRapes = new();
+		public GalleryHashSet<ManRapesInteraction> SleepRapes = [];
 
-		public GalleryHashSet<CommonSexPlayerInteraction> CommonSexPlayer = new ();
+		public GalleryHashSet<CommonSexPlayerInteraction> CommonSexPlayer = [];
 	
-		public GalleryHashSet<ToiletInteractions> Toilet = new ();
+		public GalleryHashSet<ToiletInteractions> Toilet = [];
 	
-		public GalleryHashSet<ToiletNPCInteraction> ToiletNpc = new ();
+		public GalleryHashSet<ToiletNPCInteraction> ToiletNpc = [];
 
-		public GalleryHashSet<SelfInteraction> Delivery = new ();
+		public GalleryHashSet<SelfInteraction> Delivery = [];
 
-		public GalleryHashSet<StoryInteraction> Story = new ();
+		public GalleryHashSet<StoryInteraction> Story = [];
 		
-		public GalleryHashSet<OnaniInteraction> Onani = new ();
+		public GalleryHashSet<OnaniInteraction> Onani = [];
 
 		public static void Load()
 		{

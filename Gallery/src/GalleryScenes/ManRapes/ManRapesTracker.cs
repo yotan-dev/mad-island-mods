@@ -1,3 +1,4 @@
+using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.GalleryScenes.ManRapes
@@ -15,7 +16,7 @@ namespace Gallery.GalleryScenes.ManRapes
 		public override void End()
 		{
 			if (this.Raped && this.DidCreampie) {
-				ManRapesSceneManager.Instance.Unlock(this.Man, this.Girl);
+				new ManRapesController().Unlock([this.Man, this.Girl]);
 			} else {
 				GalleryLogger.LogDebug($"ManRapeScene: OnEnd: 'Raped' or 'DidCreampie' not set -- event NOT unlocked for {Girl}");
 			}

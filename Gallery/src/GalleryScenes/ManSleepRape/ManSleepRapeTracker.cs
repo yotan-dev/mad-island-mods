@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HFramework.Scenes;
 using Gallery.SaveFile.Containers;
+using Gallery.GalleryScenes.CommonSexNPC;
 
 namespace Gallery.GalleryScenes.ManSleepRape
 {
@@ -47,16 +48,24 @@ namespace Gallery.GalleryScenes.ManSleepRape
 
 		public override void End()
 		{
+			bool shouldUnlock = false;
 			foreach (var mode in this.Modes)
 			{
-				if (!mode.DidRape || !mode.DidCreampie)
-				{
-					GalleryLogger.LogDebug($"ManRapeScene: OnEnd: mode {mode.Mode} 'raped' ({mode.DidRape}) or 'creampied' ({mode.DidCreampie}) not set -- event NOT unlocked for {Girl}");
-					continue;
-				}
 
-				ManSleepRapeSceneManager.Instance.Unlock(this.Man, this.Girl, mode.Mode);
+				if (mode.DidRape && mode.DidCreampie)
+				{
+					shouldUnlock = true;
+					break;
+				}
 			}
+
+			if (!shouldUnlock)
+			{
+				GalleryLogger.LogDebug($"ManSleepRapeScene: OnEnd: 'raped' and 'creampied' not set for the same mode -- event NOT unlocked for {Girl}");
+				return;
+			}
+
+			new ManSleepRapeController().Unlock([this.Man, this.Girl]);
 		}
 	}
 }

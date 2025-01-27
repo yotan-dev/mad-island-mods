@@ -22,7 +22,7 @@ namespace Gallery.GalleryScenes.Toilet
 				return;
 			}
 
-			ToiletSceneManager.Instance.Unlock(this.User, this.Target);
+			new ToiletController().Unlock([this.User, this.Target]);
 		}
 	}
 }

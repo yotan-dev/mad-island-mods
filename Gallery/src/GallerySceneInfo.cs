@@ -1,14 +1,10 @@
 using System;
-using System.Collections;
-using YotanModCore;
-using Gallery.SaveFile.Containers;
 using UnityEngine;
-using UnityEngine.UIElements;
 using HFramework.Scenes;
 
 namespace Gallery
 {
-	public class GallerySceneInfo
+	public class GallerySceneInfoV1
 	{
 		public class CharGroups {
 			public static readonly string Yona = "Yona";

@@ -1,3 +1,4 @@
+using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.SaveFile.Containers;
 
 namespace Gallery.GalleryScenes.PlayerRaped
@@ -20,7 +21,7 @@ namespace Gallery.GalleryScenes.PlayerRaped
 		{
 			if (this.Raped)
 			{
-				PlayerRapedSceneManager.Instance.Unlock(this.Player, this.Rapist);
+				new PlayerRapedController().Unlock([this.Player, this.Rapist]);
 			}
 			else
 			{

@@ -22,7 +22,7 @@ namespace Gallery.GalleryScenes.Daruma
 		{
 			if (this.Raped && this.Busted)
 			{
-				DarumaSceneManager.Instance.Unlock(this.Player, this.Girl);
+				new DarumaController().Unlock([this.Player, this.Girl]);
 			}
 			else
 			{

@@ -110,6 +110,10 @@ namespace Gallery
 				.ForScenes("*")
 				.HookEvent(EventNames.OnCreampieVag)
 				.Call(this.SetCreampie);
+			HookBuilder.New("Gallery.Any.OnDelivery")
+				.ForScenes("*")
+				.HookEvent(EventNames.OnDelivery)
+				.Call(this.SetDelivery);
 
 			HookBuilder.New("Gallery.ManRapesSleep.ForceRape")
 				.ForScenes(ManRapesSleep.Name)
@@ -280,6 +284,15 @@ namespace Gallery
 			var tracker = Trackers.GetValueOrDefault(scene, null);
 			if (tracker != null)
 				tracker.DidCreampie = true;
+
+			yield break;
+		}
+
+		private IEnumerator SetDelivery(IScene scene, object param)
+		{
+			var tracker = Trackers.GetValueOrDefault(scene, null);
+			if (tracker != null)
+				tracker.DidDelivery = true;
 
 			yield break;
 		}

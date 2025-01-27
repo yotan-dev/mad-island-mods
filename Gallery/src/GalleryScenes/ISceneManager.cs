@@ -4,6 +4,6 @@ namespace Gallery.GalleryScenes
 {
 	public interface ISceneManager
 	{
-		GallerySceneInfo[] GetScenes();
+		GallerySceneInfoV1[] GetScenes();
 	}
 }

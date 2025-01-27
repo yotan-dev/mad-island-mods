@@ -23,9 +23,9 @@ namespace Gallery.GalleryScenes.AssWall
 
 		public override void End()
 		{
-			if (!this.DidToilet || !this.DidCreampie)
+			if (this.DidToilet && this.DidCreampie)
 			{
-				AssWallSceneManager.Instance.Unlock(this.Player, this.Girl, this.WallType);
+				new AssWallController() { WallType = this.WallType }.Unlock([this.Player, this.Girl]);
 			}
 			else
 			{

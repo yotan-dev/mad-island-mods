@@ -1,4 +1,5 @@
 using System;
+using Gallery.GalleryScenes.AssWall;
 using Gallery.SaveFile.Containers;
 using YotanModCore.Consts;
 
@@ -32,7 +33,7 @@ namespace Gallery.GalleryScenes.Slave
 		{
 			if (this.Busted)
 			{
-				SlaveSceneManager.Instance.Unlock(this.Player, this.Girl);
+				new SlaveController().Unlock([this.Player, this.Girl]);
 			}
 			else
 			{

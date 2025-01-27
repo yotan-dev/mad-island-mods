@@ -1,17 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Mono.Cecil;
 using YotanModCore;
 using Gallery.GalleryScenes;
-using Gallery.SaveFile;
-using Gallery.UI.SceneController;
-using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 using YotanModCore.Consts;
-using HFramework.Scenes;
+using Gallery.ConfigFiles;
+using UnityEngine.EventSystems;
 
 namespace Gallery.UI
 {
@@ -30,209 +25,11 @@ namespace Gallery.UI
 
 		public GameObject DummySexMeter;
 
-		private IScene ActiveScene;
-
-		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> PlayerRapedCheck = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
-			GalleryState.Instance.PlayerRaped.Any((x) =>
-				x.Character1.UnlockCheck(npcA)
-				&& x.Character2.UnlockCheck(npcB)
-			);
-
-		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> ManRapesCheck = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
-			GalleryState.Instance.ManRapes.Any((x) => (
-				x.Character1.UnlockCheck(npcA)
-				&& x.Character2.UnlockCheck(npcB)
-			));
-
-		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> ManSleepRapesCheckNormal = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
-			GalleryState.Instance.SleepRapes.Any((x) => (
-				x.Character1.UnlockCheck(npcA)
-				&& x.Character2.UnlockCheck(npcB)
-				&& x.SexType == ManRapeSleepState.ForcefullRape
-			));
-
-		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> ManSleepRapesCheckDiscretly = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
-			GalleryState.Instance.SleepRapes.Any((x) => (
-				x.Character1.UnlockCheck(npcA)
-				&& x.Character2.UnlockCheck(npcB)
-				&& x.SexType == ManRapeSleepState.GentlyRape
-			));
-
-		private static Func<GallerySceneInfo.SceneNpc, GallerySceneInfo.SceneNpc, bool> CommonSexNpcCheck = (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
-			GalleryState.Instance.CommonSexNpc.Any((x) => (
-				x.Character1.UnlockCheck(npcA)
-				&& x.Character2.UnlockCheck(npcB)
-			));
-
-		// private List<GallerySceneInfo> Scenes = new List<GallerySceneInfo>() {
-		//#region AssWall
-		/*
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Man,
-			SceneType = GallerySceneInfo.SceneTypes.AssWall,
-			Name = "Ass Toilet\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Man, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.FemaleNative, Pregnant = false },
-			Prop = "toilet_01", // @TODO: Review
-			IsUnlocked = true, // (GallerySceneInfo.SceneNpc npcA, GallerySceneInfo.SceneNpc npcB) =>
-				GalleryState.Instance.AssWall.Any((x) => (
-					x.Character1.UnlockCheck(npcA)
-					&& x.Character2.UnlockCheck(npcB)
-					&& x.WallType.Equals("Toilet")
-				)),
-		},
-		*/
-		//#endregion
-		//#region PlayerRaped
-		/*
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Yona,
-			SceneType = GallerySceneInfo.SceneTypes.PlayerRaped,
-			Name = "Defeated by\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Yona, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.MaleNative, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.PlayerRapedCheck,
-		},
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Yona,
-			SceneType = GallerySceneInfo.SceneTypes.PlayerRaped,
-			Name = "Defeated by\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Yona, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.BigMaleNative, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.PlayerRapedCheck
-		},
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Yona,
-			SceneType = GallerySceneInfo.SceneTypes.PlayerRaped,
-			Name = "Defeated by\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Yona, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Werewolf, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.PlayerRapedCheck,
-		},
-		//#endregion
-		//#region ManRapes
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Man,
-			SceneType = GallerySceneInfo.SceneTypes.ManRapes,
-			Name = "{npcA} rapes\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Man, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.FemaleNative, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.ManRapesCheck,
-		},
-		new GallerySceneInfo() {
-			RequireDLC = true,
-			CharGroup = GallerySceneInfo.CharGroups.Man,
-			SceneType = GallerySceneInfo.SceneTypes.ManRapes,
-			Name = "{npcA} rapes\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Man, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.NativeGirl, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.ManRapesCheck
-		},
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Man,
-			SceneType = GallerySceneInfo.SceneTypes.ManRapes,
-			Name = "{npcA} rapes\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Man, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.UnderGroundWoman, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.ManRapesCheck,
-		},
-		//#endregion
-
-		//#region Sleep Rapes
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Man,
-			SceneType = GallerySceneInfo.SceneTypes.SleepRaes,
-			Name = "{npcA} sleep rapes\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Man, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.FemaleNative, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.ManSleepRapesCheckNormal,
-		},
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Man,
-			SceneType = GallerySceneInfo.SceneTypes.SleepRaes,
-			Name = "{npcA} sleep rapes\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Man, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.NativeGirl, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.ManSleepRapesCheckNormal,
-		},
-		//#endregion
-
-		//#region Common Sex Player
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.Man,
-			SceneType = GallerySceneInfo.SceneTypes.CommonSexPlayer,
-			Name = "{npcA} fucks\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.Man, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.FemaleNative, Pregnant = false },
-			IsUnlocked = true, // (GallerySceneInfo.SceneNpc a, GallerySceneInfo.SceneNpc b) => true,
-		},
-		//#endregion
-		//#region CommonSexNpc
-		// @TODO: Check for SexType / PlaceType / PlaceGrade
-
-		// ========== Native Female
-		/*
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.NativeFemale,
-			SceneType = GallerySceneInfo.SceneTypes.CommonSexNpc,
-			Name = "{npcA} sex with\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.FemaleNative, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.MaleNative, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.CommonSexNpcCheck,
-			Prop = "leafbed",
-		},
-
-		// ========== Native Male
-		new GallerySceneInfo() {
-			CharGroup = GallerySceneInfo.CharGroups.NativeMale,
-			SceneType = GallerySceneInfo.SceneTypes.CommonSexNpc,
-			Name = "{npcA} sex with\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.MaleNative, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.FemaleNative, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.CommonSexNpcCheck,
-			Prop = "leafbed",
-		},
-		new GallerySceneInfo() {
-			RequireDLC = true,
-			CharGroup = GallerySceneInfo.CharGroups.NativeMale,
-			SceneType = GallerySceneInfo.SceneTypes.CommonSexNpc,
-			Name = "{npcA} sex with\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.MaleNative, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.NativeGirl, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.CommonSexNpcCheck,
-			Prop = "leafbed",
-		},
-		new GallerySceneInfo() {
-			RequireDLC = true,
-			CharGroup = GallerySceneInfo.CharGroups.NativeMale,
-			SceneType = GallerySceneInfo.SceneTypes.CommonSexNpc,
-			Name = "{npcA} sex with\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.MaleNative, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.NativeGirl, Pregnant = true },
-			IsUnlocked = true, // GalleryMngr.CommonSexNpcCheck,
-			Prop = "leafbed",
-		},
-
-		// ========== Native Girl
-		new GallerySceneInfo() {
-			RequireDLC = true,
-			CharGroup = GallerySceneInfo.CharGroups.NativeGirl,
-			SceneType = GallerySceneInfo.SceneTypes.CommonSexNpc,
-			Name = "{npcA} sex with\n{npcB}",
-			NpcA = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.NativeGirl, Pregnant = false },
-			NpcB = new GallerySceneInfo.SceneNpc() { NpcID = NpcIDs.MaleNative, Pregnant = false },
-			IsUnlocked = true, // GalleryMngr.CommonSexNpcCheck,
-			Prop = "leafbed",
-		},
-		*/
-		//#endregion
-
-		// @TODO: SleepRapes , CommonSexPlayer, Toilet , ToiletNpc, Delivery , Story
-		// };
+		private BaseController ActiveController;
 
 		private IEnumerator Start()
 		{
-			yield return new WaitForSeconds(1f); // Give it some time to start other stuff.. not sure why, but it is needed
+			yield return new WaitForSeconds(0.2f); // Give it some time to start other stuff.. I think this is needed so the Awake/Starts properly run
 			this.mn = GameObject.Find("Managers").GetComponent<ManagersScript>();
 			this.mn.uiMN.MainCanvasView(false);
 			GameObject.Find("GalleryCanvas").SetActive(false); // remove original gallery canvas, we have our own
@@ -242,36 +39,41 @@ namespace Gallery.UI
 
 			Dictionary<string, GameObject> groups = new Dictionary<string, GameObject>();
 
-			foreach (var scnManager in GalleryScenesManager.Instance.SceneManagers)
+			GalleryScenesManager.Instance.LoadGallery();
+			foreach (var scnGroup in GalleryScenesManager.Instance.SceneGroups)
 			{
-				foreach (var scn in scnManager.GetScenes())
+				foreach (var scn in scnGroup.Value.Scenes)
 				{
-					if (scn.RequireDLC && !GameInfo.HasDLC)
+					if (scn.RequiresDLC && !GameInfo.HasDLC)
 						continue;
 
 					GameObject grp;
-					if (!groups.TryGetValue(scn.CharGroup.ToString(), out grp))
+					if (!groups.TryGetValue(scnGroup.Key, out grp))
 					{
 						grp = GameObject.Instantiate(this.GallerySceneGroupPrefab, this.ScenesListArea);
-						groups[scn.CharGroup.ToString()] = grp;
+						groups[scnGroup.Key] = grp;
 					}
 
 					var options = grp.transform.Find("Options").gameObject;
 					var btnObject = GameObject.Instantiate(this.GallerySceneBtnPrefab, options.transform);
 					var btn = btnObject.GetComponent<Button>();
 
-					if (scn.IsUnlocked)
+					if (scn.Controller.IsUnlocked(scn.Actors))
 					{
-						grp.transform.Find("Title").GetComponent<Text>().text = scn.CharGroup.ToString();
+						grp.transform.Find("Title").GetComponent<Text>().text = scnGroup.Key.ToString();
 
 						btn.onClick.AddListener(() =>
 						{
 							base.StartCoroutine(this.DoScene(scn));
 						});
 						btn.enabled = true;
-						btnObject.GetComponentInChildren<Text>().text = scn.Name
-							.Replace("{npcA}", CommonUtils.GetName(scn.NpcA.NpcID))
-							.Replace("{npcB}", CommonUtils.GetName(scn.NpcB.NpcID));
+						var name = scn.Name;
+						if (scn.Actors.Length > 0)
+							name = name.Replace("[npc0]", CommonUtils.GetName(scn.Actors?[0]?.NpcId ?? -1));
+						if (scn.Actors.Length > 1)
+							name = name.Replace("[npc1]", CommonUtils.GetName(scn.Actors?[1]?.NpcId ?? -1));
+						
+						btnObject.GetComponentInChildren<Text>().text = name;
 					}
 					else
 					{
@@ -298,62 +100,78 @@ namespace Gallery.UI
 			}
 		}
 
+		private GameObject TmpNpc;
 
-		private GameObject tmpNpc;
-
-		private IEnumerator CreateNpc(GallerySceneInfo.SceneNpc npc)
+		private IEnumerator CreateNpc(GalleryActor actor)
 		{
-			var npcObj = GameObject.Instantiate(this.NpcManager.npcPrefab[(int)npc.NpcID], Managers.mn.sexMN.transform.position, Quaternion.identity);
+			var npcObj = GameObject.Instantiate(
+				this.NpcManager.npcPrefab[(int)actor.NpcId],
+				Managers.mn.sexMN.transform.position,
+				Quaternion.identity
+			);
+
+			var common = npcObj.GetComponent<CommonStates>();
+			if (actor.Pregnant)
+			{
+				common.pregnant[PregnantIndex.Father] = 1;
+				common.pregnant[PregnantIndex.TimeToBirth] = 1;
+			}
+
+			if (actor.Fainted)
+				common.faint = 0.0f;
+			else
+				common.faint = 1.0f;
+			
 			// DON't setActive(False) it or they will crash
-			if (npc.NpcID == NpcID.Yona || npc.NpcID == NpcID.Man)
+			if (actor.NpcId == NpcID.Yona || actor.NpcId == NpcID.Man)
 			{
 				npcObj.GetComponent<PlayerMove>().enabled = false;
 				npcObj.GetComponent<Rigidbody>().useGravity = false;
 				yield return null;
 
-				if (npc.NpcID == NpcID.Yona)
+				if (actor.NpcId == NpcID.Yona)
 					yield return base.StartCoroutine(this.mn.randChar.SetPlayer(npcObj.GetComponent<CommonStates>()));
 
-				Managers.mn.gameMN.playerCommons[GameManager.selectPlayer] = npcObj.GetComponent<CommonStates>();
+				// Managers.mn.gameMN.playerCommons[GameManager.selectPlayer] = npcObj.GetComponent<CommonStates>();
 			}
 			else
 			{
 				yield return null;
 
-				npcObj.GetComponent<NPCMove>().enabled = false;
-				npcObj.GetComponent<CommonStates>().npcID = (int)npc.NpcID;
-
-				if (this.HasRandomGen(npc.NpcID))
+				common.npcID = (int)actor.NpcId;
+				common.nMove.enabled = true;
+				common.nMove.actType = NPCMove.ActType.Wait;
+				
+				if (this.HasRandomGen(actor.NpcId))
 					this.mn.randChar.RandomGen(npcObj);
 			}
 
-			this.tmpNpc = npcObj;
+			this.TmpNpc = npcObj;
 		}
 
-
-		private IEnumerator DoScene(GallerySceneInfo scene)
+		private IEnumerator DoScene(GallerySceneConfig scene)
 		{
-			if (this.ActiveScene != null) {
-				this.ActiveScene.Destroy();
-				this.ActiveScene = null;
+			if (this.ActiveController != null) {
+				this.ActiveController.Destroy();
+				this.ActiveController = null;
 			}
 
-			GallerySceneInfo.PlayData playData = new GallerySceneInfo.PlayData();
+			EventSystem.current.SetSelectedGameObject(null);
 
-			yield return this.CreateNpc(scene.NpcA);
-			var npcA = tmpNpc;
-			yield return this.CreateNpc(scene.NpcB);
-			var npcB = tmpNpc;
-
-			playData.NpcA = npcA.GetComponent<CommonStates>();
-			playData.NpcB = npcB.GetComponent<CommonStates>();
-
-			if (scene.Prop != "")
+			PlayData playData = new PlayData();
+			
+			foreach (var actor in scene.Actors)
 			{
-				ItemData tmpItem = this.mn.itemMN.FindItem(scene.Prop);
+				yield return this.CreateNpc(actor);
+				playData.Actors.Add(this.TmpNpc.GetComponent<CommonStates>());
+			}
+			
+			if (scene.Controller.Prop != null && scene.Controller.Prop != "")
+			{
+				ItemData tmpItem = this.mn.itemMN.FindItem(scene.Controller.Prop);
 				if (tmpItem == null)
 				{
-					PLogger.LogError("Item not found: " + scene.Prop);
+					PLogger.LogError("Item not found: " + scene.Controller.Prop);
 					yield break;
 				}
 
@@ -365,14 +183,17 @@ namespace Gallery.UI
 				yield return null;
 			}
 
-			var playableScene = scene.GetScene(playData);
-			this.ActiveScene = playableScene;
-			yield return base.StartCoroutine(playableScene.Run());
+			this.ActiveController = scene.Controller;
+
+			yield return base.StartCoroutine(scene.Controller.Play(playData));
+
+			this.ActiveController = null;
 
 			if (playData.Prop != null)
 				GameObject.Destroy(playData.Prop);
-			GameObject.Destroy(npcA);
-			GameObject.Destroy(npcB);
+
+			foreach (var actor in playData.Actors)
+				GameObject.Destroy(actor.gameObject);
 		}
 
 		public void BackToTitle()
