@@ -12,7 +12,7 @@
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexObjPrefabSelector" />
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="23" />
 			<Actors>
 				<Actor val="Man#1" />
 				<Actor val="Yona#0" />
