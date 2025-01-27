@@ -253,8 +253,9 @@ namespace HFramework.Scenes
 			yield return this.RunStep(StepNames.Finish, this.Finish);
 		}
 
-		private IEnumerator FadeOut()
+		private IEnumerator StartRespawn()
 		{
+			Managers.mn.uiMN.SkipView(false);
 			yield return Managers.mn.eventMN.FadeOut(1f);
 		}
 
@@ -306,8 +307,7 @@ namespace HFramework.Scenes
 
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 
-			Managers.mn.uiMN.SkipView(false);
-			yield return this.FadeOut();
+			yield return this.StartRespawn();
 
 			Object.Destroy(this.TmpSex);
 
