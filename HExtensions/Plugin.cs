@@ -1,9 +1,10 @@
-﻿using BepInEx;
+using BepInEx;
 using UnityEngine;
 
 namespace HExtensions
 {
 	[BepInPlugin("HExtensions", "HExtensions", "0.1.0")]
+	[BepInDependency("HFramework", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
