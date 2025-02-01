@@ -191,23 +191,49 @@ Adds item color marker to item slots. Only for items that are dyeable.
 
 ### NPC Stats
 
-> **!!! IMPORTANT !!!**
-> If you are playing on Mad Island v0.1.8 or earlier, you must use v1.0;
-> 
-> If you are playing on Mad Island v0.2.0 or newer, you must use v2.0;
->
-> Both are the same (at least as of 2024.11.02), but they target different Mad Island versions and
-> I can't make both work at the same time.
-> 
+Properly give stats points to NPCs in different moments.
 
-Properly give stats points and applies then to NPCs when they are born/friendlied.
+I made this mod because I noticed that high level captured NPCs or new borns were too weak,
+making more sense to level one from the scratch.
+This makes them get real points and randomly distributes them.
 
-I made this mod because I noticed that high level captured NPCs or new borns were too weak, making more sense to level
-one from the scratch. This makes them get real points and randomly distributes them.
-
-**Requirements:**
+#### Requirements
 
 1. Yotan Mod Core must be installed.
+
+#### Configuration
+
+After you start the game with NPC Stats installed once, a config file will be created,
+located at `BepInEx/config/NpcStats.cfg`. You can edit it and change the way stats are distributed.
+
+**Distribution mode:** How points are distributed.
+
+- `EnemiesDistribution`: For enemies (natives in villages, etc)
+- `TamedNpcDistribution`: For friendlied/tamed NPCs
+- `NewbornNpcDistribution`: For new born NPCs
+
+The values may be (note for exceptions):
+
+- `Default`: Just like it is done in the original
+- `Random`: Gives status points to NPC based on their level and randomly distribute over Health/Strength/Agility
+- `ForceLevel1`: Resets the NPC to level 1 and clear their stats (Can't be used for Enemies)
+- `Keep`: Keeps the stats as they were when the NPC was an enemy. If using ExtraStrong, it will be copied too. Can only be used for TamedNpc.
+
+
+**Extra strong:** Should the default stats be applied over the distribution?
+
+First, a background: every status increase in Mad Island causes
+attack / speed / health to increase by a fixed amount, which is
+dependent on the type of NPC. Let's call this `IncreaseBonus`.
+
+When this setting is `true`, NPCs will be given a hidden increase
+to their attack / speed / health of `<Level> * <IncreaseBonus>`.
+
+This is equivalent to having DistributionMode = Default, but
+this is a bonus that is added to the original distribution.
+
+Enabling this option will make NPCs way stronger than normal,
+so use with care.
 
 
 ### Stack nearby

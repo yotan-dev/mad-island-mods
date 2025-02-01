@@ -1,38 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
 using HarmonyLib;
 using YotanModCore;
-using YotanModCore.Consts;
 
 namespace NpcStats.Patches
 {
 	public class NpcSpawnPatch
 	{
+		private static List<CommonStates> PendingTamedNpcs = [];
+
+		[HarmonyPatch(typeof(RandomCharacter), nameof(RandomCharacter.GenChildSet))]
+		[HarmonyPrefix]
+		private static void Pre_RandChar_GenChildSet(CommonStates child)
+		{
+			StatDistributor.RedistributeStats(NpcKind.Newborn, child);
+		}
+
 		[HarmonyPatch(typeof(NPCManager), nameof(NPCManager.NPCLevelSet))]
 		[HarmonyPostfix]
-		public static void Post_NPCLevelSet(CommonStates common)
+		private static void Post_NPCLevelSet(CommonStates common)
 		{
-			for (int i = 1; i <= common.level; i++) {
-				common.statusPoint += StatsUtils.CalculateStatsGain(i);
+			StatDistributor.RedistributeStats(NpcKind.Enemy, common);
+		}
+
+		[HarmonyPatch(typeof(ItemManager), nameof(ItemManager.SummonNPC))]
+		[HarmonyPostfix]
+		private static IEnumerator Post_ItemManager_SummonNPC(IEnumerator result, int slotID)
+		{
+			ItemSlot tmpSlot = Managers.mn.inventory.itemSlot[slotID];
+			CommonStates? common = null;
+			bool wasWild = false;
+			if (tmpSlot?.common != null)
+			{
+				if (PendingTamedNpcs.Count > 0)
+					PLogger.LogWarning($"SummonNPC: There are {PendingTamedNpcs.Count} pending tamed NPCs. Expect 0");
+
+				PendingTamedNpcs.Add(tmpSlot.common);
+				common = tmpSlot.common;
+				wasWild = common.friendID < 10;
 			}
+			
+			while (result.MoveNext())
+				yield return result.Current;
 
-			var statsData = StatsUtils.GetStatsData(common);
-			common.maxLife = statsData.life + common.level * statsData.upLife;
-			common.attack = statsData.attack + common.level * statsData.upAttack;
-			common.maxFaint = statsData.faint + common.level * statsData.upFaint;
-			common.life = common.maxLife;
-			common.faint = common.maxFaint;
-
-			bool canIncrease = true;
-			while (canIncrease) {
-				int healthCost = StatsUtils.GetStatsUpCost(common, Stat.Health);
-				int atkCost = StatsUtils.GetStatsUpCost(common, Stat.Attack);
-				int speedCost = StatsUtils.GetStatsUpCost(common, Stat.Agility);
-
-				long points = common.statusPoint;
-				canIncrease = healthCost <= points || atkCost <= points || speedCost <= points;
-				if (canIncrease) {
-					int stats = UnityEngine.Random.Range(0, 300) % 3;
-					StatsUtils.StatsUp(common, stats);
-				}
+			if (common != null)
+			{
+				PendingTamedNpcs.Remove(common);
+				if (wasWild && common.friendID >= 10)
+					StatDistributor.RedistributeStats(NpcKind.Tamed, common);
 			}
 		}
 	}
