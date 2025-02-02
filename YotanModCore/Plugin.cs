@@ -1,8 +1,9 @@
-﻿using BepInEx;
+using BepInEx;
 using HarmonyLib;
 using YotanModCore.Patches;
 using UnityEngine;
 using YotanModCore.Events;
+using YotanModCore.Console;
 
 namespace YotanModCore
 {
@@ -21,7 +22,9 @@ namespace YotanModCore
 			PLogger.LogInfo($">> DLC: {GameInfo.HasDLC}");
 
 			CommonUtils.Init();
+			ConsoleManager.Instance.Init();
 
+			Harmony.CreateAndPatchAll(typeof(DebugToolPatch));
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 			Harmony.CreateAndPatchAll(typeof(GameLifecycleEvents));

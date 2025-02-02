@@ -63,7 +63,31 @@ If the mod mentions configuration, you should first start the game once so confi
 
 ### Yotan Mod Core
 
-This is an utility library for mods. Most mods require it, but it doesn't bring anything into the game by itself.
+This is main focused in being an utility library for mods. Additionally, adds some console commands.
+
+Most mods require it, but it doesn't bring almost anything into the game by itself.
+
+**Console commands:**
+
+By pressing enter to open the console, you can run the default commands and also additional ones added by YotanModCore (or other mods that uses it).
+
+YotanModCore commands:
+
+**Note:** whenever `[friendId]` is mentioned, it is optional and when not informed it will follow this order:
+
+1. Try to get selected NPC
+2. If no NPC is selected, selects active player
+
+- `/faint [friendId]`
+  - faints a character
+  - `[friendId]` is the target NPC friend ID
+- `/heal`, `/healhp`, `/healst`, `/healfood`, `/healwater` - heals player HP/Stamina/Food/Water (`/heal` heals everything)
+- `/makevirgin [friendId]`
+  - resets basic sex info so character is considered virgin again
+  - `[friendId]` is the target NPC friend ID
+- `/moral [value] [friendId]` - changes character moral to `value`
+- `/stun [value]` - overrides player stun damage to `value`. 0 disables it.
+
 
 **For mod developers:**
 
