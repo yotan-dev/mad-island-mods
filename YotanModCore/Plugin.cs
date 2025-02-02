@@ -21,6 +21,7 @@ namespace YotanModCore
 			PLogger._Logger = Logger;
 			PLogger.LogInfo($"> Game Version: {GameInfo.ToVersionString(GameInfo.GameVersion)}");
 			PLogger.LogInfo($">> DLC: {GameInfo.HasDLC}");
+			PLogger.LogInfo($">> Censor Type: {GameInfo.CensorType}");
 
 			Assets = AssetBundle.LoadFromFile($"BepInEx/plugins/YotanModCore/YotanModCore.assets");
 
