@@ -4,7 +4,7 @@ using YoUnnoficialPatches.Patches;
 
 namespace YoUnnoficialPatches
 {
-	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.3.0")]
+	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.4.0")]
 	[BepInDependency("YotanModCore", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
@@ -12,12 +12,15 @@ namespace YoUnnoficialPatches
 		{
 			PLogger._Logger = Logger;
 			
-			YoUnnoficialPatches.Config.Instance.Init(Config);
+			PConfig.Instance.Init(Config);
 
 			Harmony.CreateAndPatchAll(typeof(TranslationPatch));
 
-			if (YoUnnoficialPatches.Config.Instance.DontStartInvalidSex.Value)
+			if (PConfig.Instance.DontStartInvalidSex.Value)
 				Harmony.CreateAndPatchAll(typeof(DontStartInvalidSexPatch));
+
+			if (PConfig.Instance.FixMosaic.Value)
+				Harmony.CreateAndPatchAll(typeof(FixMosaicPatch));
 
 			PLogger.LogInfo($"Plugin YoUnnoficialPatches is loaded!");
 		}

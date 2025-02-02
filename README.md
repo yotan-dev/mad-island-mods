@@ -319,7 +319,8 @@ Included:
   - Translation of Dye table UI from Japanese to English
 - Prevent NPCs from starting H-Scenes if they don't have one
   - Enabled by default, can be disabled by changing `DontStartInvalidSex` in the config
-
+- Fix some mosaics that are not being cleaned up
+	- Enabled by default, can be disabled by changing `FixMosaic` in the config
 
 I won't fix:
 
