@@ -47,3 +47,52 @@ Some example inputs:
 | `/sample 1 2`        | `/sample`  | [`1`, `2`]        |
 
 Note that arguments are always string, if you need an int, you have to cast it.
+
+
+## Custom NPC Talk Buttons
+
+This module allows you to register new buttons for NPCs "Talk" section.
+
+Every button should be a class that inherits `YotanModCore.NPC.TalkButton` and implements its methods.
+
+During startup, you should make an instance of your button class and call `YotanModCore.NPC.NpcTalkManager#RegisterButton` with it.
+
+The example below creates a "Weather" button in Talk that makes NPC show "Is it gonna rain?"
+
+```CS
+public class WeatherButton : TalkButton
+{
+	public WeatherButton() : base("Weather") { }
+
+	public override bool ShouldShow(CommonStates common)
+	{
+		return true;
+	}
+
+	private IEnumerator TalkMsg(CommonStates common)
+	{
+		var tmpTalk = Managers.mn.fxMN.GoSerifBaloon("Is it gonna rain?", common.gameObject, Vector3.up * 2f + Managers.mn.eventMN.TalkOffset(common), false, common.anim, 1, "");
+		yield return null;
+
+		float talkTime = 5f;
+		while (talkTime > 0f)
+		{
+			talkTime -= Time.deltaTime;
+			if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.Space))
+			{
+				talkTime = 0f;
+			}
+			yield return null;
+		}
+		tmpTalk.SetActive(false);
+	}
+
+	public override void OnClick()
+	{
+		Managers.mn.StartCoroutine(this.TalkMsg(Managers.mn.gameMN.menuNPC));
+	}
+}
+
+// at startup
+NpcTalkManager.RegisterButton(new WeatherButton());
+```

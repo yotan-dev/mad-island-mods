@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using HarmonyLib;
+using YotanModCore.NpcTalk;
 
 namespace YotanModCore.Patches
 {
@@ -17,6 +17,14 @@ namespace YotanModCore.Patches
 		private static void Post_UIManager_Awake(UIManager __instance)
 		{
 			Managers.uiManager = new Wrappers.WrappedUIManager(__instance);
+			NpcTalkManager.OnUIManagerAwake();
+		}
+
+		[HarmonyPatch(typeof(UIManager), nameof(UIManager.NPCPanelStateChange))]
+		[HarmonyPostfix]
+		private static void Post_UIManager_NPCPanelStateChange(CommonStates common)
+		{
+			NpcTalkManager.OnOpen(common);
 		}
 	}
 }

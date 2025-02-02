@@ -1,9 +1,10 @@
-using BepInEx;
+﻿using BepInEx;
 using HarmonyLib;
 using YotanModCore.Patches;
 using UnityEngine;
 using YotanModCore.Events;
 using YotanModCore.Console;
+using YotanModCore.NpcTalk;
 
 namespace YotanModCore
 {
@@ -21,8 +22,11 @@ namespace YotanModCore
 			PLogger.LogInfo($"> Game Version: {GameInfo.ToVersionString(GameInfo.GameVersion)}");
 			PLogger.LogInfo($">> DLC: {GameInfo.HasDLC}");
 
+			Assets = AssetBundle.LoadFromFile($"BepInEx/plugins/YotanModCore/YotanModCore.assets");
+
 			CommonUtils.Init();
 			ConsoleManager.Instance.Init();
+			NpcTalkManager.Init();
 
 			Harmony.CreateAndPatchAll(typeof(DebugToolPatch));
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));

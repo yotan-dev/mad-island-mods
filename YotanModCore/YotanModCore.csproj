@@ -37,5 +37,8 @@
 		<Reference Include="Unity-TextMeshPro">
 			<HintPath>../Assemblies/Unity.TextMeshPro.dll</HintPath>
 		</Reference>
+		<Reference Include="UnityEngine-UI">
+			<HintPath>../Assemblies/UnityEngine.UI.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 </Project>
