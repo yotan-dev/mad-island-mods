@@ -258,7 +258,10 @@ namespace HFramework.Scenes
 			// and they do a roll at the beggining due to the yields for before Main and before Battle
 			// other scenes would work fine as far as I can tell, but since this is the "original code"
 			// let's make it for everyone.
-			this.Performer.PreparePerform(ActionType.Battle);
+			if (this.Girl.faint != 0)
+				this.Performer.PreparePerform(ActionType.Battle);
+			else
+				this.Performer.PreparePerform(ActionType.Defeat);
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())
