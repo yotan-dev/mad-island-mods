@@ -40,18 +40,39 @@ namespace HFramework
 			}
 		}
 
+		private bool EnsureAnimation(string name)
+		{
+			if (name == "")
+				return false;
+
+			if (!this.SexAnim.HasAnimation(name))
+			{
+				PLogger.LogError($"Animation {name} not found");
+				return false;
+			}
+
+			return true;
+		}
+
 		public IEnumerator LoopAnimation(string name)
 		{
-			PLogger.LogDebug($"LoopAnimation: {this.Scene.ExpandAnimationName(name)}");
+			name = this.Scene.ExpandAnimationName(name);
+
+			PLogger.LogDebug($"LoopAnimation: {name}");
+
 			this.ResumeAnimation();
-			yield return new LoopAnimation(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name)).Handle();
+
+			if (this.EnsureAnimation(name))
+				yield return new LoopAnimation(this.Scene, this.SexAnim, name).Handle();
 		}
 
 		public void LoopAnimationBg(string name)
 		{
-			PLogger.LogDebug($"LoopAnimation: {this.Scene.ExpandAnimationName(name)}");
 			name = this.Scene.ExpandAnimationName(name);
-			if (this.SexAnim.HasAnimation(name))
+
+			PLogger.LogDebug($"LoopAnimation: {name}");
+
+			if (this.EnsureAnimation(name))
 				this.SexAnim.state.SetAnimation(0, name, true);
 
 			this.ResumeAnimation();
@@ -59,23 +80,30 @@ namespace HFramework
 
 		public IEnumerator PlayTimedStep(string name, float time)
 		{
-			PLogger.LogDebug($"PlayTimedStep_New: {this.Scene.ExpandAnimationName(name)} for {time}");
+			name = this.Scene.ExpandAnimationName(name);
+
+			PLogger.LogDebug($"PlayTimedStep_New: {name} for {time}");
+			
 			this.ResumeAnimation();
-			yield return new LoopAnimationForTime(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name), time).Handle();
+			yield return new LoopAnimationForTime(this.Scene, this.SexAnim, name, time).Handle();
 		}
 
 		public IEnumerator PlayOnceStep(string name, bool skipable = false)
 		{
-			PLogger.LogDebug($"PlayOnceStep: {this.Scene.ExpandAnimationName(name)}");
+			name = this.Scene.ExpandAnimationName(name);
+
+			PLogger.LogDebug($"PlayOnceStep: {name}");
 			this.ResumeAnimation();
-			yield return new PlayAnimationOnce(this.Scene, this.SexAnim, this.Scene.ExpandAnimationName(name), skipable).Handle();
+			yield return new PlayAnimationOnce(this.Scene, this.SexAnim, name, skipable).Handle();
 		}
 
 		public void PlayOnceStepBg(string name)
 		{
-			PLogger.LogDebug($"PlayOnceStepBg: {this.Scene.ExpandAnimationName(name)}");
 			name = this.Scene.ExpandAnimationName(name);
-			if (this.SexAnim.HasAnimation(name))
+
+			PLogger.LogDebug($"PlayOnceStepBg: {name}");
+
+			if (this.EnsureAnimation(name))
 				this.SexAnim.state.SetAnimation(0, name, true);
 			this.ResumeAnimation();
 		}
@@ -87,8 +115,13 @@ namespace HFramework
 
 		public void SetLockedAnimation(string name)
 		{
+			name = this.Scene.ExpandAnimationName(name);
+
 			PLogger.LogDebug($"SetLockedAnimation: {this.Scene.ExpandAnimationName(name)}");
-			this.SexAnim.state.SetAnimation(0, this.Scene.ExpandAnimationName(name), false);
+
+			if (this.EnsureAnimation(name))
+				this.SexAnim.state.SetAnimation(0, this.Scene.ExpandAnimationName(name), false);
+
 			this.OriginalScale = this.SexAnim.timeScale;
 			this.SexAnim.timeScale = 0f;
 		}
