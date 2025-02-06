@@ -95,7 +95,8 @@ namespace HFramework.Scenes
 					var performer = Performer.PerformerLoader.Performers.GetValueOrDefault(performerConst);
 					if (performer == null)
 					{
-						PLogger.LogError($"Unknown performer: {performerConst} {desc}");
+						if (!Performer.PerformerLoader.SkippedPerformers.Contains(performerConst))
+							PLogger.LogError($"Unknown performer: {performerConst} {desc}");
 						continue;
 					}
 

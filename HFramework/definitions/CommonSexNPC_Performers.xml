@@ -126,7 +126,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_MaleNative_NativeGirl_Friendly_Normal">
+		<Performer id="HF_MaleNative_NativeGirl_Friendly_Normal" dlc="true">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -156,7 +156,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_NativeGirl_NativeGirl_Friendly_Normal">
+		<Performer id="HF_NativeGirl_NativeGirl_Friendly_Normal" dlc="true">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -185,7 +185,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_YoungMan_NativeGirl_Friendly_Normal">
+		<Performer id="HF_YoungMan_NativeGirl_Friendly_Normal" dlc="true">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>

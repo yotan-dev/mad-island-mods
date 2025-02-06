@@ -147,7 +147,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Man_NativeGirl_Friendly_Normal">
+		<Performer id="HF_Man_NativeGirl_Friendly_Normal" dlc="true">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -570,7 +570,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Man_Merry_Friendly_Normal">
+		<Performer id="HF_Man_Merry_Friendly_Normal" minVersion="0.2.4">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -636,7 +636,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Yona_BigNative_Friendly_Normal">
+		<Performer id="HF_Yona_BigNative_Friendly_Normal" minVersion="0.2.2">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -668,7 +668,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Yona_SmallNative_Friendly_Normal">
+		<Performer id="HF_Yona_SmallNative_Friendly_Normal" minVersion="0.1.4">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -700,7 +700,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Yona_ElderBrotherNative_Friendly_Normal">
+		<Performer id="HF_Yona_ElderBrotherNative_Friendly_Normal" minVersion="0.1.7">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>

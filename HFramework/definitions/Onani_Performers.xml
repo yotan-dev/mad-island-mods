@@ -7,7 +7,7 @@
 <PerformersConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Performers>
-		<Performer id="HF_Onani_FemaleNative_Normal">
+		<Performer id="HF_Onani_FemaleNative_Normal" minVersion="0.1.0">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -35,7 +35,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Onani_FemaleNative_Perfume">
+		<Performer id="HF_Onani_FemaleNative_Perfume" minVersion="0.1.0">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>

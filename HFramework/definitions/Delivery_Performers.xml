@@ -29,7 +29,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_NativeGirl_Delivery">
+		<Performer id="HF_NativeGirl_Delivery" dlc="true">
 			<Scopes>
 				<Scope>Delivery</Scope>
 			</Scopes>
