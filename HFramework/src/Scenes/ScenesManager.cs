@@ -70,5 +70,15 @@ namespace HFramework.Scenes
 
 			return new SexPerformer(performer, controller);
 		}
+
+		public SexPerformer? GetPerformer(string sceneName, string performerName, ISceneController controller)
+		{
+			var scnInfo = this.GetSceneInfo(sceneName);
+			var performer = this.GetSceneInfo(sceneName)?.GetPerformerById(performerName);
+			if (performer == null)
+				return null;
+
+			return new SexPerformer(performer, controller);
+		}
 	}
 }

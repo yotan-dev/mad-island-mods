@@ -55,6 +55,8 @@ namespace HFramework.Scenes
 		public string Name { get; private set; }
 
 		protected Dictionary<int, Dictionary<int, List<ScenePerformer>>> Performers = [];
+		
+		protected Dictionary<string, ScenePerformer> IdToPerformer = [];
 
 		public SceneInfo(string name)
 		{
@@ -77,7 +79,10 @@ namespace HFramework.Scenes
 				toPerformerList.Add(performer.ToNpcId ?? -1, performerList);
 			}
 
-			performerList.Add(new ScenePerformer(performer, StartConditions, PerformConditions));
+			var scnPerformer = new ScenePerformer(performer, StartConditions, PerformConditions);
+			performerList.Add(scnPerformer);
+			if (!IdToPerformer.ContainsKey(performer.Id))
+				IdToPerformer.Add(performer.Id, scnPerformer);
 		}
 
 		public bool CanStart(PerformerScope scope, CommonStates from, CommonStates? to)
@@ -112,6 +117,14 @@ namespace HFramework.Scenes
 
 				}
 			}
+
+			return null;
+		}
+
+		public SexPerformerInfo? GetPerformerById(string performerId)
+		{
+			if (IdToPerformer.ContainsKey(performerId))
+				return IdToPerformer[performerId].Performer;
 
 			return null;
 		}
