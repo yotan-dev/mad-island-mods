@@ -20,7 +20,6 @@ namespace HFramework.Patches
 		)
 		{
 			var scene = new CommonSexNPC(npcA, npcB, sexPlace, sexType);
-			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 			return false;
 		}

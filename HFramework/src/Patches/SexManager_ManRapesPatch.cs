@@ -11,7 +11,6 @@ namespace HFramework.Patches
 		private static bool Pre_SexManager_ManRapes(CommonStates girl, CommonStates man, ref IEnumerator __result)
 		{
 			var scene = new ManRapes(girl, man);
-			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 			return false;
 		}

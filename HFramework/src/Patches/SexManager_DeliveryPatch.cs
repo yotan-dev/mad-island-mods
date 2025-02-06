@@ -11,7 +11,6 @@ namespace HFramework.Patches
 		private static bool Pre_SexManager_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result)
 		{
 			var scene = new Delivery(common, tmpWorkPlace, tmpSexPlace);
-			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 			return false;
 		}
