@@ -280,9 +280,14 @@ namespace HFramework.Scenes
 			Managers.mn.uiMN.StatusChange(null);
 		}
 
+		protected virtual SexPerformer SelectPerformer()
+		{
+			return ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+		}
+
 		public override IEnumerator Run()
 		{
-			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
+			this.Performer = this.SelectPerformer();
 			if (this.Performer == null)
 			{
 				PLogger.LogError("No performer found");
