@@ -1,9 +1,10 @@
-﻿using BepInEx;
+using BepInEx;
 using HFramework.Hook;
 using HFramework.Patches;
 using HFramework.Performer;
 using HFramework.Scenes;
 using HarmonyLib;
+using YotanModCore.Events;
 
 namespace HFramework
 {
@@ -33,6 +34,7 @@ namespace HFramework
 
 				Harmony.CreateAndPatchAll(typeof(SexChecksPatch));
 
+				GameLifecycleEvents.OnGameStartEvent += () => { SexMeter.Instance.Reload(); };
 				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;
 			}
 

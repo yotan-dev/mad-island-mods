@@ -300,7 +300,6 @@ namespace HFramework.Scenes
 
 		public override bool CanContinue()
 		{
-			PLogger.LogDebug($">> Stage: {this.Stage} / Girl Faint: {this.Girl.faint} / Life: {this.Girl.life} / TmpSex: {this.TmpSex != null} / Man Life: {this.Man.life} / Input: {Input.GetKeyDown(KeyCode.R)}");
 			if (Input.GetKeyDown(KeyCode.R))
 				this.Destroyed = true;
 
