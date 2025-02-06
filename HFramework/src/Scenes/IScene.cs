@@ -7,7 +7,7 @@ namespace HFramework.Scenes
 	public interface IScene
 	{
 		IEnumerator Run();
-		void Init(ISceneController controller);
+		void SetController(ISceneController controller);
 		bool CanContinue();
 		void Destroy();
 		string GetName();

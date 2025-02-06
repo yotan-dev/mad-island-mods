@@ -22,7 +22,6 @@ namespace HFramework.Patches
 		)
 		{
 			var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
-			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 			return false;
 		}

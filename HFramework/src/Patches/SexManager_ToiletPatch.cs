@@ -12,7 +12,6 @@ namespace HFramework.Patches
 		private static bool Pre_SexManager_Toilet(InventorySlot tmpToile, ref IEnumerator __result)
 		{
 			var scene = new Toilet(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpToile);
-			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 			return false;
 		}

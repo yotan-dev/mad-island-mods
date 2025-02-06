@@ -15,7 +15,6 @@ namespace HFramework.Patches
 			var girlCommon = Managers.mn.inventory.itemSlot[50].common;
 			
 			var scene = new Daruma(pCommon, girlCommon, tmpDaruma);
-			scene.Init(new DefaultSceneController());
 			__result = scene.Run();
 
 			return false;

@@ -53,7 +53,7 @@ namespace Gallery.GalleryScenes
 				yield break;
 			}
 
-			this.Scene.Init(new GallerySceneController());
+			this.Scene.SetController(new GallerySceneController());
 			yield return null;
 			yield return this.Scene.Run();
 			yield return null; // Give some time for any clean up;

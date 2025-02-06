@@ -26,9 +26,11 @@ namespace HFramework.Scenes
 		public BaseScene(string name)
 		{
 			this.SceneName = name;
+			this.Controller = new DefaultSceneController();
+			this.Controller.SetScene(this);
 		}
 
-		public virtual void Init(ISceneController controller)
+		public virtual void SetController(ISceneController controller)
 		{
 			this.Controller = controller;
 			controller.SetScene(this);
