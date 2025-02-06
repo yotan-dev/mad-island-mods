@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using HFramework.Hook;
 using HFramework.Patches;
 using HFramework.Performer;
