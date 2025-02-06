@@ -41,7 +41,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Man_NativeGirl_Daruma">
+		<Performer id="HF_Man_NativeGirl_Daruma" dlc="true">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>

@@ -7,7 +7,7 @@
 <PerformersConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Performers>
-		<Performer id="HF_Man_Yona_Rape">
+		<Performer id="HF_Man_Yona_Rape" minVersion="0.1.4">
 			<Scopes>
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
@@ -117,7 +117,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Man_FemaleNative_Rape_Grapple_Pregnant">
+		<Performer id="HF_Man_FemaleNative_Rape_Grapple_Pregnant" minVersion="0.1.7">
 			<Scopes>
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
@@ -151,7 +151,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Man_NativeGirl_Rape_Fainted">
+		<Performer id="HF_Man_NativeGirl_Rape_Fainted" dlc="true">
 			<Scopes>
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>
@@ -185,7 +185,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_Man_NativeGirl_Rape_Grapple">
+		<Performer id="HF_Man_NativeGirl_Rape_Grapple" dlc="true">
 			<Scopes>
 				<Scope>Battle</Scope>
 				<Scope>Sex</Scope>

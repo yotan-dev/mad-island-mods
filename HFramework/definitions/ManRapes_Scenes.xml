@@ -73,6 +73,7 @@
 						<Condition xsi:type="JokeCheck" value="true" />
 					</StartConditions>
 				</Performer>
+				<Performer id="HF_Man_UnderGroundWoman_Rape" />
 				<Performer id="HF_Man_Mummy_Rape" />
 				<Performer id="HF_Man_ElderSisterNative_Rape" />
 				<Performer id="HF_Man_Shino_Rape">

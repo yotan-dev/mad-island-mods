@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using HFramework.ConfigFiles;
+using YotanModCore;
 
 namespace HFramework.Performer
 {
@@ -23,6 +24,11 @@ namespace HFramework.Performer
 		private static XmlSerializer? Serializer = null;
 
 		public static Dictionary<string, SexPerformerInfo> Performers = [];
+
+		/// <summary>
+		/// Performer IDs skipped due to not being available in the current game context
+		/// </summary>
+		public static List<string> SkippedPerformers = [];
 
 		internal static void RegisterHFPrefabSelectors()
 		{
@@ -70,6 +76,20 @@ namespace HFramework.Performer
 		/// <param name="performerConfig"></param>
 		public static void AddPerformerFromConfig(PerformerConfig performerConfig)
 		{
+			if (performerConfig.DLC && !GameInfo.HasDLC)
+			{
+				PLogger.LogDebug($"Skipping Performer {performerConfig.Id} because it is only available in DLC mode");
+				SkippedPerformers.Add(performerConfig.Id);
+				return;
+			}
+
+			if (GameInfo.ToVersion(performerConfig.MinVersion ?? "0.0.0") > GameInfo.GameVersion)
+			{
+				PLogger.LogDebug($"Skipping Performer {performerConfig.Id} because it requires a newer version (minVersion: {performerConfig.MinVersion})");
+				SkippedPerformers.Add(performerConfig.Id);
+				return;
+			}
+
 			string errorMessage = "";
 			var builder = new SexPerformerInfoBuilder(performerConfig.Id);
 

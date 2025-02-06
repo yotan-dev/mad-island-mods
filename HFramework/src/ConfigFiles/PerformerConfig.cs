@@ -12,6 +12,12 @@ namespace HFramework.ConfigFiles
 		[XmlAttribute(AttributeName = "id")]
 		public string Id { get; set; } = "NO ID";
 
+		[XmlAttribute(AttributeName = "minVersion")]
+		public string? MinVersion { get; set; } = "0.0.0";
+
+		[XmlAttribute(AttributeName = "dlc")]
+		public bool DLC { get; set; } = false;
+
 		[XmlArray(ElementName = "Scopes")]
 		[XmlArrayItem(ElementName = "Scope")]
 		public PerformerScope[] Scopes { get; set; } = [];

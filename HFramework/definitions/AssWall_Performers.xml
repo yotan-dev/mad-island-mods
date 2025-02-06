@@ -40,7 +40,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_AssWall_Man_NativeGirl">
+		<Performer id="HF_AssWall_Man_NativeGirl" dlc="true">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -102,7 +102,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_AssWall_Man_UnderGroundWoman">
+		<Performer id="HF_AssWall_Man_UnderGroundWoman" minVersion="0.2.2">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
@@ -133,7 +133,7 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
-		<Performer id="HF_AssWall_Man_ElderSisterNative">
+		<Performer id="HF_AssWall_Man_ElderSisterNative" minVersion="0.2.2">
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
