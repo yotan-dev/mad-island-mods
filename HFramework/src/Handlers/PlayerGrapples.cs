@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using HFramework.Performer;
 using HFramework.Scenes;
 using Spine.Unity;
 using UnityEngine;
@@ -17,6 +19,10 @@ namespace HFramework.Handlers
 		private readonly CommonStates Player;
 
 		private readonly CommonStates Girl;
+
+		private string LoopAnimationName;
+
+		private string AttackAnimationName;
 
 		public ManPlayerGrapples(IScene scene, SkeletonAnimation animation, CommonStates player, CommonStates girl) : base(scene)
 		{
@@ -70,6 +76,26 @@ namespace HFramework.Handlers
 			limitTime = 5f + num2;
 		}
 
+		private void SetMix(SexPerformer performer)
+		{
+			var loopAction = performer.CurrentSet.Actions.GetValueOrDefault(new ActionKey(ActionType.Battle, performer.CurrentPose), null);
+			var attackAction = performer.CurrentSet.Actions.GetValueOrDefault(new ActionKey(ActionType.Attack, performer.CurrentPose), null);
+
+			if (loopAction?.AnimationName != null)
+				this.LoopAnimationName = this.Scene.ExpandAnimationName(loopAction.AnimationName);
+
+			if (attackAction?.AnimationName != null)
+				this.AttackAnimationName = this.Scene.ExpandAnimationName(attackAction.AnimationName);
+
+			if (loopAction?.AnimationName != null && attackAction?.AnimationName != null)
+			{
+				this.Anim.state.Data.SetMix(
+					this.LoopAnimationName,
+					this.AttackAnimationName,
+					0f
+				);
+			}
+		}
 
 		protected override IEnumerator Run()
 		{
@@ -83,10 +109,12 @@ namespace HFramework.Handlers
 			breakTime.fillAmount = 1f;
 
 			var performer = this.Scene.GetPerformer();
-			// string attackAnimName = sexType + "Attack_attack";
+			// string this.AttackAnimationName = sexType + "Attack_attack";
+			this.SetMix(performer);
+
 			while (animTime > 0f && this.Girl.faint > 0.0 && this.Scene.CanContinue())
 			{
-				bool flag = false;
+				bool shouldAttack = false;
 				animTime -= Time.deltaTime;
 				breakTime.fillAmount = animTime / limitTime;
 				if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
@@ -94,33 +122,26 @@ namespace HFramework.Handlers
 
 				if (tmpAutoTime <= 0f)
 				{
-					flag = true;
+					shouldAttack = true;
 					tmpAutoTime = autoTime;
 					this.Girl.StunDamage(this.Player, tmpDamage, true);
 				}
-
+				
+				// Unfortunately we simply can't use Perfomer.PerformBg here, yielding will make the animation stutter...
 				if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 				{
-					flag = true;
+					shouldAttack = true;
 					this.Girl.StunDamage(this.Player, tmpDamage, true);
 				}
-				else if (
-					performer.HasAction(Performer.ActionType.Attack)
-					&& performer.CurrentAction == Performer.ActionType.Attack
-					&& !performer.IsPerformanceRunning()
-				)
+				else if (this.Anim.skeleton.Data.FindAnimation(this.AttackAnimationName) != null && this.Anim.AnimationName == this.AttackAnimationName && this.Anim.AnimationState.GetCurrent(0).TrackTime >= this.Anim.state.GetCurrent(0).AnimationEnd)
 				{
-					performer.PerformBg(Performer.ActionType.Battle);
+					this.Anim.state.SetAnimation(0, this.LoopAnimationName, true);
 				}
 
 
-				if (
-					performer.HasAction(Performer.ActionType.Attack)
-					&& performer.CurrentAction != Performer.ActionType.Attack
-					&& flag
-				)
+				if (this.Anim.skeleton.Data.FindAnimation(this.AttackAnimationName) != null && this.Anim.AnimationName != this.AttackAnimationName && shouldAttack)
 				{
-					performer.PerformBg(Performer.ActionType.Attack);
+					this.Anim.state.SetAnimation(0, this.AttackAnimationName, false);
 				}
 
 				yield return null;
