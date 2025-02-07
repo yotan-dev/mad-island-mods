@@ -12,7 +12,9 @@ namespace HFramework.Hook
 
 		private HookType Type = HookType.None;
 
-		private string[] SceneNames = { "*" };
+		private string[] SceneNames = ["*"];
+
+		private Func<HookMemory> MemorizeHandler;
 
 		private string Target = "";
 
@@ -28,6 +30,34 @@ namespace HFramework.Hook
 		public static HookBuilder New(string uid)
 		{
 			return new HookBuilder(uid);
+		}
+
+		private void RegisterMemorizer()
+		{
+			if (this.MemorizeHandler == null)
+				return;
+
+			string hookPrefix;
+			switch (this.Type)
+			{
+				case HookType.StepStart:
+					hookPrefix = "StepStart";
+					break;
+				case HookType.StepEnd:
+					hookPrefix = "StepEnd";
+					break;
+				case HookType.Event:
+					hookPrefix = "Event";
+					break;
+				default:
+					throw new System.Exception("Invalid hook type");
+			}
+
+			foreach (var sceneName in this.SceneNames)
+			{
+				var fullTarget = $"{hookPrefix}::{sceneName}::{this.Target}";
+				HookManager.Instance.AddMemorizer(fullTarget, this.MemorizeHandler);
+			}
 		}
 
 		public HookBuilder ForScenes(params string[] sceneNames)
@@ -66,6 +96,16 @@ namespace HFramework.Hook
 			return this;
 		}
 
+		public HookBuilder Memorize(Func<HookMemory> handler)
+		{
+			if (this.MemorizeHandler != null)
+				throw new System.Exception("A hook can only have one memorizer");
+
+			this.MemorizeHandler = handler;
+
+			return this;
+		}
+
 		public void Call(Func<IScene, object, IEnumerator> handler)
 		{
 			string hookPrefix;
@@ -94,6 +134,8 @@ namespace HFramework.Hook
 				else
 					HookManager.Instance.AddHook(fullTarget, this.UID, handler);
 			}
+
+			this.RegisterMemorizer();
 		}
 
 		public void CallBefore(string beforeUID, Func<IScene, object, IEnumerator> handler)
@@ -106,6 +148,11 @@ namespace HFramework.Hook
 		{
 			this.BeforeUID = afterUID;
 			this.Call(handler);
+		}
+
+		public void Set()
+		{
+			this.RegisterMemorizer();
 		}
 	}
 }

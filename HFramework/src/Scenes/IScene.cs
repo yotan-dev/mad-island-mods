@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
 
@@ -15,5 +16,7 @@ namespace HFramework.Scenes
 		SkeletonAnimation GetSkelAnimation();
 		string ExpandAnimationName(string originalName);
 		SexPerformer GetPerformer();
+		void AddHookMemory(HookMemory memory);
+		HookMemory GetHookMemory(string uid);
 	}
 }
