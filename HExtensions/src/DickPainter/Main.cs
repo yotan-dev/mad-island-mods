@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using HFramework.Hook;
-using HFramework.ParamContainers;
 using HFramework.Scenes;
 using Spine.Unity;
 using UnityEngine;
-using YotanModCore.Consts;
 
 namespace HExtensions.DickPainter
 {
@@ -15,6 +13,8 @@ namespace HExtensions.DickPainter
 	/// </summary>
 	public class Main
 	{
+		private const string MemoryId = "HExt.VirginMemory";
+
 		public void Init()
 		{
 			HookManager.RegisterHooksEvent += () => this.InitHooks();
@@ -127,19 +127,9 @@ namespace HExtensions.DickPainter
 				.Call(this.OnStart);
 
 			HookBuilder.New("HExt.DickPainter.Penetrate")
-				.ForScenes(
-					AssWall.Name,
-					CommonSexNPC.Name,
-					CommonSexPlayer.Name,
-					Daruma.Name,
-					ManRapes.Name,
-					ManRapesSleep.Name,
-					PlayerRaped.Name,
-					Slave.Name,
-					Toilet.Name
-				)
 				.HookEvent(EventNames.OnPenetrateVag)
-				.CallBefore("*", this.OnPenetrate);
+				.Memorize(() => new VirginMemory(MemoryId))
+				.Call(this.OnPenetrate);
 		}
 
 		private IEnumerator OnStart(IScene scene, object param)
@@ -174,31 +164,26 @@ namespace HExtensions.DickPainter
 
 		private IEnumerator OnPenetrate(IScene scene, object param)
 		{
-			FromToParams? fromTo = param as FromToParams?;
-			if (!fromTo.HasValue || fromTo.Value.To == null)
+			var memory = scene.GetHookMemory(MemoryId) as VirginMemory;
+			if (memory == null || memory.IsVirgin == false)
+				yield break;
+		
+			var performerId = scene.GetPerformer()?.Info?.Id ?? "";
+			if (performerId == "")
 				yield break;
 
-			if (fromTo.Value.To.sexInfo[SexInfoIndex.FirstSex] == -1)
+			if (!this.VirginJuices.ContainsKey(performerId))
+				yield break;
+
+			foreach (var juice in this.VirginJuices[performerId])
 			{
-				var performerId = scene.GetPerformer()?.Info?.Id ?? "";
-				if (performerId == "")
-					yield break;
+				var slot = scene.GetSkelAnimation()?.skeleton?.FindSlot(juice) ?? null;
+				if (slot == null)
+					continue;
 
-				if (!this.VirginJuices.ContainsKey(performerId))
-					yield break;
-
-				foreach (var juice in this.VirginJuices[performerId])
-				{
-					var slot = scene.GetSkelAnimation()?.skeleton?.FindSlot(juice) ?? null;
-					if (slot == null)
-						continue;
-
-					var baseColor = slot.GetColor();
-					slot.SetColor(Utils.AlphaBlend(baseColor, new Color32(255, 0, 0, 255), 1f));
-				}
+				var baseColor = slot.GetColor();
+				slot.SetColor(Utils.AlphaBlend(baseColor, new Color32(255, 0, 0, 255), 1f));
 			}
-
-			yield break;
 		}
 	}
 }
