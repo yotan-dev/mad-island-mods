@@ -96,21 +96,16 @@ namespace HFramework.Scenes
 		private GameObject GetScene(PerformerScope scope)
 		{
 			GameObject scene = null;
-			this.Performer = ScenesManager.Instance.GetPerformer(this, scope, this.Controller);
+			// For Rape, order of actors matters, and Rapist always comes first, even if they are a girl.
+			this.Performer = ScenesManager.Instance.GetPerformer(this, scope, this.Controller, [this.Rapist, this.Player]);
 			if (this.Performer != null)
 				scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 
 			return scene;
 		}
 
-		private bool SetupFightScene()
+		private void SetCharacter()
 		{
-			var scene = this.GetScene(PerformerScope.Battle);
-			if (scene == null)
-				return false;
-
-			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Player.gameObject.transform.position, Quaternion.identity);
-
 			// Setup TmpSex
 			if (this.Player.npcID == NpcID.Yona)
 			{
@@ -130,13 +125,24 @@ namespace HFramework.Scenes
 				if (this.Rapist.npcID == NpcID.Mummy)
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
-					Managers.mn.randChar.LoadMummy(this.Player, this.TmpSex);
+					Managers.mn.randChar.LoadMummy(this.Rapist, this.TmpSex);
 				}
 				else
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Rapist, this.Player);
 				}
 			}
+		}
+
+		private bool SetupFightScene()
+		{
+			var scene = this.GetScene(PerformerScope.Battle);
+			if (scene == null)
+				return false;
+
+			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Player.gameObject.transform.position, Quaternion.identity);
+
+			this.SetCharacter();
 
 			this.PrepareNpc(this.Rapist, out this.RapistMove);
 			this.DisableLiveNpc(this.Rapist, this.RapistMove);
@@ -158,10 +164,7 @@ namespace HFramework.Scenes
 			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Player.gameObject.transform.position, Quaternion.identity);
 
 			// This is a made up logic. originally SetupSexScene only happens for Man x Large Female
-			if (this.Player.npcID == NpcID.Man)
-				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Rapist, this.Player);
-			else
-				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Rapist);
+			this.SetCharacter();
 		}
 
 		private IEnumerator PerformGrapple()
