@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -22,6 +23,8 @@ namespace HFramework.Scenes
 		protected bool Destroyed = false;
 
 		private string CurrentLongLivedStepName = "";
+
+		protected Dictionary<string, HookMemory> HookMemories = [];
 
 		public BaseScene(string name)
 		{
@@ -119,6 +122,22 @@ namespace HFramework.Scenes
 			yield return runner();
 
 			yield return HookManager.Instance.RunStepEndHook(this, stepName);
+		}
+
+		public void AddHookMemory(HookMemory memory)
+		{
+			if (this.HookMemories.ContainsKey(memory.UID))
+			{
+				PLogger.LogWarning($"HookMemory with UID {memory.UID} already exists, overwriting...");
+				this.HookMemories.Remove(memory.UID);
+			}
+
+			this.HookMemories.Add(memory.UID, memory);
+		}
+
+		public HookMemory GetHookMemory(string uid)
+		{
+			return this.HookMemories.GetValueOrDefault(uid);
 		}
 	}
 }

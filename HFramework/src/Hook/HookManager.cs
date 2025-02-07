@@ -44,14 +44,31 @@ namespace HFramework.Hook
 
 		private Dictionary<string, HookQueue> HookDict = new Dictionary<string, HookQueue>();
 
+		private Dictionary<string, List<Func<HookMemory>>> MemorizerDict = [];
+
 		private HookManager()
 		{
 			GameLifecycleEvents.OnGameStartEvent += () =>
 			{
 				this.HookDict.Clear();
+				this.MemorizerDict.Clear();
 				HookManager.RegisterHooksEvent?.Invoke();
 			};
-			GameLifecycleEvents.OnGameEndEvent += () => this.HookDict.Clear();
+			GameLifecycleEvents.OnGameEndEvent += () => {
+				this.HookDict.Clear();
+				this.MemorizerDict.Clear();
+			};
+		}
+
+		public void AddMemorizer(string target, Func<HookMemory> memorizer)
+		{
+			if (!this.MemorizerDict.TryGetValue(target, out var list))
+			{
+				list = new List<Func<HookMemory>>();
+				this.MemorizerDict.Add(target, list);
+			}
+
+			list.Add(memorizer);
 		}
 
 		public void AddHook(string target, string uid, Func<IScene, object, IEnumerator> handler)
@@ -102,6 +119,28 @@ namespace HFramework.Hook
 				queue.Remove(uid);
 		}
 
+		private IEnumerator SaveHookMemory(IScene scene, string target, object param)
+		{
+			PLogger.LogDebug($"SetHookMemory: Running target - {target}");
+			if (!this.MemorizerDict.TryGetValue(target, out var list))
+				yield break;
+
+			foreach (var memorizer in list)
+			{
+				var memoryInstance = memorizer();
+				var existing = scene.GetHookMemory(memoryInstance.UID);
+
+				if (existing != null)
+					memoryInstance = existing;
+
+				PLogger.LogDebug($"SetHookMemory: Running UID - {memoryInstance.UID}");
+				memoryInstance.Save(scene, param);
+
+				if (existing == null)
+					scene.AddHookMemory(memoryInstance);
+			}
+		}
+
 		private IEnumerator RunHooks(IScene scene, string target, object param)
 		{
 			PLogger.LogDebug($"RunHooks: Running target - {target}");
@@ -120,6 +159,11 @@ namespace HFramework.Hook
 			var prefix = "StepStart";
 			var sceneName = scene.GetName();
 
+			yield return this.SaveHookMemory(scene, $"{prefix}::{sceneName}::{stepName}", null);
+			yield return this.SaveHookMemory(scene, $"{prefix}::{sceneName}::*", null);
+			yield return this.SaveHookMemory(scene, $"{prefix}::*::{stepName}", null);
+			yield return this.SaveHookMemory(scene, $"{prefix}::*::*", null);
+
 			yield return this.RunHooks(scene, $"{prefix}::{sceneName}::{stepName}", null);
 			yield return this.RunHooks(scene, $"{prefix}::{sceneName}::*", null);
 			yield return this.RunHooks(scene, $"{prefix}::*::{stepName}", null);
@@ -131,6 +175,11 @@ namespace HFramework.Hook
 			var prefix = "StepEnd";
 			var sceneName = scene.GetName();
 
+			yield return this.SaveHookMemory(scene, $"{prefix}::{sceneName}::{stepName}", null);
+			yield return this.SaveHookMemory(scene, $"{prefix}::{sceneName}::*", null);
+			yield return this.SaveHookMemory(scene, $"{prefix}::*::{stepName}", null);
+			yield return this.SaveHookMemory(scene, $"{prefix}::*::*", null);
+
 			yield return this.RunHooks(scene, $"{prefix}::{sceneName}::{stepName}", null);
 			yield return this.RunHooks(scene, $"{prefix}::{sceneName}::*", null);
 			yield return this.RunHooks(scene, $"{prefix}::*::{stepName}", null);
@@ -141,6 +190,11 @@ namespace HFramework.Hook
 		{
 			var prefix = "Event";
 			var sceneName = scene.GetName();
+
+			yield return this.SaveHookMemory(scene, $"{prefix}::{sceneName}::{eventName}", param);
+			yield return this.SaveHookMemory(scene, $"{prefix}::{sceneName}::*", param);
+			yield return this.SaveHookMemory(scene, $"{prefix}::*::{eventName}", param);
+			yield return this.SaveHookMemory(scene, $"{prefix}::*::*", param);
 
 			yield return this.RunHooks(scene, $"{prefix}::{sceneName}::{eventName}", param);
 			yield return this.RunHooks(scene, $"{prefix}::{sceneName}::*", param);
