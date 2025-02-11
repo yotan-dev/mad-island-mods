@@ -7,7 +7,7 @@ custom hooking engine that gives modders a considerable amount of control for cu
 
 It still has some limitation due to how the game works, but it should give more freedom for mod development.
 
-You can see some use cases in [HExtensions](../HExtensions/README.md) and [Gallery plugins](../Gallery/README.md).
+You can see some use cases in [HExtensions](../HExtensions/) and [Gallery plugins](../Gallery/).
 
 
 # Getting started
@@ -365,7 +365,7 @@ flowchart LR
 
 ## Sex
 
-> ![NOTE]
+> [!NOTE]
 > Several of those actions are very eventual, like Pee only really happening on Toilet,
 > or Speed3 being very rare.
 
