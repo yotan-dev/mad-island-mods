@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using UnityEngine;
 
 namespace HExtensions
@@ -24,6 +24,8 @@ namespace HExtensions
 
 			if (HExtensions.Config.Instance.EnableExtendedScenes.Value)
 				new ExtendedScenes.Main().Init();
+
+			new MoreScenes.Main().Init();
 
 			PLogger.LogInfo($"Plugin HExtensions is loaded!");
 		}
