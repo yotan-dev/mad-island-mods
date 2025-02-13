@@ -31,7 +31,7 @@ namespace Gallery.Handlers
 					&& !performer.IsPerformanceRunning()
 				)
 				{
-					performer.PerformBg(HFramework.Performer.ActionType.Battle);
+					yield return performer.PerformBg(HFramework.Performer.ActionType.Battle);
 				}
 
 
@@ -41,7 +41,7 @@ namespace Gallery.Handlers
 					&& flag
 				)
 				{
-					performer.PerformBg(HFramework.Performer.ActionType.Attack);
+					yield return performer.PerformBg(HFramework.Performer.ActionType.Attack);
 				}
 
 				yield return null;
