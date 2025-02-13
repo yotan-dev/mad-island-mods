@@ -5,7 +5,6 @@ using HFramework.Performer;
 using HFramework.Scenes;
 using HarmonyLib;
 using YotanModCore.Events;
-
 namespace HFramework
 {
 	
@@ -33,6 +32,7 @@ namespace HFramework
 				Harmony.CreateAndPatchAll(typeof(SexManager_ToiletPatch));
 
 				Harmony.CreateAndPatchAll(typeof(SexChecksPatch));
+				Harmony.CreateAndPatchAll(typeof(TranspilePlayerCheck));
 
 				GameLifecycleEvents.OnGameStartEvent += () => { SexMeter.Instance.Reload(); };
 				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;

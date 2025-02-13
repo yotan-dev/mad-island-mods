@@ -4,6 +4,7 @@ using HFramework.Performer;
 using HFramework.Scenes;
 using HarmonyLib;
 using YotanModCore;
+using YotanModCore.Consts;
 
 namespace HFramework.Patches
 {
@@ -16,7 +17,10 @@ namespace HFramework.Patches
 			__result = false;
 
 			if (!Managers.mn.npcMN.IsActiveFriend(to))
+			{
+				PLogger.LogDebug($"SexCheck: {from.charaName} -> {to.charaName} is not a friend");
 				return false;
+			}
 
 			var actors = Utils.SortActors(from, to);
 
@@ -30,6 +34,7 @@ namespace HFramework.Patches
 				sceneInfo = ScenesManager.Instance.GetSceneInfo(CommonSexNPC.Name);
 
 			__result = sceneInfo?.CanStart(PerformerScope.Sex, realFrom, realTo) ?? false;
+			PLogger.LogDebug($"SexCheck({sceneInfo?.Name}): {from.charaName} -> {to.charaName} = {__result}");
 
 			return false;
 		}
@@ -71,6 +76,32 @@ namespace HFramework.Patches
 			}
 
 			return true;
+		}
+
+		[HarmonyPatch(typeof(NPCManager), nameof(NPCManager.LoveLoveCheck))]
+		[HarmonyPostfix]
+		private static bool Post_NPCManager_LoveLoveCheck(bool result, CommonStates commonA, CommonStates commonB)
+		{
+			// This is a check where we want to know if commonB accepts sex from commonA
+
+			var sexTo = commonB;
+			var sexFrom = commonA;
+
+			// Player characters doesn't track love by default, so swap them so we can get the love of the NPC only.
+			// @TODO: Can we improve that?
+			if (sexTo.npcID == NpcID.Yona || sexTo.npcID == NpcID.Man)
+			{
+				var temp = sexTo;
+				sexTo = sexFrom;
+				sexFrom = temp;
+			}
+
+			int loversID = Managers.mn.npcMN.GetLoversID(sexTo, sexFrom.friendID);
+			float loveVal = -1;
+			if (loversID != -1)
+				loveVal = sexTo.lovers[loversID].love;
+
+			return loveVal >= 50f;
 		}
 	}
 }
