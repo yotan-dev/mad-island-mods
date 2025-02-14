@@ -8,8 +8,8 @@ namespace Gallery.SaveFile.Containers
 
 		public ToiletNPCInteraction() {}
 
-		public ToiletNPCInteraction(GalleryChara npc1, GalleryChara npc2, SexPlace.SexPlaceType type, int grade)
-			: base(npc1, npc2) {
+		public ToiletNPCInteraction(string performerId, GalleryChara npc1, GalleryChara npc2, SexPlace.SexPlaceType type, int grade)
+			: base(performerId, npc1, npc2) {
 			this.PlaceType = type;
 			this.ToiletGrade = grade;
 		}

@@ -36,6 +36,7 @@ namespace Gallery.Patches.CommonSexPlayer
 				{
 					case CommonSexPlayerState.Start:
 						Tracker = new CommonSexPlayerTracker(pCommon, nCommon, sexType);
+						Tracker.LoadPerformerId();
 						GalleryScenesManager.Instance.AddTrackerForCommon(pCommon, Tracker);
 						GalleryScenesManager.Instance.AddTrackerForCommon(nCommon, Tracker);
 						break;

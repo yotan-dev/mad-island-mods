@@ -36,6 +36,7 @@ namespace Gallery.Patches
 				GalleryLogger.SceneStart("PlayerRaped", GetChars(from, to), GetInfos());
 				
 				Tracker = new PlayerRapedTracker(to, from);
+				Tracker.LoadPerformerId();
 				GalleryScenesManager.Instance.AddTrackerForCommon(from, Tracker);
 				GalleryScenesManager.Instance.AddTrackerForCommon(to, Tracker);
 			} catch (Exception error) {

@@ -1,16 +1,17 @@
-using YotanModCore;
-
 namespace Gallery.SaveFile.Containers
 {
 	public class CharacterInteraction
 	{
+		public string PerformerId { get; set; }
+
 		public GalleryChara Character1 { get; set; }
 
 		public GalleryChara Character2 { get; set; }
 
 		public CharacterInteraction() {}
 
-		public CharacterInteraction(GalleryChara npc1, GalleryChara npc2) {
+		public CharacterInteraction(string performerId, GalleryChara npc1, GalleryChara npc2) {
+			this.PerformerId = performerId;
 			this.Character1 = npc1;
 			this.Character2 = npc2;
 		}

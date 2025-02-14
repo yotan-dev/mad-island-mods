@@ -26,6 +26,7 @@ namespace Gallery.Patches
 				GalleryLogger.SceneStart("ManRapes", Getcharas(girl, man), new Dictionary<string, string>());
 
 				var tracker = new ManRapesTracker(man, girl);
+				tracker.LoadPerformerId();
 				GalleryScenesManager.Instance.AddTrackerForCommon(man, tracker);
 				GalleryScenesManager.Instance.AddTrackerForCommon(girl, tracker);
 			} catch (Exception error) {

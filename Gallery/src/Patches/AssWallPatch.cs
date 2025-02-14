@@ -42,6 +42,7 @@ namespace Gallery.Patches
 			
 				if (state == AssWallState.Start && tmpWall != null) {
 					Tracker = new AssWallTracker(player, girl, tmpWall.type);
+					Tracker.LoadPerformerId();
 					GalleryScenesManager.Instance.AddTrackerForCommon(player, Tracker);
 					GalleryScenesManager.Instance.AddTrackerForCommon(girl, Tracker);
 				}

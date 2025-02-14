@@ -22,7 +22,12 @@ namespace Gallery.GalleryScenes.Toilet
 				return;
 			}
 
-			new ToiletController().Unlock([this.User, this.Target]);
+			new ToiletController().Unlock(this.PerformerId, [this.User, this.Target]);
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(ToiletController), [this.User, this.Target]);
 		}
 	}
 }

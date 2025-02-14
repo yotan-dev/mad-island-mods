@@ -15,13 +15,16 @@ namespace Gallery.GalleryScenes.ToiletNpc
 
 		public int Grade;
 
-		public override void Unlock(GalleryChara[] charas)
+		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 2)
 			{
 				PLogger.LogError($"ToiletNpcController: Not enough actors. Expected 2, got {charas.Length}");
 				return;
 			}
+
+			if (!this.EnsurePerformer(performerId))
+				return;
 
 			var desc = $"{charas[0]} x {charas[1]} (Grade: {this.Grade}, Place Type: {this.PlaceType})";
 
@@ -34,7 +37,7 @@ namespace Gallery.GalleryScenes.ToiletNpc
 
 			PLogger.LogInfo($"ToiletNpcController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.ToiletNpc.Add(
-				new ToiletNPCInteraction(charas[0], charas[1], this.PlaceType, this.Grade)
+				new ToiletNPCInteraction(performerId, charas[0], charas[1], this.PlaceType, this.Grade)
 			);
 		}
 
@@ -48,7 +51,27 @@ namespace Gallery.GalleryScenes.ToiletNpc
 
 			return GalleryState.Instance.ToiletNpc.Any((interaction) =>
 			{
-				return interaction.Character1.Id == actors[0].NpcId
+				return interaction.PerformerId == this.PerformerId
+					&& interaction.Character1.Id == actors[0].NpcId
+					&& interaction.Character2.Id == actors[1].NpcId
+					&& interaction.PlaceType == this.PlaceType
+					&& interaction.ToiletGrade == this.Grade
+					;
+			});
+		}
+
+		public override bool IsUnlocked(string performerId, GalleryActor[] actors)
+		{
+			if (actors.Length < 2)
+			{
+				PLogger.LogError($"ToiletNpcController: Not enough actors. Expected 2, got {actors.Length}");
+				return false;
+			}
+
+			return GalleryState.Instance.ToiletNpc.Any((interaction) =>
+			{
+				return interaction.PerformerId == performerId
+					&& interaction.Character1.Id == actors[0].NpcId
 					&& interaction.Character2.Id == actors[1].NpcId
 					&& interaction.PlaceType == this.PlaceType
 					&& interaction.ToiletGrade == this.Grade

@@ -33,13 +33,18 @@ namespace Gallery.GalleryScenes.Slave
 		{
 			if (this.Busted)
 			{
-				new SlaveController().Unlock([this.Player, this.Girl]);
+				new SlaveController().Unlock(this.PerformerId, [this.Player, this.Girl]);
 			}
 			else
 			{
 				var desc = $"{this.Player} x {this.Girl}";
 				GalleryLogger.LogDebug($"SlaveSceneTracker#OnEnd: 'Busted' ({this.Busted}) not set -- event NOT unlocked for {desc}");
 			}
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(SlaveController), [this.Player, this.Girl]);
 		}
 	}
 }

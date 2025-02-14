@@ -16,13 +16,16 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 
 		public SexManager.SexCountState SexType;
 
-		public override void Unlock(GalleryChara[] charas)
+		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 2)
 			{
 				PLogger.LogError($"CommonSexNPCController: Not enough actors. Expected 2, got {charas.Length}");
 				return;
 			}
+
+			if (!this.EnsurePerformer(performerId))
+				return;
 
 			var desc = $"{charas[0]} x {charas[1]} (Grade: {this.PlaceGrade}, Place Type: {this.PlaceType}, Sex Type: {this.SexType})";
 
@@ -35,7 +38,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 
 			PLogger.LogInfo($"CommonSexNPCController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.CommonSexNpc.Add(
-				new NpcSexInteractions(charas[0], charas[1], this.SexType, this.PlaceType, this.PlaceGrade)
+				new NpcSexInteractions(performerId, charas[0], charas[1], this.SexType, this.PlaceType, this.PlaceGrade)
 			);
 		}
 
@@ -49,7 +52,28 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 
 			return GalleryState.Instance.CommonSexNpc.Any((interaction) =>
 			{
-				return interaction.Character1.Id == actors[0].NpcId
+				return interaction.PerformerId == this.PerformerId
+					&& interaction.Character1.Id == actors[0].NpcId
+					&& interaction.Character2.Id == actors[1].NpcId
+					&& interaction.PlaceGrade == this.PlaceGrade
+					&& interaction.PlaceType == this.PlaceType
+					&& interaction.SexType == this.SexType
+					;
+			});
+		}
+
+		public override bool IsUnlocked(string performerId, GalleryActor[] actors)
+		{
+			if (actors.Length < 2)
+			{
+				PLogger.LogError($"CommonSexNPCController: Not enough actors. Expected 2, got {actors.Length}");
+				return false;
+			}
+
+			return GalleryState.Instance.CommonSexNpc.Any((interaction) =>
+			{
+				return interaction.PerformerId == performerId
+					&& interaction.Character1.Id == actors[0].NpcId
 					&& interaction.Character2.Id == actors[1].NpcId
 					&& interaction.PlaceGrade == this.PlaceGrade
 					&& interaction.PlaceType == this.PlaceType

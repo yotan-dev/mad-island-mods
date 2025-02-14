@@ -22,13 +22,18 @@ namespace Gallery.GalleryScenes.Daruma
 		{
 			if (this.Raped && this.Busted)
 			{
-				new DarumaController().Unlock([this.Player, this.Girl]);
+				new DarumaController().Unlock(this.PerformerId, [this.Player, this.Girl]);
 			}
 			else
 			{
 				var desc = $"{this.Player} x {this.Girl}";
 				GalleryLogger.LogDebug($"DarumaSceneTracker#OnEnd: 'Raped' ({this.Raped}) or 'Busted' ({this.Busted}) not set -- event NOT unlocked for {desc}");
 			}
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(DarumaController), [this.Player, this.Girl]);
 		}
 	}
 }

@@ -26,7 +26,6 @@ namespace Gallery
 			
 			Gallery.Config.Instance.Init(Config);
 			GalleryLogger.Init();
-			GalleryScenesManager.Init();
 
 			// If using Extended H-System replace mode, we don't have to patch the original code
 			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value) {
@@ -58,7 +57,8 @@ namespace Gallery
 			Harmony.CreateAndPatchAll(typeof(TitleScreenPatch));
 			Harmony.CreateAndPatchAll(typeof(UseLivePlacePatch));
 			Harmony.CreateAndPatchAll(typeof(GalleryScenePatch));
-		
+
+			GalleryScenesManager.Instance.LoadGallery();
 			GalleryState.Load();
 
 			PLogger.LogInfo($"Plugin Gallery is loaded!");

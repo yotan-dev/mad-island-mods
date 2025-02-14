@@ -46,8 +46,9 @@ namespace Gallery.Patches
 
 				if (common.employ != CommonStates.Employ.None)
 				{
-					var scene = new OnaniTracker(common);
-					GalleryScenesManager.Instance.AddTrackerForCommon(common, scene);
+					var tracker = new OnaniTracker(common);
+					tracker.LoadPerformerId();
+					GalleryScenesManager.Instance.AddTrackerForCommon(common, tracker);
 				}
 				else
 				{

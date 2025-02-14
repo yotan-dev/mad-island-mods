@@ -15,6 +15,7 @@
 						<Actor val="FemaleNative#15" />
 					</Actors>
 					<Controller xsi:type="AssWallController">
+						<PerformerId>HF_AssWall_Man_FemaleNative</PerformerId>
 						<Prop>gen_asswall_00</Prop>
 						<WallType>Toilet</WallType>
 					</Controller>
@@ -27,6 +28,7 @@
 						<Actor val="NativeGirl#16" />
 					</Actors>
 					<Controller xsi:type="AssWallController">
+						<PerformerId>HF_AssWall_Man_NativeGirl</PerformerId>
 						<Prop>gen_asswall_00</Prop>
 						<WallType>Toilet</WallType>
 					</Controller>
@@ -39,6 +41,7 @@
 						<Actor val="FemaleLargeNative#17" />
 					</Actors>
 					<Controller xsi:type="AssWallController">
+						<PerformerId>HF_AssWall_Man_FemaleLargeNative</PerformerId>
 						<Prop>gen_asswall_00</Prop>
 						<WallType>Toilet</WallType>
 					</Controller>
@@ -51,6 +54,7 @@
 						<Actor val="UnderGroundWoman#44" />
 					</Actors>
 					<Controller xsi:type="AssWallController">
+						<PerformerId>HF_AssWall_Man_UnderGroundWoman</PerformerId>
 						<Prop>gen_asswall_00</Prop>
 						<WallType>Toilet</WallType>
 					</Controller>
@@ -63,6 +67,7 @@
 						<Actor val="ElderSisterNative#90" />
 					</Actors>
 					<Controller xsi:type="AssWallController">
+						<PerformerId>HF_AssWall_Man_ElderSisterNative</PerformerId>
 						<Prop>gen_asswall_00</Prop>
 						<WallType>Toilet</WallType>
 					</Controller>
@@ -80,6 +85,7 @@
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_MaleNative_FemaleNative_Friendly_Doggy_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -92,6 +98,7 @@
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_FemaleNative_FemaleNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -104,6 +111,7 @@
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_FemaleNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -116,6 +124,7 @@
 						<Actor val="FemaleNative#15" pregnant="true" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_FemaleNative_Friendly_Pregnant</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -130,6 +139,7 @@
 						<Actor val="NativeGirl#16" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_MaleNative_NativeGirl_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -142,6 +152,7 @@
 						<Actor val="NativeGirl#16" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_NativeGirl_NativeGirl_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -154,6 +165,7 @@
 						<Actor val="NativeGirl#16" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_NativeGirl_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -168,6 +180,7 @@
 						<Actor val="FemaleLargeNative#17" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_FemaleLargeNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -182,6 +195,7 @@
 						<Actor val="UnderGroundWoman#44" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_UnderGroundWoman_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -196,6 +210,7 @@
 						<Actor val="ElderSisterNative#90" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_ElderSisterNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -215,6 +230,7 @@
 						<Actor val="Reika#5" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Reika_Friendly_Cowgirl</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -226,6 +242,7 @@
 						<Actor val="Reika#5" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Reika_Friendly_RevCowgirl</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>1</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -239,6 +256,7 @@
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_FemaleNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -250,6 +268,7 @@
 						<Actor val="FemaleNative#15" pregnant="true" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_FemaleNative_Friendly_Pregnant</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -263,6 +282,7 @@
 						<Actor val="NativeGirl#16" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_NativeGirl_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -276,6 +296,7 @@
 						<Actor val="FemaleLargeNative#17" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -287,6 +308,7 @@
 						<Actor val="FemaleLargeNative#17" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_FemaleLargeNative_Friendly_Doggy_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>1</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -300,6 +322,7 @@
 						<Actor val="Mummy#42" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Mummy_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -313,6 +336,7 @@
 						<Actor val="UnderGroundWoman#44" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_UnderGroundWoman_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -326,6 +350,7 @@
 						<Actor val="Giant#110" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Giant_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -339,6 +364,7 @@
 						<Actor val="Mermaid#71" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Mermaid_Friendly_TittyFuck</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -350,6 +376,7 @@
 						<Actor val="Mermaid#71" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Mermaid_Friendly_Fuck</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>1</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -363,6 +390,7 @@
 						<Actor val="ElderSisterNative#90" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_ElderSisterNative_Friendly_Doggy_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -376,6 +404,7 @@
 						<Actor val="Cassie2#113" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Cassie2_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -389,6 +418,7 @@
 						<Actor val="Sally#115" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Sally_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -402,6 +432,7 @@
 						<Actor val="Merry#116" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Merry_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -415,6 +446,7 @@
 						<Actor val="Shino#114" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Shino_Friendly_TittyFuck</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>1</SpecialFlag>
@@ -426,6 +458,7 @@
 						<Actor val="Shino#114" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Shino_Friendly_Fuck</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -439,6 +472,7 @@
 						<Actor val="Yona#0" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_MaleNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -452,6 +486,7 @@
 						<Actor val="Yona#0" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_BigNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -465,6 +500,7 @@
 						<Actor val="Yona#0" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_SmallNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -478,6 +514,7 @@
 						<Actor val="Yona#0" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_ElderBrotherNative_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -496,6 +533,7 @@
 						<Actor val="FemaleNative#15" />
 					</Actors>
 					<Controller xsi:type="DarumaController">
+						<PerformerId>HF_Man_FemaleNative_Daruma</PerformerId>
 						<Prop>deco_labo_cushion_01</Prop>
 					</Controller>
 				</Scene>
@@ -507,6 +545,7 @@
 						<Actor val="NativeGirl#16" />
 					</Actors>
 					<Controller xsi:type="DarumaController">
+						<PerformerId>HF_Man_NativeGirl_Daruma</PerformerId>
 						<Prop>deco_labo_cushion_01</Prop>
 					</Controller>
 				</Scene>
@@ -521,7 +560,9 @@
 					<Actors>
 						<Actor val="FemaleNative#15" pregnant="true" />
 					</Actors>
-					<Controller xsi:type="DeliveryController" />
+					<Controller xsi:type="DeliveryController">
+						<PerformerId>HF_FemaleNative_Delivery</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Native Girl -->
@@ -529,7 +570,9 @@
 					<Actors>
 						<Actor val="NativeGirl#16" pregnant="true" />
 					</Actors>
-					<Controller xsi:type="DeliveryController" />
+					<Controller xsi:type="DeliveryController">
+						<PerformerId>HF_NativeGirl_Delivery</PerformerId>
+					</Controller>
 				</Scene>
 			</Scenes>
 		</Group>
@@ -543,7 +586,9 @@
 						<Actor val="Man#1" />
 						<Actor val="Yona#0" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Female Native -->
@@ -552,21 +597,27 @@
 						<Actor val="Man#1" />
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_FemaleNative_Rape_Grapple</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc0] rapes [npc1] (Fainted)">
 					<Actors>
 						<Actor val="Man#1" />
 						<Actor val="FemaleNative#15" pregnant="false" fainted="true" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_FemaleNative_Rape_Fainted</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc0] rapes [npc1] (Pregant)" minVersion="0.1.7">
 					<Actors>
 						<Actor val="Man#1" />
 						<Actor val="FemaleNative#15" pregnant="true" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_FemaleNative_Rape_Grapple_Pregnant</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Native Girl -->
@@ -575,14 +626,18 @@
 						<Actor val="Man#1" />
 						<Actor val="NativeGirl#16" pregnant="false" fainted="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_NativeGirl_Rape_Grapple</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc0] rapes [npc1] (Fainted)" dlc="true">
 					<Actors>
 						<Actor val="Man#1" />
 						<Actor val="NativeGirl#16" pregnant="false" fainted="true" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_NativeGirl_Rape_Fainted</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Female Large Native -->
@@ -591,7 +646,9 @@
 						<Actor val="Man#1" />
 						<Actor val="FemaleLargeNative#17" pregnant="false" fainted="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_FemaleLargeNative_Rape</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Old Woman Nativee -->
@@ -600,7 +657,9 @@
 						<Actor val="Man#1" />
 						<Actor val="OldWomanNative#19" pregnant="false" fainted="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_OldWomanNative_Rape</PerformerId>
+					</Controller>
 				</Scene>
 				
 				<!-- Mummy -->
@@ -609,7 +668,9 @@
 						<Actor val="Man#1" />
 						<Actor val="Mummy#42" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_Mummy_Rape</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Underground Woman -->
@@ -618,7 +679,9 @@
 						<Actor val="Man#1" />
 						<Actor val="UnderGroundWoman#44" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_UnderGroundWoman_Rape</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Elder Sister Native -->
@@ -627,7 +690,9 @@
 						<Actor val="Man#1" />
 						<Actor val="ElderSisterNative#90" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_ElderSisterNative_Rape</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Shino -->
@@ -636,7 +701,9 @@
 						<Actor val="Man#1" />
 						<Actor val="Shino#114" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManRapesController" />
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_Shino_Rape</PerformerId>
+					</Controller>
 				</Scene>
 			</Scenes>
 		</Group>
@@ -650,7 +717,9 @@
 						<Actor val="Man#1" />
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManSleepRapeController" />
+					<Controller xsi:type="ManSleepRapeController">
+						<PerformerId>HF_Man_FemaleNative_SleepRape_Normal</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Native Girl -->
@@ -659,7 +728,9 @@
 						<Actor val="Man#1" />
 						<Actor val="NativeGirl#16" pregnant="false" />
 					</Actors>
-					<Controller xsi:type="ManSleepRapeController" />
+					<Controller xsi:type="ManSleepRapeController">
+						<PerformerId>HF_Man_NativeGirl_SleepRape_Normal</PerformerId>
+					</Controller>
 				</Scene>
 			</Scenes>
 		</Group>
@@ -673,6 +744,7 @@
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="OnaniController">
+						<PerformerId>HF_Onani_FemaleNative_Normal</PerformerId>
 						<Perfume>false</Perfume>
 					</Controller>
 				</Scene>
@@ -681,6 +753,7 @@
 						<Actor val="FemaleNative#15" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="OnaniController">
+						<PerformerId>HF_Onani_FemaleNative_Perfume</PerformerId>
 						<Perfume>true</Perfume>
 					</Controller>
 				</Scene>
@@ -696,56 +769,72 @@
 						<Actor val="Yona#0" />
 						<Actor val="MaleNative#10" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_MaleNative_Yona_Rape_Doggy_Normal</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
 						<Actor val="BigNative#11" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_BigNative_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
 						<Actor val="Bigfoot#25" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_Bigfoot_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
 						<Actor val="Werewolf#35" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_Werewolf_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
 						<Actor val="Oldguy#100" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_Oldguy_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
 						<Actor val="Spike#101" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_Spike_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
 						<Actor val="Planton#103" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_Planton_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
 						<Actor val="BossNative#104" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_BossNative_Yona_Rape</PerformerId>
+					</Controller>
 				</Scene>
 
 				<!-- Man -->
@@ -754,14 +843,19 @@
 						<Actor val="Man#1" />
 						<Actor val="Mummy#42" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<PerformerId>HF_Mummy_Man_Rape_Battle_Sex</PerformerId>
+					</Controller>
 				</Scene>
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Man#1" />
 						<Actor val="FemaleLargeNative#17" />
 					</Actors>
-					<Controller xsi:type="PlayerRapedController" />
+					<Controller xsi:type="PlayerRapedController">
+						<!-- HF_FemaleLargeNative_Man_Rape_Battle is used earlier, but the final one is Rape_Sex -->
+						<PerformerId>HF_FemaleLargeNative_Man_Rape_Sex</PerformerId>
+					</Controller>
 				</Scene>
 			</Scenes>
 		</Group>
@@ -775,6 +869,7 @@
 						<Actor val="Giant#110" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="SlaveController">
+						<PerformerId>HF_Slave_Man_Giant</PerformerId>
 						<Prop>slave_giant_01</Prop>
 					</Controller>
 				</Scene>
@@ -784,6 +879,7 @@
 						<Actor val="Shino#114" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="SlaveController">
+						<PerformerId>HF_Slave_Man_Shino</PerformerId>
 						<Prop>slave_shino_01</Prop>
 					</Controller>
 				</Scene>
@@ -793,6 +889,7 @@
 						<Actor val="Sally#115" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="SlaveController">
+						<PerformerId>HF_Slave_Man_Sally</PerformerId>
 						<Prop>slave_sally_01</Prop>
 					</Controller>
 				</Scene>
@@ -809,6 +906,7 @@
 						<Actor val="FemaleNative#15" />
 					</Actors>
 					<Controller xsi:type="ToiletController">
+						<PerformerId>HF_Toilet_Man_FemaleNative</PerformerId>
 						<Prop>gen_toilet_01</Prop>
 					</Controller>
 				</Scene>
@@ -820,6 +918,7 @@
 						<Actor val="NativeGirl#16" />
 					</Actors>
 					<Controller xsi:type="ToiletController">
+						<PerformerId>HF_Toilet_Man_NativeGirl</PerformerId>
 						<Prop>gen_toilet_01</Prop>
 					</Controller>
 				</Scene>
@@ -831,6 +930,7 @@
 						<Actor val="FemaleLargeNative#17" />
 					</Actors>
 					<Controller xsi:type="ToiletController">
+						<PerformerId>HF_Toilet_Man_FemaleLargeNative</PerformerId>
 						<Prop>gen_toilet_01</Prop>
 					</Controller>
 				</Scene>
@@ -842,6 +942,7 @@
 						<Actor val="UnderGroundWoman#44" />
 					</Actors>
 					<Controller xsi:type="ToiletController">
+						<PerformerId>HF_Toilet_Man_UnderGroundWoman</PerformerId>
 						<Prop>gen_toilet_01</Prop>
 					</Controller>
 				</Scene>
@@ -853,6 +954,7 @@
 						<Actor val="ElderSisterNative#90" />
 					</Actors>
 					<Controller xsi:type="ToiletController">
+						<PerformerId>HF_Toilet_Man_ElderSisterNative</PerformerId>
 						<Prop>gen_toilet_01</Prop>
 					</Controller>
 				</Scene>

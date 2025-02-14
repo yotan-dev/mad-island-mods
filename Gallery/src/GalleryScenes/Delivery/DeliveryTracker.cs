@@ -15,9 +15,14 @@ namespace Gallery.GalleryScenes.Delivery
 		public override void End()
 		{
 			if (this.DidDelivery)
-				new DeliveryController().Unlock([this.Mother]);
+				new DeliveryController().Unlock(this.PerformerId, [this.Mother]);
 			else
 				GalleryLogger.LogDebug($"DeliverySceneEventHandler: OnEnd: 'DidDelivery' not set -- event NOT unlocked for {this.Mother}");
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(DeliveryController), [this.Mother]);
 		}
 	}
 }

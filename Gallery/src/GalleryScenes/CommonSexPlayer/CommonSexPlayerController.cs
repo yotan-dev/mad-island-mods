@@ -14,13 +14,16 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 		
 		public int SpecialFlag;
 
-		public override void Unlock(GalleryChara[] charas)
+		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 2)
 			{
 				PLogger.LogError($"CommonSexPlayerController: Not enough actors. Expected 2, got {charas.Length}");
 				return;
 			}
+
+			if (!this.EnsurePerformer(performerId))
+				return;
 
 			var desc = $"{charas[0]} x {charas[1]} (Sex Type: {this.SexType}, Special Flag: {this.SpecialFlag})";
 
@@ -33,7 +36,7 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 
 			PLogger.LogInfo($"CommonSexPlayerController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.CommonSexPlayer.Add(
-				new CommonSexPlayerInteraction(charas[0], charas[1], this.SexType, this.SpecialFlag)
+				new CommonSexPlayerInteraction(performerId, charas[0], charas[1], this.SexType, this.SpecialFlag)
 			);
 		}
 
@@ -47,7 +50,29 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 
 			return GalleryState.Instance.CommonSexPlayer.Any((interaction) =>
 			{
-				return interaction.Character1.Id == actors[0].NpcId
+				return interaction.PerformerId == this.PerformerId
+					&& interaction.Character1.Id == actors[0].NpcId
+					&& interaction.Character1.IsPregnant == actors[0].Pregnant
+					&& interaction.Character2.Id == actors[1].NpcId
+					&& interaction.Character2.IsPregnant == actors[1].Pregnant
+					&& interaction.SexType == this.SexType
+					&& interaction.SpecialFlag == this.SpecialFlag
+					;
+			});
+		}
+
+		public override bool IsUnlocked(string performerId, GalleryActor[] actors)
+		{
+			if (actors.Length < 2)
+			{
+				PLogger.LogError($"CommonSexPlayerController: Not enough actors. Expected 2, got {actors.Length}");
+				return false;
+			}
+
+			return GalleryState.Instance.CommonSexPlayer.Any((interaction) =>
+			{
+				return interaction.PerformerId == performerId
+					&& interaction.Character1.Id == actors[0].NpcId
 					&& interaction.Character1.IsPregnant == actors[0].Pregnant
 					&& interaction.Character2.Id == actors[1].NpcId
 					&& interaction.Character2.IsPregnant == actors[1].Pregnant

@@ -61,6 +61,7 @@ namespace Gallery.Patches
 				}
 
 				var tracker = new CommonSexNPCTracker(npcA, npcB, sexPlace, sexType);
+				tracker.LoadPerformerId();
 				GalleryScenesManager.Instance.AddTrackerForCommon(npcA, tracker);
 				GalleryScenesManager.Instance.AddTrackerForCommon(npcB, tracker);
 			}

@@ -24,7 +24,12 @@ namespace Gallery.GalleryScenes.Onani
 				return;
 			}
 
-			new OnaniController() { Perfume = this.Perfume }.Unlock([this.Npc]);
+			new OnaniController() { Perfume = this.Perfume }.Unlock(this.PerformerId, [this.Npc]);
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(OnaniController), [this.Npc]);
 		}
 	}
 }

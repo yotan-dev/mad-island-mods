@@ -65,7 +65,12 @@ namespace Gallery.GalleryScenes.ManSleepRape
 				return;
 			}
 
-			new ManSleepRapeController().Unlock([this.Man, this.Girl]);
+			new ManSleepRapeController().Unlock(this.PerformerId, [this.Man, this.Girl]);
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(ManSleepRapeController), [this.Man, this.Girl]);
 		}
 	}
 }

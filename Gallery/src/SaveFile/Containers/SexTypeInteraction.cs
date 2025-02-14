@@ -6,8 +6,8 @@ namespace Gallery.SaveFile.Containers
 
 		public SexTypeInteraction() { }
 
-		public SexTypeInteraction(GalleryChara npc1, GalleryChara npc2, T sexType)
-			: base(npc1, npc2) {
+		public SexTypeInteraction(string performerId, GalleryChara npc1, GalleryChara npc2, T sexType)
+			: base(performerId, npc1, npc2) {
 			this.SexType = sexType;
 		}
 

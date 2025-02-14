@@ -21,12 +21,17 @@ namespace Gallery.GalleryScenes.PlayerRaped
 		{
 			if (this.Raped)
 			{
-				new PlayerRapedController().Unlock([this.Player, this.Rapist]);
+				new PlayerRapedController().Unlock(this.PerformerId, [this.Player, this.Rapist]);
 			}
 			else
 			{
 				GalleryLogger.LogDebug($"PlayerRapedTracker: AfterRape: 'DidRape' not set -- event NOT unlocked for {Rapist}");
 			}
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(PlayerRapedController), [this.Rapist, this.Player]);
 		}
 	}
 }

@@ -103,7 +103,8 @@ namespace Gallery.GalleryScenes.ToiletNpc
 			this.runningScenes.Remove(info.User.friendID);
 			
 			if (scene.DidToilet && scene.DidCreampie) {
-				new ToiletNpcController() { Grade = scene.PlaceGrade, PlaceType = scene.PlaceType }.Unlock([scene.User, scene.Target]);
+				// @TODO: Missing performer
+				new ToiletNpcController() { Grade = scene.PlaceGrade, PlaceType = scene.PlaceType }.Unlock("", [scene.User, scene.Target]);
 			} else {
 				var desc = $"{scene.User} x {scene.Target} (Grade: {scene.PlaceGrade}, Place Type: {scene.PlaceType})";
 				GalleryLogger.LogDebug($"ToiletNpcSceneTracker#OnEnd: 'DidCreampie'/'DidToilet' not set -- event NOT unlocked for {desc}");
