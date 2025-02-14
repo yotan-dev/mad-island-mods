@@ -6,8 +6,8 @@ namespace Gallery.SaveFile.Containers
 
 		public OnaniInteraction() {}
 
-		public OnaniInteraction(GalleryChara npc, bool perfume)
-			: base(npc) {
+		public OnaniInteraction(string performerId, GalleryChara npc, bool perfume)
+			: base(performerId, npc) {
 			this.Perfume = perfume;
 		}
 

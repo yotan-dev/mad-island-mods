@@ -222,8 +222,16 @@ namespace Gallery
 
 		private IEnumerator OnSceneEnd(IScene scene, object arg2)
 		{
-			Trackers.GetValueOrDefault(scene, null)?.End();
+			var tracker = Trackers.GetValueOrDefault(scene, null);
+
+			if (tracker != null)
+			{
+				tracker.PerformerId = scene.GetPerformer().Info.Id;
+				tracker.End();
+			}
+
 			Trackers.Remove(scene);
+
 			yield break;
 		}
 

@@ -14,13 +14,16 @@ namespace Gallery.GalleryScenes.ManRapes
 		
 		public int SpecialFlag;
 
-		public override void Unlock(GalleryChara[] charas)
+		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 2)
 			{
 				PLogger.LogError($"ManRapesController: Not enough actors. Expected 2, got {charas.Length}");
 				return;
 			}
+
+			if (!this.EnsurePerformer(performerId))
+				return;
 
 			var desc = $"{charas[0]} x {charas[1]} (Sex Type: {this.SexType}, Special Flag: {this.SpecialFlag})";
 
@@ -33,7 +36,7 @@ namespace Gallery.GalleryScenes.ManRapes
 
 			PLogger.LogInfo($"ManRapesController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.ManRapes.Add(
-				new ManRapesInteraction(charas[0], charas[1])
+				new ManRapesInteraction(performerId, charas[0], charas[1])
 			);
 		}
 
@@ -47,7 +50,27 @@ namespace Gallery.GalleryScenes.ManRapes
 
 			return GalleryState.Instance.ManRapes.Any((interaction) =>
 			{
-				return interaction.Character1.Id == actors[0].NpcId
+				return interaction.PerformerId == this.PerformerId
+					&& interaction.Character1.Id == actors[0].NpcId
+					&& interaction.Character2.Id == actors[1].NpcId
+					&& interaction.Character2.IsPregnant == actors[1].Pregnant
+					&& interaction.Character2.IsFainted == actors[1].Fainted
+					;
+			});
+		}
+
+		public override bool IsUnlocked(string performerId, GalleryActor[] actors)
+		{
+			if (actors.Length < 2)
+			{
+				PLogger.LogError($"ManRapesController: Not enough actors. Expected 2, got {actors.Length}");
+				return false;
+			}
+
+			return SaveFile.GalleryState.Instance.ManRapes.Any((interaction) =>
+			{
+				return interaction.PerformerId == performerId
+					&& interaction.Character1.Id == actors[0].NpcId
 					&& interaction.Character2.Id == actors[1].NpcId
 					&& interaction.Character2.IsPregnant == actors[1].Pregnant
 					&& interaction.Character2.IsFainted == actors[1].Fainted

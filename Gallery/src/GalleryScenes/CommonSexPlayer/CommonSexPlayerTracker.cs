@@ -1,5 +1,6 @@
-using Gallery.GalleryScenes.CommonSexNPC;
 using Gallery.SaveFile.Containers;
+using YotanModCore;
+using YotanModCore.Consts;
 
 namespace Gallery.GalleryScenes.CommonSexPlayer
 {
@@ -39,11 +40,19 @@ namespace Gallery.GalleryScenes.CommonSexPlayer
 			};
 
 			if (this.SpecialFlag > 0 && this.Busted)
-				ctrler.Unlock([this.Player, this.Npc]);
+				ctrler.Unlock(this.PerformerId, [this.Player, this.Npc]);
 			else if (this.SpecialFlag == 0 && this.DidCreampie && this.DidNormal)
-				ctrler.Unlock([this.Player, this.Npc]);
+				ctrler.Unlock(this.PerformerId, [this.Player, this.Npc]);
 			else
 				GalleryLogger.LogDebug($"CommonSexPlayerSceneTracker#OnEnd: Conditions not matched (SpecialFlag: {this.SpecialFlag}) / DidNormal: {this.DidNormal} / DidCreampie: {this.DidCreampie} / Busted: {this.Busted}) -- event NOT unlocked for {this.Npc}");
+		}
+
+		public void LoadPerformerId()
+		{
+			if (this.Player.Id == NpcID.Man)
+				this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(CommonSexPlayerController), [this.Player, this.Npc]);
+			else
+				this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(CommonSexPlayerController), [this.Npc, this.Player]);
 		}
 	}
 }

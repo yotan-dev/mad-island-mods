@@ -6,8 +6,8 @@ namespace Gallery.SaveFile.Containers
 
 		public StoryInteraction() { }
 
-		public StoryInteraction(GalleryChara npc1, GalleryChara npc2, StoryFlag flag)
-			: base(npc1, npc2) {
+		public StoryInteraction(string performerId, GalleryChara npc1, GalleryChara npc2, StoryFlag flag)
+			: base(performerId, npc1, npc2) {
 			this.Flag = flag;
 		}
 

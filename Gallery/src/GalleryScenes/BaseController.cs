@@ -32,13 +32,28 @@ namespace Gallery.GalleryScenes
 	{
 		protected IScene Scene { get; set; }
 
+		public string PerformerId { get; set; }
+
 		public string Prop { get; set; }
 
-		public abstract void Unlock(GalleryChara[] charas);
+		public abstract void Unlock(string performerId, GalleryChara[] charas);
 
 		public abstract bool IsUnlocked(GalleryActor[] actors);
+		
+		public abstract bool IsUnlocked(string performerId, GalleryActor[] actors);
 
 		protected abstract IEnumerator GetScene(PlayData playData);
+
+		protected bool EnsurePerformer(string performerId)
+		{
+			if (!GalleryScenesManager.Instance.HasPerformerForController(this.GetType(), performerId))
+			{
+				PLogger.LogInfo($"Skipping because {performerId} does not exists for {this.GetType()}");
+				return false;
+			}
+
+			return true;
+		}
 
 		public IEnumerator Play(PlayData playData)
 		{

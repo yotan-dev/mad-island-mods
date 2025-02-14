@@ -34,6 +34,7 @@ namespace Gallery.Patches
 					var player = CommonUtils.GetActivePlayer();
 					var girl = Managers.mn.inventory.itemSlot[50].common;
 					Tracker = new DarumaTracker(player, girl);
+					Tracker.LoadPerformerId();
 					
 					GalleryScenesManager.Instance.AddTrackerForCommon(player, Tracker);
 					GalleryScenesManager.Instance.AddTrackerForCommon(girl, Tracker);

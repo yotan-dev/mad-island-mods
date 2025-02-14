@@ -4,8 +4,8 @@ namespace Gallery.SaveFile.Containers
 	{
 		public ManRapesInteraction() {}
 
-		public ManRapesInteraction(GalleryChara npc1, GalleryChara npc2)
-			: base(npc1, npc2) {
+		public ManRapesInteraction(string performerId, GalleryChara npc1, GalleryChara npc2)
+			: base(performerId, npc1, npc2) {
 		}
 
 		public override bool Equals(object obj)

@@ -39,6 +39,7 @@ namespace Gallery.Patches
 				GalleryLogger.SceneStart("Delivery", GetChars(common), GetInfos(tmpWorkPlace, tmpSexPlace));
 
 				var tracker = new DeliveryTracker(common);
+				tracker.LoadPerformerId();
 				GalleryScenesManager.Instance.AddTrackerForCommon(common, tracker);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("Delivery", error);

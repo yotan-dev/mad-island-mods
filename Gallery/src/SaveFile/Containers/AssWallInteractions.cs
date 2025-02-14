@@ -6,8 +6,8 @@ namespace Gallery.SaveFile.Containers
 
 		public AssWallInteractions() {}
 
-		public AssWallInteractions(GalleryChara npc1, GalleryChara npc2, InventorySlot.Type type)
-			: base(npc1, npc2) {
+		public AssWallInteractions(string performerId, GalleryChara npc1, GalleryChara npc2, InventorySlot.Type type)
+			: base(performerId, npc1, npc2) {
 			this.WallType = type;
 		}
 

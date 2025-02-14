@@ -13,7 +13,7 @@ namespace Gallery.GalleryScenes.AssWall
 	{
 		public InventorySlot.Type WallType { get; set; }
 
-		public override void Unlock(GalleryChara[] charas)
+		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 2)
 			{
@@ -21,10 +21,13 @@ namespace Gallery.GalleryScenes.AssWall
 				return;
 			}
 
+			if (!this.EnsurePerformer(performerId))
+				return;
+
 			var desc = $"{charas[0]} x {charas[1]} (Wall Type: {this.WallType})";
 
 			var actors = new GalleryActor[2] { new(charas[0]), new(charas[1]) };
-			if (this.IsUnlocked(actors))
+			if (this.IsUnlocked(performerId, actors))
 			{
 				PLogger.LogInfo($"AssWallController: Already unlocked: {desc}");
 				return;
@@ -32,7 +35,7 @@ namespace Gallery.GalleryScenes.AssWall
 
 			PLogger.LogInfo($"AssWallController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.AssWall.Add(
-				new AssWallInteractions(charas[0], charas[1], this.WallType)
+				new AssWallInteractions(performerId, charas[0], charas[1], this.WallType)
 			);
 		}
 
@@ -46,7 +49,26 @@ namespace Gallery.GalleryScenes.AssWall
 
 			return GalleryState.Instance.AssWall.Any((interaction) =>
 			{
-				return interaction.Character1.Id == actors[0].NpcId
+				return interaction.PerformerId == this.PerformerId
+					&& interaction.Character1.Id == actors[0].NpcId
+					&& interaction.Character2.Id == actors[1].NpcId
+					&& interaction.WallType == this.WallType
+					;
+			});
+		}
+
+		public override bool IsUnlocked(string performerId, GalleryActor[] actors)
+		{
+			if (actors.Length < 2)
+			{
+				PLogger.LogError($"AssWallController: Not enough actors. Expected 2, got {actors.Length}");
+				return false;
+			}
+
+			return GalleryState.Instance.AssWall.Any((interaction) =>
+			{
+				return interaction.PerformerId == performerId
+					&& interaction.Character1.Id == actors[0].NpcId
 					&& interaction.Character2.Id == actors[1].NpcId
 					&& interaction.WallType == this.WallType
 					;

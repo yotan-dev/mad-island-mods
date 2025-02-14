@@ -51,6 +51,7 @@ namespace Gallery.Patches
 				switch (state_) {
 				case ToiletState.Start:
 					Tracker = new ToiletTracker(chars["user"], chars["target"]);
+					Tracker.LoadPerformerId();
 					GalleryScenesManager.Instance.AddTrackerForCommon(chars["user"], Tracker);
 					GalleryScenesManager.Instance.AddTrackerForCommon(chars["target"], Tracker);
 					break;

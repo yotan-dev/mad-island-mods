@@ -39,6 +39,7 @@ namespace Gallery.Patches
 				switch (state) {
 				case ManRapesState.Start: // Starting
 					Tracker = new ManSleepRapeTracker(man, girl);
+					Tracker.LoadPerformerId();
 					GalleryScenesManager.Instance.AddTrackerForCommon(man, Tracker);
 					GalleryScenesManager.Instance.AddTrackerForCommon(girl, Tracker);
 					break;

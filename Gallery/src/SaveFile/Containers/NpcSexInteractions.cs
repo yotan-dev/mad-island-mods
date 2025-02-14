@@ -9,13 +9,14 @@ namespace Gallery.SaveFile.Containers
 		public NpcSexInteractions() { }
 
 		public NpcSexInteractions(
+			string performerId,
 			GalleryChara npc1,
 			GalleryChara npc2,
 			SexManager.SexCountState sexType,
 			SexPlace.SexPlaceType placeType,
 			int placeGrade
 		)
-			: base(npc1, npc2) {
+			: base(performerId, npc1, npc2) {
 			this.SexType = sexType;
 			this.PlaceType = placeType;
 			this.PlaceGrade = placeGrade;

@@ -10,13 +10,16 @@ namespace Gallery.GalleryScenes.Delivery
 {
 	public class DeliveryController : BaseController
 	{
-		public override void Unlock(GalleryChara[] charas)
+		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 1)
 			{
 				PLogger.LogError($"DeliveryController: Not enough actors. Expected 1, got {charas.Length}");
 				return;
 			}
+
+			if (!this.EnsurePerformer(performerId))
+				return;
 
 			var desc = $"{charas[0]}";
 
@@ -29,7 +32,7 @@ namespace Gallery.GalleryScenes.Delivery
 
 			PLogger.LogInfo($"DeliveryController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.Delivery.Add(
-				new SelfInteraction(charas[0])
+				new SelfInteraction(performerId, charas[0])
 			);
 		}
 
@@ -43,7 +46,25 @@ namespace Gallery.GalleryScenes.Delivery
 
 			return GalleryState.Instance.Delivery.Any((interaction) =>
 			{
-				return interaction.Character1.Id == actors[0].NpcId
+				return interaction.PerformerId == this.PerformerId
+					&& interaction.Character1.Id == actors[0].NpcId
+					&& interaction.Character1.IsPregnant == actors[0].Pregnant
+					;
+			});
+		}
+
+		public override bool IsUnlocked(string performerId, GalleryActor[] actors)
+		{
+			if (actors.Length < 1)
+			{
+				PLogger.LogError($"DeliveryController: Not enough actors. Expected 1, got {actors.Length}");
+				return false;
+			}
+
+			return GalleryState.Instance.Delivery.Any((interaction) =>
+			{
+				return interaction.PerformerId == performerId
+					&& interaction.Character1.Id == actors[0].NpcId
 					&& interaction.Character1.IsPregnant == actors[0].Pregnant
 					;
 			});

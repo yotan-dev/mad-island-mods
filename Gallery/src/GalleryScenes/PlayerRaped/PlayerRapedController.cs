@@ -10,13 +10,16 @@ namespace Gallery.GalleryScenes.PlayerRaped
 {
 	public class PlayerRapedController : BaseController
 	{
-		public override void Unlock(GalleryChara[] charas)
+		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 2)
 			{
 				PLogger.LogError($"PlayerRapedController: Not enough actors. Expected 2, got {charas.Length}");
 				return;
 			}
+
+			if (!this.EnsurePerformer(performerId))
+				return;
 
 			var desc = $"{charas[0]} x {charas[1]}";
 
@@ -29,7 +32,7 @@ namespace Gallery.GalleryScenes.PlayerRaped
 
 			PLogger.LogInfo($"PlayerRapedController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.PlayerRaped.Add(
-				new CharacterInteraction(charas[0], charas[1])
+				new CharacterInteraction(performerId, charas[0], charas[1])
 			);
 		}
 
@@ -43,7 +46,25 @@ namespace Gallery.GalleryScenes.PlayerRaped
 
 			return GalleryState.Instance.PlayerRaped.Any((interaction) =>
 			{
-				return interaction.Character1.Id == actors[0].NpcId
+				return interaction.PerformerId == this.PerformerId
+					&& interaction.Character1.Id == actors[0].NpcId
+					&& interaction.Character2.Id == actors[1].NpcId
+					;
+			});
+		}
+
+		public override bool IsUnlocked(string performerId, GalleryActor[] actors)
+		{
+			if (actors.Length < 2)
+			{
+				PLogger.LogError($"PlayerRapedController: Not enough actors. Expected 2, got {actors.Length}");
+				return false;
+			}
+
+			return GalleryState.Instance.PlayerRaped.Any((interaction) =>
+			{
+				return interaction.PerformerId == performerId
+					&& interaction.Character1.Id == actors[0].NpcId
 					&& interaction.Character2.Id == actors[1].NpcId
 					;
 			});

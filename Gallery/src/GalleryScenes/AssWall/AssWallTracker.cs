@@ -25,13 +25,18 @@ namespace Gallery.GalleryScenes.AssWall
 		{
 			if (this.DidToilet && this.DidCreampie)
 			{
-				new AssWallController() { WallType = this.WallType }.Unlock([this.Player, this.Girl]);
+				new AssWallController() { WallType = this.WallType }.Unlock(this.PerformerId, [this.Player, this.Girl]);
 			}
 			else
 			{
 				var desc = $"{this.Player} x {this.Girl} (WallType: {this.WallType})";
 				GalleryLogger.LogDebug($"AssWallSceneTracker#OnEnd: 'DidToilet' ({this.DidToilet}) or 'DidCreampie' ({this.DidCreampie}) not set -- event NOT unlocked for {desc}");
 			}
+		}
+
+		public void LoadPerformerId()
+		{
+			this.PerformerId = GalleryScenesManager.Instance.FindPerformer(typeof(AssWallController), [this.Player, this.Girl]);
 		}
 	}
 }

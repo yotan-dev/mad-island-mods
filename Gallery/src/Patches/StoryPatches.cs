@@ -23,6 +23,7 @@ namespace Gallery.Patches
 		private static void TryUnlock(string description, GalleryChara charA, GalleryChara charB, StoryFlag flag)
 		{
 				var interaction = new StoryInteraction(
+					"",
 					charA,
 					charB,
 					flag
@@ -49,6 +50,7 @@ namespace Gallery.Patches
 			if (__instance.bossBattleState == BossBattleState.PlayerDefeated) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::BossCyborgLose",
 						new GalleryChara(Managers.mn?.gameMN?.playerCommons?[GameManager.selectPlayer]),
 						new GalleryChara(NpcID.Cassie),
 						StoryFlag.PlayerDefeatedByCyborg
@@ -59,6 +61,7 @@ namespace Gallery.Patches
 			} else if (__instance.bossBattleState == BossBattleState.BossDefeated) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::BossCyborgWin",
 						new GalleryChara(Managers.mn?.gameMN?.playerCommons?[GameManager.selectPlayer]),
 						new GalleryChara(NpcID.Cassie),
 						StoryFlag.PlayerDefeatsCyborg
@@ -289,6 +292,7 @@ namespace Gallery.Patches
 			if (__instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::DarumaLose",
 						new GalleryChara(NpcID.Yona),
 						new GalleryChara(NpcID.Dalman),
 						StoryFlag.PlayerDefeatedByDaruman
@@ -312,6 +316,7 @@ namespace Gallery.Patches
 			if (__instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::HunterLose",
 						new GalleryChara(NpcID.Yona),
 						new GalleryChara(NpcID.Bandana),
 						StoryFlag.PlayerDefeatedByHunters

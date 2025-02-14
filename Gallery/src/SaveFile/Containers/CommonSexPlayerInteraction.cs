@@ -8,8 +8,8 @@ namespace Gallery.SaveFile.Containers
 
 		public CommonSexPlayerInteraction() { }
 
-		public CommonSexPlayerInteraction(GalleryChara player, GalleryChara npc, int sexType, int specialFlag)
-			: base(player, npc) {
+		public CommonSexPlayerInteraction(string performerId, GalleryChara player, GalleryChara npc, int sexType, int specialFlag)
+			: base(performerId, player, npc) {
 			this.SexType = sexType;
 			this.SpecialFlag = specialFlag;
 		}

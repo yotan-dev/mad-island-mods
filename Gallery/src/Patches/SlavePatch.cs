@@ -43,6 +43,7 @@ namespace Gallery.Patches
 				if (state == 0)
 				{
 					Tracker = new SlaveTracker(CommonUtils.GetActivePlayer(), tmpSlave);
+					Tracker.LoadPerformerId();
 
 					GalleryScenesManager.Instance.AddTrackerForCommon(CommonUtils.GetActivePlayer(), Tracker);
 				}
