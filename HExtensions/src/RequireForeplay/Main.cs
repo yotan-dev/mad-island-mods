@@ -74,7 +74,7 @@ namespace HExtensions.RequireForeplay
 					string animName = actionValue.AnimationName;
 					float partialDuration = scene.GetSkelAnimation().skeleton.Data.FindAnimation(animName).Duration / 2;
 					
-					yield return new LoopAnimationForTime(scene, commonSexPlayer.CommonAnim, animName, partialDuration).Handle();
+					yield return new LoopAnimationForTime(scene, commonSexPlayer.GetSkelAnimation(), animName, partialDuration).Handle();
 				}
 				
 				Managers.mn.uiMN.StartCoroutine(Managers.mn.eventMN.GoCautionSt(commonSexPlayer.Npc.charaName + " refuses to continue."));
