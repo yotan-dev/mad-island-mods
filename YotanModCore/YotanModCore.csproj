@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>YotanModCore</AssemblyName>
 		<Product>Yotan Mod Core</Product>
-		<Version>1.5.0</Version>
+		<Version>1.6.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RestoreAdditionalProjectSources>
@@ -36,6 +36,9 @@
 		</Reference>
 		<Reference Include="Unity-TextMeshPro">
 			<HintPath>../Assemblies/Unity.TextMeshPro.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine-UI">
+			<HintPath>../Assemblies/UnityEngine.UI.dll</HintPath>
 		</Reference>
 	</ItemGroup>
 </Project>

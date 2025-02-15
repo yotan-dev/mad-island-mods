@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Gallery.GalleryScenes.Onani;
 using HarmonyLib;
+using YotanModCore.Consts;
 
 namespace Gallery.Patches
 {
@@ -45,8 +46,9 @@ namespace Gallery.Patches
 
 				if (common.employ != CommonStates.Employ.None)
 				{
-					var scene = new OnaniSceneEventHandler(common);
-					GalleryScenesManager.Instance.AddSceneHandlerForCommon(common, scene);
+					var tracker = new OnaniTracker(common);
+					tracker.LoadPerformerId();
+					GalleryScenesManager.Instance.AddTrackerForCommon(common, tracker);
 				}
 				else
 				{
@@ -63,6 +65,7 @@ namespace Gallery.Patches
 		[HarmonyPostfix]
 		private static IEnumerator Post_SexManager_OnaniNPC(IEnumerator result, CommonStates common, SexPlace sexPlace)
 		{
+			var masturbationCount = common.sexInfo[SexInfoIndex.Masturbation];
 			while (result.MoveNext())
 				yield return result.Current;
 
@@ -73,7 +76,12 @@ namespace Gallery.Patches
 			{
 				GalleryLogger.SceneEnd("OnaniNPC", GetChars(common), GetInfos(sexPlace));
 				if (common.employ != CommonStates.Employ.None)
-					GalleryScenesManager.Instance.GetSceneHandlerForCommon(common)?.AfterMasturbate(null, common);
+				{
+					var tracker = GalleryScenesManager.Instance.GetTrackerForCommon(common);
+					if (tracker != null && common.sexInfo[SexInfoIndex.Masturbation] > masturbationCount)
+						tracker.DidMasturbation = true;
+					tracker?.End();
+				}
 			}
 			catch (Exception error)
 			{
@@ -81,7 +89,7 @@ namespace Gallery.Patches
 			}
 			finally
 			{
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(common);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(common);
 			}
 		}
 	}

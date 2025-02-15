@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HF_ManRapes scene config.
+	This is when Man player grapples a NPC
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HF_ManRapes">
+			<Performers>
+				<Performer id="HF_Man_Yona_Rape">
+					<StartConditions>
+						<Condition xsi:type="FaintCheck" actor="Yona#0" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="FaintCheck" actor="Yona#0" value="true" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_FemaleNative_Rape_Fainted">
+					<StartConditions>
+						<Condition xsi:type="FaintCheck" actor="FemaleNative#15" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="FaintCheck" actor="FemaleNative#15" value="true" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_FemaleNative_Rape_Grapple">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_FemaleNative_Rape_Grapple_Pregnant">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_NativeGirl_Rape_Fainted">
+					<StartConditions>
+						<Condition xsi:type="FaintCheck" actor="NativeGirl#16" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="FaintCheck" actor="NativeGirl#16" value="true" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_NativeGirl_Rape_Grapple">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_FemaleLargeNative_Rape">
+					<StartConditions>
+						<Condition xsi:type="FaintCheck" actor="FemaleLargeNative#17" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_Man_FemaleLargeNative_Rape">
+					<StartConditions>
+						<Condition xsi:type="FriendCheck" actor="FemaleLargeNative#17" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_Man_OldWomanNative_Rape">
+					<StartConditions>
+						<Condition xsi:type="JokeCheck" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_Man_UnderGroundWoman_Rape" />
+				<Performer id="HF_Man_Mummy_Rape" />
+				<Performer id="HF_Man_ElderSisterNative_Rape" />
+				<Performer id="HF_Man_Shino_Rape">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_Shino" compare="eq" value="7" />
+					</StartConditions>
+				</Performer>
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>

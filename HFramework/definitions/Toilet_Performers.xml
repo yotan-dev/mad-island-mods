@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+	Performers for Toilet scenes
+	That's when Player fucks NPCs in the Toilet structure (where they are sit in)
+
+	!!! NOTE !!!
+	The Prefab Selector is somewat wrong, because the game actually connects
+	to the attached Toilet object, which is not covered by performers.
+-->
+<PerformersConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Performers>
+		<Performer id="HF_Toilet_Man_FemaleNative">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="3" objIndex="0" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="FemaleNative#15" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle2" />
+						<Animation action="IdlePee" play="Loop" name="A_idle_pee" />
+						<Animation action="Insert" play="Once" name="A_Start">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="InsertIdle" play="Loop" name="A_Start_idle" />
+						<Animation action="InsertPee" play="Loop" name="A_Start_pee" />
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Toilet_Man_NativeGirl" dlc="true">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="3" objIndex="1" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="NativeGirl#16" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle2" />
+						<Animation action="IdlePee" play="Loop" name="A_idle_pee" />
+						<Animation action="Insert" play="Once" name="A_Start">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="InsertIdle" play="Loop" name="A_Start_idle" />
+						<Animation action="InsertPee" play="Loop" name="A_Start_pee" />
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Toilet_Man_FemaleLargeNative">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="3" objIndex="0" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="FemaleLargeNative#17" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle2" />
+						<Animation action="IdlePee" play="Loop" name="A_idle_pee" />
+						<Animation action="Insert" play="Once" name="A_Start">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="InsertIdle" play="Loop" name="A_Start_idle" />
+						<Animation action="InsertPee" play="Loop" name="A_Start_pee" />
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Toilet_Man_UnderGroundWoman">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="3" objIndex="0" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="UnderGroundWoman#44" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle2" />
+						<Animation action="IdlePee" play="Loop" name="A_idle_pee" />
+						<Animation action="Insert" play="Once" name="A_Start">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="InsertIdle" play="Loop" name="A_Start_idle" />
+						<Animation action="InsertPee" play="Loop" name="A_Start_pee" />
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Toilet_Man_ElderSisterNative">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="3" objIndex="0" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="ElderSisterNative#90" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle2" />
+						<Animation action="IdlePee" play="Loop" name="A_idle_pee" />
+						<Animation action="Insert" play="Once" name="A_Start">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="InsertIdle" play="Loop" name="A_Start_idle" />
+						<Animation action="InsertPee" play="Loop" name="A_Start_pee" />
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+	</Performers>
+</PerformersConfig>

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+	Performers for Player Raped scenes
+	That's when a Player loses a fight and gets into a battle/rape.
+-->
+<PerformersConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Performers>
+		<Performer id="HF_MaleNative_Yona_Rape_Doggy_Normal">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" />
+			<Actors>
+				<Actor val="MaleNative#10" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_BigNative_Yona_Rape">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="11" />
+			<Actors>
+				<Actor val="BigNative#11" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Bigfoot_Yona_Rape">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="25" />
+			<Actors>
+				<Actor val="Bigfoot#25" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Werewolf_Yona_Rape">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="35" />
+			<Actors>
+				<Actor val="Werewolf#35" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Oldguy_Yona_Rape">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="100" />
+			<Actors>
+				<Actor val="Oldguy#100" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Spike_Yona_Rape">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="101" />
+			<Actors>
+				<Actor val="Spike#101" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Planton_Yona_Rape">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="103" />
+			<Actors>
+				<Actor val="Planton#103" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_BossNative_Yona_Rape">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="104" />
+			<Actors>
+				<Actor val="BossNative#104" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_FemaleLargeNative_Man_Rape_Battle">
+			<Scopes>
+				<Scope>Battle</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="8" objIndex="0" />
+			<Actors>
+				<Actor val="FemaleLargeNative#17" />
+				<Actor val="Man#1" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_FemaleLargeNative_Man_Rape_Sex">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="8" objIndex="1" />
+			<Actors>
+				<Actor val="FemaleLargeNative#17" />
+				<Actor val="Man#1" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Ass</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Ass</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Mummy_Man_Rape_Battle_Sex">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="6" />
+			<Actors>
+				<Actor val="Mummy#42" />
+				<Actor val="Man#1" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnHandJob</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+	</Performers>
+</PerformersConfig>

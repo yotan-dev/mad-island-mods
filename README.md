@@ -1,9 +1,21 @@
+> [!CAUTION]
+> This repository contains mods for the **ADULT GAME** Mad Island.
+>
+> Thus, **BEWARE** that when browsing this repository content you are likely to find text, code and _maybe_ images that are not suitable for a general audience.
+>
+> As much as possible, I tried to keep images either zipped or not in the repository at all, but be cautios.
+> 
+
 # Mad Island Mods
 
 Mods for Mad Island game.
 
 
 ## Before you begin
+
+> [!WARNING]
+> Read this before you continue. Don't report a bug to the developers if you can't reproduce it without mods.
+> 
 
 Before you start, you need to know and understand that:
 
@@ -51,7 +63,31 @@ If the mod mentions configuration, you should first start the game once so confi
 
 ### Yotan Mod Core
 
-This is an utility library for mods. Most mods require it, but it doesn't bring anything into the game by itself.
+This is main focused in being an utility library for mods. Additionally, adds some console commands.
+
+Most mods require it, but it doesn't bring almost anything into the game by itself.
+
+**Console commands:**
+
+By pressing enter to open the console, you can run the default commands and also additional ones added by YotanModCore (or other mods that uses it).
+
+YotanModCore commands:
+
+**Note:** whenever `[friendId]` is mentioned, it is optional and when not informed it will follow this order:
+
+1. Try to get selected NPC
+2. If no NPC is selected, selects active player
+
+- `/faint [friendId]`
+  - faints a character
+  - `[friendId]` is the target NPC friend ID
+- `/heal`, `/healhp`, `/healst`, `/healfood`, `/healwater` - heals player HP/Stamina/Food/Water (`/heal` heals everything)
+- `/makevirgin [friendId]`
+  - resets basic sex info so character is considered virgin again
+  - `[friendId]` is the target NPC friend ID
+- `/moral [value] [friendId]` - changes character moral to `value`
+- `/stun [value]` - overrides player stun damage to `value`. 0 disables it.
+
 
 **For mod developers:**
 
@@ -62,32 +98,41 @@ It will follow semantic versioning and I will write about deprecations/removals 
 Please let me know if you are depending on it :)
 
 
-### Extended H-System
+### HFramework
 
-This mod rewrites the H-scenes in a pluggable way. It does not include new scenes (yet), and by itself it doesn't change anything,
-but it allows modders (myself included) to do some stuff with the scenes.
+Rewrites the game H-Scenes/system into a pluggable framework. This allows modders to interact with the H-System and expand it much easily.
 
-You can configure whether you want it to replace the original scenes or not, but most mods will need you to replace it, and it is
-the default config. You can change that on `BepInEx/config/ExtendedHSystem.json`
+> [!WARNING]
+> When using the replacement mode (default), new scenes added to the game by the devs won't work until this mod is updated.
 
-I plan to make certain scenes that are specific to some moments available in other, but no promises here...
+By default, it will replace the developer shipped H-Scenes with similar ones that are coded in the mod.
+You can configure whether you want it to replace the original scenes or not, but most mods will need you to replace it.
+You can change that on `BepInEx/config/HFramework.json`
 
-> ⚠️ When using the replacement mode, new scenes added to the game by the devs won't work until I update this mod.
-
+HExtensions and Gallery plugins makes extensive use of it.
 
 **For mod developers:**
 
-Please, don't use it yet, as I am still trying to figure out the best API for it ( suggestions are welcome :) )
-
-My idea is that you will be able to hook into certain parts of the scene and perform additional things over the scene,
-including removing the original "events" and adding new ones.
-
-You can also use it to trigger scenes by yourself.
+- [Documentation](./HFramework/README.md)
+- See HExtensions and Gallery plugins for examples
 
 
-**Requirements:**
+### HExtensions
+
+Provides some modifications for H-Scenes. As explained below.
+
+#### Require Foreplay
+
+For H-Scenes with players, NPCs will refuse to continue if the player tries to "insert" before they are ready.
+
+To enable it, go to `BepInEx/config/HFramework.json` and set `RequireForeplay` to `true`.
+
+In the same file you can customize the required bar level and whether you want age and some random factors to apply over it.
+
+#### Requirements
 
 1. Yotan Mod Core must be installed.
+2. HFramework must be installed.
 
 
 ### Gallery
@@ -191,7 +236,13 @@ Adds item color marker to item slots. Only for items that are dyeable.
 
 ### NPC Stats
 
+> [!TIP]
+> If you are playing on Mad Island version earlier than v0.2.7, you will need to compile it yourself.
+> Or search for the right release.
+> 
+
 Properly give stats points to NPCs in different moments.
+
 
 I made this mod because I noticed that high level captured NPCs or new borns were too weak,
 making more sense to level one from the scratch.
@@ -260,12 +311,16 @@ Bug fixes implemented via modding. Let me know if there are other bugs that coul
 
 Included:
 
-- Translation of some boss names from Japanese to English
-- Translation of Quest UI titles to english
-- Translation of Surgery table / Cute Mirror to english
-- Translation of Craft "Ingredients", Shop "Buy", and "Paused" texts
-- Translation of Dye table UI from Japanese to English
-
+- Translation (always on)
+  - Translation of some boss names from Japanese to English
+  - Translation of Quest UI titles to english
+  - Translation of Surgery table / Cute Mirror to english
+  - Translation of Craft "Ingredients", Shop "Buy", and "Paused" texts
+  - Translation of Dye table UI from Japanese to English
+- Prevent NPCs from starting H-Scenes if they don't have one
+  - Enabled by default, can be disabled by changing `DontStartInvalidSex` in the config
+- Fix some mosaics that are not being cleaned up
+	- Enabled by default, can be disabled by changing `FixMosaic` in the config
 
 I won't fix:
 

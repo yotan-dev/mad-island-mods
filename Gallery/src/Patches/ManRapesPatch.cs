@@ -25,9 +25,10 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneStart("ManRapes", Getcharas(girl, man), new Dictionary<string, string>());
 
-				var handler = new ManRapesSceneEventHandler(man, girl);
-				GalleryScenesManager.Instance.AddSceneHandlerForCommon(man, handler);
-				GalleryScenesManager.Instance.AddSceneHandlerForCommon(girl, handler);
+				var tracker = new ManRapesTracker(man, girl);
+				tracker.LoadPerformerId();
+				GalleryScenesManager.Instance.AddTrackerForCommon(man, tracker);
+				GalleryScenesManager.Instance.AddTrackerForCommon(girl, tracker);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("ManRapes", error);
 			}
@@ -46,16 +47,16 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneEnd("ManRapes", Getcharas(girl, man), new Dictionary<string, string>());
 
-				var handlerA = GalleryScenesManager.Instance.GetSceneHandlerForCommon(man);
-				var handlerB = GalleryScenesManager.Instance.GetSceneHandlerForCommon(girl);
-				handlerA.AfterManRape(girl, man);
-				if (handlerA != handlerB)
-					handlerB.AfterManRape(man, girl);
+				var trackerA = GalleryScenesManager.Instance.GetTrackerForCommon(man);
+				var trackerB = GalleryScenesManager.Instance.GetTrackerForCommon(girl);
+				trackerA.End();
+				if (trackerA != trackerB)
+					trackerB.End();
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("ManRapes", error);
 			} finally {
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(man);
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(girl);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(man);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(girl);
 			}
 		}
 	}

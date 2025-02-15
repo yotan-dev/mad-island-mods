@@ -4,8 +4,8 @@ namespace Gallery.SaveFile.Containers
 	{
 		public ToiletInteractions() {}
 
-		public ToiletInteractions(GalleryChara npc1, GalleryChara npc2)
-			: base(npc1, npc2) {
+		public ToiletInteractions(string performerId, GalleryChara npc1, GalleryChara npc2)
+			: base(performerId, npc1, npc2) {
 		}
 
 		public override bool Equals(object obj)

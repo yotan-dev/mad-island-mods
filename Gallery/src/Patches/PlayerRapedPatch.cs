@@ -8,7 +8,7 @@ namespace Gallery.Patches
 {
 	public class PlayerRapedPatch
 	{
-		private static PlayerRapedSceneEventHandler EventHandler;
+		private static PlayerRapedTracker Tracker;
 
 		private static Dictionary<string, CommonStates> GetChars(CommonStates from, CommonStates to)
 		{
@@ -35,9 +35,10 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneStart("PlayerRaped", GetChars(from, to), GetInfos());
 				
-				EventHandler = new PlayerRapedSceneEventHandler(to, from);
-				GalleryScenesManager.Instance.AddSceneHandlerForCommon(from, EventHandler);
-				GalleryScenesManager.Instance.AddSceneHandlerForCommon(to, EventHandler);
+				Tracker = new PlayerRapedTracker(to, from);
+				Tracker.LoadPerformerId();
+				GalleryScenesManager.Instance.AddTrackerForCommon(from, Tracker);
+				GalleryScenesManager.Instance.AddTrackerForCommon(to, Tracker);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("PlayerRaped", error);
 			}
@@ -57,12 +58,15 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneEnd("PlayerRaped", GetChars(from, to), GetInfos());
 
-				EventHandler?.PlayerRaped(to, from, false);
+				if (Tracker != null)
+					Tracker.Raped = true;
+
+				Tracker?.End();
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("PlayerRaped", error);
 			} finally {
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(from);
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(to);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(from);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(to);
 			}
 		}
 	}

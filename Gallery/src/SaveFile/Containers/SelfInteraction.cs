@@ -2,11 +2,14 @@ namespace Gallery.SaveFile.Containers
 {
 	public class SelfInteraction
 	{
+		public string PerformerId { get; set; }
+
 		public GalleryChara Character1 { get; set; }
 
 		public SelfInteraction() {}
 
-		public SelfInteraction(GalleryChara npc1) {
+		public SelfInteraction(string performerId, GalleryChara npc1) {
+			this.PerformerId = performerId;
 			this.Character1 = npc1;
 		}
 

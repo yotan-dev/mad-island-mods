@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HF_PlayerRaped scene config.
+	That's when a Player loses a fight and gets into a battle/rape.
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HF_PlayerRaped">
+			<Performers>
+				<Performer id="HF_MaleNative_Yona_Rape_Doggy_Normal" />
+				<Performer id="HF_BigNative_Yona_Rape" />
+				<Performer id="HF_Bigfoot_Yona_Rape" />
+				<Performer id="HF_Werewolf_Yona_Rape" />
+				<Performer id="HF_Oldguy_Yona_Rape" />
+				<Performer id="HF_Spike_Yona_Rape" />
+				<Performer id="HF_Planton_Yona_Rape" />
+				<Performer id="HF_BossNative_Yona_Rape" />
+				<Performer id="HF_FemaleLargeNative_Man_Rape_Battle" />
+				<Performer id="HF_FemaleLargeNative_Man_Rape_Sex" />
+				<Performer id="HF_Mummy_Man_Rape_Battle_Sex" />
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using YotanModCore.Consts;
 
 namespace YotanModCore
@@ -8,11 +9,14 @@ namespace YotanModCore
 	{
 		private static Dictionary<int, string> NPCNames = new Dictionary<int, string>();
 
+		private static Dictionary<string, int> NPCConstToId = new Dictionary<string, int>();
+
 		internal static void Init()
 		{
 			var fields = typeof(NpcID).GetFields();
 			foreach (var field in fields) {
-				field.GetValue(null);
+				NPCConstToId[field.Name] = (int)field.GetValue(null);
+				
 				if (field.GetCustomAttributes(typeof(StrValAttribute), false).FirstOrDefault() is StrValAttribute attr) {
 					NPCNames[(int)field.GetValue(null)] = (string)attr.StrVal;
 				}
@@ -93,6 +97,9 @@ namespace YotanModCore
 		/// <returns></returns>
 		public static bool IsPregnant(CommonStates common)
 		{
+			if (common == null)
+				return false;
+
 			return common.pregnant[0] != -1;
 		}
 
@@ -121,6 +128,11 @@ namespace YotanModCore
 			}
 
 			return name;
+		}
+
+		public static int ConstToId(string constVal)
+		{
+			return NPCConstToId.GetValueOrDefault(constVal, -1);
 		}
 
 		/// <summary>
@@ -158,6 +170,31 @@ namespace YotanModCore
 			}
 
 			return $"{common.charaName} ({CommonUtils.GetName(common.npcID)})";
+		}
+
+		/// <summary>
+		/// Creates a 'dangling' CommonStates for npcId. This NPC is not really in the game,
+		/// but can be used as if it was.
+		/// It is the caller's responsibility to destroy this GameObject after it finishes using it.
+		/// </summary>
+		/// <param name="npcId"></param>
+		/// <returns></returns>
+		public static CommonStates MakeTempCommon(int npcId)
+		{
+			var statsData = Managers.mn.npcMN.GetStatsData(npcId);
+			if (statsData == null)
+			{
+				PLogger.LogWarning($"No stats data for NPC {npcId}");
+				return null;
+			}
+
+			var tempCommon = new GameObject("TempCommon")
+				.AddComponent<CommonStates>();
+			tempCommon.lovers = new List<CommonStates.Lovers>();
+			tempCommon.charaName = statsData.GetLocalizedCharaName();
+			tempCommon.npcID = npcId;
+			tempCommon.friendID = -npcId;
+			return tempCommon;
 		}
 	}
 }

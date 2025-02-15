@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>Gallery</AssemblyName>
 		<Product>Gallery</Product>
-		<Version>0.3.0</Version>
+		<Version>1.0.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RestoreAdditionalProjectSources>
@@ -47,6 +47,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ExtendedHSystem\ExtendedHSystem.csproj" />
+		<ProjectReference Include="..\HFramework\HFramework.csproj" />
 	</ItemGroup>
 </Project>

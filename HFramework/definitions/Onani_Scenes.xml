@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HF_OnaniNPC (Masturbation) scene config.
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HF_OnaniNPC">
+			<Performers>
+				<Performer id="HF_Onani_FemaleNative_Normal">
+					<PerformConditions>
+						<Condition xsi:type="PerfumeCheck" actor="FemaleNative#15" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Onani_FemaleNative_Perfume">
+					<PerformConditions>
+						<Condition xsi:type="PerfumeCheck" actor="FemaleNative#15" value="true" />
+					</PerformConditions>
+				</Performer>
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>

@@ -23,6 +23,7 @@ namespace Gallery.Patches
 		private static void TryUnlock(string description, GalleryChara charA, GalleryChara charB, StoryFlag flag)
 		{
 				var interaction = new StoryInteraction(
+					"",
 					charA,
 					charB,
 					flag
@@ -46,9 +47,10 @@ namespace Gallery.Patches
 				yield break;
 
 			GalleryLogger.LogDebug($"StoryManager: BossCyborg00: {__instance.bossBattleState}");
-			if ((BossBattleState) __instance.bossBattleState == BossBattleState.PlayerDefeated) {
+			if (__instance.bossBattleState == BossBattleState.PlayerDefeated) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::BossCyborgLose",
 						new GalleryChara(Managers.mn?.gameMN?.playerCommons?[GameManager.selectPlayer]),
 						new GalleryChara(NpcID.Cassie),
 						StoryFlag.PlayerDefeatedByCyborg
@@ -56,9 +58,10 @@ namespace Gallery.Patches
 				);
 
 				GalleryLogger.LogDebug("StoryManager: BossCyborg00: PlayerDefeated event UNLOCKED");
-			} else if ((BossBattleState) __instance.bossBattleState == BossBattleState.BossDefeated) {
+			} else if (__instance.bossBattleState == BossBattleState.BossDefeated) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::BossCyborgWin",
 						new GalleryChara(Managers.mn?.gameMN?.playerCommons?[GameManager.selectPlayer]),
 						new GalleryChara(NpcID.Cassie),
 						StoryFlag.PlayerDefeatsCyborg
@@ -286,9 +289,10 @@ namespace Gallery.Patches
 			if (Plugin.InGallery)
 				yield break;
 
-			if ((BossBattleState) __instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
+			if (__instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::DarumaLose",
 						new GalleryChara(NpcID.Yona),
 						new GalleryChara(NpcID.Dalman),
 						StoryFlag.PlayerDefeatedByDaruman
@@ -309,9 +313,10 @@ namespace Gallery.Patches
 			if (Plugin.InGallery)
 				yield break;
 
-			if ((BossBattleState) __instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
+			if (__instance.bossBattleState == BossBattleState.PlayerDefeated && GameManager.selectPlayer == 0) {
 				GalleryState.Instance.Story.Add(
 					new StoryInteraction(
+						"Story::HunterLose",
 						new GalleryChara(NpcID.Yona),
 						new GalleryChara(NpcID.Bandana),
 						StoryFlag.PlayerDefeatedByHunters

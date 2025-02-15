@@ -32,13 +32,29 @@ namespace YotanModCore
 		public static bool HasDLC { get { return Instance._HasDLC; } }
 
 		/// <summary>
+		/// True if Joke mode is enabled
+		/// </summary>
+		public static bool JokeMode { get { return SaveManager.SaveSettingStatic.joke == 1; } }
+
+		/// <summary>
+		/// Returns the level of censorship being applied
+		/// </summary>
+		public static CensorType CensorType { get { return Instance._CensorType; } }
+
+		/// <summary>
+		/// Returns the size of a censorship block
+		/// </summary>
+		public static float CensorBlockSize { get { return Instance._CensorBlockSize; } }
+
+		/// <summary>
 		/// Converts major/minor/patch version to GameVersion
 		/// </summary>
 		/// <param name="major"></param>
 		/// <param name="minor"></param>
 		/// <param name="patch"></param>
 		/// <returns></returns>
-		public static int ToVersion(int major, int minor, int patch) {
+		public static int ToVersion(int major, int minor, int patch)
+		{
 			return major * 1_000_000 + minor * 1_000 + patch;
 		}
 
@@ -49,7 +65,8 @@ namespace YotanModCore
 		/// <param name="str"></param>
 		/// <returns></returns>
 		/// <exception cref="Exception"></exception>
-		public static int ToVersion(string str) {
+		public static int ToVersion(string str)
+		{
 			var parts = str.Split('.');
 			if (parts.Length != 3)
 				throw new Exception("Invalid version string: " + str);
@@ -63,15 +80,20 @@ namespace YotanModCore
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		public static string ToVersionString(int version) {
+		public static string ToVersionString(int version)
+		{
 			return (version / 1_000_000) + "." + (version / 1_000) + "." + (version % 1_000);
 		}
-		
+
 		private static GameInfo Instance = new GameInfo();
 
 		private bool _HasDLC = false;
 
 		private int _GameVersion = 0;
+
+		private CensorType _CensorType = CensorType.Default;
+
+		private float _CensorBlockSize = 7f;
 
 		private GameInfo()
 		{
@@ -91,12 +113,28 @@ namespace YotanModCore
 			 */
 			this._HasDLC = File.Exists(path);
 			this._GameVersion = this.ParseVersion();
+			this._CensorType = this.DetectCensorType();
+			if (this._CensorType == CensorType.Fanza)
+				this._CensorBlockSize = 17f;
+			if (this._CensorType == CensorType.None)
+				this._CensorBlockSize = 0.01f;
+		}
+
+		private CensorType DetectCensorType()
+		{
+			if (File.Exists(Application.dataPath + "/StreamingAssets/XML/FNZ.bat"))
+				return CensorType.Fanza;
+			
+			if (File.Exists(Application.dataPath + "/StreamingAssets/XML/None.bat"))
+				return CensorType.None;
+			
+			return CensorType.Default;
 		}
 
 		private int ParseVersion()
 		{
 			var buildTimestamp = Resources.Load<TextAsset>("BuildDate").text.Remove(0, 1);
-			
+
 			Dictionary<string, int> buildDateVersion = new Dictionary<string, int>() {
 				{ "2024/06/28--10:56", ToVersion("0.0.12") },
 				{ "2024/07/27--15:32", ToVersion("0.1.3") },
@@ -129,7 +167,7 @@ namespace YotanModCore
 			var buildDate = buildTimestamp.Substring(0, 10);
 			if (dateToVersion.ContainsKey(buildDate))
 				return dateToVersion[buildDate];
-			
+
 			PLogger.LogError($"Could not determine version by build date. Using 999.999.999");
 			return ToVersion("999.999.999");
 		}

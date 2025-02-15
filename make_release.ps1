@@ -19,12 +19,13 @@ function Build-Plugin {
 }
 
 Build-Plugin "YotanModCore" -OutFile "YotanModCore.dll"
+Build-Plugin "HFramework" -OutFile "HFramework.dll"
 
 Build-Plugin "CraftColors" -OutFile "CraftColors.dll"
 Build-Plugin "DisassembleItems" -OutFile "DisassembleItems.dll"
 Build-Plugin "EnhanceWorkplaces" -OutFile "EnhanceWorkplaces.dll"
-Build-Plugin "ExtendedHSystem" -OutFile "ExtendedHSystem.dll"
 Build-Plugin "Gallery" -OutFile "Gallery.dll"
+Build-Plugin "HExtensions" -OutFile "HExtensions.dll"
 Build-Plugin "IncreaseZoom" -OutFile "IncreaseZoom.dll"
 Build-Plugin "ItemSlotColor" -OutFile "ItemSlotColor.dll"
 Build-Plugin "NpcStats" -OutFile "NpcStats.dll"

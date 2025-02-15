@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+	Performers for Delivery scenes
+	That's when a NPC gives birth
+-->
+<PerformersConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Performers>
+		<Performer id="HF_FemaleNative_Delivery">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="FemaleNative#15" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_NativeGirl_Delivery" dlc="true">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="NativeGirl#16" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+	</Performers>
+</PerformersConfig>

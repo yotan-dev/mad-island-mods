@@ -1,134 +1,162 @@
+#nullable enable
+
 using System;
 using System.Collections.Generic;
-using ExtendedHSystem;
 using Gallery.GalleryScenes;
-using Gallery.GalleryScenes.AssWall;
-using Gallery.GalleryScenes.CommonSexNPC;
-using Gallery.GalleryScenes.CommonSexPlayer;
-using Gallery.GalleryScenes.Daruma;
-using Gallery.GalleryScenes.Delivery;
-using Gallery.GalleryScenes.ManRapes;
-using Gallery.GalleryScenes.ManSleepRape;
-using Gallery.GalleryScenes.Onani;
-using Gallery.GalleryScenes.PlayerRaped;
-using Gallery.GalleryScenes.Slave;
-using Gallery.GalleryScenes.Toilet;
-using Gallery.GalleryScenes.ToiletNpc;
-using YotanModCore;
+using System.Xml.Serialization;
+using Gallery.ConfigFiles;
+using System.IO;
+using Gallery.SaveFile.Containers;
+using HFramework.Performer;
 
 namespace Gallery
 {
 	public class GalleryScenesManager
 	{
-		public static GalleryScenesManager Instance { get; set; }
+		public static GalleryScenesManager Instance { get; set; } = new GalleryScenesManager();
 
-		private List<IGalleryScene> ActiveScenes = new List<IGalleryScene>();
+		private Dictionary<CommonStates, BaseTracker?> Trackers = [];
 
-		private Dictionary<CommonStates, SceneEventHandler> SceneHandlers = new Dictionary<CommonStates, SceneEventHandler>();
+		public Dictionary<string, GalleryGroupConfig> SceneGroups = [];
 
-		public List<ISceneManager> SceneManagers = new List<ISceneManager>()
+		private Dictionary<string, List<string>> ControllerPerformers = [];
+
+		public BaseTracker? GetTrackerForCommon(CommonStates common)
 		{
-			ManRapesSceneManager.Instance,
-			DarumaSceneManager.Instance,
-			SlaveSceneManager.Instance,
-			CommonSexNPCSceneManager.Instance,
-			CommonSexPlayerSceneManager.Instance,
-			AssWallSceneManager.Instance,
-			DeliverySceneManager.Instance,
-			ManSleepRapeSceneManager.Instance,
-			PlayerRapedSceneManager.Instance,
-			new ToiletNpcSceneManager(),
-			ToiletSceneManager.Instance,
-		};
-
-		public static void Init() {
-			Instance = new GalleryScenesManager();
-			if (GameInfo.GameVersion >= GameInfo.ToVersion("0.1.0")) {
-				Instance.SceneManagers.Add(OnaniSceneManager.Instance);
-			}
+			return this.Trackers.GetValueOrDefault(common, null);
 		}
 
-		public IGalleryScene GetSceneWithChara(CommonStates chara, Type sceneType = null)
+		public void AddTrackerForCommon(CommonStates common, BaseTracker tracker)
 		{
-			if (sceneType == null) {
-				return this.ActiveScenes.Find((scn) => scn.IsCharacterInScene(chara));
-			} else {
-				return this.ActiveScenes.Find((scn) => scn.IsCharacterInScene(chara) && scn.GetType() == sceneType);
-			}
-		}
-
-		public IGalleryScene[] GetScenesByType(Type sceneType) {
-			return ActiveScenes.FindAll((scn) => scn.GetType() == sceneType).ToArray();
-		}
-
-		public void CheckExistingScenes(CommonStates chara, string scene)
-		{
-			var sceneWithChara = GetSceneWithChara(chara);
-			if (sceneWithChara != null) {
-				var charaName = CommonUtils.DetailedString(chara);
-				GalleryLogger.LogError($"CheckForExistingScenes: Found existing scene for {charaName} while creating {scene}. Existing: {sceneWithChara}");
-			}
-		}
-
-		public void EndScene(Type sceneType, CommonStates charaA, CommonStates charaB = null) {
-			var sceneA = GetSceneWithChara(charaA, sceneType);
-			IGalleryScene sceneB;
-			if (charaB != null) {
-				sceneB = GetSceneWithChara(charaB, sceneType);
-			} else {
-				sceneB = sceneA;
-			}
-
-			if (sceneA == null) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneA == null ({CommonUtils.LogName(charaA)})");
-			}
-
-			if (sceneA != sceneB) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneA != sceneB: {sceneA} != {sceneB}");
-			}
-
-			if (sceneA != null && !sceneA.GetType().IsEquivalentTo(sceneType)) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneA.GetType() != sceneType: {sceneA.GetType()} != {sceneType}");
-			}
-
-			if (sceneB != null && !sceneB.GetType().IsEquivalentTo(sceneType)) {
-				GalleryLogger.LogError($"EndScene ({sceneType}): sceneB.GetType() != sceneType: {sceneB.GetType()} != {sceneType}");
-			}
-
-			sceneA?.OnEnd();
-			ActiveScenes.Remove(sceneA);
-		
-			if (sceneA != sceneB) {
-				sceneB?.OnEnd();
-				ActiveScenes.Remove(sceneB);
-			}
-		}
-
-		public SceneEventHandler GetSceneHandlerForCommon(CommonStates common)
-		{
-			return this.SceneHandlers.GetValueOrDefault(common, null);
-		}
-
-		public void AddSceneHandlerForCommon(CommonStates common, SceneEventHandler handler)
-		{
-			if (this.SceneHandlers.ContainsKey(common))
-				this.SceneHandlers[common] = handler;
+			if (this.Trackers.ContainsKey(common))
+				this.Trackers[common] = tracker;
 			else
-				this.SceneHandlers.Add(common, handler);
+				this.Trackers.Add(common, tracker);
 		}
 
-		public void RemoveSceneHandlerForCommon(CommonStates common)
+		public void RemoveTrackerForCommon(CommonStates common)
 		{
-			if (this.SceneHandlers.ContainsKey(common))
-				this.SceneHandlers.Remove(common);
+			if (this.Trackers.ContainsKey(common))
+				this.Trackers.Remove(common);
 		}
 
-		public void AddScene(IGalleryScene scene)
+		public void LoadGallery()
 		{
-			this.CheckExistingScenes(scene.GetCharacter1(), scene.GetType().Name);
-			this.CheckExistingScenes(scene.GetCharacter2(), scene.GetType().Name);
+			if (this.SceneGroups.Count > 0)
+				return;
 
-			ActiveScenes.Add(scene);
+
+			XmlSerializer serializer = new XmlSerializer(typeof(GalleryGroupsConfig));
+			var fileStream = new FileStream("BepInEx/plugins/Gallery/GalleryList.xml", FileMode.Open);
+			var scenesConfig = (GalleryGroupsConfig)serializer.Deserialize(fileStream);
+			fileStream.Close();
+
+			foreach (var group in scenesConfig.Groups)
+			{
+				this.SceneGroups.Add(group.Name, group);
+
+				foreach (var scene in group.Scenes)
+				{
+					var ctrlerType = scene.Controller.GetType().ToString();
+					if (!this.ControllerPerformers.TryGetValue(ctrlerType, out var performers))
+					{
+						performers = [];
+						this.ControllerPerformers.Add(ctrlerType, performers);
+					}
+
+					performers.Add(scene.Controller.PerformerId);
+				}
+			}
+		}
+
+		public bool HasPerformerForController(Type controllerType, string performerId)
+		{
+			if (!this.ControllerPerformers.TryGetValue(controllerType.ToString(), out var performers))
+				return false;
+
+			return performers.Contains(performerId);
+		}
+
+		public string FindPerformer(Type controllerType, GalleryChara[] charas)
+		{
+			if (!this.ControllerPerformers.TryGetValue(controllerType.ToString(), out var performers))
+				return "";
+
+			foreach (var performerId in performers)
+			{
+				PerformerLoader.Performers.TryGetValue(performerId, out var performer);
+
+				if (performer == null)
+					continue;
+
+				int numCharas = 0;
+				if (performer.FromNpcId != -1)
+					numCharas++;
+
+				if (performer.ToNpcId != null && performer.ToNpcId != -1)
+					numCharas++;
+
+				if (numCharas != charas.Length)
+					continue;
+
+				// First char is the same
+				if (performer.FromNpcId != charas[0].Id)
+					continue;
+
+				// Second char is the same
+				if (performer.ToNpcId != null && performer.ToNpcId != charas[1].Id)
+					continue;
+
+				// This performer is probably right; now we need to treat edge cases
+
+				if (performerId == "HF_YoungMan_FemaleNative_Friendly_Normal" || performerId == "HF_YoungMan_FemaleNative_Friendly_Pregnant")
+				{
+					if (charas[1].IsPregnant)
+						return "HF_YoungMan_FemaleNative_Friendly_Pregnant";
+					else
+						return "HF_YoungMan_FemaleNative_Friendly_Normal";
+				}
+
+				if (performerId == "HF_Man_FemaleNative_Friendly_Normal" || performerId == "HF_Man_FemaleNative_Friendly_Pregnant")
+				{
+					if (charas[1].IsPregnant)
+						return "HF_Man_FemaleNative_Friendly_Pregnant";
+					else
+						return "HF_Man_FemaleNative_Friendly_Normal";
+				}
+
+				if (performerId == "HF_Man_FemaleNative_Rape_Fainted" || performerId == "HF_Man_FemaleNative_Rape_Grapple" || performerId == "HF_Man_FemaleNative_Rape_Grapple_Pregnant")
+				{
+					if (charas[1].IsPregnant)
+						return "HF_Man_FemaleNative_Rape_Grapple_Pregnant";
+
+					if (charas[1].IsFainted)
+						return "HF_Man_FemaleNative_Rape_Fainted";
+
+					return "HF_Man_FemaleNative_Rape_Grapple";
+				}
+
+				if (performerId == "HF_Man_NativeGirl_Rape_Fainted" || performerId == "HF_Man_NativeGirl_Rape_Grapple")
+				{
+					if (charas[1].IsFainted)
+						return "HF_Man_NativeGirl_Rape_Fainted";
+
+					return "HF_Man_NativeGirl_Rape_Grapple";
+				}
+
+				if (performerId == "HF_FemaleLargeNative_Man_Rape_Battle")
+					return "HF_FemaleLargeNative_Man_Rape_Sex";
+
+				// @TODO: Can't differentiate:
+				// HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal / HF_Man_FemaleLargeNative_Friendly_Doggy_Normal
+				// HF_Man_Reika_Friendly_Cowgirl / HF_Man_Reika_Friendly_RevCowgirl
+				// HF_Man_Mermaid_Friendly_TittyFuck / HF_Man_Mermaid_Friendly_Fuck
+				// HF_Man_Shino_Friendly_TittyFuck / HF_Man_Shino_Friendly_Fuck
+
+				return performerId;
+			}
+
+			return "";
 		}
 	}
 }

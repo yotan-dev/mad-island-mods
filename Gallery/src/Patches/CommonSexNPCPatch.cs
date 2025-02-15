@@ -60,9 +60,10 @@ namespace Gallery.Patches
 					return;
 				}
 
-				var handler = new CommonSexNPCSceneEventHandler(npcA, npcB, sexPlace, sexType);
-				GalleryScenesManager.Instance.AddSceneHandlerForCommon(npcA, handler);
-				GalleryScenesManager.Instance.AddSceneHandlerForCommon(npcB, handler);
+				var tracker = new CommonSexNPCTracker(npcA, npcB, sexPlace, sexType);
+				tracker.LoadPerformerId();
+				GalleryScenesManager.Instance.AddTrackerForCommon(npcA, tracker);
+				GalleryScenesManager.Instance.AddTrackerForCommon(npcB, tracker);
 			}
 			catch (Exception error)
 			{
@@ -89,12 +90,12 @@ namespace Gallery.Patches
 				}
 				else
 				{
-					var handlerA = GalleryScenesManager.Instance.GetSceneHandlerForCommon(npcA);
-					handlerA?.AfterSex(null, npcA, npcB);
+					var handlerA = GalleryScenesManager.Instance.GetTrackerForCommon(npcA);
+					handlerA?.End();
 
-					var handlerB = GalleryScenesManager.Instance.GetSceneHandlerForCommon(npcB);
+					var handlerB = GalleryScenesManager.Instance.GetTrackerForCommon(npcB);
 					if (handlerB != handlerA)
-						handlerB?.AfterSex(null, npcA, npcB);
+						handlerB?.End();
 				}
 			}
 			catch (Exception error)
@@ -103,8 +104,8 @@ namespace Gallery.Patches
 			}
 			finally
 			{
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(npcA);
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(npcB);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(npcA);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(npcB);
 			}
 		}
 	}

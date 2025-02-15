@@ -38,8 +38,9 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneStart("Delivery", GetChars(common), GetInfos(tmpWorkPlace, tmpSexPlace));
 
-				var handler = new DeliverySceneEventHandler(common);
-				GalleryScenesManager.Instance.AddSceneHandlerForCommon(common, handler);
+				var tracker = new DeliveryTracker(common);
+				tracker.LoadPerformerId();
+				GalleryScenesManager.Instance.AddTrackerForCommon(common, tracker);
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("Delivery", error);
 			}
@@ -59,13 +60,12 @@ namespace Gallery.Patches
 			try {
 				GalleryLogger.SceneEnd("Delivery", GetChars(common), GetInfos(tmpWorkPlace, tmpSexPlace));
 
-				var handler = GalleryScenesManager.Instance.GetSceneHandlerForCommon(common);
-				if (handler != null && handler is DeliverySceneEventHandler deliveryHandler)
-					deliveryHandler.AfterDelivery(null, common);
+				var tracker = GalleryScenesManager.Instance.GetTrackerForCommon(common);
+				tracker?.End();
 			} catch (Exception error) {
 				GalleryLogger.SceneErrorToPlayer("Delivery", error);
 			} finally {
-				GalleryScenesManager.Instance.RemoveSceneHandlerForCommon(common);
+				GalleryScenesManager.Instance.RemoveTrackerForCommon(common);
 			}
 		}
 	}

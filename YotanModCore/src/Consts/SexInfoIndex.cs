@@ -8,5 +8,8 @@ namespace YotanModCore.Consts
 		public const int Pregnancies = 3;
 
 		public const int Deliveries = 4;
+
+		public const int AllowLove = 8; // 1 = disabled / 0 = enabled
+		public const int AllowSex = 9; // 1 = disabled / 0 = enabled
 	}
 }
