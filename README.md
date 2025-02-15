@@ -152,7 +152,7 @@ By far the most ambitious of those mods. This implements a Gallery of game scene
 **Requirements:**
 
 1. Yotan Mod Core must be installed.
-2. Extended H-System must be installed.
+2. HFramework must be installed.
 
 
 **Technical notes:**
