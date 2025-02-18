@@ -232,8 +232,8 @@
 			<AnimationSets>
 				<AnimationSet id="Default">
 					<Animations>
-						<Animation action="Battle" play="Loop" name="A_Attack_loop" />
-						<Animation action="Attack" play="Once" name="A_Attack_attack" />
+						<Animation action="Battle" play="Loop" name="" />
+						<Animation action="Attack" play="Once" name="" />
 						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
 						<Animation action="Insert" play="Once" name="A_AttackToSex">
 							<Events>

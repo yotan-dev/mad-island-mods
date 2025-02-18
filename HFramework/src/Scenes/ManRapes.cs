@@ -112,11 +112,17 @@ namespace HFramework.Scenes
 		{
 			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
+			{
+				PLogger.LogDebug($"Could not get prefab for {this.Man.npcID} x {this.Girl.npcID}");
 				return false;
+			}
 
 			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Man.gameObject.transform.position, Quaternion.identity);
 			if (this.TmpSex == null)
+			{
+				PLogger.LogDebug($"Could not instantiate prefab for {this.Man.npcID} x {this.Girl.npcID}");
 				return false;
+			}
 
 			// Setup TmpSex
 			if (this.Girl.npcID == NpcID.Mummy)
@@ -135,7 +141,7 @@ namespace HFramework.Scenes
 			}
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			
+
 			if (this.Girl.npcID == NpcID.Yona && string.IsNullOrEmpty(this.Girl.equip[3].itemKey) && this.CommonAnim.skeleton.FindSlot("Panty") != null)
 				this.CommonAnim.skeleton.SetAttachment("Panty", null);
 

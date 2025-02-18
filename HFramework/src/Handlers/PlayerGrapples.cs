@@ -87,7 +87,7 @@ namespace HFramework.Handlers
 			if (attackAction?.AnimationName != null)
 				this.AttackAnimationName = this.Scene.ExpandAnimationName(attackAction.AnimationName);
 
-			if (loopAction?.AnimationName != null && attackAction?.AnimationName != null)
+			if (loopAction?.AnimationName != null && loopAction?.AnimationName != "" && attackAction?.AnimationName != null && attackAction?.AnimationName != "")
 			{
 				this.Anim.state.Data.SetMix(
 					this.LoopAnimationName,

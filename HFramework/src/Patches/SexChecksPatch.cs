@@ -72,6 +72,7 @@ namespace HFramework.Patches
 			if (sceneInfo != null)
 			{
 				__result = sceneInfo.CanStart(PerformerScope.Sex, from, to);
+				PLogger.LogDebug($"RapesCheck({sceneInfo?.Name}): {from.charaName} -> {to.charaName} = {__result}");
 				return false;
 			}
 
