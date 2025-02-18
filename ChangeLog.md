@@ -8,6 +8,13 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.02.18
+
+### HFramework v1.0.2
+
+- Fix Yona ManRapes not working when Yona is killed instead of stunned
+
+
 ## 2025.02.17
 
 ### HFramework v1.0.1

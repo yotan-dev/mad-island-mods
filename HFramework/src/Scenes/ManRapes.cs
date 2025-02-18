@@ -264,7 +264,8 @@ namespace HFramework.Scenes
 			// and they do a roll at the beggining due to the yields for before Main and before Battle
 			// other scenes would work fine as far as I can tell, but since this is the "original code"
 			// let's make it for everyone.
-			if (this.Girl.faint != 0)
+			// Also, Yona always uses defeat, regardless of being Dead or Fainted.
+			if (this.Girl.npcID != NpcID.Yona && this.Girl.faint != 0)
 				this.Performer.PreparePerform(ActionType.Battle);
 			else
 				this.Performer.PreparePerform(ActionType.Defeat);
@@ -277,7 +278,8 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			if (this.Girl.faint != 0)
+			// Yona never battles, regardless of being Dead or Fainted, it continues
+			if (this.Girl.npcID != NpcID.Yona && this.Girl.faint != 0)
 			{
 				yield return this.RunStep(StepNames.Battle, this.PerformBattle);
 				if (!this.CanContinue())
@@ -312,9 +314,10 @@ namespace HFramework.Scenes
 			if (this.Destroyed)
 				return false;
 
-			if (this.Stage == 1)
+			// Yona may be dead during the entire scene, so we don't check for her life
+			if (this.Stage == 1 && this.Girl.npcID != NpcID.Yona)
 			{
-				// For some reason, Shino and Yona are killed once the battle ends...
+				// For some reason, Shino is killed once the battle ends...
 				// but before Stage 1 ends. so bypass the life check in this case.
 				if ((this.Girl.npcID == NpcID.Yona || this.Girl.npcID == NpcID.Shino) && this.Girl.faint == 0f)
 					return this.TmpSex != null && this.Man.life > 0.0 && !Input.GetKeyDown(KeyCode.R);
