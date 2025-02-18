@@ -293,7 +293,7 @@ namespace HFramework.Scenes
 			}
 
 			yield return this.PerformRape();
-			
+
 			yield return HookManager.Instance.RunStepEndHook(this, StepNames.Main);
 			yield return this.Teardown();
 		}
@@ -308,11 +308,11 @@ namespace HFramework.Scenes
 
 			if (this.Stage == 1)
 			{
-				// For some reason, Shino is killed once the battle ends...
+				// For some reason, Shino and Yona are killed once the battle ends...
 				// but before Stage 1 ends. so bypass the life check in this case.
-				if (this.Girl.npcID == NpcID.Shino && this.Girl.faint == 0f)
+				if ((this.Girl.npcID == NpcID.Yona || this.Girl.npcID == NpcID.Shino) && this.Girl.faint == 0f)
 					return this.TmpSex != null && this.Man.life > 0.0 && !Input.GetKeyDown(KeyCode.R);
-				
+
 				return this.Girl.life > 0.0 && this.TmpSex != null && this.Man.life > 0.0 && !Input.GetKeyDown(KeyCode.R);
 			}
 
