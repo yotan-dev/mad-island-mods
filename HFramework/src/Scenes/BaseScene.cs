@@ -64,6 +64,11 @@ namespace HFramework.Scenes
 			return this.Performer;
 		}
 
+		public virtual int GetSexType()
+		{
+			return -1;
+		}
+
 		public virtual SkeletonAnimation GetSkelAnimation()
 		{
 			return this.CommonAnim;

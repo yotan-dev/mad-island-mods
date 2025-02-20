@@ -12,6 +12,7 @@ namespace HFramework.Scenes
 		bool CanContinue();
 		void Destroy();
 		string GetName();
+		int GetSexType();
 		CommonStates[] GetActors();
 		SkeletonAnimation GetSkelAnimation();
 		string ExpandAnimationName(string originalName);

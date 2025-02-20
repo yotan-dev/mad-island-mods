@@ -72,6 +72,11 @@ namespace HFramework.Scenes
 				Managers.mn.sexMN.StartCoroutine(this.RunStep(StepNames.Leave, this.OnLeave));
 		}
 
+		public override int GetSexType()
+		{
+			return this.Type;
+		}
+
 		private bool AreActorsAlive()
 		{
 			return this.Player.life > 0.0 && this.Npc.life > 0.0;

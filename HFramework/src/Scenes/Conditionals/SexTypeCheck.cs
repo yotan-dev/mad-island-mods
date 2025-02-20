@@ -16,10 +16,8 @@ namespace HFramework.Scenes.Conditionals
 
 		public override bool Pass(IScene scene)
 		{
-			if (scene is not CommonSexPlayer commonSexPlayer)
-				return false;
-
-			return commonSexPlayer.Type == this.ExpectedValue;
+			PLogger.LogDebug($">> SexTypeCheck: {scene.GetSexType()} / {this.ExpectedValue}");
+			return scene.GetSexType() == this.ExpectedValue;
 		}
 
 		public override bool Pass(CommonStates from, CommonStates to)
