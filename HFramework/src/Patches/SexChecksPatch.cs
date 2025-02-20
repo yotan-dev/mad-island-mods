@@ -1,6 +1,5 @@
 #nullable enable
 
-using HFramework.Performer;
 using HFramework.Scenes;
 using HarmonyLib;
 using YotanModCore;
@@ -14,27 +13,10 @@ namespace HFramework.Patches
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_SexCheck(CommonStates from, CommonStates to, ref bool __result)
 		{
-			__result = false;
-
-			if (!Managers.mn.npcMN.IsActiveFriend(to))
-			{
-				PLogger.LogDebug($"SexCheck: {from.charaName} -> {to.charaName} is not a friend");
-				return false;
-			}
-
-			var actors = Utils.SortActors(from, to);
-
-			var realFrom = actors[0];
-			var realTo = actors.Length >= 2 ? actors[1] : null;
-
-			SceneInfo? sceneInfo;
 			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
-				sceneInfo = ScenesManager.Instance.GetSceneInfo(CommonSexPlayer.Name);
+				__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
 			else
-				sceneInfo = ScenesManager.Instance.GetSceneInfo(CommonSexNPC.Name);
-
-			__result = sceneInfo?.CanStart(PerformerScope.Sex, realFrom, realTo) ?? false;
-			PLogger.LogDebug($"SexCheck({sceneInfo?.Name}): {from.charaName} -> {to.charaName} = {__result}");
+				__result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
 
 			return false;
 		}
@@ -51,17 +33,17 @@ namespace HFramework.Patches
 			//       In those cases, we will have additional performers to support that.
 
 			int activePlayer = CommonUtils.GetActivePlayer().npcID;
-			SceneInfo? sceneInfo;
+			string sceneName;
 			if (to.npcID == activePlayer)
 			{
-				sceneInfo = ScenesManager.Instance.GetSceneInfo(PlayerRaped.Name);
+				sceneName = PlayerRaped.Name;
 			}
 			else if (from.npcID == activePlayer)
 			{
 				if (to.nMove.actType == NPCMove.ActType.Sleep && to.anim.state.GetCurrent(0).Animation.Name == "A_sleep")
-					sceneInfo = ScenesManager.Instance.GetSceneInfo(ManRapesSleep.Name);
+					sceneName = ManRapesSleep.Name;
 				else
-					sceneInfo = ScenesManager.Instance.GetSceneInfo(ManRapes.Name);
+					sceneName = ManRapes.Name;
 			}
 			else
 			{
@@ -69,14 +51,7 @@ namespace HFramework.Patches
 				return true; // @TODO: We don't have this yet
 			}
 
-			if (sceneInfo != null)
-			{
-				__result = sceneInfo.CanStart(PerformerScope.Sex, from, to);
-				PLogger.LogDebug($"RapesCheck({sceneInfo?.Name}): {from.charaName} -> {to.charaName} = {__result}");
-				return false;
-			}
-
-			return true;
+			return SexChecker.CanRape(sceneName, from, to);
 		}
 
 		[HarmonyPatch(typeof(NPCManager), nameof(NPCManager.LoveLoveCheck))]
