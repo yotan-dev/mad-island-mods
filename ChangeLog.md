@@ -8,6 +8,17 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.02.19
+
+### HFramework v1.0.3
+
+- Fix Female Native sex with Man in Pose 2 failing due to an animation name typo
+- Delay HFramework startup to give time for mods that depends on it to register for the
+  start up events (such as RegisterScene or RegisterPerformers)
+- Add a debug log when OnCreampie event runs, as there were reports of it crashing
+  which I couldn't reproduce.
+
+
 ## 2025.02.18
 
 ### HFramework v1.0.2

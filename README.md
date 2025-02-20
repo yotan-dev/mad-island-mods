@@ -52,6 +52,13 @@ You need to install x64 version of BepInEx v5 (latest stable v5 available).
 
 After you have it installed, download the mods that you need (and requirements, if applicable) from [Releases](https://github.com/yotan-dev/mad-island-mods/releases) and extract the files into `Mad Island Folder/BepInEx/plugins`.
 
+> [!WARNING]
+> Extract the zip files using "Extract here".
+> The extracted files must stay AS IS in the `plugins` folder.
+> If the zip contains a folder, this folder must be directly inside plugins.
+> Don't rename the folder no put it in a subfolder, because the mod will expect the name to be exactly as shipped
+> 
+
 If the mod contains a single dll, the dll must be laying in the `plugins` folder (in other words, `Mad Island Folder/BepInEx/plugins/modname.dll` should exist).
 
 If the mod contains a folder with 2 or more files, this folder must be in `plugins` one (in other words, `Mad Island Folder/BepInEx/plugins/modname/modname.dll` should exist).
