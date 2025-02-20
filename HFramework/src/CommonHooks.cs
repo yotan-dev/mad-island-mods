@@ -215,6 +215,9 @@ namespace HFramework
 			if (!fromTo.HasValue)
 				yield break;
 
+			// Added to debug a reported crash in discord.
+			PLogger.LogDebug($"OnCreampie: {scene.GetName()} - {fromTo.Value.From?.charaName ?? "NULL"} -> {fromTo.Value.To?.charaName ?? "NULL"}");
+
 			Managers.mn.sexMN.SexCountChange(fromTo.Value.To, fromTo.Value.From, SexManager.SexCountState.Creampie);
 			yield break;
 		}

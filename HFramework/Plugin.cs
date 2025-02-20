@@ -8,10 +8,14 @@ using YotanModCore.Events;
 namespace HFramework
 {
 	
-	[BepInPlugin("HFramework", "HFramework", "1.0.2")]
+	[BepInPlugin("HFramework", "HFramework", "1.0.3")]
 	[BepInDependency("YotanModCore", "1.5.0")]
 	public class Plugin : BaseUnityPlugin
 	{
+		private bool Loaded = false;
+
+		private int Ticks = 0;
+
 		private void Awake()
 		{
 			PLogger._Logger = Logger;
@@ -40,10 +44,22 @@ namespace HFramework
 
 			Harmony.CreateAndPatchAll(typeof(NpcMovePatches));
 
-			PerformerLoader.Load();
-			ScenesManager.Instance.Init();
-
 			PLogger.LogInfo($"Plugin HFramework is loaded!");
+		}
+
+		private void Update()
+		{
+			if (this.Loaded)
+				return;
+
+			Ticks++;
+
+			if (this.Ticks > 5)
+			{
+				this.Loaded = true;
+				PerformerLoader.Load();
+				ScenesManager.Instance.Init();
+			}
 		}
 	}
 }

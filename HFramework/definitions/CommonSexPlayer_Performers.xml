@@ -109,7 +109,7 @@
 								<string>OnCreampie:Vag</string>
 							</Events>
 						</Animation>
-						<Animation action="FinishIdle" play="Loop" name="A_Finish_00_idle" pose="2" changePose="false" />
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle_00" pose="2" changePose="false" />
 					</Animations>
 				</AnimationSet>
 			</AnimationSets>
