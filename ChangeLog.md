@@ -8,6 +8,13 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.02.27
+
+### EnhanceWorkplaces v0.2.1
+
+- Fix Harvest not working
+
+
 ## 2025.02.19
 
 ### HFramework v1.0.3
