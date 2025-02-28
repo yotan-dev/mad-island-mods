@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EnhanceWorkplaces
 {
-	[BepInPlugin("EnhanceWorkplaces", "EnhanceWorkplaces", "0.2.0")]
+	[BepInPlugin("EnhanceWorkplaces", "EnhanceWorkplaces", "0.2.1")]
 	[BepInDependency("YotanModCore", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
