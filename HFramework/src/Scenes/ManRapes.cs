@@ -248,6 +248,30 @@ namespace HFramework.Scenes
 
 		public override IEnumerator Run()
 		{
+			// If the girl is in another sex scene, we need to interrupt it first or the game will (v0.3.0 fix)
+			if (this.Girl.sex != CommonStates.SexState.None)
+			{
+				var currentAct = this.Girl.nMove.actType;
+
+				this.Girl.nMove.actType = NPCMove.ActType.Idle;
+				float timeOut = 0.1f;
+				while (this.Girl.sex != CommonStates.SexState.None && timeOut > 0f)
+				{
+					timeOut -= Time.deltaTime;
+					yield return null;
+				}
+
+				// while the vanilla doesn't do that, it doesn't make sense to continue after time out,
+				// it simply means the game couldn't get her out of the other sex scene, no mater what.
+				if (timeOut <= 0f && this.Girl.sex != CommonStates.SexState.None)
+				{
+					if (this.Girl.nMove.actType == NPCMove.ActType.Idle)
+						this.Girl.nMove.actType = currentAct;
+
+					yield break;
+				}
+			}
+
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
 			if (this.Performer == null)
 			{
