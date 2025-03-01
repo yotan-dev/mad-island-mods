@@ -8,6 +8,13 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.03.01+1
+
+### ItemSlotColor v1.0.2
+
+- Fix issues when playing EntKing story and add more safety checks to prevet similar issues
+
+
 ## 2025.03.01
 
 ### YotanModCore v1.7.0
