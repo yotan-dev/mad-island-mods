@@ -8,6 +8,18 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.03.01
+
+### YotanModCore v1.7.0
+
+- Added v0.3.0 and v0.3.1 detection
+
+### HFramework v1.0.4
+
+- Fix ManRapes duplicating characters when grappling a girl that is in another sex scene
+  (based on the official fix added in v0.3.0)
+
+
 ## 2025.02.27
 
 ### EnhanceWorkplaces v0.2.1
