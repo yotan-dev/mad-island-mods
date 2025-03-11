@@ -8,6 +8,13 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.03.11+1
+
+### HFramework v1.0.6
+
+- Fixed Man Rapes (R) not working
+
+
 ## 2025.03.11
 
 ### YotanModCore v1.8.0
