@@ -249,7 +249,7 @@ namespace HFramework.Scenes
 		public override IEnumerator Run()
 		{
 			// If the girl is in another sex scene, we need to interrupt it first or the game will (v0.3.0 fix)
-			if (this.Girl.sex != CommonStates.SexState.None)
+			if (this.Girl.sex != CommonStates.SexState.None && this.Girl.faint > 0.0)
 			{
 				var currentAct = this.Girl.nMove.actType;
 
