@@ -14,6 +14,10 @@ Each mod has its own version which follows SemVer.
 
 - Added v0.3.2, v0.3.3 and v0.3.4 detection
 
+### HFramework v1.0.5
+
+- Add faint check on ManRapes - based on official game fix.
+
 
 ## 2025.03.01+1
 
