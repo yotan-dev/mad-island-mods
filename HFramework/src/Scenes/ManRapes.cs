@@ -263,13 +263,15 @@ namespace HFramework.Scenes
 
 				// while the vanilla doesn't do that, it doesn't make sense to continue after time out,
 				// it simply means the game couldn't get her out of the other sex scene, no mater what.
-				if (timeOut <= 0f && this.Girl.sex != CommonStates.SexState.None)
-				{
-					if (this.Girl.nMove.actType == NPCMove.ActType.Idle)
-						this.Girl.nMove.actType = currentAct;
+				// UPDATE: We can't do that or raping anyone that is not already in a sex scene will fail.
+				// @FIXME: We probably should figure out a better way to do it? Still feels wrong to ignore this.
+				// if (timeOut <= 0f && this.Girl.sex != CommonStates.SexState.None)
+				// {
+				// 	if (this.Girl.nMove.actType == NPCMove.ActType.Idle)
+				// 		this.Girl.nMove.actType = currentAct;
 
-					yield break;
-				}
+				// 	yield break;
+				// }
 			}
 
 			this.Performer = ScenesManager.Instance.GetPerformer(this, PerformerScope.Sex, this.Controller);
