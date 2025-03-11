@@ -8,6 +8,13 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.03.11
+
+### YotanModCore v1.8.0
+
+- Added v0.3.2, v0.3.3 and v0.3.4 detection
+
+
 ## 2025.03.01+1
 
 ### ItemSlotColor v1.0.2
