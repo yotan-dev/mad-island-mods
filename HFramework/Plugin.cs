@@ -8,7 +8,7 @@ using YotanModCore.Events;
 namespace HFramework
 {
 	
-	[BepInPlugin("HFramework", "HFramework", "1.0.4")]
+	[BepInPlugin("HFramework", "HFramework", "1.0.5")]
 	[BepInDependency("YotanModCore", "1.5.0")]
 	public class Plugin : BaseUnityPlugin
 	{
