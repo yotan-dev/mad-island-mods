@@ -10,6 +10,8 @@ namespace EnhancedIsland
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
+		
+		public ConfigEntry<bool> EnableDisassembleItems { get; private set; }
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
@@ -21,6 +23,15 @@ namespace EnhancedIsland
 				true,
 				"Enable Requirement Checker enhancement?\n"
 				+ "If true, when looking to craft items, missing requirements will be marked in red.\n"
+				+ "If false, no changes are made to the game.\n"
+			);
+
+			this.EnableDisassembleItems = conf.Bind<bool>(
+				"DisassembleItems",
+				"Enabled",
+				true,
+				"Allow player to disassemble items?\n"
+				+ "If true, player may pess T to break items back into their crafting materials.\n"
 				+ "If false, no changes are made to the game.\n"
 			);
 		}

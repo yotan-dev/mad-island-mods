@@ -31,6 +31,9 @@ namespace EnhancedIsland
 			if (!IsDuplicated("CraftColors"))
 				new RequirementChecker.RequirementChecker().Init();
 
+			if (!IsDuplicated("DisassembleItems"))
+				new DisassembleItems.Main().Init();
+
 			PLogger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 		}
 	}
