@@ -196,7 +196,7 @@ When trying to craft an item, the missing requirements will show in Red.
 Crafted something by mistake? Don't need it any longer? Press `T` and get the materials back.
 
 
-### Enhance Workplaces
+#### Better Workplaces (old: Enhanced Workplaces)
 
 Does some improvements to NPC work.
 
@@ -223,11 +223,6 @@ It currently affects Mining and Logging. When the drop of an item does happen, t
 **(MadIsland v0.1.8 and earlier)** Also, when doing Harvesting, if the NPC has a Fishing rod in their first inventory
 slot, they will first try to collect any Fishtrap that has fishes in it.
 This is officially supported since MadIsland v0.2.0 so the Mod won't do it for newer versions.
-
-
-**Requirements:**
-
-1. Yotan Mod Core must be installed.
 
 
 ### Increase Zoom
