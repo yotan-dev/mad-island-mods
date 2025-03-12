@@ -15,6 +15,8 @@ namespace EnhancedIsland
 
 		public ConfigEntry<bool> EnableIncreaseZoom { get; private set; }
 
+		public ConfigEntry<bool> EnableItemColorInSlot { get; private set; }
+
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -38,6 +40,15 @@ namespace EnhancedIsland
 				true,
 				"Increase zoom out limit?\n"
 				+ "If true, you can zoom out much farther away (Fog still applies).\n"
+				+ "If false, no changes are made to the game.\n"
+			);
+
+			this.EnableItemColorInSlot = conf.Bind<bool>(
+				"ItemColorInSlot",
+				"Enabled",
+				true,
+				"Show bubble with item color on item slots (inventory/equipment/etc)?\n"
+				+ "If true, you will see this visual indicator on those places.\n"
 				+ "If false, no changes are made to the game.\n"
 			);
 

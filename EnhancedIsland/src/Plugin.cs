@@ -7,6 +7,10 @@ namespace EnhancedIsland
 	[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 	[BepInDependency("YotanModCore", BepInDependency.DependencyFlags.HardDependency)]
 	// Soft dependency on old mods to soften the migration process - Rmove later
+	[BepInDependency("EnhanceWorkplaces", BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInDependency("DisassembleItems", BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInDependency("IncreaseZoom", BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInDependency("ItemSlotColor", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("CraftColors", BepInDependency.DependencyFlags.SoftDependency)]
 	public class Plugin : BaseUnityPlugin
 	{
@@ -40,6 +44,9 @@ namespace EnhancedIsland
 
 			if (!IsDuplicated("IncreaseZoom"))
 				new IncreaseZoom.Main().Init();
+
+			if (!IsDuplicated("ItemSlotColor"))
+				new ItemColorInSlot.Main().Init();
 
 			if (!IsDuplicated("CraftColors"))
 				new RequirementChecker.Main().Init();

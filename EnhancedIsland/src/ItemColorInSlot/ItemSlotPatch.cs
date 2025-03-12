@@ -2,7 +2,7 @@ using HarmonyLib;
 using UnityEngine;
 using YotanModCore;
 
-namespace ItemSlotColor
+namespace EnhancedIsland.ItemColorInSlot
 {
 	public class ItemSlotPatch
 	{

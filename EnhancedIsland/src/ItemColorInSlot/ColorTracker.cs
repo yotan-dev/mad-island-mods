@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YotanModCore;
 
-namespace ItemSlotColor
+namespace EnhancedIsland.ItemColorInSlot
 {
 	public class ColorTracker: MonoBehaviour
 	{
