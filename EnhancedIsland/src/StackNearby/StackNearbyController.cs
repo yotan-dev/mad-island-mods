@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using YotanModCore;
 using UnityEngine;
 
-namespace StackNearby
+namespace EnhancedIsland.StackNearby
 {
 	public class StackNearbyController
 	{
@@ -21,13 +21,13 @@ namespace StackNearby
 				yield return null;
 			}
 
-			foreach (var storage in StackNearbyController.Storages) {
+			foreach (var storage in StackNearbyController.Storages!) {
 				var storagePos = storage?.transform?.position;
 				if (storagePos == null) {
 					continue;
 				}
 
-				float dist = Vector3.Distance(fromPos, storage.transform.position);
+				float dist = Vector3.Distance(fromPos, storage!.transform.position);
 				if (dist < 5) {
 					// base.StartCoroutine(this.UseProp(itemData));
 					var inventorySlot = storage.GetComponent<InventorySlot>();

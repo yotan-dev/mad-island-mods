@@ -284,7 +284,7 @@ Enabling this option will make NPCs way stronger than normal,
 so use with care.
 
 
-### Stack nearby
+#### Stack nearby
 
 Press `V` to stack items from your inventory into all nearby chests.
 

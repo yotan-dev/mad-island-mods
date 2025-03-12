@@ -1,7 +1,7 @@
 using HarmonyLib;
 using YotanModCore;
 
-namespace StackNearby
+namespace EnhancedIsland.StackNearby
 {
 	public class BuildInfoPatch
 	{

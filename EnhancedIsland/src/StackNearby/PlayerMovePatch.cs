@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace StackNearby
+namespace EnhancedIsland.StackNearby
 {
 	public class PlayerMovePatch
 	{

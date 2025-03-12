@@ -13,6 +13,7 @@ namespace EnhancedIsland
 	[BepInDependency("ItemSlotColor", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("NpcStats", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("CraftColors", BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInDependency("StackNearby", BepInDependency.DependencyFlags.SoftDependency)]
 	public class Plugin : BaseUnityPlugin
 	{
 		internal static string PluginPath = "";
@@ -54,6 +55,9 @@ namespace EnhancedIsland
 
 			if (!IsDuplicated("CraftColors"))
 				new RequirementChecker.Main().Init();
+
+			if (!IsDuplicated("StackNearby"))
+				new StackNearby.Main().Init();
 
 			PLogger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 		}
