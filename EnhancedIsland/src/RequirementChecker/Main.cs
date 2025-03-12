@@ -2,7 +2,7 @@ using HarmonyLib;
 
 namespace EnhancedIsland.RequirementChecker
 {
-	public class RequirementChecker
+	public class Main
 	{
 		public void Init()
 		{
@@ -10,6 +10,8 @@ namespace EnhancedIsland.RequirementChecker
 				return;
 
 			Harmony.CreateAndPatchAll(typeof(ItemDescriptionPatch));
+
+			PLogger.LogInfo($"Requirement Checker is loaded!");
 		}
 	}
 }
