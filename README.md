@@ -225,7 +225,7 @@ slot, they will first try to collect any Fishtrap that has fishes in it.
 This is officially supported since MadIsland v0.2.0 so the Mod won't do it for newer versions.
 
 
-### Increase Zoom
+#### Increase Zoom
 
 Allows you to zoom out much further.
 

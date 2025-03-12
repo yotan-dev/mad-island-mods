@@ -38,6 +38,9 @@ namespace EnhancedIsland
 			if (!IsDuplicated("DisassembleItems"))
 				new DisassembleItems.Main().Init();
 
+			if (!IsDuplicated("IncreaseZoom"))
+				new IncreaseZoom.Main().Init();
+
 			if (!IsDuplicated("CraftColors"))
 				new RequirementChecker.Main().Init();
 

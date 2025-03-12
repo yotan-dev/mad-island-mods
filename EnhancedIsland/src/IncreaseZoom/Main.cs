@@ -1,18 +1,18 @@
-﻿using BepInEx;
-using HarmonyLib;
+﻿using HarmonyLib;
 using UnityEngine;
 
-namespace IncreaseZoom
+namespace EnhancedIsland.IncreaseZoom
 {
-	
-	[BepInPlugin("IncreaseZoom", "IncreaseZoom", "1.0.0")]
-	public class Plugin : BaseUnityPlugin
+	public class Main
 	{
-		private void Awake()
+		internal void Init()
 		{
-			Harmony.CreateAndPatchAll(typeof(Plugin));
+			if (!PConfig.Instance.EnableIncreaseZoom.Value)
+				return;
 
-			Logger.LogInfo($"Plugin Increase Zoom is loaded!");
+			Harmony.CreateAndPatchAll(typeof(Main));
+
+			PLogger.LogInfo($"Increase Zoom is loaded!");
 		}
 
 		[HarmonyPostfix]
