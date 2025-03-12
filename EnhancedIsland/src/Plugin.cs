@@ -11,6 +11,7 @@ namespace EnhancedIsland
 	[BepInDependency("DisassembleItems", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("IncreaseZoom", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("ItemSlotColor", BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInDependency("NpcStats", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("CraftColors", BepInDependency.DependencyFlags.SoftDependency)]
 	public class Plugin : BaseUnityPlugin
 	{
@@ -47,6 +48,9 @@ namespace EnhancedIsland
 
 			if (!IsDuplicated("ItemSlotColor"))
 				new ItemColorInSlot.Main().Init();
+
+			if (!IsDuplicated("NpcStats"))
+				new NpcStats.Main().Init();
 
 			if (!IsDuplicated("CraftColors"))
 				new RequirementChecker.Main().Init();

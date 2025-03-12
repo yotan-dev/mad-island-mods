@@ -1,4 +1,4 @@
-namespace NpcStats.Config
+namespace EnhancedIsland.NpcStats.Config
 {
 	public enum DistributionMode
 	{

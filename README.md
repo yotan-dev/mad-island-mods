@@ -241,28 +241,18 @@ Adds item color marker to item slots. Only for items that are dyeable.
 ![alt text](docs/imgs/slotcolor.png)
 
 
-### NPC Stats
-
-> [!TIP]
-> If you are playing on Mad Island version earlier than v0.2.7, you will need to compile it yourself.
-> Or search for the right release.
-> 
+#### NPC Stats
 
 Properly give stats points to NPCs in different moments.
-
 
 I made this mod because I noticed that high level captured NPCs or new borns were too weak,
 making more sense to level one from the scratch.
 This makes them get real points and randomly distributes them.
 
-#### Requirements
-
-1. Yotan Mod Core must be installed.
-
 #### Configuration
 
-After you start the game with NPC Stats installed once, a config file will be created,
-located at `BepInEx/config/NpcStats.cfg`. You can edit it and change the way stats are distributed.
+After you start the game with Enhanced Island installed once, a config file will be created,
+located at `BepInEx/config/EnhancedIsland.cfg`. You can edit it and change the way stats are distributed.
 
 **Distribution mode:** How points are distributed.
 

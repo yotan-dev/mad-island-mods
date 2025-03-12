@@ -17,6 +17,8 @@ namespace EnhancedIsland
 
 		public ConfigEntry<bool> EnableItemColorInSlot { get; private set; }
 
+		public NpcStats.Config.PConfig NpcStats { get { return EnhancedIsland.NpcStats.Config.PConfig.Instance; } }
+
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
@@ -24,6 +26,7 @@ namespace EnhancedIsland
 		internal void Init(ConfigFile conf)
 		{
 			this.BetterWorkplaces.Init(conf);
+			this.NpcStats.Init(conf);
 
 			this.EnableDisassembleItems = conf.Bind<bool>(
 				"DisassembleItems",

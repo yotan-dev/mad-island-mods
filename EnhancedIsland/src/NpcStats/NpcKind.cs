@@ -1,4 +1,4 @@
-namespace NpcStats
+namespace EnhancedIsland.NpcStats
 {
 	public enum NpcKind
 	{

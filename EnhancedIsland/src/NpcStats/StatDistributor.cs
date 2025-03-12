@@ -1,8 +1,8 @@
-using NpcStats.Config;
+using EnhancedIsland.NpcStats.Config;
 using YotanModCore;
 using YotanModCore.Consts;
 
-namespace NpcStats
+namespace EnhancedIsland.NpcStats
 {
 	public class StatDistributor
 	{
@@ -94,31 +94,31 @@ namespace NpcStats
 			{
 				case NpcKind.Enemy:
 					{
-						DistributionMode mode = PConfig.Instance.EnemiesDistribution.Value;
+						DistributionMode mode = Config.PConfig.Instance.EnemiesDistribution.Value;
 						if (mode == DistributionMode.ForceLevel1 || mode == DistributionMode.Keep)
 						{
 							PLogger.LogError($"RedistributeStats: {mode} is not supported for enemies. Swithcing to random");
 							mode = DistributionMode.Random;
 						}
 
-						StatDistributor.RedistributeStats(common, mode, PConfig.Instance.ExtraStrongEnemies.Value);
+						StatDistributor.RedistributeStats(common, mode, Config.PConfig.Instance.ExtraStrongEnemies.Value);
 					}
 					break;
 
 				case NpcKind.Tamed:
-					StatDistributor.RedistributeStats(common, PConfig.Instance.TamedNpcDistribution.Value, PConfig.Instance.ExtraStrongTamedNpc.Value);
+					StatDistributor.RedistributeStats(common, Config.PConfig.Instance.TamedNpcDistribution.Value, Config.PConfig.Instance.ExtraStrongTamedNpc.Value);
 					break;
 
 				case NpcKind.Newborn:
 					{
-						DistributionMode mode = PConfig.Instance.EnemiesDistribution.Value;
+						DistributionMode mode = Config.PConfig.Instance.EnemiesDistribution.Value;
 						if (mode == DistributionMode.Keep)
 						{
 							PLogger.LogError($"RedistributeStats: {mode} is not supported for newborns. Swithcing to random");
 							mode = DistributionMode.Random;
 						}
 
-						StatDistributor.RedistributeStats(common, mode, PConfig.Instance.ExtraStrongNewborns.Value);
+						StatDistributor.RedistributeStats(common, mode, Config.PConfig.Instance.ExtraStrongNewborns.Value);
 					}
 					break;
 				default:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HarmonyLib;
 using YotanModCore;
 
-namespace NpcStats.Patches
+namespace EnhancedIsland.NpcStats.Patches
 {
 	public class NpcSpawnPatch
 	{
