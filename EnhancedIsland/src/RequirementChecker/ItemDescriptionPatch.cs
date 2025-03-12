@@ -3,7 +3,7 @@ using HarmonyLib;
 using UnityEngine.UI;
 using TMPro;
 
-namespace EnhancedIsland.CraftColors
+namespace EnhancedIsland.RequirementChecker
 {
 	public class ItemDescriptionPatch
 	{

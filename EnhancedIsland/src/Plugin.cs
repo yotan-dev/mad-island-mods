@@ -1,4 +1,5 @@
-﻿using BepInEx;
+﻿using System.IO;
+using BepInEx;
 using BepInEx.Bootstrap;
 
 namespace EnhancedIsland
@@ -9,6 +10,8 @@ namespace EnhancedIsland
 	[BepInDependency("CraftColors", BepInDependency.DependencyFlags.SoftDependency)]
 	public class Plugin : BaseUnityPlugin
 	{
+		internal static string PluginPath = "";
+
 		/// <summary>
 		/// Temporary safety check for people who forget to delete the old plugins
 		/// </summary>
@@ -25,6 +28,7 @@ namespace EnhancedIsland
 
 		private void Awake()
 		{
+			PluginPath = Path.GetDirectoryName(this.Info.Location);
 			PLogger._Logger = base.Logger;
 			PConfig.Instance.Init(Config);
 

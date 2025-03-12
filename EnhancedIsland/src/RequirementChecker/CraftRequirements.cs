@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using YotanModCore;
 
-namespace EnhancedIsland.CraftColors
+namespace EnhancedIsland.RequirementChecker
 {
 	public class CraftRequirements
 	{
