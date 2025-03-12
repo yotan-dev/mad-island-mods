@@ -19,7 +19,7 @@ namespace EnhancedIsland.DisassembleItems
 		public static Dictionary<string, DisassembleItem[]> Table = [];
 
 		public static void Init() {
-			var json = File.ReadAllText("BepInEx/plugins/DisassembleItems/DisassembleTable.json");
+			var json = File.ReadAllText(Path.Combine(Plugin.PluginPath, "DisassembleTable.json"));
 			var fileTable = SimpleJSON.JSON.Parse(json);
 
 			Table = [];

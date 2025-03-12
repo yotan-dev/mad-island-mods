@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 
 namespace EnhancedIsland.DisassembleItems
 {	
@@ -9,10 +10,15 @@ namespace EnhancedIsland.DisassembleItems
 			if (!PConfig.Instance.EnableDisassembleItems.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(DisassembleItemsPatch));
-			DisassembleTable.Init();
+			try {
+				Harmony.CreateAndPatchAll(typeof(DisassembleItemsPatch));
+				DisassembleTable.Init();
 
-			PLogger.LogInfo($"Disassemble Items enabled!");
+				PLogger.LogInfo($"Disassemble Items enabled!");
+			} catch (Exception e) {
+				PLogger.LogError("Failed to enable Disassemble Items!");
+				PLogger.LogError(e);
+			}
 		}
 	}
 }
