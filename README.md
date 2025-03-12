@@ -191,14 +191,9 @@ When trying to craft an item, the missing requirements will show in Red.
 ![craft](docs/imgs/craft.png)
 
 
-
-### Disassemble Items
+#### Disassemble Items
 
 Crafted something by mistake? Don't need it any longer? Press `T` and get the materials back.
-
-**Requirements:**
-
-1. Yotan Mod Core must be installed.
 
 
 ### Enhance Workplaces
