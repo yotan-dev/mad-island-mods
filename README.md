@@ -126,6 +126,9 @@ HExtensions and Gallery plugins makes extensive use of it.
 
 ### HExtensions
 
+> [!WARNING]
+> This plugin is a work in progress. It only supports very few things right now.
+
 Provides some modifications for H-Scenes. As explained below.
 
 #### Require Foreplay
@@ -167,15 +170,26 @@ By far the most ambitious of those mods. This implements a Gallery of game scene
 Progress is tracked in "GalleryState.xml" in Mad Islands root folder. This file is not saved to Steam Cloud.
 
 
-### Craft Colors
+### Enhanced Island
 
-Shows what is missing to craft an item in Red.
+This mod provides several enhancements/minor changes to the game. It is highly configurable and each feature may be turned on/off at your will.
 
-![craft](docs/imgs/craft.png)
+They are all enabled by default and using configurations that I like, so it is recommended to take a look before you play with it.
+
+To configure, first install the mod and run Mad Island once. After that, you can change the settings on `BepInEx/config/EnhancedIsland.json`
+or using [BepInEx Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager) -- Restart the game after changing.
+
 
 **Requirements:**
 
-1. Yotan Mod Core must be installed.
+1. Requires YotanModCore installed.
+
+
+#### Requirement checker (old: Craft Colors)
+When trying to craft an item, the missing requirements will show in Red.
+
+![craft](docs/imgs/craft.png)
+
 
 
 ### Disassemble Items
