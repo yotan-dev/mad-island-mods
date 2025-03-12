@@ -32,11 +32,14 @@ namespace EnhancedIsland
 			PLogger._Logger = base.Logger;
 			PConfig.Instance.Init(Config);
 
-			if (!IsDuplicated("CraftColors"))
-				new RequirementChecker.RequirementChecker().Init();
+			if (!IsDuplicated("EnhanceWorkplaces"))
+				new BetterWorkplaces.Main().Init();
 
 			if (!IsDuplicated("DisassembleItems"))
 				new DisassembleItems.Main().Init();
+
+			if (!IsDuplicated("CraftColors"))
+				new RequirementChecker.Main().Init();
 
 			PLogger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 		}

@@ -9,6 +9,8 @@ namespace EnhancedIsland
 		// Not worth fighting with this error for configs, as they will all be initialized at program startup.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
+		public BetterWorkplaces.PConfig BetterWorkplaces { get { return EnhancedIsland.BetterWorkplaces.PConfig.Instance; } }
+
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
 		
 		public ConfigEntry<bool> EnableDisassembleItems { get; private set; }
@@ -17,6 +19,8 @@ namespace EnhancedIsland
 
 		internal void Init(ConfigFile conf)
 		{
+			this.BetterWorkplaces.Init(conf);
+
 			this.EnableRequirementChecker = conf.Bind<bool>(
 				"RequirementChecker",
 				"Enabled",
