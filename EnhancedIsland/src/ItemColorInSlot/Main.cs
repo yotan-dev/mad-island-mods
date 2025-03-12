@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 
 namespace EnhancedIsland.ItemColorInSlot
 {
@@ -10,9 +11,14 @@ namespace EnhancedIsland.ItemColorInSlot
 			if (!PConfig.Instance.EnableItemColorInSlot.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(ItemSlotPatch));
+			try {
+				Harmony.CreateAndPatchAll(typeof(ItemSlotPatch));
 
-			PLogger.LogInfo($"Item Color in Slot is loaded!");
+				PLogger.LogInfo($"Item Color in Slot is loaded!");
+			} catch (Exception e) {
+				PLogger.LogInfo("Failed to enable Item COlor in Slot");
+				PLogger.LogError(e);
+			}
 		}
 	}
 }

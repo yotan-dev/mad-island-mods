@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 
 namespace EnhancedIsland.WarpBody
 {
@@ -9,9 +10,14 @@ namespace EnhancedIsland.WarpBody
 			if (!PConfig.Instance.EnableWarpBody.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(PlayerMovePatch));
+			try {
+				Harmony.CreateAndPatchAll(typeof(PlayerMovePatch));
 
-			PLogger.LogInfo($"Warp Body is loaded!");
+				PLogger.LogInfo($"Warp Body is enabled");
+			} catch (Exception e) {
+				PLogger.LogError("Failed to enable Warp Body");
+				PLogger.LogError(e);
+			}
 		}
 	}
 }

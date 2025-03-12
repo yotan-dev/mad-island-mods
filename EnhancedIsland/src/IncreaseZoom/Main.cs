@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 using UnityEngine;
 
 namespace EnhancedIsland.IncreaseZoom
@@ -10,9 +11,14 @@ namespace EnhancedIsland.IncreaseZoom
 			if (!PConfig.Instance.EnableIncreaseZoom.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(Main));
+			try {
+				Harmony.CreateAndPatchAll(typeof(Main));
 
-			PLogger.LogInfo($"Increase Zoom is loaded!");
+				PLogger.LogInfo($"Increase Zoom is enabled");
+			} catch (Exception e) {
+				PLogger.LogError("Failed to enable Increase Zoom");
+				PLogger.LogError(e);
+			}
 		}
 
 		[HarmonyPostfix]

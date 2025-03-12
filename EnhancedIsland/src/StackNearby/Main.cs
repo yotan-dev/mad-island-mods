@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 
 namespace EnhancedIsland.StackNearby
 {
@@ -9,10 +10,15 @@ namespace EnhancedIsland.StackNearby
 			if (!PConfig.Instance.EnableStackNearby.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(BuildInfoPatch));
-			Harmony.CreateAndPatchAll(typeof(PlayerMovePatch));
+			try {
+				Harmony.CreateAndPatchAll(typeof(BuildInfoPatch));
+				Harmony.CreateAndPatchAll(typeof(PlayerMovePatch));
 
-			PLogger.LogInfo($"Stack Nearby is loaded!");
+				PLogger.LogInfo($"Stack Nearby is loaded!");
+			} catch (Exception e) {
+				PLogger.LogError("Failed to enable stack nearby");
+				PLogger.LogError(e);
+			}
 		}
 	}
 }

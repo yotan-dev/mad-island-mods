@@ -14,9 +14,9 @@ namespace EnhancedIsland.DisassembleItems
 				Harmony.CreateAndPatchAll(typeof(DisassembleItemsPatch));
 				DisassembleTable.Init();
 
-				PLogger.LogInfo($"Disassemble Items enabled!");
+				PLogger.LogInfo($"Disassemble Items enabled");
 			} catch (Exception e) {
-				PLogger.LogError("Failed to enable Disassemble Items!");
+				PLogger.LogError("Failed to enable Disassemble Items");
 				PLogger.LogError(e);
 			}
 		}

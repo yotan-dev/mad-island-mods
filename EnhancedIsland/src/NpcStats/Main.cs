@@ -1,4 +1,5 @@
-﻿using EnhancedIsland.NpcStats.Patches;
+﻿using System;
+using EnhancedIsland.NpcStats.Patches;
 using HarmonyLib;
 
 namespace EnhancedIsland.NpcStats
@@ -10,9 +11,14 @@ namespace EnhancedIsland.NpcStats
 			if (!Config.PConfig.Instance.Enabled.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(NpcSpawnPatch));
+			try {
+				Harmony.CreateAndPatchAll(typeof(NpcSpawnPatch));
 
-			PLogger.LogInfo($"NpcStats is loaded!");
+				PLogger.LogInfo($"Npc Stats enabled");
+			} catch (Exception e) {
+				PLogger.LogError("Failed to enable Npc Stats");
+				PLogger.LogError(e);
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System;
+using HarmonyLib;
 
 namespace EnhancedIsland.BetterWorkplaces
 {
@@ -9,9 +10,14 @@ namespace EnhancedIsland.BetterWorkplaces
 			if (!PConfig.Instance.Enabled.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(WorkResultPatch));
+			try {
+				Harmony.CreateAndPatchAll(typeof(WorkResultPatch));
 
-			PLogger.LogInfo($"Better Workplaces is loaded!");
+				PLogger.LogInfo($"Better Workplaces is enabled");
+			} catch (Exception e) {
+				PLogger.LogError("Failed to enable Better Workplaces");
+				PLogger.LogError(e);
+			}
 		}
 	}
 }

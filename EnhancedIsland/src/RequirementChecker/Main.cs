@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 
 namespace EnhancedIsland.RequirementChecker
@@ -9,9 +10,14 @@ namespace EnhancedIsland.RequirementChecker
 			if (!PConfig.Instance.EnableRequirementChecker.Value)
 				return;
 
-			Harmony.CreateAndPatchAll(typeof(ItemDescriptionPatch));
+			try {
+				Harmony.CreateAndPatchAll(typeof(ItemDescriptionPatch));
 
-			PLogger.LogInfo($"Requirement Checker is loaded!");
+				PLogger.LogInfo("Requirement Checker is enabled");
+			} catch (Exception e) {
+				PLogger.LogError("Failed to load Requirement Checker");
+				PLogger.LogError(e);
+			}
 		}
 	}
 }
