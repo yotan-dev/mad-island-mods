@@ -29,7 +29,7 @@ namespace EnhancedIsland
 			PConfig.Instance.Init(Config);
 
 			if (!IsDuplicated("CraftColors"))
-				new CraftColors.CraftColors().Init();
+				new RequirementChecker.RequirementChecker().Init();
 
 			PLogger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 		}
