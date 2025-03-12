@@ -4,6 +4,7 @@ New-Item -ItemType Directory -Path Release
 function Build-Plugin {
 	param (
 		$path,
+		$OutFolder,
 		[string[]]$OutFile
 	)
 	Write-Output ""
@@ -12,16 +13,19 @@ function Build-Plugin {
 	Write-Output ""
 	foreach ($file in $OutFile) {
 		Write-Output "================= Copying $file =============="
-		Copy-Item "$path/bin/Debug/netstandard2.1/$file" -Destination "Release/$file"
+		Copy-Item "$path/bin/Debug/netstandard2.1/$file" -Destination "Release/$OutFolder/$file"
 		Write-Output ""
 	}
 	Write-Output "======================================================"
 }
 
-Build-Plugin "YotanModCore" -OutFile "YotanModCore.dll"
-Build-Plugin "HFramework" -OutFile "HFramework.dll"
+Build-Plugin "YotanModCore" -OutFolder / -OutFile "YotanModCore.dll"
+Build-Plugin "HFramework" -OutFolder / -OutFile "HFramework.dll"
 
-Build-Plugin "EnhancedIsland" -OutFile "EnhancedIsland.dll"
-Build-Plugin "Gallery" -OutFile "Gallery.dll"
-Build-Plugin "HExtensions" -OutFile "HExtensions.dll"
-Build-Plugin "YoUnnoficialPatches" -OutFile "YoUnnoficialPatches.dll"
+New-Item -ItemType Directory -Path Release/EnhancedIsland
+Build-Plugin "EnhancedIsland" -OutFolder /EnhancedIsland/ -OutFile "EnhancedIsland.dll"
+Copy-Item "EnhancedIsland/assets/*" -Destination "Release/EnhancedIsland/" -Recurse
+
+Build-Plugin "Gallery" -OutFolder / -OutFile "Gallery.dll"
+Build-Plugin "HExtensions" -OutFolder / -OutFile "HExtensions.dll"
+Build-Plugin "YoUnnoficialPatches" -OutFolder / -OutFile "YoUnnoficialPatches.dll"
