@@ -14,6 +14,7 @@ namespace EnhancedIsland
 	[BepInDependency("NpcStats", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("CraftColors", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("StackNearby", BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInDependency("WarpBody", BepInDependency.DependencyFlags.SoftDependency)]
 	public class Plugin : BaseUnityPlugin
 	{
 		internal static string PluginPath = "";
@@ -58,6 +59,9 @@ namespace EnhancedIsland
 
 			if (!IsDuplicated("StackNearby"))
 				new StackNearby.Main().Init();
+
+			if (!IsDuplicated("WarpBody"))
+				new WarpBody.Main().Init();
 
 			PLogger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
 		}

@@ -291,15 +291,11 @@ Press `V` to stack items from your inventory into all nearby chests.
 **Note:** It lags a bit
 
 
-### Warp body
+#### Warp body
 
 Press `P` while checking the inventory of a body to warp them to the nearest "respawn" point.
 
 Useful when you get a pile of body near your base.
-
-**Requirements:**
-
-1. Yotan Mod Core must be installed.
 
 
 ### YoUnnoficialPatches

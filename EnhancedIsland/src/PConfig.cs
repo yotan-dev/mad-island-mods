@@ -23,6 +23,8 @@ namespace EnhancedIsland
 		
 		public ConfigEntry<bool> EnableStackNearby { get; private set; }
 
+		public ConfigEntry<bool> EnableWarpBody { get; private set; }
+
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 		internal void Init(ConfigFile conf)
@@ -72,6 +74,15 @@ namespace EnhancedIsland
 				true,
 				"Enable Stack Nearby enhancement?\n"
 				+ "If true, you may press V to stack items from inventory into nearby containers.\n"
+				+ "If false, no changes are made to the game.\n"
+			);
+
+			this.EnableWarpBody = conf.Bind<bool>(
+				"WarpBody",
+				"Enabled",
+				true,
+				"Enable Warp Body enhancement?\n"
+				+ "If true, you may press P to warp the selected body to the closest \"garbage\" area.\n"
 				+ "If false, no changes are made to the game.\n"
 			);
 		}

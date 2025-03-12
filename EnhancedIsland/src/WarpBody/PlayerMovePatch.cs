@@ -2,7 +2,7 @@ using HarmonyLib;
 using UnityEngine;
 using YotanModCore;
 
-namespace WarpBody
+namespace EnhancedIsland.WarpBody
 {
 	internal class PlayerMovePatch
 	{
