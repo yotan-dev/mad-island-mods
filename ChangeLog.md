@@ -8,6 +8,60 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.03.12
+
+> [!WARNING]
+> On this version, the following mods merged into the new "EnhancedIsland" mod:
+> 
+> - EnhanceWorkplaces (now named Better Workplaces)
+> - DisassembleItems
+> - IncreaseZoom
+> - ItemSlotColor (now named Item Color in Slot)
+> - NpcStats
+> - CraftColors (now named Requirement Checker)
+> - StackNearby
+> - WarpBody
+>
+> All of them are enabled by default, but you can disable each one separately in order to go back to your previous setup.
+>
+> When EnhancedIsland detects any of those installed, it won't load the one from EnhancedIsland,
+> but this safety check will be removed in the near feature.
+> 
+> Please take a few minutes to do that and delete the old ones.
+>
+> Check the main README of the repository for details.
+
+### ⭐ EnhancedIsland v1.0.0 [NEW]
+
+Packs all the enhancements mods listed above. This initial release does not contain any
+new change other than the configuration to enable/disable each change.
+
+
+### ❌ EnhanceWorkplaces [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+### ❌ DisassembleItems [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+### ❌ IncreaseZoom [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+### ❌ ItemSlotColor [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+### ❌ NpcStats [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+### ❌ CraftColors [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+### ❌ StackNearby [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+### ❌ WarpBody [Replaced/Discontinued]
+Replaced by Enhanced Island. Move to it.
+
+
 ## 2025.03.11+1
 
 ### HFramework v1.0.6
