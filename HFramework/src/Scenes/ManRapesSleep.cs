@@ -242,12 +242,12 @@ namespace HFramework.Scenes
 		{
 			this.MenuPanel.Hide();
 
-			this.TmpCommonSub = 1;
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
 
 			yield return this.Performer.Perform(ActionType.Speed1);
+			this.TmpCommonSub = 1;
 
 			this.MenuPanel.Show();
 			this.MenuPanel.ShowInsertMenu(this.TmpCommonState == ManRapeSleepState.SleepPowder);
@@ -255,10 +255,15 @@ namespace HFramework.Scenes
 
 		private IEnumerator OnSpeed()
 		{
-			if (this.Performer.CurrentAction == ActionType.Speed2)
+			if (this.Performer.CurrentAction == ActionType.Speed2) {
+				if (this.TmpCommonState != ManRapeSleepState.ForcefullRape)
+					this.TmpCommonSub = 2;
 				yield return this.Performer.Perform(ActionType.Speed1);
-			else
+			} else {
+				if (this.TmpCommonState != ManRapeSleepState.ForcefullRape)
+					this.TmpCommonSub = 1;
 				yield return this.Performer.Perform(ActionType.Speed2);
+			}
 		}
 
 		private IEnumerator OnSpeed2()
@@ -272,6 +277,7 @@ namespace HFramework.Scenes
 		private IEnumerator OnFinish()
 		{
 			this.MenuPanel.Hide();
+			this.TmpCommonSub = 0;
 
 			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
 				this.Girl.faint = 0.0;
@@ -282,10 +288,10 @@ namespace HFramework.Scenes
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 
-			this.TmpCommonSub = 0;
-
-			this.MenuPanel.Show();
-			this.MenuPanel.ShowFinishMenu();
+			if (this.TmpCommonSub != 5) {
+				this.MenuPanel.Show();
+				this.MenuPanel.ShowFinishMenu();
+			}
 		}
 
 		private IEnumerator OnLeave()
@@ -300,7 +306,7 @@ namespace HFramework.Scenes
 			{
 				if (this.TmpCommonSub == 2)
 				{
-					this.NoticeTime += Time.deltaTime * 2f;
+					this.NoticeTime += Time.deltaTime * 1.5f;
 				}
 				else
 				{
