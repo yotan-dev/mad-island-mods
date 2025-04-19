@@ -75,7 +75,11 @@ namespace HFramework.Scenes
 				yield break;
 
 			CapsuleCollider coll = npc.GetComponent<CapsuleCollider>();
-			if (coll != null)
+			// About the faint check: This is part of official v0.4.0 code.
+			// Dead/Fainted characters have their RigidBody set to kinect and colliders off,
+			// so skipping colliders when the target is fainted is actually how the game expects it to be
+			// (Maybe this is for some sort of optimization?)
+			if (coll != null && npc.faint > 0.0)
 				coll.enabled = true;
 
 			MeshRenderer mesh = npc.anim.GetComponent<MeshRenderer>();
