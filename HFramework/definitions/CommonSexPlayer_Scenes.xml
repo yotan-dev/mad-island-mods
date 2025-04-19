@@ -56,6 +56,40 @@
 				</Performer>
 				<!-- End of Man x Reika -->
 
+				<!-- Man x Nami -->
+
+				<!-- Blackmail / Reverse cowgirl -->
+				<Performer id="HF_Man_Nami_Friendly_ver1">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="in">
+							<Values>
+								<Value>2</Value>
+								<Value>3</Value>
+							</Values>
+						</Condition>
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="eq" value="3" />
+					</PerformConditions>
+				</Performer>
+
+				<Performer id="HF_Man_Nami_Friendly_ver2">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="in">
+							<Values>
+								<Value>2</Value>
+								<Value>3</Value>
+							</Values>
+						</Condition>
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="eq" value="2" />
+					</PerformConditions>
+				</Performer>
+
+
+				<!-- End of Man x Nami -->
+
 				<Performer id="HF_Man_FemaleNative_Friendly_Normal">
 					<StartConditions>
 						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
@@ -179,6 +213,16 @@
 				<!-- End of Sally -->
 
 				<Performer id="HF_Man_Merry_Friendly_Normal" />
+
+				<Performer id="HF_Yona_Nami_Friendly">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiYona" compare="eq" value="1" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiYona" compare="eq" value="1" />
+					</PerformConditions>
+				</Performer>
+
 				<Performer id="HF_Yona_MaleNative_Friendly_Normal" />
 				<Performer id="HF_Yona_BigNative_Friendly_Normal" />
 				<Performer id="HF_Yona_SmallNative_Friendly_Normal" />

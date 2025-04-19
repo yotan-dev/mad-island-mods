@@ -82,13 +82,32 @@ namespace HFramework.Scenes
 			return this.Player.life > 0.0 && this.Npc.life > 0.0;
 		}
 
+		private void SetupTmpSexYonaNami()
+		{
+			Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, null);
+			CommonStates tmpSexCommon = this.TmpSex.GetComponent<CommonStates>();
+			if (tmpSexCommon != null)
+			{
+				Managers.mn.randChar.CopyParams(this.Npc, tmpSexCommon);
+				Managers.mn.randChar.LoadGenGirl(this.TmpSex, false, RandomCharacter.LoadType.G2);
+				AnimationFX sexPlaceAnimFx = tmpSexCommon.anim.GetComponent<AnimationFX>();
+				sexPlaceAnimFx.voiceID = this.Player.voiceID;
+				sexPlaceAnimFx.voice2ID = this.Npc.voiceID;
+			}
+		}
+
 		private void SetupTmpSex()
 		{
 			if (this.Player.npcID == NpcID.Yona)
 			{
 				// NOTE: right know, all Yona scenes are with humans. Maybe this will change later...
+				//       As of v0.4.0, Nami is an exception for SetCharacter
 				// NPC IDs (as of v0.2.3): 10, 11, 12, 91
-				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
+				// NPC IDs (as of v0.4.0): + 6
+				if (this.Npc.npcID == NpcID.Nami)
+					this.SetupTmpSexYonaNami();
+				else
+					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
 			}
 			else
 			{
