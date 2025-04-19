@@ -18,6 +18,16 @@
 						<Condition xsi:type="FaintCheck" actor="Yona#0" value="true" />
 					</PerformConditions>
 				</Performer>
+				<!-- This is in v0.4.0 code but doesn't work yet
+				<Performer id="HF_Man_Nami_Rape">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="Nami#6" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="Nami#6" value="false" />
+					</PerformConditions>
+				</Performer>
+				-->
 				<Performer id="HF_Man_FemaleNative_Rape_Fainted">
 					<StartConditions>
 						<Condition xsi:type="FaintCheck" actor="FemaleNative#15" value="true" />
