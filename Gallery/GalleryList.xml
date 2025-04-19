@@ -249,6 +249,44 @@
 					</Controller>
 				</Scene>
 
+				<!-- Nami -->
+				<Scene name="[npc1] sex with [npc0] (ver1)">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="Nami#6" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Nami_Friendly_ver1</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+				<Scene name="[npc1] sex with [npc0] (ver2)">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="Nami#6" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Nami_Friendly_ver2</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+				<Scene name="[npc1] sex with [npc0]">
+					<Actors>
+						<Actor val="Yona#0" />
+						<Actor val="Nami#6" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_Nami_Friendly</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
 				<!-- Female Native -->
 				<Scene name="[npc1] sex with [npc0]">
 					<Actors>
@@ -590,6 +628,19 @@
 						<PerformerId>HF_Man_Yona_Rape</PerformerId>
 					</Controller>
 				</Scene>
+
+				<!-- Nami -->
+				<!-- While present in code in v0.4.0, it doesn't work
+				<Scene name="[npc0] rapes [npc1]" minVersion="0.4.0">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="Nami#6" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_Nami_Rape</PerformerId>
+					</Controller>
+				</Scene>
+				-->
 
 				<!-- Female Native -->
 				<Scene name="[npc0] rapes [npc1]">
