@@ -674,7 +674,7 @@
 			</Scopes>
 			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="15" objIndex="0" />
 			<Actors>
-				<Actor val="Man#1" />
+				<Actor val="Yona#0" />
 				<Actor val="Nami#6" />
 			</Actors>
 			<AnimationSets>
@@ -684,7 +684,7 @@
 						<Animation action="Caress" play="Loop" name="A_Contact_01" />
 						<Animation action="Insert" play="Once" name="">
 							<Events>
-								<string>OnPenetrate:Vag</string>
+								<string>OnScissor</string>
 							</Events>
 						</Animation>
 						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
@@ -692,7 +692,8 @@
 						<Animation action="Finish" play="Once" name="A_Finish">
 							<Events>
 								<string>OnOrgasm</string>
-								<string>OnCreampie:Vag</string>
+								<!-- Note: On v0.4.0 it does count as creampie, but it doesn't make sense -->
+								<!-- <string>OnCreampie:Vag</string> -->
 							</Events>
 						</Animation>
 						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
