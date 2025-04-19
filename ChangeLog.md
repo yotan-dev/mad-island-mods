@@ -8,6 +8,33 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.04.19
+
+All plugins rebuilt to target Beta v0.4.0.
+
+### YotanModCore v1.8.1
+
+- **(For developers)** Add v0.4.0 detection
+
+
+### HFramework v1.0.7
+
+- Updates to match official version
+  - Added Nami's sex scenes
+  - Updated some checks in ManRapes, ManRapesSleep and PlayerRaped
+- **Note:** HFramework slightly deviates from the official code,
+  as the official version counts Yona x Nami orgasm as a Creampie,
+  which seems wrong...
+
+
+#### Gallery v1.0.1
+
+- Added detection of new Nami's sex scenes
+  - Note: Due to an old bug that was found today, the scenes are likely to
+  not play in Gallery, this will eventually be fixed.
+  But this version tracks and unlocks the scenes.
+
+
 ## 2025.03.12
 
 > [!WARNING]
