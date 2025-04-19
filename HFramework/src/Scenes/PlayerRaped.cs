@@ -55,6 +55,8 @@ namespace HFramework.Scenes
 				coll.enabled = false;
 			if (mesh != null)
 				mesh.enabled = false;
+
+			Managers.mn.randChar.HandItemHide(npc, true);
 		}
 
 		private void EnableLiveNpc(CommonStates npc)
@@ -69,6 +71,8 @@ namespace HFramework.Scenes
 			CapsuleCollider coll = npc.GetComponent<CapsuleCollider>();
 			if (coll != null)
 				coll.enabled = true;
+
+			Managers.mn.randChar.HandItemHide(npc, false);
 		}
 
 		private void DisableLivePlayer(CommonStates player)
@@ -77,6 +81,8 @@ namespace HFramework.Scenes
 			MeshRenderer toMesh = player.anim.GetComponent<MeshRenderer>();
 			toColl.enabled = false;
 			toMesh.enabled = false;
+
+			Managers.mn.randChar.HandItemHide(player, true);
 		}
 
 		private void EnableLivePlayer(CommonStates player, bool isRespawn)
@@ -91,6 +97,8 @@ namespace HFramework.Scenes
 				MeshRenderer toMesh = player.anim.GetComponent<MeshRenderer>();
 				toMesh.enabled = true;
 			}
+
+			Managers.mn.randChar.HandItemHide(player, true);
 		}
 
 		private GameObject GetScene(PerformerScope scope)
