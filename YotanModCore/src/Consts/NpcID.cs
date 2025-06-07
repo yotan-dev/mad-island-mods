@@ -10,9 +10,9 @@ namespace YotanModCore.Consts
 		[StrVal("Man")]
 		public const int Man = 1;
 		[StrVal("Riona")]
-		public const int Riona = 2;
+		public const int Riona = 2; // DLC
 		[StrVal("Little & Nickey")]
-		public const int LittleNickey = 3;
+		public const int LittleNickey = 3; // DLC
 		[StrVal("Reika")]
 		public const int Reika = 5;
 		[StrVal("Nami")]
@@ -30,11 +30,11 @@ namespace YotanModCore.Consts
 		[StrVal("Guard")]
 		public const int Guard = 13;
 		[StrVal("Native Boy")]
-		public const int NativeBoy = 14;
+		public const int NativeBoy = 14; // DLC
 		[StrVal("Female Native")]
 		public const int FemaleNative = 15;
 		[StrVal("Native Girl")]
-		public const int NativeGirl = 16;
+		public const int NativeGirl = 16; // DLC
 		[StrVal("Female Large Native")]
 		public const int FemaleLargeNative = 17;
 		[StrVal("Old Man Native")]
@@ -181,6 +181,8 @@ namespace YotanModCore.Consts
 		public const int BloodRuck = 97;
 		[StrVal("Maid Ruck")]
 		public const int MaidRuck = 98;
+		[StrVal("Wingy")]
+		public const int Wingy = 99;
 		[StrVal("Old guy")]
 		public const int Oldguy = 100;
 		[StrVal("Spike")]
@@ -223,6 +225,16 @@ namespace YotanModCore.Consts
 		public const int EntQueen = 121;
 		[StrVal("Ent Worrior")]
 		public const int EntWorrior = 122;
+		[StrVal("Large Native Girl")]
+		public const int LargeNativeGirl = 140; // DLC
+		[StrVal("Large Native Boy")]
+		public const int LargeNativeBoy = 141; // DLC
+		[StrVal("Under Ground Girl")]
+		public const int UnderGroundGirl = 142; // DLC
+		[StrVal("Under Ground Boy")]
+		public const int UnderGroundBoy = 143; // DLC
+		[StrVal("Giant2")]
+		public const int Giant2 = 149;
 		[StrVal("Bee Hive")]
 		public const int BeeHive = 150;
 		[StrVal("Necks Egg")]
@@ -251,5 +263,9 @@ namespace YotanModCore.Consts
 		public const int PresentGreen = 171;
 		[StrVal("Present (Red)")]
 		public const int PresentRed = 172;
+		[StrVal("Large Young Man")]
+		public const int LargeYoungMan = 180;
+		[StrVal("Under Ground Young Man")]
+		public const int UnderGroundYoungMan = 181;
 	}
 }
