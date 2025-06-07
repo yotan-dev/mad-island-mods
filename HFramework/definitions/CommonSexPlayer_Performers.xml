@@ -243,6 +243,38 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+		<Performer id="HF_Man_NativeGirl_Friendly_Pregnant" dlc="true" minVersion="0.4.2" minDlcVersion="0.2">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="28" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="NativeGirl#16" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 		<Performer id="HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal">
 			<Scopes>
 				<Scope>Sex</Scope>
@@ -667,6 +699,40 @@
 			</AnimationSets>
 		</Performer>
 
+		<!-- v0.4.2 Update -->
+		<Performer id="HF_Man_LargeNativeGirl_Friendly_Normal" minVersion="0.4.2">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="29" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="LargeNativeGirl#140" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+
 		<!-- ================ Yona ============== -->
 		<Performer id="HF_Yona_Nami_Friendly" minVersion="0.4.0">
 			<Scopes>
@@ -804,6 +870,38 @@
 			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="13" objIndex="0" />
 			<Actors>
 				<Actor val="ElderBrotherNative#91" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Yona_NativeBoy_Friendly_Normal" minVersion="0.4.2">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="0" />
+			<Actors>
+				<Actor val="NativeBoy#14" />
 				<Actor val="Yona#0" />
 			</Actors>
 			<AnimationSets>

@@ -20,6 +20,16 @@
 						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="true" />
 					</StartConditions>
 				</Performer>
+				<Performer id="HF_FemaleLargeNative_Delivery">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleLargeNative#17" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_UnderGroundWoman_Delivery">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="UnderGroundWoman#44" value="true" />
+					</StartConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>

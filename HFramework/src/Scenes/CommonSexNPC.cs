@@ -152,10 +152,11 @@ namespace HFramework.Scenes
 				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Npc1);
 				Managers.mn.randChar.LoadGenUnder(this.Npc2, this.TmpSex);
 			}
-			else if (this.Npc2.npcID == NpcID.ElderSisterNative && this.Npc1.npcID == NpcID.YoungMan)
-			{
-				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, this.Npc1);
-			}
+			// Removed in v0.4.2/v0.4.3 -- needs confirmation if it works for prev version
+			// else if (this.Npc2.npcID == NpcID.ElderSisterNative && this.Npc1.npcID == NpcID.YoungMan)
+			// {
+			// 	Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, this.Npc1);
+			// }
 
 			this.Place.user = this.TmpSex;
 			this.TmpSex.transform.position += new Vector3(0f, 0f, 0.02f);

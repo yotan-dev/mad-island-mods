@@ -110,6 +110,17 @@
 					<StartConditions>
 						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
 					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_NativeGirl_Friendly_Pregnant">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="true" />
+					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Man_FemaleLargeNative_Friendly_Cowgirl_Normal">
 					<StartConditions>
@@ -214,6 +225,8 @@
 
 				<Performer id="HF_Man_Merry_Friendly_Normal" />
 
+				<Performer id="HF_Man_LargeNativeGirl_Friendly_Normal" />
+
 				<Performer id="HF_Yona_Nami_Friendly">
 					<StartConditions>
 						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiYona" compare="eq" value="1" />
@@ -226,6 +239,7 @@
 				<Performer id="HF_Yona_MaleNative_Friendly_Normal" />
 				<Performer id="HF_Yona_BigNative_Friendly_Normal" />
 				<Performer id="HF_Yona_SmallNative_Friendly_Normal" />
+				<Performer id="HF_Yona_NativeBoy_Friendly_Normal" />
 				<Performer id="HF_Yona_ElderBrotherNative_Friendly_Normal" />
 			</Performers>
 		</Scene>

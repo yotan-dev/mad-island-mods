@@ -50,6 +50,17 @@
 					<StartConditions>
 						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
 					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_NativeGirl_Friendly_Pregnant">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="true" />
+					</PerformConditions>
 				</Performer>
 				<Performer id="HF_YoungMan_FemaleLargeNative_Friendly_Normal">
 					<StartConditions>
@@ -78,6 +89,12 @@
 				<Performer id="HF_YoungMan_ElderSisterNative_Friendly_Normal">
 					<StartConditions>
 						<Condition xsi:type="PregnantCheck" actor="ElderSisterNative#90" value="false" />
+					</StartConditions>
+				</Performer>
+
+				<Performer id="HF_YoungMan_LargeNativeGirl_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="LargeNativeGirl#140" value="false" />
 					</StartConditions>
 				</Performer>
 			</Performers>

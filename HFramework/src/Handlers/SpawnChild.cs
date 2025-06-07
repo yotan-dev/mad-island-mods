@@ -67,9 +67,18 @@ namespace HFramework.Handlers
 			// first we determine the real deal
 			switch (this.Girl.npcID)
 			{
+				// Decompiled code "default"
 				case NpcID.FemaleNative:
 				case NpcID.NativeGirl:
 					childNpcId = gender == Gender.Male ? NpcID.NativeBoy : NpcID.NativeGirl;
+					break;
+
+				case NpcID.FemaleLargeNative:
+					childNpcId = gender == Gender.Male ? NpcID.LargeNativeBoy : NpcID.LargeNativeGirl;
+					break;
+
+				case NpcID.UnderGroundWoman:
+					childNpcId = gender == Gender.Male ? NpcID.UnderGroundBoy : NpcID.UnderGroundGirl;
 					break;
 
 				default:
@@ -79,6 +88,8 @@ namespace HFramework.Handlers
 			}
 
 			// Now we fallback to skip DLC stuff.
+			// Note: From v0.4.2 onwards, the game handles DLC on NPCManager::GenSpawn
+			// So we are only handling edge cases here.
 			if (!GameInfo.HasDLC)
 			{
 				switch (childNpcId)
@@ -91,7 +102,8 @@ namespace HFramework.Handlers
 						break;
 
 					case NpcID.NativeGirl:
-						childNpcId = NpcID.FemaleNative;
+						if (GameInfo.GameVersion < GameInfo.ToVersion("0.4.2"))
+							childNpcId = NpcID.FemaleNative;
 						break;
 				}
 			}

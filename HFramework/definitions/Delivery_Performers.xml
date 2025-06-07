@@ -51,5 +51,49 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+		<Performer id="HF_FemaleLargeNative_Delivery" minVersion="0.4.2">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="FemaleLargeNative#17" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_UnderGroundWoman_Delivery" minVersion="0.4.2">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="UnderGroundWoman#44" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>

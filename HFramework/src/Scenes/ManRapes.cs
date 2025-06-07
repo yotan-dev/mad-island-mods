@@ -139,7 +139,7 @@ namespace HFramework.Scenes
 				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Man);
 				Managers.mn.randChar.LoadGenUnder(this.Girl, this.TmpSex);
 			}
-			else if (this.Girl.npcID != NpcID.OldManNative)
+			else
 			{
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Girl, this.Man);
 			}

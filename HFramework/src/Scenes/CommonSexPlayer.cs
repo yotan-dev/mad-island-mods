@@ -96,6 +96,17 @@ namespace HFramework.Scenes
 			}
 		}
 
+		private void SetupTmpSexYonaNativeBoy()
+		{
+			Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
+			AnimationFX componentInChildren = this.TmpSex.GetComponentInChildren<AnimationFX>();
+			if (componentInChildren != null)
+			{
+				componentInChildren.voiceID = this.Npc.voiceID;
+				componentInChildren.voice2ID = this.Player.voiceID;
+			}
+		}
+
 		private void SetupTmpSex()
 		{
 			if (this.Player.npcID == NpcID.Yona)
@@ -106,18 +117,22 @@ namespace HFramework.Scenes
 				// NPC IDs (as of v0.4.0): + 6
 				if (this.Npc.npcID == NpcID.Nami)
 					this.SetupTmpSexYonaNami();
+				else if (this.Npc.npcID == NpcID.NativeBoy)
+					this.SetupTmpSexYonaNativeBoy();
 				else
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
 			}
 			else
 			{
-				if (this.Npc.npcID == NpcID.Reika)
-				{
-					// @TODO: Probably can be simplified
-					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
-					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, this.Player);
-				}
-				else if (this.Npc.npcID == NpcID.Mermaid)
+				// New decomp (v0.4.2) shows it is not needed
+				// @TODO: Check if this has side effects on current stable
+				// if (this.Npc.npcID == NpcID.Reika)
+				// {
+				// 	// @TODO: Probably can be simplified
+				// 	Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
+				// 	Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, this.Player);
+				// }
+				if (this.Npc.npcID == NpcID.Mermaid)
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 				}
