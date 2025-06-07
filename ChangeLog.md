@@ -8,6 +8,34 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.06.07
+
+All plugins rebuilt to target Beta v0.4.3.
+
+### YotanModCore v1.8.2
+
+- **(For developers)** Add v0.4.1 ~ v0.4.3 detection
+- **(For developers)** Add v0.4.2 new NPC IDs
+
+
+### HFramework v1.0.8
+
+- Adds new v0.4.2 content
+  - Adds Pregnant NativeGirl x Man/YoungMan
+  - Adds Yona x NativeBoy
+  - Adds (NEW) LargeNativeGirl x Man/YoungMan
+  - Adds Delivery for LargeNativeFemale and UndergroundWoman
+
+
+#### Gallery v1.0.2
+
+- Added detection of new v0.4.2 content
+  - Adds Pregnant NativeGirl x Man/YoungMan
+  - Adds Yona x NativeBoy
+  - Adds (NEW) LargeNativeGirl x Man/YoungMan
+  - Adds Delivery for LargeNativeFemale and UndergroundWoman
+
+
 ## 2025.04.19
 
 All plugins rebuilt to target Beta v0.4.0.
