@@ -172,6 +172,19 @@
 						<SexType>Normal</SexType>
 					</Controller>
 				</Scene>
+				<Scene name="[npc1] (pregnant) sex with [npc0]" dlc="true">
+					<Actors>
+						<Actor val="YoungMan#89" pregnant="false" />
+						<Actor val="NativeGirl#16" pregnant="true" />
+					</Actors>
+					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_NativeGirl_Friendly_Pregnant</PerformerId>
+						<Prop>bed_01</Prop>
+						<PlaceGrade>0</PlaceGrade>
+						<PlaceType>Normal</PlaceType>
+						<SexType>Normal</SexType>
+					</Controller>
+				</Scene>
 
 				<!-- FemaleLargeNative -->
 				<Scene name="[npc1] sex with [npc0]">
@@ -211,6 +224,21 @@
 					</Actors>
 					<Controller xsi:type="CommonSexNPCController">
 						<PerformerId>HF_YoungMan_ElderSisterNative_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<PlaceGrade>0</PlaceGrade>
+						<PlaceType>Normal</PlaceType>
+						<SexType>Normal</SexType>
+					</Controller>
+				</Scene>
+
+				<!-- LargeNativeGirl -->
+				<Scene name="[npc1] sex with [npc0]">
+					<Actors>
+						<Actor val="YoungMan#89" pregnant="false" />
+						<Actor val="LargeNativeGirl#140" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexNPCController">
+						<PerformerId>HF_YoungMan_LargeNativeGirl_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<PlaceGrade>0</PlaceGrade>
 						<PlaceType>Normal</PlaceType>
@@ -321,6 +349,18 @@
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
 						<PerformerId>HF_Man_NativeGirl_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+				<Scene name="[npc1] (pregnant) sex with [npc0]" dlc="true">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="NativeGirl#16" pregnant="true" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_NativeGirl_Friendly_Pregnant</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -503,6 +543,20 @@
 					</Controller>
 				</Scene>
 
+				<!-- LargeNativeGirl -->
+				<Scene name="[npc1] sex with [npc0]">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="LargeNativeGirl#140" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_LargeNativeGirl_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
 				<!-- Yona / Male Native -->
 				<Scene name="[npc1] sex with [npc0]">
 					<Actors>
@@ -553,6 +607,20 @@
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
 						<PerformerId>HF_Yona_ElderBrotherNative_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
+				<!-- Yona / Native Boy -->
+				<Scene name="[npc1] sex with [npc0]" minVersion="0.1.7">
+					<Actors>
+						<Actor val="NativeBoy#14" />
+						<Actor val="Yona#0" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_NativeBoy_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -610,6 +678,26 @@
 					</Actors>
 					<Controller xsi:type="DeliveryController">
 						<PerformerId>HF_NativeGirl_Delivery</PerformerId>
+					</Controller>
+				</Scene>
+
+				<!-- Female Large Native -->
+				<Scene name="[npc0] gives birth" dlc="true">
+					<Actors>
+						<Actor val="FemaleLargeNative#17" pregnant="true" />
+					</Actors>
+					<Controller xsi:type="DeliveryController">
+						<PerformerId>HF_FemaleLargeNative_Delivery</PerformerId>
+					</Controller>
+				</Scene>
+
+				<!-- Underground Woman -->
+				<Scene name="[npc0] gives birth" dlc="true">
+					<Actors>
+						<Actor val="UnderGroundWoman#44" pregnant="true" />
+					</Actors>
+					<Controller xsi:type="DeliveryController">
+						<PerformerId>HF_UnderGroundWoman_Delivery</PerformerId>
 					</Controller>
 				</Scene>
 			</Scenes>
