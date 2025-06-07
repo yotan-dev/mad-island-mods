@@ -56,26 +56,47 @@ namespace HFramework.Handlers
 
 		private int GetChildNpcId(int gender)
 		{
-			switch (gender)
+			if (gender != Gender.Male && gender != Gender.Female)
 			{
-				case Gender.Female:
-					if (GameInfo.HasDLC)
-						return NpcID.NativeGirl;
-					else
-						return NpcID.FemaleNative;
+				PLogger.LogWarning("GetChildNpcId: Unexpected gender: " + gender);
+				return NpcID.MaleNative;
+			}
 
-				case Gender.Male:
-					if (GameInfo.HasDLC)
-						return NpcID.NativeBoy;
-					else if (CommonUtils.GetPregnantFatherId(this.Girl) == NpcID.Man)
-						return NpcID.YoungMan;
-					else
-						return NpcID.MaleNative;
+			int childNpcId;
+
+			// first we determine the real deal
+			switch (this.Girl.npcID)
+			{
+				case NpcID.FemaleNative:
+				case NpcID.NativeGirl:
+					childNpcId = gender == Gender.Male ? NpcID.NativeBoy : NpcID.NativeGirl;
+					break;
 
 				default:
-					PLogger.LogError("GetChildNpcId: Unexpected gender: " + gender);
-					return NpcID.MaleNative;
+					PLogger.LogWarning("GetChildNpcId: Unexpected npcID: " + this.Girl.npcID);
+					childNpcId = gender == Gender.Male ? NpcID.NativeBoy : NpcID.NativeGirl;
+					break;
 			}
+
+			// Now we fallback to skip DLC stuff.
+			if (!GameInfo.HasDLC)
+			{
+				switch (childNpcId)
+				{
+					case NpcID.NativeBoy:
+						if (CommonUtils.GetPregnantFatherId(this.Girl) == NpcID.Man)
+							childNpcId = NpcID.YoungMan;
+						else
+							childNpcId = NpcID.MaleNative;
+						break;
+
+					case NpcID.NativeGirl:
+						childNpcId = NpcID.FemaleNative;
+						break;
+				}
+			}
+
+			return childNpcId;
 		}
 
 		protected override IEnumerator Run()
