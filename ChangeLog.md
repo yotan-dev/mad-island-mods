@@ -8,6 +8,43 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.06.08
+
+> [!WARNING]
+> This update is changing how YotanModCore exposes game versions.
+> 
+> Mods dependending on this feature will BREAK until they move to YotanModCore v2.
+>
+> Mod authors can refer to this upgrade guide: [YotanModCore v2](./YotanModCore/docs/upgrade/v2.md)
+
+All plugins rebuilt to target Beta v0.4.3.2
+
+### YotanModCore v2.0.0
+
+- **(For developers)** **[BREAKING]** Change `GameVersion` type to `System.Version`
+- **(For developers)** **[BREAKING]** Removed `ConstMenuItem` class
+- **(For developers)** Add v0.4.3.1 ~ v0.4.3.2 detection
+
+
+### HFramework v1.0.9
+
+- Upgraded to use YotanModCore v2
+
+
+#### Gallery v1.0.3
+
+- Upgraded to use YotanModCore v2
+
+#### Enhanced Island v1.0.1
+
+- Upgraded to use YotanModCore v2
+
+
+#### YoUnnoficialPatches v0.4.1
+
+- Upgraded to use YotanModCore v2
+
+
 ## 2025.06.07
 
 All plugins rebuilt to target Beta v0.4.3.
