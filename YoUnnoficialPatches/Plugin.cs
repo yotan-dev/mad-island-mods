@@ -4,8 +4,8 @@ using YoUnnoficialPatches.Patches;
 
 namespace YoUnnoficialPatches
 {
-	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.4.0")]
-	[BepInDependency("YotanModCore", "1.0.0")]
+	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.4.1")]
+	[BepInDependency("YotanModCore", "2.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		private void Awake()

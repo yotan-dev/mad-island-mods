@@ -9,8 +9,8 @@ using YotanModCore;
 
 namespace Gallery
 {
-	[BepInPlugin("Gallery", "Gallery", "1.0.2")]
-	[BepInDependency("YotanModCore", "1.5.0")]
+	[BepInPlugin("Gallery", "Gallery", "1.0.3")]
+	[BepInDependency("YotanModCore", "2.0.0")]
 	[BepInDependency("HFramework", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{

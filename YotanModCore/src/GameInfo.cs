@@ -41,10 +41,11 @@ namespace YotanModCore
 		public static float CensorBlockSize { get { return Instance._CensorBlockSize; } }
 
 		/// <summary>
-		/// Converts major/minor/patch version to GameVersion
+		/// Converts major/minor/build/patch version to GameVersion
 		/// </summary>
 		/// <param name="major"></param>
 		/// <param name="minor"></param>
+		/// <param name="build"></param>
 		/// <param name="patch"></param>
 		/// <returns></returns>
 		public static Version ToVersion(int major, int minor, int build, int patch = 0)

@@ -5,7 +5,7 @@ using BepInEx.Bootstrap;
 namespace EnhancedIsland
 {
 	[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-	[BepInDependency("YotanModCore", BepInDependency.DependencyFlags.HardDependency)]
+	[BepInDependency("YotanModCore", "2.0.0")]
 	// Soft dependency on old mods to soften the migration process - Rmove later
 	[BepInDependency("EnhanceWorkplaces", BepInDependency.DependencyFlags.SoftDependency)]
 	[BepInDependency("DisassembleItems", BepInDependency.DependencyFlags.SoftDependency)]
