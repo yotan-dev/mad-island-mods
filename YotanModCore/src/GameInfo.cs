@@ -12,19 +12,13 @@ namespace YotanModCore
 	{
 		/// <summary>
 		/// GameVersion based on patch notes.
-		/// It follows the format of Major.Minor.Patch where each has space up to 999.
+		/// It follows the format of Major.Minor.Build.Patch, using C#'s Version class
 		/// 
-		/// If version could not be determined, it returns 999_999_999
-		/// 
-		/// Thus: (GameVersion -> String)
-		/// 12 -> 0.0.12
-		/// 1_000 -> 0.1.0
-		/// 1_001 -> 0.1.1
-		/// 1_000_000 -> 1.0.0
+		/// If version could not be determined, it returns 999_999_999_999
 		/// 
 		/// To compare/display, prefer using ToVersion and ToVersionString.
 		/// </summary>
-		public static int GameVersion { get { return Instance._GameVersion; } }
+		public static Version GameVersion { get { return Instance._GameVersion; } }
 
 		/// <summary>
 		/// True if DLC is installed
@@ -53,25 +47,27 @@ namespace YotanModCore
 		/// <param name="minor"></param>
 		/// <param name="patch"></param>
 		/// <returns></returns>
-		public static int ToVersion(int major, int minor, int patch)
+		public static Version ToVersion(int major, int minor, int build, int patch = 0)
 		{
-			return major * 1_000_000 + minor * 1_000 + patch;
+			return new Version(major, minor, build, patch);
 		}
 
 		/// <summary>
-		/// Parses a version string into GameVersion. A version string is composed of "<major>.<minor>.<patch>"
-		/// where each of the 3 values are integers.
+		/// Parses a version string into GameVersion. A version string is composed of "<major>.<minor>.<build>.<patch>"
+		/// where each of the 4 values are integers.
+		/// <build> and <patch> may be ommited, but major and minor are required.
+		/// 
+		/// Examples:
+		/// - "0.1" -> 0.1.0.0
+		/// - "0.1.2" -> 0.1.2.0
+		/// - "0.1.2.3" -> 0.1.2.3
 		/// </summary>
 		/// <param name="str"></param>
 		/// <returns></returns>
 		/// <exception cref="Exception"></exception>
-		public static int ToVersion(string str)
+		public static Version ToVersion(string str)
 		{
-			var parts = str.Split('.');
-			if (parts.Length != 3)
-				throw new Exception("Invalid version string: " + str);
-
-			return ToVersion(int.Parse(parts[0]), int.Parse(parts[1]), int.Parse(parts[2]));
+			return new Version(str);
 		}
 
 		/// <summary>
@@ -80,16 +76,16 @@ namespace YotanModCore
 		/// </summary>
 		/// <param name="version"></param>
 		/// <returns></returns>
-		public static string ToVersionString(int version)
+		public static string ToVersionString(Version version)
 		{
-			return (version / 1_000_000) + "." + (version / 1_000) + "." + (version % 1_000);
+			return version.ToString();
 		}
 
 		private static GameInfo Instance = new GameInfo();
 
 		private bool _HasDLC = false;
 
-		private int _GameVersion = 0;
+		private Version _GameVersion = new Version(0, 0, 0, 0);
 
 		private CensorType _CensorType = CensorType.Default;
 
@@ -131,11 +127,11 @@ namespace YotanModCore
 			return CensorType.Default;
 		}
 
-		private int ParseVersion()
+		private Version ParseVersion()
 		{
-			var buildTimestamp = Resources.Load<TextAsset>("BuildDate").text.Remove(0, 1);
+			var buildTimestamp = Resources.Load<TextAsset>("BuildDate").text[1..];
 
-			Dictionary<string, int> buildDateVersion = new Dictionary<string, int>() {
+			Dictionary<string, Version> buildDateVersion = new Dictionary<string, Version>() {
 				{ "2024/06/28--10:56", ToVersion("0.0.12") },
 				{ "2024/07/27--15:32", ToVersion("0.1.3") },
 				{ "2024/08/09--18:40", ToVersion("0.1.5") },
@@ -164,7 +160,7 @@ namespace YotanModCore
 				return buildDateVersion[buildTimestamp];
 
 			PLogger.LogWarning($"Unknown build date {buildTimestamp}. Using heuristics.");
-			Dictionary<string, int> dateToVersion = new Dictionary<string, int>() {
+			Dictionary<string, Version> dateToVersion = new Dictionary<string, Version>() {
 				{ "2024/06/10", ToVersion("0.0.8") }, // "--16:36" not 100% sure ("oldver" beta on August 4th, 2024)
 				{ "2024/07/19", ToVersion("0.1.0") },
 				{ "2024/07/20", ToVersion("0.1.1") },
@@ -173,12 +169,12 @@ namespace YotanModCore
 				{ "2024/09/08", ToVersion("0.1.7") }, // 0.1.7 was released a bit before 0.1.8, same day
 			};
 
-			var buildDate = buildTimestamp.Substring(0, 10);
+			var buildDate = buildTimestamp[..10];
 			if (dateToVersion.ContainsKey(buildDate))
 				return dateToVersion[buildDate];
 
-			PLogger.LogError($"Could not determine version by build date. Using 999.999.999");
-			return ToVersion("999.999.999");
+			PLogger.LogError($"Could not determine version by build date. Using 999.999.999.999");
+			return ToVersion("999.999.999.999");
 		}
 	}
 }
