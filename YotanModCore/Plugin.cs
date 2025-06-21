@@ -5,6 +5,8 @@ using UnityEngine;
 using YotanModCore.Events;
 using YotanModCore.Console;
 using YotanModCore.NpcTalk;
+using YotanModCore.Items;
+using YotanModCore.Items.Patches;
 
 namespace YotanModCore
 {
@@ -29,10 +31,15 @@ namespace YotanModCore
 			ConsoleManager.Instance.Init();
 			NpcTalkManager.Init();
 
+			Harmony.CreateAndPatchAll(typeof(ItemManagerPatches));
 			Harmony.CreateAndPatchAll(typeof(DebugToolPatch));
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 			Harmony.CreateAndPatchAll(typeof(GameLifecycleEvents));
+
+			ItemDB.Init();
+			BundleLoader.Load();
+			ItemDB.Instance.PostProcessItems();
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");
 		}
