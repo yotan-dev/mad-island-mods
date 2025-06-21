@@ -10,7 +10,10 @@ namespace YotanModCore
 		{
 			PLogger.LogInfo("Loading bundles");
 
-			string[] bundlePaths = Directory.GetFiles("BepInEx/CustomBundles", "*.asset", SearchOption.AllDirectories);
+			if (!Directory.Exists("BepInEx/CustomBundles"))
+				Directory.CreateDirectory("BepInEx/CustomBundles");
+
+			string[] bundlePaths = Directory.GetFiles("BepInEx/CustomBundles", "*", SearchOption.AllDirectories);
 			foreach (var bundlePath in bundlePaths)
 			{
 				PLogger.LogDebug($"Loading bundle {bundlePath}");
