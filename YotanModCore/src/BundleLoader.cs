@@ -34,6 +34,15 @@ namespace YotanModCore
 				}
 
 				PLogger.LogDebug($"Loaded {itemCount} items from bundle {bundlePath}");
+
+				var recipesCount = 0;
+				foreach (var recipe in loader.CraftRecipes)
+				{
+					if (CraftDB.Instance.RegisterCraft(recipe))
+						recipesCount++;
+				}
+
+				PLogger.LogDebug($"Loaded {recipesCount} recipes from bundle {bundlePath}");
 			}
 		}
 	}

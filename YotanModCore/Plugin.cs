@@ -10,7 +10,6 @@ using YotanModCore.Items.Patches;
 
 namespace YotanModCore
 {
-	
 	[BepInPlugin("YotanModCore", "YotanModCore", "2.0.2")]
 	public class Plugin : BaseUnityPlugin
 	{
@@ -31,17 +30,25 @@ namespace YotanModCore
 			ConsoleManager.Instance.Init();
 			NpcTalkManager.Init();
 
+			Harmony.CreateAndPatchAll(typeof(CraftManagerPatches));
+			Harmony.CreateAndPatchAll(typeof(InventoryManagerPatches));
 			Harmony.CreateAndPatchAll(typeof(ItemManagerPatches));
 			Harmony.CreateAndPatchAll(typeof(DebugToolPatch));
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 			Harmony.CreateAndPatchAll(typeof(GameLifecycleEvents));
 
+			CraftDB.Init();
 			ItemDB.Init();
-			BundleLoader.Load();
-			ItemDB.Instance.PostProcessItems();
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");
+		}
+
+		private void Start()
+		{
+			// This must be delayed until Start or it might be too early for some stuff to be registered
+			BundleLoader.Load();
+			CraftDB.Instance.LoadRecipes(Managers.mn.craftMN);
 		}
 	}
 }

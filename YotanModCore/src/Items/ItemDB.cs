@@ -24,13 +24,10 @@ namespace YotanModCore.Items
 			PLogger.LogDebug($"Getting item {name}");
 			if (name == null)
 			{
-				PLogger.LogError("Item name is null!");
-				PLogger.LogError((new Exception()).StackTrace);
 				return null;
 			}
 
 			var item = Items.GetValueOrDefault(name, null);
-			PLogger.LogDebug($"Item {name} is {item} (Item is null: {item == null})");
 
 			return item;
 		}
@@ -49,27 +46,12 @@ namespace YotanModCore.Items
 
 		private void LoadCraftInfo()
 		{
+			/*
 			foreach (var item in this.Items.Values)
 			{
 				var customCraftInfo = item.GetComponent<CustomCraftInfo>();
 				if (customCraftInfo == null)
 					continue;
-
-				var craftInfo = item.gameObject.AddComponent<CraftInfo>();
-
-				if (customCraftInfo.craft.Length > 0)
-				{
-					craftInfo.required = new CraftInfo.Required[customCraftInfo.craft.Length];
-
-					for (int i = 0; i < customCraftInfo.craft.Length; i++)
-					{
-						craftInfo.required[i] = new CraftInfo.Required
-						{
-							itemData = Managers.mn.itemMN.FindItem(customCraftInfo.craft[i].itemCode),
-							count = customCraftInfo.craft[i].count
-						};
-					}
-				}
 
 				if (customCraftInfo.shopTrade.Length > 0)
 				{
@@ -87,11 +69,7 @@ namespace YotanModCore.Items
 
 				GameObject.Destroy(customCraftInfo);
 			}
-		}
-
-		internal void PostProcessItems()
-		{
-			this.LoadCraftInfo();
+			*/
 		}
 	}
 }

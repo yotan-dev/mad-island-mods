@@ -10,5 +10,8 @@ namespace YotanModCore
 	{
 		[Tooltip("Add your custom items 'inventory data' here so they get loaded into the game")]
 		public List<CustomItemData> Items = [];
+
+		[Tooltip("Add your custom craft recipes here so they get loaded into the game")]
+		public List<CraftRecipe> CraftRecipes = [];
 	}
 }
