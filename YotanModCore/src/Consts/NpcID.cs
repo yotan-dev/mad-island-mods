@@ -21,6 +21,8 @@ namespace YotanModCore.Consts
 		public const int Takumi = 7;
 		[StrVal("Keigo")]
 		public const int Keigo = 8;
+		[StrVal("Young Lady")]
+		public const int YoungLady = 9;
 		[StrVal("Male Native")]
 		public const int MaleNative = 10;
 		[StrVal("Big Native")]
@@ -219,6 +221,8 @@ namespace YotanModCore.Consts
 		public const int Merry = 116;
 		[StrVal("Reindeer")]
 		public const int Reindeer = 117;
+		[StrVal("Mira")]
+		public const int Mira = 118;
 		[StrVal("Ent King")]
 		public const int EntKing = 120;
 		[StrVal("Ent Queen")]
@@ -263,9 +267,17 @@ namespace YotanModCore.Consts
 		public const int PresentGreen = 171;
 		[StrVal("Present (Red)")]
 		public const int PresentRed = 172;
+		[StrVal("Mothman")]
+		public const int Mothman = 173;
+		[StrVal("Servant of Death")]
+		public const int ServantofDeath = 174;
+		[StrVal("Death")]
+		public const int Death = 175;
 		[StrVal("Large Young Man")]
 		public const int LargeYoungMan = 180;
 		[StrVal("Under Ground Young Man")]
 		public const int UnderGroundYoungMan = 181;
+		[StrVal("Dummy")]
+		public const int Dummy = 999;
 	}
 }
