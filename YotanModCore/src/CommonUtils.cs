@@ -77,6 +77,8 @@ namespace YotanModCore
 				return Gender.Male;
 			case Gender.Female:
 				return Gender.Female;
+			case Gender.Unknown:
+				return Gender.Unknown;
 			case Gender.Invalid:
 				return Gender.Invalid;
 			default:
