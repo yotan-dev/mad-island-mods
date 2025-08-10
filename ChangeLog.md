@@ -8,6 +8,26 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## 2025.08.09
+
+All plugins rebuilt to target Beta v0.4.4.3
+
+### YotanModCore v2.0.1
+- **(For developers)** Add v0.4.4.1 ~ v0.4.4.3 detection
+- **(For developers)** Add new Gender "Unknown" (2) constant
+
+
+### HFramework v1.0.10
+- Added content of v0.4.4.x
+
+
+#### Gallery v1.0.4
+- Added content of v0.4.4.x
+
+#### YoUnnoficialPatches v0.4.1
+- Updated for v0.4.4.x
+
+
 ## 2025.06.08
 
 > [!WARNING]
