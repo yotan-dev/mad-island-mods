@@ -15,11 +15,10 @@ namespace HFramework.Patches
 			CommonStates npcA,
 			CommonStates npcB,
 			SexPlace sexPlace,
-			SexManager.SexCountState sexType,
 			ref IEnumerator __result
 		)
 		{
-			var scene = new CommonSexNPC(npcA, npcB, sexPlace, sexType);
+			var scene = new CommonSexNPC(npcA, npcB, sexPlace);
 			__result = scene.Run();
 			return false;
 		}

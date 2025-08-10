@@ -34,21 +34,20 @@ namespace Gallery.Patches
 			};
 		}
 
-		private static Dictionary<string, string> GetInfos(SexPlace sexPlace, SexManager.SexCountState sexType)
+		private static Dictionary<string, string> GetInfos(SexPlace sexPlace)
 		{
 			return new Dictionary<string, string>() {
 				{ "sexPlace", $"{sexPlace?.name ?? "*null*"}, grade: {sexPlace?.grade.ToString() ?? "*null*"}, type: {sexPlace?.placeType.ToString() ?? "*null*"}" },
-				{ "sexType", $"{sexType}" },
 			};
 		}
 
 		[HarmonyPatch(typeof(SexManager), "CommonSexNPC")]
 		[HarmonyPrefix]
-		private static void Pre_SexManager_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
+		private static void Pre_SexManager_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace)
 		{
 			try
 			{
-				GalleryLogger.SceneStart("CommonSexNPC", GetChars(npcA, npcB), GetInfos(sexPlace, sexType));
+				GalleryLogger.SceneStart("CommonSexNPC", GetChars(npcA, npcB), GetInfos(sexPlace));
 				if (npcA == null || npcB == null)
 				{
 					PLogger.LogError("Skipping because npcA or npcB is null");
@@ -60,7 +59,7 @@ namespace Gallery.Patches
 					return;
 				}
 
-				var tracker = new CommonSexNPCTracker(npcA, npcB, sexPlace, sexType);
+				var tracker = new CommonSexNPCTracker(npcA, npcB, sexPlace);
 				tracker.LoadPerformerId();
 				GalleryScenesManager.Instance.AddTrackerForCommon(npcA, tracker);
 				GalleryScenesManager.Instance.AddTrackerForCommon(npcB, tracker);
@@ -73,7 +72,7 @@ namespace Gallery.Patches
 
 		[HarmonyPatch(typeof(SexManager), "CommonSexNPC")]
 		[HarmonyPostfix]
-		private static IEnumerator Post_SexManager_CommonSexNPC(IEnumerator result, CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
+		private static IEnumerator Post_SexManager_CommonSexNPC(IEnumerator result, CommonStates npcA, CommonStates npcB, SexPlace sexPlace)
 		{
 			while (result.MoveNext())
 				yield return result.Current;
@@ -83,7 +82,7 @@ namespace Gallery.Patches
 
 			try
 			{
-				GalleryLogger.SceneEnd("CommonSexNPC", GetChars(npcA, npcB), GetInfos(sexPlace, sexType));
+				GalleryLogger.SceneEnd("CommonSexNPC", GetChars(npcA, npcB), GetInfos(sexPlace));
 				if (npcA.employ == CommonStates.Employ.None && npcB.employ == CommonStates.Employ.None)
 				{
 					PLogger.LogInfo("Skipping because both are non-friend");

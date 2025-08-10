@@ -16,9 +16,9 @@ namespace EnhancedIsland.NpcStats.Patches
 			StatDistributor.RedistributeStats(NpcKind.Newborn, child);
 		}
 
-		[HarmonyPatch(typeof(NPCManager), nameof(NPCManager.NPCLevelSet))]
+		[HarmonyPatch(typeof(NPCManager), nameof(NPCManager.NPCSetWorldLevel))]
 		[HarmonyPostfix]
-		private static void Post_NPCLevelSet(CommonStates common)
+		private static void Post_NPCSetWorldLevel(CommonStates common)
 		{
 			StatDistributor.RedistributeStats(NpcKind.Enemy, common);
 		}

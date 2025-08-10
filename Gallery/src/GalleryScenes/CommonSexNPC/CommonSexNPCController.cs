@@ -14,8 +14,6 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 
 		public SexPlace.SexPlaceType PlaceType;
 
-		public SexManager.SexCountState SexType;
-
 		public override void Unlock(string performerId, GalleryChara[] charas)
 		{
 			if (charas.Length < 2)
@@ -27,7 +25,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 			if (!this.EnsurePerformer(performerId))
 				return;
 
-			var desc = $"{charas[0]} x {charas[1]} (Grade: {this.PlaceGrade}, Place Type: {this.PlaceType}, Sex Type: {this.SexType})";
+			var desc = $"{charas[0]} x {charas[1]} (Grade: {this.PlaceGrade}, Place Type: {this.PlaceType})";
 
 			var actors = new GalleryActor[2] { new(charas[0]), new(charas[1]) };
 			if (this.IsUnlocked(actors))
@@ -38,7 +36,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 
 			PLogger.LogInfo($"CommonSexNPCController: Unlocking: {desc}");
 			SaveFile.GalleryState.Instance.CommonSexNpc.Add(
-				new NpcSexInteractions(performerId, charas[0], charas[1], this.SexType, this.PlaceType, this.PlaceGrade)
+				new NpcSexInteractions(performerId, charas[0], charas[1], this.PlaceType, this.PlaceGrade)
 			);
 		}
 
@@ -57,7 +55,6 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 					&& interaction.Character2.Id == actors[1].NpcId
 					&& interaction.PlaceGrade == this.PlaceGrade
 					&& interaction.PlaceType == this.PlaceType
-					&& interaction.SexType == this.SexType
 					;
 			});
 		}
@@ -77,7 +74,6 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 					&& interaction.Character2.Id == actors[1].NpcId
 					&& interaction.PlaceGrade == this.PlaceGrade
 					&& interaction.PlaceType == this.PlaceType
-					&& interaction.SexType == this.SexType
 					;
 			});
 		}
@@ -90,7 +86,7 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 				yield break;
 			}
 
-			this.Scene = new HFramework.Scenes.CommonSexNPC(playData.Actors[0], playData.Actors[1], playData.Prop.GetComponent<SexPlace>(), this.SexType);
+			this.Scene = new HFramework.Scenes.CommonSexNPC(playData.Actors[0], playData.Actors[1], playData.Prop.GetComponent<SexPlace>());
 		}
 	}
 }
