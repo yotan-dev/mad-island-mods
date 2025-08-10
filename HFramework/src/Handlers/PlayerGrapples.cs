@@ -117,7 +117,7 @@ namespace HFramework.Handlers
 				bool shouldAttack = false;
 				animTime -= Time.deltaTime;
 				breakTime.fillAmount = animTime / limitTime;
-				if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+				if (Input.GetMouseButton(0) || Input.GetMouseButton(1)) /* this.mn.gameMN.IsRightClick(GameManager.ClickType.Hold) */
 					tmpAutoTime -= Time.deltaTime;
 
 				if (tmpAutoTime <= 0f)
@@ -128,7 +128,7 @@ namespace HFramework.Handlers
 				}
 				
 				// Unfortunately we simply can't use Perfomer.PerformBg here, yielding will make the animation stutter...
-				if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+				if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) /* this.mn.gameMN.IsRightClick(GameManager.ClickType.Down) */
 				{
 					shouldAttack = true;
 					this.Girl.StunDamage(this.Player, tmpDamage, true);

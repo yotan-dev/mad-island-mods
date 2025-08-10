@@ -26,6 +26,7 @@ namespace HFramework.Scenes
 			AddConditional(typeof(LibidoCheck));
 			AddConditional(typeof(PerfumeCheck));
 			AddConditional(typeof(PregnantCheck));
+			AddConditional(typeof(IsDueDate));
 			AddConditional(typeof(QuestProgressCheck));
 			AddConditional(typeof(SexTypeCheck));
 		}

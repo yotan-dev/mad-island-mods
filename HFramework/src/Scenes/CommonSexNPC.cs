@@ -32,8 +32,6 @@ namespace HFramework.Scenes
 
 		public readonly SexPlace Place;
 
-		public readonly SexManager.SexCountState Type;
-
 		private GameObject TmpSex;
 
 		private float AAngle;
@@ -46,11 +44,10 @@ namespace HFramework.Scenes
 
 		public bool Success { get; private set; } = false;
 
-		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, SexManager.SexCountState sexType)
+		public CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace)
 			: base(Name)
 		{
 			this.Place = sexPlace;
-			this.Type = sexType;
 			this.NpcA = npcA;
 			this.NpcB = npcB;
 			var actors = Utils.SortActors(npcA, npcB);

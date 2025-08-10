@@ -12,12 +12,12 @@
 			<Performers>
 				<Performer id="HF_MaleNative_FemaleNative_Friendly_Doggy_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="false" />
 					</StartConditions>
 				</Performer>
 				<Performer id="HF_FemaleNative_FemaleNative_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="false" />
 					</StartConditions>
 				</Performer>
 				<Performer id="HF_YoungMan_FemaleNative_Friendly_Normal">
@@ -38,12 +38,12 @@
 				</Performer>
 				<Performer id="HF_MaleNative_NativeGirl_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="false" />
 					</StartConditions>
 				</Performer>
 				<Performer id="HF_NativeGirl_NativeGirl_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="false" />
 					</StartConditions>
 				</Performer>
 				<Performer id="HF_YoungMan_NativeGirl_Friendly_Normal">
@@ -64,7 +64,7 @@
 				</Performer>
 				<Performer id="HF_YoungMan_FemaleLargeNative_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleLargeNative#17" value="false" />
+						<Condition xsi:type="IsDueDate" actor="FemaleLargeNative#17" value="false" />
 					</StartConditions>
 				</Performer>
 				<!-- SexCheck suggests this is possible, but CommonSexNPC does not support it
@@ -76,7 +76,7 @@
 				-->
 				<Performer id="HF_YoungMan_UnderGroundWoman_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="UnderGroundWoman#44" value="false" />
+						<Condition xsi:type="IsDueDate" actor="UnderGroundWoman#44" value="false" />
 					</StartConditions>
 				</Performer>
 				<!-- SexCheck suggests this is possible, but CommonSexNPC does not support it
@@ -88,13 +88,13 @@
 				-->
 				<Performer id="HF_YoungMan_ElderSisterNative_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="ElderSisterNative#90" value="false" />
+						<Condition xsi:type="IsDueDate" actor="ElderSisterNative#90" value="false" />
 					</StartConditions>
 				</Performer>
 
 				<Performer id="HF_YoungMan_LargeNativeGirl_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="LargeNativeGirl#140" value="false" />
+						<Condition xsi:type="IsDueDate" actor="LargeNativeGirl#140" value="false" />
 					</StartConditions>
 				</Performer>
 			</Performers>

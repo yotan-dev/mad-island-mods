@@ -91,6 +91,10 @@
 						<Condition xsi:type="QuestProgressCheck" questName="Sub_Shino" compare="eq" value="7" />
 					</StartConditions>
 				</Performer>
+
+				<!-- New in v0.4.4 -->
+				<Performer id="HF_Man_LargeNativeGirl_Rape" />
+				<Performer id="HF_Man_UnderGroundGirl_Rape" />
 			</Performers>
 		</Scene>
 	</Scenes>

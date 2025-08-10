@@ -85,7 +85,9 @@ namespace HFramework
 			PLogger.LogDebug($"PlayTimedStep_New: {name} for {time}");
 			
 			this.ResumeAnimation();
-			yield return new LoopAnimationForTime(this.Scene, this.SexAnim, name, time).Handle();
+
+			if (this.EnsureAnimation(name))
+				yield return new LoopAnimationForTime(this.Scene, this.SexAnim, name, time).Handle();
 		}
 
 		public IEnumerator PlayOnceStep(string name, bool skipable = false)
@@ -94,7 +96,9 @@ namespace HFramework
 
 			PLogger.LogDebug($"PlayOnceStep: {name}");
 			this.ResumeAnimation();
-			yield return new PlayAnimationOnce(this.Scene, this.SexAnim, name, skipable).Handle();
+
+			if (this.EnsureAnimation(name))
+				yield return new PlayAnimationOnce(this.Scene, this.SexAnim, name, skipable).Handle();
 		}
 
 		public void PlayOnceStepBg(string name)

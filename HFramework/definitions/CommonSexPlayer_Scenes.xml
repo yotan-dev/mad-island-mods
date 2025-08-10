@@ -241,6 +241,15 @@
 				<Performer id="HF_Yona_SmallNative_Friendly_Normal" />
 				<Performer id="HF_Yona_NativeBoy_Friendly_Normal" />
 				<Performer id="HF_Yona_ElderBrotherNative_Friendly_Normal" />
+
+				<!-- New in v0.4.4 -->
+				<Performer id="HF_Man_Mira_Friendly_Normal" />
+				<Performer id="HF_Yona_LargeNativeBoy_Friendly_Normal" />
+				<Performer id="HF_Man_UnderGroundGirl_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="UnderGroundGirl#142" value="false" />
+					</StartConditions>
+				</Performer>				
 			</Performers>
 		</Scene>
 	</Scenes>
