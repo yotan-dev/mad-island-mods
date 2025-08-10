@@ -557,6 +557,34 @@
 					</Controller>
 				</Scene>
 
+				<!-- Mira -->
+				<Scene name="[npc1] sex with [npc0]" minVersion="0.4.4">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="Mira#117" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Mira_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
+				<!-- UnderGroundGirl -->
+				<Scene name="[npc1] sex with [npc0]" minVersion="0.4.4" dlc="true">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="UnderGroundGirl#142" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_UnderGroundGirl_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
 				<!-- Yona / Male Native -->
 				<Scene name="[npc1] sex with [npc0]">
 					<Actors>
@@ -621,6 +649,20 @@
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
 						<PerformerId>HF_Yona_NativeBoy_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
+				<!-- Yona / Large Native Boy -->
+				<Scene name="[npc1] sex with [npc0]" minVersion="0.4.4" dlc="true">
+					<Actors>
+						<Actor val="LargeNativeBoy#141" />
+						<Actor val="Yona#0" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_LargeNativeBoy_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -844,7 +886,29 @@
 						<PerformerId>HF_Man_Shino_Rape</PerformerId>
 					</Controller>
 				</Scene>
+
+				<!-- Large Native Girl -->
+				<Scene name="[npc0] rapes [npc1]" minVersion="0.4.4" dlc="true">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="LargeNativeGirl#140" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="ManRapesController">
+						<PerformerId>HF_Man_LargeNativeGirl_Rape</PerformerId>
+					</Controller>
+				</Scene>
 			</Scenes>
+
+			<!-- UnderGroundGirl -->
+			<Scene name="[npc0] rapes [npc1]" minVersion="0.4.4" dlc="true">
+				<Actors>
+					<Actor val="Man#1" />
+					<Actor val="UnderGroundGirl#142" pregnant="false" />
+				</Actors>
+				<Controller xsi:type="ManRapesController">
+					<PerformerId>HF_Man_UnderGroundGirl_Rape</PerformerId>
+				</Controller>
+			</Scene>
 		</Group>
 
 		<!-- ManSleepRapes -->

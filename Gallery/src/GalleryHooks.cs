@@ -158,7 +158,7 @@ namespace Gallery
 
 			// We only track if at least one is friend, as we can get some weird results otherwise -- specially with herb village
 			if (CommonUtils.IsFriend(commonSexNpc.Npc1) || CommonUtils.IsFriend(commonSexNpc.Npc2))
-				Trackers.Add(commonSexNpc, new CommonSexNPCTracker(commonSexNpc.Npc1, commonSexNpc.Npc2, commonSexNpc.Place, commonSexNpc.Type));
+				Trackers.Add(commonSexNpc, new CommonSexNPCTracker(commonSexNpc.Npc1, commonSexNpc.Npc2, commonSexNpc.Place));
 
 			yield break;
 		}

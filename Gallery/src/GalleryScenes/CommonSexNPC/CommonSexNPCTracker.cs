@@ -13,14 +13,11 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 
 		private readonly SexPlace.SexPlaceType PlaceType;
 
-		private readonly SexManager.SexCountState SexType;
-
 
 		public CommonSexNPCTracker(
 			CommonStates npcA,
 			CommonStates npcB,
-			SexPlace sexPlace,
-			SexManager.SexCountState sexType
+			SexPlace sexPlace
 		) : base()
 		{
 			// @TODO: Revert this so male comes first
@@ -36,7 +33,6 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 
 			this.PlaceGrade = sexPlace?.grade ?? -1;
 			this.PlaceType = sexPlace?.placeType ?? SexPlace.SexPlaceType.Normal;
-			this.SexType = sexType;
 		}
 
 		public override void End()
@@ -48,12 +44,11 @@ namespace Gallery.GalleryScenes.CommonSexNPC
 				{
 					PlaceGrade = this.PlaceGrade,
 					PlaceType = this.PlaceType,
-					SexType = this.SexType
 				}.Unlock(this.PerformerId, [this.NpcA, this.NpcB]);
 			}
 			else
 			{
-				var desc = $"{this.NpcA} x {this.NpcB} (Grade: {this.PlaceGrade}, Place Type: {this.PlaceType}, Sex Type: {this.SexType})";
+				var desc = $"{this.NpcA} x {this.NpcB} (Grade: {this.PlaceGrade}, Place Type: {this.PlaceType})";
 				GalleryLogger.LogDebug($"CommonSexNPCSceneTracker#OnEnd: 'DidCreampie' not set -- event NOT unlocked for {desc}");
 			}
 		}
