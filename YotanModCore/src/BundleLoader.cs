@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using UnityEngine;
 using YotanModCore.Items;
 
@@ -13,9 +14,19 @@ namespace YotanModCore
 			if (!Directory.Exists("BepInEx/CustomBundles"))
 				Directory.CreateDirectory("BepInEx/CustomBundles");
 
-			string[] bundlePaths = Directory.GetFiles("BepInEx/CustomBundles", "*", SearchOption.AllDirectories);
+			string[] dllPaths = Directory.GetFiles($"{BepInEx.Paths.BepInExRootPath}/CustomBundles", "*.dll", SearchOption.AllDirectories);
+			foreach (var dllPath in dllPaths)
+			{
+				PLogger.LogDebug($"Loading DLL {dllPath}");
+				Assembly.LoadFile(dllPath);
+			}
+
+			string[] bundlePaths = Directory.GetFiles($"{BepInEx.Paths.BepInExRootPath}/CustomBundles", "*", SearchOption.AllDirectories);
 			foreach (var bundlePath in bundlePaths)
 			{
+				if (bundlePath.EndsWith(".dll"))
+					continue;
+
 				PLogger.LogDebug($"Loading bundle {bundlePath}");
 
 				var bundle = AssetBundle.LoadFromFile(bundlePath);
