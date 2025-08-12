@@ -160,6 +160,7 @@ namespace YotanModCore
 				{ "2025/08/08--18:25", ToVersion("0.4.4.1") }, // Beta
 				{ "2025/08/08--20:24", ToVersion("0.4.4.2") }, // Beta
 				{ "2025/08/09--01:57", ToVersion("0.4.4.3") }, // Beta
+				{ "2025/08/11--18:12", ToVersion("0.4.4.5") }, // Beta
 			};
 
 			if (buildDateVersion.ContainsKey(buildTimestamp))
@@ -174,6 +175,7 @@ namespace YotanModCore
 				{ "2024/08/09", ToVersion("0.1.4") },
 				{ "2024/09/08", ToVersion("0.1.7") }, // 0.1.7 was released a bit before 0.1.8, same day
 				{ "2025/06/08", ToVersion("0.4.3.1") }, // Beta; 0.4.3.1 was released a bit before 0.4.3.2, same day
+				{ "2025/08/11", ToVersion("0.4.4.4") }, // Beta; 0.4.4.4 was released a bit before 0.4.4.5, same day
 			};
 
 			var buildDate = buildTimestamp[..10];
