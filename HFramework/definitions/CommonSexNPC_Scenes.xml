@@ -97,6 +97,12 @@
 						<Condition xsi:type="IsDueDate" actor="LargeNativeGirl#140" value="false" />
 					</StartConditions>
 				</Performer>
+
+				<Performer id="HF_YoungMan_UnderGroundGirl_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="UnderGroundGirl#142" value="false" />
+					</StartConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>

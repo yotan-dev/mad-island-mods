@@ -247,9 +247,12 @@
 				<Performer id="HF_Yona_LargeNativeBoy_Friendly_Normal" />
 				<Performer id="HF_Man_UnderGroundGirl_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="IsDueDate" actor="UnderGroundGirl#142" value="false" />
+						<Condition xsi:type="PregnantCheck" actor="UnderGroundGirl#142" value="false" />
 					</StartConditions>
-				</Performer>				
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="UnderGroundGirl#142" value="false" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>
