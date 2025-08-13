@@ -12,6 +12,18 @@ Each mod has its own version which follows SemVer.
 
 All plugins rebuilt to target Beta v0.4.4.3
 
+### YotanModCore v2.0.2
+- **(For developers)** Add v0.4.4.4 ~ v0.4.4.5 detection
+
+
+### HFramework v1.0.11
+- Added additional content of v0.4.4.x
+
+
+## 2025.08.09
+
+All plugins rebuilt to target Beta v0.4.4.3
+
 ### YotanModCore v2.0.1
 - **(For developers)** Add v0.4.4.1 ~ v0.4.4.3 detection
 - **(For developers)** Add new Gender "Unknown" (2) constant

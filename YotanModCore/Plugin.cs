@@ -9,7 +9,7 @@ using YotanModCore.NpcTalk;
 namespace YotanModCore
 {
 	
-	[BepInPlugin("YotanModCore", "YotanModCore", "2.0.1")]
+	[BepInPlugin("YotanModCore", "YotanModCore", "2.0.2")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
