@@ -8,9 +8,9 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
-## 2025.08.09
+## 2025.08.12
 
-All plugins rebuilt to target Beta v0.4.4.3
+All plugins rebuilt to target Beta v0.4.4.5
 
 ### YotanModCore v2.0.2
 - **(For developers)** Add v0.4.4.4 ~ v0.4.4.5 detection
