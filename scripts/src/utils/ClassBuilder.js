@@ -19,13 +19,22 @@ export class ClassBuilder {
 		return this;
 	}
 
+	addRawField(field) {
+		this.fields.push(field);
+		return this;
+	}
+
 	/**
 	 * 
 	 * @returns {string}
 	 */
 	build() {
 		const fieldList = this.fields
-			.map((fld) => `\t\t${fld}`)
+			.map((fld) => {
+				return fld.split('\n')
+					.map((line) => `\t\t${line}`)
+					.join('\n');
+			})
 			.join('\n\n');
 
 		return `// Automatically generated - Do NOT edit.
