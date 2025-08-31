@@ -7,6 +7,8 @@ using YotanModCore.Console;
 using YotanModCore.NpcTalk;
 using YotanModCore.Items;
 using YotanModCore.Items.Patches;
+using YotanModCore.Initializer;
+using YotanModCoreLoader.Patches;
 
 namespace YotanModCore
 {
@@ -17,10 +19,12 @@ namespace YotanModCore
 
 		public static ManagersScript ManagerScript;
 
+		internal static InitializerResult InitializerResult;
+
 		private void Awake()
 		{
 			PLogger._Logger = Logger;
-			Initializer.Init(new BepisLogger(Logger));
+			InitializerResult = Initializer.Init(new BepisLogger(Logger));
 
 			Assets = AssetBundle.LoadFromFile($"BepInEx/plugins/YotanModCore/YotanModCore.assets");
 
@@ -32,7 +36,7 @@ namespace YotanModCore
 			Harmony.CreateAndPatchAll(typeof(DebugToolPatch));
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
-			Harmony.CreateAndPatchAll(typeof(GameLifecycleEvents));
+			Harmony.CreateAndPatchAll(typeof(LifecyclePatch));
 
 			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
 			Harmony.CreateAndPatchAll(typeof(DefenceInfoPatch));

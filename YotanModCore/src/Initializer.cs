@@ -1,4 +1,5 @@
 using YotanModCore.Console;
+using YotanModCore.Events;
 using YotanModCore.Items;
 
 namespace YotanModCore
@@ -7,12 +8,12 @@ namespace YotanModCore
 	{
 		private static bool initialized = false;
 
-		public static void Init(ILogger logger)
+		public static InitializerResult Init(ILogger logger)
 		{
 			if (initialized)
 			{
 				PLogger.LogError("YotanModCore: Already initialized");
-				return;
+				return null;
 			}
 
 			initialized = true;
@@ -31,6 +32,12 @@ namespace YotanModCore
 			ItemDB.Init();
 
 			PLogger.LogInfo("YotanModCore initialized!");
+
+			return new InitializerResult()
+			{
+				Pre_GameManager_Start = GameLifecycleEvents.Pre_GamaManager_Start,
+				Pre_SceneScript_SceneChange = GameLifecycleEvents.Pre_SceneScript_SceneChange,
+			};
 		}
 	}
 }
