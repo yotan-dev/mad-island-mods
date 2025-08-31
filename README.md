@@ -4,7 +4,7 @@
 > Thus, **BEWARE** that when browsing this repository content you are likely to find text, code and _maybe_ images that are not suitable for a general audience.
 >
 > As much as possible, I tried to keep images either zipped or not in the repository at all, but be cautios.
-> 
+>
 
 # Mad Island Mods
 
@@ -15,7 +15,7 @@ Mods for Mad Island game.
 
 > [!WARNING]
 > Read this before you continue. Don't report a bug to the developers if you can't reproduce it without mods.
-> 
+>
 
 Before you start, you need to know and understand that:
 
@@ -57,7 +57,7 @@ After you have it installed, download the mods that you need (and requirements, 
 > The extracted files must stay AS IS in the `plugins` folder.
 > If the zip contains a folder, this folder must be directly inside plugins.
 > Don't rename the folder no put it in a subfolder, because the mod will expect the name to be exactly as shipped
-> 
+>
 
 If the mod contains a single dll, the dll must be laying in the `plugins` folder (in other words, `Mad Island Folder/BepInEx/plugins/modname.dll` should exist).
 
@@ -325,6 +325,13 @@ I won't fix:
 1. Yotan Mod Core must be installed.
 
 
+## Utilities
+
+### AssemblyStripper
+
+Utilitary tool to strip relevant Mad Island dlls into Assemblies folder. Stripped DLLs does not contain original/copyrighted code.
+
+
 ## Compatibility with Melon Loader
 
 You can use Melon Loader mods together with BepInEx mods. But to do that, you **CAN'T** install Melon Loader directly. Instead you have to:
@@ -349,8 +356,6 @@ For bigger changes/new features, please open an issue for discussion first.
 ## Development Setup
 
 1. Clone this repo
-2. See `Assemblies/.gitkeep` for a list of DLLs you should copy from `<steam>/Mad Island_data/Managed/` into `Assemblies` folder and copy them
-
 
 - You can build any mod by opening a shell in its folder and running `dotnet build`
 - You can build all mods by opening a PowerShell and running:

@@ -1,5 +1,10 @@
 */bin/**/**
 */obj/**/**
 Assemblies/*
-!Assemblies/.gitkeep
 Release
+
+# Stripped assemblies
+!Assemblies/.gitkeep
+!Assemblies/*.dll
+!Assemblies/version.txt
+!Assemblies/README.md
