@@ -1,3 +1,5 @@
+import { FieldBuilder } from "./FieldBuilder.js";
+
 export class ClassBuilder {
 	/** @type {string} */
 	namespace;
@@ -14,8 +16,12 @@ export class ClassBuilder {
 	}
 
 	addIntConstField(name, value, comment = '') {
-		let commentPart = comment ? ` // ${comment}` : '';
-		this.fields.push(`public const int ${name} = ${value};${commentPart}`);
+		this.fields.push(FieldBuilder.intConst(name, value).setComment(comment).build());
+		return this;
+	}
+
+	addStringConstField(name, value, comment = '') {
+		this.fields.push(FieldBuilder.stringConst(name, value).setComment(comment).build());
 		return this;
 	}
 

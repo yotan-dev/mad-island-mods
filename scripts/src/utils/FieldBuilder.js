@@ -2,8 +2,11 @@ export class FieldBuilder {
 	/** @type {string} */
 	name;
 	
-	/** @type {number} */
+	/** @type {any} */
 	value;
+
+	/** @type {string} */
+	type;
 	
 	/** @type {string} */
 	comment;
@@ -11,14 +14,19 @@ export class FieldBuilder {
 	/** @type {string[]} */
 	attributes = [];
 
-	constructor(name, value) {
+	constructor(type, name, value) {
+		this.type = type;
 		this.name = name;
 		this.value = value;
 		this.comment = '';
 	}
 
 	static intConst(name, value) {
-		return new FieldBuilder(name, value);
+		return new FieldBuilder('int', name, value);
+	}
+
+	static stringConst(name, value) {
+		return new FieldBuilder('string', name, `"${value}"`);
 	}
 
 	setComment(comment) {
@@ -39,6 +47,6 @@ export class FieldBuilder {
 			attributesPart = `${attributesPart}\n`;
 		}
 		
-		return `${attributesPart}public const int ${this.name} = ${this.value};${commentPart}`;
+		return `${attributesPart}public const ${this.type} ${this.name} = ${this.value};${commentPart}`;
 	}
 }
