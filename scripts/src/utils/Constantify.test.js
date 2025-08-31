@@ -25,4 +25,14 @@ describe('Constantify', () => {
 			expect(Constantify.text(input)).toBe(expected);
 		});
 	});
+
+	describe('fileName', () => {
+		test.each([
+			['test.ogg', 'Test'],
+			['test.mp3.asset', 'Test'],
+			['test', 'Test'],
+		])('%s -> %s', (input, expected) => {
+			expect(Constantify.fileName(input)).toBe(expected);
+		});
+	});
 });

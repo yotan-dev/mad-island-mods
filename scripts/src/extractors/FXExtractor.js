@@ -17,8 +17,8 @@ export class FXExtractor {
 
 		fxManager.fx.forEach((fx, index) => {
 			const meta = project.getMetaByGuid(fx.fxPrefab.guid);
-			const fileName = path.basename(meta.filePath, '.prefab');
-			const constName = Constantify.text(fileName);
+			const fileName = path.basename(meta.filePath);
+			const constName = Constantify.fileName(fileName);
 			fxClass.addIntConstField(constName, index, fileName);
 		});
 
@@ -32,8 +32,8 @@ export class FXExtractor {
 		const emoteClass = new ClassBuilder('YotanModCore.Consts', 'Emote');
 		fxManager.emotionImages.forEach((emote, index) => {
 			const meta = project.getMetaByGuid(emote.guid);
-			const fileName = path.basename(meta.filePath, '.asset');
-			const constName = Constantify.text(fileName);
+			const fileName = path.basename(meta.filePath);
+			const constName = Constantify.fileName(fileName);
 			emoteClass.addIntConstField(constName, index, fileName);
 		});
 

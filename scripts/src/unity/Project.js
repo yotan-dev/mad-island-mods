@@ -107,13 +107,16 @@ export class Project {
 		const files = await fs.readdir(`${this.path}/${dirPath}`);
 
 		const readPromises = files
-			.filter((file) => !file.endsWith('.meta'))
+			.filter((file) => file.endsWith('.meta'))
 			.map(async (file) => {
+				const mainFileName = file.substring(0, file.length - 5);
+				const filePath = `${dirPath}/${mainFileName}`;
+
 				// Don't re-read files we've already read
-				if (this.#guidCache.has(file.substring(0, file.length - 5)))
+				if (this.#fileMetaCache.has(filePath))
 					return;
 
-				await this.loadMeta(`${dirPath}/${file}`);
+				await this.loadMeta(filePath);
 			});
 		await Promise.all(readPromises);
 

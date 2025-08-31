@@ -29,4 +29,13 @@ export class Constantify {
 
 		return combined;
 	}
+
+	static fileName(str) {
+		let endIndex = str.indexOf('.');
+		if (endIndex === -1) {
+			endIndex = str.length;
+		}
+
+		return Constantify.text(str.substring(0, endIndex));
+	}
 }
