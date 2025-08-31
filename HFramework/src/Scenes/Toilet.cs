@@ -78,11 +78,11 @@ namespace HFramework.Scenes
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
-			
+
 			yield return this.Performer.Perform(ActionType.InsertIdle);
 			if (!this.CanContinue())
 				yield break;
-			
+
 			this.MenuPanel.ShowInsertMenu();
 			this.MenuPanel.Show();
 		}
@@ -230,10 +230,10 @@ namespace HFramework.Scenes
 			this.MenuPanel.Open(this.SexPlace.transform.position);
 			this.MenuPanel.ShowInitialMenu();
 
-			this.Pee1Audio = Managers.mn.sound.LoopAudio3D(AudioTrack.Pee1, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
+			this.Pee1Audio = Managers.mn.sound.LoopAudio3D(AudioSE.Pee01, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
 			this.Pee1Audio.Pause();
 
-			this.Pee2Audio = Managers.mn.sound.LoopAudio3D(AudioTrack.Pee2, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
+			this.Pee2Audio = Managers.mn.sound.LoopAudio3D(AudioSE.Pee02, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
 			this.Pee2Audio.Pause();
 
 			while (this.CanContinue())
