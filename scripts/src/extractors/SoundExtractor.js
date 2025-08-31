@@ -42,14 +42,14 @@ export class SoundExtractor {
 
 	/**
 	 * Extracts AudioSE and AudioBGM constants from the project
-	 * @param {import("../unity/types.js").Project} project 
+	 * @param {import("../unity/Project.js").Project} project 
 	 */
 	async extract(project) {
 		// Finds the GUID for SoundManager.cs
 		const soundManagerMeta = await project.loadMeta('Assets/Scripts/Assembly-CSharp/SoundManager.cs');
 
 		// Get SoundManager from scene_01 (main scene))
-		const scene01 = await project.loadScene('Assets/Scenes/scene_01.unity');
+		const scene01 = await project.loadContainer('Assets/Scenes/scene_01.unity');
 
 		/** @type {import("../types.mi.js").SoundManager} */
 		const soundManager = scene01.getMonoBehaviourByGuid(soundManagerMeta.guid);

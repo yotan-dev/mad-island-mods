@@ -42,14 +42,14 @@ export class FXExtractor {
 
 	/**
 	 * Extracts FX and Emote constants from the project
-	 * @param {import("../unity/types.js").Project} project 
+	 * @param {import("../unity/Project.js").Project} project 
 	 */
 	async extract(project) {
 		// Finds the GUID for FXManager.cs
 		const fxManagerMeta = await project.loadMeta('Assets/Scripts/Assembly-CSharp/FXManager.cs');
 
 		// Get FXManager from scene_01 (main scene))
-		const scene01 = await project.loadScene('Assets/Scenes/scene_01.unity');
+		const scene01 = await project.loadContainer('Assets/Scenes/scene_01.unity');
 
 		/** @type {import("../types.mi.js").FXManager} */
 		const fxManager = scene01.getMonoBehaviourByGuid(fxManagerMeta.guid);

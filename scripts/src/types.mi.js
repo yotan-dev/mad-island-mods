@@ -6,4 +6,10 @@
  * @property {number} fx[].useID
  */
 
+/**
+ * @typedef {object} NpcStats
+ * @property {string} charaName Japanese name
+ * @property {string[]} localizedName Localized names. [1] = english
+ */
+
 export default {};

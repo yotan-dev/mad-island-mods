@@ -14,7 +14,7 @@ export class Constantify {
 	 * @returns {string}
 	 */
 	static text(str) {
-		str = str.replace(/ /g, '_');
+		str = str.replace(/[^a-zA-Z0-9]/g, '_');
 
 		const parts = str.split('_');
 		for (let i = 0; i < parts.length; i++) {

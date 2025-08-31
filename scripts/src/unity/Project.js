@@ -1,7 +1,7 @@
 import assert from 'assert';
 import fs from 'fs/promises';
 import * as yaml from 'js-yaml';
-import { Scene } from './Scene.js';
+import { Container } from './Container.js';
 
 /** @typedef {{ guid: string; filePath: string; }} FileMeta */
 
@@ -24,7 +24,7 @@ export class Project {
 	 * @param {string} filePath path relative to the project
 	 * @returns {Promise<import('./types').UnityYaml>}
 	 */
-	async loadUnityYaml(filePath) {
+	async #loadUnityYaml(filePath) {
 		// console.debug(`Loading YAML for ${filePath}`);
 
 		/**
@@ -82,12 +82,12 @@ export class Project {
 	/**
 	 * 
 	 * @param {string} mainFilePath 
-	 * @returns {Promise<import('./types').UnityMeta>}
+	 * @returns {Promise<import('./types').FileMeta>}
 	 */
 	async loadMeta(mainFilePath) {
 		// console.debug(`Loading meta for ${mainFilePath}`);
 
-		const metaFile = await this.loadUnityYaml(mainFilePath + '.meta');
+		const metaFile = await this.#loadUnityYaml(`ExportedProject/${mainFilePath}.meta`);
 		/** @type {import('./types').UnityMeta} */
 		const metadata = metaFile[0];
 
@@ -98,13 +98,19 @@ export class Project {
 		this.#fileMetaCache.set(mainFilePath, fileMeta);
 
 		// console.debug(`Loaded meta for ${mainFilePath}`);
-		return metadata;
+		return fileMeta;
 	}
 
+
+	/**
+	 * Scans a directory for .meta files, loading them into memory
+	 * @param {string} dirPath 
+	 * @returns {Promise<import('./types').FileMeta[]>}
+	 */
 	async scanDirectory(dirPath) {
 		console.debug(`Scanning directory ${dirPath}`);
 
-		const files = await fs.readdir(`${this.path}/${dirPath}`);
+		const files = await fs.readdir(`${this.path}/ExportedProject/${dirPath}`);
 
 		const readPromises = files
 			.filter((file) => file.endsWith('.meta'))
@@ -113,18 +119,20 @@ export class Project {
 				const filePath = `${dirPath}/${mainFileName}`;
 
 				// Don't re-read files we've already read
-				if (this.#fileMetaCache.has(filePath))
-					return;
+				if (this.#fileMetaCache.has(filePath)) {
+					return this.#fileMetaCache.get(filePath);
+				}
 
-				await this.loadMeta(filePath);
+				return this.loadMeta(filePath);
 			});
-		await Promise.all(readPromises);
+		const metas = await Promise.all(readPromises);
 
 		console.debug(`Scanned ${files.length} files in ${dirPath}`);
+		return metas;
 	}
 
 	/**
-	 * 
+	 * Gets a meta by its GUID
 	 * @param {string} guid 
 	 * @returns {FileMeta}
 	 */
@@ -135,8 +143,8 @@ export class Project {
 		return meta;
 	}
 
-	async loadScene(scenePath) {
-		const sceneFile = await this.loadUnityYaml(scenePath);
-		return new Scene(scenePath, sceneFile);
+	async loadContainer(filePath) {
+		const file = await this.#loadUnityYaml(`ExportedProject/${filePath}`);
+		return new Container(filePath, file);
 	}
 }

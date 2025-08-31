@@ -1,6 +1,11 @@
 import assert from "assert";
 
-export class Scene {
+/**
+ * A container represents a structure that holds data (usually from a Unity YAML)
+ * For example: scenes, prefabs, etc. which contains several objects,
+ * like MonoBehaviours, Transforms, etc.
+ */
+export class Container {
 	/** @type {string} */
 	filePath;
 

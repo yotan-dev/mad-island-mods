@@ -21,6 +21,8 @@ describe('Constantify', () => {
 			['1test-text', '_1testText'],
 			['test-1-text', 'Test1Text'],
 			['ba-ku_test', 'BaKuTest'],
+			['Chicken?', 'Chicken'],
+			['Az&Bz', 'AzBz'],
 		])('%s -> %s', (input, expected) => {
 			expect(Constantify.text(input)).toBe(expected);
 		});
