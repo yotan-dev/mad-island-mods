@@ -21,7 +21,7 @@ namespace YotanModCore.Items
 
 		public CustomItemData GetItem(string name)
 		{
-			PLogger.LogDebug($"Getting item {name}");
+			// PLogger.LogDebug($"Getting item {name}");
 			if (name == null)
 			{
 				return null;

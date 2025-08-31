@@ -10,6 +10,7 @@ namespace YotanModCore.Patches
 		private static void Post_ManagerScript_Awake(ManagersScript __instance)
 		{
 			Managers.mn = __instance;
+			Managers2.mn = __instance;
 		}
 
 		[HarmonyPatch(typeof(UIManager), "Awake")]

@@ -38,6 +38,9 @@ namespace YotanModCore
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 			Harmony.CreateAndPatchAll(typeof(GameLifecycleEvents));
 
+			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
+			Harmony.CreateAndPatchAll(typeof(DefenceInfoPatch));
+
 			CraftDB.Init();
 			ItemDB.Init();
 
