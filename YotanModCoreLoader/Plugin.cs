@@ -20,14 +20,10 @@ namespace YotanModCore
 		private void Awake()
 		{
 			PLogger._Logger = Logger;
-			PLogger.LogInfo($"> Game Version: {GameInfo.ToVersionString(GameInfo.GameVersion)}");
-			PLogger.LogInfo($">> DLC: {GameInfo.HasDLC}");
-			PLogger.LogInfo($">> Censor Type: {GameInfo.CensorType}");
+			Initializer.Init(new BepisLogger(Logger));
 
 			Assets = AssetBundle.LoadFromFile($"BepInEx/plugins/YotanModCore/YotanModCore.assets");
 
-			CommonUtils.Init();
-			ConsoleManager.Instance.Init();
 			NpcTalkManager.Init();
 
 			Harmony.CreateAndPatchAll(typeof(CraftManagerPatches));
@@ -40,9 +36,6 @@ namespace YotanModCore
 
 			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
 			Harmony.CreateAndPatchAll(typeof(DefenceInfoPatch));
-
-			CraftDB.Init();
-			ItemDB.Init();
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");
 		}

@@ -132,7 +132,7 @@ namespace YotanModCore.Items
 			this.BenchToCraftId = new Dictionary<string, int>(DefaultBenches);
 		}
 
-		internal void LoadRecipes(CraftManager craftManager)
+		public void LoadRecipes(CraftManager craftManager)
 		{
 			PLogger.LogDebug("Loading recipes");
 
@@ -152,14 +152,14 @@ namespace YotanModCore.Items
 					var startIdx = craftInfo.Length;
 					Array.Resize(ref craftInfo, craftInfo.Length + newRecipes.Count);
 					craftManager.craftData[craftId].craftInfo = craftInfo;
-					
+
 					for (int i = 0; i < newRecipes.Count; i++)
 						craftInfo[startIdx + i] = newRecipes[i];
 				}
 				else
 				{
 					craftId = craftManager.craftData.Length;
-					
+
 					var craftData = new CraftData()
 					{
 						craftName = benchKey,
