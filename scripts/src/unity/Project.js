@@ -82,7 +82,7 @@ export class Project {
 	/**
 	 * 
 	 * @param {string} mainFilePath 
-	 * @returns {Promise<import('./types').FileMeta>}
+	 * @returns {Promise<FileMeta>}
 	 */
 	async loadMeta(mainFilePath) {
 		// console.debug(`Loading meta for ${mainFilePath}`);
@@ -105,7 +105,7 @@ export class Project {
 	/**
 	 * Scans a directory for .meta files, loading them into memory
 	 * @param {string} dirPath 
-	 * @returns {Promise<import('./types').FileMeta[]>}
+	 * @returns {Promise<FileMeta[]>}
 	 */
 	async scanDirectory(dirPath) {
 		console.debug(`Scanning directory ${dirPath}`);
