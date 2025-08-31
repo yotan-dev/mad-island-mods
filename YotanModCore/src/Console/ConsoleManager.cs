@@ -24,7 +24,7 @@ namespace YotanModCore.Console
 
 			this.RegisterCmd("/moral", new MoralCmd());
 
-			this.RegisterCmd("/stun", new StunCmd());
+			// this.RegisterCmd("/stun", new StunCmd());
 		}
 
 		/// <summary>

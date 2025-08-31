@@ -5,9 +5,10 @@ using HFramework.Performer;
 using HFramework.Scenes;
 using HarmonyLib;
 using YotanModCore.Events;
+
 namespace HFramework
 {
-	
+
 	[BepInPlugin("HFramework", "HFramework", "1.0.11")]
 	[BepInDependency("YotanModCore", "2.0.0")]
 	public class Plugin : BaseUnityPlugin
@@ -22,7 +23,8 @@ namespace HFramework
 
 			HFramework.Config.Instance.Init(Config);
 
-			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value) {
+			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value)
+			{
 				Harmony.CreateAndPatchAll(typeof(SexManager_AssWallPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexNPCPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexPlayerPatch));
