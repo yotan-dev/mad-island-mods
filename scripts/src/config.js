@@ -1,1 +1,1 @@
-export const outDir = './';
+export const constOutDir = '../YotanModCore/src/Consts/';

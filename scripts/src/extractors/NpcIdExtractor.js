@@ -3,7 +3,7 @@ import { Constantify } from "../utils/Constantify.js";
 import { FieldBuilder } from "../utils/FieldBuilder.js";
 import { assert } from "console";
 import * as fs from "fs";
-import { outDir } from "../config.js";
+import { constOutDir } from "../config.js";
 
 export class NpcIdExtractor {
 	// from SaveManger::LoadDLC
@@ -26,8 +26,8 @@ export class NpcIdExtractor {
 	};
 
 	/**
-	 * 
-	 * @param {import("../unity/Project.js").Project} project 
+	 *
+	 * @param {import("../unity/Project.js").Project} project
 	 */
 	async extract(project) {
 		const npcStatsMeta = await project.loadMeta('Assets/Scripts/Assembly-CSharp/StatsData.cs');
@@ -45,7 +45,7 @@ export class NpcIdExtractor {
 
 			/** @type {import("../types.mi.js").NpcStats} */
 			const npcStatsObj = npcStats.getMonoBehaviourByGuid(npcStatsMeta.guid);
-			
+
 			let npcName = npcStatsObj.localizedName[1];
 			npcName = this.#rename[npcId] ?? npcName;
 			npcList.push({ npcId: parseInt(npcId, 10), npcName, constant: Constantify.text(npcName) });
@@ -53,17 +53,24 @@ export class NpcIdExtractor {
 
 		npcList.sort((a, b) => a.npcId - b.npcId);
 
-		const npcIdBuilder = new ClassBuilder('YotanModCore.Consts', 'NpcIDs');
+		const npcIdBuilder = new ClassBuilder('YotanModCore.Consts', 'NpcID');
+
+		const field = FieldBuilder
+			.intConst('None', -1)
+			.addAttribute('[StrVal("None")]')
+			.setComment('Custom - Represents no one')
+			.build();
+		npcIdBuilder.addRawField(field);
 
 		for (const { npcId, npcName, constant } of npcList) {
 			const field = FieldBuilder
 				.intConst(constant, npcId)
 				.addAttribute(`[StrVal("${npcName}")]`)
-				.setComment(this.#DlcNpcIDs.has(npcId) ? ' // DLC' : '')
+				.setComment(this.#DlcNpcIDs.has(npcId) ? 'DLC' : '')
 				.build();
 			npcIdBuilder.addRawField(field);
 		}
 
-		fs.writeFileSync(`${outDir}NpcID.cs`, npcIdBuilder.build());
+		fs.writeFileSync(`${constOutDir}NpcID.cs`, npcIdBuilder.build());
 	}
 }

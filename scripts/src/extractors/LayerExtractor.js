@@ -1,12 +1,12 @@
 import assert from "assert";
 import fs from "fs";
 import { ClassBuilder } from "../utils/ClassBuilder.js";
-import { outDir } from "../config.js";
 import { Constantify } from "../utils/Constantify.js";
+import { constOutDir } from "../config.js";
 
 export class LayerExtractor {
 	/**
-	 * @param {import("../unity/Project.js").Project} project 
+	 * @param {import("../unity/Project.js").Project} project
 	 */
 	async extract(project) {
 		const tagManager = await project.loadContainer('ProjectSettings/TagManager.asset');
@@ -26,6 +26,6 @@ export class LayerExtractor {
 		}
 
 		console.log('Generating Layers.cs...');
-		fs.writeFileSync(`${outDir}Layers.cs`, classBuilder.build(), 'utf-8');
+		fs.writeFileSync(`${constOutDir}Layers.cs`, classBuilder.build(), 'utf-8');
 	}
 }

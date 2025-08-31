@@ -1,12 +1,12 @@
 import assert from "assert";
 import fs from "fs";
 import { ClassBuilder } from "../utils/ClassBuilder.js";
-import { outDir } from "../config.js";
+import { constOutDir } from "../config.js";
 import { Constantify } from "../utils/Constantify.js";
 
 export class TagExtractor {
 	/**
-	 * @param {import("../unity/Project.js").Project} project 
+	 * @param {import("../unity/Project.js").Project} project
 	 */
 	async extract(project) {
 		const tagManager = await project.loadContainer('ProjectSettings/TagManager.asset');
@@ -36,6 +36,6 @@ export class TagExtractor {
 		}
 
 		console.log('Generating Tags.cs...');
-		fs.writeFileSync(`${outDir}Tags.cs`, classBuilder.build(), 'utf-8');
+		fs.writeFileSync(`${constOutDir}Tags.cs`, classBuilder.build(), 'utf-8');
 	}
 }

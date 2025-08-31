@@ -2,13 +2,20 @@ import path from "path";
 import fs from "fs";
 import { Constantify } from "../utils/Constantify.js";
 import { ClassBuilder } from "../utils/ClassBuilder.js";
-import { outDir } from "../config.js";
+import { constOutDir } from "../config.js";
+import assert from "assert";
 
 /**
  * Extracts FX and Emote constants from the project
  * generating Emote.cs and FX.cs files.
  */
 export class FXExtractor {
+	// The game files has those duplicated, so we need to give them new constant names
+	#overrides = {
+		90: { from: 'Drugbug01Prefab', to: 'Drugbug01Prefab_B' },
+		92: { from: 'SandImpact3', to: 'SandImpact3_B' },
+	};
+
 	async #extractFX(project, fxManager) {
 		// Scann all PrefabInstance files, as FX files are prefabs.
 		await project.scanDirectory('Assets/PrefabInstance');
@@ -18,11 +25,15 @@ export class FXExtractor {
 		fxManager.fx.forEach((fx, index) => {
 			const meta = project.getMetaByGuid(fx.fxPrefab.guid);
 			const fileName = path.basename(meta.filePath);
-			const constName = Constantify.fileName(fileName);
+			let constName = Constantify.fileName(fileName);
+			if (this.#overrides[index]) {
+				assert(this.#overrides[index].from === constName, `Override name mismatch for index ${index}: expected ${this.#overrides[index].from}, got ${constName}`);
+				constName = this.#overrides[index].to;
+			}
 			fxClass.addIntConstField(constName, index, fileName);
 		});
 
-		fs.writeFileSync(outDir + '/FX.cs', fxClass.build(), 'utf-8');
+		fs.writeFileSync(constOutDir + '/FX.cs', fxClass.build(), 'utf-8');
 	}
 
 	async #extractEmotes(project, fxManager) {
@@ -37,12 +48,12 @@ export class FXExtractor {
 			emoteClass.addIntConstField(constName, index, fileName);
 		});
 
-		fs.writeFileSync(outDir + '/Emote.cs', emoteClass.build(), 'utf-8');
+		fs.writeFileSync(constOutDir + '/Emote.cs', emoteClass.build(), 'utf-8');
 	}
 
 	/**
 	 * Extracts FX and Emote constants from the project
-	 * @param {import("../unity/Project.js").Project} project 
+	 * @param {import("../unity/Project.js").Project} project
 	 */
 	async extract(project) {
 		// Finds the GUID for FXManager.cs

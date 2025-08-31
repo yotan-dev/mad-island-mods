@@ -2,7 +2,7 @@ import assert from "assert";
 import fs from "fs";
 import { Constantify } from "../utils/Constantify.js";
 import { ClassBuilder } from "../utils/ClassBuilder.js";
-import { outDir } from "../config.js";
+import { constOutDir } from "../config.js";
 
 export class TextColorExtractor {
 	// The game does not provide a proper name we can use as constant,
@@ -29,14 +29,14 @@ export class TextColorExtractor {
 		};
 		const colorInfo = this.#colorsList
 			.find((c) => c.r === rgba.r && c.g === rgba.g && c.b === rgba.b && c.a === rgba.a);
-		
+
 		assert(colorInfo, `Color ${rgba.r} ${rgba.g} ${rgba.b} ${rgba.a} not found`);
-		
+
 		return colorInfo;
 	}
 
 	/**
-	 * @param {import("../unity/Project.js").Project} project 
+	 * @param {import("../unity/Project.js").Project} project
 	 */
 	async extract(project) {
 		const fxManagerMeta = await project.loadMeta('Assets/Scripts/Assembly-CSharp/FXManager.cs');
@@ -54,6 +54,6 @@ export class TextColorExtractor {
 		}
 
 		console.log('Generating TextColor.cs...');
-		fs.writeFileSync(`${outDir}TextColor.cs`, classBuilder.build(), 'utf-8');
+		fs.writeFileSync(`${constOutDir}TextColor.cs`, classBuilder.build(), 'utf-8');
 	}
 }
