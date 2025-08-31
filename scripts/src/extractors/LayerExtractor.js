@@ -4,7 +4,7 @@ import { ClassBuilder } from "../utils/ClassBuilder.js";
 import { outDir } from "../config.js";
 import { Constantify } from "../utils/Constantify.js";
 
-export class TagExtractor {
+export class LayerExtractor {
 	/**
 	 * @param {import("../unity/Project.js").Project} project 
 	 */
@@ -15,27 +15,17 @@ export class TagExtractor {
 		const tagManagerObj = tagManager.data[0].TagManager;
 		assert(tagManagerObj);
 
-		const tags = tagManagerObj.tags;
-		assert(tags);
+		const layers = tagManagerObj.layers.filter((l) => !!l);
+		assert(layers);
 
-		console.log('Extracting Tags...');
-		// Those are built-in tags shipped by unity -- https://docs.unity3d.com/Manual/Tags.html
-		tags.unshift(
-			'Untagged',
-			'Respawn',
-			'Finish',
-			'EditorOnly',
-			'MainCamera',
-			'Player',
-			'GameController',
-		);
+		console.log('Extracting Layers...');
 
-		const classBuilder = new ClassBuilder('YotanModCore.Consts', 'Tags');
-		for (const name of [...tags].sort()) {
+		const classBuilder = new ClassBuilder('YotanModCore.Consts', 'Layers');
+		for (const name of [...layers].sort()) {
 			classBuilder.addStringConstField(Constantify.text(name), name);
 		}
 
-		console.log('Generating Tags.cs...');
-		fs.writeFileSync(`${outDir}Tags.cs`, classBuilder.build(), 'utf-8');
+		console.log('Generating Layers.cs...');
+		fs.writeFileSync(`${outDir}Layers.cs`, classBuilder.build(), 'utf-8');
 	}
 }
