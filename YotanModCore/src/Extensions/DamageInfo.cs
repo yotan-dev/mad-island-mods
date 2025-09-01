@@ -7,6 +7,7 @@ namespace YotanModCore.Extensions
 	/// <summary>
 	/// Used to pass damage information to TakeDamage.
 	/// </summary>
+	[Experimental]
 	public class DamageInfo
 	{
 		public float Damage { get; set; }

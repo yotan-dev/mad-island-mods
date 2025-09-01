@@ -15,6 +15,7 @@ namespace YotanModCore.Items
 	/// If the item can't be damaged, it should not use DefenceInfo.
 	/// For damage on touch only, use CDamageTrigger instead
 	/// </summary>
+	[Experimental]
 	public class CDefenceInfo : DefenceInfo
 	{
 		/// <summary>

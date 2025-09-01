@@ -10,6 +10,7 @@ namespace YotanModCore.Items
 	/// Declares a Crafting Recipe.
 	/// A Crafting Recipe enables an item to be created at a certain place by using certain materials
 	/// </summary>
+	[Experimental]
 	[CreateAssetMenu(fileName = "New Craft Recipe", menuName = "Yotan Mod Core/Craft Recipe", order = 2)]
 	public class CraftRecipe : ScriptableObject, ISerializationCallbackReceiver
 	{
@@ -37,7 +38,7 @@ namespace YotanModCore.Items
 		/// <summary>
 		/// List of materials required to craft the item.
 		/// Must follow the pattern `<itemCode>:<count>`
-		/// 
+		///
 		/// This is later serailized to Materials, as Unity is not able to properly serialize
 		/// objects inside an external DLL/AssetBundle.
 		/// </summary>

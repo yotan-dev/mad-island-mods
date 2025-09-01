@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace YotanModCore.Items
 {
+	/// <summary>
+	/// Custom Item Data
+	/// </summary>
+	[Experimental]
 	public class CustomItemData : ItemData
 	{
 		[Header("Custom Item Data")]

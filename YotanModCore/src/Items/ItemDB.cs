@@ -5,6 +5,10 @@ using UnityEngine.Assertions;
 
 namespace YotanModCore.Items
 {
+	/// <summary>
+	/// Item Database
+	/// </summary>
+	[Experimental]
 	public class ItemDB : ScriptableObject
 	{
 		public static ItemDB Instance { get; private set; }

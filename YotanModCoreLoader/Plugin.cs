@@ -2,12 +2,9 @@
 using HarmonyLib;
 using YotanModCore.Patches;
 using UnityEngine;
-using YotanModCore.Events;
-using YotanModCore.Console;
 using YotanModCore.NpcTalk;
 using YotanModCore.Items;
 using YotanModCore.Items.Patches;
-using YotanModCore.Initializer;
 using YotanModCoreLoader.Patches;
 
 namespace YotanModCore

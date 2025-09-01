@@ -1,9 +1,9 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 using YotanModCore.Consts;
 
 namespace YotanModCore.Extensions
 {
+	[Experimental]
 	public static class CommonStatesExtensions
 	{
 		/// <summary>

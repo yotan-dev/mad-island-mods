@@ -4,6 +4,7 @@ using System;
 
 namespace YotanModCore.Items
 {
+	[Experimental]
 	[Serializable]
 	public class ItemAmountEntry
 	{

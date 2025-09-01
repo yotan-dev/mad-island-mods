@@ -25,6 +25,10 @@ namespace YotanModCore.Events
 			OnGameStartEvent?.Invoke();
 		}
 
+		/// <summary>
+		/// Trigger to Game Start. This is meant to be called by YotanModCoreLoader.
+		/// </summary>
+		/// <param name="__instance"></param>
 		internal static void Pre_GamaManager_Start(GameManager __instance)
 		{
 			if (!__instance.IsGameScene())
@@ -33,6 +37,9 @@ namespace YotanModCore.Events
 			__instance.StartCoroutine(GameStartRoutine());
 		}
 
+		/// <summary>
+		/// Trigger to Scene Change. This is meant to be called by YotanModCoreLoader.
+		/// </summary>
 		internal static void Pre_SceneScript_SceneChange()
 		{
 			if (!Managers.mn.gameMN.IsGameScene())

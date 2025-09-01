@@ -11,6 +11,7 @@ namespace YotanModCore.Items
 	/// <summary>
 	/// Holds craft station recipes
 	/// </summary>
+	[Experimental]
 	public class CraftDB : ScriptableObject
 	{
 		public static CraftDB Instance { get; private set; }

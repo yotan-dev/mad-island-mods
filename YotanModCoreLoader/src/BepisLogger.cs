@@ -2,9 +2,12 @@ using BepInEx.Logging;
 
 namespace YotanModCore
 {
-	public class BepisLogger : ILogger
+	/// <summary>
+	/// Logger that bridges BepInEx logging to YotanModCore logging
+	/// </summary>
+	internal class BepisLogger : ILogger
 	{
-		private ManualLogSource _Logger;
+		private readonly ManualLogSource _Logger;
 
 		public BepisLogger(ManualLogSource logger)
 		{
