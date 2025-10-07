@@ -20,7 +20,9 @@ namespace EnhancedIsland
 		public NpcStats.Config.PConfig NpcStats { get { return EnhancedIsland.NpcStats.Config.PConfig.Instance; } }
 
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
-		
+
+		public RotateObject.PConfig RotateObject { get { return EnhancedIsland.RotateObject.PConfig.Instance; } }
+
 		public ConfigEntry<bool> EnableStackNearby { get; private set; }
 
 		public ConfigEntry<bool> EnableWarpBody { get; private set; }
@@ -31,6 +33,7 @@ namespace EnhancedIsland
 		{
 			this.BetterWorkplaces.Init(conf);
 			this.NpcStats.Init(conf);
+			this.RotateObject.Init(conf);
 
 			this.EnableDisassembleItems = conf.Bind<bool>(
 				"DisassembleItems",

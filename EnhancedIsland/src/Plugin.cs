@@ -57,6 +57,8 @@ namespace EnhancedIsland
 			if (!IsDuplicated("CraftColors"))
 				new RequirementChecker.Main().Init();
 
+			new RotateObject.Main().Init();
+
 			if (!IsDuplicated("StackNearby"))
 				new StackNearby.Main().Init();
 
