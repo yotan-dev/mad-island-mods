@@ -5,6 +5,7 @@ using UnityEngine;
 using YotanModCore.Items;
 using YotanModCore.Items.Patches;
 using YotanModCoreLoader.Patches;
+using YotanModCore.DataStore;
 
 namespace YotanModCore
 {
@@ -30,7 +31,10 @@ namespace YotanModCore
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 			Harmony.CreateAndPatchAll(typeof(LifecyclePatch));
 
+			Harmony.CreateAndPatchAll(typeof(SaveManagerPatch));
+
 			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
+			Harmony.CreateAndPatchAll(typeof(TranspileSaveFileSerializer));
 			Harmony.CreateAndPatchAll(typeof(DefenceInfoPatch));
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");
