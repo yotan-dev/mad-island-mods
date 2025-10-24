@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine.Assertions;
 using Mono.Cecil.Cil;
 using BepInEx.Logging;
+using System;
 
 public static class Patcher
 {
@@ -109,6 +110,11 @@ public static class Patcher
 		AddProperty(GetTypeByName(module, classNamePath), "modData", module.ImportReference(typeof(List<object>)), []);
 	}
 
+	private static void AddModDataStoreProperty(ModuleDefinition module, string[] classNamePath)
+	{
+		AddProperty(GetTypeByName(module, classNamePath), "modDataStores", module.ImportReference(typeof(Dictionary<Type, object>)), []);
+	}
+
 	// Patches the assemblies
 	public static void Patch(AssemblyDefinition assembly)
 	{
@@ -117,6 +123,7 @@ public static class Patcher
 		var module = assembly.Modules[0];
 		AddModDataProperty(module, ["SaveManager", "SaveManager/SaveEntry"]);
 		AddModDataProperty(module, ["SaveManager", "SaveManager/CharaSave"]);
+		AddModDataStoreProperty(module, ["CommonStates"]);
 
 		// This breaks the game for unknown reasons
 		// var newField = new FieldDefinition("testField", FieldAttributes.Public, module.ImportReference(typeof(int)));

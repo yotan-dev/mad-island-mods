@@ -28,7 +28,8 @@ namespace YotanModCore.Patches
 
 		private static XmlSerializer GetSerializer(Type type)
 		{
-			if (type == typeof(SaveManager.SaveDataBase)) {
+			if (type == typeof(SaveManager.SaveDataBase))
+			{
 				return new XmlSerializer(type, DataStoreManager.GetSaveDataTypes());
 			}
 
