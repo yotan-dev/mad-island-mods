@@ -3,6 +3,8 @@ namespace YotanModCore.Consts
 {
 	public static class Tags
 	{
+		public const string AssNPC = "AssNPC";
+
 		public const string AssPlayer = "AssPlayer";
 
 		public const string Defence = "Defence";

@@ -9,7 +9,7 @@ using YotanModCoreLoader.Patches;
 
 namespace YotanModCore
 {
-	[BepInPlugin("YotanModCore", "YotanModCore", "2.0.2")]
+	[BepInPlugin("YotanModCore", "YotanModCore", "2.1.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;

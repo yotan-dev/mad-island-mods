@@ -90,5 +90,7 @@ namespace YotanModCore.Consts
 		public const int KokoMountain01Loop = 42; // koko_mountain_01_loop.ogg
 
 		public const int KokoKonton01Loop = 43; // koko_konton_01_loop.ogg
+
+		public const int NatsunokazehaHarukatookuhe = 44; // Natsunokazeha_harukatookuhe.ogg
 	}
 }

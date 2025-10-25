@@ -470,5 +470,9 @@ namespace YotanModCore.Consts
 		public const int FXExplosionCloud00 = 232; // FX_Explosion_cloud_00.prefab
 
 		public const int FXDeathCurse00 = 233; // FX_Death_curse_00.prefab
+
+		public const int FXPuke02Prefab = 234; // FX_puke_02_prefab.prefab
+
+		public const int FXWaterflowCapsule01Prefab = 235; // FX_waterflow_capsule_01_prefab.prefab
 	}
 }

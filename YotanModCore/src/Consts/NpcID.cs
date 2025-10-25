@@ -390,6 +390,12 @@ namespace YotanModCore.Consts
 		[StrVal("Halloween Ghost")]
 		public const int HalloweenGhost = 161;
 
+		[StrVal("Kana")]
+		public const int Kana = 162;
+
+		[StrVal("Lulu")]
+		public const int Lulu = 163;
+
 		[StrVal("Present (Blue)")]
 		public const int PresentBlue = 170;
 

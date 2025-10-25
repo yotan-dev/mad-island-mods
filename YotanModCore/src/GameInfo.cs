@@ -13,9 +13,9 @@ namespace YotanModCore
 		/// <summary>
 		/// GameVersion based on patch notes.
 		/// It follows the format of Major.Minor.Build.Patch, using C#'s Version class
-		/// 
+		///
 		/// If version could not be determined, it returns 999_999_999_999
-		/// 
+		///
 		/// To compare/display, prefer using ToVersion and ToVersionString.
 		/// </summary>
 		public static Version GameVersion { get { return Instance._GameVersion; } }
@@ -57,7 +57,7 @@ namespace YotanModCore
 		/// Parses a version string into GameVersion. A version string is composed of "<major>.<minor>.<build>.<patch>"
 		/// where each of the 4 values are integers.
 		/// <build> and <patch> may be ommited, but major and minor are required.
-		/// 
+		///
 		/// Examples:
 		/// - "0.1" -> 0.1.0.0
 		/// - "0.1.2" -> 0.1.2.0
@@ -121,10 +121,10 @@ namespace YotanModCore
 		{
 			if (File.Exists(Application.dataPath + "/StreamingAssets/XML/FNZ.bat"))
 				return CensorType.Fanza;
-			
+
 			if (File.Exists(Application.dataPath + "/StreamingAssets/XML/None.bat"))
 				return CensorType.None;
-			
+
 			return CensorType.Default;
 		}
 
@@ -164,6 +164,8 @@ namespace YotanModCore
 				{ "2025/08/17--15:37", ToVersion("0.4.4.6") }, // Beta
 				{ "2025/08/17--15:53", ToVersion("0.4.4.7") }, // Beta
 				{ "2025/08/20--16:18", ToVersion("0.4.4.8") }, // Beta
+				{ "2025/10/25--17:52", ToVersion("0.4.5.0") }, // Beta
+				{ "2025/10/25--18:14", ToVersion("0.4.5.1") }, // Beta
 			};
 
 			if (buildDateVersion.ContainsKey(buildTimestamp))
