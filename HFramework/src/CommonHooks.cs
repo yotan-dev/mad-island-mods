@@ -30,6 +30,10 @@ namespace HFramework
 				.ForScenes(CommonSexPlayer.Name)
 				.HookEvent(EventNames.OnHandJob)
 				.Call(this.CountNormal);
+			HookBuilder.New("HF.Friendly.OnPenetrateMouth")
+				.ForScenes(CommonSexPlayer.Name)
+				.HookEvent(EventNames.OnPenetrateMouth)
+				.Call(this.CountNormal);
 			HookBuilder.New("HF.Friendly.OnTitFuck")
 				.ForScenes(CommonSexPlayer.Name)
 				.HookEvent(EventNames.OnTitFuck)

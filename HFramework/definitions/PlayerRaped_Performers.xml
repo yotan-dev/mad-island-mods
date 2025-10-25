@@ -146,7 +146,7 @@
 			</Scopes>
 			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="100" />
 			<Actors>
-				<Actor val="Oldguy#100" />
+				<Actor val="OldGuy#100" />
 				<Actor val="Yona#0" />
 			</Actors>
 			<AnimationSets>

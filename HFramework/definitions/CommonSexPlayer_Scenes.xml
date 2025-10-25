@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 
+<!--
 	HF_CommonSexPlayer scene config.
 	This if for friendly sex initiated by the player (Sex button)
 -->
@@ -253,6 +253,39 @@
 						<Condition xsi:type="PregnantCheck" actor="UnderGroundGirl#142" value="false" />
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.4.5 -->
+				<Performer id="HF_Man_Kana_Sex">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_Kana" compare="in">
+							<Values>
+								<Value>7</Value> <!-- Kana is your lover -->
+								<Value>9</Value> <!-- Kana love is supported -->
+								<Value>11</Value> <!-- ??? -->
+							</Values>
+						</Condition>
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_Kana" compare="in">
+							<Values>
+								<Value>7</Value> <!-- Kana is your lover -->
+								<Value>9</Value> <!-- Kana love is supported -->
+								<Value>11</Value> <!-- ??? -->
+							</Values>
+						</Condition>
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_Lulu_Blowjob">
+					<PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="0" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_Lulu_Sex">
+					<PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="1" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Yona_LargeYoungMan_Normal" />
 			</Performers>
 		</Scene>
 	</Scenes>

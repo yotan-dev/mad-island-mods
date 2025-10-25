@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 
+<!--
 	HF_ManRapes scene config.
 	This is when Man player grapples a NPC
 -->
@@ -95,6 +95,26 @@
 				<!-- New in v0.4.4 -->
 				<Performer id="HF_Man_LargeNativeGirl_Rape" />
 				<Performer id="HF_Man_UnderGroundGirl_Rape" />
+
+				<!-- New in v0.4.5 -->
+				<Performer id="HF_Man_Kana_Rape">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_Kana" compare="nin">
+							<Values>
+								<Value>5</Value> <!-- You are close to Kana -->
+								<Value>7</Value> <!-- Kana is your lover -->
+							</Values>
+						</Condition>
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_Kana" compare="nin">
+							<Values>
+								<Value>5</Value> <!-- You are close to Kana -->
+								<Value>7</Value> <!-- Kana is your lover -->
+							</Values>
+						</Condition>
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>

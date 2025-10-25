@@ -50,6 +50,8 @@ namespace HFramework.Scenes.Conditionals
 				return progress <= this.ExpectedValue;
 			else if (this.Compare == "in")
 				return this.ExpectedValues.Contains(progress);
+			else if (this.Compare == "nin")
+				return !this.ExpectedValues.Contains(progress);
 
 			PLogger.LogError($"Unknown compare operator {this.Compare}");
 			return false;
