@@ -5,9 +5,8 @@ using System.Reflection.Emit;
 using System.Xml.Serialization;
 using HarmonyLib;
 using UnityEngine.Assertions;
-using YotanModCore.DataStore;
 
-namespace YotanModCore.Patches
+namespace YotanModCore.DataStore
 {
 	[HarmonyPatch]
 	internal static class TranspileSaveFileSerializer

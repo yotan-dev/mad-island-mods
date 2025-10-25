@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 
-namespace YotanModCore.Patches
+namespace YotanModCore.DataStore
 {
 	[HarmonyPatch]
 	internal static class TranspileLoadPlayer

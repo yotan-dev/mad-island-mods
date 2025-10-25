@@ -31,12 +31,14 @@ namespace YotanModCore
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 			Harmony.CreateAndPatchAll(typeof(LifecyclePatch));
 
+#region DataStore
 			Harmony.CreateAndPatchAll(typeof(SaveManagerPatch));
-
-			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
 			Harmony.CreateAndPatchAll(typeof(TranspileSaveFileSerializer));
 			Harmony.CreateAndPatchAll(typeof(TranspileSavePlayer));
 			Harmony.CreateAndPatchAll(typeof(TranspileLoadPlayer));
+#endregion // DataStore
+
+			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
 			Harmony.CreateAndPatchAll(typeof(DefenceInfoPatch));
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");

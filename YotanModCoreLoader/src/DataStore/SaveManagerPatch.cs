@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
 using HarmonyLib;
-using YotanModCore.DataStore;
 
-namespace YotanModCore.Patches
+namespace YotanModCore.DataStore
 {
 	public class SaveManagerPatch
 	{
