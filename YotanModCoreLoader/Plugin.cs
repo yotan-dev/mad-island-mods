@@ -35,6 +35,8 @@ namespace YotanModCore
 
 			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
 			Harmony.CreateAndPatchAll(typeof(TranspileSaveFileSerializer));
+			Harmony.CreateAndPatchAll(typeof(TranspileSavePlayer));
+			Harmony.CreateAndPatchAll(typeof(TranspileLoadPlayer));
 			Harmony.CreateAndPatchAll(typeof(DefenceInfoPatch));
 
 			PLogger.LogInfo($"Plugin YotanModCore is loaded!");

@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Xml;
 using HarmonyLib;
 using YotanModCore.DataStore;
 
@@ -24,6 +24,17 @@ namespace YotanModCore.Patches
 				modData.Add(store.OnSave());
 		}
 
+		private static string GetDataName(object data)
+		{
+			if (data is not XmlNode[] nodes)
+				return "<Unknown Data>";
+
+			if (nodes.Length == 0)
+				return "<Unknown Empty>";
+
+			return $"<{nodes[0].InnerText}>";
+		}
+
 		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.LoadBuild), [])]
 		[HarmonyPrefix]
 		private static void Pre_SaveManager_LoadBuild(SaveManager __instance)
@@ -37,7 +48,7 @@ namespace YotanModCore.Patches
 				var dataStore = data as ISaveData;
 				if (dataStore == null)
 				{
-					PLogger.LogError($"Invalid data type: {data.GetType()}");
+					PLogger.LogError($"Invalid custom data type: {GetDataName(data)}. Ignoring it.");
 					continue;
 				}
 
@@ -46,38 +57,32 @@ namespace YotanModCore.Patches
 			}
 		}
 
-		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.NPCCommonToCharaSave))]
-		[HarmonyPostfix]
-		private static void Post_SaveManager_NPCCommonToCharaSave(
-			CommonStates nCommon,
-			SaveManager.CharaSave chara,
-			SaveManager.NPCBagCommon npcBag
-		)
+		internal static void SaveCommonData(CommonStates commonStates, SaveManager.CharaSave charaSave)
 		{
 			var modData = new List<object>();
-			CharaSaveModData.SetValue(chara, modData);
+			CharaSaveModData.SetValue(charaSave, modData);
 
 			var storeTypes = DataStoreManager.GetCommonSDataTypes();
 			foreach (var storeType in storeTypes)
 			{
 				ICommonSDataStore store;
-				if (!nCommon.TryGetData(storeType, out store))
+				if (!commonStates.TryGetData(storeType, out store))
 					continue;
 
 				modData.Add(store.OnSave());
 			}
 		}
 
-		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.CharaSaveToNPCCommon))]
+		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.NPCCommonToCharaSave))]
 		[HarmonyPostfix]
-		private static void Post_SaveManager_CharaSaveToNPCCommon(
-			SaveManager.CharaSave npc,
-			CommonStates nCommon,
-			bool andMove,
-			int id
-		)
+		private static void Post_SaveManager_NPCCommonToCharaSave(CommonStates nCommon, SaveManager.CharaSave chara)
 		{
-			List<object> modData = CharaSaveModData.GetValue(npc) as List<object>;
+			SaveCommonData(nCommon, chara);
+		}
+
+		internal static void LoadCommonData(CommonStates commonStates, SaveManager.CharaSave charaSave)
+		{
+			List<object> modData = CharaSaveModData.GetValue(charaSave) as List<object>;
 			if (modData == null)
 				modData = new List<object>();
 
@@ -86,13 +91,20 @@ namespace YotanModCore.Patches
 				var dataStore = data as ISaveData;
 				if (dataStore == null)
 				{
-					PLogger.LogError($"Invalid data type: {data.GetType()}");
+					PLogger.LogError($"Invalid custom data type: {GetDataName(data)}. Ignoring it.");
 					continue;
 				}
 
-				var store = nCommon.GetData(dataStore.GetStoreType());
+				var store = commonStates.GetData(dataStore.GetStoreType());
 				store.OnLoad(dataStore);
 			}
+		}
+
+		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.CharaSaveToNPCCommon))]
+		[HarmonyPostfix]
+		private static void Post_SaveManager_CharaSaveToNPCCommon(SaveManager.CharaSave npc, CommonStates nCommon)
+		{
+			LoadCommonData(nCommon, npc);
 		}
 	}
 }
