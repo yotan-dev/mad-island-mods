@@ -18,11 +18,9 @@ namespace YotanModCore.DataStore
 			var modData = new List<object>();
 			CharaSaveModData.SetValue(charaSave, modData);
 
-			var storeTypes = DataStoreManager.GetCommonSDataTypes();
-			foreach (var storeType in storeTypes)
+			foreach (var storeType in DataStoreManager.GetCommonSDataStoreTypes())
 			{
-				ICommonSDataStore store;
-				if (!commonStates.TryGetData(storeType, out store))
+				if (!commonStates.TryGetData(storeType, out ICommonSDataStore store))
 					continue;
 
 				modData.Add(store.OnSave());
@@ -36,14 +34,12 @@ namespace YotanModCore.DataStore
 		/// <param name="charaSave"></param>
 		internal static void LoadCommonData(CommonStates commonStates, SaveManager.CharaSave charaSave)
 		{
-			List<object> modData = CharaSaveModData.GetValue(charaSave) as List<object>;
-			if (modData == null)
-				modData = new List<object>();
+			if (CharaSaveModData.GetValue(charaSave) is not List<object> modData)
+				modData = [];
 
 			foreach (var data in modData)
 			{
-				var dataStore = data as ISaveData;
-				if (dataStore == null)
+				if (data is not ISaveData dataStore)
 				{
 					PLogger.LogError($"Invalid custom data type: {SaveUtils.TryGetXmlNodeName(data)}. Ignoring it.");
 					continue;

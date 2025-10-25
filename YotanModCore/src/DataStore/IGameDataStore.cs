@@ -1,5 +1,3 @@
-using System;
-
 namespace YotanModCore.DataStore
 {
 	/// <summary>
@@ -8,18 +6,14 @@ namespace YotanModCore.DataStore
 	///
 	/// During the game lifecycle, one instance of this class will be created and kept.
 	/// </summary>
-	public interface IGameDataStore
+	public interface IGameDataStore : IDataStore
 	{
 		/// <summary>
-		/// Called when the data is loaded from the save file.
+		/// Called when creating a new store for this GameManager.
+		/// This usually happens the first time GetData is called for this store in this GameManager.
+		/// A GameManager is recreated when the game restarts or a save file is loaded.
 		/// </summary>
-		/// <param name="data">The data loaded from the save file.</param>
-		public abstract void OnLoad(ISaveData data);
-
-		/// <summary>
-		/// Called when the data is saved to the save file.
-		/// </summary>
-		/// <returns>The data to be saved to the save file.</returns>
-		public abstract ISaveData OnSave();
+		/// <param name="gameMn"></param>
+		public void Initialize(GameManager gameMn);
 	}
 }

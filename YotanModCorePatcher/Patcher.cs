@@ -124,6 +124,7 @@ public static class Patcher
 		AddModDataProperty(module, ["SaveManager", "SaveManager/SaveEntry"]);
 		AddModDataProperty(module, ["SaveManager", "SaveManager/CharaSave"]);
 		AddModDataStoreProperty(module, ["CommonStates"]);
+		AddModDataStoreProperty(module, ["GameManager"]);
 
 		// This breaks the game for unknown reasons
 		// var newField = new FieldDefinition("testField", FieldAttributes.Public, module.ImportReference(typeof(int)));

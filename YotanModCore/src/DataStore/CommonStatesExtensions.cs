@@ -10,8 +10,7 @@ namespace YotanModCore.DataStore
 
 		public static T GetData<T>(this CommonStates __instance) where T : class
 		{
-			var dataStores = CommonModData.GetValue(__instance) as Dictionary<Type, object>;
-			if (dataStores == null)
+			if (CommonModData.GetValue(__instance) is not Dictionary<Type, object> dataStores)
 			{
 				dataStores = new Dictionary<Type, object>();
 				CommonModData.SetValue(__instance, dataStores);
@@ -25,8 +24,7 @@ namespace YotanModCore.DataStore
 
 		public static ICommonSDataStore GetData(this CommonStates __instance, Type storeType)
 		{
-			var dataStores = CommonModData.GetValue(__instance) as Dictionary<Type, object>;
-			if (dataStores == null)
+			if (CommonModData.GetValue(__instance) is not Dictionary<Type, object> dataStores)
 			{
 				dataStores = new Dictionary<Type, object>();
 				CommonModData.SetValue(__instance, dataStores);
@@ -42,8 +40,7 @@ namespace YotanModCore.DataStore
 		{
 			store = default;
 
-			var dataStores = CommonModData.GetValue(__instance) as Dictionary<Type, object>;
-			if (dataStores == null)
+			if (CommonModData.GetValue(__instance) is not Dictionary<Type, object> dataStores)
 				return false;
 
 			if (!dataStores.ContainsKey(storeType))

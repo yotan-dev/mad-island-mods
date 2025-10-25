@@ -24,9 +24,13 @@ namespace YotanModCore.DataStore
 			var modData = new List<object>();
 			GameModData.SetValue(__instance.saveEntry, modData);
 
-			var stores = Managers.mn.gameMN.GetDataStores();
-			foreach (var store in stores)
+			foreach (var storeType in DataStoreManager.GetGameDataStoreTypes())
+			{
+				if (!Managers.mn.gameMN.TryGetData(storeType, out IGameDataStore store))
+					continue;
+
 				modData.Add(store.OnSave());
+			}
 		}
 
 		/// <summary>
@@ -37,20 +41,18 @@ namespace YotanModCore.DataStore
 		[HarmonyPrefix]
 		private static void Pre_SaveManager_LoadBuild(SaveManager __instance)
 		{
-			List<object> modData = GameModData.GetValue(__instance.saveDB.save[0]) as List<object>;
-			if (modData == null)
-				modData = new List<object>();
+			if (GameModData.GetValue(__instance.saveDB.save[0]) is not List<object> modData)
+				modData = [];
 
 			foreach (var data in modData)
 			{
-				var dataStore = data as ISaveData;
-				if (dataStore == null)
+				if (data is not ISaveData dataStore)
 				{
 					PLogger.LogError($"Invalid custom data type: {SaveUtils.TryGetXmlNodeName(data)}. Ignoring it.");
 					continue;
 				}
 
-				var store = Managers.mn.gameMN.GetDataStore<IGameDataStore>(dataStore.GetStoreType());
+				var store = Managers.mn.gameMN.GetData(dataStore.GetStoreType());
 				store.OnLoad(dataStore);
 			}
 		}

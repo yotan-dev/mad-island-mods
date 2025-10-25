@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace YotanModCore
 {
 	internal class PLogger
@@ -14,9 +16,11 @@ namespace YotanModCore
 			_Logger.LogInfo(data);
 		}
 
-		public static void LogError(object data)
+		public static void LogError(object data, bool includeStack = false)
 		{
 			_Logger.LogError(data);
+			if (includeStack)
+				_Logger.LogError(new StackTrace().ToString());
 		}
 
 		public static void LogWarning(object data)

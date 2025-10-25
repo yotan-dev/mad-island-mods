@@ -1,43 +1,58 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.Reflection;
 
 namespace YotanModCore.DataStore
 {
 	public static class GameManagerExtensions
 	{
-		private static readonly Dictionary<Type, IGameDataStore> dataStores = new();
+		private static readonly PropertyInfo GameModData = typeof(GameManager).GetProperty("modDataStores");
 
-		internal static void AddDataStore(IGameDataStore dataStore)
+		public static T GetData<T>(this GameManager __instance) where T : class
 		{
-			dataStores.Add(dataStore.GetType(), dataStore);
-		}
+			if (GameModData.GetValue(__instance) is not Dictionary<Type, object> dataStores)
+			{
+				dataStores = new Dictionary<Type, object>();
+				GameModData.SetValue(__instance, dataStores);
+			}
 
-		internal static void ClearDataStores()
-		{
-			dataStores.Clear();
-		}
-
-		public static T GetDataStore<T>(this GameManager __instance) where T : class
-		{
 			if (!dataStores.ContainsKey(typeof(T)))
-				throw new Exception($"DataStoreManager: DataStore for type {typeof(T)} not found");
+				dataStores.Add(typeof(T), DataStoreManager.CreateGameDataStore(typeof(T), __instance));
 
 			return dataStores[typeof(T)] as T;
 		}
 
-		public static T GetDataStore<T>(this GameManager __instance, Type dataType) where T : class
+		public static IGameDataStore GetData(this GameManager __instance, Type storeType)
 		{
-			if (!dataStores.ContainsKey(dataType))
-				throw new Exception($"DataStoreManager: DataStore for type {dataType} not found");
+			PLogger.LogInfo($"GameManager: {__instance == null}");
+			PLogger.LogInfo($"GetData: {storeType}");
+			PLogger.LogInfo($"GameModData: {GameModData.GetValue(__instance)}");
+			if (GameModData.GetValue(__instance) is not Dictionary<Type, object> dataStores)
+			{
+				PLogger.LogInfo($"GameModData is null");
+				dataStores = new Dictionary<Type, object>();
+				GameModData.SetValue(__instance, dataStores);
+			}
 
-			return dataStores[dataType] as T;
+			PLogger.LogInfo($"dataStores: {dataStores}");
+			if (!dataStores.ContainsKey(storeType))
+				dataStores.Add(storeType, DataStoreManager.CreateGameDataStore(storeType, __instance));
+
+			return dataStores[storeType] as IGameDataStore;
 		}
 
-		public static ReadOnlyCollection<IGameDataStore> GetDataStores(this GameManager __instance)
+		public static bool TryGetData<T>(this GameManager __instance, Type storeType, out T store) where T : IGameDataStore
 		{
-			return dataStores.Values.ToList().AsReadOnly();
+			store = default;
+
+			if (GameModData.GetValue(__instance) is not Dictionary<Type, object> dataStores)
+				return false;
+
+			if (!dataStores.ContainsKey(storeType))
+				return false;
+
+			store = (T)dataStores[storeType];
+			return true;
 		}
 	}
 }
