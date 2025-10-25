@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
@@ -21,15 +22,33 @@ namespace YotanModCore.DataStore
 		[HarmonyPrefix]
 		private static void Pre_SaveManager_TempToSave(SaveManager __instance)
 		{
-			var modData = new List<object>();
-			GameModData.SetValue(__instance.saveEntry, modData);
-
-			foreach (var storeType in DataStoreManager.GetGameDataStoreTypes())
+			try
 			{
-				if (!Managers.mn.gameMN.TryGetData(storeType, out IGameDataStore store))
-					continue;
+				var modData = new List<object>();
+				GameModData.SetValue(__instance.saveEntry, modData);
 
-				modData.Add(store.OnSave());
+				foreach (var storeType in DataStoreManager.GetGameDataStoreTypes())
+				{
+					if (!Managers.mn.gameMN.TryGetData(storeType, out IGameDataStore store))
+						continue;
+
+					try
+					{
+						modData.Add(store.OnSave());
+					}
+					catch (Exception e)
+					{
+						PLogger.LogError($"SaveGameDataPatch: Failed to save Game MOD data / Data kind: {storeType}");
+						PLogger.LogError("Skipping data related to this kind to prevent save corruption.");
+						PLogger.LogError(e);
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				PLogger.LogError($"SaveGameDataPatch: Failed to save Game MOD data");
+				PLogger.LogError("Skipping all of its MOD PROVIDED data to prevent save corruption.");
+				PLogger.LogError(e);
 			}
 		}
 
@@ -48,7 +67,7 @@ namespace YotanModCore.DataStore
 			{
 				if (data is not ISaveData dataStore)
 				{
-					PLogger.LogError($"Invalid custom data type: {SaveUtils.TryGetXmlNodeName(data)}. Ignoring it.");
+					PLogger.LogError($"Invalid custom data type: {SaveUtils.TryGetXmlNodeName(data)}. Ignoring it. (Probably missing/removed/broken mod)");
 					continue;
 				}
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
@@ -15,15 +16,33 @@ namespace YotanModCore.DataStore
 		/// <param name="charaSave"></param>
 		internal static void SaveCommonData(CommonStates commonStates, SaveManager.CharaSave charaSave)
 		{
-			var modData = new List<object>();
-			CharaSaveModData.SetValue(charaSave, modData);
-
-			foreach (var storeType in DataStoreManager.GetCommonSDataStoreTypes())
+			try
 			{
-				if (!commonStates.TryGetData(storeType, out ICommonSDataStore store))
-					continue;
+				var modData = new List<object>();
+				CharaSaveModData.SetValue(charaSave, modData);
 
-				modData.Add(store.OnSave());
+				foreach (var storeType in DataStoreManager.GetCommonSDataStoreTypes())
+				{
+					if (!commonStates.TryGetData(storeType, out ICommonSDataStore store))
+						continue;
+
+					try
+					{
+						modData.Add(store.OnSave());
+					}
+					catch (Exception e)
+					{
+						PLogger.LogError($"SaveCharDataPatch: Failed to save CommonStates MOD data for NPC ID {commonStates.npcID} / Data kind: {storeType}");
+						PLogger.LogError("Skipping data realted to this kind to prevent save corruption.");
+						PLogger.LogError(e);
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				PLogger.LogError($"SaveCharDataPatch: Failed to save CommonStates MOD data for NPC ID {commonStates.npcID}");
+				PLogger.LogError("Skipping all of its MOD PROVIDED data to prevent save corruption.");
+				PLogger.LogError(e);
 			}
 		}
 
@@ -41,7 +60,7 @@ namespace YotanModCore.DataStore
 			{
 				if (data is not ISaveData dataStore)
 				{
-					PLogger.LogError($"Invalid custom data type: {SaveUtils.TryGetXmlNodeName(data)}. Ignoring it.");
+					PLogger.LogError($"Invalid custom data type: {SaveUtils.TryGetXmlNodeName(data)}. Ignoring it. (Probably missing/removed/broken mod)");
 					continue;
 				}
 
