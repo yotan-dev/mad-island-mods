@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ClassBuilder should build class with namespace, class name and int const fields 1`] = `
+"// Automatically generated - Do NOT edit.
+namespace YotanModCore.Consts
+{
+	public static class SampleClass
+	{
+		public const int Test = 0; // This is a test
+
+		public const int Test2 = 1;
+	}
+}
+"
+`;
+
+exports[`ClassBuilder should build class with namespace, class name and int const fields with attributes 1`] = `
+"// Automatically generated - Do NOT edit.
+namespace YotanModCore.Consts
+{
+	public static class SampleClass
+	{
+		[Obsolete]
+		public const int Test = 0;
+	}
+}
+"
+`;

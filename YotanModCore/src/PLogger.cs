@@ -1,10 +1,13 @@
 namespace YotanModCore
 {
-	using BepInEx.Logging;
-
 	internal class PLogger
 	{
-		public static ManualLogSource _Logger;
+		public static ILogger _Logger = new UnityLogger();
+
+		public static void SetLogger(ILogger logger)
+		{
+			_Logger = logger;
+		}
 
 		public static void LogInfo(object data)
 		{

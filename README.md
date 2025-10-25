@@ -59,6 +59,8 @@ After you have it installed, download the mods that you need (and requirements, 
 > Don't rename the folder no put it in a subfolder, because the mod will expect the name to be exactly as shipped
 >
 
+For YoCustomItems, see specific instructions on [YoCustomItems README](YoCustomItems/README.md).
+
 If the mod contains a single dll, the dll must be laying in the `plugins` folder (in other words, `Mad Island Folder/BepInEx/plugins/modname.dll` should exist).
 
 If the mod contains a folder with 2 or more files, this folder must be in `plugins` one (in other words, `Mad Island Folder/BepInEx/plugins/modname/modname.dll` should exist).
@@ -68,7 +70,7 @@ If the mod mentions configuration, you should first start the game once so confi
 
 ## Mod list
 
-### Yotan Mod Core
+### Yotan Mod Core (and Yotan Mod Core Loader)
 
 This is main focused in being an utility library for mods. Additionally, adds some console commands.
 
@@ -98,9 +100,12 @@ YotanModCore commands:
 
 **For mod developers:**
 
-You can check its API directly in the source code. I tried to keep it more or less documented. Feel free to depend on it.
+You can check its API directly in the source code or through the [docs site](https://yotan-dev.github.io/mad-island-mods/). I tried to keep it more or less documented. Feel free to depend on it.
 
-It will follow semantic versioning and I will write about deprecations/removals when they come.
+1. It will follow semantic versioning and I will write about deprecations/removals when they come.
+2. Classes/Methods marked as `[Obsolete]` are probably being removed in the next **MAJOR** version.
+3. Classes/Methods marked as `[Experimental]` are not stable and might change or be removed in the next **MINOR** version.
+4. If a method is not marked as `[Obsolete]` or `[Experimental]`, it is stable and is not planed to be removed in upcoming versions.
 
 Please let me know if you are depending on it :)
 
@@ -121,6 +126,7 @@ HExtensions and Gallery plugins makes extensive use of it.
 **For mod developers:**
 
 - [Documentation](./HFramework/README.md)
+- [docs site (API)](https://yotan-dev.github.io/mad-island-mods/)
 - See HExtensions and Gallery plugins for examples
 
 
@@ -296,6 +302,15 @@ Press `V` to stack items from your inventory into all nearby chests.
 Press `P` while checking the inventory of a body to warp them to the nearest "respawn" point.
 
 Useful when you get a pile of body near your base.
+
+
+### Yo Custom Items
+
+Adds some custom items to the game.
+
+This is mainly meant as a showcase of how to add items to the game, but they are all functional.
+
+See [Yo Custom Items](./YoCustomItems/README.md) for more info.
 
 
 ### YoUnnoficialPatches

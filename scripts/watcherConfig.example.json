@@ -1,0 +1,44 @@
+{
+	// Create reusable paths. those will be available in target by replacing %ALIAS_NAME% with its value.
+	"aliases": {
+		"UNITY_FOLDER": "D:/my/unity/folder",
+		"UNITY_BUNDLES_FOLDER": "%UNITY_FOLDER%/Assets/AssetBundles",
+
+		"MODS_FOLDER": "D:/my/mods/folder",
+
+		"MAD_ISLAND_FOLDER": "D:/SteamLibrary/steamapps/common/Mad Island",
+		"BEPS_PLUGINS": "%MAD_ISLAND_FOLDER%/BepInEx/plugins",
+		"YMC_BUNDLES": "%MAD_ISLAND_FOLDER%/BepInEx/CustomBundles"
+	},
+	// Tells which files to watch for and where to copy them.
+	// from: path to the file to watch
+	// to: list of paths where to copy the file
+	//
+	// You can use aliases from previous section by using %key%.
+	"target": [
+		// YMC
+		{
+			"from": "%MODS_FOLDER%/YotanModCore/bin/Debug/netstandard2.1/YotanModCore.dll",
+			"to": [
+				"%BEPS_PLUGINS%/YotanModCore/YotanModCore.dll",
+				"%UNITY_FOLDER%/Assets/Plugins/YotanModCore.dll"
+			]
+		},
+		{
+			"from": "%MODS_FOLDER%/YotanModCoreLoader/bin/Debug/netstandard2.1/YotanModCoreLoader.dll",
+			"to": ["%BEPS_PLUGINS%/YotanModCore/YotanModCoreLoader.dll"]
+		},
+		// YoCustomItems
+		{
+			"from": "%MODS_FOLDER%/YoCustomItems/bin/Debug/netstandard2.1/YoCustomItems.dll",
+			"to": [
+				"%YMC_BUNDLES%/YoCustomItems.dll",
+				"%UNITY_FOLDER%/Assets/Plugins/YoCustomItems.dll"
+			]
+		},
+		{
+			"from": "%UNITY_BUNDLES_FOLDER%/yo_custom_items",
+			"to": ["%YMC_BUNDLES%/yo_custom_items"]
+		}
+	]
+}

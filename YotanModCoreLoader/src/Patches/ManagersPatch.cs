@@ -3,7 +3,7 @@ using YotanModCore.NpcTalk;
 
 namespace YotanModCore.Patches
 {
-	public class ManagersPatch
+	public static class ManagersPatch
 	{
 		[HarmonyPatch(typeof(ManagersScript), "Awake")]
 		[HarmonyPostfix]

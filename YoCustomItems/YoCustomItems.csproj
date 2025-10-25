@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>YoCustomItems</AssemblyName>
+		<Product>Yo Custom Items</Product>
+		<Version>1.0.0</Version>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<LangVersion>latest</LangVersion>
+		<RestoreAdditionalProjectSources>
+			https://api.nuget.org/v3/index.json;
+			https://nuget.bepinex.dev/v3/index.json;
+			https://nuget.samboy.dev/v3/index.json
+		</RestoreAdditionalProjectSources>
+		<RootNamespace>YoCustomItems</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="UnityEngine.Modules" Version="2021.3.6" IncludeAssets="compile" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2"
+			PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="MadIsland-Asssembly">
+			<HintPath>../Assemblies/Assembly-CSharp.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\YotanModCore\YotanModCore.csproj" />
+	</ItemGroup>
+</Project>

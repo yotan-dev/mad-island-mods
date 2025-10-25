@@ -1,5 +1,4 @@
 using System.Collections;
-using HarmonyLib;
 using UnityEngine;
 
 namespace YotanModCore.Events
@@ -26,9 +25,11 @@ namespace YotanModCore.Events
 			OnGameStartEvent?.Invoke();
 		}
 
-		[HarmonyPatch(typeof(GameManager), "Start")]
-		[HarmonyPrefix]
-		private static void Pre_GamaManager_Start(GameManager __instance)
+		/// <summary>
+		/// Trigger to Game Start. This is meant to be called by YotanModCoreLoader.
+		/// </summary>
+		/// <param name="__instance"></param>
+		internal static void Pre_GamaManager_Start(GameManager __instance)
 		{
 			if (!__instance.IsGameScene())
 				return;
@@ -36,9 +37,10 @@ namespace YotanModCore.Events
 			__instance.StartCoroutine(GameStartRoutine());
 		}
 
-		[HarmonyPatch(typeof(SceneScript), "SceneChange")]
-		[HarmonyPrefix]
-		private static void Pre_SceneScript_SceneChange()
+		/// <summary>
+		/// Trigger to Scene Change. This is meant to be called by YotanModCoreLoader.
+		/// </summary>
+		internal static void Pre_SceneScript_SceneChange()
 		{
 			if (!Managers.mn.gameMN.IsGameScene())
 				return;
