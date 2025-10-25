@@ -32,10 +32,11 @@ namespace YotanModCore
 			Harmony.CreateAndPatchAll(typeof(LifecyclePatch));
 
 #region DataStore
-			Harmony.CreateAndPatchAll(typeof(SaveManagerPatch));
+			Harmony.CreateAndPatchAll(typeof(SaveCharDataPatch));
+			Harmony.CreateAndPatchAll(typeof(SaveGameDataPatch));
+			Harmony.CreateAndPatchAll(typeof(TranspileLoadPlayer));
 			Harmony.CreateAndPatchAll(typeof(TranspileSaveFileSerializer));
 			Harmony.CreateAndPatchAll(typeof(TranspileSavePlayer));
-			Harmony.CreateAndPatchAll(typeof(TranspileLoadPlayer));
 #endregion // DataStore
 
 			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));

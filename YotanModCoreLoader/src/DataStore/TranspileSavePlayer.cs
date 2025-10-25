@@ -5,6 +5,10 @@ using HarmonyLib;
 
 namespace YotanModCore.DataStore
 {
+	/// <summary>
+	/// Patches the saving process to include saving of Player data,
+	/// which doesn't have a dedicated function for us to hook into.
+	/// </summary>
 	[HarmonyPatch]
 	internal static class TranspileSavePlayer
 	{
@@ -28,7 +32,7 @@ namespace YotanModCore.DataStore
 			//
 			// We are just repeating them here because making use of the loop is too hard.
 			for (int i = 0; i < __instance.saveEntry.playerSave.Length; i++)
-				SaveManagerPatch.SaveCommonData(__instance.gameMN.playerCommons[i], __instance.saveEntry.playerSave[i]);
+				SaveCharDataPatch.SaveCommonData(__instance.gameMN.playerCommons[i], __instance.saveEntry.playerSave[i]);
 		}
 
 		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
