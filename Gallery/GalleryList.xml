@@ -561,7 +561,7 @@
 				<Scene name="[npc1] sex with [npc0]" minVersion="0.4.4">
 					<Actors>
 						<Actor val="Man#1" />
-						<Actor val="Mira#117" pregnant="false" />
+						<Actor val="Mira#118" pregnant="false" />
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
 						<PerformerId>HF_Man_Mira_Friendly_Normal</PerformerId>
@@ -581,6 +581,47 @@
 						<PerformerId>HF_Man_UnderGroundGirl_Friendly_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
+				<!-- Kana -->
+				<Scene name="[npc1] sex with [npc0]" minVersion="0.4.5">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="Kana#162" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Kana_Sex</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
+				<!-- Lulu -->
+				<Scene name="[npc1] blowjob [npc0]">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="Lulu#163" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Lulu_Blowjob</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>1</SpecialFlag>
+					</Controller>
+				</Scene>
+
+				<Scene name="[npc1] sex with [npc0]">
+					<Actors>
+						<Actor val="Man#1" />
+						<Actor val="Lulu#163" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Man_Lulu_Sex</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>1</SexType>
 						<SpecialFlag>0</SpecialFlag>
 					</Controller>
 				</Scene>
@@ -663,6 +704,20 @@
 					</Actors>
 					<Controller xsi:type="CommonSexPlayerController">
 						<PerformerId>HF_Yona_LargeNativeBoy_Friendly_Normal</PerformerId>
+						<Prop>bed_01</Prop>
+						<SexType>0</SexType>
+						<SpecialFlag>0</SpecialFlag>
+					</Controller>
+				</Scene>
+
+				<!-- Yona / Large Young Man -->
+				<Scene name="[npc1] sex with [npc0]" minVersion="0.4.5">
+					<Actors>
+						<Actor val="LargeYoungMan#180" />
+						<Actor val="Yona#0" pregnant="false" />
+					</Actors>
+					<Controller xsi:type="CommonSexPlayerController">
+						<PerformerId>HF_Yona_LargeYoungMan_Normal</PerformerId>
 						<Prop>bed_01</Prop>
 						<SexType>0</SexType>
 						<SpecialFlag>0</SpecialFlag>
@@ -842,7 +897,7 @@
 						<PerformerId>HF_Man_OldWomanNative_Rape</PerformerId>
 					</Controller>
 				</Scene>
-				
+
 				<!-- Mummy -->
 				<Scene name="[npc0] rapes [npc1]">
 					<Actors>
@@ -907,6 +962,17 @@
 				</Actors>
 				<Controller xsi:type="ManRapesController">
 					<PerformerId>HF_Man_UnderGroundGirl_Rape</PerformerId>
+				</Controller>
+			</Scene>
+
+			<!-- Kana -->
+			<Scene name="[npc0] rapes [npc1]" minVersion="0.4.5">
+				<Actors>
+					<Actor val="Man#1" />
+					<Actor val="Kana#162" pregnant="false" />
+				</Actors>
+				<Controller xsi:type="ManRapesController">
+					<PerformerId>HF_Man_Kana_Rape</PerformerId>
 				</Controller>
 			</Scene>
 		</Group>
@@ -1006,7 +1072,7 @@
 				<Scene name="[npc1] rapes [npc0]">
 					<Actors>
 						<Actor val="Yona#0" />
-						<Actor val="Oldguy#100" />
+						<Actor val="OldGuy#100" />
 					</Actors>
 					<Controller xsi:type="PlayerRapedController">
 						<PerformerId>HF_Oldguy_Yona_Rape</PerformerId>

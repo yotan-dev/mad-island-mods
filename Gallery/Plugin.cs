@@ -9,7 +9,7 @@ using YotanModCore;
 
 namespace Gallery
 {
-	[BepInPlugin("Gallery", "Gallery", "1.0.4")]
+	[BepInPlugin("Gallery", "Gallery", "1.0.5")]
 	[BepInDependency("YotanModCore", "2.0.0")]
 	[BepInDependency("HFramework", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
@@ -23,7 +23,7 @@ namespace Gallery
 			PLogger._Logger = Logger;
 
 			Assets = AssetBundle.LoadFromFile($"BepInEx/plugins/Gallery/GalleryAssets.assets");
-			
+
 			Gallery.Config.Instance.Init(Config);
 			GalleryLogger.Init();
 
