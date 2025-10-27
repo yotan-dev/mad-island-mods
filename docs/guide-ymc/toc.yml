@@ -11,3 +11,6 @@
 - href: items/crafting-stations.md
 - href: items/destroyable-objects.md
 - href: items/internals.md
+
+- name: Notes
+- href: notes/damageType.md
