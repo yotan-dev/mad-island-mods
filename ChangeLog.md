@@ -27,7 +27,7 @@ Each mod has its own version which follows SemVer.
 - Added new condition for QuestProgress ("nin"/Not In)
 
 
-### Gallery v1.0.5
+### Gallery v1.0.11
 - Added new scenes for v0.4.5
 
 
