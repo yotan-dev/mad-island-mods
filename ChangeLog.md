@@ -7,6 +7,35 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## 2025.10.26
+
+### YotanModCore v2.1.0
+
+> [!WARNING]
+> This update is changing how YotanModCore is installed, please delete the existing folder and download the new one, it now includes 2 DLLs + 1 asset bundle, they should be placed together.
+
+- Added v0.4.5 content support -- NPC IDs, constants, etc
+- **(For developers)** Added many new constants (see src/Consts)
+- **(For developers)** Added experimental support for creating some custom items. Incomplete docs may be found here: https://github.com/yotan-dev/mi-anim-docs/blob/new-core/README.md . Soon a new docs site will be available.
+	- This new system allows creation of static items, custom "defence" objects (like walls, objects that cause damage, or other damageable objects), and crafting stations and recipes.
+	- These APIs are considered experimental (they have the `Experimental` attribute, and may change without a new Major version -- stay tuned in updates)
+- **(For developers)** Deprecated Audio3D consts in favor of AudioSE -- Audio3D will be removed on v3.0 (no release date planned yet)
+
+
+### HFramework v1.1.0
+- Added v0.4.5 content
+- Added new condition for QuestProgress ("nin"/Not In)
+
+
+### Gallery v1.0.5
+- Added new scenes for v0.4.5
+
+
+### Others
+- Story flags for new content added to docs_internal
+- New scripts to automatically extract constants added to scripts
+- New script to watch and copy mod data added to scripts folder
+
 
 ## 2025.08.12
 
@@ -44,7 +73,7 @@ All plugins rebuilt to target Beta v0.4.4.3
 
 > [!WARNING]
 > This update is changing how YotanModCore exposes game versions.
-> 
+>
 > Mods dependending on this feature will BREAK until they move to YotanModCore v2.
 >
 > Mod authors can refer to this upgrade guide: [YotanModCore v2](./YotanModCore/docs/upgrade/v2.md)
@@ -136,7 +165,7 @@ All plugins rebuilt to target Beta v0.4.0.
 
 > [!WARNING]
 > On this version, the following mods merged into the new "EnhancedIsland" mod:
-> 
+>
 > - EnhanceWorkplaces (now named Better Workplaces)
 > - DisassembleItems
 > - IncreaseZoom
@@ -150,7 +179,7 @@ All plugins rebuilt to target Beta v0.4.0.
 >
 > When EnhancedIsland detects any of those installed, it won't load the one from EnhancedIsland,
 > but this safety check will be removed in the near feature.
-> 
+>
 > Please take a few minutes to do that and delete the old ones.
 >
 > Check the main README of the repository for details.
