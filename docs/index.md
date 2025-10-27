@@ -2,10 +2,15 @@
 _layout: landing
 ---
 
-# This is the **HOMEPAGE**.
+# Welcome to Yotan's Mod Documentation for Mad Island
 
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
+This site is a collection of documentation for Mad Island frameworks created by Yotan to expand Mad Island game.
 
-## Quick Start Notes:
+- Guide sections are meant to be small tutorials/overviews to explain how the frameworks works and how to use it
+- API section contains the classes documentation.
 
-1. Add images to the *images* folder if the file is referencing an image.
+
+For now, this site is focusing on:
+
+1. Yotan Mod Core -- Core framework for modding Mad Island, containing support to access game data, create items, constants, etc.
+2. HFramework -- Framework for modding sex scenes, containing support to create/customize sex scenes

@@ -1,0 +1,13 @@
+- name: Get started
+
+- href: introduction.md
+- href: minimal-unity-project.md
+- href: unity-project-yotan-mod-core.md
+
+- name: Items
+- href: items/overview.md
+- href: items/your-first-item.md
+- href: items/craft-recipes.md
+- href: items/crafting-stations.md
+- href: items/destroyable-objects.md
+- href: items/internals.md
