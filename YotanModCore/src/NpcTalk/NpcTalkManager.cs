@@ -15,7 +15,7 @@ namespace YotanModCore.NpcTalk
 
 		internal static void Init()
 		{
-			TalkBtn = Plugin.Assets.LoadAsset<GameObject>("TalkBtn");
+			TalkBtn = Initializer.Assets.LoadAsset<GameObject>("TalkBtn");
 		}
 
 		public static void RegisterButton(TalkButton btn)
@@ -26,19 +26,19 @@ namespace YotanModCore.NpcTalk
 		internal static void OnUIManagerAwake()
 		{
 			NpcTalkManager.Instance = new GameObject("YotanMod_NpcTalk").AddComponent<NpcTalkManager>();
-			
+
 			foreach (var btn in RegisteredButtons)
 			{
 				var sexBtn = Managers.uiManager.UIManager.npcPanelState[11];
 				var newBtn = GameObject.Instantiate(TalkBtn, sexBtn.transform.parent);
 				var newBtnComponent = newBtn.GetComponent<Button>();
-				
+
 				newBtnComponent.onClick.AddListener(btn.OnClick);
 
 				var txtObj = newBtn.transform.GetChild(0);
 				var lblComponent = txtObj.GetComponent<TextMeshProUGUI>();
 				lblComponent.SetText(btn.Text, 0);
-				
+
 				newBtn.SetActive(false);
 
 				btn.Button = newBtnComponent;

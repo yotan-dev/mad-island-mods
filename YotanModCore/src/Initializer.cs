@@ -1,6 +1,7 @@
+using UnityEngine;
 using YotanModCore.Console;
-using YotanModCore.Events;
 using YotanModCore.Items;
+using YotanModCore.NpcTalk;
 
 namespace YotanModCore
 {
@@ -8,12 +9,14 @@ namespace YotanModCore
 	{
 		private static bool initialized = false;
 
+		internal static AssetBundle Assets;
+
 		/// <summary>
 		/// Initializes YotanModCore. Should only be used by YotanModCoreLoader.
 		/// </summary>
 		/// <param name="logger"></param>
 		/// <returns></returns>
-		public static InitializerResult Init(ILogger logger)
+		public static ModCoreBridge Init(ILogger logger)
 		{
 			if (initialized)
 			{
@@ -33,16 +36,16 @@ namespace YotanModCore
 			CommonUtils.Init();
 			ConsoleManager.Instance.Init();
 
+			Assets = AssetBundle.LoadFromFile($"BepInEx/plugins/YotanModCore/YotanModCore.assets");
+
 			CraftDB.Init();
 			ItemDB.Init();
 
+			NpcTalkManager.Init();
+
 			PLogger.LogInfo("YotanModCore initialized!");
 
-			return new InitializerResult()
-			{
-				Pre_GameManager_Start = GameLifecycleEvents.Pre_GamaManager_Start,
-				Pre_SceneScript_SceneChange = GameLifecycleEvents.Pre_SceneScript_SceneChange,
-			};
+			return new ModCoreBridge();
 		}
 	}
 }

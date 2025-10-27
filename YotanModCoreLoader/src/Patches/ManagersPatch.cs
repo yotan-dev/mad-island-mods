@@ -17,14 +17,14 @@ namespace YotanModCore.Patches
 		private static void Post_UIManager_Awake(UIManager __instance)
 		{
 			Managers.uiManager = new Wrappers.WrappedUIManager(__instance);
-			NpcTalkManager.OnUIManagerAwake();
+			Plugin.ModCoreBridge.Post_UIManager_Awake(__instance);
 		}
 
 		[HarmonyPatch(typeof(UIManager), nameof(UIManager.NPCPanelStateChange))]
 		[HarmonyPostfix]
 		private static void Post_UIManager_NPCPanelStateChange(CommonStates common)
 		{
-			NpcTalkManager.OnOpen(common);
+			Plugin.ModCoreBridge.Post_UIManager_NPCPanelStateChange(common);
 		}
 	}
 }

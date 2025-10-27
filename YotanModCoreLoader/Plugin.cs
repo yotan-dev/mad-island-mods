@@ -2,7 +2,6 @@
 using HarmonyLib;
 using YotanModCore.Patches;
 using UnityEngine;
-using YotanModCore.NpcTalk;
 using YotanModCore.Items;
 using YotanModCore.Items.Patches;
 using YotanModCoreLoader.Patches;
@@ -16,16 +15,12 @@ namespace YotanModCore
 
 		public static ManagersScript ManagerScript;
 
-		internal static InitializerResult InitializerResult;
+		internal static ModCoreBridge ModCoreBridge;
 
 		private void Awake()
 		{
 			PLogger._Logger = Logger;
-			InitializerResult = Initializer.Init(new BepisLogger(Logger));
-
-			Assets = AssetBundle.LoadFromFile($"BepInEx/plugins/YotanModCore/YotanModCore.assets");
-
-			NpcTalkManager.Init();
+			ModCoreBridge = Initializer.Init(new BepisLogger(Logger));
 
 			Harmony.CreateAndPatchAll(typeof(CraftManagerPatches));
 			Harmony.CreateAndPatchAll(typeof(InventoryManagerPatches));

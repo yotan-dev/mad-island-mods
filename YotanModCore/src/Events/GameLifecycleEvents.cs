@@ -19,28 +19,16 @@ namespace YotanModCore.Events
 		/// </summary>
 		public static event OnGameEnd OnGameEndEvent;
 
-		private static IEnumerator GameStartRoutine()
+		internal static IEnumerator GameStartHandler(GameManager __instance)
 		{
+			if (!__instance.IsGameScene())
+				yield break;
+
 			yield return new WaitUntil(() => !SaveManager.SaveStatic.loaded);
 			OnGameStartEvent?.Invoke();
 		}
 
-		/// <summary>
-		/// Trigger to Game Start. This is meant to be called by YotanModCoreLoader.
-		/// </summary>
-		/// <param name="__instance"></param>
-		internal static void Pre_GamaManager_Start(GameManager __instance)
-		{
-			if (!__instance.IsGameScene())
-				return;
-
-			__instance.StartCoroutine(GameStartRoutine());
-		}
-
-		/// <summary>
-		/// Trigger to Scene Change. This is meant to be called by YotanModCoreLoader.
-		/// </summary>
-		internal static void Pre_SceneScript_SceneChange()
+		internal static void GameEndHandler()
 		{
 			if (!Managers.mn.gameMN.IsGameScene())
 				return;
