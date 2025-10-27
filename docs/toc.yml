@@ -1,4 +1,6 @@
 - name: Guide - Yotan Mod Core
   href: guide-ymc/
+- name: Notes
+  href: notes/
 - name: API
   href: api/

@@ -10,7 +10,4 @@
 - href: items/craft-recipes.md
 - href: items/crafting-stations.md
 - href: items/destroyable-objects.md
-- href: items/internals.md
-
-- name: Notes
-- href: notes/damageType.md
+- href: items/object-inventory.md

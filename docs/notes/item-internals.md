@@ -1,4 +1,4 @@
-# Internals
+# Item internals
 
 This page explains some internals of how Items work in Mad Island.
 

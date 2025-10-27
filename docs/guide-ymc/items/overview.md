@@ -23,8 +23,4 @@ The topics presented here will tell you how to do it.
 Once you get your item to work, you may want to give them a bit more stuff. These topics will show you how to do it.
 
 - [Destroyable objects](./destroyable-objects.md)
-
-
-## Advanced topics
-
-- [Internals about items](./internals.md)
+- [Object inventory](./object-inventory.md)

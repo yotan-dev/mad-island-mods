@@ -8,6 +8,7 @@ This site is a collection of documentation for Mad Island frameworks created by 
 
 - Guide sections are meant to be small tutorials/overviews to explain how the frameworks works and how to use it
 - API section contains the classes documentation.
+- Notes section contains notes about the game internals, such as constants, enums, etc.
 
 
 For now, this site is focusing on:
