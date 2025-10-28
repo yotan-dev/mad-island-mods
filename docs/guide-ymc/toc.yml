@@ -3,6 +3,7 @@
 - href: introduction.md
 - href: minimal-unity-project.md
 - href: unity-project-yotan-mod-core.md
+- href: data-loading.md
 
 - name: Items
 - href: items/overview.md

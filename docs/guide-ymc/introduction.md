@@ -68,3 +68,19 @@ If you are looking into creating custom items and things like that, you will nee
 2. Once you have a Unity Project, you can install Yotan Mod Core following [Adding Yotan Mod Core to Unity project](./unity-project-yotan-mod-core.md) guide.
 
 Now you can start creating your mod!
+
+
+## How Yotan Mod Core integrates to the game
+
+Yotan Mod Core creates several custom classes that allows us to "bridge" our custom items into the game, so they game thinks they are originally part of it.
+
+You will see many classes called `C[XXXX]` during the guides that interacts with unity, those classes are custom classes extended from the original ones (`C` stands for `Custom`).
+
+For example, `CDefenceInfo` is our abstraction over the game's `DefenceInfo` class. We provide the same fields as `DefenceInfo` and additional points for your mod to hook/customize.
+
+Additionally, it provides a custom loader for mod data, enabling your mods to be created with 0 code (as long as you can rely only on existing classes/functionality). Once created,
+just drop the asset bundle into `BepInEx/CustomBundles` and YotanModCore will load it automatically. This aims at reducing the entry barrier for new modders who doesn't have a technical background.
+
+But you can also go further and interact with it directly via code, specially if you need to make your own BepInEx plugin to reach your goals.
+
+These details will be discussed further in [Data Loading](./data-loading-intro.md) guide and also in every page of this site.
