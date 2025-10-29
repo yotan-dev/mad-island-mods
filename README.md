@@ -67,6 +67,10 @@ If the mod contains a folder with 2 or more files, this folder must be in `plugi
 
 If the mod mentions configuration, you should first start the game once so configuration files get generated, shut down the game and configure it at `BepInEx/config/` folder.
 
+If you install all mods, you should end up with a folder structure like that: (Note that for most mods, you have a folder with its name and the DLL inside, in other cases, simply have the dll there)
+
+![alt text](docs/imgs/modsFolder.png)
+
 
 ## Mod list
 
