@@ -69,7 +69,7 @@ If the mod mentions configuration, you should first start the game once so confi
 
 If you install all mods, you should end up with a folder structure like that: (Note that for most mods, you have a folder with its name and the DLL inside, in other cases, simply have the dll there)
 
-![alt text](docs/imgs/modsFolder.png)
+![alt text](./docs/imgs/modsFolder.png)
 
 
 ## Mod list
