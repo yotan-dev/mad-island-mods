@@ -1,9 +1,17 @@
 - name: Get started
-
 - href: introduction.md
 - href: minimal-unity-project.md
 - href: unity-project-yotan-mod-core.md
 - href: data-loading.md
+
+- name: Code utilities
+- href: code/game-info.md
+- href: code/constants.md
+- href: code/manager-facade.md
+- href: code/custom-commands.md
+- href: code/utility-classes.md
+- href: code/talk-options.md
+- href: code/prop-panels.md
 
 - name: Items
 - href: items/overview.md
