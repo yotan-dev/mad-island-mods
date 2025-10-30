@@ -1,3 +1,14 @@
+# Story Flags
+
+> [!WARNING]
+> This section contains spoilers from the game.
+>
+
+> [!WARNING]
+> This list is incomplete
+>
+
+
 This file lists known quest/story flags and their meaning.
 
 ## Reika / Keigo

@@ -1,4 +1,4 @@
-# Yotan Mod Core v1 to v2 migration guide
+# v1 to v2 migration guide
 
 This docs explains how a mod auther can migrate from YotanModCore v1.x.x to v2.0.0.
 

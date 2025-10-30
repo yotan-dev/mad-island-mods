@@ -7,6 +7,7 @@
 - name: Code utilities
 - href: code/game-info.md
 - href: code/constants.md
+- href: code/events.md
 - href: code/manager-facade.md
 - href: code/custom-commands.md
 - href: code/utility-classes.md
@@ -20,3 +21,6 @@
 - href: items/crafting-stations.md
 - href: items/destroyable-objects.md
 - href: items/object-inventory.md
+
+- name: Upgrading
+- href: upgrading/v1-to-v2.md
