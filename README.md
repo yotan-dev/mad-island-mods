@@ -50,7 +50,13 @@ See installation instructions at: https://docs.bepinex.dev/articles/user_guide/i
 
 You need to install x64 version of BepInEx v5 (latest stable v5 available).
 
-After you have it installed, download the mods that you need (and requirements, if applicable) from [Releases](https://github.com/yotan-dev/mad-island-mods/releases) and extract the files into `Mad Island Folder/BepInEx/plugins`.
+After you have it installed, download the mods that you need (and requirements, if applicable) from [Releases](https://github.com/yotan-dev/mad-island-mods/releases).
+
+For YotanMod Core, extract the zip file on you Mad Island folder (use "Extract here" option and let it overwrite files, as it will put files in a few folders).
+
+For other mods, extract the files into `Mad Island Folder/BepInEx/plugins` (also use "Extract here" option).
+
+You can see at the end of this section how your folders should look like if you install all mods in this repository.
 
 > [!WARNING]
 > Extract the zip files using "Extract here".
