@@ -164,3 +164,21 @@ Yotan Mod Core provides a few DataStores out of the box:
 
 - `GameDataStore` for general game data, which has a single intance for the game session (e.g.: Time of day, etc.) -- This data is linked to the current `GameManager` instance (you can access it through `Managers.gameMN`)
 - `CommonSDataStore` for data that is specific to a CommonStates instance (e.g.: NPC life, etc.) -- This data is linked to `CommonStates` instances
+
+
+# Auto-cleanup
+
+If you remove a mod that previously added a DataStore, or a mod you have been using updated and no longer registers a given DataStore, it will be automatically cleaned up on the game load.
+
+You are likely to see errors like that on your BepInEX console when this happens:
+
+```
+[Error  :YotanModCore] Invalid custom data type: <YotanModCore.KillCountStore.Data>. Ignoring it. (Probably missing/removed/broken mod)
+```
+
+This is normal if you removed a mod or linked to an update. It might be an issue if:
+
+1. The new version of the mod is actually broken
+2. Something else went really wrong and you were not supposed to lose this info.
+
+But overall, YotanModCore will ignore it and if you save it, these data will be lost forever. So keep it in mind.
