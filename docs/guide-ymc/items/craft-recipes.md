@@ -1,5 +1,9 @@
 # Craft recipes
 
+> [!WARNING]
+> This is an [experimental API (see versioning policy)](../introduction.md#versioning-policy) and may change in the future. Feedback is welcome.
+>
+
 Craft recipes are a way to make a new item craftable in the game.
 
 To create a new recipe you must perform 2 major steps:

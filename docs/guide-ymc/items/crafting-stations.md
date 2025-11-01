@@ -1,5 +1,9 @@
 # Crafting stations
 
+> [!WARNING]
+> This is an [experimental API (see versioning policy)](../introduction.md#versioning-policy) and may change in the future. Feedback is welcome.
+>
+
 This guide will show you how to create a new crafting station.
 
 **Before you continue** make sure you know the basics of custom items, as this won't go through the basics.

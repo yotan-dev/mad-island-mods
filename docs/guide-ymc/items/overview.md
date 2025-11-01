@@ -1,6 +1,10 @@
 # Overview
 
-This folder contains information about modding items in the game.
+> [!WARNING]
+> This is an [experimental API (see versioning policy)](../introduction.md#versioning-policy) and may change in the future. Feedback is welcome.
+>
+
+This section contains information about modding items in the game.
 
 ## Introduction - Start from here
 

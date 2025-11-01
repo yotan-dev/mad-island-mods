@@ -1,5 +1,9 @@
 # Data loading
 
+> [!WARNING]
+> This is an [experimental API (see versioning policy)](../introduction.md#versioning-policy) and may change in the future. Feedback is welcome.
+>
+
 You can load your custom data into yotan mod core in several ways, depending on your needs:
 
 1. A simple custom asset bundle

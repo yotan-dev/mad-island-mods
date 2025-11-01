@@ -1,5 +1,9 @@
 # Object inventory (StorageInventory)
 
+> [!WARNING]
+> This is an [experimental API (see versioning policy)](../introduction.md#versioning-policy) and may change in the future. Feedback is welcome.
+>
+
 This page will show you how to use the `StorageInventory` class, which allows you to make world have inventory to hold items.
 
 Items like crafting stations and chests are examples of items that uses this.

@@ -1,5 +1,9 @@
 # Your first static item
 
+> [!WARNING]
+> This is an [experimental API (see versioning policy)](../introduction.md#versioning-policy) and may change in the future. Feedback is welcome.
+>
+
 This guide will introduce you to creating your first static item and loading it into the game
 by using Yotan Mod Core.
 
