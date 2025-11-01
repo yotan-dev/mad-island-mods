@@ -7,6 +7,18 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## 2025.11.01
+
+### YotanModCore v2.2.0
+
+> [!WARNING]
+> This update is changing how YotanModCore is installed, the ZIP file must be extracted in the root folder of Mad Island, as it now contains BepInEx/patchers and BepInEx/plugins.
+
+- **(For developers)** Added experimental support for DataStore
+
+**For end users:** This update is not really needed for now, unless you are using mods that needs this new functionality.
+
+
 ## 2025.10.26
 
 ### YotanModCore v2.1.0

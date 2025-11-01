@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>YotanModCoreLoader</AssemblyName>
-		<Product>Yotan Mod Core Loader</Product>
-		<Version>2.2.0</Version>
+		<AssemblyName>Samples</AssemblyName>
+		<Product>Samples</Product>
+		<Version>1.0.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RestoreAdditionalProjectSources>
@@ -12,7 +12,8 @@
 			https://nuget.bepinex.dev/v3/index.json;
 			https://nuget.samboy.dev/v3/index.json
 		</RestoreAdditionalProjectSources>
-		<RootNamespace>YotanModCore</RootNamespace>
+		<RootNamespace>Samples</RootNamespace>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -31,15 +32,16 @@
 		<Reference Include="MadIsland-Asssembly">
 			<HintPath>../Assemblies/Assembly-CSharp.dll</HintPath>
 		</Reference>
-		<Reference Include="Spine-Unity">
-			<HintPath>../Assemblies/spine-unity.dll</HintPath>
-		</Reference>
+		<!--
 		<Reference Include="Unity-TextMeshPro">
 			<HintPath>../Assemblies/Unity.TextMeshPro.dll</HintPath>
 		</Reference>
+		-->
+		<!--
 		<Reference Include="UnityEngine-UI">
 			<HintPath>../Assemblies/UnityEngine.UI.dll</HintPath>
 		</Reference>
+		-->
 	</ItemGroup>
 
 	<ItemGroup>

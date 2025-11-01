@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>YotanModCoreLoader</AssemblyName>
-		<Product>Yotan Mod Core Loader</Product>
-		<Version>2.2.0</Version>
+		<AssemblyName>YotanModCorePatcher</AssemblyName>
+		<Product>Pre-load patcher for YotanModCore</Product>
+		<Version>1.0.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RestoreAdditionalProjectSources>
@@ -13,36 +13,18 @@
 			https://nuget.samboy.dev/v3/index.json
 		</RestoreAdditionalProjectSources>
 		<RootNamespace>YotanModCore</RootNamespace>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
 		<PackageReference Include="BepInEx.Core" Version="5.*" />
 		<PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+		<PackageReference Include="Mono.Cecil" Version="0.11.6" />
 		<PackageReference Include="UnityEngine.Modules" Version="2021.3.6" IncludeAssets="compile" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2"
-			PrivateAssets="all" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="MadIsland-Asssembly">
-			<HintPath>../Assemblies/Assembly-CSharp.dll</HintPath>
-		</Reference>
-		<Reference Include="Spine-Unity">
-			<HintPath>../Assemblies/spine-unity.dll</HintPath>
-		</Reference>
-		<Reference Include="Unity-TextMeshPro">
-			<HintPath>../Assemblies/Unity.TextMeshPro.dll</HintPath>
-		</Reference>
-		<Reference Include="UnityEngine-UI">
-			<HintPath>../Assemblies/UnityEngine.UI.dll</HintPath>
-		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\YotanModCore\YotanModCore.csproj" />
+		<PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
 	</ItemGroup>
 </Project>

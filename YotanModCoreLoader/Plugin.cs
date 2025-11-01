@@ -5,10 +5,11 @@ using UnityEngine;
 using YotanModCore.Items;
 using YotanModCore.Items.Patches;
 using YotanModCoreLoader.Patches;
+using YotanModCore.DataStore;
 
 namespace YotanModCore
 {
-	[BepInPlugin("YotanModCore", "YotanModCore", "2.1.0")]
+	[BepInPlugin("YotanModCore", "YotanModCore", "2.2.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
@@ -29,6 +30,14 @@ namespace YotanModCore
 			Harmony.CreateAndPatchAll(typeof(ManagersPatch));
 			Harmony.CreateAndPatchAll(typeof(PropPanelsPatch));
 			Harmony.CreateAndPatchAll(typeof(LifecyclePatch));
+
+#region DataStore
+			Harmony.CreateAndPatchAll(typeof(SaveCharDataPatch));
+			Harmony.CreateAndPatchAll(typeof(SaveGameDataPatch));
+			Harmony.CreateAndPatchAll(typeof(TranspileLoadPlayer));
+			Harmony.CreateAndPatchAll(typeof(TranspileSaveFileSerializer));
+			Harmony.CreateAndPatchAll(typeof(TranspileSavePlayer));
+#endregion // DataStore
 
 			Harmony.CreateAndPatchAll(typeof(TranspileDefenceInfo));
 			Harmony.CreateAndPatchAll(typeof(DefenceInfoPatch));
