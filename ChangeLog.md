@@ -7,6 +7,13 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## Unreleased
+
+### EnhancedIsland v1.0.2
+
+- Fix NPC Stats compatibility with versions prior to v0.4.4.3
+
+
 ## 2025.11.01
 
 ### YotanModCore v2.2.0

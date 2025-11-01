@@ -16,13 +16,6 @@ namespace EnhancedIsland.NpcStats.Patches
 			StatDistributor.RedistributeStats(NpcKind.Newborn, child);
 		}
 
-		[HarmonyPatch(typeof(NPCManager), nameof(NPCManager.NPCSetWorldLevel))]
-		[HarmonyPostfix]
-		private static void Post_NPCSetWorldLevel(CommonStates common)
-		{
-			StatDistributor.RedistributeStats(NpcKind.Enemy, common);
-		}
-
 		[HarmonyPatch(typeof(ItemManager), nameof(ItemManager.SummonNPC))]
 		[HarmonyPostfix]
 		private static IEnumerator Post_ItemManager_SummonNPC(IEnumerator result, int slotID)
@@ -39,7 +32,7 @@ namespace EnhancedIsland.NpcStats.Patches
 				common = tmpSlot.common;
 				wasWild = common.friendID < 10;
 			}
-			
+
 			while (result.MoveNext())
 				yield return result.Current;
 
