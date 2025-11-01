@@ -8,6 +8,7 @@ namespace YotanModCore.DataStore
 	{
 		private static readonly PropertyInfo GameModData = typeof(GameManager).GetProperty("modDataStores");
 
+		[Experimental]
 		public static T GetData<T>(this GameManager __instance) where T : class
 		{
 			if (GameModData.GetValue(__instance) is not Dictionary<Type, object> dataStores)
@@ -22,6 +23,7 @@ namespace YotanModCore.DataStore
 			return dataStores[typeof(T)] as T;
 		}
 
+		[Experimental]
 		public static IGameDataStore GetData(this GameManager __instance, Type storeType)
 		{
 			PLogger.LogInfo($"GameManager: {__instance == null}");
@@ -41,6 +43,7 @@ namespace YotanModCore.DataStore
 			return dataStores[storeType] as IGameDataStore;
 		}
 
+		[Experimental]
 		public static bool TryGetData<T>(this GameManager __instance, Type storeType, out T store) where T : IGameDataStore
 		{
 			store = default;

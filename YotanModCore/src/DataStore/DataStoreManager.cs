@@ -60,6 +60,7 @@ namespace YotanModCore.DataStore
 		/// <param name="storeType"></param>
 		/// <param name="dataStoreFactory"></param>
 		/// <param name="saveType"></param>
+		[Experimental]
 		public static void RegisterDataStore(Type storeType, Func<IGameDataStore> dataStoreFactory, Type saveType)
 		{
 			if (storeType.GetInterface(typeof(IGameDataStore).FullName) is null)
@@ -90,6 +91,7 @@ namespace YotanModCore.DataStore
 		/// <param name="storeType"></param>
 		/// <param name="dataStoreFactory"></param>
 		/// <param name="dataType"></param>
+		[Experimental]
 		public static void RegisterDataStore(Type storeType, Func<ICommonSDataStore> dataStoreFactory, Type dataType)
 		{
 			if (storeType.GetInterface(typeof(ICommonSDataStore).FullName) is null)
@@ -118,6 +120,7 @@ namespace YotanModCore.DataStore
 		/// Returns a list of all types that should be saved, so we can patch XmlSerializer to support them.
 		/// </summary>
 		/// <returns></returns>
+		[Experimental]
 		public static Type[] GetSaveDataTypes()
 		{
 			return [.. saveDataTypes];
@@ -127,6 +130,7 @@ namespace YotanModCore.DataStore
 		/// Returns a list of all types that are registered as GameManager DataStores (GameDataStore).
 		/// </summary>
 		/// <returns></returns>
+		[Experimental]
 		public static Type[] GetGameDataStoreTypes()
 		{
 			return [.. gameDataStoreFactories.Keys];
@@ -136,6 +140,7 @@ namespace YotanModCore.DataStore
 		/// Returns a list of all types that are registered as CommonStates DataStores (CommonSDataStore).
 		/// </summary>
 		/// <returns></returns>
+		[Experimental]
 		public static Type[] GetCommonSDataStoreTypes()
 		{
 			return [.. commonSDataStoreFactories.Keys];
