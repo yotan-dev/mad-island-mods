@@ -7,7 +7,11 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
-## Unreleased
+## 2025.11.02
+
+### YotanModCore v2.2.1
+
+- Added v0.4.5.3 detection
 
 ### EnhancedIsland v1.0.2
 
