@@ -1,3 +1,5 @@
+- name: End-user guide
+  href: end-user/
 - name: Guide - Yotan Mod Core
   href: guide-ymc/
 - name: Notes

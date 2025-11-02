@@ -1,0 +1,16 @@
+- name: Get started
+- href: introduction.md
+- href: decensoring.md
+- href: troubleshooting.md
+- href: install-bepinex.md
+- href: configuring.md
+
+- name: Mods
+- href: mod-yotan-mod-core.md
+- href: mod-enhanced-island.md
+- href: mod-yo-unnoficial-patches.md
+
+- name: Mods - HFramework
+- href: mod-hframework.md
+- href: mod-hextensions.md
+- href: mod-gallery.md

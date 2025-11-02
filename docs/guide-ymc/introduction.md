@@ -83,4 +83,4 @@ just drop the asset bundle into `BepInEx/CustomBundles` and YotanModCore will lo
 
 But you can also go further and interact with it directly via code, specially if you need to make your own BepInEx plugin to reach your goals.
 
-These details will be discussed further in [Data Loading](./data-loading-intro.md) guide and also in every page of this site.
+These details will be discussed further in [Data Loading](./data-loading.md) guide and also in every page of this site.
