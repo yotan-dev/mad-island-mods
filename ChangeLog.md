@@ -7,6 +7,13 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## 2025.11.07
+
+### YotanModCore v2.2.2
+
+- Added support for v0.4.5.{4,5,6}
+
+
 ## 2025.11.02
 
 ### YotanModCore v2.2.1
