@@ -10,7 +10,7 @@ namespace YotanModCore.DataStore
 	///
 	/// World data is saved into "SaveEntry::modData", which is created by YotanModCore Patcher
 	/// </summary>
-	public class SaveGameDataPatch
+	public class SaveGameDataPatch_Common
 	{
 		private static readonly PropertyInfo GameModData = typeof(SaveManager.SaveEntry).GetProperty("modData");
 
@@ -56,9 +56,7 @@ namespace YotanModCore.DataStore
 		/// Patches the Loading process to load custom data
 		/// </summary>
 		/// <param name="__instance"></param>
-		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.LoadBuild), [])]
-		[HarmonyPrefix]
-		private static void Pre_SaveManager_LoadBuild(SaveManager __instance)
+		internal static void Pre_SaveManager_Loading(SaveManager __instance)
 		{
 			if (GameModData.GetValue(__instance.saveDB.save[0]) is not List<object> modData)
 				modData = [];

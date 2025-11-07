@@ -14,7 +14,11 @@ namespace YotanModCore.DataStore
 	{
 		private static IEnumerable<MethodBase> TargetMethods()
 		{
-			var loadBuildCoroutineMethod = AccessTools.Method(typeof(SaveManager), nameof(SaveManager.LoadBuild), []);
+			MethodInfo loadBuildCoroutineMethod;
+			if (GameInfo.GameVersion >= GameInfo.ToVersion("0.4.5.6"))
+				loadBuildCoroutineMethod = AccessTools.Method(typeof(SaveManager), nameof(SaveManager.Loading));
+			else
+				loadBuildCoroutineMethod = AccessTools.Method(typeof(SaveManager), nameof(SaveManager.LoadBuild), []);
 
 			var result = new List<MethodBase>
 			{

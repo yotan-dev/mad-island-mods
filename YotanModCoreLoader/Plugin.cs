@@ -9,7 +9,7 @@ using YotanModCore.DataStore;
 
 namespace YotanModCore
 {
-	[BepInPlugin("YotanModCore", "YotanModCore", "2.2.1")]
+	[BepInPlugin("YotanModCore", "YotanModCore", "2.2.2")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;
@@ -33,7 +33,11 @@ namespace YotanModCore
 
 #region DataStore
 			Harmony.CreateAndPatchAll(typeof(SaveCharDataPatch));
-			Harmony.CreateAndPatchAll(typeof(SaveGameDataPatch));
+			Harmony.CreateAndPatchAll(typeof(SaveGameDataPatch_Common));
+			if (GameInfo.GameVersion >= GameInfo.ToVersion("0.4.5.6"))
+				Harmony.CreateAndPatchAll(typeof(SaveGameDataPatch_v0_4_5_6));
+			else
+				Harmony.CreateAndPatchAll(typeof(SaveGameDataPatch_vOld));
 			Harmony.CreateAndPatchAll(typeof(TranspileLoadPlayer));
 			Harmony.CreateAndPatchAll(typeof(TranspileSaveFileSerializer));
 			Harmony.CreateAndPatchAll(typeof(TranspileSavePlayer));
