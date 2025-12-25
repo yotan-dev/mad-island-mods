@@ -21,6 +21,7 @@ namespace EnhancedIsland.StackNearby
 				yield return null;
 			}
 
+			Managers.mn.inventory.SubInventoryVisible();
 			foreach (var storage in StackNearbyController.Storages!) {
 				var storagePos = storage?.transform?.position;
 				if (storagePos == null) {
@@ -37,8 +38,8 @@ namespace EnhancedIsland.StackNearby
 					}
 
 					var itemData = Managers.mn.itemMN.FindItem(storage.itemKey);
-					Managers.mn.inventory.SubInventoryLoad(inventorySlot, itemData, true); 
-					Managers.mn.inventory.MoveSameItemsToSub(); 
+					Managers.mn.inventory.SubInventoryLoad(inventorySlot, itemData, true);
+					Managers.mn.inventory.MoveSameItemsToSub();
 					Managers.mn.inventory.SubInventoryVisible();
 				}
 			}
