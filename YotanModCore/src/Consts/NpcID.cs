@@ -99,7 +99,7 @@ namespace YotanModCore.Consts
 		[StrVal("Angler")]
 		public const int Angler = 31;
 
-		[StrVal("VampireScorpion")]
+		[StrVal("Vampire Scorpion")]
 		public const int VampireScorpion = 32;
 
 		[StrVal("Leech")]
@@ -353,6 +353,12 @@ namespace YotanModCore.Consts
 
 		[StrVal("Under Ground Boy")]
 		public const int UnderGroundBoy = 143; // DLC
+
+		[StrVal("Daughter")]
+		public const int Daughter = 144;
+
+		[StrVal("Son")]
+		public const int Son = 145;
 
 		[StrVal("Giant2")]
 		public const int Giant2 = 149;

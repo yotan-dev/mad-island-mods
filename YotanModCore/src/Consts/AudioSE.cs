@@ -540,5 +540,11 @@ namespace YotanModCore.Consts
 		public const int Revive03 = 267; // revive_03.ogg
 
 		public const int Magic00 = 268; // magic_00.ogg
+
+		public const int MelodyDoPiano01 = 269; // melody_do_piano_01.ogg
+
+		public const int HitSaw03 = 270; // hit_saw_03.ogg
+
+		public const int Piko03 = 271; // piko_03.ogg
 	}
 }
