@@ -397,5 +397,37 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+
+		<!-- New in v0.5 -->
+		<Performer id="HF_Keigo_Reika_4_0_Love" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="4" objIndex="0" />
+			<Actors>
+				<Actor val="Keigo#8" />
+				<Actor val="Reika#5" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Love_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>

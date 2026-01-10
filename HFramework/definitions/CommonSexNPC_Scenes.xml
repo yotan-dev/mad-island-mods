@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 
+<!--
 	HF_CommonSexNPC scene config.
 	This is for when NPC makes friendly sex with another NPC
 -->
@@ -102,6 +102,16 @@
 					<StartConditions>
 						<Condition xsi:type="IsDueDate" actor="UnderGroundGirl#142" value="false" />
 					</StartConditions>
+				</Performer>
+
+				<!-- New in v0.5 -->
+				<Performer id="HF_Keigo_Reika_4_0_Love">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
+					</PerformConditions>
 				</Performer>
 			</Performers>
 		</Scene>
