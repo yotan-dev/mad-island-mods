@@ -352,6 +352,8 @@
 						<Condition xsi:type="SexTypeCheck" value="2" />
 					</PerformConditions>
 				</Performer>
+
+				<Performer id="HF_Yona_Takumi_Friendly" />
 			</Performers>
 		</Scene>
 	</Scenes>
