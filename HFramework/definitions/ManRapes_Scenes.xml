@@ -115,6 +115,16 @@
 						</Condition>
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.5.0 -->
+				<Performer id="HF_Man_YoungLady_Rape">
+					<StartConditions>
+						<Condition xsi:type="FaintCheck" actor="YoungLady#9" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="FaintCheck" actor="YoungLady#9" value="true" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>
