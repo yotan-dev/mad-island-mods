@@ -15,6 +15,9 @@ namespace HFramework.Scenes
 		public event EventHandler<int>? OnFinishSelected;
 		public event EventHandler<int>? OnLeaveSelected;
 		public event EventHandler<int>? OnStopSelected;
+		public event EventHandler<int>? OnToggleManDisplaySelected;
+
+		public bool CanToggleManDisplay = false;
 
 		public void ShowInitialMenu(string? pose2Text = null)
 		{
@@ -24,6 +27,8 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 5
 			if (pose2Text != null)
 				this.Options.Add(new MenuItem(pose2Text, () => { this.OnPose2Selected?.Invoke(this, 0); })); // 7
+			if (this.CanToggleManDisplay)
+				this.Options.Add(new MenuItem(PropPanelConst.Text.ToggleManDisplay, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 8
 			PropPanelManager.Instance.DrawOptions();
 		}
 
@@ -35,6 +40,8 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 5
 			if (pose2Text != null)
 				this.Options.Add(new MenuItem(pose2Text, () => { this.OnPose2Selected?.Invoke(this, 0); })); // 7
+			if (this.CanToggleManDisplay)
+				this.Options.Add(new MenuItem(PropPanelConst.Text.ToggleManDisplay, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 8
 			PropPanelManager.Instance.DrawOptions();
 		}
 
@@ -48,6 +55,8 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 5
 			if (pose2Text != null)
 				this.Options.Add(new MenuItem(pose2Text, () => { this.OnPose2Selected?.Invoke(this, 0); })); // 7
+			if (this.CanToggleManDisplay)
+				this.Options.Add(new MenuItem(PropPanelConst.Text.ToggleManDisplay, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 8
 			PropPanelManager.Instance.DrawOptions();
 		}
 
@@ -59,6 +68,8 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 5
 			if (pose2Text != null)
 				this.Options.Add(new MenuItem(pose2Text, () => { this.OnPose2Selected?.Invoke(this, 0); })); // 7
+			if (this.CanToggleManDisplay)
+				this.Options.Add(new MenuItem(PropPanelConst.Text.ToggleManDisplay, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 8
 			PropPanelManager.Instance.DrawOptions();
 		}
 
@@ -70,6 +81,8 @@ namespace HFramework.Scenes
 			this.Options.Add(new MenuItem(PropPanelConst.Text.Leave, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 5
 			if (pose2Text != null)
 				this.Options.Add(new MenuItem(pose2Text, () => { this.OnPose2Selected?.Invoke(this, 0); })); // 7
+			if (this.CanToggleManDisplay)
+				this.Options.Add(new MenuItem(PropPanelConst.Text.ToggleManDisplay, () => { this.OnLeaveSelected?.Invoke(this, 0); })); // 8
 			PropPanelManager.Instance.DrawOptions();
 		}
 	}

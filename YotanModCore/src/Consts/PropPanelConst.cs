@@ -50,6 +50,8 @@ namespace YotanModCore.Consts
 			public const int Kill = 32;
 			public const int Reset = 33;
 			public const int Recall = 34;
+
+			public const int ToggleManDisplay = 40;
 		}
 	}
 }

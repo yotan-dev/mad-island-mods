@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using HFramework.Hook;
 using HFramework.Performer;
@@ -5,6 +6,7 @@ using Spine.Unity;
 using UnityEngine;
 using YotanModCore;
 using YotanModCore.Consts;
+using YotanModCore.Extensions;
 
 namespace HFramework.Scenes
 {
@@ -22,6 +24,7 @@ namespace HFramework.Scenes
 			public const string Finish = "Finish";
 			public const string Stop = "Stop";
 			public const string Leave = "Leave";
+			public const string ToggleManDisplay = "ToggleManDisplay";
 		}
 
 		public readonly CommonStates Player;
@@ -70,6 +73,8 @@ namespace HFramework.Scenes
 				Managers.mn.sexMN.StartCoroutine(this.StartLongLivedStep(StepNames.Stop, this.OnStop));
 			this.MenuPanel.OnLeaveSelected += (object s, int e) =>
 				Managers.mn.sexMN.StartCoroutine(this.RunStep(StepNames.Leave, this.OnLeave));
+			this.MenuPanel.OnToggleManDisplaySelected += (object s, int e) =>
+				Managers.mn.sexMN.StartCoroutine(this.RunStep(StepNames.ToggleManDisplay, this.OnToggleManDisplay));
 		}
 
 		public override int GetSexType()
@@ -115,10 +120,13 @@ namespace HFramework.Scenes
 				//       As of v0.4.0, Nami is an exception for SetCharacter
 				// NPC IDs (as of v0.2.3): 10, 11, 12, 91
 				// NPC IDs (as of v0.4.0): + 6
+				// NPC IDs (as of v0.4.4): + 14, 141
+				// NPC IDs (as of v0.4.5): + 180
+				// NPC IDs (as of v0.5.0): + 1, 7, 89
 				if (this.Npc.npcID == NpcID.Nami)
 					this.SetupTmpSexYonaNami();
 				else if (this.Npc.npcID == NpcID.NativeBoy)
-					this.SetupTmpSexYonaNativeBoy();
+					this.SetupTmpSexYonaNativeBoy(); // Note: This happen inside NativeBoy case
 				else
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
 			}
@@ -306,6 +314,15 @@ namespace HFramework.Scenes
 			yield break;
 		}
 
+		private IEnumerator OnToggleManDisplay()
+		{
+			if (this.CommonAnim.state.GetCurrent(10)?.Animation != null)
+				this.CommonAnim.state.SetEmptyAnimation(10, 0);
+			else
+				this.CommonAnim.state.SetAnimation(10, "noman", true);
+			yield break;
+		}
+
 		private void Teardown()
 		{
 			this.EnableLiveNpc(this.Npc, this.NpcMove);
@@ -343,6 +360,7 @@ namespace HFramework.Scenes
 			}
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.MenuPanel.CanToggleManDisplay = this.CommonAnim.HasAnimation("noman");
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())
