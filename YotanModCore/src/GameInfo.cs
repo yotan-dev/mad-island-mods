@@ -41,6 +41,25 @@ namespace YotanModCore
 		public static float CensorBlockSize { get { return Instance._CensorBlockSize; } }
 
 		/// <summary>
+		/// Should Quest Conditions be ignored when checking if Sex may be started between characters?
+		/// This is a "Debug" config present in the game and here we simply have an
+		/// acessor for it.
+		///
+		/// Only works for v0.5 and newer. Older versions always returns false.
+		/// </summary>
+		public static bool RemoveQuestConditionForSex {
+			get
+			{
+				if (GameInfo.GameVersion >= GameInfo.ToVersion("0.5.0.0"))
+				{
+					return SaveManager.SaveSettingStatic.sexLimit == 0;
+				}
+
+				return false;
+			}
+		}
+
+		/// <summary>
 		/// Converts major/minor/build/patch version to GameVersion
 		/// </summary>
 		/// <param name="major"></param>
