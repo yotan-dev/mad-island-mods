@@ -1158,5 +1158,199 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+
+		<!-- New in v0.5.0 -->
+		<Performer id="HF_Man_Yona_0-2" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="2" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Man_Yona_0-3" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="3" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_Man_Yona_0-4" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="4" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_YoungMan_Yona_0-2" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="2" />
+			<Actors>
+				<Actor val="YoungMan#89" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_YoungMan_Yona_0-3" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="3" />
+			<Actors>
+				<Actor val="YoungMan#89" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_YoungMan_Yona_0-4" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="4" />
+			<Actors>
+				<Actor val="YoungMan#89" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>

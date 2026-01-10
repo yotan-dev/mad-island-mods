@@ -286,6 +286,72 @@
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Yona_LargeYoungMan_Normal" />
+
+				<!-- New in v0.5.0 -->
+				<Performer id="HF_Man_Yona_0-2">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Main_Yona" compare="in">
+							<Values>
+								<Value>1</Value> <!-- ??? -->
+								<Value>4</Value> <!-- ??? -->
+								<Value>10</Value> <!-- ??? -->
+							</Values>
+						</Condition>
+					</StartConditions>
+					<PerformConditions>
+						<PerformConditions>
+							<Condition xsi:type="SexTypeCheck" value="0" />
+						</PerformConditions>
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_Yona_0-3">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Main_Yona" compare="in">
+							<Values>
+								<Value>1</Value> <!-- ??? -->
+								<Value>4</Value> <!-- ??? -->
+								<Value>10</Value> <!-- ??? -->
+							</Values>
+						</Condition>
+					</StartConditions>
+					<PerformConditions>
+						<PerformConditions>
+							<Condition xsi:type="SexTypeCheck" value="1" />
+						</PerformConditions>
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_Yona_0-4">
+					<StartConditions>
+						<Condition xsi:type="QuestProgressCheck" questName="Main_Yona" compare="in">
+							<Values>
+								<Value>1</Value> <!-- ??? -->
+								<Value>4</Value> <!-- ??? -->
+								<Value>10</Value> <!-- ??? -->
+							</Values>
+						</Condition>
+					</StartConditions>
+					<PerformConditions>
+						<PerformConditions>
+							<Condition xsi:type="SexTypeCheck" value="2" />
+						</PerformConditions>
+					</PerformConditions>
+				</Performer>
+
+				<Performer id="HF_YoungMan_Yona_0-2">
+					<PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="0" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_Yona_0-3">
+					<PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="1" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_Yona_0-4">
+					<PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="2" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>
