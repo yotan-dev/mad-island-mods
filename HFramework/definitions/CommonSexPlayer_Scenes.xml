@@ -354,6 +354,31 @@
 				</Performer>
 
 				<Performer id="HF_Yona_Takumi_Friendly" />
+
+				<Performer id="HF_Man_YoungLady_0-2">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_YoungLady_0-3">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_YoungLady_0-4">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>
