@@ -123,6 +123,12 @@ namespace HFramework.Scenes
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Rapist);
 				}
+				else if (GameInfo.GameVersion >= GameInfo.ToVersion("0.5.0") && this.Rapist.npcID == NpcID.BossNative)
+				{
+					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, null);
+					this.CommonAnim.state.SetAnimation(10, "Hide_G1", true);
+					this.CommonAnim.state.SetAnimation(11, "Hide_G2", true);
+				}
 				else
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, null);
