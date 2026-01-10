@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using HFramework.Performer;
 using HFramework.Scenes.Conditionals;
+using YotanModCore;
 
 namespace HFramework.Scenes
 {
@@ -30,6 +31,12 @@ namespace HFramework.Scenes
 
 				foreach (var conditional in this.StartConditions)
 				{
+					// We must check it here instead of inside QuestProgressCheck, because QuestProgressCheck
+					// may be used for CanPerform too -- and currently we don't want that check there
+					// to match the original code.
+					if (conditional is QuestProgressCheck && GameInfo.RemoveQuestConditionForSex)
+						continue;
+
 					if (!conditional.Pass(from, to))
 						return false;
 				}
@@ -55,7 +62,7 @@ namespace HFramework.Scenes
 		public string Name { get; private set; }
 
 		protected Dictionary<int, Dictionary<int, List<ScenePerformer>>> Performers = [];
-		
+
 		protected Dictionary<string, ScenePerformer> IdToPerformer = [];
 
 		public SceneInfo(string name)
