@@ -230,30 +230,28 @@ namespace HFramework.Scenes
 			this.MenuPanel.Open(this.SexPlace.transform.position);
 			this.MenuPanel.ShowInitialMenu();
 
-			this.Pee1Audio = Managers.mn.sound.LoopAudio3D(AudioSE.Pee01, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
-			this.Pee1Audio.Pause();
-
-			this.Pee2Audio = Managers.mn.sound.LoopAudio3D(AudioSE.Pee02, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
-			this.Pee2Audio.Pause();
-
 			while (this.CanContinue())
 			{
 				if (this.Performer.CurrentAction == ActionType.IdlePee)
 				{
-					if (!this.Pee1Audio.isPlaying)
-						this.Pee1Audio.UnPause();
+					if (this.Pee1Audio == null)
+						this.Pee1Audio = Managers.mn.sound.LoopAudio3D(AudioSE.Pee01, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
 				}
 				else if (this.Performer.CurrentAction == ActionType.InsertPee)
 				{
-					if (!this.Pee2Audio.isPlaying)
-						this.Pee2Audio.UnPause();
+					if (this.Pee2Audio == null)
+						this.Pee2Audio = Managers.mn.sound.LoopAudio3D(AudioSE.Pee02, this.CommonAnim.transform.position, Managers.mn.sound.soundBaseDist);
 				}
 				else
 				{
-					if (this.Pee1Audio.isPlaying)
-						this.Pee1Audio.Pause();
-					if (this.Pee2Audio.isPlaying)
-						this.Pee2Audio.Pause();
+					if (this.Pee1Audio != null) {
+						this.Pee1Audio.Stop();
+						this.Pee1Audio = null;
+					}
+					if (this.Pee2Audio != null) {
+						this.Pee2Audio.Stop();
+						this.Pee2Audio = null;
+					}
 				}
 
 				yield return null;
