@@ -95,5 +95,51 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+
+		<!-- New in v0.5 -->
+		<Performer id="HF_Yona_Delivery" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_YoungLady_Delivery" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="YoungLady#9" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>

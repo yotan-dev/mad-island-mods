@@ -67,6 +67,11 @@ namespace HFramework.Handlers
 			// first we determine the real deal
 			switch (this.Girl.npcID)
 			{
+				case NpcID.Yona:
+				case NpcID.YoungLady:
+					childNpcId = gender == Gender.Male ? NpcID.Son : NpcID.Daughter;
+					break;
+
 				// Decompiled code "default"
 				case NpcID.FemaleNative:
 				case NpcID.NativeGirl:
@@ -138,7 +143,7 @@ namespace HFramework.Handlers
 			tmpGenerate.friendID = Managers.mn.npcMN.CreateFriendID();
 			Managers.mn.npcMN.NPCtoFriend(tmpGenerate.gameObject, true, false);
 			Managers.mn.randChar.GenChildSet(tmpGenerate, this.Girl);
-			
+
 			yield return HookManager.Instance.RunEventHook(this.Scene, EventNames.OnBirth, null);
 			string log = addText + Managers.mn.textMN.texts[14].Replace("XXXX", this.Girl.charaName).Replace("YYYY", tmpGenerate.charaName);
 			Managers.mn.uiMN.GoLogText(log);

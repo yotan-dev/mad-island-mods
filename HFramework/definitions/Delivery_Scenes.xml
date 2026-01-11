@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 
+<!--
 	HF_Delivery scene config.
 	This is when NPC gives birth
 -->
@@ -28,6 +28,18 @@
 				<Performer id="HF_UnderGroundWoman_Delivery">
 					<StartConditions>
 						<Condition xsi:type="PregnantCheck" actor="UnderGroundWoman#44" value="true" />
+					</StartConditions>
+				</Performer>
+
+				<!-- new in v0.5 -->
+				<Performer id="HF_Yona_Delivery">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="Yona#0" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_YoungLady_Delivery">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="YoungLady#9" value="true" />
 					</StartConditions>
 				</Performer>
 			</Performers>
