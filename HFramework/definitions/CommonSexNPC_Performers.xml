@@ -429,5 +429,35 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+		<Performer id="HF_Takumi_YoungLady_6_1_Love" minVersion="0.5.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="4" objIndex="0" />
+			<Actors>
+				<Actor val="Takumi#7" />
+				<Actor val="YoungLady#9" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Love_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>
