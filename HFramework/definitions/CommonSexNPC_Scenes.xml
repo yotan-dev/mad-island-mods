@@ -22,18 +22,18 @@
 				</Performer>
 				<Performer id="HF_YoungMan_FemaleNative_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="false" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="false" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_YoungMan_FemaleNative_Friendly_Pregnant">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="true" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="true" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_MaleNative_NativeGirl_Friendly_Normal">
@@ -48,18 +48,18 @@
 				</Performer>
 				<Performer id="HF_YoungMan_NativeGirl_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="false" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="false" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_YoungMan_NativeGirl_Friendly_Pregnant">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="true" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="true" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="true" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="true" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_YoungMan_FemaleLargeNative_Friendly_Normal">
@@ -70,7 +70,7 @@
 				<!-- SexCheck suggests this is possible, but CommonSexNPC does not support it
 				<Performer id="HF_YoungMan_Mummy_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="Mummy#42" value="false" />
+						<Condition xsi:type="IsDueDate" actor="Mummy#42" value="false" />
 					</StartConditions>
 				</Performer>
 				-->
@@ -82,7 +82,7 @@
 				<!-- SexCheck suggests this is possible, but CommonSexNPC does not support it
 				<Performer id="HF_YoungMan_Mermaid_Friendly_Normal">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="Mermaid#71" value="false" />
+						<Condition xsi:type="IsDueDate" actor="Mermaid#71" value="false" />
 					</StartConditions>
 				</Performer>
 				-->

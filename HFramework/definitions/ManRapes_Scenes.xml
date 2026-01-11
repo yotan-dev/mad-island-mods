@@ -21,10 +21,10 @@
 				<!-- This is in v0.4.0 code but doesn't work yet
 				<Performer id="HF_Man_Nami_Rape">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="Nami#6" value="false" />
+						<Condition xsi:type="IsDueDate" actor="Nami#6" value="false" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="Nami#6" value="false" />
+						<Condition xsi:type="IsDueDate" actor="Nami#6" value="false" />
 					</PerformConditions>
 				</Performer>
 				-->
@@ -38,18 +38,18 @@
 				</Performer>
 				<Performer id="HF_Man_FemaleNative_Rape_Grapple">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="false" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="false" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Man_FemaleNative_Rape_Grapple_Pregnant">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="true" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+						<Condition xsi:type="IsDueDate" actor="FemaleNative#15" value="true" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Man_NativeGirl_Rape_Fainted">
@@ -62,10 +62,10 @@
 				</Performer>
 				<Performer id="HF_Man_NativeGirl_Rape_Grapple">
 					<StartConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="false" />
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="IsDueDate" actor="NativeGirl#16" value="false" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Man_FemaleLargeNative_Rape">
