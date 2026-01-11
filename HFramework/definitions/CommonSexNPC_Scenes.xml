@@ -105,14 +105,26 @@
 				</Performer>
 
 				<!-- New in v0.5 -->
+				<!-- 2 possible paths for Reika x Keigo, since so 2 records -->
 				<Performer id="HF_Keigo_Reika_4_0_Love">
 					<StartConditions>
 						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
+						<Condition xsi:type="QuestProgressCheck" questName="Main_Reika1" compare="eq" value="2" />
 					</StartConditions>
 					<PerformConditions>
 						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
 					</PerformConditions>
 				</Performer>
+				<Performer id="HF_Keigo_Reika_4_0_Love">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_Keigo" compare="eq" value="1" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
+					</PerformConditions>
+				</Performer>
+
 				<Performer id="HF_Takumi_YoungLady_6_1_Love">
 					<StartConditions>
 						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
