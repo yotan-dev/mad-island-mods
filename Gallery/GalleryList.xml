@@ -1191,42 +1191,6 @@
 						<Prop>gen_toilet_01</Prop>
 					</Controller>
 				</Scene>
-
-				<!-- Female Large Native -->
-				<Scene name="[npc0] uses [npc1] on Toilet">
-					<Actors>
-						<Actor val="Man#1" />
-						<Actor val="FemaleLargeNative#17" />
-					</Actors>
-					<Controller xsi:type="ToiletController">
-						<PerformerId>HF_Toilet_Man_FemaleLargeNative</PerformerId>
-						<Prop>gen_toilet_01</Prop>
-					</Controller>
-				</Scene>
-
-				<!-- Underground Woman -->
-				<Scene name="[npc0] uses [npc1] on Toilet">
-					<Actors>
-						<Actor val="Man#1" />
-						<Actor val="UnderGroundWoman#44" />
-					</Actors>
-					<Controller xsi:type="ToiletController">
-						<PerformerId>HF_Toilet_Man_UnderGroundWoman</PerformerId>
-						<Prop>gen_toilet_01</Prop>
-					</Controller>
-				</Scene>
-
-				<!-- Elder Sister -->
-				<Scene name="[npc0] uses [npc1] on Toilet">
-					<Actors>
-						<Actor val="Man#1" />
-						<Actor val="ElderSisterNative#90" />
-					</Actors>
-					<Controller xsi:type="ToiletController">
-						<PerformerId>HF_Toilet_Man_ElderSisterNative</PerformerId>
-						<Prop>gen_toilet_01</Prop>
-					</Controller>
-				</Scene>
 			</Scenes>
 		</Group>
 	</Groups>
