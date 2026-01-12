@@ -29,7 +29,7 @@ namespace YotanModCore.Consts
 
 		public const int Angry01 = 12; // angry_01.asset
 
-		public const int IconGenunder01Oppai0 = 13; // icon_genunder_01_oppai_0.asset
+		public const int IconGengirlOppai0 = 13; // icon_gengirl_oppai_0.asset
 
 		public const int Water01 = 14; // water_01.asset
 
