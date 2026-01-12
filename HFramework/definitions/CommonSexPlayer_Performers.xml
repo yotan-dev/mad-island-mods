@@ -1386,6 +1386,39 @@
 			</AnimationSets>
 		</Performer>
 
+		<Performer id="HF_Yona_ChubbyGuy_Friendly" minVersion="0.5.4">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="6" objIndex="1" />
+			<Actors>
+				<Actor val="ChubbyGuy#72" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="Love_A_idle" />
+						<Animation action="Caress" play="Loop" name="Love_A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Love_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+
 		<Performer id="HF_Man_YoungLady_0-2">
 			<Scopes>
 				<Scope>Sex</Scope>

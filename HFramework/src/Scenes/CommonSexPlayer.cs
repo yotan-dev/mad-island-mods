@@ -123,6 +123,7 @@ namespace HFramework.Scenes
 				// NPC IDs (as of v0.4.4): + 14, 141
 				// NPC IDs (as of v0.4.5): + 180
 				// NPC IDs (as of v0.5.0): + 1, 7, 89
+				// NPC IDs (as of v0.5.4): + 72
 				if (this.Npc.npcID == NpcID.Nami)
 					this.SetupTmpSexYonaNami();
 				else if (this.Npc.npcID == NpcID.NativeBoy)
@@ -217,11 +218,6 @@ namespace HFramework.Scenes
 
 		private bool SetupScene()
 		{
-			SexMeter.Instance.Init(this.Position + new Vector3(1f, 1f, 0f), 0.3f);
-			SexMeter.Instance.Show();
-
-			Managers.mn.uiMN.MainCanvasView(false);
-
 			this.TmpCommonState = 0;
 			this.TmpSexCountType = 0;
 
@@ -231,6 +227,11 @@ namespace HFramework.Scenes
 
 			this.TmpSex = GameObject.Instantiate<GameObject>(scene, this.Position, Quaternion.identity);
 			this.SetupTmpSex();
+
+			SexMeter.Instance.Init(this.Position + new Vector3(1f, 1f, 0f), 0.3f);
+			SexMeter.Instance.Show();
+
+			Managers.mn.uiMN.MainCanvasView(false);
 
 			this.NpcMove = this.Npc.GetComponent<NPCMove>();
 			this.DisableLiveNpc(this.Npc, this.NpcMove);
