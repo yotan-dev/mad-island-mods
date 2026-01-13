@@ -299,9 +299,7 @@
 						</Condition>
 					</StartConditions>
 					<PerformConditions>
-						<PerformConditions>
-							<Condition xsi:type="SexTypeCheck" value="0" />
-						</PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="0" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Man_Yona_0-3">
@@ -315,9 +313,7 @@
 						</Condition>
 					</StartConditions>
 					<PerformConditions>
-						<PerformConditions>
-							<Condition xsi:type="SexTypeCheck" value="1" />
-						</PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="1" />
 					</PerformConditions>
 				</Performer>
 				<Performer id="HF_Man_Yona_0-4">
@@ -331,9 +327,7 @@
 						</Condition>
 					</StartConditions>
 					<PerformConditions>
-						<PerformConditions>
-							<Condition xsi:type="SexTypeCheck" value="2" />
-						</PerformConditions>
+						<Condition xsi:type="SexTypeCheck" value="2" />
 					</PerformConditions>
 				</Performer>
 
