@@ -7,6 +7,28 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+
+## 2026.12.01
+
+### YotanModCore v2.2.3
+- Support for v0.5.{0,1,2,3,4}
+	- New constants
+	- Accessor for check for quest skip for sex scenes
+
+### HFramework v1.1.1
+- Support for v0.5.{0,1,2,3,4} content
+	- New scenes
+	- Support to hide male character in some scenes (aligned with official code)
+	- Allow use of "Sex quest lock" debug option (from game menu)
+- Fixed some invalid scenes in definition files (they were not triggered anyway)
+
+### Gallery v1.0.12
+- Removed invalid scenes from definition files
+
+### Enhanced Island v1.0.3
+- Fixed chest being emptied if open when trigger quick stack.
+
+
 ## 2025.11.07
 
 ### YotanModCore v2.2.2
