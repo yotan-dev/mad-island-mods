@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	Other scenes config.
+	This file is not loaded directly, thus Scene ids are referenced by custom code
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HExt_ManRapesDead">
+			<Performers>
+				<Performer id="HExt_Man_FemaleNative_Rape_Dead">
+					<StartConditions>
+						<Condition xsi:type="DeadCheck" actor="FemaleNative#15" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HExt_Man_NativeGirl_Rape_Dead">
+					<StartConditions>
+						<Condition xsi:type="DeadCheck" actor="NativeGirl#16" value="true" />
+					</StartConditions>
+				</Performer>
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>

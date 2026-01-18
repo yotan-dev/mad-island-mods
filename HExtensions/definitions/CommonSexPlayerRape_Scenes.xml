@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+	HExt_CommonSexPlayerRape scene config.
+	Most of them are copy pasted from ManRapes, with some conditions adjusted
+	to remove faint checks / etc, as those are now triggered by talk
+-->
+
+<ScenesConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Scenes>
+		<Scene id="HExt_CommonSexPlayerRape">
+			<Performers>
+				<Performer id="HF_Man_Yona_Rape">
+					<StartConditions />
+					<PerformConditions />
+				</Performer>
+				<Performer id="HF_Man_FemaleNative_Rape_Fainted">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="SexTypeCheck" value="1" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_FemaleNative_Rape_Grapple">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="false" />
+						<Condition xsi:type="SexTypeCheck" value="0" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_FemaleNative_Rape_Grapple_Pregnant">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="FemaleNative#15" value="true" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_NativeGirl_Rape_Fainted">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="SexTypeCheck" value="1" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_NativeGirl_Rape_Grapple">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="PregnantCheck" actor="NativeGirl#16" value="false" />
+						<Condition xsi:type="SexTypeCheck" value="0" />
+					</PerformConditions>
+				</Performer>
+				<!-- TODO: There is the player raped scene, but it is split in 2 Performers, extra work -->
+				<Performer id="HF_Man_FemaleLargeNative_Rape">
+					<StartConditions />
+					<PerformConditions />
+				</Performer>
+				<Performer id="HF_Man_OldWomanNative_Rape">
+					<StartConditions>
+						<Condition xsi:type="JokeCheck" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_Man_UnderGroundWoman_Rape" />
+				<Performer id="HF_Man_Mummy_Rape" />
+				<Performer id="HF_Man_ElderSisterNative_Rape" />
+				<Performer id="HF_Man_Shino_Rape" />
+			</Performers>
+		</Scene>
+	</Scenes>
+</ScenesConfig>

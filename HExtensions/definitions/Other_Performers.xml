@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+	Performers for Man Rapes Sleep scenes
+	That's when Man Player grapples a sleeping NPC
+-->
+<PerformersConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Performers>
+		<Performer id="HExt_Man_FemaleNative_Rape_Dead">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="4" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="FemaleNative#15" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Defeat" play="Loop" name="A_sleep_idle" />
+						<Animation action="Insert" play="Once" name="A_sleep_start">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_sleep_loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_sleep_loop_02" />
+						<Animation action="Speed3" play="Loop" name="A_sleep_loop_03" />
+						<Animation action="Finish" play="Once" name="A_sleep_finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_sleep_finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HExt_Man_NativeGirl_Rape_Dead" dlc="true">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="5" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="NativeGirl#16" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Defeat" play="Loop" name="A_sleep_idle" />
+						<Animation action="Insert" play="Once" name="A_sleep_start">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_sleep_loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_sleep_loop_02" />
+						<Animation action="Speed3" play="Loop" name="A_sleep_loop_03" />
+						<Animation action="Finish" play="Once" name="A_sleep_finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_sleep_finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+	</Performers>
+</PerformersConfig>
