@@ -18,16 +18,25 @@ namespace AssemblyStripper
 			var version = args[0];
 			var managedFolder = args[1] + "/Mad Island_Data/Managed/";
 			var assemblies = new string[] { "Assembly-CSharp.dll", "spine-unity.dll", "Unity.TextMeshPro.dll", "UnityEngine.UI.dll" };
+
+			Directory.CreateDirectory($"../Assemblies/v{version}");
+
 			foreach (var assembly in assemblies)
 			{
+				var outPath = $"../Assemblies/{version}/{assembly}";
+				var finalPath = $"../Assemblies/{assembly}";
+
 				AssemblyPublicizer.Publicize(
 					managedFolder + assembly,
-					"../Assemblies/" + assembly,
+					outPath,
 					new AssemblyPublicizerOptions { Strip = true }
 				);
+				File.Copy(outPath, finalPath, true);
 			}
 
-			File.WriteAllText("../Assemblies/version.txt", $"{version}\n");
+			File.WriteAllText($"../Assemblies/v{version}/version.txt", version);
+			File.WriteAllText($"../Assemblies/version.txt", version);
+
 
 			Console.WriteLine("Done.");
 		}
