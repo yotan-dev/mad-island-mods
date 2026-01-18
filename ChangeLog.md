@@ -7,8 +7,19 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## 2026.01.18
 
-## 2026.12.01
+### YotanModCore v2.2.4
+
+- Added support for v0.5.{5,6}
+
+### HFramework v1.1.2
+
+- Added support for v0.5.{5,6}
+- Fixed a wrong condition for Nami x Man
+
+
+## 2026.01.12 (wrongly tagged as 2026.12.01)
 
 ### YotanModCore v2.2.3
 - Support for v0.5.{0,1,2,3,4}
