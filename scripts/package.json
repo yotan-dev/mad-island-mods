@@ -8,7 +8,8 @@
 		"lint": "eslint .",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
 		"generate": "node src/generator.js",
-		"watch": "node src/watcher.js"
+		"watch": "node src/watcher.js",
+		"build-release": "node src/buildRelease.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -20,6 +21,7 @@
 		"jest": "30.1.1"
 	},
 	"dependencies": {
+		"archiver": "^7.0.1",
 		"chokidar": "^4.0.3",
 		"js-yaml": "4.1.0",
 		"json5": "^2.2.3"
