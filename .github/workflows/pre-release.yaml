@@ -1,0 +1,54 @@
+# Build a pre-release from latest main branch
+# A new release is made whenever there is a push to main
+# Can be downloaded. It is marked as a pre-release (so not to be confused with a final release)
+name: Create Pre-Release
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - 'LICENSE'
+      - '**/*.md'
+
+jobs:
+  build-and-package:
+    name: Build and Package
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Create output directory
+      run: mkdir -p "${{ github.workspace }}/Release"
+
+    - name: Build release
+      run: |
+        cd scripts
+        npm install
+        npm run build-release
+
+    - name: Prepare release info
+      id: prepare-release
+      run: |
+        echo "TAG_NAME=pre-release-$(Get-Date -Format 'yyyyMMdd-HHmmss')" >> $env:GITHUB_ENV
+        echo "BUILD_DATE=$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" >> $env:GITHUB_ENV
+
+    - name: Upload Release Assets
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ./Release/*.zip
+        name: "[Experimental] ${{ env.TAG_NAME }}"
+        tag_name: ${{ env.TAG_NAME }}
+        draft: false
+        prerelease: true
+        body: "**This is experimental code. Prefer the 'latest' release for stability.**\n\nPre-release build from main branch. Built on ${{ env.BUILD_DATE }}."
