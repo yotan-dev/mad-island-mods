@@ -83,7 +83,7 @@
 						</Condition>
 					</StartConditions>
 					<PerformConditions>
-						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="eq" value="2" />
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="neq" value="3" />
 					</PerformConditions>
 				</Performer>
 
