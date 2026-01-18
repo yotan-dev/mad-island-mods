@@ -45,22 +45,30 @@ namespace HFramework.Scenes.Conditionals
 			bool isDueDate = false;
 			foreach (var actor in scene.GetActors())
 			{
-				if (actor.npcID == this.NpcId)
+				if (actor.npcID == this.NpcId) {
+					PLogger.LogConditionDebug($"Pass({this.GetType().Name}): {scene.GetName()} - {actor.charaName} | {actor.npcID} is due to give birth = {this.IsDueDateCheck(actor)}");
 					isDueDate = isDueDate || this.IsDueDateCheck(actor);
+				}
 			}
 
+			PLogger.LogConditionDebug($"Pass({this.GetType().Name}): {scene.GetName()} - {isDueDate} = {this.ExpectedValue}");
 			return isDueDate == this.ExpectedValue;
 		}
 
 		public override bool Pass(CommonStates from, CommonStates to)
 		{
 			bool pass = true;
-			if (from.npcID == this.NpcId)
-				pass = pass && this.IsDueDateCheck(from);
+			if (from.npcID == this.NpcId) {
+				PLogger.LogConditionDebug($"PassB({this.GetType().Name}): {from.charaName} | {from.npcID} is due to give birth = {this.IsDueDateCheck(from)}");
+				pass = pass && this.IsDueDateCheck(from) == this.ExpectedValue;
+			}
 
-			if (to?.npcID == this.NpcId)
-				pass = pass && this.IsDueDateCheck(to);
+			if (to?.npcID == this.NpcId) {
+				PLogger.LogConditionDebug($"PassB({this.GetType().Name}): {to.charaName} | {to.npcID} is due to give birth = {this.IsDueDateCheck(to)}");
+				pass = pass && this.IsDueDateCheck(to) == this.ExpectedValue;
+			}
 
+			PLogger.LogConditionDebug($"PassB({this.GetType().Name}): {from.charaName} -> {to?.charaName} = {pass}");
 			return pass;
 		}
 	}

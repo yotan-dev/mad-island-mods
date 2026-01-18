@@ -34,10 +34,14 @@ namespace HFramework.Scenes
 					// We must check it here instead of inside QuestProgressCheck, because QuestProgressCheck
 					// may be used for CanPerform too -- and currently we don't want that check there
 					// to match the original code.
-					if (conditional is QuestProgressCheck && GameInfo.RemoveQuestConditionForSex)
+					if (conditional is QuestProgressCheck && GameInfo.RemoveQuestConditionForSex) {
+						PLogger.LogConditionDebug($"CanStart({this.Performer.Id})[{conditional.GetType().Name}]: {from.charaName} -> {to?.charaName} - Skipped due to Quest bypass");
 						continue;
+					}
 
-					if (!conditional.Pass(from, to))
+					var pass = conditional.Pass(from, to);
+					PLogger.LogConditionDebug($"CanStart({this.Performer.Id})[{conditional.GetType().Name}]: {from.charaName} -> {to?.charaName} = {pass}");
+					if (!pass)
 						return false;
 				}
 
@@ -51,7 +55,9 @@ namespace HFramework.Scenes
 
 				foreach (var conditional in this.PerformConditions)
 				{
-					if (!conditional.Pass(scene))
+					var pass = conditional.Pass(scene);
+					PLogger.LogConditionDebug($"CanPerform({this.Performer.Id})[{conditional.GetType().Name}]: {scene.GetName()} = {pass}");
+					if (!pass)
 						return false;
 				}
 
@@ -100,6 +106,7 @@ namespace HFramework.Scenes
 				{
 					foreach (var performer in performerList)
 					{
+						PLogger.LogConditionDebug($"CanStart({performer.Performer.Id}): {from.charaName} -> {to?.charaName}");
 						if (performer.CanStart(scope, from, to))
 							return true;
 					}

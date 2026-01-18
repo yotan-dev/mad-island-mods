@@ -26,6 +26,14 @@ namespace HFramework
 			_Logger.LogDebug(data);
 		}
 
+		public static void LogConditionDebug(object data)
+		{
+			if (!Config.Instance.DebugConditions.Value)
+				return;
+
+			_Logger.LogDebug($"Condition: {data}");
+		}
+
 		public static void LogFatal(object data)
 		{
 			_Logger.LogFatal(data);

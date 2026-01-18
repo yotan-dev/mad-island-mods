@@ -20,6 +20,7 @@ namespace HFramework
 			var realTo = actors.Length >= 2 ? actors[1] : null;
 
 			var sceneInfo = ScenesManager.Instance.GetSceneInfo(sceneName);
+			PLogger.LogConditionDebug($"SexCheck({sceneInfo?.Name}): {from.charaName} -> {to.charaName}");
 			bool result = sceneInfo?.CanStart(PerformerScope.Sex, realFrom, realTo) ?? false;
 			PLogger.LogDebug($"SexCheck({sceneInfo?.Name}): {from.charaName} -> {to.charaName} = {result}");
 

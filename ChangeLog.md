@@ -16,7 +16,9 @@ Each mod has its own version which follows SemVer.
 ### HFramework v1.1.2
 
 - Added support for v0.5.{5,6}
+- Added config to show more debug details of conditions
 - Fixed a wrong condition for Nami x Man
+- Fixed IsDueDate condition check
 
 
 ## 2026.01.12 (wrongly tagged as 2026.12.01)
