@@ -213,6 +213,9 @@ namespace YotanModCore.Consts
 		[StrVal("Chubby guy")]
 		public const int ChubbyGuy = 72;
 
+		[StrVal("Slender Young Lady")]
+		public const int SlenderYoungLady = 73;
+
 		[StrVal("White Tiger")]
 		public const int WhiteTiger = 78;
 
