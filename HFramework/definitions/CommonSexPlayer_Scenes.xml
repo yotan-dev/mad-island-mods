@@ -374,6 +374,37 @@
 						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.5.5 -->
+				<Performer id="HF_Yona_SlenderYoungLady_Friendly" />
+				<Performer id="HF_Man_SlenderYoungLady_Friendly_ver1">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="SlenderYoungLady#73" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<!--
+						This condition looks dumb to me, since there is no reason for Nami progress to affect how you fuck her clone...
+						But this is how the game does it - probably copy paste mess.
+						Since this is not normally triggerable (no way to get this NPC today by playing), they probably will fix this later.
+						Using BedType here would allow both scenes to work.
+						-->
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="eq" value="3" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Man_SlenderYoungLady_Friendly_ver2">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="SlenderYoungLady#73" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<!--
+						This condition looks dumb to me, since there is no reason for Nami progress to affect how you fuck her clone...
+						But this is how the game does it - probably copy paste mess.
+						Since this is not normally triggerable (no way to get this NPC today by playing), they probably will fix this later.
+						Using BedType here would allow both scenes to work.
+						-->
+						<Condition xsi:type="QuestProgressCheck" questName="Sub_NamiMan" compare="neq" value="3" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>

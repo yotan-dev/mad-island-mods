@@ -216,6 +216,18 @@
 						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.5.5 -->
+				<Performer id="HF_YoungLady_SlenderYoungLady_Normal">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+						<Condition xsi:type="IsDueDate" actor="SlenderYoungLady#73" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+						<Condition xsi:type="IsDueDate" actor="SlenderYoungLady#73" value="false" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>

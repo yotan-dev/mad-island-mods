@@ -125,6 +125,18 @@
 						<Condition xsi:type="FaintCheck" actor="YoungLady#9" value="true" />
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.5.5 -->
+				<!-- This is in v0.5.5 code but doesn't work yet
+				<Performer id="HF_Man_SlenderYoungLady_Rape">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="SlenderYoungLady#73" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="SlenderYoungLady#73" value="false" />
+					</PerformConditions>
+				</Performer>
+				-->
 			</Performers>
 		</Scene>
 	</Scenes>

@@ -603,5 +603,43 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+
+		<!-- New in v0.5.5 -->
+		<!-- This is in v0.5.5 code but doesn't work yet
+		<Performer id="HF_Man_SlenderYoungLady_Rape" minVersion="0.5.5">
+			<Scopes>
+				<Scope>Battle</Scope>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="23" />
+			<Actors>
+				<Actor val="Man#1" />
+				<Actor val="SlenderYoungLady#73" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="Battle" play="Loop" name="" />
+						<Animation action="Attack" play="Once" name="" />
+						<Animation action="Defeat" play="Loop" name="A_Attack_giveup" />
+						<Animation action="Insert" play="Once" name="A_AttackToSex">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		-->
 	</Performers>
 </PerformersConfig>

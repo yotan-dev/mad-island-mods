@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
@@ -84,8 +85,14 @@ namespace HFramework.Scenes
 
 		private void SetupTmpSex()
 		{
-			if (this.Npc2.npcID == this.Npc1.npcID)
-			{ // Same NPC (usually girl x girl)
+			var girlOnGirlSpecial = new List<int>() {
+				NpcID.YoungLady,
+				NpcID.FemaleNative,
+				NpcID.NativeGirl,
+				NpcID.SlenderYoungLady,
+			};
+			if (girlOnGirlSpecial.Contains(this.Npc1.npcID) && girlOnGirlSpecial.Contains(this.Npc2.npcID))
+			{ // girl x girl has some special handling
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, null);
 				CommonStates component2 = this.TmpSex.GetComponent<CommonStates>();
 				if (component2 != null)
@@ -180,7 +187,7 @@ namespace HFramework.Scenes
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
-			
+
 			yield return this.Performer.Perform(ActionType.Speed1, new PerformModifiers() { Duration = 20f });
 			if (!this.CanContinue())
 				yield break;
@@ -232,7 +239,7 @@ namespace HFramework.Scenes
 
 			emotionA.SetActive(false);
 			emotionB.SetActive(false);
-			
+
 			// Check for destroyed only, as CanContinue is still false at this point as the scene is not ready.
 			if (this.Destroyed)
 			{
@@ -315,7 +322,7 @@ namespace HFramework.Scenes
 			var col1 = this.Npc1.GetComponent<CapsuleCollider>();
 			if (col1 != null)
 				col1.enabled = true;
-			
+
 			var col2 = this.Npc2.GetComponent<CapsuleCollider>();
 			if (col2 != null)
 				col2.enabled = true;
