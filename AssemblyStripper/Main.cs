@@ -19,7 +19,7 @@ namespace AssemblyStripper
 			var managedFolder = args[1] + "/Mad Island_Data/Managed/";
 			var assemblies = new string[] { "Assembly-CSharp.dll", "spine-unity.dll", "Unity.TextMeshPro.dll", "UnityEngine.UI.dll" };
 
-			Directory.CreateDirectory($"../Assemblies/v{version}");
+			Directory.CreateDirectory($"../Assemblies/{version}");
 
 			foreach (var assembly in assemblies)
 			{
@@ -34,7 +34,7 @@ namespace AssemblyStripper
 				File.Copy(outPath, finalPath, true);
 			}
 
-			File.WriteAllText($"../Assemblies/v{version}/version.txt", version);
+			File.WriteAllText($"../Assemblies/{version}/version.txt", version);
 			File.WriteAllText($"../Assemblies/version.txt", version);
 
 
