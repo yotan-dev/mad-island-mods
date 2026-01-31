@@ -7,6 +7,22 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## 2026.01.31
+
+### YotanModCore v2.2.5
+
+- Added detection of v0.5.7
+
+
+### EnhancedIsland v1.1.0
+
+#### Disassemble Items
+- Disassemble table is update to resemble current content
+	- We now generate the disassembly table from the game data instead of from provided file
+	- From my tests, there are no meaningful difference in time (~1ms to generate) and we automatically get it updated
+- Made DisassembleItems mod console messages less noisy (More details can be enabled by toggling verbose logs in its config)
+
+
 ## 2026.01.18
 
 ### YotanModCore v2.2.4
