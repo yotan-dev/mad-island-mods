@@ -38,5 +38,11 @@ namespace EnhancedIsland
 		{
 			_Logger.LogMessage(data);
 		}
+
+		public static void LogVerbose(object data)
+		{
+			if (PConfig.Instance.VerboseLogs.Value)
+				_Logger.LogDebug(data);
+		}
 	}
 }

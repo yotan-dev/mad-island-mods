@@ -9,6 +9,8 @@ namespace EnhancedIsland
 		// Not worth fighting with this error for configs, as they will all be initialized at program startup.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
+		public ConfigEntry<bool> VerboseLogs { get; private set; }
+
 		public BetterWorkplaces.PConfig BetterWorkplaces { get { return EnhancedIsland.BetterWorkplaces.PConfig.Instance; } }
 
 		public ConfigEntry<bool> EnableDisassembleItems { get; private set; }
@@ -20,7 +22,7 @@ namespace EnhancedIsland
 		public NpcStats.Config.PConfig NpcStats { get { return EnhancedIsland.NpcStats.Config.PConfig.Instance; } }
 
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
-		
+
 		public ConfigEntry<bool> EnableStackNearby { get; private set; }
 
 		public ConfigEntry<bool> EnableWarpBody { get; private set; }
@@ -29,6 +31,15 @@ namespace EnhancedIsland
 
 		internal void Init(ConfigFile conf)
 		{
+			this.VerboseLogs = conf.Bind<bool>(
+				"Logger",
+				"VerboseLogs",
+				false,
+				"Enable verbose logging?\n"
+				+ "If true, more detailed information will be logged.\n"
+				+ "If false, no changes are made to the game.\n"
+			);
+
 			this.BetterWorkplaces.Init(conf);
 			this.NpcStats.Init(conf);
 
