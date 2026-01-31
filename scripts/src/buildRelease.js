@@ -148,10 +148,6 @@ async function buildEnhancedIsland() {
 			from: resolve(getBinaryPath(libPath), 'EnhancedIsland.dll'),
 			to: 'EnhancedIsland/EnhancedIsland/EnhancedIsland.dll',
 		},
-		{
-			from: resolve(libPath, 'assets/DisassembleTable.json'),
-			to: 'EnhancedIsland/EnhancedIsland/DisassembleTable.json',
-		},
 	]);
 
 	const version = getProjectVersion(resolve(libPath, 'EnhancedIsland.csproj'));

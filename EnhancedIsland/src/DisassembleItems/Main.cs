@@ -2,7 +2,7 @@
 using HarmonyLib;
 
 namespace EnhancedIsland.DisassembleItems
-{	
+{
 	public class Main
 	{
 		public void Init()
@@ -12,7 +12,6 @@ namespace EnhancedIsland.DisassembleItems
 
 			try {
 				Harmony.CreateAndPatchAll(typeof(DisassembleItemsPatch));
-				DisassembleTable.Init();
 
 				PLogger.LogInfo($"Disassemble Items enabled");
 			} catch (Exception e) {
