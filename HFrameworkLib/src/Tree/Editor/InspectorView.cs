@@ -5,29 +5,32 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor;
 
-public class InspectorView : VisualElement
+namespace HFramework.Tree.EditorUI
 {
-	public new class UxmlFactory : UxmlFactory<InspectorView, VisualElement.UxmlTraits> { }
-
-	Editor editor;
-
-	public InspectorView()
+	public class InspectorView : VisualElement
 	{
+		public new class UxmlFactory : UxmlFactory<InspectorView, VisualElement.UxmlTraits> { }
 
-	}
+		Editor editor;
 
-	internal void UpdateSelection(NodeView nodeView)
-	{
-		Clear();
-
-		UnityEngine.Object.DestroyImmediate(editor); // destroy previous editor
-
-		editor = Editor.CreateEditor(nodeView.node);
-		IMGUIContainer container = new IMGUIContainer(() =>
+		public InspectorView()
 		{
-			editor.OnInspectorGUI();
-		});
 
-		Add(container);
+		}
+
+		internal void UpdateSelection(NodeView nodeView)
+		{
+			Clear();
+
+			UnityEngine.Object.DestroyImmediate(editor); // destroy previous editor
+
+			editor = Editor.CreateEditor(nodeView.node);
+			IMGUIContainer container = new IMGUIContainer(() =>
+			{
+				editor.OnInspectorGUI();
+			});
+
+			Add(container);
+		}
 	}
 }

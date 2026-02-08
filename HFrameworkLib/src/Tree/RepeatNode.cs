@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RepeatNode : DecoratorNode
+namespace HFramework.Tree
 {
-	protected override void OnStart()
+	public class RepeatNode : DecoratorNode
 	{
-		Debug.Log("---- Repeat Node Start");
-	}
+		protected override void OnStart()
+		{
+			Debug.Log("---- Repeat Node Start");
+		}
 
-	protected override void OnStop()
-	{
-		Debug.Log("---- Repeat Node Stop");
-	}
+		protected override void OnStop()
+		{
+			Debug.Log("---- Repeat Node Stop");
+		}
 
-	protected override State OnUpdate()
-	{
-		Debug.Log("---- Repeat Node UPDATE");
-		child.Update();
-		return State.Running;
+		protected override State OnUpdate()
+		{
+			Debug.Log("---- Repeat Node UPDATE");
+			child.Update();
+			return State.Running;
+		}
 	}
 }
