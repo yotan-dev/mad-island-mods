@@ -35,38 +35,50 @@ namespace HFramework.Tree.EditorUI
 			return GetNodeByGuid(node.GUID) as NodeView;
 		}
 
+		Port GetOutputPort(NodeView parentView, Node childNode)
+		{
+			var root = parentView.node as RootNode;
+			if (root != null && parentView.teardownOutput != null && root.teardownNode == childNode)
+			{
+				return parentView.teardownOutput;
+			}
+
+			return parentView.output;
+		}
+
 		internal void PopulateView(BehaviourTree tree)
 		{
 			this.tree = tree;
 
-		graphViewChanged -= OnGraphViewChanged;
-		DeleteElements(graphElements);
-		graphViewChanged += OnGraphViewChanged;
+			graphViewChanged -= OnGraphViewChanged;
+			DeleteElements(graphElements);
+			graphViewChanged += OnGraphViewChanged;
 
-		if (tree.rootNode == null)
-		{
-			tree.rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
-			EditorUtility.SetDirty(tree);
-			AssetDatabase.SaveAssets();
-		}
-
-		// Creates nodes views
-		tree.nodes.ForEach(n => CreateNodeView(n));
-
-		// Creates edges
-		tree.nodes.ForEach(n =>
-		{
-			var children = tree.GetChildren(n);
-			children.ForEach(c =>
+			if (tree.rootNode == null)
 			{
-				var parentView = FindNodeView(n);
-				var childView = FindNodeView(c);
+				tree.rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
+				EditorUtility.SetDirty(tree);
+				AssetDatabase.SaveAssets();
+			}
 
-				var edge = parentView.output.ConnectTo(childView.input);
-				AddElement(edge);
+			// Creates nodes views
+			tree.nodes.ForEach(n => CreateNodeView(n));
+
+			// Creates edges
+			tree.nodes.ForEach(n =>
+			{
+				var children = tree.GetChildren(n);
+				children.ForEach(c =>
+				{
+					var parentView = FindNodeView(n);
+					var childView = FindNodeView(c);
+
+					var outputPort = GetOutputPort(parentView, c);
+					var edge = outputPort.ConnectTo(childView.input);
+					AddElement(edge);
+				});
 			});
-		});
-	}
+		}
 
 		public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
 		{
@@ -90,7 +102,7 @@ namespace HFramework.Tree.EditorUI
 					{
 						var parentView = edge.output.node as NodeView;
 						var childView = edge.input.node as NodeView;
-						tree.RemoveChild(parentView.node, childView.node);
+						tree.RemoveChild(parentView.node, childView.node, edge.output.portName);
 					}
 				});
 			}
@@ -102,7 +114,7 @@ namespace HFramework.Tree.EditorUI
 					var parentView = edge.output.node as NodeView;
 					var childView = edge.input.node as NodeView;
 
-					tree.AddChild(parentView.node, childView.node);
+					tree.AddChild(parentView.node, childView.node, edge.output.portName);
 				});
 			}
 			return graphViewChange;
