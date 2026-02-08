@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using HFramework.Scenes;
 using HarmonyLib;
 using YotanModCore;
+using YotanModCore.Consts;
+using HFramework.SexScripts;
 
 namespace HFramework.Patches
 {
@@ -18,6 +20,16 @@ namespace HFramework.Patches
 			ref IEnumerator __result
 		)
 		{
+			if ((npcA.npcID == NpcID.MaleNative && npcB.npcID == NpcID.FemaleNative) ||
+				(npcA.npcID == NpcID.FemaleNative && npcB.npcID == NpcID.MaleNative))
+			{
+				var scr = new CommonSexNpcScript();
+				scr.Init(npcA, npcB, sexPlace);
+				var wrap = new SexScriptWrapper();
+				__result = wrap.Run(scr);
+				return false;
+			}
+
 			var scene = new CommonSexNPC(npcA, npcB, sexPlace);
 			__result = scene.Run();
 			return false;
