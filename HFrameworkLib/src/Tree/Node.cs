@@ -1,45 +1,48 @@
 using UnityEngine;
 
-public abstract class Node : ScriptableObject
+namespace HFramework.Tree
 {
-	public enum State
+	public abstract class Node : ScriptableObject
 	{
-		Running,
-		Failure,
-		Success
-	}
-
-	[HideInInspector] public State state = State.Running;
-	[HideInInspector] public bool started = false;
-
-	[HideInInspector] public string GUID;
-	[HideInInspector] public Vector2 position;
-
-	public State Update()
-	{
-		if (!started)
+		public enum State
 		{
-			OnStart();
-			started = true;
+			Running,
+			Failure,
+			Success
 		}
 
-		state = OnUpdate();
+		[HideInInspector] public State state = State.Running;
+		[HideInInspector] public bool started = false;
 
-		if (state == State.Failure || state == State.Success)
+		[HideInInspector] public string GUID;
+		[HideInInspector] public Vector2 position;
+
+		public State Update()
 		{
-			OnStop();
-			started = false;
+			if (!started)
+			{
+				OnStart();
+				started = true;
+			}
+
+			state = OnUpdate();
+
+			if (state == State.Failure || state == State.Success)
+			{
+				OnStop();
+				started = false;
+			}
+
+			return state;
 		}
 
-		return state;
-	}
+		public virtual Node Clone()
+		{
+			return Instantiate(this);
+		}
 
-	public virtual Node Clone()
-	{
-		return Instantiate(this);
+		protected abstract void OnStart();
+		protected abstract void OnStop();
+		protected abstract State OnUpdate();
 	}
-
-	protected abstract void OnStart();
-	protected abstract void OnStop();
-	protected abstract State OnUpdate();
 }

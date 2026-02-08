@@ -7,35 +7,37 @@ using UnityEditor;
 using System;
 using System.Linq;
 
-public class BehaviourTreeView : GraphView
+namespace HFramework.Tree.EditorUI
 {
-	public Action<NodeView> OnNodeSelected;
-
-	public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
-
-	BehaviourTree tree;
-
-	public BehaviourTreeView()
+	public class BehaviourTreeView : GraphView
 	{
-		Insert(0, new GridBackground());
+		public Action<NodeView> OnNodeSelected;
 
-		this.AddManipulator(new ContentZoomer());
-		this.AddManipulator(new ContentDragger());
-		this.AddManipulator(new SelectionDragger());
-		this.AddManipulator(new RectangleSelector());
+		public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
 
-		var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Tree/Editor/BehaviourTreeEditor.uss");
-		styleSheets.Add(styleSheet);
-	}
+		BehaviourTree tree;
 
-	NodeView FindNodeView(Node node)
-	{
-		return GetNodeByGuid(node.GUID) as NodeView;
-	}
+		public BehaviourTreeView()
+		{
+			Insert(0, new GridBackground());
 
-	internal void PopulateView(BehaviourTree tree)
-	{
-		this.tree = tree;
+			this.AddManipulator(new ContentZoomer());
+			this.AddManipulator(new ContentDragger());
+			this.AddManipulator(new SelectionDragger());
+			this.AddManipulator(new RectangleSelector());
+
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Tree/Editor/BehaviourTreeEditor.uss");
+			styleSheets.Add(styleSheet);
+		}
+
+		NodeView FindNodeView(Node node)
+		{
+			return GetNodeByGuid(node.GUID) as NodeView;
+		}
+
+		internal void PopulateView(BehaviourTree tree)
+		{
+			this.tree = tree;
 
 		graphViewChanged -= OnGraphViewChanged;
 		DeleteElements(graphElements);
@@ -66,78 +68,79 @@ public class BehaviourTreeView : GraphView
 		});
 	}
 
-	public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
-	{
-		return ports.ToList().Where(endPort => endPort.direction != startPort.direction && endPort.node != startPort.node).ToList();
-	}
-
-	private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
-	{
-		if (graphViewChange.elementsToRemove != null)
+		public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
 		{
-			graphViewChange.elementsToRemove.ForEach(elem =>
-			{
-				var nodeView = elem as NodeView;
-				if (nodeView != null)
-				{
-					tree.DeleteNode(nodeView.node);
-				}
+			return ports.ToList().Where(endPort => endPort.direction != startPort.direction && endPort.node != startPort.node).ToList();
+		}
 
-				var edge = elem as Edge;
-				if (edge != null)
+		private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
+		{
+			if (graphViewChange.elementsToRemove != null)
+			{
+				graphViewChange.elementsToRemove.ForEach(elem =>
+				{
+					var nodeView = elem as NodeView;
+					if (nodeView != null)
+					{
+						tree.DeleteNode(nodeView.node);
+					}
+
+					var edge = elem as Edge;
+					if (edge != null)
+					{
+						var parentView = edge.output.node as NodeView;
+						var childView = edge.input.node as NodeView;
+						tree.RemoveChild(parentView.node, childView.node);
+					}
+				});
+			}
+
+			if (graphViewChange.edgesToCreate != null)
+			{
+				graphViewChange.edgesToCreate.ForEach(edge =>
 				{
 					var parentView = edge.output.node as NodeView;
 					var childView = edge.input.node as NodeView;
-					tree.RemoveChild(parentView.node, childView.node);
-				}
-			});
+
+					tree.AddChild(parentView.node, childView.node);
+				});
+			}
+			return graphViewChange;
 		}
 
-		if (graphViewChange.edgesToCreate != null)
+		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
-			graphViewChange.edgesToCreate.ForEach(edge =>
+			// base.BuildContextualMenu(evt);
+			var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
+			foreach (var type in types)
 			{
-				var parentView = edge.output.node as NodeView;
-				var childView = edge.input.node as NodeView;
+				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+			}
 
-				tree.AddChild(parentView.node, childView.node);
-			});
+			types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
+			foreach (var type in types)
+			{
+				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+			}
+
+			types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
+			foreach (var type in types)
+			{
+				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+			}
 		}
-		return graphViewChange;
-	}
 
-	public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
-	{
-		// base.BuildContextualMenu(evt);
-		var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
-		foreach (var type in types)
+		void CreateNode(System.Type type)
 		{
-			evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+			var node = tree.CreateNode(type);
+			CreateNodeView(node);
 		}
 
-		types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
-		foreach (var type in types)
+		void CreateNodeView(Node node)
 		{
-			evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+			var nodeView = new NodeView(node);
+			nodeView.OnNodeSelected = OnNodeSelected;
+			AddElement(nodeView);
 		}
-
-		types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
-		foreach (var type in types)
-		{
-			evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
-		}
-	}
-
-	void CreateNode(System.Type type)
-	{
-		var node = tree.CreateNode(type);
-		CreateNodeView(node);
-	}
-
-	void CreateNodeView(Node node)
-	{
-		var nodeView = new NodeView(node);
-		nodeView.OnNodeSelected = OnNodeSelected;
-		AddElement(nodeView);
 	}
 }
