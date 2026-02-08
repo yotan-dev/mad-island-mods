@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,10 +7,11 @@ namespace HFramework.Tree
 	{
 		[HideInInspector] public List<Node> children = new List<Node>();
 
-		public override Node Clone()
+		public override Node Clone(CommonContext context)
 		{
 			var node = Instantiate(this);
-			node.children = children.ConvertAll(c => c.Clone());
+			node.context = context;
+			node.children = children.ConvertAll(c => c.Clone(context));
 
 			return node;
 		}

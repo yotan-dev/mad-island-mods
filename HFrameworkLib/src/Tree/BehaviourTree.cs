@@ -13,6 +13,8 @@ namespace HFramework.Tree
 
 		public Node.State treeState = Node.State.Running;
 
+		public CommonContext context;
+
 		public List<Node> nodes = new List<Node>();
 
 		public Node.State Update()
@@ -114,7 +116,8 @@ namespace HFramework.Tree
 		public BehaviourTree Clone()
 		{
 			var tree = Instantiate(this);
-			tree.rootNode = tree.rootNode.Clone();
+			tree.context = tree.context.Clone();
+			tree.rootNode = tree.rootNode.Clone(tree.context);
 			return tree;
 		}
 	}

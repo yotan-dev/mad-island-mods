@@ -4,6 +4,8 @@ namespace HFramework.Tree
 	{
 		public Node child;
 
+		public Node teardownNode;
+
 		protected override void OnStart()
 		{
 
@@ -19,10 +21,11 @@ namespace HFramework.Tree
 			return child.Update();
 		}
 
-		public override Node Clone()
+		public override Node Clone(CommonContext context)
 		{
 			var node = Instantiate(this);
-			node.child = child.Clone();
+			node.context = context;
+			node.child = child.Clone(context);
 
 			return node;
 		}

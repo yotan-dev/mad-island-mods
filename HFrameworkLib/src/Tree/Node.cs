@@ -11,6 +11,8 @@ namespace HFramework.Tree
 			Success
 		}
 
+		internal CommonContext context;
+
 		[HideInInspector] public State state = State.Running;
 		[HideInInspector] public bool started = false;
 
@@ -36,9 +38,11 @@ namespace HFramework.Tree
 			return state;
 		}
 
-		public virtual Node Clone()
+		public virtual Node Clone(CommonContext context)
 		{
-			return Instantiate(this);
+			var node = Instantiate(this);
+			node.context = context;
+			return node;
 		}
 
 		protected abstract void OnStart();
