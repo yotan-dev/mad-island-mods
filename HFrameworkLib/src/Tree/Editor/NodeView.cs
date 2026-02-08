@@ -14,6 +14,8 @@ namespace HFramework.Tree.EditorUI
 
 		public Port output;
 
+		public Port teardownOutput;
+
 		public NodeView(Node node)
 		{
 			this.node = node;
@@ -74,12 +76,20 @@ namespace HFramework.Tree.EditorUI
 			else if (node is RootNode)
 			{
 				output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				output.portName = "";
+
+				teardownOutput = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				teardownOutput.portName = BehaviourTree.TeardownPortName;
 			}
 
 			if (output != null)
 			{
-				output.portName = "";
 				outputContainer.Add(output);
+			}
+
+			if (teardownOutput != null)
+			{
+				outputContainer.Add(teardownOutput);
 			}
 		}
 

@@ -9,6 +9,8 @@ namespace HFramework.Tree
 	[CreateAssetMenu()]
 	public class BehaviourTree : ScriptableObject
 	{
+		public static string TeardownPortName = "Teardown";
+
 		public Node rootNode;
 
 		public Node.State treeState = Node.State.Running;
@@ -46,7 +48,7 @@ namespace HFramework.Tree
 			AssetDatabase.SaveAssets();
 		}
 
-		public void AddChild(Node parent, Node child)
+		public void AddChild(Node parent, Node child, string portName = "")
 		{
 			var decorator = parent as DecoratorNode;
 			if (decorator)
@@ -57,7 +59,14 @@ namespace HFramework.Tree
 			var root = parent as RootNode;
 			if (root)
 			{
-				root.child = child;
+				if (portName == TeardownPortName)
+				{
+					root.teardownNode = child;
+				}
+				else
+				{
+					root.child = child;
+				}
 			}
 
 			var composite = parent as CompositeNode;
@@ -67,7 +76,7 @@ namespace HFramework.Tree
 			}
 		}
 
-		public void RemoveChild(Node parent, Node child)
+		public void RemoveChild(Node parent, Node child, string portName = "")
 		{
 			var decorator = parent as DecoratorNode;
 			if (decorator)
@@ -78,7 +87,14 @@ namespace HFramework.Tree
 			var root = parent as RootNode;
 			if (root)
 			{
-				root.child = null;
+				if (portName == TeardownPortName)
+				{
+					root.teardownNode = null;
+				}
+				else
+				{
+					root.child = null;
+				}
 			}
 
 			var composite = parent as CompositeNode;
@@ -102,6 +118,11 @@ namespace HFramework.Tree
 			if (root && root.child != null)
 			{
 				children.Add(root.child);
+			}
+
+			if (root && root.teardownNode != null)
+			{
+				children.Add(root.teardownNode);
 			}
 
 			var composite = parent as CompositeNode;
