@@ -6,10 +6,11 @@ namespace HFramework.Tree
 	{
 		[HideInInspector] public Node child;
 
-		public override Node Clone()
+		public override Node Clone(CommonContext context)
 		{
 			var node = Instantiate(this);
-			node.child = child.Clone();
+			node.context = context;
+			node.child = child.Clone(context);
 
 			return node;
 		}

@@ -48,7 +48,7 @@
 		</Reference>
 	</ItemGroup>
 
-	<!-- <ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\YotanModCore\YotanModCore.csproj" />
-	</ItemGroup> -->
+	</ItemGroup>
 </Project>
