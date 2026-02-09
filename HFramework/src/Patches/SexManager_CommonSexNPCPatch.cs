@@ -23,10 +23,19 @@ namespace HFramework.Patches
 			if ((npcA.npcID == NpcID.MaleNative && npcB.npcID == NpcID.FemaleNative) ||
 				(npcA.npcID == NpcID.FemaleNative && npcB.npcID == NpcID.MaleNative))
 			{
-				var scr = new CommonSexNpcScript();
-				scr.Init(npcA, npcB, sexPlace);
-				var wrap = new SexScriptWrapper();
-				__result = wrap.Run(scr);
+				var tree = BundleLoader.Loader.Prefabs[0];
+				if (tree == null)
+				{
+					PLogger.LogError("Failed to load tree");
+					return false;
+				}
+
+				var wrap = new TreeWrapper();
+				__result = wrap.Run(tree, npcA, npcB, sexPlace);
+				// var scr = new CommonSexNpcScript();
+				// scr.Init(npcA, npcB, sexPlace);
+				// var wrap = new SexScriptWrapper();
+				// __result = wrap.Run(scr);
 				return false;
 			}
 

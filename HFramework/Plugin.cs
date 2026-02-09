@@ -22,6 +22,7 @@ namespace HFramework
 			PLogger._Logger = Logger;
 
 			HFramework.Config.Instance.Init(Config);
+			Initializer.Init(new BepisLogger(Logger));
 
 			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value)
 			{
@@ -61,6 +62,7 @@ namespace HFramework
 				this.Loaded = true;
 				PerformerLoader.Load();
 				ScenesManager.Instance.Init();
+				BundleLoader.Load();
 			}
 		}
 	}

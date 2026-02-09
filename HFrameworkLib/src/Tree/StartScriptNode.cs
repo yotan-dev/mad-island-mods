@@ -10,6 +10,7 @@ namespace HFramework.Tree
 
 		protected override void OnStart()
 		{
+			this.context.SexPlacePos = this.context.SexPlace.transform.Find("pos")?.position;
 		}
 
 		protected override void OnStop()
