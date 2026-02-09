@@ -18,12 +18,12 @@ namespace HFramework.Tree
 		{
 			if (this.context.NpcA?.dead != 0 || this.context.NpcB?.dead != 0)
 			{
+				PLogger.LogError("ScriptAliveNode: NpcA or NpcB is dead");
 				return State.Failure;
 			}
 
 			Debug.Log("---- ScriptAlive Node UPDATE");
-			child.Update();
-			return State.Running;
+			return child.Update();
 		}
 	}
 }
