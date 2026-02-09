@@ -1,11 +1,10 @@
-using HFramework.Tree.PrefabCreators;
 using UnityEngine;
 
 namespace HFramework.Tree
 {
 	public class Setup : ActionNode
 	{
-		[SerializeField] public BasePrefabCreator prefabCreator;
+		public PrefabConfig prefabConfig;
 
 		protected override void OnStart()
 		{
@@ -17,7 +16,7 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			var prefab = this.prefabCreator.CreatePrefab(this.context.SexPlacePos.Value);
+			var prefab = this.prefabConfig.CreatePrefab(this.context.SexPlacePos.Value);
 			if (this.context.SexPlace.user != null)
 			{
 				PLogger.LogError("Sex place already has a user");
@@ -34,9 +33,9 @@ namespace HFramework.Tree
 			this.context.NpcA.gameObject.transform.position = this.context.SexPlacePos.Value;
 			this.context.NpcB.gameObject.transform.position = this.context.SexPlacePos.Value;
 
-			this.prefabCreator.SetAppearance(prefab, this.context);
+			this.prefabConfig.SetAppearance(prefab, this.context);
 			this.context.TmpSex = prefab;
-			this.context.TmpSexAnim = this.prefabCreator.GetSkeletonAnimation(prefab);
+			this.context.TmpSexAnim = this.prefabConfig.GetSkeletonAnimation(prefab);
 
 			return State.Success;
 		}
