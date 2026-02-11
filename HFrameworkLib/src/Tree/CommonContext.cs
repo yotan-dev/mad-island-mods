@@ -31,6 +31,8 @@ namespace HFramework.Tree
 
 		public SkeletonAnimation? TmpSexAnim { get; set; }
 
+		public int SexType = -1;
+
 		public CommonContext Clone()
 		{
 			// @TODO: Maybe create instead of clone

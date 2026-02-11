@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using HFramework.Scenes;
 using HarmonyLib;
-using YotanModCore;
 using YotanModCore.Consts;
 using HFramework.SexScripts;
+using HFramework.SexScripts.Info;
 
 namespace HFramework.Patches
 {
@@ -23,7 +21,12 @@ namespace HFramework.Patches
 			if ((npcA.npcID == NpcID.MaleNative && npcB.npcID == NpcID.FemaleNative) ||
 				(npcA.npcID == NpcID.FemaleNative && npcB.npcID == NpcID.MaleNative))
 			{
-				var tree = BundleLoader.Loader.Prefabs[0];
+				var info = new CommonSexInfo
+				{
+					Place = sexPlace
+				};
+
+				var tree = BundleLoader.Loader.Prefabs.Find(x => x.Info.CanExecute(info)) as CommonSexNPCScript;
 				if (tree == null)
 				{
 					PLogger.LogError("Failed to load tree");
@@ -31,7 +34,7 @@ namespace HFramework.Patches
 				}
 
 				var wrap = new TreeWrapper();
-				__result = wrap.Run(tree, npcA, npcB, sexPlace);
+				__result = wrap.Run(tree.Create(npcA, npcB, sexPlace));
 				// var scr = new CommonSexNpcScript();
 				// scr.Init(npcA, npcB, sexPlace);
 				// var wrap = new SexScriptWrapper();

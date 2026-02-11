@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using HFramework.Tree;
+using HFramework.SexScripts;
 
 namespace HFramework
 {
@@ -13,6 +14,6 @@ namespace HFramework
 	public class HFrameworkDataLoader : ScriptableObject
 	{
 		[Tooltip("Add your custom prefabs here so they get loaded into the game")]
-		public List<BehaviourTree> Prefabs = [];
+		public List<SexScript> Prefabs = [];
 	}
 }

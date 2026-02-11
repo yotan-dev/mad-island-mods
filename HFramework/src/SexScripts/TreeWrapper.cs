@@ -5,30 +5,14 @@ namespace HFramework.SexScripts
 {
 	public class TreeWrapper
 	{
-		public IEnumerator Run(BehaviourTree tree, CommonStates npcA, CommonStates npcB, SexPlace sexPlace)
+		public IEnumerator Run(BehaviourTree tree)
 		{
-			BehaviourTree actualTree;
-			try
-			{
-				PLogger.LogInfo("Tree is null? " + (tree == null));
-				actualTree = tree.Clone();
-				actualTree.context.NpcA = npcA;
-				actualTree.context.NpcB = npcB;
-				actualTree.context.SexPlace = sexPlace;
-			}
-			catch (System.Exception e)
-			{
-				PLogger.LogError($"Sex script start error: {e}");
-				yield break;
-			}
-
-
 			// bool recoveryMode = false;
-			while (actualTree.treeState == Node.State.Running)
+			while (tree.treeState == Node.State.Running)
 			{
 				try
 				{
-					actualTree.Update();
+					tree.Update();
 				}
 				catch (System.Exception e)
 				{
