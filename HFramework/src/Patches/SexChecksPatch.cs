@@ -4,6 +4,7 @@ using HFramework.Scenes;
 using HarmonyLib;
 using YotanModCore;
 using YotanModCore.Consts;
+using System.Linq;
 
 namespace HFramework.Patches
 {
@@ -16,7 +17,10 @@ namespace HFramework.Patches
 			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
 				__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
 			else
-				__result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
+			{
+				// __result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
+				__result = BundleLoader.Loader.Prefabs.Any(p => p.Info.CanStart(from, to));
+			}
 
 			return false;
 		}

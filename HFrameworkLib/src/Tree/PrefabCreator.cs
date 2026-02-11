@@ -50,7 +50,7 @@ namespace HFramework.Tree
 		{
 			if (appearanceMode == AppearenceMode.ManGirl)
 			{
-				Managers.mn.randChar.SetCharacter(prefab, ctx.NpcB, ctx.NpcA);
+				Managers.mn.randChar.SetCharacter(prefab, ctx.NpcA, ctx.NpcB);
 			}
 			else
 			{

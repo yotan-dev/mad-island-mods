@@ -134,7 +134,7 @@ namespace HFramework.Tree
 			return children;
 		}
 
-		public BehaviourTree Clone()
+		internal BehaviourTree Clone()
 		{
 			var tree = Instantiate(this);
 			PLogger.LogInfo("Cloning tree - null? " + (tree == null));
