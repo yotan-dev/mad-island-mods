@@ -49,8 +49,10 @@ namespace HFramework.Tree
 			if (this.context.SexPlace != null)
 				this.context.SexPlace.user = null;
 
-			RestoreLivingCharacter(this.context.NpcA, this.context.NpcAAngle);
-			RestoreLivingCharacter(this.context.NpcB, this.context.NpcBAngle);
+			foreach (var npc in this.context.Npcs)
+			{
+				RestoreLivingCharacter(npc.Common, npc.Angle);
+			}
 
 			// @TODO: Moral change
 			// npcA.MoralChange(3f);

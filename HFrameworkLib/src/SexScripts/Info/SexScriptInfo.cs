@@ -72,6 +72,15 @@ namespace HFramework.SexScripts.Info
 			return true;
 		}
 
+		public CommonStates[] BuildNpcs(params CommonStates[] npcs)
+		{
+			if (this.NpcOrderMatters)
+				return npcs;
+
+			this.TryMatchUnorderedNpcs(npcs, out var matchedNpcs);
+			return matchedNpcs;
+		}
+
 		public bool CanStart(params CommonStates[] npcs)
 		{
 			PLogger.LogDebug($"CanStart: {string.Join(", ", npcs.Select(n => n.npcID))}");

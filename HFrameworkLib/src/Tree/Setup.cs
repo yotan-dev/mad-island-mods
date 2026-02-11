@@ -26,12 +26,12 @@ namespace HFramework.Tree
 			this.context.SexPlace.user = prefab;
 
 			prefab.transform.position += new Vector3(0.0f, 0.0f, 0.02f);
-			this.context.NpcAAngle = this.context.NpcA.nMove.searchAngle;
-			this.context.NpcBAngle = this.context.NpcB.nMove.searchAngle;
-			this.context.NpcA.nMove.searchAngle = 180f;
-			this.context.NpcB.nMove.searchAngle = 180f;
-			this.context.NpcA.gameObject.transform.position = this.context.SexPlacePos.Value;
-			this.context.NpcB.gameObject.transform.position = this.context.SexPlacePos.Value;
+			foreach (var npc in this.context.Npcs)
+			{
+				npc.Angle = npc.Common.nMove.searchAngle;
+				npc.Common.nMove.searchAngle = 180f;
+				npc.Common.gameObject.transform.position = this.context.SexPlacePos.Value;
+			}
 
 			this.prefabConfig.SetAppearance(prefab, this.context);
 			this.context.TmpSex = prefab;

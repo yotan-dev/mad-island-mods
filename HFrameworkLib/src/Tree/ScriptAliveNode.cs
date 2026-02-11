@@ -16,10 +16,13 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			if (this.context.NpcA?.dead != 0 || this.context.NpcB?.dead != 0)
+			foreach (var npc in this.context.Npcs)
 			{
-				PLogger.LogError("ScriptAliveNode: NpcA or NpcB is dead");
-				return State.Failure;
+				if (npc.Common.dead != 0)
+				{
+					PLogger.LogError("ScriptAliveNode: Npc is dead");
+					return State.Failure;
+				}
 			}
 
 			Debug.Log("---- ScriptAlive Node UPDATE");
