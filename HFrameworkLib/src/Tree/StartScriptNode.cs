@@ -19,12 +19,11 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			NPCMove aMove = this.context.NpcA.GetComponent<NPCMove>();
-			NPCMove bMove = this.context.NpcB.GetComponent<NPCMove>();
-			aMove.actType = NPCMove.ActType.Wait;
-			bMove.actType = NPCMove.ActType.Wait;
-			this.context.NpcA.sex = CommonStates.SexState.Playing;
-			this.context.NpcB.sex = CommonStates.SexState.Playing;
+			foreach (var npc in this.context.Npcs)
+			{
+				npc.Common.nMove.actType = NPCMove.ActType.Wait;
+				npc.Common.sex = CommonStates.SexState.Playing;
+			}
 
 			return State.Success;
 		}

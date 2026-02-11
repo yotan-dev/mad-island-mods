@@ -1,5 +1,6 @@
 using System;
 using Spine.Unity;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using YotanModCore;
 
@@ -16,7 +17,7 @@ namespace HFramework.Tree
 
 		public enum AppearenceMode
 		{
-			ManGirl,
+			MaleFemale,
 			// GirlGirl,
 			// Custom,
 		}
@@ -24,6 +25,15 @@ namespace HFramework.Tree
 		[Header("General config (Always required)")]
 		[SerializeField] private PrefabType prefabType = default;
 		[SerializeField] private AppearenceMode appearanceMode = default;
+
+		[Space(10)]
+
+		[Header("MaleFemale config (if AppearenceMode = MaleFemale)")]
+		[Tooltip("Male index in SexScript > Info > Npcs")]
+		[SerializeField] private int maleIndex = 0;
+
+		[Tooltip("Female index in SexScript > Info > Npcs")]
+		[SerializeField] private int femaleIndex = 1;
 
 		[Space(10)]
 
@@ -48,9 +58,9 @@ namespace HFramework.Tree
 
 		public void SetAppearance(GameObject prefab, CommonContext ctx)
 		{
-			if (appearanceMode == AppearenceMode.ManGirl)
+			if (appearanceMode == AppearenceMode.MaleFemale)
 			{
-				Managers.mn.randChar.SetCharacter(prefab, ctx.NpcA, ctx.NpcB);
+				Managers.mn.randChar.SetCharacter(prefab, ctx.Npcs[femaleIndex].Common, ctx.Npcs[maleIndex].Common);
 			}
 			else
 			{

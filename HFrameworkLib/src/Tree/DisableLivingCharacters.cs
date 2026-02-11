@@ -14,18 +14,15 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			this.context.NpcA.nMove.RBState(false);
-			this.context.NpcB.nMove.RBState(false);
-			CapsuleCollider aColl = this.context.NpcA.GetComponent<CapsuleCollider>();
-			CapsuleCollider bColl = this.context.NpcB.GetComponent<CapsuleCollider>();
-			MeshRenderer aMesh = this.context.NpcA.anim.GetComponent<MeshRenderer>();
-			MeshRenderer bMesh = this.context.NpcB.anim.GetComponent<MeshRenderer>();
-			aMesh.enabled = false;
-			bMesh.enabled = false;
-			if ((UnityEngine.Object)aColl != (UnityEngine.Object)null)
-				aColl.enabled = false;
-			if ((UnityEngine.Object)bColl != (UnityEngine.Object)null)
-				bColl.enabled = false;
+			foreach (var npc in this.context.Npcs)
+			{
+				npc.Common.nMove.RBState(false);
+				var coll = npc.Common.GetComponent<CapsuleCollider>();
+				var mesh = npc.Common.anim.GetComponent<MeshRenderer>();
+				mesh.enabled = false;
+				if (coll != null)
+					coll.enabled = false;
+			}
 
 			return State.Success;
 		}
