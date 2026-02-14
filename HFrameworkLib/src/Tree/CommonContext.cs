@@ -1,10 +1,21 @@
 #nullable enable
 
+using System;
 using Spine.Unity;
 using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Serializable]
+	public enum SexAction
+	{
+		Idle,
+		Caressing,
+		SexSlow,
+		SexFast,
+		Cumming,
+	}
+
 	public interface ISexScriptMenuSession
 	{
 		void SetOptions((string Id, string Text)[] options);
@@ -31,6 +42,8 @@ namespace HFramework.Tree
 
 		public ISexScriptMenuSession? MenuSession { get; set; }
 
+		public SexAction SexAction { get; set; } = SexAction.Idle;
+
 		public string? PendingChoiceId { get; set; }
 
 		public string? LastChoiceId { get; set; }
@@ -42,6 +55,20 @@ namespace HFramework.Tree
 		public GameObject? TmpSex { get; set; }
 
 		public SkeletonAnimation? TmpSexAnim { get; set; }
+
+		/// <summary>
+		/// Whether the main canvas visibility has been changed by a node.
+		/// We use that to restore the canvas on Teardown
+		/// Note: We only expect to have 1 script touching the canvas at any given time
+		/// </summary>
+		public bool HasChangedMainCanvasVisibility { get; set; }
+
+		/// <summary>
+		/// Whether the sex meter has been created by a node.
+		/// We use that to hide the sex meter on Teardown.
+		/// Note: We only expect to have 1 script using sex meter at any given time
+		/// </summary>
+		public bool HasSexMeter { get; set; }
 
 		public int SexType = -1;
 

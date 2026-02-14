@@ -28,11 +28,12 @@ namespace HFramework.Tree
 				this.context.SexPlace.user = prefab;
 			}
 
+			// Pos offset only in CommonSexNpc
 			prefab.transform.position += new Vector3(0.0f, 0.0f, 0.02f);
 			foreach (var npc in this.context.Npcs)
 			{
 				npc.Angle = npc.Common.nMove.searchAngle;
-				npc.Common.nMove.searchAngle = 180f;
+				npc.Common.nMove.searchAngle = 0f; //180f;
 				npc.Common.gameObject.transform.position = this.context.SexPlacePos.Value;
 			}
 

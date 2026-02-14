@@ -1,6 +1,9 @@
 #nullable enable
 
+using System.Linq;
+using HFramework.Scenes;
 using UnityEngine;
+using YotanModCore;
 
 namespace HFramework.Tree
 {
@@ -40,6 +43,12 @@ namespace HFramework.Tree
 				character.libido -= 20f;
 		}
 
+		private bool IsPlayerInvolved()
+		{
+			var currentPlayer = CommonUtils.GetActivePlayer();
+			return this.context.Npcs.Any(npc => npc.Common == currentPlayer);
+		}
+
 		protected override State OnUpdate()
 		{
 			Debug.Log("Teardown.Update");
@@ -53,6 +62,16 @@ namespace HFramework.Tree
 			{
 				RestoreLivingCharacter(npc.Common, npc.Angle);
 			}
+
+			if (this.context.HasChangedMainCanvasVisibility)
+				Managers.mn.uiMN.MainCanvasView(true);
+
+			if (this.context.HasSexMeter)
+				SexMeter.Instance.Hide();
+
+			// Refresh the "status" window if the player has it open
+			if (this.IsPlayerInvolved())
+				Managers.mn.uiMN.StatusChange(null);
 
 			// @TODO: Moral change
 			// npcA.MoralChange(3f);
