@@ -17,13 +17,16 @@ namespace HFramework.Tree
 		protected override State OnUpdate()
 		{
 			var prefab = this.prefabConfig.CreatePrefab(this.context.SexPlacePos.Value);
-			if (this.context.SexPlace.user != null)
+			if (this.context.SexPlace != null)
 			{
-				PLogger.LogError("Sex place already has a user");
-				return State.Failure;
-			}
+				if (this.context.SexPlace.user != null)
+				{
+					PLogger.LogError("Sex place already has a user");
+					return State.Failure;
+				}
 
-			this.context.SexPlace.user = prefab;
+				this.context.SexPlace.user = prefab;
+			}
 
 			prefab.transform.position += new Vector3(0.0f, 0.0f, 0.02f);
 			foreach (var npc in this.context.Npcs)

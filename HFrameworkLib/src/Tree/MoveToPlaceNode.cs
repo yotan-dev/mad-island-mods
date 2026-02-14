@@ -109,7 +109,7 @@ namespace HFramework.Tree
 				return State.Failure;
 			}
 
-			if (this.context.SexPlace.user != null)
+			if (this.context.SexPlace != null && this.context.SexPlace.user != null)
 			{ // Some other NPC took the sex place, can't use it -- give up
 				return State.Failure;
 			}

@@ -3,7 +3,7 @@ using YotanModCore.Extensions;
 
 namespace HFramework.Tree
 {
-	public class AnimOnceNode : ActionNode
+	public class LoopAnim : ActionNode
 	{
 		public string animName = "";
 
@@ -13,7 +13,7 @@ namespace HFramework.Tree
 		{
 			if (this.context.TmpSexAnim == null)
 			{
-				PLogger.LogError("AnimOnce: TmpSexAnim is null");
+				PLogger.LogError("LoopAnimForTime: TmpSexAnim is null");
 				return;
 			}
 
@@ -22,12 +22,11 @@ namespace HFramework.Tree
 
 			if (!this.context.TmpSexAnim.HasAnimation(this.animName))
 			{
-				PLogger.LogError($"AnimOnce: Animation '{this.animName}' not found");
+				PLogger.LogError($"LoopAnimForTime: Animation '{this.animName}' not found");
 				return;
 			}
 
-			this.context.TmpSexAnim.state.SetAnimation(0, this.animName, false);
-			this.remainingTime = this.context.TmpSexAnim.state.GetCurrent(0).AnimationEnd;
+			this.context.TmpSexAnim.state.SetAnimation(0, this.animName, true);
 		}
 
 		protected override void OnStop()
@@ -37,12 +36,6 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			remainingTime -= Time.deltaTime;
-			if (remainingTime <= 0)
-			{
-				return State.Success;
-			}
-
 			return State.Running;
 		}
 	}
