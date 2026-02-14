@@ -60,7 +60,7 @@ namespace HFramework.Tree
 		{
 			if (appearanceMode == AppearenceMode.MaleFemale)
 			{
-				Managers.mn.randChar.SetCharacter(prefab, ctx.Npcs[femaleIndex].Common, ctx.Npcs[maleIndex].Common);
+				Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[femaleIndex].Common, ctx.Actors[maleIndex].Common);
 			}
 			else
 			{

@@ -9,7 +9,7 @@ namespace HFramework.SexScripts
 	{
 		public CommonSexNPCScript Create(CommonStates npcA, CommonStates npcB, SexPlace sexPlace) {
 			var tree = Clone();
-			tree.context.Npcs = [.. this.Info.BuildNpcs(npcA, npcB).Select(npc => new ContextNpc(npc, null))];
+			tree.context.Actors = [.. this.Info.BuildNpcs(npcA, npcB).Select(npc => new ContextNpc(npc, null))];
 			tree.context.SexPlace = sexPlace;
 			return (CommonSexNPCScript)tree;
 		}

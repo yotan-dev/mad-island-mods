@@ -23,7 +23,7 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			foreach (var npc in this.context.Npcs)
+			foreach (var npc in this.context.Actors)
 			{
 				npc.Common.nMove.actType = NPCMove.ActType.Wait;
 				npc.Common.sex = CommonStates.SexState.Playing;
