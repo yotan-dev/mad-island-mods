@@ -18,15 +18,15 @@ namespace HFramework.Tree
 			this.animTime = this.timeout;
 
 			// Start moving NPCs to sex place
-			this.emotions = new GameObject[this.context.Npcs.Length];
-			for (int i = 0; i < this.context.Npcs.Length; i++)
+			this.emotions = new GameObject[this.context.Actors.Length];
+			for (int i = 0; i < this.context.Actors.Length; i++)
 			{
-				this.emotions[i] = Managers.fxMN.GoEmotion(0, this.context.Npcs[i].Common.gameObject, Vector3.zero);
+				this.emotions[i] = Managers.fxMN.GoEmotion(0, this.context.Actors[i].Common.gameObject, Vector3.zero);
 			}
-			for (int i = 0; i < this.context.Npcs.Length; i++)
+			for (int i = 0; i < this.context.Actors.Length; i++)
 			{
 				Managers.sexMN.StartCoroutine(
-					Managers.storyMN.MovePosition(this.context.Npcs[i].Common.gameObject, this.context.SexPlacePos.Value, 2f, AnimName.Walk, true)
+					Managers.storyMN.MovePosition(this.context.Actors[i].Common.gameObject, this.context.SexPlacePos.Value, 2f, AnimName.Walk, true)
 				);
 			}
 		}
@@ -79,9 +79,9 @@ namespace HFramework.Tree
 
 			// If NPCs reached target position, we are done.
 			bool allAtPos = true;
-			for (int i = 0; i < this.context.Npcs.Length; i++)
+			for (int i = 0; i < this.context.Actors.Length; i++)
 			{
-				if (!this.IsNpcAtPos(this.context.Npcs[i].Common, this.context.SexPlacePos.Value))
+				if (!this.IsNpcAtPos(this.context.Actors[i].Common, this.context.SexPlacePos.Value))
 				{
 					allAtPos = false;
 					break;
@@ -96,9 +96,9 @@ namespace HFramework.Tree
 			// Otherwise, we need to check for possible interruptions.
 
 			bool allWaiting = true;
-			for (int i = 0; i < this.context.Npcs.Length; i++)
+			for (int i = 0; i < this.context.Actors.Length; i++)
 			{
-				if (!this.IsNpcWaiting(this.context.Npcs[i].Common))
+				if (!this.IsNpcWaiting(this.context.Actors[i].Common))
 				{
 					allWaiting = false;
 					break;

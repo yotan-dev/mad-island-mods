@@ -38,7 +38,7 @@ namespace HFramework.Tree
 
 	public class CommonContext
 	{
-		public ContextNpc[] Npcs { get; set; } = [];
+		public ContextNpc[] Actors { get; set; } = [];
 
 		public ISexScriptMenuSession? MenuSession { get; set; }
 

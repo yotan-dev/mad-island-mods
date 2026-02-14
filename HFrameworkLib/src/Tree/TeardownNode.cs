@@ -17,7 +17,7 @@ namespace HFramework.Tree
 		{
 		}
 
-		private void RestoreLivingCharacter(CommonStates? character, float? searchAngle)
+		private void RestoreLivingNpc(CommonStates? character, float? searchAngle)
 		{
 			if (character == null)
 				return;
@@ -38,15 +38,26 @@ namespace HFramework.Tree
 
 			if (searchAngle != null)
 				move.searchAngle = searchAngle.Value;
+
 			character.sex = CommonStates.SexState.None;
 			if (character.debuff.perfume <= 0.0)
 				character.libido -= 20f;
 		}
 
+		private void RestoreLivingPlayer(CommonStates? character)
+		{
+			if (character == null)
+				return;
+
+			var mesh = character.anim.GetComponent<MeshRenderer>();
+			if (mesh != null)
+				mesh.enabled = true;
+		}
+
 		private bool IsPlayerInvolved()
 		{
 			var currentPlayer = CommonUtils.GetActivePlayer();
-			return this.context.Npcs.Any(npc => npc.Common == currentPlayer);
+			return this.context.Actors.Any(npc => npc.Common == currentPlayer);
 		}
 
 		protected override State OnUpdate()
@@ -58,9 +69,20 @@ namespace HFramework.Tree
 			if (this.context.SexPlace != null)
 				this.context.SexPlace.user = null;
 
-			foreach (var npc in this.context.Npcs)
+			var currentPlayer = CommonUtils.GetActivePlayer();
+			foreach (var npc in this.context.Actors)
 			{
-				RestoreLivingCharacter(npc.Common, npc.Angle);
+				if (npc.Common == currentPlayer)
+					RestoreLivingPlayer(npc.Common);
+				else
+					RestoreLivingNpc(npc.Common, npc.Angle);
+
+				// Restores hand items
+				// Normally, the item itself is already restored by the above,
+				// but this is specially important for items like torches which would otherwise lose their "flame"
+				//
+				// Officially, CommonSexNPC does not do this, but it is officially bugged
+				Managers.mn.randChar.HandItemHide(npc.Common, false);
 			}
 
 			if (this.context.HasChangedMainCanvasVisibility)

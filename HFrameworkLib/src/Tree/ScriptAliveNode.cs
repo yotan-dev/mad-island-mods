@@ -16,7 +16,7 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			foreach (var npc in this.context.Npcs)
+			foreach (var npc in this.context.Actors)
 			{
 				if (npc.Common.dead != 0)
 				{
