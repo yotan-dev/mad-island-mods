@@ -22,7 +22,7 @@ namespace HFramework.Tree
 			{
 				var opts = this.options
 					.Where(o => o != null && !string.IsNullOrEmpty(o.Id))
-					.Select(o => (o.Id, o.Text))
+					.Select(o => (o.Id, o.Text, o.Effect))
 					.ToArray();
 				this.context.MenuSession.SetOptions(opts);
 			}

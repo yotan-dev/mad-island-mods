@@ -27,6 +27,27 @@ namespace HFramework.Tree
 				return State.Success;
 			}
 
+			if (this.context.PendingChoiceAction != null)
+			{
+				var actionNode = this.children.Find(node => (node as LastChoiceEqualsNode)?.choiceId == this.context.PendingChoiceAction);
+				if (actionNode != null) {
+					var actionResult = actionNode.Update();
+					switch (actionResult) {
+						case State.Running:
+							PLogger.LogWarning($"MenuInteractionNode: Unexpected ACTION menu '{this.context.PendingChoiceAction}' moving to Running state -- they should be a single fire operation");
+							break;
+
+						case State.Failure:
+							PLogger.LogWarning($"MenuInteractionNode: ACTION menu '{this.context.PendingChoiceAction}' failed");
+							return State.Failure; // Abort everything
+					}
+				} else {
+					PLogger.LogWarning($"MenuInteractionNode: ACTION menu '{this.context.PendingChoiceAction}' not found");
+				}
+
+				this.context.PendingChoiceAction = null;
+			}
+
 			if (this.context.PendingChoiceId == null)
 			{
 				PLogger.LogDebug("MenuInteractionNode: No pending choice");

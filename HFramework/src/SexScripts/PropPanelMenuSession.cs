@@ -10,7 +10,7 @@ namespace HFramework.SexScripts
 	{
 		private readonly CommonContext context;
 		private readonly SexScriptMenuPanel panel;
-		private (string Id, string Text)[] options = Array.Empty<(string Id, string Text)>();
+		private (string Id, string Text, MenuOption.EffectType Effect)[] options = Array.Empty<(string Id, string Text, MenuOption.EffectType Effect)>();
 
 		public PropPanelMenuSession(CommonContext context, Vector3 openPos)
 		{
@@ -19,9 +19,9 @@ namespace HFramework.SexScripts
 			this.panel.Open(openPos);
 		}
 
-		public void SetOptions((string Id, string Text)[] options)
+		public void SetOptions((string Id, string Text, MenuOption.EffectType Effect)[] options)
 		{
-			this.options = options ?? Array.Empty<(string Id, string Text)>();
+			this.options = options ?? Array.Empty<(string Id, string Text, MenuOption.EffectType Effect)>();
 			this.panel.Redraw();
 		}
 
@@ -40,12 +40,19 @@ namespace HFramework.SexScripts
 			this.panel.Close();
 		}
 
-		private void SubmitChoice(string choiceId)
+		private void SubmitChoice(string choiceId, MenuOption.EffectType effect)
 		{
 			if (string.IsNullOrEmpty(choiceId))
 				return;
 
-			this.context.PendingChoiceId = choiceId;
+			if (effect == MenuOption.EffectType.ChangeState)
+			{
+				this.context.PendingChoiceId = choiceId;
+			}
+			else
+			{
+				this.context.PendingChoiceAction = choiceId;
+			}
 		}
 	}
 }
