@@ -14,13 +14,13 @@ namespace HFramework.Patches
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_SexCheck(CommonStates from, CommonStates to, ref bool __result)
 		{
-			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
-				__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
-			else
-			{
+			// if (from.npcID == CommonUtils.GetActivePlayer().npcID)
+			// 	__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
+			// else
+			// {
 				// __result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
 				__result = BundleLoader.Loader.Prefabs.Any(p => p.Info.CanStart(from, to));
-			}
+			// }
 
 			return false;
 		}

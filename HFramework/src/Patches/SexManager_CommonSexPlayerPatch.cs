@@ -24,20 +24,24 @@ namespace HFramework.Patches
 			ref IEnumerator __result
 		)
 		{
-			if (nCommon.npcID == NpcID.FemaleNative && pCommon.npcID == NpcID.Man)
-			{
+			PLogger.LogInfo("Common Sex Player");
+			// if (nCommon.npcID == NpcID.FemaleNative && pCommon.npcID == NpcID.Man)
+			// {
 				var info = new PlayerSexInfo
 				{
 					Pos = pos,
 					SexType = sexType,
 				};
 
-				var tree = BundleLoader.Loader.Prefabs.Find(x => x is CommonSexPlayerScript && x.Info.CanExecute(info)) as CommonSexPlayerScript;
+				// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
+				var tree = BundleLoader.Loader.Prefabs.Find(x => x is CommonSexPlayerScript && x.Info.CanStart(pCommon, nCommon) && x.Info.CanExecute(info)) as CommonSexPlayerScript;
 				if (tree == null)
 				{
 					PLogger.LogError("Failed to load tree");
 					return false;
 				}
+
+				PLogger.LogDebug($"Tree: {tree.Info.Npcs[0].NpcID} | {tree.Info.Npcs[1].NpcID}");
 
 				var wrap = new TreeWrapper();
 				__result = wrap.Run(tree.Create(pCommon, nCommon, pos, sexType));
@@ -46,11 +50,11 @@ namespace HFramework.Patches
 				// var wrap = new SexScriptWrapper();
 				// __result = wrap.Run(scr);
 				return false;
-			}
+			// }
 
-			var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
-			__result = scene.Run();
-			return false;
+			// var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
+			// __result = scene.Run();
+			// return false;
 		}
 	}
 }
