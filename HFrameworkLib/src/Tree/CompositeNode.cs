@@ -15,5 +15,15 @@ namespace HFramework.Tree
 
 			return node;
 		}
+
+		public override void Terminate(bool fromOutside = true)
+		{
+			foreach (var child in children)
+			{
+				child.Terminate(fromOutside);
+			}
+
+			base.Terminate(fromOutside);
+		}
 	}
 }

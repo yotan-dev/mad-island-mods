@@ -47,6 +47,13 @@ namespace HFramework.Tree
 			return mainFinalState;
 		}
 
+		public override void Terminate(bool fromOutside = true)
+		{
+			child?.Terminate(fromOutside);
+			teardownNode?.Terminate(fromOutside);
+			base.Terminate(fromOutside);
+		}
+
 		public override Node Clone(CommonContext context)
 		{
 			var node = Instantiate(this);

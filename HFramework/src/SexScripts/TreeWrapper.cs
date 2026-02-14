@@ -1,5 +1,6 @@
 using System.Collections;
 using HFramework.Tree;
+using UnityEngine;
 
 namespace HFramework.SexScripts
 {
@@ -7,6 +8,12 @@ namespace HFramework.SexScripts
 	{
 		public IEnumerator Run(BehaviourTree tree)
 		{
+			if (tree.context != null && tree.context.MenuSession == null)
+			{
+				var pos = tree.context.SexPlacePos ?? tree.context.SexPlace?.transform.position ?? Vector3.zero;
+				tree.context.MenuSession = new PropPanelMenuSession(tree.context, pos);
+			}
+
 			// bool recoveryMode = false;
 			while (tree.treeState == Node.State.Running)
 			{
@@ -34,6 +41,10 @@ namespace HFramework.SexScripts
 
 				yield return null;
 			}
+
+			tree.context?.MenuSession?.Close();
+			if (tree.context != null)
+				tree.context.MenuSession = null;
 
 			PLogger.LogError($"Sex script finished");
 		}
