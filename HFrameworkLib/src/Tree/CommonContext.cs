@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 
@@ -38,7 +39,11 @@ namespace HFramework.Tree
 
 	public class CommonContext
 	{
-		public ContextNpc[] Actors { get; set; } = [];
+		private ContextNpc[] _actors = [];
+		public ContextNpc[] Actors {
+			get { return this._actors; }
+			set { this._actors = value; this.LoadActorsVariables(); }
+		}
 
 		public ISexScriptMenuSession? MenuSession { get; set; }
 
@@ -56,6 +61,8 @@ namespace HFramework.Tree
 
 		public SkeletonAnimation? TmpSexAnim { get; set; }
 
+		public Dictionary<string, string> Variables { get; set; } = [];
+
 		/// <summary>
 		/// Whether the main canvas visibility has been changed by a node.
 		/// We use that to restore the canvas on Teardown
@@ -71,6 +78,18 @@ namespace HFramework.Tree
 		public bool HasSexMeter { get; set; }
 
 		public int SexType = -1;
+
+		public virtual void LoadActorsVariables()
+		{
+			int idx = 0;
+			foreach (var actor in this.Actors)
+			{
+				var missingLegs = actor.Common.dissect[4] == 1 && actor.Common.dissect[5] == 1;
+				this.Variables[$"actors[{idx}].tits"] = actor.Common.parameters[6].ToString("00");
+				this.Variables[$"actors[{idx}].disleg"] = missingLegs ? "DisLeg_" : "";
+				idx++;
+			}
+		}
 
 		public bool TryConsumeChoice(out string choiceId)
 		{

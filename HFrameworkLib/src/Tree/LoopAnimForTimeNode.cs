@@ -9,7 +9,13 @@ namespace HFramework.Tree
 
 		public string animName = "";
 
+		private TemplatedString templatedAnimName;
 		float remainingTime;
+
+		private void Awake()
+		{
+			this.templatedAnimName = new TemplatedString(this.animName);
+		}
 
 		protected override void OnStart()
 		{
@@ -20,16 +26,16 @@ namespace HFramework.Tree
 				return;
 			}
 
-			//@TODO: We need to handle the dynamic animation name (E.g. change for tit size)
 			//@TODO: We may consider pausing the animation here and resuming later (see ResumeAnimation in DefaultSceneController)
 
-			if (!this.context.TmpSexAnim.HasAnimation(this.animName))
+			var animationName = this.templatedAnimName.GetString(this.context.Variables);
+			if (!this.context.TmpSexAnim.HasAnimation(animationName))
 			{
-				PLogger.LogError($"LoopAnimForTime: Animation '{this.animName}' not found");
+				PLogger.LogError($"LoopAnimForTime: Animation '{animationName}' not found");
 				return;
 			}
 
-			this.context.TmpSexAnim.state.SetAnimation(0, this.animName, true);
+			this.context.TmpSexAnim.state.SetAnimation(0, animationName, true);
 		}
 
 		protected override void OnStop()
