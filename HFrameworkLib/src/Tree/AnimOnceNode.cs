@@ -7,7 +7,13 @@ namespace HFramework.Tree
 	{
 		public string animName = "";
 
+		private TemplatedString templatedAnimName;
 		float remainingTime;
+
+		private void Awake()
+		{
+			this.templatedAnimName = new TemplatedString(this.animName);
+		}
 
 		protected override void OnStart()
 		{
@@ -17,16 +23,16 @@ namespace HFramework.Tree
 				return;
 			}
 
-			//@TODO: We need to handle the dynamic animation name (E.g. change for tit size)
 			//@TODO: We may consider pausing the animation here and resuming later (see ResumeAnimation in DefaultSceneController)
 
-			if (!this.context.TmpSexAnim.HasAnimation(this.animName))
+			var animationName = this.templatedAnimName.GetString(this.context.Variables);
+			if (!this.context.TmpSexAnim.HasAnimation(animationName))
 			{
-				PLogger.LogError($"AnimOnce: Animation '{this.animName}' not found");
+				PLogger.LogError($"AnimOnce: Animation '{animationName}' not found");
 				return;
 			}
 
-			this.context.TmpSexAnim.state.SetAnimation(0, this.animName, false);
+			this.context.TmpSexAnim.state.SetAnimation(0, animationName, false);
 			this.remainingTime = this.context.TmpSexAnim.state.GetCurrent(0).AnimationEnd;
 		}
 
@@ -37,8 +43,8 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			remainingTime -= Time.deltaTime;
-			if (remainingTime <= 0)
+			this.remainingTime -= Time.deltaTime;
+			if (this.remainingTime <= 0)
 			{
 				return State.Success;
 			}
