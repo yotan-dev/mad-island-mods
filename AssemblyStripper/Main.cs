@@ -29,7 +29,7 @@ namespace AssemblyStripper
 				AssemblyPublicizer.Publicize(
 					managedFolder + assembly,
 					outPath,
-					new AssemblyPublicizerOptions { Strip = true }
+					new AssemblyPublicizerOptions { Target = PublicizeTarget.None, Strip = true }
 				);
 				File.Copy(outPath, finalPath, true);
 			}
