@@ -5,6 +5,7 @@ using HFramework.Tree;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using System;
 
 namespace HFramework.Tree.EditorUI
 {
@@ -18,7 +19,7 @@ namespace HFramework.Tree.EditorUI
 		{
 			// Create a new VisualElement to be the root of our inspector UI
 			VisualElement myInspector = new VisualElement();
-			
+
 			// Load from default reference
 			m_InspectorXML.CloneTree(myInspector);
 
@@ -34,7 +35,7 @@ namespace HFramework.Tree.EditorUI
 				// while keeping the dropdown as a UI-only element, which triggers RegisterValueChangedCallback
 
 				// @TODO 2: Add a validation so we can warn about bad nodes.
-				var id = (fld.GetValue(null) as SexEvent).id;
+				var id = (fld.GetValue(null) as IReadOnlySexEvent<BaseSexEventArgs>).GetId();
 				choices.Add(id);
 			}
 
@@ -44,11 +45,6 @@ namespace HFramework.Tree.EditorUI
 				Debug.Log("Event_Dropdown not found");
 			}
 
-			// vals.RegisterValueChangedCallback((e) =>
-			// {
-			// 	Debug.Log("vals changed to " + e.newValue);
-			// });
-		
 			vals.choices = choices;
 
 			// Get a reference to the default inspector foldout control
@@ -56,6 +52,34 @@ namespace HFramework.Tree.EditorUI
 
 			// Attach a default inspector to the foldout
 			InspectorElement.FillDefaultInspector(inspectorFoldout, serializedObject, this);
+
+			// Handle event type change so we can update the event args
+			vals.RegisterValueChangedCallback((e) =>
+			{
+				inspectorFoldout.Unbind();
+
+				// We need to manually handle the change callback, or it will lose the update
+				var propertyRef2 = serializedObject.FindProperty("eventKey");
+				propertyRef2.stringValue = e.newValue;
+
+				var propertyRef = serializedObject.FindProperty("EventArgs");
+
+				if (SexEvents.Events.TryGetValue(e.newValue, out var eventInfo))
+				{
+					try
+					{
+						var eventArgs = Activator.CreateInstance(eventInfo.EventType);
+						propertyRef.managedReferenceValue = eventArgs;
+						serializedObject.ApplyModifiedProperties();
+						serializedObject.Update();
+					}
+					catch (Exception ex)
+					{
+						Debug.LogError($"Error triggering event {e.newValue}: {ex}");
+					}
+				}
+				inspectorFoldout.Bind(serializedObject);
+			});
 
 			// Return the finished inspector UI
 			return myInspector;
