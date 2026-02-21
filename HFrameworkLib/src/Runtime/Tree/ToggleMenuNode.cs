@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
-	public class HideMenuNode : ActionNode
+	public class ToggleMenuNode : ActionNode
 	{
+		public bool Visible = true;
+
 		protected override void OnStart()
 		{
 		}
@@ -14,7 +16,11 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			this.context.MenuSession?.Hide();
+			if (this.Visible)
+				this.context.MenuSession?.Show();
+			else
+				this.context.MenuSession?.Hide();
+
 			return State.Success;
 		}
 	}
