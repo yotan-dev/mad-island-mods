@@ -8,6 +8,8 @@ namespace HFramework.Tree
 	{
 		public List<MenuOption> options = new List<MenuOption>();
 
+		public bool forceOpen = true;
+
 		protected override void OnStart()
 		{
 		}
@@ -25,6 +27,11 @@ namespace HFramework.Tree
 					.Select(o => (o.Id, o.Text, o.Effect))
 					.ToArray();
 				this.context.MenuSession.SetOptions(opts);
+
+				if (this.forceOpen)
+				{
+					this.context.MenuSession.Show();
+				}
 			}
 
 			return State.Success;
