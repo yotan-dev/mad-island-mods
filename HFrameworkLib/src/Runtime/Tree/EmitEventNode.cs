@@ -9,8 +9,12 @@ namespace HFramework.Tree
 	{
 		public string eventKey;
 
+		public bool EmitOnce = false;
+
 		[SerializeReference]
-		public BaseSexEventArgs EventArgs;
+		public SexEventArgs EventArgs;
+
+		[HideInInspector] public bool hasEmitted = false;
 
 		protected override void OnStart()
 		{
@@ -25,12 +29,17 @@ namespace HFramework.Tree
 		protected override State OnUpdate()
 		{
 			Debug.Log($"OnUpdate: {eventKey}");
+			if (this.EmitOnce && this.hasEmitted)
+			{
+				return State.Success;
+			}
 
 			if (SexEvents.Events.TryGetValue(eventKey, out var eventInfo))
 			{
 				try
 				{
-					var eventArgs = Activator.CreateInstance(eventInfo.EventType) as BaseSexEventArgs;
+					this.hasEmitted = true;
+					var eventArgs = Activator.CreateInstance(eventInfo.EventType) as SexEventArgs;
 					eventArgs.Populate(context, this);
 					eventInfo.Event.TriggerWithBaseArgs(eventArgs);
 					return State.Success;
