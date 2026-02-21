@@ -148,7 +148,6 @@ namespace HFramework.Tree.EditorUI
 
 		void CreateNode(System.Type type)
 		{
-			Debug.Log(type);
 #if UNITY_EDITOR
 			var node = tree.CreateNode(type);
 			CreateNodeView(node);

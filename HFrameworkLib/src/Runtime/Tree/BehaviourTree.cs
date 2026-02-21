@@ -140,10 +140,7 @@ namespace HFramework.Tree
 		internal BehaviourTree Clone()
 		{
 			var tree = Instantiate(this);
-			PLogger.LogInfo("Cloning tree - null? " + (tree == null));
-			PLogger.LogInfo("Cloning tree CTX - null? " + (tree.context == null));
-			tree.context = new CommonContext();
-			PLogger.LogInfo("Cloning tree - null? " + (tree.rootNode == null));
+			tree.context = new CommonContext(this);
 			tree.rootNode = tree.rootNode.Clone(tree.context);
 			return tree;
 		}

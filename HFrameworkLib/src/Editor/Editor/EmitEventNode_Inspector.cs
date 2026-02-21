@@ -35,7 +35,7 @@ namespace HFramework.Tree.EditorUI
 				// while keeping the dropdown as a UI-only element, which triggers RegisterValueChangedCallback
 
 				// @TODO 2: Add a validation so we can warn about bad nodes.
-				var id = (fld.GetValue(null) as IReadOnlySexEvent<BaseSexEventArgs>).GetId();
+				var id = (fld.GetValue(null) as IReadOnlySexEvent<SexEventArgs>).GetId();
 				choices.Add(id);
 			}
 
@@ -56,20 +56,25 @@ namespace HFramework.Tree.EditorUI
 			// Handle event type change so we can update the event args
 			vals.RegisterValueChangedCallback((e) =>
 			{
+				var eventKeyRef = serializedObject.FindProperty("eventKey");
+				if (eventKeyRef.stringValue == e.newValue || (eventKeyRef.stringValue == "" && e.newValue == null))
+					return;
+
+				// Unbind the inspector foldout from the serialized object
+				// This is necessary because otherwise the changes we make to the serialized object
+				// will not be persisted when the inspector redraws.
 				inspectorFoldout.Unbind();
 
 				// We need to manually handle the change callback, or it will lose the update
-				var propertyRef2 = serializedObject.FindProperty("eventKey");
-				propertyRef2.stringValue = e.newValue;
+				eventKeyRef.stringValue = e.newValue;
 
-				var propertyRef = serializedObject.FindProperty("EventArgs");
-
+				var eventArgsRef = serializedObject.FindProperty("EventArgs");
 				if (SexEvents.Events.TryGetValue(e.newValue, out var eventInfo))
 				{
 					try
 					{
 						var eventArgs = Activator.CreateInstance(eventInfo.EventType);
-						propertyRef.managedReferenceValue = eventArgs;
+						eventArgsRef.managedReferenceValue = eventArgs;
 						serializedObject.ApplyModifiedProperties();
 						serializedObject.Update();
 					}

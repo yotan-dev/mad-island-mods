@@ -45,6 +45,8 @@ namespace HFramework.Tree
 			set { this._actors = value; this.LoadActorsVariables(); }
 		}
 
+		public BehaviourTree? SexScript { get; set; }
+
 		public ISexScriptMenuSession? MenuSession { get; set; }
 
 		public SexAction SexAction { get; set; } = SexAction.Idle;
@@ -80,6 +82,11 @@ namespace HFramework.Tree
 		public bool HasSexMeter { get; set; }
 
 		public int SexType = -1;
+
+		public CommonContext(BehaviourTree sexScript)
+		{
+			this.SexScript = sexScript;
+		}
 
 		public virtual void LoadActorsVariables()
 		{

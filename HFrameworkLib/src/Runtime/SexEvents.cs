@@ -25,7 +25,7 @@ namespace HFramework
 		public ISexEventBase Event { get; private set; }
 		public Type EventType { get; private set; }
 
-		public void SetEvent<T>(ISexEvent<T> evt) where T : BaseSexEventArgs, new()
+		public void SetEvent<T>(ISexEvent<T> evt) where T : SexEventArgs, new()
 		{
 			Event = evt;
 			EventType = typeof(T);
@@ -44,7 +44,7 @@ namespace HFramework
 		[SexEvent("HF", "Perform: Masturbation")]
 		public static readonly SexEvent<SelfEventArgs> OnPerformMasturbation = new SexEvent<SelfEventArgs>("HF.perform.masturbation");
 		[SexEvent("HF", "Perform: Delivery")]
-		public static readonly SexEvent<FromToEventArgs> OnPerformDelivery = new SexEvent<FromToEventArgs>("HF.perform.delivery");
+		public static readonly SexEvent<SelfEventArgs> OnPerformDelivery = new SexEvent<SelfEventArgs>("HF.perform.delivery");
 
 		// Penetration events (dick being inserted somewhere)
 		[SexEvent("HF", "Penetrate: Vagina")]
@@ -79,6 +79,9 @@ namespace HFramework
 		// Other
 		[SexEvent("HF", "Other: Player Defeated")]
 		public static readonly SexEvent<FromToEventArgs> OnPlayerDefeated = new SexEvent<FromToEventArgs>("HF.other.playerDefeated");
+
+		[SexEvent("HF", "End")]
+		public static readonly SexEvent<SexEventArgs> OnEnd = new SexEvent<SexEventArgs>("HF.end");
 
 		public static readonly Dictionary<string, SexEventInfo> Events = new Dictionary<string, SexEventInfo>();
 

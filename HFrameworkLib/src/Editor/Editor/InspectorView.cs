@@ -26,18 +26,12 @@ namespace HFramework.Tree.EditorUI
 			UnityEngine.Object.DestroyImmediate(editor); // destroy previous editor
 
 			if (nodeView.node is EmitEventNode emitEventNode) {
-				Debug.Log("Emit event");
 				editor = EmitEventNode_Inspector.CreateEditor(nodeView.node);
 				var container = editor.CreateInspectorGUI();
 				var so = new SerializedObject(nodeView.node);
 				container.Bind(so);
-				// var container = new IMGUIContainer(() =>
-				// {
-				// 	editor.OnInspectorGUI();
-				// });
 				Add(container);
 			} else {
-				Debug.Log("Other");
 				editor = Editor.CreateEditor(nodeView.node);
 				var container = new IMGUIContainer(() =>
 				{
