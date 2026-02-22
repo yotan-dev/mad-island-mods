@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using YotanModCore;
 
@@ -26,7 +27,7 @@ namespace HFramework.Tree
 
 		protected override State OnUpdate()
 		{
-			var prefab = this.prefabConfig.CreatePrefab(this.context.SexPlacePos.Value);
+			var prefab = this.prefabConfig.Instantiator.CreatePrefab(this.context.SexPlacePos.Value);
 			if (this.context.SexPlace != null)
 			{
 				if (this.context.SexPlace.user != null)
@@ -52,9 +53,9 @@ namespace HFramework.Tree
 				}
 			}
 
-			this.prefabConfig.SetAppearance(prefab, this.context);
+			this.prefabConfig.AppearanceSetter.SetAppearance(prefab, this.context);
 			this.context.TmpSex = prefab;
-			this.context.TmpSexAnim = this.prefabConfig.GetSkeletonAnimation(prefab);
+			this.context.TmpSexAnim = this.prefabConfig.Instantiator.GetSkeletonAnimation(prefab);
 
 			return State.Success;
 		}
