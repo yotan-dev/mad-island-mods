@@ -13,7 +13,7 @@ namespace HFramework
 		{
 			PLogger.LogDebug($"Loading bundle HFramework");
 
-			var bundle = AssetBundle.LoadFromFile("BepInEx/Plugins/HFramework/test.asset");
+			var bundle = AssetBundle.LoadFromFile("BepInEx/Plugins/HFramework/vanillasexscripts");
 			Loader = bundle.LoadAsset<HFrameworkDataLoader>("HFrameworkDataLoader");
 			if (Loader == null)
 			{
