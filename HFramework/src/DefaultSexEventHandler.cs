@@ -37,7 +37,8 @@ namespace HFramework
 			// @TODO:
 			// SexEvents.OnPlayerDefeated.Triggered += this.OnPlayerDefeated;
 
-			SexEvents.OnEnd.Triggered += this.OnSexEnd;
+			SexEvents.OnEnd.Triggered += this.OnSexEnd_CommonSexNpc;
+			SexEvents.OnEnd.Triggered += this.OnSexEnd_CommonSexPlayer;
 		}
 
 		private void OnCumOnVagina(object sender, FromToEventArgs e)
@@ -120,48 +121,54 @@ namespace HFramework
 		// 	Managers.mn.uiMN.SkipView(true);
 		// }
 
-		private void OnSexEnd(object sender, SexEventArgs e)
+		private void OnSexEnd_CommonSexPlayer(object sender, SexEventArgs e)
 		{
-			if (e.ctx.SexScript is CommonSexNPCScript commonSexNpcScript)
-			{
-				if (commonSexNpcScript.treeState != Tree.Node.State.Success)
-					return;
+			if (e.ctx.SexScript is not CommonSexPlayerScript commonSexPlayerScript)
+				return;
 
-				// Sex was completed, every actor loves the others more.
-				// Official code only works for 2 actors, but we are generalizing here so custom scripts may support more than 2.
-				foreach (var actor in e.ctx.Actors)
+			if (!e.ctx.HasSexMeter)
+				return;
+
+			float loveChange = 0f;
+			if (SexMeter.Instance.FillAmount == 1f)
+				loveChange = 10f;
+			else if (SexMeter.Instance.FillAmount < 0.3f)
+				loveChange = -5f;
+
+			if (loveChange != 0f)
+			{
+				var currentPlayer = CommonUtils.GetActivePlayer();
+				foreach (var npcActor in e.ctx.Actors)
 				{
-					foreach (var otherActor in e.ctx.Actors)
-					{
-						if (actor == otherActor)
-							continue;
+					if (npcActor.Common == currentPlayer)
+						continue;
 
-						actor.Common.LoveChange(otherActor.Common, 10f, false);
-					}
+					npcActor.Common.LoveChange(currentPlayer, loveChange, false);
 				}
 			}
-			else if (e.ctx.SexScript is CommonSexPlayerScript commonSexPlayerScript)
+		}
+
+		private void OnSexEnd_CommonSexNpc(object sender, SexEventArgs e)
+		{
+			if (e.ctx.SexScript is not CommonSexNPCScript commonSexNpcScript)
+				return;
+
+			if (commonSexNpcScript.treeState != Tree.Node.State.Success)
+				return;
+
+			// Sex was completed, every actor loves the others more.
+			// Official code only works for 2 actors, but we are generalizing here so custom scripts may support more than 2.
+			foreach (var actor in e.ctx.Actors)
 			{
-				if (!e.ctx.HasSexMeter)
-					return;
+				foreach (var otherActor in e.ctx.Actors)
+				{
+					if (actor == otherActor)
+						continue;
 
-				float loveChange = 0f;
-				if (SexMeter.Instance.FillAmount == 1f)
-					loveChange = 10f;
-				else if (SexMeter.Instance.FillAmount < 0.3f)
-					loveChange = -5f;
-
-				if (loveChange != 0f) {
-					var currentPlayer = CommonUtils.GetActivePlayer();
-					foreach (var npcActor in e.ctx.Actors)
-					{
-						if (npcActor.Common == currentPlayer)
-							continue;
-
-						npcActor.Common.LoveChange(currentPlayer, loveChange, false);
-					}
+					actor.Common.LoveChange(otherActor.Common, 10f, false);
 				}
 			}
+
 
 			// @TODO:
 			// if (this.ToiletCounted.ContainsKey(scene))
