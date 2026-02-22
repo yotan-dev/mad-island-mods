@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using System.IO;
+using AsmResolver.DotNet;
 using BepInEx.AssemblyPublicizer;
 
 namespace AssemblyStripper
@@ -31,6 +33,11 @@ namespace AssemblyStripper
 					outPath,
 					new AssemblyPublicizerOptions { Target = PublicizeTarget.None, Strip = true }
 				);
+
+				if (assembly == "Assembly-CSharp.dll")
+				{
+					RemoveAssemblyCSharpProblematicClasses(outPath);
+				}
 				File.Copy(outPath, finalPath, true);
 			}
 
@@ -39,6 +46,46 @@ namespace AssemblyStripper
 
 
 			Console.WriteLine("Done.");
+		}
+
+		private static void RemoveAssemblyCSharpProblematicClasses(string path)
+		{
+			var assembly = FatalAsmResolver.FromFile(path);
+			var module = assembly.ManifestModule ?? throw new NullReferenceException();
+
+			foreach (var type in module.GetAllTypes()) {
+				if (ShouldRemoveType(type)) {
+					module.TopLevelTypes.Remove(type);
+					Console.WriteLine($">> Removed {type.FullName}");
+				}
+			}
+
+			module.FatalWrite(path);
+		}
+
+		private static bool ShouldRemoveType(TypeDefinition type)
+		{
+			// GlitchEffect / Limitless causes post-processing issues on Unity.
+			// CustomTexture depends on them.
+			// It is unlikely that modders will need those, so we remove them to avoid issues.
+
+			if (type.FullName == "GlitchEffectsManipulationExample") {
+				return true;
+			}
+
+			if (type.FullName.StartsWith("LimitlessGlitch")) {
+				return true;
+			}
+
+			if (type.FullName.StartsWith("Limitless_")) {
+				return true;
+			}
+
+			if (type.FullName == "CustomTexture") {
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

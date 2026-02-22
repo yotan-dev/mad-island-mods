@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="BepInEx.AssemblyPublicizer" Version="0.4.2" PrivateAssets="all" />
+		<PackageReference Include="AsmResolver" Version="5.5.1" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
