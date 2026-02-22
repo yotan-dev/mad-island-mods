@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HFramework.Tree
@@ -39,7 +37,7 @@ namespace HFramework.Tree
 				try
 				{
 					this.hasEmitted = true;
-					var eventArgs = Activator.CreateInstance(eventInfo.EventType) as SexEventArgs;
+					var eventArgs = this.EventArgs.Clone();
 					eventArgs.Populate(context, this);
 					eventInfo.Event.TriggerWithBaseArgs(eventArgs);
 					return State.Success;
