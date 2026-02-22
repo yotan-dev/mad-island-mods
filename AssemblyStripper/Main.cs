@@ -8,15 +8,8 @@ namespace AssemblyStripper
 {
 	public class Program
 	{
-		public static void Main(string[] args)
+		private static void StripMadIsland(string[] args)
 		{
-			if (args.Length != 2)
-			{
-				Console.WriteLine("Provide version and path to MadIsland folder.");
-				Console.WriteLine("Usage: AssemblyStripper v0.4.4.1 C:/SteamLibrary/MadIsland");
-				return;
-			}
-
 			var version = args[0];
 			var managedFolder = args[1] + "/Mad Island_Data/Managed/";
 			var assemblies = new string[] { "Assembly-CSharp.dll", "spine-unity.dll", "Unity.TextMeshPro.dll", "UnityEngine.UI.dll" };
@@ -43,7 +36,43 @@ namespace AssemblyStripper
 
 			File.WriteAllText($"../Assemblies/{version}/version.txt", version);
 			File.WriteAllText($"../Assemblies/version.txt", version);
+		}
 
+		private static void StripUnityEditor(string[] args)
+		{
+			var managedFolder = args[1] + "Editor/Data/Managed/";
+			var assemblies = new string[] { "UnityEditor.dll" };
+
+			foreach (var assembly in assemblies)
+			{
+				var outPath = $"../Assemblies/{assembly}";
+
+				AssemblyPublicizer.Publicize(
+					managedFolder + assembly,
+					outPath,
+					new AssemblyPublicizerOptions { Target = PublicizeTarget.None, Strip = true }
+				);
+			}
+		}
+
+		public static void Main(string[] args)
+		{
+			if (args.Length != 2)
+			{
+				Console.WriteLine("Provide version and path to MadIsland folder.");
+				Console.WriteLine("Usage: AssemblyStripper v0.4.4.1 C:/SteamLibrary/MadIsland");
+				return;
+			}
+
+			var version = args[0];
+			if (version.ToLower() == "editor")
+			{
+				StripUnityEditor(args);
+			}
+			else
+			{
+				StripMadIsland(args);
+			}
 
 			Console.WriteLine("Done.");
 		}
@@ -53,8 +82,10 @@ namespace AssemblyStripper
 			var assembly = FatalAsmResolver.FromFile(path);
 			var module = assembly.ManifestModule ?? throw new NullReferenceException();
 
-			foreach (var type in module.GetAllTypes()) {
-				if (ShouldRemoveType(type)) {
+			foreach (var type in module.GetAllTypes())
+			{
+				if (ShouldRemoveType(type))
+				{
 					module.TopLevelTypes.Remove(type);
 					Console.WriteLine($">> Removed {type.FullName}");
 				}
@@ -69,19 +100,23 @@ namespace AssemblyStripper
 			// CustomTexture depends on them.
 			// It is unlikely that modders will need those, so we remove them to avoid issues.
 
-			if (type.FullName == "GlitchEffectsManipulationExample") {
+			if (type.FullName == "GlitchEffectsManipulationExample")
+			{
 				return true;
 			}
 
-			if (type.FullName.StartsWith("LimitlessGlitch")) {
+			if (type.FullName.StartsWith("LimitlessGlitch"))
+			{
 				return true;
 			}
 
-			if (type.FullName.StartsWith("Limitless_")) {
+			if (type.FullName.StartsWith("Limitless_"))
+			{
 				return true;
 			}
 
-			if (type.FullName == "CustomTexture") {
+			if (type.FullName == "CustomTexture")
+			{
 				return true;
 			}
 

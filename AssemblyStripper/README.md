@@ -1,7 +1,11 @@
 # Assembly Stripper
 Simple tool to strip and patch relevant Mad Island or Unity assemblies and put them into Assemblies folder.
 
-Usage (For Mad Island): `dotnet run v0.x.x.x "C:/path/to/Mad Island/folder`
+Usage (For Mad Island): `dotnet run v0.x.x.x "C:/path/to/Mad Island/folder/`
+
+Usage (For Unity Editor): `dotnet run editor "C:/path/to/Unity/Install/<vesrion>/`
+
+- Prefer using 2021.3.45f2 -- the same as the game
 
 It will update the files in `Assemblies/` folder.
 
