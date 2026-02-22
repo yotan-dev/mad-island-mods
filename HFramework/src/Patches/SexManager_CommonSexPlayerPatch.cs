@@ -24,37 +24,32 @@ namespace HFramework.Patches
 			ref IEnumerator __result
 		)
 		{
-			PLogger.LogInfo("Common Sex Player");
-			// if (nCommon.npcID == NpcID.FemaleNative && pCommon.npcID == NpcID.Man)
-			// {
-				var info = new PlayerSexInfo
-				{
-					Pos = pos,
-					SexType = sexType,
-				};
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+			List<Func<IEnumerator>> scripts = [];
+			var info = new PlayerSexInfo
+			{
+				Pos = pos,
+				SexType = sexType,
+			};
 
-				// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
-				var tree = BundleLoader.Loader.Prefabs.Find(x => x is CommonSexPlayerScript && x.Info.CanStart(pCommon, nCommon) && x.Info.CanExecute(info)) as CommonSexPlayerScript;
-				if (tree == null)
-				{
-					PLogger.LogError("Failed to load tree");
-					return false;
-				}
+			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
+			BundleLoader.Loader.Prefabs
+				.FindAll(x => x is CommonSexPlayerScript && x.Info.CanStart(pCommon, nCommon) && x.Info.CanExecute(info))
+				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((CommonSexPlayerScript)x).Create(pCommon, nCommon, pos, sexType))));
 
-				PLogger.LogDebug($"Tree: {tree.Info.Npcs[0].NpcID} | {tree.Info.Npcs[1].NpcID}");
+			if (Config.Instance.EnableLegacyScenes.Value)
+			{
+				var legacyScene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
+				scripts.Add(() => legacyScene.Run());
+			}
 
-				var wrap = new TreeWrapper();
-				__result = wrap.Run(tree.Create(pCommon, nCommon, pos, sexType));
-				// var scr = new CommonSexNpcScript();
-				// scr.Init(npcA, npcB, sexPlace);
-				// var wrap = new SexScriptWrapper();
-				// __result = wrap.Run(scr);
-				return false;
-			// }
+			if (scripts.Count > 0)
+			{
+				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
+				__result = targetScript();
+			}
 
-			// var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
-			// __result = scene.Run();
-			// return false;
+			return false;
 		}
 	}
 }

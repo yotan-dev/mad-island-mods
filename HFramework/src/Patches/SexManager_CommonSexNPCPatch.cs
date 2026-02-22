@@ -4,6 +4,9 @@ using HarmonyLib;
 using YotanModCore.Consts;
 using HFramework.SexScripts;
 using HFramework.SexScripts.Info;
+using System.Collections.Generic;
+using System;
+using HFramework.Performer;
 
 namespace HFramework.Patches
 {
@@ -18,32 +21,33 @@ namespace HFramework.Patches
 			ref IEnumerator __result
 		)
 		{
-			if ((npcA.npcID == NpcID.MaleNative && npcB.npcID == NpcID.FemaleNative) ||
-				(npcA.npcID == NpcID.FemaleNative && npcB.npcID == NpcID.MaleNative))
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+
+			List<Func<IEnumerator>> scripts = new List<Func<IEnumerator>>();
+
+			var info = new CommonSexInfo
 			{
-				var info = new CommonSexInfo
-				{
-					Place = sexPlace
-				};
+				Place = sexPlace
+			};
 
-				var tree = BundleLoader.Loader.Prefabs.Find(x => x.Info.CanExecute(info)) as CommonSexNPCScript;
-				if (tree == null)
+			BundleLoader.Loader.Prefabs
+				.FindAll(p => p is CommonSexNPCScript && p.Info.CanStart([npcA, npcB]) && p.Info.CanExecute(info))
+				.ForEach(p => scripts.Add(() => new TreeWrapper().Run(((CommonSexNPCScript) p).Create(npcA, npcB, sexPlace))));
+
+			if (Config.Instance.EnableLegacyScenes.Value) {
+				var legacyScene = new CommonSexNPC(npcA, npcB, sexPlace);
+				if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, new CommonStates[] { npcA, npcB }))
 				{
-					PLogger.LogError("Failed to load tree");
-					return false;
+					scripts.Add(() => legacyScene.Run());
 				}
-
-				var wrap = new TreeWrapper();
-				__result = wrap.Run(tree.Create(npcA, npcB, sexPlace));
-				// var scr = new CommonSexNpcScript();
-				// scr.Init(npcA, npcB, sexPlace);
-				// var wrap = new SexScriptWrapper();
-				// __result = wrap.Run(scr);
-				return false;
 			}
 
-			var scene = new CommonSexNPC(npcA, npcB, sexPlace);
-			__result = scene.Run();
+			if (scripts.Count > 0)
+			{
+				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
+				__result = targetScript();
+			}
+
 			return false;
 		}
 
