@@ -48,6 +48,18 @@ namespace HFramework
 		{
 			this.ctx = ctx;
 		}
+
+		internal void CopyInspectorDataFrom(SexEventArgs other)
+		{
+			this.comment = other.comment;
+		}
+
+		public virtual SexEventArgs Clone()
+		{
+			var newInstance = new SexEventArgs();
+			newInstance.CopyInspectorDataFrom(this);
+			return newInstance;
+		}
 	}
 
 	[Serializable]
@@ -67,6 +79,22 @@ namespace HFramework
 			From = ctx.Actors[fromNpcIdx].Common;
 			To = ctx.Actors[toNpcIdx].Common;
 		}
+
+		internal void CopyInspectorDataFrom(FromToEventArgs other)
+		{
+			base.CopyInspectorDataFrom(other);
+			this.fromNpcIdx = other.fromNpcIdx;
+			this.toNpcIdx = other.toNpcIdx;
+			this.isRape = other.isRape;
+		}
+
+		public override SexEventArgs Clone()
+		{
+			var newInstance = new FromToEventArgs();
+			newInstance.CopyInspectorDataFrom(this);
+
+			return newInstance;
+		}
 	}
 
 	[Serializable]
@@ -79,6 +107,20 @@ namespace HFramework
 		{
 			base.Populate(ctx, node);
 			Self = ctx.Actors[fromNpcIdx].Common;
+		}
+
+		internal void CopyInspectorDataFrom(SelfEventArgs other)
+		{
+			base.CopyInspectorDataFrom(other);
+			this.fromNpcIdx = other.fromNpcIdx;
+		}
+
+		public override SexEventArgs Clone()
+		{
+			var newInstance = new SelfEventArgs();
+			newInstance.CopyInspectorDataFrom(this);
+
+			return newInstance;
 		}
 	}
 

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+#if UNITY_EDITOR
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+#endif
 
 namespace HFramework
 {
@@ -89,6 +91,7 @@ namespace HFramework
 		{
 			Events = new Dictionary<string, SexEventInfo>();
 
+#if UNITY_EDITOR
 			var fields = TypeCache.GetFieldsWithAttribute<SexEventAttribute>();
 			foreach (var fld in fields)
 			{
@@ -107,7 +110,31 @@ namespace HFramework
 					Events[eventInstance.GetId()] = eventInfo;
 				}
 			}
+#else
+			var t = typeof(SexEvents);
+			var fields = t.GetFields(BindingFlags.Public | BindingFlags.Static);
+			foreach (var fld in fields)
+			{
+				var attr = fld.GetCustomAttribute<SexEventAttribute>();
+				if (attr != null)
+				{
+					var evt = fld.GetValue(null);
+					var eventType = fld.FieldType;
+					var eventInstance = evt as ISexEventBase;
 
+					if (eventInstance != null)
+					{
+						var eventInfo = new SexEventInfo();
+						var genericType = eventType.GetGenericArguments()[0];
+						var setMethod = typeof(SexEventInfo).GetMethod("SetEvent")
+							.MakeGenericMethod(genericType);
+						setMethod.Invoke(eventInfo, new[] { evt });
+
+						Events[eventInstance.GetId()] = eventInfo;
+					}
+				}
+			}
+#endif
 		}
 	}
 }
