@@ -43,6 +43,8 @@ namespace HFramework
 
 				GameLifecycleEvents.OnGameStartEvent += () => { SexMeter.Instance.Reload(); };
 				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;
+
+				DefaultSexEventHandler.Instance.Init();
 			}
 
 			Harmony.CreateAndPatchAll(typeof(NpcMovePatches));
