@@ -6,100 +6,101 @@ using YotanModCore;
 namespace HFramework.Tree
 {
 	[Serializable]
-	public class PrefabConfig
-	{
-		public enum PrefabType
+	public class SexListPrefab : PrefabInstantiator {
+		public int listIndex;
+		public int objIndex;
+
+		public override GameObject CreatePrefab(Vector3 position)
 		{
-			SexList,
-			Prefab,
-		}
-
-		public enum AppearenceMode
-		{
-			MaleFemale,
-			// GirlGirl,
-			// Custom,
-		}
-
-		[Header("General config (Always required)")]
-		[SerializeField] private PrefabType prefabType = default;
-		[SerializeField] private AppearenceMode appearanceMode = default;
-
-		[Space(10)]
-
-		[Header("MaleFemale config (if AppearenceMode = MaleFemale)")]
-		[Tooltip("Male index in SexScript > Info > Npcs")]
-		[SerializeField] private int maleIndex = 0;
-
-		[Tooltip("Female index in SexScript > Info > Npcs")]
-		[SerializeField] private int femaleIndex = 1;
-
-		[Space(10)]
-
-		[Header("SexList config (if PrefabType = SexList)")]
-		[SerializeField] private int listIndex = 0;
-		[SerializeField] private int objIndex = 0;
-
-		[Space(10)]
-
-		[Header("Prefab config (if PrefabType = Prefab)")]
-		[SerializeField] private GameObject prefab = default;
-
-		public GameObject CreatePrefab(Vector3 position)
-		{
-			if (prefabType == PrefabType.SexList)
-			{
-				var prefab = Managers.sexMN.sexList[listIndex].sexObj[objIndex];
-				return GameObject.Instantiate(prefab, position, Quaternion.identity);
-			}
+			var prefab = Managers.sexMN.sexList[listIndex].sexObj[objIndex];
 			return GameObject.Instantiate(prefab, position, Quaternion.identity);
 		}
+	}
 
-		public void SetAppearance(GameObject prefab, CommonContext ctx)
+	[Serializable]
+	public class CustomPrefab : PrefabInstantiator {
+		public GameObject prefab;
+
+		public override GameObject CreatePrefab(Vector3 position)
 		{
-			if (appearanceMode == AppearenceMode.MaleFemale)
-			{
-				Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[femaleIndex].Common, ctx.Actors[maleIndex].Common);
-			}
-			else
-			{
-				PLogger.LogError("Unknown appearance mode: " + appearanceMode);
-			}
-			// switch (girl.npcID)
-			// {
-			// 	case 9:
-			// 	case 15:
-			// 	case 16 /*0x10*/:
-			// 	case 73:
-			// 		switch (man.npcID)
-			// 		{
-			// 			case 9:
-			// 			case 15:
-			// 			case 16 /*0x10*/:
-			// 			case 73:
-			// 				sexManager.mn.randChar.SetCharacter(tmpSex, girl, (CommonStates)null);
-			// 				CommonStates component = tmpSex.GetComponent<CommonStates>();
-			// 				if ((UnityEngine.Object)component != (UnityEngine.Object)null)
-			// 				{
-			// 					sexManager.mn.randChar.CopyParams(man, component);
-			// 					sexManager.mn.randChar.LoadGenGirl(tmpSex, loadType: RandomCharacter.LoadType.G);
-			// 					break;
-			// 				}
-			// 				break;
-			// 			default:
-			// 				sexManager.mn.randChar.SetCharacter(tmpSex, girl, man);
-			// 				break;
-			// 		}
-			// 		break;
-			// 	default:
-			// 		sexManager.mn.randChar.SetCharacter(tmpSex, girl, man);
-			// 		break;
-			// }
+			return GameObject.Instantiate(prefab, position, Quaternion.identity);
+		}
+	}
+
+	[Serializable]
+	public class PrefabInstantiator {
+		public string PathToSkeletonAnimation = "Scale/Anim";
+
+		public virtual GameObject CreatePrefab(Vector3 position)
+		{
+			throw new NotImplementedException();
 		}
 
 		public virtual SkeletonAnimation GetSkeletonAnimation(GameObject prefab)
 		{
-			return prefab.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			return prefab.transform.Find(this.PathToSkeletonAnimation).gameObject.GetComponent<SkeletonAnimation>();
 		}
+	}
+
+	public interface IAppearanceSetter {
+		void SetAppearance(GameObject prefab, CommonContext ctx);
+	}
+
+	[Serializable]
+	public class PrefabCharSetter : AppearanceSetter {
+		public override void SetAppearance(GameObject prefab, CommonContext ctx)
+		{
+			prefab.GetComponent<IAppearanceSetter>().SetAppearance(prefab, ctx);
+		}
+	}
+
+	[Serializable]
+	public class FemaleFemaleRandCharSetter : AppearanceSetter
+	{
+		[SerializeField] private int FemaleIndex = 0;
+
+		public override void SetAppearance(GameObject prefab, CommonContext ctx)
+		{
+			Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[FemaleIndex].Common, ctx.Actors[FemaleIndex].Common);
+
+// @TODO: Understand when this is used and how to make it into char setter
+// 				CommonStates component = tmpSex.GetComponent<CommonStates>();
+// 				if ((UnityEngine.Object)component != (UnityEngine.Object)null)
+// 				{
+// 					sexManager.mn.randChar.CopyParams(man, component);
+// 					sexManager.mn.randChar.LoadGenGirl(tmpSex, loadType: RandomCharacter.LoadType.G);
+// 					break;
+// 				}
+		}
+	}
+
+	[Serializable]
+	public class MaleFemaleRandCharSetter : AppearanceSetter
+	{
+		[SerializeField] private int MaleIndex = 0;
+		[SerializeField] private int FemaleIndex = 1;
+
+		public override void SetAppearance(GameObject prefab, CommonContext ctx)
+		{
+			Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[FemaleIndex].Common, ctx.Actors[MaleIndex].Common);
+		}
+	}
+
+	[Serializable]
+	public class AppearanceSetter {
+		public virtual void SetAppearance(GameObject prefab, CommonContext ctx)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	[Serializable]
+	public class PrefabConfig
+	{
+		[SerializeReference, Subclass]
+		public PrefabInstantiator Instantiator;
+
+		[SerializeReference, Subclass]
+		public AppearanceSetter AppearanceSetter;
 	}
 }
