@@ -1,0 +1,85 @@
+ManifestFileVersion: 0
+CRC: 2514202314
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f48c1d78f0790c0fadcba8f152394391
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c638729c73667884678413e00b6c550b
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: f48c1d78f0790c0fadcba8f152394391
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 1128d2c441052e04fbb588fcd2aca0cf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b29b51089ef3cc04fafd37507784da74, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 79455d799c6ca0a49b2fd0764d4b3599, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3ffd5baa76ca38745862cee3b058a2ce, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 47d862e67f098ce4abb6e6f65bbe83d2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 893d0ec947f561344ac997f34cd0ecea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7b88c036460f2fe4ba0dcbcd344a9a5e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6e9dae5e43c79ab448e530c640617a85, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d204dd2f6b87ef341937fba0698eb5b1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a9ced296fdb98254e90a630233c5d9db, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 27d87426a0250894aa28a1c03ebbfdaa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6902b52d4e4075a41b1c71bf4ddcea1f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c56b187b071db1d4f9becf045827c127, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3172a789bd254f748b4e91cdf4f30ba8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: db061cc5fa446f54b9185808b0569a73, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 23244e6084b493c4abfce05def176cb6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 896acd3dd7562794bac23ae53bbe090b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2d2b84fa3e92814468cdd62c01364f21, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a2b9dee987a243145b106eee885353ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2dad8e2e878e74f408651c8118a2dae4, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.FromToEventArgs
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.SexEventArgs
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.SexScripts.Info.Condition
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.SexScripts.Info.ConditionGroup
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.SexScripts.Info.SexNpcInfo
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.SexScripts.Info.SexScriptInfo
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.Tree.MaleFemaleRandCharSetter
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.Tree.MenuOption
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.Tree.PrefabConfig
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.Tree.SexAction
+- AssemblyName: HFrameworkLib
+  ClassName: HFramework.Tree.SexListPrefab
+Assets:
+- Assets/HFramework/CommonSexPlayer/HF_Man_Yona_0-2.asset
+- Assets/HFramework/HFrameworkDataLoader.asset
+Dependencies: []

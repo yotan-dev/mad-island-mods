@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Shootable
+  - NPC
+  - Water
+  - Defence
+  - Rag
+  - Paintable
+  - Swamp
+  - AssPlayer
+  - AssNPC
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Lighting
+  - Ground
+  - Postprocessing
+  - Player
+  - BG
+  - None
+  - NPC
+  - Chara
+  - PassOBJ
+  - Bullet
+  - BuildBlocker
+  - Rag
+  - BGNPC
+  - PhysicBG
+  - 2DFX
+  - FX
+  - Border
+  - Platform
+  - LiveColl
+  - Wall
+  - Removal
+  - PlayerBullet
+  - 
+  - 
+  m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0

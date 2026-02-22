@@ -1,0 +1,1045 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9038169782744116547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896acd3dd7562794bac23ae53bbe090b, type: 3}
+  m_Name: LoopAnim
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: b09799b16f2dbcf42a3c45d4ee908373
+  position: {x: 815.99994, y: -21.000013}
+  animName: A_Contact_01
+--- !u!114 &-9020006319079676500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29b51089ef3cc04fafd37507784da74, type: 3}
+  m_Name: StartScriptNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 8ed48facd69c6d64fa46e1a79ec5eb99
+  position: {x: -8.000014, y: -39.000004}
+  message: 
+--- !u!114 &-8795925427740227812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: da67266c73f207246a9c5172c7129871
+  position: {x: 627, y: 850}
+  children:
+  - {fileID: 8088762165021128397}
+  - {fileID: 9219846429046614866}
+  - {fileID: -5082135104969873054}
+  - {fileID: 5783888541102730770}
+  - {fileID: 5528099473595147967}
+  - {fileID: -3387854605687360993}
+  - {fileID: 1070394972015199729}
+  - {fileID: 3895585179716085047}
+--- !u!114 &-7868252674772679015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d862e67f098ce4abb6e6f65bbe83d2, type: 3}
+  m_Name: Setup
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 50d59d390f66cee4eb9e091608fa34a5
+  position: {x: -9, y: -444}
+  prefabConfig:
+    Instantiator:
+      rid: 9143579865439272998
+    AppearanceSetter:
+      rid: 9143579865439272997
+  stopNpcReaction: 1
+  posOffset: {x: 0, y: 0, z: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 9143579865439272997
+      type: {class: MaleFemaleRandCharSetter, ns: HFramework.Tree, asm: HFrameworkLib}
+      data:
+        MaleIndex: 0
+        FemaleIndex: 1
+    - rid: 9143579865439272998
+      type: {class: SexListPrefab, ns: HFramework.Tree, asm: HFrameworkLib}
+      data:
+        PathToSkeletonAnimation: Scale/Anim
+        listIndex: 0
+        objIndex: 2
+--- !u!114 &-7516209601130677830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896acd3dd7562794bac23ae53bbe090b, type: 3}
+  m_Name: LoopAnim
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 1e7c3c6954441264a91f64bd170dd7e8
+  position: {x: 816, y: 722.5611}
+  animName: A_Loop_02
+--- !u!114 &-5960543056419185874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ced296fdb98254e90a630233c5d9db, type: 3}
+  m_Name: TickSexMeter
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: bdd5e8fe858ca644fa1e261d5c5162d0
+  position: {x: -6.0000367, y: 176.00003}
+  child: {fileID: -940461729269144591}
+--- !u!114 &-5082135104969873054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23244e6084b493c4abfce05def176cb6, type: 3}
+  m_Name: EmitEventNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 7688aab109b1e0a4f800420859bd26cb
+  position: {x: 817.00006, y: 1048.355}
+  eventKey: HF.cum.vagina
+  EmitOnce: 0
+  EventArgs:
+    rid: 9143579854032601142
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 9143579854032601142
+      type: {class: FromToEventArgs, ns: HFramework, asm: HFrameworkLib}
+      data:
+        comment: 
+        fromNpcIdx: 1
+        toNpcIdx: 0
+        isRape: 0
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &-4366543135071625620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56b187b071db1d4f9becf045827c127, type: 3}
+  m_Name: DisableLivingCharacters
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: cf5075eac3140844b931f226502fbd41
+  position: {x: -6, y: 56}
+--- !u!114 &-4091551569299701352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 0e1faba354d9351448b7411767a8649e
+  position: {x: 626.865, y: -444}
+  children:
+  - {fileID: 8296325665364203218}
+  - {fileID: 1468647584225682686}
+--- !u!114 &-4022225559107411787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db061cc5fa446f54b9185808b0569a73, type: 3}
+  m_Name: CreateSexMeter
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 3236469f86a2dba4281a076510d58271
+  position: {x: -8.999939, y: -343}
+  DividerPercent: 0.3
+  Offset: {x: 1, y: 1, z: 0}
+  Show: 1
+--- !u!114 &-3387854605687360993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3172a789bd254f748b4e91cdf4f30ba8, type: 3}
+  m_Name: SetMenuOptionsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: be17fa153a8f42e47bc643e6daee3b9c
+  position: {x: 816.00006, y: 1361.5626}
+  options:
+  - Id: caress
+    Text: Caress
+    Effect: 0
+  - Id: speed1
+    Text: Insert
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  - Id: toggleMan
+    Text: Toggle Man
+    Effect: 1
+  forceOpen: 1
+--- !u!114 &-3239579325228706024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896acd3dd7562794bac23ae53bbe090b, type: 3}
+  m_Name: LoopAnim
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: b7c4898e71bc7084e9b0579f886d39d2
+  position: {x: 816.00006, y: 403.36252}
+  animName: A_Loop_01
+--- !u!114 &-3086685111270725878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffd5baa76ca38745862cee3b058a2ce, type: 3}
+  m_Name: ToggleManView
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 999e5469a1abd9d408a9a191b5694693
+  position: {x: 607.00006, y: 1168}
+  TrackIndex: 10
+  AnimationName: noman
+--- !u!114 &-2954745299951232852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b9dee987a243145b106eee885353ea, type: 3}
+  m_Name: SetSexAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 22b0cbe229c08884cbbd732941c854f7
+  position: {x: 816.00006, y: 626.865}
+  Action: 3
+--- !u!114 &-2723816438142730307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3172a789bd254f748b4e91cdf4f30ba8, type: 3}
+  m_Name: SetMenuOptionsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 67918ad0cbe4b124abe58d89734cb997
+  position: {x: 816, y: 214.50002}
+  options:
+  - Id: speed2
+    Text: Inc. Speed
+    Effect: 0
+  - Id: bust
+    Text: Bust
+    Effect: 0
+  - Id: caress
+    Text: Caress
+    Effect: 0
+  - Id: idle
+    Text: Stop
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  - Id: toggleMan
+    Text: Toggle Man
+    Effect: 1
+  forceOpen: 1
+--- !u!114 &-2447310747789094543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2b84fa3e92814468cdd62c01364f21, type: 3}
+  m_Name: SexStartNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 536d8d9a57cdc4b48bf120730a2f7575
+  position: {x: -8.999949, y: -127.67747}
+--- !u!114 &-1514635079555262771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79455d799c6ca0a49b2fd0764d4b3599, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 93620fff583ad2643a4532e6325ce202
+  position: {x: -638, y: -444}
+  child: {fileID: 7459119736104089514}
+  teardownNode: {fileID: 225955234381973954}
+--- !u!114 &-1320676715486183380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6902b52d4e4075a41b1c71bf4ddcea1f, type: 3}
+  m_Name: LastChoiceEqualsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: e7aededcf677dc241b4f7fc9008fd415
+  position: {x: 396.99997, y: -233.00002}
+  child: {fileID: -806292437137456628}
+  choiceId: caress
+--- !u!114 &-940461729269144591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893d0ec947f561344ac997f34cd0ecea, type: 3}
+  m_Name: MenuInteractionNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 45a7c94559175b84f80888f0fc80718e
+  position: {x: 198, y: 176}
+  children:
+  - {fileID: 7701858906825977007}
+  - {fileID: -1320676715486183380}
+  - {fileID: 6230936357413258171}
+  - {fileID: 1553519796152468740}
+  - {fileID: 2841807217439777467}
+  - {fileID: 1352577507484728442}
+  InitialMenuId: idle
+  SuccessOnChoiceId: leave
+--- !u!114 &-885434512361270675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9dae5e43c79ab448e530c640617a85, type: 3}
+  m_Name: ChangeMainCanvasVisibility
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: a1bdfb1faaa5121408a2da41c94f6289
+  position: {x: -8.999949, y: -232.61783}
+  Visible: 0
+--- !u!114 &-806292437137456628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 9505517734c0a234899b66df0fb11e0a
+  position: {x: 627.00006, y: -233.00002}
+  children:
+  - {fileID: 4703575686083624613}
+  - {fileID: 7639911848139569786}
+  - {fileID: -9038169782744116547}
+--- !u!114 &-290292081234419120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3172a789bd254f748b4e91cdf4f30ba8, type: 3}
+  m_Name: SetMenuOptionsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 5a194f30ee0cb694880d5758ae3c2c09
+  position: {x: 816, y: 521}
+  options:
+  - Id: speed1
+    Text: Dec. Speed
+    Effect: 0
+  - Id: bust
+    Text: Bust
+    Effect: 0
+  - Id: caress
+    Text: Caress
+    Effect: 0
+  - Id: idle
+    Text: Stop
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  - Id: toggleMan
+    Text: Toggle Man
+    Effect: 1
+  forceOpen: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1128d2c441052e04fbb588fcd2aca0cf, type: 3}
+  m_Name: HF_Man_Yona_0-2
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: -1514635079555262771}
+  treeState: 0
+  nodes:
+  - {fileID: -1514635079555262771}
+  - {fileID: -7868252674772679015}
+  - {fileID: 7459119736104089514}
+  - {fileID: -4022225559107411787}
+  - {fileID: -885434512361270675}
+  - {fileID: -940461729269144591}
+  - {fileID: -2447310747789094543}
+  - {fileID: -9020006319079676500}
+  - {fileID: -4366543135071625620}
+  - {fileID: 7701858906825977007}
+  - {fileID: 8296325665364203218}
+  - {fileID: -5960543056419185874}
+  - {fileID: 6175711650113934082}
+  - {fileID: -1320676715486183380}
+  - {fileID: -4091551569299701352}
+  - {fileID: 1468647584225682686}
+  - {fileID: -806292437137456628}
+  - {fileID: 7639911848139569786}
+  - {fileID: -9038169782744116547}
+  - {fileID: 4703575686083624613}
+  - {fileID: 6230936357413258171}
+  - {fileID: 5254155864302358922}
+  - {fileID: 6371842143697143012}
+  - {fileID: -2723816438142730307}
+  - {fileID: 4292470021709542548}
+  - {fileID: -3239579325228706024}
+  - {fileID: 1553519796152468740}
+  - {fileID: 871314631072374771}
+  - {fileID: -290292081234419120}
+  - {fileID: -2954745299951232852}
+  - {fileID: -7516209601130677830}
+  - {fileID: 2841807217439777467}
+  - {fileID: -8795925427740227812}
+  - {fileID: 5528099473595147967}
+  - {fileID: -5082135104969873054}
+  - {fileID: 9219846429046614866}
+  - {fileID: 5783888541102730770}
+  - {fileID: -3387854605687360993}
+  - {fileID: 3895585179716085047}
+  - {fileID: 1070394972015199729}
+  - {fileID: 1352577507484728442}
+  - {fileID: -3086685111270725878}
+  - {fileID: 8088762165021128397}
+  - {fileID: 225955234381973954}
+  - {fileID: 1513287413518793029}
+  Info:
+    Npcs:
+    - NpcID: 0
+      Pregnant: 0
+      Faint: 0
+      Dead: 0
+    - NpcID: 1
+      Pregnant: 0
+      Faint: 0
+      Dead: 0
+    NpcOrderMatters: 0
+    StartConditions: []
+    ExecuteConditions:
+    - Conditions:
+      - Type: 1
+        QuestName: 
+        QuestValues: 
+        SexTypeValues: 00000000
+--- !u!114 &225955234381973954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: da2596725bd81ee43919b2b7732aae18
+  position: {x: -465, y: -289}
+  children:
+  - {fileID: 1513287413518793029}
+  - {fileID: 6175711650113934082}
+--- !u!114 &871314631072374771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 9488d551df692904881452e37324d663
+  position: {x: 627, y: 521.00006}
+  children:
+  - {fileID: -290292081234419120}
+  - {fileID: -2954745299951232852}
+  - {fileID: -7516209601130677830}
+--- !u!114 &1070394972015199729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b9dee987a243145b106eee885353ea, type: 3}
+  m_Name: SetSexAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: c7a74bbe318aa884c9147e48a17092ec
+  position: {x: 817.00006, y: 1466.5493}
+  Action: 0
+--- !u!114 &1352577507484728442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6902b52d4e4075a41b1c71bf4ddcea1f, type: 3}
+  m_Name: LastChoiceEqualsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 6f118b5873f14764a98a34d5c2667d85
+  position: {x: 397, y: 1168}
+  child: {fileID: -3086685111270725878}
+  choiceId: toggleMan
+--- !u!114 &1468647584225682686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896acd3dd7562794bac23ae53bbe090b, type: 3}
+  m_Name: LoopAnim
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: fdb9caea781e33a41bba6c2455556f66
+  position: {x: 816.00006, y: -343.00003}
+  animName: A_idle
+--- !u!114 &1513287413518793029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23244e6084b493c4abfce05def176cb6, type: 3}
+  m_Name: EmitEventNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: dfc0b19b4cfa01949ac8aac30a5357cb
+  position: {x: -287, y: -289}
+  eventKey: HF.end
+  EmitOnce: 0
+  EventArgs:
+    rid: 9143579876730077208
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 9143579876730077208
+      type: {class: SexEventArgs, ns: HFramework, asm: HFrameworkLib}
+      data:
+        comment: 
+--- !u!114 &1553519796152468740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6902b52d4e4075a41b1c71bf4ddcea1f, type: 3}
+  m_Name: LastChoiceEqualsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: a1530fab22484b9459eb97c290e5f45c
+  position: {x: 396.99997, y: 521.00006}
+  child: {fileID: 871314631072374771}
+  choiceId: speed2
+--- !u!114 &2841807217439777467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6902b52d4e4075a41b1c71bf4ddcea1f, type: 3}
+  m_Name: LastChoiceEqualsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 34932b701072b034d88aa73d75f40bf8
+  position: {x: 396.99997, y: 849.6269}
+  child: {fileID: -8795925427740227812}
+  choiceId: bust
+--- !u!114 &3895585179716085047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896acd3dd7562794bac23ae53bbe090b, type: 3}
+  m_Name: LoopAnim
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 87db13c9ad7252446a52a94996f0ed8b
+  position: {x: 817.00006, y: 1568.5845}
+  animName: A_Finish_idle
+--- !u!114 &4292470021709542548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b9dee987a243145b106eee885353ea, type: 3}
+  m_Name: SetSexAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 0e1f1d54b5713394294bf80b5301591b
+  position: {x: 816, y: 312}
+  Action: 2
+--- !u!114 &4703575686083624613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3172a789bd254f748b4e91cdf4f30ba8, type: 3}
+  m_Name: SetMenuOptionsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 57ae07ff1ba40364284b2b2b9960c7dc
+  position: {x: 815.99994, y: -233.00002}
+  options:
+  - Id: speed1
+    Text: Insert
+    Effect: 0
+  - Id: idle
+    Text: Stop
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  - Id: toggleMan
+    Text: Toggle Man
+    Effect: 1
+  forceOpen: 1
+--- !u!114 &5254155864302358922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 305ba46af2cb5b345b562944f6ceb6ad
+  position: {x: 627, y: 112}
+  children:
+  - {fileID: 6371842143697143012}
+  - {fileID: -2723816438142730307}
+  - {fileID: 4292470021709542548}
+  - {fileID: -3239579325228706024}
+--- !u!114 &5528099473595147967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b88c036460f2fe4ba0dcbcd344a9a5e, type: 3}
+  m_Name: AnimOnceNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 9a75fa6c2e4ae274c98d4f449ef220fc
+  position: {x: 816, y: 1244.6024}
+  animName: A_Finish
+--- !u!114 &5783888541102730770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b9dee987a243145b106eee885353ea, type: 3}
+  m_Name: SetSexAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 743f04d1b163d934790b6e4059c800b1
+  position: {x: 817.00006, y: 1142.3596}
+  Action: 4
+--- !u!114 &6175711650113934082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d204dd2f6b87ef341937fba0698eb5b1, type: 3}
+  m_Name: TeardownNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: c17295a30510c924f9c80fbbd37437f2
+  position: {x: -287, y: -177}
+--- !u!114 &6230936357413258171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6902b52d4e4075a41b1c71bf4ddcea1f, type: 3}
+  m_Name: LastChoiceEqualsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 0bb38f03ae9f32643854b6ad42ad9791
+  position: {x: 397, y: 112.4125}
+  child: {fileID: 5254155864302358922}
+  choiceId: speed1
+--- !u!114 &6371842143697143012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23244e6084b493c4abfce05def176cb6, type: 3}
+  m_Name: EmitEventNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 532bc58ba84fce34baa968551b1867c5
+  position: {x: 816, y: 112}
+  eventKey: HF.penetrate.vagina
+  EmitOnce: 1
+  EventArgs:
+    rid: 9143579854032601132
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 9143579854032601132
+      type: {class: FromToEventArgs, ns: HFramework, asm: HFrameworkLib}
+      data:
+        comment: 
+        fromNpcIdx: 1
+        toNpcIdx: 0
+        isRape: 0
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &7459119736104089514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c90acd8bd4c6e54bae5d9bcea6ba09e, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 7d61f3c4e7d99344aa7b419eff1d454c
+  position: {x: -261.23962, y: -443.7946}
+  children:
+  - {fileID: -7868252674772679015}
+  - {fileID: -4022225559107411787}
+  - {fileID: -885434512361270675}
+  - {fileID: -2447310747789094543}
+  - {fileID: -9020006319079676500}
+  - {fileID: -4366543135071625620}
+  - {fileID: -5960543056419185874}
+--- !u!114 &7639911848139569786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b9dee987a243145b106eee885353ea, type: 3}
+  m_Name: SetSexAction
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 63802fe76e8ce20438d5ea4f8c976067
+  position: {x: 816, y: -127.99998}
+  Action: 1
+--- !u!114 &7701858906825977007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6902b52d4e4075a41b1c71bf4ddcea1f, type: 3}
+  m_Name: LastChoiceEqualsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 67836eae77205e34cab21b6622feb165
+  position: {x: 397.0244, y: -444}
+  child: {fileID: -4091551569299701352}
+  choiceId: idle
+--- !u!114 &8088762165021128397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d87426a0250894aa28a1c03ebbfdaa, type: 3}
+  m_Name: ToggleMenuNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: c019b8067a8978746a1397f8a3815993
+  position: {x: 817, y: 850}
+  Visible: 0
+--- !u!114 &8296325665364203218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3172a789bd254f748b4e91cdf4f30ba8, type: 3}
+  m_Name: SetMenuOptionsNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: dec580607f26a044d88eb92ee72cc2bc
+  position: {x: 816.41754, y: -444}
+  options:
+  - Id: caress
+    Text: Caress
+    Effect: 0
+  - Id: speed1
+    Text: Insert
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  - Id: toggleMan
+    Text: Toggle Man
+    Effect: 1
+  forceOpen: 1
+--- !u!114 &9219846429046614866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23244e6084b493c4abfce05def176cb6, type: 3}
+  m_Name: EmitEventNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  GUID: 4cc8a482f8404fd47bec287fca5932dc
+  position: {x: 817.00006, y: 949.6776}
+  eventKey: HF.orgasm
+  EmitOnce: 0
+  EventArgs:
+    rid: 9143579854032601143
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 9143579854032601143
+      type: {class: FromToEventArgs, ns: HFramework, asm: HFrameworkLib}
+      data:
+        comment: 
+        fromNpcIdx: 1
+        toNpcIdx: 0
+        isRape: 0
+        From: {fileID: 0}
+        To: {fileID: 0}
