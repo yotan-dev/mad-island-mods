@@ -7,12 +7,14 @@ as a starting point for creating customizations.
 
 ## Pre-requisites
 
-1. Download Unity v2021.3.6f1 from Unity Hub
+1. Download Unity v2021.3.45f2 from Unity Hub
 2. Download Spine Unity Runtime v3.8 from [Spine site](https://pt.esotericsoftware.com/spine-unity-download)
 	- Direct link: [spine-unity 3.8 for Unity 2017.1-2020.3](https://esotericsoftware.com/files/runtimes/unity/spine-unity-3.8-2021-11-10.unitypackage)
 3. Have a copy of Mad Island installed -- We will reference it as `<MadIsland folder>`
 4. Download the [project template](./assets/mad-island-template.zip) -- We will reference it as `template`
-	- At the end of this doc, there will be an explanation on how this template was created and why certain things are done.
+	- At the end of this doc there will be an explanation on how this template was created and why certain things are done.
+5. Download Mad Island stripped and "fixed" `Assembly-CSharp.dll` from [Yotan's repository](https://github.com/yotan-dev/mad-island-mods/tree/main/Assemblies)
+	- At the end of this doc there will be an explanation on how this DLL was created and why certain things are done.
 
 
 ## Preparing the project
@@ -33,11 +35,9 @@ as a starting point for creating customizations.
 ![disable spine examples](assets/unity-project/import-spine.png)
 
 8. Click `Import` and wait for it to finish
-9. Drag and drop your `<MadIsland folder>/Mad Island_Data/Managed/Assembly-CSharp.dll` into Unity's Plugins folder
-10. Select the imported `Assembly-CSharp.dll` and configure it as follows, then `Apply`
-
-![assembly c-sharp config](./assets/unity-project/assembly-csharp-config.png)
-
+9. Drag and drop the downloaded `Assembly-CSharp.dll` into Unity's Plugins folder
+10. Drag and drop your `<MadIsland folder>/Mad Island_Data/Managed/com.rlabrecque.steamworks.net` into Unity's Plugins folder (Assembly-CSharp depends on it, and will error without it)
+11. Unity should not show any errors at this point (a few warnings are fine)
 
 You now have a minimal working project for Mad Island modding.
 It does not include the game assets, but this is something for another day.
@@ -53,7 +53,7 @@ Whenever the game updates, you will most likely want to update your project as w
 > DON'T drag and drop the `Assembly-CSharp.dll` file, it will cause issues.
 
 1. On Windows File Explorer, open your Unity Project and go to `Assets/Plugins` folder
-2. Copy the new version of `Assembly-CSharp.dll` into it, and accept replacing the old one
+2. Copy the new version of `Assembly-CSharp.dll` (Downloaded from Yotan's repository) into it, and accept replacing the old one
 3. Go back to Unity and it should recompile and work in the new version
 
 
@@ -66,7 +66,10 @@ You most likely will want to use Yotan Mod Core to get started, as it will ease 
 - [Adding Yotan Mod Core to Unity project](./unity-project-yotan-mod-core.md)
 
 
-## Creating from scratch and reasoning
+## Creating the project from scratch and reasoning
+
+> [!NOTE]
+> This section is only for reference, you don't need to follow it if have downloaded the template.
 
 This was roughly based on https://github.com/Valheim-Modding/Wiki/wiki/Valheim-Unity-Project-Guide
 
@@ -93,6 +96,7 @@ Open `<Template>/Packages/manifest.json` and add the following:
     "com.unity.postprocessing": "3.2.2",
     "com.unity.services.lobby": "1.0.3",
     "com.unity.textmeshpro": "3.0.6",
+	"com.unity.services.leaderboards": "2.3.3"
 ```
 
 > [!NOTE]
@@ -104,7 +108,25 @@ On your `<Template>`, create this structure:
 - `Assets/`
 	- `Editor/`
 		- `CreateAssetBundles.cs` -- Script to create Asset Bundles
-	- `Plugins/` -- Folder for plugins that we can't ship
+	- `Plugins/` -- Folder for DLLs that we depend on (E.g. Assembly-CSharp -- we don't ship those)
 
 
 And that's it! Don't open it on Unity or it will generate lots of other files
+
+
+## Preparing Assembly-CSharp.dll
+
+The game's Assembly-CSharp.dll contains all the game code and Unity stuff.
+If we try to use it as is, we get several errors, specially related to Post-Processing libraries.
+
+Since those are specific to some very weird classes that is unlikely to anyone to need,
+I decided to remove them from the DLL so it stops erroring on Unity, while we can still
+reference everything else in our code.
+
+Additionally, to make it possible for me to distribute it in a downloadable format for
+my own use and for other modders, the DLL also goes through a "stripping" process,
+which removes all the code, only keeping the "interface" (classes, methods, etc),
+every code block is simply a "Throw".
+
+This process is done by a modified version of BepInEx Assembly Publicizer, which
+can be found here: https://github.com/yotan-dev/mad-island-mods/tree/main/AssemblyStripper
