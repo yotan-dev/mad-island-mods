@@ -8,3 +8,6 @@ Release
 !Assemblies/*.dll
 !Assemblies/version.txt
 !Assemblies/README.md
+
+
+AGENTS.md
