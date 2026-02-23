@@ -2,6 +2,8 @@
   href: end-user/
 - name: Guide - Yotan Mod Core
   href: guide-ymc/
+- name: (Experimental) Guide - HFramework v2
+  href: guide-hf/
 - name: Notes
   href: notes/
 - name: API
