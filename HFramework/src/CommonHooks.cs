@@ -71,6 +71,11 @@ namespace HFramework
 				.HookEvent(EventNames.OnPenetrateVag)
 				.Call(this.OnToiletsPenetrate);
 
+			HookBuilder.New("HF.AndroidSex.OnPenetrate")
+				.ForScenes(CommonSexNPC.Name, CommonSexPlayer.Name)
+				.HookEvent(EventNames.OnPenetrateAndroid)
+				.Call(this.OnToiletsPenetrate);
+
 			HookBuilder.New("HF.Delivery.OnDelivery")
 				.ForScenes(Delivery.Name)
 				.HookEvent(EventNames.OnDelivery)
@@ -158,7 +163,7 @@ namespace HFramework
 			if (!fromTo.HasValue)
 				yield break;
 
-			// Official code counts toilet once for AssWall but several times for Toilet, which is inconsistent.
+			// Official code counts toilet once for AssWall but several times for Toilet/CommonSexPlayer/CommonSxNpc, which is inconsistent.
 			// We count once always, as IMO it means the start of the "interaction", not how many times you did
 			if (ToiletCounted.ContainsKey(scene))
 				yield break;

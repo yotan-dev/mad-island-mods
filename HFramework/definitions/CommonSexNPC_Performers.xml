@@ -817,5 +817,131 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+
+		<!-- New in v0.5.8 -->
+		<Performer id="HF_YoungMan_CyborgTypeB_1-38" minVersion="0.5.8.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="38" />
+			<Actors>
+				<Actor val="YoungMan#89" />
+				<Actor val="TypeB#86" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="Love_A_idle" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Android</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Love_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCumOnAndroid</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_YoungMan_CyborgTypeC_1-37" minVersion="0.5.8.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="37" />
+			<Actors>
+				<Actor val="YoungMan#89" />
+				<Actor val="TypeC#87" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="Love_A_idle" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Android</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Love_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCumOnAndroid</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_YoungMan_CyborgCustom_1-39" minVersion="0.5.8.0">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="39" />
+			<Actors>
+				<Actor val="YoungMan#89" />
+				<Actor val="Cyborg#88" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="Love_A_idle" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Android</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Love_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCumOnAndroid</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_YoungMan_Daughter_1-36" minVersion="0.5.8.0" dlc="true">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="1" objIndex="36" />
+			<Actors>
+				<Actor val="YoungMan#89" />
+				<Actor val="Daughter#144" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="Love_A_idle" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
+						<Animation action="Finish" play="Once" name="Love_A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>

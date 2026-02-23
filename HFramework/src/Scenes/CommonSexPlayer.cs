@@ -155,6 +155,16 @@ namespace HFramework.Scenes
 					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 					Managers.mn.randChar.LoadGenUnder(this.Npc, this.TmpSex);
 				}
+				else if (this.Npc.npcID == NpcID.Cyborg)
+				{
+					SkeletonAnimation subSkeletonAnimation = this.TmpSex.GetComponentInChildren<SkeletonAnimation>();
+					subSkeletonAnimation.skeleton.SetSkin("Man");
+					subSkeletonAnimation.skeleton.SetSlotsToSetupPose();
+					CyborgCommon cyborgCommon = this.Npc.GetComponent<CyborgCommon>();
+					if (cyborgCommon != null)
+						Managers.mn.randChar.SetCyborg(this.TmpSex, cyborgCommon.cyborgParams, noOffset: true);
+					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
+				}
 				else
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, this.Player);
@@ -360,7 +370,13 @@ namespace HFramework.Scenes
 				yield break;
 			}
 
-			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			// v0.5.8.0 now has "scale" too
+			this.CommonAnim = (this.TmpSex.transform.Find("Scale/Anim") ?? this.TmpSex.transform.Find("scale/Anim"))?.gameObject?.GetComponent<SkeletonAnimation>();
+			if (this.CommonAnim == null) {
+				PLogger.LogError("CommonAnim not found");
+				yield break;
+			}
+
 			this.MenuPanel.CanToggleManDisplay = this.CommonAnim.HasAnimation("noman");
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);

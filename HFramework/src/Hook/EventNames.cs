@@ -5,6 +5,7 @@ namespace HFramework.Hook
 		public const string OnPenetrateVag = "OnPenetrate:Vag";
 		public const string OnPenetrateAss = "OnPenetrate:Ass";
 		public const string OnPenetrateMouth = "OnPenetrate:Mouth";
+		public const string OnPenetrateAndroid = "OnPenetrate:Android";
 		public const string OnPussyLick = "OnPussyLick";
 		public const string OnScissor = "OnScissor";
 		public const string OnTitFuck = "OnTitFuck";
@@ -18,6 +19,7 @@ namespace HFramework.Hook
 		public const string OnCreampieAss = "OnCreampie:Ass";
 		public const string OnCumOnMouth = "OnCumOnMouth";
 		public const string OnCumOnTits = "OnCumOnTits";
+		public const string OnCumOnAndroid = "OnCumOnAndroid";
 		public const string OnPlayerDefeated = "OnPlayerDefeated";
 		public const string OnAnimSetChanged = "OnAnimSetChanged";
 	}

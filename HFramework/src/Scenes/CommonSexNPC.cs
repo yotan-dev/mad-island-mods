@@ -91,7 +91,17 @@ namespace HFramework.Scenes
 				NpcID.NativeGirl,
 				NpcID.SlenderYoungLady,
 			};
-			if (girlOnGirlSpecial.Contains(this.Npc1.npcID) && girlOnGirlSpecial.Contains(this.Npc2.npcID))
+			if (this.Npc2.npcID == NpcID.Cyborg)
+			{ // cyborg special handling
+				SkeletonAnimation subSkeletonAnimation = this.TmpSex.GetComponentInChildren<SkeletonAnimation>();
+				subSkeletonAnimation.skeleton.SetSkin("Man");
+				subSkeletonAnimation.skeleton.SetSlotsToSetupPose();
+				CyborgCommon cyborgCommon = this.Npc2.GetComponent<CyborgCommon>();
+				if (cyborgCommon != null)
+					Managers.mn.randChar.SetCyborg(this.TmpSex, cyborgCommon.cyborgParams, noOffset: true);
+				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Npc1);
+			}
+			else if (girlOnGirlSpecial.Contains(this.Npc1.npcID) && girlOnGirlSpecial.Contains(this.Npc2.npcID))
 			{ // girl x girl has some special handling
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, null);
 				CommonStates component2 = this.TmpSex.GetComponent<CommonStates>();
@@ -183,7 +193,8 @@ namespace HFramework.Scenes
 			if (!this.CanContinue())
 				yield break;
 
-			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = (this.TmpSex.transform.Find("Scale/Anim") ?? this.TmpSex.transform.Find("scale/Anim"))
+				.gameObject.GetComponent<SkeletonAnimation>();
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;

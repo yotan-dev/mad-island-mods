@@ -228,6 +228,40 @@
 						<Condition xsi:type="IsDueDate" actor="SlenderYoungLady#73" value="false" />
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.5.8 -->
+				<Performer id="HF_YoungMan_CyborgTypeB_1-38">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="TypeB#86" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="TypeB#86" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_CyborgTypeC_1-37">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="TypeC#87" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="TypeC#87" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_CyborgCustom_1-39">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="Cyborg#88" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="Cyborg#88" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_YoungMan_Daughter_1-36">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="Daughter#144" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="Daughter#144" value="false" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>
