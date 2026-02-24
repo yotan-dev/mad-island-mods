@@ -924,21 +924,21 @@
 			<AnimationSets>
 				<AnimationSet id="Default">
 					<Animations>
-						<Animation action="StartIdle" play="Loop" name="Love_A_idle" />
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
 						<Animation action="Insert" play="Once" name="">
 							<Events>
 								<string>OnPenetrate:Vag</string>
 							</Events>
 						</Animation>
-						<Animation action="Speed1" play="Loop" name="Love_A_Loop_01" />
-						<Animation action="Speed2" play="Loop" name="Love_A_Loop_02" />
-						<Animation action="Finish" play="Once" name="Love_A_Finish">
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
 							<Events>
 								<string>OnOrgasm</string>
 								<string>OnCreampie:Vag</string>
 							</Events>
 						</Animation>
-						<Animation action="FinishIdle" play="Loop" name="Love_A_Finish_idle" />
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
 					</Animations>
 				</AnimationSet>
 			</AnimationSets>
