@@ -29,6 +29,15 @@ namespace AssemblyStripper
 
 				if (assembly == "Assembly-CSharp.dll")
 				{
+					// For Assembly-CSharp, also create a publicized version, as we can use it for preload patch
+					// For unity, the publicized version contains references to BepInEx, which causes issues.
+					AssemblyPublicizer.Publicize(
+						managedFolder + assembly,
+						outPath.Replace(".dll", "_publicized.dll"),
+						new AssemblyPublicizerOptions { Strip = true }
+					);
+					File.Copy(outPath.Replace(".dll", "_publicized.dll"), finalPath.Replace(".dll", "_publicized.dll"), true);
+
 					RemoveAssemblyCSharpProblematicClasses(outPath);
 				}
 				File.Copy(outPath, finalPath, true);

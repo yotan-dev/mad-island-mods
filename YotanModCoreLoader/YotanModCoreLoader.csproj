@@ -29,7 +29,7 @@
 
 	<ItemGroup>
 		<Reference Include="MadIsland-Asssembly">
-			<HintPath>../Assemblies/Assembly-CSharp.dll</HintPath>
+			<HintPath>../Assemblies/Assembly-CSharp_publicized.dll</HintPath>
 		</Reference>
 		<Reference Include="Spine-Unity">
 			<HintPath>../Assemblies/spine-unity.dll</HintPath>
