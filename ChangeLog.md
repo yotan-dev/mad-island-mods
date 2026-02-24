@@ -7,6 +7,26 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## 2026.02.24
+
+### YotanModCore v2.2.6
+
+- Added support for v0.5.8.0 content
+
+
+### HFramework v1.1.3
+- Adds support for v0.5.8.0 content
+
+	- Scenes: Man x Cyborg (TypeB, TypeC, built in base)
+	- Scenes: Man x Daughter
+	- Scenes: Young Man x Cyborg (TypeB, TypeC, built in base)
+	- Scenes: Young Man x Daughter
+	- New sex events: 'OnPenetrate:Android' , 'OnCumOnAndroid' -- used by Cyborg scenes.
+
+### Gallery v1.0.13
+- Added support for v0.5.8 content
+
+
 ## 2026.01.31
 
 ### YotanModCore v2.2.5
