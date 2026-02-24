@@ -50,6 +50,7 @@ namespace YotanModCore.Items
 			{ "@npc:Merry", 27 },
 			{ "bench_surround", 28 },
 			{ "bench_spring", 29 },
+			{ "bench_drink", 30 },
 		};
 
 		/// <summary>
