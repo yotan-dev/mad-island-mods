@@ -6,23 +6,9 @@
 - name: Core concepts
 - href: core-concepts/data-loading.md
 - href: core-concepts/sex-scripts.md
-# - href: code/game-info.md
-# - href: code/constants.md
-# - href: code/events.md
-# - href: code/manager-facade.md
-# - href: code/custom-commands.md
-# - href: code/utility-classes.md
-# - href: code/talk-options.md
-# - href: code/prop-panels.md
-# - href: code/storing-custom-data.md
+- href: core-concepts/nodes.md
+- href: core-concepts/events.md
+- href: core-concepts/context.md
 
-# - name: Items
-# - href: items/overview.md
-# - href: items/your-first-item.md
-# - href: items/craft-recipes.md
-# - href: items/crafting-stations.md
-# - href: items/destroyable-objects.md
-# - href: items/object-inventory.md
-
-# - name: Upgrading
-# - href: upgrading/v1-to-v2.md
+- name: Guide
+- href: guide/first-script.md
