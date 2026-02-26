@@ -3,14 +3,14 @@
     <uie:Toolbar>
         <uie:ToolbarMenu display-tooltip-when-elided="true" text="Assets" />
     </uie:Toolbar>
-    <SplitView fixed-pane-initial-dimension="300">
+    <HFramework.Tree.EditorUI.SplitView fixed-pane-initial-dimension="300">
         <ui:VisualElement name="left-panel">
             <ui:Label text="Inspector" display-tooltip-when-elided="true" />
-            <InspectorView />
+            <HFramework.Tree.EditorUI.InspectorView />
         </ui:VisualElement>
         <ui:VisualElement name="right-panel">
             <ui:Label text="Tree View" display-tooltip-when-elided="true" />
-            <BehaviourTreeView focusable="true" style="flex-grow: 1;" />
+            <HFramework.Tree.EditorUI.BehaviourTreeView focusable="true" style="flex-grow: 1;" />
         </ui:VisualElement>
-    </SplitView>
+    </HFramework.Tree.EditorUI.SplitView>
 </ui:UXML>
