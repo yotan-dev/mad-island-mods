@@ -1,7 +1,7 @@
 # Data loading
 
 > [!WARNING]
-> This was mostly copy-pasted from YotanModCore. While it should work, I have only reviewed the "Simple asset bundle" method.
+> This was mostly copy-pasted from YotanModCore. I haven't reviewed it  yet.
 >
 
 You can load your customizations into HFramework in several ways, depending on your needs:
