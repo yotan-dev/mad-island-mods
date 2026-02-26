@@ -26,7 +26,7 @@ namespace HFramework.Tree.EditorUI
 			this.AddManipulator(new SelectionDragger());
 			this.AddManipulator(new RectangleSelector());
 
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Tree/Editor/BehaviourTreeEditor.uss");
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/Editor/BehaviourTreeEditor.uss");
 			styleSheets.Add(styleSheet);
 		}
 
