@@ -161,9 +161,9 @@ namespace HFramework.Scenes
 					subSkeletonAnimation.skeleton.SetSkin("Man");
 					subSkeletonAnimation.skeleton.SetSlotsToSetupPose();
 					CyborgCommon cyborgCommon = this.Npc.GetComponent<CyborgCommon>();
+					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 					if (cyborgCommon != null)
 						Managers.mn.randChar.SetCyborg(this.TmpSex, cyborgCommon.cyborgParams, noOffset: true);
-					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 				}
 				else
 				{

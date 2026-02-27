@@ -97,9 +97,9 @@ namespace HFramework.Scenes
 				subSkeletonAnimation.skeleton.SetSkin("Man");
 				subSkeletonAnimation.skeleton.SetSlotsToSetupPose();
 				CyborgCommon cyborgCommon = this.Npc2.GetComponent<CyborgCommon>();
+				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Npc1);
 				if (cyborgCommon != null)
 					Managers.mn.randChar.SetCyborg(this.TmpSex, cyborgCommon.cyborgParams, noOffset: true);
-				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Npc1);
 			}
 			else if (girlOnGirlSpecial.Contains(this.Npc1.npcID) && girlOnGirlSpecial.Contains(this.Npc2.npcID))
 			{ // girl x girl has some special handling
