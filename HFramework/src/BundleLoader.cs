@@ -1,7 +1,6 @@
 using System.IO;
-using System.Reflection;
+using HFramework.SexScripts;
 using UnityEngine;
-using YotanModCore.Items;
 
 namespace HFramework
 {
@@ -9,37 +8,39 @@ namespace HFramework
 	{
 		public static HFrameworkDataLoader Loader;
 
-		internal static void Load()
-		{
-			PLogger.LogDebug($"Loading bundle HFramework");
+		private static void LoadBundle(string path) {
+			PLogger.LogInfo($"Loading {path}");
 
-			var bundle = AssetBundle.LoadFromFile("BepInEx/Plugins/HFramework/vanillasexscripts");
-			Loader = bundle.LoadAsset<HFrameworkDataLoader>("HFrameworkDataLoader");
-			if (Loader == null)
-			{
+			var bundle = AssetBundle.LoadFromFile(path);
+			var assets = bundle.LoadAllAssets<SexScript>();
+			if (Loader == null) {
 				PLogger.LogError($"Failed to load HFrameworkDataLoader from bundle. Make sure the asset exists with the right name.");
 				return;
 			}
 
-			PLogger.LogInfo($"Loaded HFrameworkDataLoader from bundle - {Loader.Prefabs.Count} prefabs");
+			foreach (var item in assets)
+			{
+				Loader.Prefabs.Add(item);
+			}
 
-			// var itemCount = 0;
-			// foreach (var item in loader.Items)
-			// {
-			// 	ItemDB.Instance.RegisterItem(item);
-			// 	itemCount++;
-			// }
+			PLogger.LogInfo($"Loaded - {Loader.Prefabs.Count} prefabs");
+		}
 
-			// PLogger.LogDebug($"Loaded {itemCount} items from bundle {bundlePath}");
+		internal static void Load() {
+			Loader = HFrameworkDataLoader.CreateInstance<HFrameworkDataLoader>();
 
-			// var recipesCount = 0;
-			// foreach (var recipe in loader.CraftRecipes)
-			// {
-			// 	if (CraftDB.Instance.RegisterCraft(recipe))
-			// 		recipesCount++;
-			// }
+			LoadBundle("BepInEx/Plugins/HFramework/hf_sex_scripts");
 
-			// PLogger.LogDebug($"Loaded {recipesCount} recipes from bundle {bundlePath}");
+			if (!Directory.Exists("BepInEx/Plugins/HFramework/CustomBundles"))
+				Directory.CreateDirectory("BepInEx/Plugins/HFramework/CustomBundles");
+
+			string[] bundlePaths = Directory.GetFiles($"BepInEx/Plugins/HFramework/CustomBundles", "*", SearchOption.AllDirectories);
+			foreach (var bundlePath in bundlePaths) {
+				if (bundlePath.EndsWith(".dll"))
+					continue;
+
+				LoadBundle(bundlePath);
+			}
 		}
 	}
 }
