@@ -1,14 +1,10 @@
 # Data loading
 
-> [!WARNING]
-> This was mostly copy-pasted from YotanModCore. I haven't reviewed it  yet.
->
-
 You can load your customizations into HFramework in several ways, depending on your needs:
 
 1. A simple asset bundle
-2. A asset bundle with scripts
-3. A BepInEx plugin that interacts with HFramework
+2. A asset bundle with scripts (TODO)
+3. A BepInEx plugin that interacts with HFramework (TODO)
 
 Below you will find how to use each of the above methods, also the guides on other sections should show you
 some complete examples.
@@ -17,7 +13,7 @@ some complete examples.
 ## Simple asset bundle
 
 This method is ideal when just importing the Spine object and setting up the Behavior Tree with existing nodes components are enough.
-You simply produce a new asset bundle from the unity project and put it into `BepInEx/CustomBundles/` folder (may be in a subfolder)
+You simply produce a new asset bundle from the unity project and put it into `BepInEx/plugins/HFramework/CustomBundles/` folder (may be in a subfolder)
 
 Examples:
 - Making a new sex interaction for a character
@@ -25,22 +21,14 @@ Examples:
 
 ### Steps
 
+1. Create your asset bundle containing the SexScript and related assets (See [how to](../../notes/unity-asset-bundles.md))
 First create your asset bundle:
-
-1. Select your `HFrameworkDataLoader`
-2. On the Inspect window, at the very bottom, click on the first dropdown of `Asset Bundle`
-3. Click on `new`
-4. Give it a name (I will call mine `my_first_item`)
-5. Add the same asset bundle to all related objects of your mod (prefabs, textures, etc)
-6. Right click the folder and select `Build AssetBundles`
-
-Now go to your Unity Project `AssetBundles` folder through Windows file explorer and copy the asset bundle there,
-this is the file you will need to put in your game/distribute to others.
-
-Put the asset bundle generated in the previous steps into `BepInEx/CustomBundles/` folder, you can also create a folder with your mod name if you want.
+2. Now go to your Unity Project `AssetBundles` folder through Windows file explorer and copy the asset bundle there
+3. Paste the asset bundle on your Mad Island folder, at `BepInEx/plugins/HFramework/CustomBundles/` (may be in a subfolder)
 
 You should be ready to go.
 
+<!--
 
 ## Asset bundle with scripts
 
@@ -99,3 +87,5 @@ You should be ready to go.
 
 - Used when other cases are not enough, and you need to touch the game's code
 - You put everything in your BepInEx plugin and use YMC's API to interact with it
+
+--->
