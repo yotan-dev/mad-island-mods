@@ -4,6 +4,8 @@ using HFramework.Scenes;
 using HarmonyLib;
 using YotanModCore;
 using YotanModCore.Consts;
+using System.Linq;
+using HFramework.SexScripts;
 
 namespace HFramework.Patches
 {
@@ -13,10 +15,21 @@ namespace HFramework.Patches
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_SexCheck(CommonStates from, CommonStates to, ref bool __result)
 		{
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
 			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
-				__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
+			{
+				// CommonSexPlayer
+				__result = BundleLoader.Loader.Prefabs.Any(p => p is CommonSexPlayerScript && p.Info.CanStart(from, to));
+				if (!__result && Config.Instance.EnableLegacyScenes.Value)
+					__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
+			}
 			else
-				__result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
+			{
+				// CommonSexNPC
+				__result = BundleLoader.Loader.Prefabs.Any(p => p is CommonSexNPCScript && p.Info.CanStart(from, to));
+				if (!__result && Config.Instance.EnableLegacyScenes.Value)
+					__result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
+			}
 
 			return false;
 		}

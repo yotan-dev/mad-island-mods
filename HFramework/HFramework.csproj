@@ -40,5 +40,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\YotanModCore\YotanModCore.csproj" />
+		<ProjectReference Include="..\HFrameworkLib\HFrameworkLib.csproj" />
 	</ItemGroup>
 </Project>
