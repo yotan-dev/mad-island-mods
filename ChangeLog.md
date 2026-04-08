@@ -7,6 +7,15 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## Unreleased
+
+### HFramework v1.1.4
+- Adds support for v0.5.9.{0,1} content
+
+	- Scene: {Young Lady, Yona} x Son (DLC/Normal)
+	- Scene: Young Lady x Man (Forced)
+
+
 ## 2026.02.24
 
 ### YotanModCore v2.2.6

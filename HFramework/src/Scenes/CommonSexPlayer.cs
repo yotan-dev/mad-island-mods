@@ -112,6 +112,17 @@ namespace HFramework.Scenes
 			}
 		}
 
+		private void SetupTmpSexYonaSon()
+		{
+			Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
+			AnimationFX componentInChildren = this.TmpSex.GetComponentInChildren<AnimationFX>();
+			if (componentInChildren != null)
+			{
+				componentInChildren.voiceID = this.Player.voiceID;
+				componentInChildren.voice2ID = this.Npc.voiceID;
+			}
+		}
+
 		private void SetupTmpSex()
 		{
 			if (this.Player.npcID == NpcID.Yona)
@@ -128,6 +139,8 @@ namespace HFramework.Scenes
 					this.SetupTmpSexYonaNami();
 				else if (this.Npc.npcID == NpcID.NativeBoy)
 					this.SetupTmpSexYonaNativeBoy(); // Note: This happen inside NativeBoy case
+				else if (this.Npc.npcID == NpcID.Son)
+					this.SetupTmpSexYonaSon(); // Note: This happen inside Son case
 				else
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
 			}

@@ -439,6 +439,9 @@
 						<Condition xsi:type="IsDueDate" actor="Daughter#144" value="false" />
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.5.9.0 -->
+				<Performer id="HF_Yona_Son_Friendly_Normal" />
 			</Performers>
 		</Scene>
 	</Scenes>

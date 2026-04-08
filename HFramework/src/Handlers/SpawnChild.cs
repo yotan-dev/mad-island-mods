@@ -69,6 +69,7 @@ namespace HFramework.Handlers
 			{
 				case NpcID.Yona:
 				case NpcID.YoungLady:
+				case NpcID.Daughter:
 					childNpcId = gender == Gender.Male ? NpcID.Son : NpcID.Daughter;
 					break;
 
@@ -79,10 +80,12 @@ namespace HFramework.Handlers
 					break;
 
 				case NpcID.FemaleLargeNative:
+				case NpcID.LargeNativeGirl:
 					childNpcId = gender == Gender.Male ? NpcID.LargeNativeBoy : NpcID.LargeNativeGirl;
 					break;
 
 				case NpcID.UnderGroundWoman:
+				case NpcID.UnderGroundGirl:
 					childNpcId = gender == Gender.Male ? NpcID.UnderGroundBoy : NpcID.UnderGroundGirl;
 					break;
 

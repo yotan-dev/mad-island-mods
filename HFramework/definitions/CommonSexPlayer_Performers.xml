@@ -1744,5 +1744,39 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+
+		<!-- New in v0.5.9 -->
+		<Performer id="HF_Yona_Son_Friendly_Normal" minVersion="0.5.9.0" dlc="true">
+			<Scopes>
+				<Scope>Sex</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="5" />
+			<Actors>
+				<Actor val="Son#145" />
+				<Actor val="Yona#0" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="StartIdle" play="Loop" name="A_idle" />
+						<Animation action="Caress" play="Loop" name="A_Contact_01" />
+						<Animation action="Insert" play="Once" name="">
+							<Events>
+								<string>OnPenetrate:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="Speed1" play="Loop" name="A_Loop_01" />
+						<Animation action="Speed2" play="Loop" name="A_Loop_02" />
+						<Animation action="Finish" play="Once" name="A_Finish">
+							<Events>
+								<string>OnOrgasm</string>
+								<string>OnCreampie:Vag</string>
+							</Events>
+						</Animation>
+						<Animation action="FinishIdle" play="Loop" name="A_Finish_idle" />
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>
