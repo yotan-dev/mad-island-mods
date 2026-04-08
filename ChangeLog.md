@@ -7,7 +7,7 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
-## Unreleased
+## v2026.04.08
 
 ### YotanModCore v2.2.7
 - Adds support for v0.5.9.{0,1} content
