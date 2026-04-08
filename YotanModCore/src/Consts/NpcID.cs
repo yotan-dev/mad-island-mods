@@ -345,8 +345,8 @@ namespace YotanModCore.Consts
 		[StrVal("Ent Queen")]
 		public const int EntQueen = 121;
 
-		[StrVal("Ent Worrior")]
-		public const int EntWorrior = 122;
+		[StrVal("Ent Warrior")]
+		public const int EntWarrior = 122;
 
 		[StrVal("Large Native Girl")]
 		public const int LargeNativeGirl = 140; // DLC

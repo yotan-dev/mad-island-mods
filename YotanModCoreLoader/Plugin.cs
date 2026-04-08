@@ -9,7 +9,7 @@ using YotanModCore.DataStore;
 
 namespace YotanModCore
 {
-	[BepInPlugin("YotanModCore", "YotanModCore", "2.2.6")]
+	[BepInPlugin("YotanModCore", "YotanModCore", "2.2.7")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static AssetBundle Assets;

@@ -9,6 +9,13 @@ Each mod has its own version which follows SemVer.
 
 ## Unreleased
 
+### YotanModCore v2.2.7
+- Adds support for v0.5.9.{0,1} content
+
+	- Version detection
+	- Fixed a NPC ID Constant name
+
+
 ### HFramework v1.1.4
 - Adds support for v0.5.9.{0,1} content
 
