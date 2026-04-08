@@ -15,6 +15,7 @@ Each mod has its own version which follows SemVer.
 	- Version detection
 	- Fixed a NPC ID Constant name
 
+- Adds detection for missing official craft station and prevent game from breaking when we don't have it mapped
 
 ### HFramework v1.1.4
 - Adds support for v0.5.9.{0,1} content

@@ -25,14 +25,7 @@ namespace YotanModCore.Items.Patches
 			if (chest == null || tmpData == null || chest.type != InventorySlot.Type.Bench)
 				return;
 
-			string benchKey = tmpData.name;
-			if (benchKey == null)
-				return;
-
-			if (CraftDB.IsDefaultBench(benchKey))
-				return; // This should have been handled by the game
-
-			Managers.mn.inventory.CraftOpen(CraftDB.Instance.GetCraftIdForBench(benchKey));
+			CraftDB.OpenCustomCraftStationForObject(chest, tmpData);
 		}
 	}
 }

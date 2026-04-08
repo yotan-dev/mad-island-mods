@@ -16,10 +16,20 @@ namespace YotanModCore.Items
 	{
 		public static CraftDB Instance { get; private set; }
 
+		/// <summary>
+		/// Official benches from the game
+		/// - Key is either:
+		///    - the bench item name (key -> index map on OG Code, InventoryManager::SubInventoryLoad)
+		///    - "@npc:<Npc Constant>" for NPC crafts (key -> index map on OG Code, UIManager::NPCMenuOpen)
+		///    - "@other:" for special cases (no fixed position)
+		/// - Values are the indexes of StaticGroup > CraftManager from scene
+		///
+		/// This is used for:
+		/// 1. Understanding if we our mod needs to handle its opening or the game does it
+		/// 2. Linking mod-provided recipes to those crafting stations (via YotanModCore recipes)
+		/// </summary>
 		private static readonly Dictionary<string, int> DefaultBenches = new()
 		{
-			// Official benches from:
-			// - Can be found by looking at StaticGroup > CraftManager
 			{ "@other:hand", 0 },
 			{ "campfire_01", 1 },
 			{ "bench_wood", 2 },
@@ -138,6 +148,14 @@ namespace YotanModCore.Items
 		{
 			PLogger.LogDebug("Loading recipes");
 
+			var initialCraftDataLen = craftManager.craftData.Length;
+			var knownDefaultBenches = CraftDB.DefaultBenches.Count;
+			if (initialCraftDataLen != knownDefaultBenches) {
+				// Detects unmapped craftData in CraftDB.DefaultBenches -- see there how to update.
+				PLogger.LogWarning($"The game is providing **{initialCraftDataLen}** crafting stations, while YotanModCore has mapped **{knownDefaultBenches}**.");
+				PLogger.LogWarning("Some stations may not be available for modding until YotanModCore is updated!!");
+			}
+
 			// We need to load the default benches first whenever the manager is reloaded,
 			// as we mutate that afterwards
 			this.SetDefaultBenches();
@@ -186,6 +204,38 @@ namespace YotanModCore.Items
 		public static bool IsDefaultBench(string benchKey)
 		{
 			return DefaultBenches.ContainsKey(benchKey);
+		}
+
+		/// <summary>
+		/// Opens a custom, mod-provided, craftig station linked to the given object.
+		///
+		/// The game originally has a switch/case linking each crafting station to a craft index,
+		/// YotanModCore will look into uncovered cases and handle it here.
+		///
+		/// Official stations are already handled by the game and should not be touched here.
+		/// </summary>
+		/// <param name="station"></param>
+		/// <param name="tmpData"></param>
+		public static void OpenCustomCraftStationForObject(InventorySlot station, ItemData tmpData) {
+			string benchKey = tmpData.name;
+			if (benchKey == null)
+				return;
+
+			// Default benches were handled by SubInventoryLoad already
+			if (CraftDB.IsDefaultBench(benchKey))
+				return; // This should have been handled by the game
+
+			// If CraftDB doesn't know about the bench, we are not able to open it, so better do nothing.
+			// Unknown benches can happen in a few cases:
+			// - Something went wrong during custom data load up
+			// - A new craft station was added to the game in a recent update and YotanModCore did not update its DefaultBenches list yet
+			//
+			// In those cases, it is better to do nothing than to break the game.
+			int craftIdx = CraftDB.Instance.GetCraftIdForBench(benchKey);
+			if (craftIdx == -1)
+				return;
+
+			Managers.mn.inventory.CraftOpen(craftIdx);
 		}
 	}
 }
