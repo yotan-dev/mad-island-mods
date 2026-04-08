@@ -656,8 +656,8 @@
 			<AnimationSets>
 				<AnimationSet id="Default">
 					<Animations>
-						<Animation action="Battle" play="Loop" name="" />
-						<Animation action="Attack" play="Once" name="" />
+						<Animation action="Battle" play="Loop" name="Rape_A_Attack_loop" />
+						<Animation action="Attack" play="Once" name="Rape_A_Attack_attack" />
 						<Animation action="Defeat" play="Loop" name="Rape_A_Attack_giveup" />
 						<Animation action="Insert" play="Once" name="Rape_A_AttackToSex">
 							<Events>
