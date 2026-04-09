@@ -31,17 +31,17 @@ jobs:
     - name: Create output directory
       run: mkdir -p "${{ github.workspace }}/Release"
 
-    - name: Build release
-      run: |
-        cd scripts
-        npm install
-        npm run build-release
-
     - name: Prepare release info
       id: prepare-release
       run: |
         echo "TAG_NAME=pre-release-$(Get-Date -Format 'yyyyMMdd-HHmmss')" >> $env:GITHUB_ENV
         echo "BUILD_DATE=$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" >> $env:GITHUB_ENV
+
+    - name: Build release
+      run: |
+        cd scripts
+        npm install
+        npm run build-release
 
     - name: Upload Release Assets
       uses: softprops/action-gh-release@v2

@@ -37,6 +37,11 @@ function copyToRelease(files) {
 		const toDir = resolve(artifactsDir, dirname(file.to));
 		mkdirSync(toDir, { recursive: true });
 		cpSync(file.from, resolve(artifactsDir, file.to), { recursive: true, force: true });
+
+		const parts = file.to.split('/');
+		parts.shift();
+		const allInOneDir = resolve(artifactsDir, 'AllInOne', ...parts);
+		cpSync(file.from, allInOneDir, { recursive: true, force: true });
 	}
 }
 
@@ -120,11 +125,11 @@ async function buildHFramework() {
 	copyToRelease([
 		{
 			from: resolve(getBinaryPath(libPath), 'HFramework.dll'),
-			to: 'HFramework/HFramework/HFramework.dll',
+			to: 'HFramework/BepInEx/plugins/HFramework/HFramework.dll',
 		},
 		{
 			from: resolve(libPath, 'definitions'),
-			to: 'HFramework/HFramework/definitions',
+			to: 'HFramework/BepInEx/plugins/HFramework/definitions',
 		}
 	]);
 
@@ -146,7 +151,7 @@ async function buildEnhancedIsland() {
 	copyToRelease([
 		{
 			from: resolve(getBinaryPath(libPath), 'EnhancedIsland.dll'),
-			to: 'EnhancedIsland/EnhancedIsland/EnhancedIsland.dll',
+			to: 'EnhancedIsland/BepInEx/plugins/EnhancedIsland/EnhancedIsland.dll',
 		},
 	]);
 
@@ -168,15 +173,15 @@ async function buildGallery() {
 	copyToRelease([
 		{
 			from: resolve(getBinaryPath(libPath), 'Gallery.dll'),
-			to: 'Gallery/Gallery/Gallery.dll',
+			to: 'Gallery/BepInEx/plugins/Gallery/Gallery.dll',
 		},
 		{
 			from: resolve(libPath, 'GalleryList.xml'),
-			to: 'Gallery/Gallery/GalleryList.xml',
+			to: 'Gallery/BepInEx/plugins/Gallery/GalleryList.xml',
 		},
 		{
 			from: resolve(libPath, 'GalleryAssets.assets'),
-			to: 'Gallery/Gallery/GalleryAssets.assets',
+			to: 'Gallery/BepInEx/plugins/Gallery/GalleryAssets.assets',
 		}
 	]);
 
@@ -198,11 +203,11 @@ async function buildHExtensions() {
 	copyToRelease([
 		{
 			from: resolve(getBinaryPath(libPath), 'HExtensions.dll'),
-			to: 'HExtensions/HExtensions/HExtensions.dll',
+			to: 'HExtensions/BepInEx/plugins/HExtensions/HExtensions.dll',
 		},
 		{
 			from: resolve(libPath, 'definitions'),
-			to: 'HExtensions/HExtensions/definitions',
+			to: 'HExtensions/BepInEx/plugins/HExtensions/definitions',
 		}
 	]);
 
@@ -224,7 +229,7 @@ async function buildYoUnnoficialPathces() {
 	copyToRelease([
 		{
 			from: resolve(getBinaryPath(libPath), 'YoUnnoficialPatches.dll'),
-			to: 'YoUnnoficialPatches/YoUnnoficialPatches.dll',
+			to: 'YoUnnoficialPatches/BepInEx/plugins/YoUnnoficialPatches.dll',
 		},
 	]);
 
@@ -268,6 +273,8 @@ async function main() {
 			await pack('YoUnnoficialPatches', version, resolve(artifactsDir, 'YoUnnoficialPatches'));
 		})(),
 	]);
+
+	await pack('AllInOne', process.env.TAG_NAME ?? 'unknown', resolve(artifactsDir, 'AllInOne'));
 
 	console.log('\nBuild completed successfully!');
 	console.log(`Artifacts available in: ${artifactsDir}`);

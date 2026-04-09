@@ -9,6 +9,12 @@ Each mod has its own version which follows SemVer.
 
 ## Unreleased
 
+> [!WARNING]
+> This release is changing the way plugin zips are distributted:
+>
+> - All zips will now contain the BepInEx folder, so just throw it on your Mad Island root and let it replace the files
+> - We now have an "AllInOne" zip too containing all my plugins together.
+
 ### HFramework v1.2.0
 - Splits HFramework into 2 DLLs:
 	- `HFramework.dll` - contains the main framework code
