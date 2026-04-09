@@ -21,7 +21,7 @@ namespace HFramework.Scenes
 
 		public static ScenesManager Instance = new ScenesManager();
 
-		private Dictionary<string, SceneInfo> SceneInfos = [];
+		private Dictionary<string, SceneInfo> SceneInfos = new();
 
 		private ScenesManager() { }
 

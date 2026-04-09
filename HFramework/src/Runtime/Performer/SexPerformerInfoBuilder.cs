@@ -11,9 +11,9 @@ namespace HFramework.Performer
 
 		private int? ToNpcId { get; set; }
 
-		private List<PerformerScope> Scopes { get; set; } = [];
+		private List<PerformerScope> Scopes { get; set; } = new();
 
-		private Dictionary<string, AnimationSet> AnimationSets { get; set; } = [];
+		private Dictionary<string, AnimationSet> AnimationSets { get; set; } = new();
 
 		public SexPerformerInfoBuilder(string id)
 		{
@@ -38,7 +38,7 @@ namespace HFramework.Performer
 			this.SexPrefabSeletor = selector;
 			return this;
 		}
-		
+
 		public SexPerformerInfoBuilder AddAnimationSet(AnimationSet animationSet)
 		{
 			this.AnimationSets.Add(animationSet.Name, animationSet);

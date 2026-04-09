@@ -12,7 +12,7 @@ namespace HFramework.Hook
 
 		private HookType Type = HookType.None;
 
-		private string[] SceneNames = ["*"];
+		private string[] SceneNames = new string[] { "*" };
 
 		private Func<HookMemory> MemorizeHandler;
 

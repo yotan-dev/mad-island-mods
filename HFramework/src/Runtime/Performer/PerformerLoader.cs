@@ -19,21 +19,21 @@ namespace HFramework.Performer
 
 		public static event RegisterPrefabSelectors? OnRegisterPrefabSelectors;
 
-		private static readonly List<Type> PrefabSelectors = [];
+		private static readonly List<Type> PrefabSelectors = new();
 
 		private static XmlSerializer? Serializer = null;
 
-		public static Dictionary<string, SexPerformerInfo> Performers = [];
+		public static Dictionary<string, SexPerformerInfo> Performers = new();
 
 		/// <summary>
 		/// Performer IDs skipped due to not being available in the current game context
 		/// </summary>
-		public static List<string> SkippedPerformers = [];
+		public static List<string> SkippedPerformers = new();
 
 		internal static void RegisterHFPrefabSelectors()
 		{
 			AddPrefabSelector(typeof(SexListPrefabSelector));
-			AddPrefabSelector(typeof(SexObjPrefabSelector));	
+			AddPrefabSelector(typeof(SexObjPrefabSelector));
 		}
 
 		/// <summary>
@@ -195,7 +195,7 @@ namespace HFramework.Performer
 
 			PLogger.LogInfo("Loading performers");
 
-			string[] definitions = [
+			string[] definitions = new string[] {
 				"AssWall_Performers.xml",
 				"CommonSexNPC_Performers.xml",
 				"CommonSexPlayer_Performers.xml",
@@ -207,7 +207,7 @@ namespace HFramework.Performer
 				"PlayerRaped_Performers.xml",
 				"Slave_Performers.xml",
 				"Toilet_Performers.xml"
-			];
+			};
 
 			foreach (var definition in definitions)
 			{

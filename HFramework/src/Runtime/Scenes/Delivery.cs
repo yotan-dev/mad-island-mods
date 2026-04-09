@@ -180,7 +180,7 @@ namespace HFramework.Scenes
 
 			girlMove.searchAngle = 0f;
 			if (this.TargetPosObject != null)
-				yield return new MoveToPlace(this, [this.Girl], this.TargetPosObject.transform.position, this.SexPlace);
+				yield return new MoveToPlace(this, new CommonStates[] { this.Girl }, this.TargetPosObject.transform.position, this.SexPlace);
 
 			if (!this.CanContinue())
 				yield break;
@@ -217,7 +217,7 @@ namespace HFramework.Scenes
 
 		public override CommonStates[] GetActors()
 		{
-			return [this.Girl];
+			return new CommonStates[] { this.Girl };
 		}
 	}
 }

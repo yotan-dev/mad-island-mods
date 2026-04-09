@@ -211,7 +211,7 @@ namespace HFramework.Scenes
 		private IEnumerator OnForcefullyRape()
 		{
 			this.TmpCommonState = ManRapeSleepState.ForcefullRape; // 1
-			
+
 			yield return this.Performer.ChangeSet("ForceRape");
 
 			if (this.Girl != null)
@@ -373,7 +373,7 @@ namespace HFramework.Scenes
 
 		public override CommonStates[] GetActors()
 		{
-			return [this.Man, this.Girl];
+			return new CommonStates[] { this.Man, this.Girl };
 		}
 
 		public override string ExpandAnimationName(string originalName)

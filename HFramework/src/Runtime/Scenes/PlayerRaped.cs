@@ -105,7 +105,7 @@ namespace HFramework.Scenes
 		{
 			GameObject scene = null;
 			// For Rape, order of actors matters, and Rapist always comes first, even if they are a girl.
-			this.Performer = ScenesManager.Instance.GetPerformer(this, scope, this.Controller, [this.Rapist, this.Player]);
+			this.Performer = ScenesManager.Instance.GetPerformer(this, scope, this.Controller, new CommonStates[] { this.Rapist, this.Player });
 			if (this.Performer != null)
 				scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 
@@ -352,11 +352,11 @@ namespace HFramework.Scenes
 		public override CommonStates[] GetActors()
 		{
 			if (CommonUtils.IsMale(this.Player))
-				return [this.Player, this.Rapist];
+				return new CommonStates[] { this.Player, this.Rapist };
 			else if (CommonUtils.IsMale(this.Rapist))
-				return [this.Rapist, this.Player];
+				return new CommonStates[] { this.Rapist, this.Player };
 
-			return [this.Player, this.Rapist];
+			return new CommonStates[] { this.Player, this.Rapist };
 		}
 
 		public override string ExpandAnimationName(string originalName)

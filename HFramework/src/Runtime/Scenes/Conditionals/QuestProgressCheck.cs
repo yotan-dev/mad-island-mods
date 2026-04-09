@@ -19,7 +19,7 @@ namespace HFramework.Scenes.Conditionals
 
 		[XmlArray("Values")]
 		[XmlArrayItem("Value")]
-		public int[] ExpectedValues { get; set; } = [];
+		public int[] ExpectedValues { get; set; } = new int[0];
 
 		public QuestProgressCheck() { }
 

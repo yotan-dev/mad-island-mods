@@ -278,7 +278,7 @@ namespace HFramework.Scenes
 
 		public override CommonStates[] GetActors()
 		{
-			return [this.Player, this.Npc];
+			return new CommonStates[] { this.Player, this.Npc };
 		}
 	}
 }
