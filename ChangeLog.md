@@ -15,16 +15,18 @@ Each mod has its own version which follows SemVer.
 > - All zips will now contain the BepInEx folder, so just throw it on your Mad Island root and let it replace the files
 > - We now have an "AllInOne" zip too containing all my plugins together.
 
+### YotanModCore v2.3.0
+
+**Technical/Mod utiltities:**
+
+- Adds accessors for more managers via `Managers.` class
+
+
 ### HFramework v1.2.0
 - Splits HFramework into 2 DLLs:
 	- `HFramework.dll` - contains the main framework code
 	- `HFrameworkLoader.dll` - contains the BepInEx interface/loader code
 	- This is in preparation for the next version of HFramework, where modders will need to load it into Unity.
-
-**Technical changes (for mod developers/contributors)**
-
-- HFramework "main" is now a UnityPackage (preparation for the new version)
-
 
 ### Gallery v1.0.14
 - Update HFramework access to match HFramework v1.2.0
