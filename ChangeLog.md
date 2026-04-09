@@ -21,6 +21,11 @@ Each mod has its own version which follows SemVer.
 	- `HFrameworkLoader.dll` - contains the BepInEx interface/loader code
 	- This is in preparation for the next version of HFramework, where modders will need to load it into Unity.
 
+**Technical changes (for mod developers/contributors)**
+
+- HFramework "main" is now a UnityPackage (preparation for the new version)
+
+
 ### Gallery v1.0.14
 - Update HFramework access to match HFramework v1.2.0
 

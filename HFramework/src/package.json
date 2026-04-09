@@ -1,0 +1,13 @@
+{
+	"name": "com.yotan-dev.hframework",
+	"version": "1.2.0",
+	"displayName": "HFramework",
+	"description": "HFramework enables easy customization of sexual interactions in Mad Island.",
+	"unity": "2021.3",
+	"documentationUrl": "https://yotan-dev.github.io/HFramework/",
+	"changelogUrl": "https://github.com/yotan-dev/mad-island-mods/blob/main/ChangeLog.md",
+	"licensesUrl": "https://github.com/yotan-dev/mad-island-mods?tab=readme-ov-file#license",
+	"author": {
+		"name": "Yotan"
+	}
+}
