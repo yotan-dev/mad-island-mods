@@ -1,19 +1,27 @@
 namespace HFramework
 {
-	using BepInEx.Logging;
+	using System.Diagnostics;
+	using YotanModCore;
 
 	internal class PLogger
 	{
-		public static ManualLogSource _Logger;
+		internal static ILogger _Logger = new UnityLogger();
+
+		public static void SetLogger(ILogger logger)
+		{
+			_Logger = logger;
+		}
 
 		public static void LogInfo(object data)
 		{
 			_Logger.LogInfo(data);
 		}
 
-		public static void LogError(object data)
+		public static void LogError(object data, bool includeStack = false)
 		{
 			_Logger.LogError(data);
+			if (includeStack)
+				_Logger.LogError(new StackTrace().ToString());
 		}
 
 		public static void LogWarning(object data)
@@ -26,14 +34,6 @@ namespace HFramework
 			_Logger.LogDebug(data);
 		}
 
-		public static void LogConditionDebug(object data)
-		{
-			if (!Config.Instance.DebugConditions.Value)
-				return;
-
-			_Logger.LogDebug($"Condition: {data}");
-		}
-
 		public static void LogFatal(object data)
 		{
 			_Logger.LogFatal(data);
@@ -42,6 +42,14 @@ namespace HFramework
 		public static void LogMessage(object data)
 		{
 			_Logger.LogMessage(data);
+		}
+
+		public static void LogConditionDebug(object data)
+		{
+			if (!HFConfig.Instance.DebugConditions)
+				return;
+
+			_Logger.LogDebug($"Condition: {data}");
 		}
 	}
 }

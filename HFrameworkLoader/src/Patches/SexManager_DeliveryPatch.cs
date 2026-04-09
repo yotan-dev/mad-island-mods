@@ -1,8 +1,7 @@
 using System.Collections;
-using HFramework.Scenes;
 using HarmonyLib;
 
-namespace HFramework.Patches
+namespace HFrameworkLoader.Patches
 {
 	public class SexManager_DeliveryPatch
 	{
@@ -10,9 +9,7 @@ namespace HFramework.Patches
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result)
 		{
-			var scene = new Delivery(common, tmpWorkPlace, tmpSexPlace);
-			__result = scene.Run();
-			return false;
+			return Plugin.Bridge.SexManager_Pre_Delivery(common, tmpWorkPlace, tmpSexPlace, ref __result);
 		}
 	}
 }

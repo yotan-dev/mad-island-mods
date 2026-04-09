@@ -7,6 +7,18 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## Unreleased
+
+### HFramework v1.2.0
+- Splits HFramework into 2 DLLs:
+	- `HFramework.dll` - contains the main framework code
+	- `HFrameworkLoader.dll` - contains the BepInEx interface/loader code
+	- This is in preparation for the next version of HFramework, where modders will need to load it into Unity.
+
+### Gallery v1.0.14
+- Update HFramework access to match HFramework v1.2.0
+
+
 ## v2026.04.08
 
 ### YotanModCore v2.2.7
