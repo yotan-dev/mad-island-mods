@@ -1,12 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using HFramework.Scenes;
 using HarmonyLib;
 using UnityEngine;
-using YotanModCore;
 
-namespace HFramework.Patches
+namespace HFrameworkLoader.Patches
 {
 	public class SexManager_CommonSexPlayerPatch
 	{
@@ -21,9 +17,7 @@ namespace HFramework.Patches
 			ref IEnumerator __result
 		)
 		{
-			var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
-			__result = scene.Run();
-			return false;
+			return Plugin.Bridge.SexManager_Pre_CommonSexPlayer(state, pCommon, nCommon, pos, sexType, ref __result);
 		}
 	}
 }

@@ -1,8 +1,7 @@
 using System.Collections;
-using HFramework.Scenes;
 using HarmonyLib;
 
-namespace HFramework.Patches
+namespace HFrameworkLoader.Patches
 {
 	public class SexManager_ManRapesPatch
 	{
@@ -10,9 +9,7 @@ namespace HFramework.Patches
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_ManRapes(CommonStates girl, CommonStates man, ref IEnumerator __result)
 		{
-			var scene = new ManRapes(girl, man);
-			__result = scene.Run();
-			return false;
+			return Plugin.Bridge.SexManager_Pre_ManRapes(girl, man, ref __result);
 		}
 	}
 }

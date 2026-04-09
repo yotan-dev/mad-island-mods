@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using HFramework.Scenes;
 using HarmonyLib;
-using YotanModCore;
 
-namespace HFramework.Patches
+namespace HFrameworkLoader.Patches
 {
 	public class SexManager_CommonSexNPCPatch
 	{
@@ -18,9 +14,7 @@ namespace HFramework.Patches
 			ref IEnumerator __result
 		)
 		{
-			var scene = new CommonSexNPC(npcA, npcB, sexPlace);
-			__result = scene.Run();
-			return false;
+			return Plugin.Bridge.SexManager_Pre_CommonSexNPC(npcA, npcB, sexPlace, ref __result);
 		}
 
 		[HarmonyPatch(typeof(SexManager), "CommonSexNPC")]

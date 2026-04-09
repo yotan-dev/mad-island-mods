@@ -2,15 +2,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using YotanModCore;
 
-namespace HFramework.Patches
+namespace HFrameworkLoader.Patches
 {
 	[HarmonyPatch]
 	public static class TranspilePlayerCheck
 	{
-		private static IEnumerable<MethodBase> TargetMethods()
-		{
+		private static IEnumerable<MethodBase> TargetMethods() {
 			var result = new List<MethodBase>
 			{
 				AccessTools.EnumeratorMoveNext(AccessTools.Method(typeof(NPCMove), nameof(NPCMove.Live)))
@@ -24,21 +22,11 @@ namespace HFramework.Patches
 		/// </summary>
 		/// <param name="st"></param>
 		/// <returns></returns>
-		private static int CanSexWithNpc(CommonStates st)
-		{
-			// We allow player characters to do it, as long as they are not the active player
-			// otherwise it would block player control.
-			// This is being controlled by the sex scenes anyway, and in the default game it would
-			// never happen.
-			int ret = 0;
-			if (st.npcID != CommonUtils.GetActivePlayer().npcID)
-				ret = 999;
-
-			return ret;
+		private static int CanSexWithNpc(CommonStates st) {
+			return Plugin.Bridge.CanSexWithNpc(st);
 		}
 
-		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-		{
+		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
 			/*
 			* Looks for:
 				CommonStates partner = NPCManager.GetSexableLover(this.common);
@@ -48,8 +36,8 @@ namespace HFramework.Patches
 			* Replace with:
 				CommonStates partner = NPCManager.GetSexableLover(this.common);
 				if (partner != null && CanSexWithNpc(partner) > 1) {
-					
-				}	
+
+				}
 			*/
 
 			var codeMatcher = new CodeMatcher(instructions);

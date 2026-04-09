@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HFramework.Patches;
 using HFramework.Scenes;
 using UnityEngine;
 
@@ -19,7 +18,7 @@ namespace HFramework.Handlers
 		public MakeNpcWait(IScene scene, CommonStates[] npcs) : base(scene)
 		{
 			this.Npcs = npcs;
-			NpcMovePatches.OnActTypeChanged += OnActTypeChanged;
+			HFrameworkBridge.OnActTypeChanged += OnActTypeChanged;
 		}
 
 		private void OnActTypeChanged(object sender, NPCMove.ActType e)

@@ -1,8 +1,7 @@
 using System.Collections;
-using HFramework.Scenes;
 using HarmonyLib;
 
-namespace HFramework.Patches
+namespace HFrameworkLoader.Patches
 {
 	public class SexManager_OnaniNPCPatch
 	{
@@ -10,9 +9,7 @@ namespace HFramework.Patches
 		[HarmonyPrefix]
 		private static bool Pre_SexManager_OnaniNPC(CommonStates common, SexPlace sexPlace, float upMoral, ref IEnumerator __result)
 		{
-			var scene = new OnaniNPC(common, sexPlace, upMoral);
-			__result = scene.Run();
-			return false;
+			return Plugin.Bridge.SexManager_Pre_OnaniNPC(common, sexPlace, upMoral, ref __result);
 		}
 	}
 }

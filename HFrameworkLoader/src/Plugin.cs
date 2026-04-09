@@ -1,30 +1,30 @@
 ﻿using BepInEx;
-using HFramework.Hook;
-using HFramework.Patches;
-using HFramework.Performer;
-using HFramework.Scenes;
 using HarmonyLib;
-using YotanModCore.Events;
+using HFramework;
+using HFrameworkLoader.Patches;
 
-namespace HFramework
+namespace HFrameworkLoader
 {
-
-	[BepInPlugin("HFramework", "HFramework", "1.1.4")]
-	[BepInDependency("YotanModCore", "2.2.4")]
+	[BepInPlugin("HFramework", "HFramework", MyPluginInfo.PLUGIN_VERSION)]
+	[BepInDependency("YotanModCore", "2.2.7")]
 	public class Plugin : BaseUnityPlugin
 	{
+#nullable disable // Awake will set it. Too much effort to type this as nullable
+		internal static HFrameworkBridge Bridge { get; private set; }
+#nullable enable
+
 		private bool Loaded = false;
 
 		private int Ticks = 0;
 
-		private void Awake()
-		{
+		private void Awake() {
+			HFrameworkLoader.Config.Instance.Init(Config);
+
+			Plugin.Bridge = Initializer.Init(new BepisLogger(Logger));
 			PLogger._Logger = Logger;
 
-			HFramework.Config.Instance.Init(Config);
-
-			if (HFramework.Config.Instance.ReplaceOriginalScenes.Value)
-			{
+			var hfConfig = HFConfig.GetInstance();
+			if (hfConfig.ReplaceOriginalScenes) {
 				Harmony.CreateAndPatchAll(typeof(SexManager_AssWallPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexNPCPatch));
 				Harmony.CreateAndPatchAll(typeof(SexManager_CommonSexPlayerPatch));
@@ -39,9 +39,6 @@ namespace HFramework
 
 				Harmony.CreateAndPatchAll(typeof(SexChecksPatch));
 				Harmony.CreateAndPatchAll(typeof(TranspilePlayerCheck));
-
-				GameLifecycleEvents.OnGameStartEvent += () => { SexMeter.Instance.Reload(); };
-				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;
 			}
 
 			Harmony.CreateAndPatchAll(typeof(NpcMovePatches));
@@ -49,18 +46,15 @@ namespace HFramework
 			PLogger.LogInfo($"Plugin HFramework is loaded!");
 		}
 
-		private void Update()
-		{
+		private void Update() {
 			if (this.Loaded)
 				return;
 
 			Ticks++;
 
-			if (this.Ticks > 5)
-			{
+			if (this.Ticks > 5) {
 				this.Loaded = true;
-				PerformerLoader.Load();
-				ScenesManager.Instance.Init();
+				Plugin.Bridge.AfterStartTicks();
 			}
 		}
 	}
