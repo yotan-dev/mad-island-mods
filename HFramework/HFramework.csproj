@@ -33,6 +33,10 @@
 		<Reference Include="Spine-Unity">
 			<HintPath>../Assemblies/spine-unity.dll</HintPath>
 		</Reference>
+
+		<Reference Include="UnityEditor">
+			<HintPath>../Assemblies/UnityEditor.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 
 	<ItemGroup>
