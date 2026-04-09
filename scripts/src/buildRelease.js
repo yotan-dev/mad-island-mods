@@ -117,23 +117,30 @@ async function buildYotanModCore() {
 async function buildHFramework() {
 	console.log('=== Building HFramework ===');
 
-	const libPath = join(rootDir, 'HFramework');
+	const corePath = join(rootDir, 'HFramework');
+	const loaderPath = join(rootDir, 'HFrameworkLoader');
 
-	runCommand('dotnet restore', libPath);
-	runCommand(`dotnet build -c ${config}`, libPath);
+	runCommand('dotnet restore', corePath);
+	runCommand(`dotnet build -c ${config}`, corePath);
+	runCommand('dotnet restore', loaderPath);
+	runCommand(`dotnet build -c ${config}`, loaderPath);
 
 	copyToRelease([
 		{
-			from: resolve(getBinaryPath(libPath), 'HFramework.dll'),
+			from: resolve(getBinaryPath(corePath), 'HFramework.dll'),
 			to: 'HFramework/BepInEx/plugins/HFramework/HFramework.dll',
 		},
 		{
-			from: resolve(libPath, 'definitions'),
+			from: resolve(corePath, 'definitions'),
 			to: 'HFramework/BepInEx/plugins/HFramework/definitions',
-		}
+		},
+		{
+			from: resolve(getBinaryPath(loaderPath), 'HFrameworkLoader.dll'),
+			to: 'HFramework/BepInEx/plugins/HFramework/HFrameworkLoader.dll',
+		},
 	]);
 
-	const version = getProjectVersion(resolve(libPath, 'HFramework.csproj'));
+	const version = getProjectVersion(resolve(loaderPath, 'HFrameworkLoader.csproj'));
 
 	console.log('Done.');
 
