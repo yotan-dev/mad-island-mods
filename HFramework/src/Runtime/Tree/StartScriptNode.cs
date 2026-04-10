@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class StartScriptNode : ActionNode
 	{
 		public string message;

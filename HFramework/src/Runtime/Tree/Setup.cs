@@ -4,6 +4,7 @@ using YotanModCore;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class Setup : ActionNode
 	{
 		public PrefabConfig prefabConfig;

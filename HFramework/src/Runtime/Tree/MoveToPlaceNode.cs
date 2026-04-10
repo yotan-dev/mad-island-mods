@@ -4,6 +4,7 @@ using YotanModCore.Extensions;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class MoveToPlaceNode : ActionNode
 	{
 		public float timeout = 30f;

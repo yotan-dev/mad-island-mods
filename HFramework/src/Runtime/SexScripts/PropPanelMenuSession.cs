@@ -3,9 +3,11 @@
 using System;
 using HFramework.Tree;
 using UnityEngine;
+using YotanModCore;
 
 namespace HFramework.SexScripts
 {
+	[Experimental]
 	public class PropPanelMenuSession : ISexScriptMenuSession
 	{
 		private readonly CommonContext context;

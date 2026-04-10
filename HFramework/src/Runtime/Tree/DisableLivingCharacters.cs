@@ -3,6 +3,7 @@ using YotanModCore;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class DisableLivingCharacters : ActionNode
 	{
 		protected override void OnStart()

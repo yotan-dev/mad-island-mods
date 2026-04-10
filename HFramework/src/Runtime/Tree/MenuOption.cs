@@ -3,6 +3,7 @@ using System;
 namespace HFramework.Tree
 {
 	[Serializable]
+	[Experimental]
 	public class MenuOption
 	{
 		public enum EffectType {

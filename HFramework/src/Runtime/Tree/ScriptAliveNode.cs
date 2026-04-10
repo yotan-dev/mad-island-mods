@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class ScriptAliveNode : DecoratorNode
 	{
 		protected override void OnStart()

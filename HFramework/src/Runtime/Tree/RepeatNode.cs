@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class RepeatNode : DecoratorNode
 	{
 		protected override void OnStart()

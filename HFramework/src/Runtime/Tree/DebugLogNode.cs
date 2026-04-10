@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class DebugLogNode : ActionNode
 	{
 		public string message;

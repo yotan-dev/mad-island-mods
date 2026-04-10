@@ -30,6 +30,7 @@ namespace HFramework
 	}
 
 	[Serializable]
+	[Experimental]
 	public class SexEventArgs : EventArgs
 	{
 		/// <summary>
@@ -63,6 +64,7 @@ namespace HFramework
 	}
 
 	[Serializable]
+	[Experimental]
 	public class FromToEventArgs : SexEventArgs
 	{
 		public int fromNpcIdx;
@@ -98,6 +100,7 @@ namespace HFramework
 	}
 
 	[Serializable]
+	[Experimental]
 	public class SelfEventArgs : SexEventArgs
 	{
 		public int fromNpcIdx;
@@ -124,6 +127,7 @@ namespace HFramework
 		}
 	}
 
+	[Experimental]
 	public class SexEvent<T> : ISexEvent<T> where T : SexEventArgs, new()
 	{
 		public readonly string id;

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace HFramework.SexScripts.Info
 {
+	[Experimental]
 	public abstract class SexInfo
 	{
 
@@ -18,6 +19,7 @@ namespace HFramework.SexScripts.Info
 		Vector3 Pos { get; }
 	}
 
+	[Experimental]
 	public class CommonSexInfo : SexInfo, IHasSexPlace
 	{
 		public SexPlace Place { get; set; }
@@ -29,6 +31,7 @@ namespace HFramework.SexScripts.Info
 		int SexType { get; }
 	}
 
+	[Experimental]
 	public class PlayerSexInfo : SexInfo, IHasSexType, IHasSexPos
 	{
 		public int SexType { get; set; }

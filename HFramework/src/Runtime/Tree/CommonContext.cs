@@ -25,6 +25,7 @@ namespace HFramework.Tree
 		void Close();
 	}
 
+	[Experimental]
 	public class ContextNpc
 	{
 		public CommonStates Common { get; set; }
@@ -37,6 +38,7 @@ namespace HFramework.Tree
 		}
 	}
 
+	[Experimental]
 	public class CommonContext
 	{
 		private ContextNpc[] _actors = new ContextNpc[0];

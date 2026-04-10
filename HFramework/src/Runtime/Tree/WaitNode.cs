@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class WaitNode : ActionNode
 	{
 		public float duration = 1;

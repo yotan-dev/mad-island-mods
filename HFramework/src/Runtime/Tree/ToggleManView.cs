@@ -3,6 +3,7 @@ using YotanModCore.Extensions;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class ToggleManView : ActionNode
 	{
 		public int TrackIndex = 10;

@@ -6,6 +6,7 @@ using YotanModCore;
 namespace HFramework.Tree
 {
 	[Serializable]
+	[Experimental]
 	public class SexListPrefab : PrefabInstantiator {
 		public int listIndex;
 		public int objIndex;
@@ -18,6 +19,7 @@ namespace HFramework.Tree
 	}
 
 	[Serializable]
+	[Experimental]
 	public class CustomPrefab : PrefabInstantiator {
 		public GameObject prefab;
 
@@ -28,6 +30,7 @@ namespace HFramework.Tree
 	}
 
 	[Serializable]
+	[Experimental]
 	public class PrefabInstantiator {
 		public string PathToSkeletonAnimation = "Scale/Anim";
 
@@ -47,6 +50,7 @@ namespace HFramework.Tree
 	}
 
 	[Serializable]
+	[Experimental]
 	public class PrefabCharSetter : AppearanceSetter {
 		public override void SetAppearance(GameObject prefab, CommonContext ctx)
 		{
@@ -55,6 +59,7 @@ namespace HFramework.Tree
 	}
 
 	[Serializable]
+	[Experimental]
 	public class FemaleFemaleRandCharSetter : AppearanceSetter
 	{
 		[SerializeField] private int FemaleIndex = 0;
@@ -75,6 +80,7 @@ namespace HFramework.Tree
 	}
 
 	[Serializable]
+	[Experimental]
 	public class MaleFemaleRandCharSetter : AppearanceSetter
 	{
 		[SerializeField] private int MaleIndex = 0;
@@ -87,6 +93,7 @@ namespace HFramework.Tree
 	}
 
 	[Serializable]
+	[Experimental]
 	public class AppearanceSetter {
 		public virtual void SetAppearance(GameObject prefab, CommonContext ctx)
 		{
@@ -95,6 +102,7 @@ namespace HFramework.Tree
 	}
 
 	[Serializable]
+	[Experimental]
 	public class PrefabConfig
 	{
 		[SerializeReference, Subclass]

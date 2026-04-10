@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class SetMenuOptionsNode : ActionNode
 	{
 		public List<MenuOption> options = new List<MenuOption>();

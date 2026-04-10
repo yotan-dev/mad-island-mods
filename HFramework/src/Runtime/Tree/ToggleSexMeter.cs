@@ -2,6 +2,7 @@ using HFramework.Scenes;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class ToggleSexMeter : ActionNode
 	{
 		public bool Show = true;

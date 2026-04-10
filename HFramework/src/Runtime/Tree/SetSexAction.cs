@@ -1,5 +1,6 @@
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class SetSexAction : ActionNode
 	{
 		public SexAction Action;

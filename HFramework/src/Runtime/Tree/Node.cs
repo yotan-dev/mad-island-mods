@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public abstract class Node : ScriptableObject
 	{
 		public enum State

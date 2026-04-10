@@ -7,6 +7,7 @@ using YotanModCore;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class TeardownNode : ActionNode
 	{
 		protected override void OnStart()

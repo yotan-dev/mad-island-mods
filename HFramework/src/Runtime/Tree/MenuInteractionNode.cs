@@ -1,5 +1,6 @@
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class MenuInteractionNode : CompositeNode
 	{
 		public string InitialMenuId = "";

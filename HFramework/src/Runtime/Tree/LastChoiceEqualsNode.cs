@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class LastChoiceEqualsNode : DecoratorNode
 	{
 		public string choiceId = "";

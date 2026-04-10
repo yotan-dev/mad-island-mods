@@ -1,11 +1,13 @@
 using System.Linq;
 using HFramework.Tree;
 using UnityEngine;
+using YotanModCore;
 
 
 namespace HFramework.SexScripts
 {
 	[CreateAssetMenu()]
+	[Experimental]
 	public class CommonSexPlayerScript : SexScript
 	{
 		public CommonSexPlayerScript Create(CommonStates actorA, CommonStates actorB, Vector3 pos, int sexType) {

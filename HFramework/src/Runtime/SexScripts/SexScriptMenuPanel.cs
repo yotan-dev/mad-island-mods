@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using HFramework.Tree;
 using UnityEngine;
+using YotanModCore;
 using YotanModCore.PropPanels;
 
 namespace HFramework.SexScripts
 {
+	[Experimental]
 	public class SexScriptMenuPanel : BasePropPanel
 	{
 		private readonly Func<(string Id, string Text, MenuOption.EffectType Effect)[]> getOptions;

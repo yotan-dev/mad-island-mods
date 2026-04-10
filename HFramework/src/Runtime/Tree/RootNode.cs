@@ -1,5 +1,6 @@
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class RootNode : Node
 	{
 		public Node child;

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public abstract class DecoratorNode : Node
 	{
 		[HideInInspector] public Node child;

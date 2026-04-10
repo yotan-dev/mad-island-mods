@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HFramework.Tree;
 
 namespace HFramework.SexScripts.Info
 {
 	[Serializable]
+	[Experimental]
 	public class SexScriptInfo
 	{
 		public SexNpcInfo[] Npcs;

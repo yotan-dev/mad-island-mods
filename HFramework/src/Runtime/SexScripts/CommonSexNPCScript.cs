@@ -5,6 +5,7 @@ using UnityEngine;
 namespace HFramework.SexScripts
 {
 	[CreateAssetMenu()]
+	[Experimental]
 	public class CommonSexNPCScript : SexScript
 	{
 		public CommonSexNPCScript Create(CommonStates npcA, CommonStates npcB, SexPlace sexPlace) {

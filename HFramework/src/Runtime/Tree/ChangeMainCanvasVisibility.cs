@@ -2,6 +2,7 @@ using YotanModCore;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class ChangeMainCanvasVisibility : ActionNode
 	{
 		public bool Visible = true;

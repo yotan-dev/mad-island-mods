@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class ToggleMenuNode : ActionNode
 	{
 		public bool Visible = true;

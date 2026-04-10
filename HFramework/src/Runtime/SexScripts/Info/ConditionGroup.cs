@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HFramework.Tree;
+using YotanModCore;
 
 namespace HFramework.SexScripts.Info
 {
 	[Serializable]
+	[Experimental]
 	public class ConditionGroup
 	{
 		public List<Condition> Conditions;

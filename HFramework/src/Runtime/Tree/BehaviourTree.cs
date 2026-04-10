@@ -8,6 +8,7 @@ using UnityEditorInternal;
 namespace HFramework.Tree
 {
 	[CreateAssetMenu()]
+	[Experimental]
 	public class BehaviourTree : ScriptableObject
 	{
 		public static string TeardownPortName = "Teardown";

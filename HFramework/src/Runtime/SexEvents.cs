@@ -10,6 +10,7 @@ using UnityEngine;
 namespace HFramework
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+	[Experimental]
 	public class SexEventAttribute : Attribute
 	{
 		public string Source;
@@ -22,6 +23,7 @@ namespace HFramework
 		}
 	}
 
+	[Experimental]
 	public class SexEventInfo
 	{
 		public ISexEventBase Event { get; private set; }
@@ -34,6 +36,7 @@ namespace HFramework
 		}
 	}
 
+	[Experimental]
 	public static class SexEvents
 	{
 		// General performance (e.g. starting to do something)

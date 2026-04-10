@@ -11,6 +11,7 @@ namespace HFramework
 	/// </summary>
 	// [Experimental]
 	[CreateAssetMenu(fileName = "HFrameworkDataLoader", menuName = "HFramework/Data Loader", order = 1)]
+	[Experimental]
 	public class HFrameworkDataLoader : ScriptableObject
 	{
 		[Tooltip("Add your custom prefabs here so they get loaded into the game")]

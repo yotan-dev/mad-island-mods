@@ -3,6 +3,7 @@ using YotanModCore.Extensions;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class AnimOnceNode : ActionNode
 	{
 		public string animName = "";

@@ -6,6 +6,7 @@ using YotanModCore.Consts;
 namespace HFramework.SexScripts.Info
 {
 	[Serializable]
+	[Experimental]
 	public class SexNpcInfo
 	{
 		public int NpcID;

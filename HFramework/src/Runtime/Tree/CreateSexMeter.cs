@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class CreateSexMeter : ActionNode
 	{
 		public float DividerPercent = 0.3f;

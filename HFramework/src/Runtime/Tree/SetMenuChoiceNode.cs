@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class SetMenuChoiceNode : ActionNode
 	{
 		public string newChoiceId;

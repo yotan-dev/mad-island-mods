@@ -4,6 +4,7 @@ using System.Text;
 
 namespace HFramework
 {
+	[Experimental]
 	public sealed class TemplatedString
 	{
 		private readonly string template;

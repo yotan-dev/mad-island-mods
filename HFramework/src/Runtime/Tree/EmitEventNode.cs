@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class EmitEventNode : ActionNode
 	{
 		public string eventKey;

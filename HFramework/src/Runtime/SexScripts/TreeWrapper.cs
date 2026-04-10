@@ -1,9 +1,11 @@
 using System.Collections;
 using HFramework.Tree;
 using UnityEngine;
+using YotanModCore;
 
 namespace HFramework.SexScripts
 {
+	[Experimental]
 	public class TreeWrapper
 	{
 		public IEnumerator Run(BehaviourTree tree)

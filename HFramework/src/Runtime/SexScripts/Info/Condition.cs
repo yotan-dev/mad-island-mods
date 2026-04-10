@@ -6,6 +6,7 @@ using YotanModCore;
 namespace HFramework.SexScripts.Info
 {
 	[Serializable]
+	[Experimental]
 	public class Condition
 	{
 		public ConditionType Type;

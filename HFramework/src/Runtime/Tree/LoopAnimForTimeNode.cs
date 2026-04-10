@@ -3,6 +3,7 @@ using YotanModCore.Extensions;
 
 namespace HFramework.Tree
 {
+	[Experimental]
 	public class LoopAnimForTimeNode : ActionNode
 	{
 		public float duration = 1;

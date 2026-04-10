@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace HFramework
 {
+	[Experimental]
 	internal static class BundleLoader
 	{
 		public static HFrameworkDataLoader Loader;
