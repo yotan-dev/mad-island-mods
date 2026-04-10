@@ -21,7 +21,7 @@ namespace YotanModCore
 		private void Awake()
 		{
 			PLogger._Logger = Logger;
-			ModCoreBridge = Initializer.Init(new BepisLogger(Logger));
+			ModCoreBridge = Initializer.Init(new BepisLogger(Logger), Paths.BepInExRootPath);
 
 			Harmony.CreateAndPatchAll(typeof(CraftManagerPatches));
 			Harmony.CreateAndPatchAll(typeof(InventoryManagerPatches));
@@ -52,7 +52,7 @@ namespace YotanModCore
 		private void Start()
 		{
 			// This must be delayed until Start or it might be too early for some stuff to be registered
-			BundleLoader.Load();
+			ModCoreBridge.OnStart();
 			CraftDB.Instance.LoadRecipes(Managers.mn.craftMN);
 		}
 	}

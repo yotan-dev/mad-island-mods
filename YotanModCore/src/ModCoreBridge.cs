@@ -1,5 +1,6 @@
 using System;
 using YotanModCore.Events;
+using YotanModCore.Items;
 using YotanModCore.NpcTalk;
 
 namespace YotanModCore
@@ -46,6 +47,35 @@ namespace YotanModCore
 		public void Post_UIManager_NPCPanelStateChange(CommonStates common)
 		{
 			NpcTalkManager.OnOpen(common);
+		}
+
+		public void OnStart()
+		{
+			BundleLoader.Load();
+
+			var loaderList = BundleLoader.LoadAssetsWithName<YMCDataLoader>("YMCDataLoader");
+			foreach (var loader in loaderList)
+			{
+				PLogger.LogDebug($"Loading from bundle: {loader.BundleName}");
+
+				var itemCount = 0;
+				foreach (var item in loader.Asset.Items)
+				{
+					ItemDB.Instance.RegisterItem(item);
+					itemCount++;
+				}
+
+				PLogger.LogDebug($"Loaded {itemCount} items from bundle {loader.BundleName}");
+
+				var recipesCount = 0;
+				foreach (var recipe in loader.Asset.CraftRecipes)
+				{
+					if (CraftDB.Instance.RegisterCraft(recipe))
+						recipesCount++;
+				}
+
+				PLogger.LogDebug($"Loaded {recipesCount} recipes from bundle {loader.BundleName}");
+			}
 		}
 	}
 }
