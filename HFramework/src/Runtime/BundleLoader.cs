@@ -36,7 +36,7 @@ namespace HFramework
 			// Temp disable until we start making the official scripts
 			// LoadBundle("BepInEx/Plugins/HFramework/hf_sex_scripts");
 
-			var assets = YotanModCore.BundleLoader.LoadAllAssetsOfType<SexScript>();
+			var assets = YotanModCore.BundleUtils.BundleLoader.LoadAllAssetsOfType<SexScript>();
 			var scripts = assets.Select(x => x.Asset).ToArray();
 			LoadSexScripts(scripts);
 		}
