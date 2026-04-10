@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 
-namespace YotanModCore
+namespace YotanModCore.BundleUtils
 {
 	/// <summary>
 	/// Class to enable loading asset bundles from the CustomBundles folder.
