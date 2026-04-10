@@ -1,4 +1,5 @@
 using UnityEngine;
+using YotanModCore.BundleUtils;
 using YotanModCore.Console;
 using YotanModCore.Items;
 using YotanModCore.NpcTalk;
