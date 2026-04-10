@@ -16,6 +16,11 @@ namespace HFramework
 		public bool ReplaceOriginalScenes { get; set; } = true;
 
 		/// <summary>
+		/// How the mod checks for scenes
+		/// </summary>
+		public RunMode RunMode { get; set; } = RunMode.Legacy;
+
+		/// <summary>
 		/// Whether to log debug information about conditions.
 		/// </summary>
 		public bool DebugConditions { get; set; } = false;
