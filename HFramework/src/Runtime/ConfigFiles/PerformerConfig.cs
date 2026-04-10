@@ -20,17 +20,17 @@ namespace HFramework.ConfigFiles
 
 		[XmlArray(ElementName = "Scopes")]
 		[XmlArrayItem(ElementName = "Scope")]
-		public PerformerScope[] Scopes { get; set; } = [];
+		public PerformerScope[] Scopes { get; set; } = new PerformerScope[0];
 
 		public BasePrefabSelector? PrefabSelector { get; set; }
 
 		[XmlArray(ElementName = "Actors")]
 		[XmlArrayItem(ElementName = "Actor")]
-		public ConfigActor[] Actors { get; set; } = [];
+		public ConfigActor[] Actors { get; set; } = new ConfigActor[0];
 
 		[XmlArray(ElementName = "AnimationSets")]
 		[XmlArrayItem(ElementName = "AnimationSet")]
-		public AnimationSetXml[] AnimationSets { get; set; } = [];
+		public AnimationSetXml[] AnimationSets { get; set; } = new AnimationSetXml[0];
 	}
 
 	[Serializable]
@@ -41,6 +41,6 @@ namespace HFramework.ConfigFiles
 
 		[XmlArray(ElementName = "Animations")]
 		[XmlArrayItem(ElementName = "Animation")]
-		public AnimationsConfig[] Animations { get; set; } = [];
+		public AnimationsConfig[] Animations { get; set; } = new AnimationsConfig[0];
 	}
 }

@@ -241,12 +241,12 @@ namespace HFramework.Scenes
 			this.NpcA.sex = CommonStates.SexState.Playing;
 
 			this.NpcB.sex = CommonStates.SexState.Playing;
-			yield return new MakeNpcWait(this, [this.NpcB]).Handle();
+			yield return new MakeNpcWait(this, new CommonStates[] { this.NpcB }).Handle();
 
 			GameObject emotionA = this.SetEmotion(this.Npc2);
 			GameObject emotionB = this.SetEmotion(this.Npc1);
 
-			yield return new MoveToPlace(this, [this.Npc2, this.Npc1], transform.position, this.Place).Handle();
+			yield return new MoveToPlace(this, new CommonStates[] { this.Npc2, this.Npc1 }, transform.position, this.Place).Handle();
 
 			emotionA.SetActive(false);
 			emotionB.SetActive(false);
@@ -348,7 +348,7 @@ namespace HFramework.Scenes
 
 		public override CommonStates[] GetActors()
 		{
-			return [this.Npc1, this.Npc2];
+			return new CommonStates[] { this.Npc1, this.Npc2 };
 		}
 	}
 }

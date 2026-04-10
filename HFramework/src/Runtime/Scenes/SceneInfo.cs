@@ -67,9 +67,9 @@ namespace HFramework.Scenes
 
 		public string Name { get; private set; }
 
-		protected Dictionary<int, Dictionary<int, List<ScenePerformer>>> Performers = [];
+		protected Dictionary<int, Dictionary<int, List<ScenePerformer>>> Performers = new();
 
-		protected Dictionary<string, ScenePerformer> IdToPerformer = [];
+		protected Dictionary<string, ScenePerformer> IdToPerformer = new();
 
 		public SceneInfo(string name)
 		{

@@ -8,19 +8,19 @@ namespace HFramework.Hook
 {
 	/// <summary>
 	/// Manages hooks.
-	/// 
+	///
 	/// Hook targets:
 	/// <Type>::<SceneName>::<Specifier>
-	/// 
+	///
 	/// Execution order:
 	/// - Hooks that have all 3 values set (e.g.: StepStart::CommonSexPlayer::Main)
 	/// - Hooks that have SceneName set and Specifier as wildcard (*) (e.g. StepStart::CommonsexPlayer::*)
 	/// - Hooks that have SceneName as wildcard and Specifier set (e.g. Event::*::OnPenetrate)
 	/// - Hooks that have SceneName and Specifier as wildcards (e.g. Event::*::*)
-	/// 
+	///
 	/// Hooks are queued and executed in the order they are added, unless AddBefore/AddAfter is used, in this case,
 	/// those hooks are put at that position, but if several hooks adds before the same key, the addition order is kept.
-	/// 
+	///
 	/// Type:
 	/// - StepStart: Before a 'Step' (Battle, Fuck, Speed, Bust, etc) in the scene runs
 	/// 	- SceneName: The name of the scene the step is in. Use * to mean any scene.
@@ -42,9 +42,9 @@ namespace HFramework.Hook
 
 		public static HookManager Instance { get; set; } = new HookManager();
 
-		private Dictionary<string, HookQueue> HookDict = new Dictionary<string, HookQueue>();
+		private Dictionary<string, HookQueue> HookDict = new();
 
-		private Dictionary<string, List<Func<HookMemory>>> MemorizerDict = [];
+		private Dictionary<string, List<Func<HookMemory>>> MemorizerDict = new();
 
 		private HookManager()
 		{

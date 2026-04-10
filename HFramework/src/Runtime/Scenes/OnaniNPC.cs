@@ -207,7 +207,7 @@ namespace HFramework.Scenes
 
 			GameObject emoA = Managers.mn.fxMN.GoEmotion(13, this.Npc.gameObject, Vector3.zero);
 
-			yield return new MoveToPlace(this, [this.Npc], pos, this.Place).Handle();
+			yield return new MoveToPlace(this, new CommonStates[] { this.Npc }, pos, this.Place).Handle();
 			if (!this.CanContinue())
 				yield break;
 
@@ -255,7 +255,7 @@ namespace HFramework.Scenes
 
 		public override CommonStates[] GetActors()
 		{
-			return [this.Npc];
+			return new CommonStates[] { this.Npc };
 		}
 	}
 }

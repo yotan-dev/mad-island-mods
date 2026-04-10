@@ -12,11 +12,11 @@ namespace HFramework.ConfigFiles
 		[XmlArray("StartConditions")]
 		[XmlArrayItem("Condition")]
 		[DefaultValue(null)]
-		public BaseConditional[] StartConditions { get; set; } = [];
-		
+		public BaseConditional[] StartConditions { get; set; } = new BaseConditional[0];
+
 		[XmlArray("PerformConditions")]
 		[XmlArrayItem("Condition")]
 		[DefaultValue(null)]
-		public BaseConditional[] PerformConditions { get; set; } = [];
+		public BaseConditional[] PerformConditions { get; set; } = new BaseConditional[0];
 	}
 }

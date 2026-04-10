@@ -7,18 +7,18 @@ namespace HFramework.ConfigFiles
 	{
 		[XmlAttribute("action")]
 		public ActionType Action { get; set; }
-		
+
 		[XmlAttribute("play")]
 		public PlayType Play { get; set; }
-		
+
 		[XmlAttribute("name")]
 		public string Name { get; set; }
-		
+
 		[XmlAttribute("pose")]
 		public int Pose { get; set; } = 1;
-		
-		public string[] Events { get; set; } = [];
-		
+
+		public string[] Events { get; set; } = new string[0];
+
 		[XmlAttribute("changePose")]
 		public bool ChangePose { get; set; } = true;
 	}

@@ -13,7 +13,7 @@ namespace HFramework.Scenes
 	{
 		private static XmlSerializer? Serializer = null;
 
-		private static List<Type> ConditionalTypes = [];
+		private static List<Type> ConditionalTypes = new();
 
 		/// <summary>
 		/// Register HFramework-provided conditionals
@@ -154,7 +154,7 @@ namespace HFramework.Scenes
 		{
 			try
 			{
-				string[] definitions = [
+				string[] definitions = new string[] {
 					"AssWall_Scenes.xml",
 					"CommonSexNPC_Scenes.xml",
 					"CommonSexPlayer_Scenes.xml",
@@ -166,7 +166,7 @@ namespace HFramework.Scenes
 					"PlayerRaped_Scenes.xml",
 					"Slave_Scenes.xml",
 					"Toilet_Scenes.xml",
-				];
+				};
 
 				foreach (var definition in definitions)
 					LoadScenesFromFile($"BepInEx/plugins/HFramework/definitions/{definition}");

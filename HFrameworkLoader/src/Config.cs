@@ -9,6 +9,8 @@ namespace HFrameworkLoader
 
 		private ConfigEntry<bool>? ReplaceOriginalScenes { get; set; }
 
+		private ConfigEntry<RunMode>? RunMode { get; set; }
+
 		private ConfigEntry<bool>? DebugConditions { get; set; }
 
 		internal void Init(ConfigFile conf)
@@ -28,6 +30,21 @@ namespace HFrameworkLoader
 			this.ReplaceOriginalScenes.SettingChanged += (sender, eventArgs) =>
 			{
 				hfConfig.ReplaceOriginalScenes = this.ReplaceOriginalScenes.Value;
+			};
+
+			this.RunMode = conf.Bind<RunMode>(
+				"General",
+				"RunMode",
+				HFramework.RunMode.Legacy,
+				"How the mod checks for scenes. (Requires restart)\n"
+				+ "Legacy: Uses the old Scenes / Definition files.\n"
+				+ "Compatibility: Uses both the new SexScript mode and the old Scenes / Definition files.\n"
+				+ "Future: Uses the new SexScript mode only."
+			);
+			hfConfig.RunMode = this.RunMode.Value;
+			this.RunMode.SettingChanged += (sender, eventArgs) =>
+			{
+				hfConfig.RunMode = this.RunMode.Value;
 			};
 
 			this.DebugConditions = conf.Bind<bool>(

@@ -16,6 +16,21 @@ namespace HFramework
 		public bool ReplaceOriginalScenes { get; set; } = true;
 
 		/// <summary>
+		/// How the mod checks for scenes
+		/// </summary>
+		public RunMode RunMode { get; set; } = RunMode.Legacy;
+
+		/// <summary>
+		/// Is Legacy mode enabled (either in compatiility or actively chosen)
+		/// </summary>
+		public bool IsLegacyModeEnabled => this.RunMode == RunMode.Legacy;
+
+		/// <summary>
+		/// Is Modern mode enabled somehow (either in compatiility or actively chosen)
+		/// </summary>
+		public bool IsModernModeEnabled => this.RunMode != RunMode.Legacy;
+
+		/// <summary>
 		/// Whether to log debug information about conditions.
 		/// </summary>
 		public bool DebugConditions { get; set; } = false;

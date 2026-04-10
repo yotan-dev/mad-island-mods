@@ -21,7 +21,7 @@ namespace HFramework.Scenes
 
 		public static ScenesManager Instance = new ScenesManager();
 
-		private Dictionary<string, SceneInfo> SceneInfos = [];
+		private Dictionary<string, SceneInfo> SceneInfos = new();
 
 		private ScenesManager() { }
 
@@ -52,6 +52,19 @@ namespace HFramework.Scenes
 		public SceneInfo? GetSceneInfo(string name)
 		{
 			return SceneInfos.GetValueOrDefault(name);
+		}
+
+		public bool HasPerformer(IScene scene, PerformerScope scope, CommonStates[] actors)
+		{
+			if (actors.Length == 0)
+				return false;
+
+			var from = actors[0];
+			var to = actors.Length > 1 ? actors[1] : null;
+			var performer = this.GetSceneInfo(scene.GetName())
+				?.GetPerformerInfo(scene, scope, from.npcID, to?.npcID);
+
+			return performer != null;
 		}
 
 		public SexPerformer? GetPerformer(IScene scene, PerformerScope scope, ISceneController controller, CommonStates[] actors)

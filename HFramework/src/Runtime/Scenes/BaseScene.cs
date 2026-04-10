@@ -24,7 +24,7 @@ namespace HFramework.Scenes
 
 		private string CurrentLongLivedStepName = "";
 
-		protected Dictionary<string, HookMemory> HookMemories = [];
+		protected Dictionary<string, HookMemory> HookMemories = new();
 
 		public BaseScene(string name)
 		{

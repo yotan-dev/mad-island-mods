@@ -26,7 +26,7 @@ namespace HFramework.Handlers
 		{
 			addText = "";
 
-			LayerMask mask = LayerMask.GetMask(["BG"]);
+			LayerMask mask = LayerMask.GetMask(new string[] { "BG" });
 			Collider[] array = Physics.OverlapSphere(this.Girl.gameObject.transform.position, 3f, mask);
 			if (array.Length != 0)
 			{

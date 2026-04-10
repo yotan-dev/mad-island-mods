@@ -16,7 +16,7 @@ namespace HFramework.Performer
 
 		public readonly int? ToNpcId;
 
-		public readonly Dictionary<string, AnimationSet> AnimationSets = [];
+		public readonly Dictionary<string, AnimationSet> AnimationSets = new();
 
 		public readonly List<PerformerScope> Scopes;
 

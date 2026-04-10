@@ -36,7 +36,7 @@ namespace HFramework.Scenes
 
 
 		public readonly InventorySlot TmpSlave;
-		
+
 		private CommonStates Npc;
 
 		private GameObject SexObject;
@@ -56,7 +56,7 @@ namespace HFramework.Scenes
 
 			ItemInfo component = this.TmpSlave?.GetComponent<ItemInfo>();
 			this.ItemKey = component?.itemKey ?? "";
-			
+
 			this.Npc = null;
 			if (ItemKeyToNpcID.TryGetValue(this.ItemKey, out var npcId))
 				this.Npc = CommonUtils.MakeTempCommon(npcId);
@@ -156,7 +156,7 @@ namespace HFramework.Scenes
 				PLogger.LogError("No performer found");
 				return false;
 			}
-			
+
 			var scene = this.Performer.Info.SexPrefabSelector.GetPrefab();
 			if (scene == null)
 			{
@@ -280,7 +280,7 @@ namespace HFramework.Scenes
 
 		public override CommonStates[] GetActors()
 		{
-			return [this.Player, this.Npc];
+			return new CommonStates[] { this.Player, this.Npc };
 		}
 	}
 }
