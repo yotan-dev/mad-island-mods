@@ -13,10 +13,8 @@ namespace HFramework
 		/// </summary>
 		/// <param name="logger">Logger instance</param>
 		/// <returns></returns>
-		public static HFrameworkBridge Init(YotanModCore.ILogger logger)
-		{
-			if (initialized)
-			{
+		public static HFrameworkBridge Init(YotanModCore.ILogger logger) {
+			if (initialized) {
 				PLogger.LogError("HFramework: Already initialized");
 				return null;
 			}
@@ -29,10 +27,13 @@ namespace HFramework
 			PLogger.LogInfo($"> Replace Original Scenes: {HFConfig.Instance.ReplaceOriginalScenes}");
 			PLogger.LogInfo($"> Debug Conditions: {HFConfig.Instance.DebugConditions}");
 
-			if (HFConfig.Instance.ReplaceOriginalScenes)
-			{
+			if (HFConfig.Instance.ReplaceOriginalScenes) {
 				GameLifecycleEvents.OnGameStartEvent += () => { SexMeter.Instance.Reload(); };
 				HookManager.RegisterHooksEvent += CommonHooks.Instance.InitHooks;
+			}
+
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				DefaultSexEventHandler.Instance.Init();
 			}
 
 			PLogger.LogInfo("HFramework initialized!");

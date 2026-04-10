@@ -21,6 +21,11 @@ namespace HFramework
 		public RunMode RunMode { get; set; } = RunMode.Legacy;
 
 		/// <summary>
+		/// Is Modern mode enabled somehow (either in compatiility or actively chosen)
+		/// </summary>
+		public bool IsModernModeEnabled => this.RunMode != RunMode.Legacy;
+
+		/// <summary>
 		/// Whether to log debug information about conditions.
 		/// </summary>
 		public bool DebugConditions { get; set; } = false;
