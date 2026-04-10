@@ -1,5 +1,5 @@
 {
-    "name": "HFrameworkLib",
+    "name": "HFramework",
     "rootNamespace": "HFramework",
     "references": [
         "spine-unity"

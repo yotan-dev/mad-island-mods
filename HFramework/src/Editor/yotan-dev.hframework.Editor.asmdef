@@ -1,8 +1,8 @@
 {
-    "name": "yotan-dev.hframework.Editor",
+    "name": "HFramework.Editor",
     "rootNamespace": "",
     "references": [
-        "HFrameworkLib",
+        "HFramework",
         "UnityEditor.UI"
     ],
     "includePlatforms": [

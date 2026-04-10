@@ -30,7 +30,8 @@ namespace HFramework
 		internal static void Load() {
 			Loader = HFrameworkDataLoader.CreateInstance<HFrameworkDataLoader>();
 
-			LoadBundle("BepInEx/Plugins/HFramework/hf_sex_scripts");
+			// Temp disable until we start making the official scripts
+			// LoadBundle("BepInEx/Plugins/HFramework/hf_sex_scripts");
 
 			if (!Directory.Exists("BepInEx/Plugins/HFramework/CustomBundles"))
 				Directory.CreateDirectory("BepInEx/Plugins/HFramework/CustomBundles");
