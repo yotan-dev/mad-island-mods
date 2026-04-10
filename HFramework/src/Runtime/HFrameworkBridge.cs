@@ -7,6 +7,10 @@ using HFramework.Scenes;
 using YotanModCore;
 using YotanModCore.Consts;
 using UnityEngine;
+using System.Linq;
+using HFramework.SexScripts;
+using System.Collections.Generic;
+using HFramework.SexScripts.Info;
 
 namespace HFramework
 {
@@ -44,7 +48,28 @@ namespace HFramework
 
 		#region SexChecks
 
+		private bool SexManager_Pre_SexCheck_Modern(CommonStates from, CommonStates to, ref bool __result) {
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+			if (from.npcID == CommonUtils.GetActivePlayer().npcID) {
+				// CommonSexPlayer
+				__result = BundleLoader.Loader.Prefabs.Any(p => p is CommonSexPlayerScript && p.Info.CanStart(from, to));
+				if (!__result && HFConfig.Instance.IsLegacyModeEnabled)
+					__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
+			} else {
+				// CommonSexNPC
+				__result = BundleLoader.Loader.Prefabs.Any(p => p is CommonSexNPCScript && p.Info.CanStart(from, to));
+				if (!__result && HFConfig.Instance.IsLegacyModeEnabled)
+					__result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
+			}
+
+			return false;
+		}
+
 		public bool SexManager_Pre_SexCheck(CommonStates from, CommonStates to, ref bool __result) {
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				return SexManager_Pre_SexCheck_Modern(from, to, ref __result);
+			}
+
 			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
 				__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
 			else
@@ -116,8 +141,39 @@ namespace HFramework
 
 		#region CommonSexNPC
 
-		public bool SexManager_Pre_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, ref IEnumerator __result)
-		{
+		private bool SexManager_Pre_CommonSexNPC_Modern(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, ref IEnumerator __result) {
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+
+			List<Func<IEnumerator>> scripts = new();
+
+			var info = new CommonSexInfo {
+				Place = sexPlace
+			};
+
+			BundleLoader.Loader.Prefabs
+				.FindAll(p => p is CommonSexNPCScript && p.Info.CanStart(new CommonStates[] { npcA, npcB }) && p.Info.CanExecute(info))
+				.ForEach(p => scripts.Add(() => new TreeWrapper().Run(((CommonSexNPCScript)p).Create(npcA, npcB, sexPlace))));
+
+			if (HFConfig.Instance.IsLegacyModeEnabled) {
+				var legacyScene = new CommonSexNPC(npcA, npcB, sexPlace);
+				if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, new CommonStates[] { npcA, npcB })) {
+					scripts.Add(() => legacyScene.Run());
+				}
+			}
+
+			if (scripts.Count > 0) {
+				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
+				__result = targetScript();
+			}
+
+			return false;
+		}
+
+		public bool SexManager_Pre_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, ref IEnumerator __result) {
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				return SexManager_Pre_CommonSexNPC_Modern(npcA, npcB, sexPlace, ref __result);
+			}
+
 			var scene = new CommonSexNPC(npcA, npcB, sexPlace);
 			__result = scene.Run();
 			return false;
@@ -126,8 +182,37 @@ namespace HFramework
 
 		#region CommonSexPlayer
 
-		public bool SexManager_Pre_CommonSexPlayer(int state, CommonStates pCommon, CommonStates nCommon, Vector3 pos, int sexType, ref IEnumerator __result)
-		{
+		private bool SexManager_Pre_CommonSexPlayer_Modern(int state, CommonStates pCommon, CommonStates nCommon, Vector3 pos, int sexType, ref IEnumerator __result) {
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+			List<Func<IEnumerator>> scripts = new();
+			var info = new PlayerSexInfo {
+				Pos = pos,
+				SexType = sexType,
+			};
+
+			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
+			BundleLoader.Loader.Prefabs
+				.FindAll(x => x is CommonSexPlayerScript && x.Info.CanStart(pCommon, nCommon) && x.Info.CanExecute(info))
+				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((CommonSexPlayerScript)x).Create(pCommon, nCommon, pos, sexType))));
+
+			if (HFConfig.Instance.IsLegacyModeEnabled) {
+				var legacyScene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
+				scripts.Add(() => legacyScene.Run());
+			}
+
+			if (scripts.Count > 0) {
+				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
+				__result = targetScript();
+			}
+
+			return false;
+		}
+
+		public bool SexManager_Pre_CommonSexPlayer(int state, CommonStates pCommon, CommonStates nCommon, Vector3 pos, int sexType, ref IEnumerator __result) {
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				return SexManager_Pre_CommonSexPlayer_Modern(state, pCommon, nCommon, pos, sexType, ref __result);
+			}
+
 			var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
 			__result = scene.Run();
 			return false;
@@ -137,8 +222,7 @@ namespace HFramework
 
 		#region Daruma
 
-		public bool SexManager_Pre_DarumaSex(int state, InventorySlot tmpDaruma, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_DarumaSex(int state, InventorySlot tmpDaruma, ref IEnumerator __result) {
 			var pCommon = CommonUtils.GetActivePlayer();
 			var girlCommon = Managers.mn.inventory.itemSlot[50].common;
 
@@ -152,8 +236,7 @@ namespace HFramework
 
 		#region Delivery
 
-		public bool SexManager_Pre_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result) {
 			var scene = new Delivery(common, tmpWorkPlace, tmpSexPlace);
 			__result = scene.Run();
 			return false;
@@ -163,8 +246,7 @@ namespace HFramework
 
 		#region ManRapes
 
-		public bool SexManager_Pre_ManRapes(CommonStates girl, CommonStates man, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_ManRapes(CommonStates girl, CommonStates man, ref IEnumerator __result) {
 			var scene = new ManRapes(girl, man);
 			__result = scene.Run();
 			return false;
@@ -174,8 +256,7 @@ namespace HFramework
 
 		#region ManRapesSleep
 
-		public bool SexManager_Pre_ManRapesSleep(CommonStates girl, CommonStates man, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_ManRapesSleep(CommonStates girl, CommonStates man, ref IEnumerator __result) {
 			var scene = new ManRapesSleep(girl, man);
 			__result = scene.Run();
 			return false;
@@ -185,8 +266,7 @@ namespace HFramework
 
 		#region OnaniNPC
 
-		public bool SexManager_Pre_OnaniNPC(CommonStates common, SexPlace sexPlace, float upMoral, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_OnaniNPC(CommonStates common, SexPlace sexPlace, float upMoral, ref IEnumerator __result) {
 			var scene = new OnaniNPC(common, sexPlace, upMoral);
 			__result = scene.Run();
 			return false;
@@ -196,8 +276,7 @@ namespace HFramework
 
 		#region PlayerRaped
 
-		public bool SexManager_Pre_PlayerRaped(CommonStates to, CommonStates from, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_PlayerRaped(CommonStates to, CommonStates from, ref IEnumerator __result) {
 			var scene = new PlayerRaped(to, from);
 			__result = scene.Run();
 			return false;
@@ -207,15 +286,13 @@ namespace HFramework
 
 		#region Slave
 
-		public bool SexManager_Pre_Slave(InventorySlot tmpSlave, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_Slave(InventorySlot tmpSlave, ref IEnumerator __result) {
 			var scene = new Slave(CommonUtils.GetActivePlayer(), tmpSlave);
 			__result = scene.Run();
 			return false;
 		}
 
-		public IEnumerator SexManager_Post_Slave(IEnumerator result)
-		{
+		public IEnumerator SexManager_Post_Slave(IEnumerator result) {
 			while (result.MoveNext())
 				yield return result.Current;
 
@@ -229,8 +306,7 @@ namespace HFramework
 
 		#region Toilet
 
-		public bool SexManager_Pre_Toilet(InventorySlot tmpToile, ref IEnumerator __result)
-		{
+		public bool SexManager_Pre_Toilet(InventorySlot tmpToile, ref IEnumerator __result) {
 			var scene = new Toilet(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpToile);
 			__result = scene.Run();
 			return false;
@@ -246,8 +322,7 @@ namespace HFramework
 		/// </summary>
 		/// <param name="st"></param>
 		/// <returns></returns>
-		public int CanSexWithNpc(CommonStates st)
-		{
+		public int CanSexWithNpc(CommonStates st) {
 			// We allow player characters to do it, as long as they are not the active player
 			// otherwise it would block player control.
 			// This is being controlled by the sex scenes anyway, and in the default game it would
