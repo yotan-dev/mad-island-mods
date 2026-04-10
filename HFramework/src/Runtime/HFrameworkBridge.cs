@@ -22,8 +22,14 @@ namespace HFramework
 	public class HFrameworkBridge
 	{
 		public void AfterStartTicks() {
-			PerformerLoader.Load();
-			ScenesManager.Instance.Init();
+			if (HFConfig.Instance.IsLegacyModeEnabled) {
+				PerformerLoader.Load();
+				ScenesManager.Instance.Init();
+			}
+
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				BundleLoader.Load();
+			}
 		}
 
 		#region NPCMove
