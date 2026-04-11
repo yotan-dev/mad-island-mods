@@ -9,6 +9,7 @@ namespace HFramework.SexScripts.Info
 	[Experimental]
 	public class SexNpcInfo
 	{
+		[NpcId]
 		public int NpcID;
 
 		public Faint FaintCondition;
