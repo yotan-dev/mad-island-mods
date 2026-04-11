@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using HFramework.ScriptNodes;
 
-namespace HFramework.Tree.EditorUI
+namespace HFramework.EditorUI.SexScripts
 {
 	public class InspectorView : VisualElement
 	{

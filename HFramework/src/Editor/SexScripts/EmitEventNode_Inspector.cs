@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Reflection;
 using System;
 
-namespace HFramework.Tree.EditorUI
+namespace HFramework.EditorUI.SexScripts
 {
 
 	[CustomEditor(typeof(EmitEventNode))]
