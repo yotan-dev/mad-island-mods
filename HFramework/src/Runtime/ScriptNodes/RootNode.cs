@@ -1,11 +1,11 @@
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class RootNode : Node
+	public class RootNode : ScriptNode
 	{
-		public Node child;
+		public ScriptNode child;
 
-		public Node teardownNode;
+		public ScriptNode teardownNode;
 
 		State mainFinalState;
 
@@ -55,7 +55,7 @@ namespace HFramework.ScriptNodes
 			base.Terminate(fromOutside);
 		}
 
-		public override Node Clone(CommonContext context)
+		public override ScriptNode Clone(CommonContext context)
 		{
 			var node = Instantiate(this);
 			node.context = context;

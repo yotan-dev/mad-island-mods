@@ -16,7 +16,7 @@ namespace HFramework.SexScripts
 			}
 
 			// bool recoveryMode = false;
-			while (tree.treeState == Node.State.Running)
+			while (tree.treeState == ScriptNode.State.Running)
 			{
 				try
 				{
