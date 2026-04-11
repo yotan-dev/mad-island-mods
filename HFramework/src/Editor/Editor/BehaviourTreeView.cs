@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
-using UnityEngine;
 using HFramework.ScriptNodes;
 using UnityEditor;
 using System;
@@ -16,7 +14,7 @@ namespace HFramework.Tree.EditorUI
 
 		public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
 
-		ScriptNodes.BehaviourTree tree;
+		BehaviourTree tree;
 
 		public BehaviourTreeView()
 		{
@@ -31,14 +29,14 @@ namespace HFramework.Tree.EditorUI
 			styleSheets.Add(styleSheet);
 		}
 
-		NodeView FindNodeView(ScriptNodes.Node node)
+		NodeView FindNodeView(ScriptNode node)
 		{
 			return GetNodeByGuid(node.GUID) as NodeView;
 		}
 
-		Port GetOutputPort(NodeView parentView, ScriptNodes.Node childNode)
+		Port GetOutputPort(NodeView parentView, ScriptNode childNode)
 		{
-			var root = parentView.node as ScriptNodes.RootNode;
+			var root = parentView.node as RootNode;
 			if (root != null && parentView.teardownOutput != null && root.teardownNode == childNode)
 			{
 				return parentView.teardownOutput;
@@ -47,7 +45,7 @@ namespace HFramework.Tree.EditorUI
 			return parentView.output;
 		}
 
-		internal void PopulateView(ScriptNodes.BehaviourTree tree)
+		internal void PopulateView(BehaviourTree tree)
 		{
 			this.tree = tree;
 
@@ -156,7 +154,7 @@ namespace HFramework.Tree.EditorUI
 		}
 
 
-		void CreateNodeView(ScriptNodes.Node node)
+		void CreateNodeView(ScriptNode node)
 		{
 			var nodeView = new NodeView(node);
 			nodeView.OnNodeSelected = OnNodeSelected;

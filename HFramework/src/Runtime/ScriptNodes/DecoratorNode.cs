@@ -3,11 +3,11 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public abstract class DecoratorNode : Node
+	public abstract class DecoratorNode : ScriptNode
 	{
-		[HideInInspector] public Node child;
+		[HideInInspector] public ScriptNode child;
 
-		public override Node Clone(CommonContext context)
+		public override ScriptNode Clone(CommonContext context)
 		{
 			var node = Instantiate(this);
 			node.context = context;

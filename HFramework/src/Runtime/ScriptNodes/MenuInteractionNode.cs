@@ -7,7 +7,7 @@ namespace HFramework.ScriptNodes
 
 		public string SuccessOnChoiceId = "leave";
 
-		private Node? currentChild;
+		private ScriptNode? currentChild;
 
 		protected override void OnStart()
 		{
