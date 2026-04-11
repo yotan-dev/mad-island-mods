@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using HFramework.ScriptNodes;
+using HFramework.SexScripts;
 
 namespace HFramework.Tree.EditorUI
 {
@@ -41,7 +42,7 @@ namespace HFramework.Tree.EditorUI
 
 		public void OnSelectionChange()
 		{
-			var tree = Selection.activeObject as BehaviourTree;
+			var tree = Selection.activeObject as SexScript;
 			if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
 			{
 				treeView.PopulateView(tree);

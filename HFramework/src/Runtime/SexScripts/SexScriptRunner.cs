@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.SexScripts
 {
 	[Experimental]
-	public class BehaviourTreeRunner : MonoBehaviour
+	public class SexScriptRunner : MonoBehaviour
 	{
-		public BehaviourTree tree;
+		public SexScript tree;
 
 		// Start is called before the first frame update
 		void Start()

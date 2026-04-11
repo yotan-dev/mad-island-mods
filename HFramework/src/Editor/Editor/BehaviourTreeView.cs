@@ -5,6 +5,7 @@ using HFramework.ScriptNodes;
 using UnityEditor;
 using System;
 using System.Linq;
+using HFramework.SexScripts;
 
 namespace HFramework.Tree.EditorUI
 {
@@ -14,7 +15,7 @@ namespace HFramework.Tree.EditorUI
 
 		public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
 
-		BehaviourTree tree;
+		SexScript tree;
 
 		public BehaviourTreeView()
 		{
@@ -45,7 +46,7 @@ namespace HFramework.Tree.EditorUI
 			return parentView.output;
 		}
 
-		internal void PopulateView(BehaviourTree tree)
+		internal void PopulateView(SexScript tree)
 		{
 			this.tree = tree;
 

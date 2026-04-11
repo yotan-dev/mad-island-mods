@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using HFramework.SexScripts;
 using Spine.Unity;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace HFramework.ScriptNodes
 			set { this._actors = value; this.LoadActorsVariables(); }
 		}
 
-		public BehaviourTree? SexScript { get; set; }
+		public SexScript? SexScript { get; set; }
 
 		public ISexScriptMenuSession? MenuSession { get; set; }
 
@@ -85,7 +86,7 @@ namespace HFramework.ScriptNodes
 
 		public int SexType = -1;
 
-		public CommonContext(BehaviourTree sexScript)
+		public CommonContext(SexScript sexScript)
 		{
 			this.SexScript = sexScript;
 		}

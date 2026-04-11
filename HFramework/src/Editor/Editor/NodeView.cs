@@ -2,6 +2,7 @@ using System;
 using UnityEditor.Experimental.GraphView;
 using HFramework.ScriptNodes;
 using UnityEngine;
+using HFramework.SexScripts;
 
 namespace HFramework.Tree.EditorUI
 {
@@ -80,7 +81,7 @@ namespace HFramework.Tree.EditorUI
 				output.portName = "";
 
 				teardownOutput = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
-				teardownOutput.portName = BehaviourTree.TeardownPortName;
+				teardownOutput.portName = SexScript.TeardownPortName;
 			}
 
 			if (output != null)
