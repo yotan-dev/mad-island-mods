@@ -8,6 +8,19 @@ namespace HFramework.SexScripts.Info
 	[Experimental]
 	public class SexScriptInfo
 	{
+		/// <summary>
+		/// The Unique Identifier of this SexScript, it may be used if we want to reference it from code/other mods.
+		/// Should be unique across all mods.
+		///
+		/// Recommended format: "modname.scriptname"
+		/// </summary>
+		public string GUID;
+
+		/// <summary>
+		/// The display name of the sex script.
+		/// </summary>
+		public string Name;
+
 		public SexNpcInfo[] Npcs;
 
 		public bool NpcOrderMatters;
@@ -92,7 +105,7 @@ namespace HFramework.SexScripts.Info
 			if (this.StartConditions.Count == 0)
 				return true;
 
-			var result = this.StartConditions.Any(g => g.Pass());
+			var result = this.StartConditions.Any(g => g.CanStart());
 			PLogger.LogDebug($"Start conditions result: {result}");
 			return result;
 		}
@@ -102,7 +115,7 @@ namespace HFramework.SexScripts.Info
 			if (this.ExecuteConditions.Count == 0)
 				return true;
 
-			var result = this.ExecuteConditions.Any(g => g.Pass(info));
+			var result = this.ExecuteConditions.Any(g => g.CanExecute(info));
 			PLogger.LogDebug($"Execute conditions result: {result}");
 			return result;
 		}
