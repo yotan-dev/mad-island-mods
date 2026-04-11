@@ -7,7 +7,7 @@ namespace HFramework.SexScripts
 	[Experimental]
 	public class TreeWrapper
 	{
-		public IEnumerator Run(BehaviourTree tree)
+		public IEnumerator Run(SexScript tree)
 		{
 			if (tree.context != null && tree.context.MenuSession == null)
 			{
