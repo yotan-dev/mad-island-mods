@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using HFramework.Tree;
+using HFramework.ScriptNodes;
 using YotanModCore;
 
 namespace HFramework.SexScripts.Info

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using HFramework.Tree;
 using HFramework.SexScripts;
 
 namespace HFramework

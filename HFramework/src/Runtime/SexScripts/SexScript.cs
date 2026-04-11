@@ -1,6 +1,5 @@
 using HFramework.SexScripts.Info;
-using HFramework.Tree;
-using YotanModCore;
+using HFramework.ScriptNodes;
 
 namespace HFramework.SexScripts
 {

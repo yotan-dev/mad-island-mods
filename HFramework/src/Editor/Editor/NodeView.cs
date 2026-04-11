@@ -1,5 +1,6 @@
 using System;
 using UnityEditor.Experimental.GraphView;
+using HFramework.ScriptNodes;
 using UnityEngine;
 
 namespace HFramework.Tree.EditorUI
@@ -8,7 +9,7 @@ namespace HFramework.Tree.EditorUI
 	{
 		public Action<NodeView> OnNodeSelected;
 
-		public Node node;
+		public ScriptNodes.Node node;
 
 		public Port input;
 
@@ -16,7 +17,7 @@ namespace HFramework.Tree.EditorUI
 
 		public Port teardownOutput;
 
-		public NodeView(Node node)
+		public NodeView(ScriptNodes.Node node)
 		{
 			this.node = node;
 			this.title = node.name;

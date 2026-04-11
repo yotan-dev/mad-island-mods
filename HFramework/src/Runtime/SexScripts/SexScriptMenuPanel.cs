@@ -2,7 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using HFramework.Tree;
+using HFramework.ScriptNodes;
 using UnityEngine;
 using YotanModCore;
 using YotanModCore.PropPanels;
