@@ -9,37 +9,43 @@ using YotanModCore.Consts;
 [Experimental]
 public class Pregnant : NpcCondition
 {
-	[Header("Pregnancy Status\n(select all that applies -- treated as 'OR')")]
-	/// <summary>
-	/// If true, the NPC must not be pregnant.
-	/// </summary>
-	[Tooltip("If true, the NPC must not be pregnant.")]
-	public bool NotPregnant;
+	[Flags]
+	public enum PregnancyStatus : int {
+		[InspectorName("None - (DO NOT USE) Will never pass")]
+		None = 0,
 
-	/// <summary>
-	/// If true, the NPC must be pregnant but not ready to give birth.
-	/// This means they are running the pregnancy cycle, but does not have a belly yet
-	/// </summary>
-	[Tooltip("If true, the NPC must be pregnant but not ready to give birth (no belly yet).")]
-	public bool PregnantNoBelly;
+		/// <summary>
+		/// Not pregnant at all
+		/// </summary>
+		NotPregnant = 1 << 0,
 
-	/// <summary>
-	/// If true, the NPC must be ready to give birth.
-	/// This means they have a belly and are ready to give birth.
-	/// </summary>
-	[Tooltip("If true, the NPC must be ready to give birth (has belly and is ready to give birth).")]
-	public bool PregnantReady;
+		/// <summary>
+		/// Pregnant but not ready to give birth (no belly yet)
+		/// </summary>
+		PregnantNoBelly = 1 << 1,
+
+		/// <summary>
+		/// Pregnant and ready to give birth (has belly)
+		/// </summary>
+		PregnantReady = 1 << 2,
+
+		[InspectorName("All - (DO NOT USE) Will always pass, just delete the condition")]
+		All = ~0,
+	}
+
+	[Tooltip("Pregnancy states that are accepted (treated as 'OR')")]
+	public PregnancyStatus Pregnancy = PregnancyStatus.NotPregnant;
 
 	public override bool Pass(CommonStates common) {
 		if (!CommonUtils.IsPregnant(common)) {
-			return this.NotPregnant;
+			return this.Pregnancy.HasFlag(PregnancyStatus.NotPregnant);
 		}
 
 		var isReadyToGiveBirth = common.pregnant[PregnantIndex.TimeToBirth] != 0;
 		if (isReadyToGiveBirth) {
-			return this.PregnantReady;
+			return this.Pregnancy.HasFlag(PregnancyStatus.PregnantReady);
 		} else {
-			return this.PregnantNoBelly;
+			return this.Pregnancy.HasFlag(PregnancyStatus.PregnantNoBelly);
 		}
 	}
 }
