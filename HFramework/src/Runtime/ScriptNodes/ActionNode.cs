@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public abstract class ActionNode : Node
+	public abstract class ActionNode : ScriptNode
 	{
 	}
 }

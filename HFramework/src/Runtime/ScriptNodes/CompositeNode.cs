@@ -4,11 +4,11 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public abstract class CompositeNode : Node
+	public abstract class CompositeNode : ScriptNode
 	{
-		[HideInInspector] public List<Node> children = new List<Node>();
+		[HideInInspector] public List<ScriptNode> children = new List<ScriptNode>();
 
-		public override Node Clone(CommonContext context)
+		public override ScriptNode Clone(CommonContext context)
 		{
 			var node = Instantiate(this);
 			node.context = context;

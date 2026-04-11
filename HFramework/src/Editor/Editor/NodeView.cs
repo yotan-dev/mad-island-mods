@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace HFramework.Tree.EditorUI
 {
-	public class NodeView : UnityEditor.Experimental.GraphView.Node
+	public class NodeView : Node
 	{
 		public Action<NodeView> OnNodeSelected;
 
-		public ScriptNodes.Node node;
+		public ScriptNode node;
 
 		public Port input;
 
@@ -17,7 +17,7 @@ namespace HFramework.Tree.EditorUI
 
 		public Port teardownOutput;
 
-		public NodeView(ScriptNodes.Node node)
+		public NodeView(ScriptNode node)
 		{
 			this.node = node;
 			this.title = node.name;

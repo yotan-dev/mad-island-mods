@@ -13,17 +13,17 @@ namespace HFramework.ScriptNodes
 	{
 		public static string TeardownPortName = "Teardown";
 
-		public Node rootNode;
+		public ScriptNode rootNode;
 
-		public Node.State treeState = Node.State.Running;
+		public ScriptNode.State treeState = ScriptNode.State.Running;
 
 		public CommonContext context;
 
-		public List<Node> nodes = new List<Node>();
+		public List<ScriptNode> nodes = new List<ScriptNode>();
 
-		public Node.State Update()
+		public ScriptNode.State Update()
 		{
-			if (rootNode.state == Node.State.Running)
+			if (rootNode.state == ScriptNode.State.Running)
 			{
 				treeState = rootNode.Update();
 			}
@@ -32,9 +32,9 @@ namespace HFramework.ScriptNodes
 		}
 
 #if UNITY_EDITOR
-		public Node CreateNode(System.Type type)
+		public ScriptNode CreateNode(System.Type type)
 		{
-			var node = ScriptableObject.CreateInstance(type) as Node;
+			var node = ScriptableObject.CreateInstance(type) as ScriptNode;
 			node.name = type.Name;
 			node.GUID = GUID.Generate().ToString();
 			nodes.Add(node);
@@ -44,7 +44,7 @@ namespace HFramework.ScriptNodes
 			return node;
 		}
 
-		public void DeleteNode(Node node)
+		public void DeleteNode(ScriptNode node)
 		{
 			nodes.Remove(node);
 			AssetDatabase.RemoveObjectFromAsset(node);
@@ -52,7 +52,7 @@ namespace HFramework.ScriptNodes
 		}
 #endif
 
-		public void AddChild(Node parent, Node child, string portName = "")
+		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "")
 		{
 			var decorator = parent as DecoratorNode;
 			if (decorator)
@@ -80,7 +80,7 @@ namespace HFramework.ScriptNodes
 			}
 		}
 
-		public void RemoveChild(Node parent, Node child, string portName = "")
+		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "")
 		{
 			var decorator = parent as DecoratorNode;
 			if (decorator)
@@ -108,9 +108,9 @@ namespace HFramework.ScriptNodes
 			}
 		}
 
-		public List<Node> GetChildren(Node parent)
+		public List<ScriptNode> GetChildren(ScriptNode parent)
 		{
-			var children = new List<Node>();
+			var children = new List<ScriptNode>();
 
 			var decorator = parent as DecoratorNode;
 			if (decorator && decorator.child != null)

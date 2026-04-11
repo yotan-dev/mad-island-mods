@@ -3,7 +3,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public abstract class Node : ScriptableObject
+	public abstract class ScriptNode : ScriptableObject
 	{
 		public enum State
 		{
@@ -47,7 +47,7 @@ namespace HFramework.ScriptNodes
 			this.started = false;
 		}
 
-		public virtual Node Clone(CommonContext context)
+		public virtual ScriptNode Clone(CommonContext context)
 		{
 			var node = Instantiate(this);
 			node.context = context;
