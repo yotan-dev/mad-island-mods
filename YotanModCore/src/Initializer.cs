@@ -1,4 +1,5 @@
 using UnityEngine;
+using YotanModCore.BundleUtils;
 using YotanModCore.Console;
 using YotanModCore.Items;
 using YotanModCore.NpcTalk;
@@ -15,9 +16,12 @@ namespace YotanModCore
 		/// Initializes YotanModCore. Should only be used by YotanModCoreLoader.
 		/// </summary>
 		/// <param name="logger"></param>
+		/// <param name="bepInExRoot"></param>
 		/// <returns></returns>
-		public static ModCoreBridge Init(ILogger logger)
+		public static ModCoreBridge Init(ILogger logger, string bepInExRoot)
 		{
+			BundleLoader.BepInExRootPath = bepInExRoot;
+
 			if (initialized)
 			{
 				PLogger.LogError("YotanModCore: Already initialized");

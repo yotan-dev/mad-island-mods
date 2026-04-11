@@ -1,7 +1,6 @@
-using System;
-using System.Linq;
 using HFramework.Scenes;
 using HFramework.SexScripts;
+using HFramework.ScriptNodes;
 using YotanModCore;
 using YotanModCore.Consts;
 
@@ -153,7 +152,7 @@ namespace HFramework
 			if (e.ctx.SexScript is not CommonSexNPCScript commonSexNpcScript)
 				return;
 
-			if (commonSexNpcScript.treeState != Tree.Node.State.Success)
+			if (commonSexNpcScript.treeState != ScriptNode.State.Success)
 				return;
 
 			// Sex was completed, every actor loves the others more.

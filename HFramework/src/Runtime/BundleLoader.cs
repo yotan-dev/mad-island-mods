@@ -1,4 +1,4 @@
-using System.IO;
+using System.Linq;
 using HFramework.SexScripts;
 using UnityEngine;
 
@@ -13,14 +13,17 @@ namespace HFramework
 			PLogger.LogInfo($"Loading {path}");
 
 			var bundle = AssetBundle.LoadFromFile(path);
-			var assets = bundle.LoadAllAssets<SexScript>();
+			var assets = bundle.LoadAllAssets<SexScripts.SexScript>();
 			if (Loader == null) {
 				PLogger.LogError($"Failed to load HFrameworkDataLoader from bundle. Make sure the asset exists with the right name.");
 				return;
 			}
 
-			foreach (var item in assets)
-			{
+			LoadSexScripts(assets);
+		}
+
+		private static void LoadSexScripts(SexScripts.SexScript[] scripts) {
+			foreach (var item in scripts) {
 				Loader.Prefabs.Add(item);
 			}
 
@@ -33,16 +36,9 @@ namespace HFramework
 			// Temp disable until we start making the official scripts
 			// LoadBundle("BepInEx/Plugins/HFramework/hf_sex_scripts");
 
-			if (!Directory.Exists("BepInEx/Plugins/HFramework/CustomBundles"))
-				Directory.CreateDirectory("BepInEx/Plugins/HFramework/CustomBundles");
-
-			string[] bundlePaths = Directory.GetFiles($"BepInEx/Plugins/HFramework/CustomBundles", "*", SearchOption.AllDirectories);
-			foreach (var bundlePath in bundlePaths) {
-				if (bundlePath.EndsWith(".dll"))
-					continue;
-
-				LoadBundle(bundlePath);
-			}
+			var assets = YotanModCore.BundleUtils.BundleLoader.LoadAllAssetsOfType<SexScripts.SexScript>();
+			var scripts = assets.Select(x => x.Asset).ToArray();
+			LoadSexScripts(scripts);
 		}
 	}
 }

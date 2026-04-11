@@ -1,14 +1,13 @@
 using System.Collections;
-using HFramework.Tree;
+using HFramework.ScriptNodes;
 using UnityEngine;
-using YotanModCore;
 
 namespace HFramework.SexScripts
 {
 	[Experimental]
 	public class TreeWrapper
 	{
-		public IEnumerator Run(BehaviourTree tree)
+		public IEnumerator Run(SexScript tree)
 		{
 			if (tree.context != null && tree.context.MenuSession == null)
 			{
@@ -17,7 +16,7 @@ namespace HFramework.SexScripts
 			}
 
 			// bool recoveryMode = false;
-			while (tree.treeState == Node.State.Running)
+			while (tree.treeState == ScriptNode.State.Running)
 			{
 				try
 				{

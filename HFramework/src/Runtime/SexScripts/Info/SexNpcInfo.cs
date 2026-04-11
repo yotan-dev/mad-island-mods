@@ -1,6 +1,6 @@
 using System;
-using YotanModCore;
-using YotanModCore.Consts;
+using HFramework.SexScripts.Info.NpcConditions;
+using UnityEngine;
 
 
 namespace HFramework.SexScripts.Info
@@ -9,69 +9,15 @@ namespace HFramework.SexScripts.Info
 	[Experimental]
 	public class SexNpcInfo
 	{
+		[NpcId]
 		public int NpcID;
-		public PregnantState Pregnant;
-		public FaintState Faint;
-		public DeadState Dead;
 
-		private bool CheckPregnant(CommonStates common)
-		{
-			PLogger.LogDebug($"Checking pregnant state for NPC {common.npcID}. To match: {this.Pregnant}");
-			switch (this.Pregnant) {
-				case PregnantState.Any:
-					return true;
+		public Faint FaintCondition;
 
-				case PregnantState.NotPregnant:
-					return !CommonUtils.IsPregnant(common);
+		public Dead DeadCondition;
 
-				case PregnantState.Pregnant:
-					return CommonUtils.IsPregnant(common);
-
-				case PregnantState.NotReadyToGiveBirth:
-					return !CommonUtils.IsPregnant(common) || common.pregnant[PregnantIndex.TimeToBirth] != 0;
-
-				case PregnantState.PregNotReadyToGiveBirth:
-					return CommonUtils.IsPregnant(common) && common.pregnant[PregnantIndex.TimeToBirth] != 0;
-
-				case PregnantState.ReadyToGiveBirth:
-					return CommonUtils.IsPregnant(common) && common.pregnant[PregnantIndex.TimeToBirth] == 0;
-			}
-
-			return false;
-		}
-
-		private bool CheckFaint(CommonStates common)
-		{
-			switch (this.Faint) {
-				case FaintState.Any:
-					return true;
-
-				case FaintState.NotFainted:
-					return common.faint > 0 && common.life > 0;
-
-				// @TODO: HFramework conditionals used life too, but I don't remember why
-				case FaintState.Fainted:
-					return common.faint <= 0 || common.life <= 0;
-			}
-
-			return false;
-		}
-
-		private bool CheckDead(CommonStates common)
-		{
-			switch (this.Dead) {
-				case DeadState.Any:
-					return true;
-
-				case DeadState.NotDead:
-					return common.dead == 0;
-
-				case DeadState.Dead:
-					return common.dead != 0;
-			}
-
-			return false;
-		}
+		[SerializeReference, Subclass]
+		public NpcCondition[] Conditions;
 
 		public bool Pass(CommonStates npc)
 		{
@@ -80,19 +26,21 @@ namespace HFramework.SexScripts.Info
 				return false;
 			}
 
-			if (!this.CheckPregnant(npc)) {
-				PLogger.LogDebug($"Pregnant check failed for NPC {npc.npcID}");
-				return false;
-			}
-
-			if (!this.CheckFaint(npc)) {
+			if (!this.FaintCondition.Pass(npc)) {
 				PLogger.LogDebug($"Faint check failed for NPC {npc.npcID}");
 				return false;
 			}
 
-			if (!this.CheckDead(npc)) {
+			if (!this.DeadCondition.Pass(npc)) {
 				PLogger.LogDebug($"Dead check failed for NPC {npc.npcID}");
 				return false;
+			}
+
+			foreach (var condition in this.Conditions) {
+				if (!condition.Pass(npc)) {
+					PLogger.LogDebug($"Condition {condition.GetType().Name} failed for NPC {npc.npcID}");
+					return false;
+				}
 			}
 
 			PLogger.LogDebug($"NPC {npc.npcID} passed all checks");
