@@ -17,12 +17,15 @@ namespace HFramework.SexScripts
 
 		public static string TeardownPortName = "Teardown";
 
+		[HideInInspector]
 		public ScriptNode rootNode;
 
+		[HideInInspector]
 		public ScriptNode.State treeState = ScriptNode.State.Running;
 
 		public CommonContext context;
 
+		[HideInInspector]
 		public List<ScriptNode> nodes = new List<ScriptNode>();
 
 		public ScriptNode.State Update()
