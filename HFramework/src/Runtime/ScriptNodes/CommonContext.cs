@@ -48,7 +48,7 @@ namespace HFramework.ScriptNodes
 			set { this._actors = value; this.LoadActorsVariables(); }
 		}
 
-		public SexScript? SexScript { get; set; }
+		public SexScripts.SexScript? SexScript { get; set; }
 
 		public ISexScriptMenuSession? MenuSession { get; set; }
 
@@ -86,7 +86,7 @@ namespace HFramework.ScriptNodes
 
 		public int SexType = -1;
 
-		public CommonContext(SexScript sexScript)
+		public CommonContext(SexScripts.SexScript sexScript)
 		{
 			this.SexScript = sexScript;
 		}

@@ -13,7 +13,7 @@ namespace HFramework
 			PLogger.LogInfo($"Loading {path}");
 
 			var bundle = AssetBundle.LoadFromFile(path);
-			var assets = bundle.LoadAllAssets<SexScript>();
+			var assets = bundle.LoadAllAssets<SexScripts.SexScript>();
 			if (Loader == null) {
 				PLogger.LogError($"Failed to load HFrameworkDataLoader from bundle. Make sure the asset exists with the right name.");
 				return;
@@ -22,7 +22,7 @@ namespace HFramework
 			LoadSexScripts(assets);
 		}
 
-		private static void LoadSexScripts(SexScript[] scripts) {
+		private static void LoadSexScripts(SexScripts.SexScript[] scripts) {
 			foreach (var item in scripts) {
 				Loader.Prefabs.Add(item);
 			}
@@ -36,7 +36,7 @@ namespace HFramework
 			// Temp disable until we start making the official scripts
 			// LoadBundle("BepInEx/Plugins/HFramework/hf_sex_scripts");
 
-			var assets = YotanModCore.BundleUtils.BundleLoader.LoadAllAssetsOfType<SexScript>();
+			var assets = YotanModCore.BundleUtils.BundleLoader.LoadAllAssetsOfType<SexScripts.SexScript>();
 			var scripts = assets.Select(x => x.Asset).ToArray();
 			LoadSexScripts(scripts);
 		}

@@ -4,7 +4,7 @@ using HFramework.ScriptNodes;
 using UnityEngine;
 using HFramework.SexScripts;
 
-namespace HFramework.Tree.EditorUI
+namespace HFramework.EditorUI.SexScripts
 {
 	public class NodeView : Node
 	{
