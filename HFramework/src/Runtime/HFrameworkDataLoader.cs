@@ -14,6 +14,6 @@ namespace HFramework
 	public class HFrameworkDataLoader : ScriptableObject
 	{
 		[Tooltip("Add your custom prefabs here so they get loaded into the game")]
-		public List<SexScript> Prefabs = new List<SexScript>();
+		public List<SexScripts.SexScript> Prefabs = new List<SexScripts.SexScript>();
 	}
 }

@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using HFramework.ScriptNodes;
 using HFramework.SexScripts;
 
-namespace HFramework.Tree.EditorUI
+namespace HFramework.EditorUI.SexScripts
 {
 	public class BehaviourTreeEditor : EditorWindow
 	{
@@ -25,12 +25,12 @@ namespace HFramework.Tree.EditorUI
 			VisualElement root = rootVisualElement;
 
 			// Import UXML
-			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.yotan-dev.hframework/Editor/Editor/BehaviourTreeEditor.uxml");
+			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.yotan-dev.hframework/Editor/SexScripts/BehaviourTreeEditor.uxml");
 			visualTree.CloneTree(root);
 
 			// A stylesheet can be added to a VisualElement.
 			// The style will be applied to the VisualElement and all of its children.
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/Editor/BehaviourTreeEditor.uss");
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/BehaviourTreeEditor.uss");
 			root.styleSheets.Add(styleSheet);
 
 			treeView = root.Q<BehaviourTreeView>();

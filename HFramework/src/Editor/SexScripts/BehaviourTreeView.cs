@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using HFramework.SexScripts;
 
-namespace HFramework.Tree.EditorUI
+namespace HFramework.EditorUI.SexScripts
 {
 	public class BehaviourTreeView : GraphView
 	{
@@ -26,7 +26,7 @@ namespace HFramework.Tree.EditorUI
 			this.AddManipulator(new SelectionDragger());
 			this.AddManipulator(new RectangleSelector());
 
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/Editor/BehaviourTreeEditor.uss");
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/BehaviourTreeEditor.uss");
 			styleSheets.Add(styleSheet);
 		}
 
