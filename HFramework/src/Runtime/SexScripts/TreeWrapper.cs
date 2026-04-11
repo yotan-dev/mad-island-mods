@@ -1,7 +1,6 @@
 using System.Collections;
-using HFramework.Tree;
+using HFramework.ScriptNodes;
 using UnityEngine;
-using YotanModCore;
 
 namespace HFramework.SexScripts
 {
