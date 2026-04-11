@@ -9,15 +9,15 @@ using HFramework.SexScripts;
 
 namespace HFramework.EditorUI.SexScripts
 {
-	public class BehaviourTreeView : GraphView
+	public class SexScriptView : GraphView
 	{
 		public Action<NodeView> OnNodeSelected;
 
-		public new class UxmlFactory : UxmlFactory<BehaviourTreeView, GraphView.UxmlTraits> { }
+		public new class UxmlFactory : UxmlFactory<SexScriptView, GraphView.UxmlTraits> { }
 
 		SexScript tree;
 
-		public BehaviourTreeView()
+		public SexScriptView()
 		{
 			Insert(0, new GridBackground());
 
@@ -26,7 +26,7 @@ namespace HFramework.EditorUI.SexScripts
 			this.AddManipulator(new SelectionDragger());
 			this.AddManipulator(new RectangleSelector());
 
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/BehaviourTreeEditor.uss");
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/SexScriptEditor.uss");
 			styleSheets.Add(styleSheet);
 		}
 

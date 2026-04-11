@@ -1,22 +1,21 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using HFramework.ScriptNodes;
 using HFramework.SexScripts;
 
 namespace HFramework.EditorUI.SexScripts
 {
-	public class BehaviourTreeEditor : EditorWindow
+	public class SexScriptEditor : EditorWindow
 	{
-		BehaviourTreeView treeView;
+		SexScriptView treeView;
 		InspectorView inspectorView;
 
 
-		[MenuItem("Behaviour Tree/Editor...")]
+		[MenuItem("Sex Script/Editor...")]
 		public static void OpenWindow()
 		{
-			BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();
-			wnd.titleContent = new GUIContent("BehaviourTreeEditor");
+			SexScriptEditor wnd = GetWindow<SexScriptEditor>();
+			wnd.titleContent = new GUIContent("SexScriptEditor");
 		}
 
 		public void CreateGUI()
@@ -25,15 +24,15 @@ namespace HFramework.EditorUI.SexScripts
 			VisualElement root = rootVisualElement;
 
 			// Import UXML
-			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.yotan-dev.hframework/Editor/SexScripts/BehaviourTreeEditor.uxml");
+			var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.yotan-dev.hframework/Editor/SexScripts/SexScriptEditor.uxml");
 			visualTree.CloneTree(root);
 
 			// A stylesheet can be added to a VisualElement.
 			// The style will be applied to the VisualElement and all of its children.
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/BehaviourTreeEditor.uss");
+			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/SexScriptEditor.uss");
 			root.styleSheets.Add(styleSheet);
 
-			treeView = root.Q<BehaviourTreeView>();
+			treeView = root.Q<SexScriptView>();
 			inspectorView = root.Q<InspectorView>();
 			treeView.OnNodeSelected = OnNodeSelectionChanged;
 
