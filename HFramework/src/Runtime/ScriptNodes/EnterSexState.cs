@@ -5,18 +5,13 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	[ScriptNode("HFramework", "Flow/Start Script")]
-	public class StartScript : Action
+	[ScriptNode("HFramework", "Flow/Enter Sex State")]
+	public class EnterSexState : Action
 	{
 		public string message;
 
 		protected override void OnStart()
 		{
-			// @TODO: Maybe move this to script creation
-			if (this.context.SexPlace != null && this.context.SexPlacePos == null)
-			{
-				this.context.SexPlacePos = this.context.SexPlace.transform.Find("pos")?.position;
-			}
 		}
 
 		protected override void OnStop()
