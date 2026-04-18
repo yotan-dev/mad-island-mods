@@ -28,10 +28,8 @@ namespace HFramework.SexScripts
 		[HideInInspector]
 		public List<ScriptNode> nodes = new List<ScriptNode>();
 
-		public ScriptNode.State Update()
-		{
-			if (rootNode.state == ScriptNode.State.Running)
-			{
+		public ScriptNode.State Update() {
+			if (rootNode.state == ScriptNode.State.Running) {
 				treeState = rootNode.Update();
 			}
 
@@ -39,11 +37,38 @@ namespace HFramework.SexScripts
 		}
 
 #if UNITY_EDITOR
+		private string GenerateNodeId(System.Type type)
+		{
+			var newId = type.Name.ToString();
+			var idCount = 0;
+			bool isUnique = false;
+			while (!isUnique)
+			{
+				isUnique = true;
+				foreach (var node in nodes)
+				{
+					if (node.ID == newId)
+					{
+						isUnique = false;
+						break;
+					}
+				}
+				if (!isUnique)
+				{
+					idCount++;
+					newId = $"{type.Name}_{idCount}";
+				}
+			}
+
+			return newId;
+		}
+
 		public ScriptNode CreateNode(System.Type type)
 		{
 			var node = ScriptableObject.CreateInstance(type) as ScriptNode;
 			node.name = type.Name;
 			node.GUID = GUID.Generate().ToString();
+			node.ID = this.GenerateNodeId(type);
 			nodes.Add(node);
 
 			AssetDatabase.AddObjectToAsset(node, this);
@@ -59,94 +84,74 @@ namespace HFramework.SexScripts
 		}
 #endif
 
-		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "")
-		{
+		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as DecoratorNode;
-			if (decorator)
-			{
+			if (decorator) {
 				decorator.child = child;
 			}
 
 			var root = parent as RootNode;
-			if (root)
-			{
-				if (portName == TeardownPortName)
-				{
+			if (root) {
+				if (portName == TeardownPortName) {
 					root.teardownNode = child;
-				}
-				else
-				{
+				} else {
 					root.child = child;
 				}
 			}
 
 			var composite = parent as CompositeNode;
-			if (composite)
-			{
+			if (composite) {
 				composite.children.Add(child);
 			}
 		}
 
-		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "")
-		{
+		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as DecoratorNode;
-			if (decorator)
-			{
+			if (decorator) {
 				decorator.child = null;
 			}
 
 			var root = parent as RootNode;
-			if (root)
-			{
-				if (portName == TeardownPortName)
-				{
+			if (root) {
+				if (portName == TeardownPortName) {
 					root.teardownNode = null;
-				}
-				else
-				{
+				} else {
 					root.child = null;
 				}
 			}
 
 			var composite = parent as CompositeNode;
-			if (composite)
-			{
+			if (composite) {
 				composite.children.Remove(child);
 			}
 		}
 
-		public List<ScriptNode> GetChildren(ScriptNode parent)
-		{
+		public List<ScriptNode> GetChildren(ScriptNode parent) {
 			var children = new List<ScriptNode>();
 
 			var decorator = parent as DecoratorNode;
-			if (decorator && decorator.child != null)
-			{
+			if (decorator && decorator.child != null) {
 				children.Add(decorator.child);
 			}
 
 			var root = parent as RootNode;
-			if (root && root.child != null)
-			{
+			if (root && root.child != null) {
 				children.Add(root.child);
 			}
 
-			if (root && root.teardownNode != null)
-			{
+			if (root && root.teardownNode != null) {
 				children.Add(root.teardownNode);
 			}
 
 			var composite = parent as CompositeNode;
-			if (composite)
-			{
+			if (composite) {
 				return composite.children;
 			}
 
 			return children;
 		}
 
-		internal SexScript Clone()
-		{
+		internal SexScript Clone() {
 			var tree = Instantiate(this);
 			tree.context = new CommonContext(this);
 			tree.rootNode = tree.rootNode.Clone(tree.context);
