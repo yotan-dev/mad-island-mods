@@ -45,7 +45,7 @@ namespace HFramework
 
 		[HideInInspector] public CommonContext ctx;
 
-		public virtual void Populate(CommonContext ctx, EmitEventNode node)
+		public virtual void Populate(CommonContext ctx, EmitEvent node)
 		{
 			this.ctx = ctx;
 		}
@@ -75,7 +75,7 @@ namespace HFramework
 		[HideInInspector] public CommonStates From;
 		[HideInInspector] public CommonStates To;
 
-		public override void Populate(CommonContext ctx, EmitEventNode node)
+		public override void Populate(CommonContext ctx, EmitEvent node)
 		{
 			base.Populate(ctx, node);
 			From = ctx.Actors[fromNpcIdx].Common;
@@ -106,7 +106,7 @@ namespace HFramework
 		public int fromNpcIdx;
 		[HideInInspector] public CommonStates Self;
 
-		public override void Populate(CommonContext ctx, EmitEventNode node)
+		public override void Populate(CommonContext ctx, EmitEvent node)
 		{
 			base.Populate(ctx, node);
 			Self = ctx.Actors[fromNpcIdx].Common;

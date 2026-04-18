@@ -3,26 +3,30 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class ToggleMenu : Action
+	public class Wait : Action
 	{
-		public bool ToVisibility = true;
+		public float duration = 1;
+
+		float startTime;
 
 		protected override void OnStart()
 		{
+			startTime = Time.time;
 		}
 
 		protected override void OnStop()
 		{
+
 		}
 
 		protected override State OnUpdate()
 		{
-			if (this.ToVisibility)
-				this.context.MenuSession?.Show();
-			else
-				this.context.MenuSession?.Hide();
+			if (Time.time - startTime > duration)
+			{
+				return State.Success;
+			}
 
-			return State.Success;
+			return State.Running;
 		}
 	}
 }

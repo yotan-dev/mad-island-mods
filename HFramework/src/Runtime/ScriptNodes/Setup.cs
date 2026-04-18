@@ -5,7 +5,7 @@ using YotanModCore;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class Setup : ActionNode
+	public class Setup : Action
 	{
 		public PrefabConfig prefabConfig;
 

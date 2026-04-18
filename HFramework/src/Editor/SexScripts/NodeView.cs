@@ -46,19 +46,19 @@ namespace HFramework.EditorUI.SexScripts
 
 		private void CreateInputPorts()
 		{
-			if (node is ActionNode)
+			if (node is ScriptNodes.Action)
 			{
-				input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
 			}
-			else if (node is CompositeNode)
+			else if (node is Composite)
 			{
-				input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
 			}
-			else if (node is DecoratorNode)
+			else if (node is Decorator)
 			{
-				input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
 			}
-			else if (node is RootNode)
+			else if (node is Root)
 			{
 
 			}
@@ -72,28 +72,28 @@ namespace HFramework.EditorUI.SexScripts
 
 		private void CreateOutputPorts()
 		{
-			if (node is ActionNode)
+			if (node is ScriptNodes.Action)
 			{
 				// no ouputs
 			}
-			else if (node is CompositeNode)
+			else if (node is Composite)
 			{
-				output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
 			}
-			else if (node is DecoratorNode)
+			else if (node is Decorator)
 			{
-				output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
 			}
-			else if (node is DecoratorNode)
+			else if (node is Decorator)
 			{
-				output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
 			}
-			else if (node is RootNode)
+			else if (node is Root)
 			{
-				output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
 				output.portName = "";
 
-				teardownOutput = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				teardownOutput = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
 				teardownOutput.portName = SexScript.TeardownPortName;
 			}
 

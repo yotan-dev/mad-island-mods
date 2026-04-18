@@ -4,7 +4,7 @@ using YotanModCore;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class DisableLivingCharacters : ActionNode
+	public class DisableLivingCharacters : Action
 	{
 		protected override void OnStart()
 		{
