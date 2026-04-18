@@ -5,6 +5,7 @@ using YotanModCore.Extensions;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Characters/Move To Place")]
 	public class MoveToPlace : Action
 	{
 		public float TimeLimitSeconds = 30f;

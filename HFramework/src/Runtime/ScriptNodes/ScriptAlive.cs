@@ -3,6 +3,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Script Alive")]
 	public class ScriptAlive : Decorator
 	{
 		protected override void OnStart()

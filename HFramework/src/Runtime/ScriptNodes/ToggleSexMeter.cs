@@ -3,6 +3,7 @@ using HFramework.Scenes;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Sex Meter/Toggle Sex Meter")]
 	public class ToggleSexMeter : Action
 	{
 		public bool ToVisibility = true;

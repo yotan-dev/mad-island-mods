@@ -4,6 +4,7 @@ using YotanModCore.Extensions;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Animation/Animate Once")]
 	public class AnimateOnce : Action
 	{
 		public string animationName = "";

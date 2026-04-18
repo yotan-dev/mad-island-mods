@@ -1,6 +1,7 @@
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Sequence")]
 	public class Sequence : Composite
 	{
 		int current;

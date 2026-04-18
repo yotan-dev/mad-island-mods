@@ -8,6 +8,7 @@ using YotanModCore;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Teardown")]
 	public class Teardown : Action
 	{
 		protected override void OnStart()

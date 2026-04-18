@@ -3,6 +3,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Menu/Last Choice Equals")]
 	public class LastChoiceEquals : Decorator
 	{
 		public string choiceId = "";

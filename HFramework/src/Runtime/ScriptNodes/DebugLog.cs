@@ -3,6 +3,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Debug/Debug Log")]
 	public class DebugLog : Action
 	{
 		public string message;

@@ -1,6 +1,7 @@
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Menu/Menu Interaction")]
 	public class MenuInteraction : Composite
 	{
 		public string InitialMenuId = "";

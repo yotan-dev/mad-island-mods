@@ -4,6 +4,7 @@ using YotanModCore.Extensions;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Animation/Loop Animation")]
 	public class LoopAnimation : Action
 	{
 		public string animName = "";

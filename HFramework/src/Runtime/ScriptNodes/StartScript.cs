@@ -5,6 +5,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Start Script")]
 	public class StartScript : Action
 	{
 		public string message;

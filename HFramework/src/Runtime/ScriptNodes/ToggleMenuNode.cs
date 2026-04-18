@@ -3,6 +3,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Menu/Toggle Menu")]
 	public class ToggleMenu : Action
 	{
 		public bool ToVisibility = true;

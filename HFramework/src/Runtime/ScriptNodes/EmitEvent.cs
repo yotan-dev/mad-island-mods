@@ -4,6 +4,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Emit Event")]
 	public class EmitEvent : Action
 	{
 		public string eventKey;
