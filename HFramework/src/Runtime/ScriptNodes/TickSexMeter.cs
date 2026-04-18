@@ -4,7 +4,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class TickSexMeter : DecoratorNode
+	public class TickSexMeter : Decorator
 	{
 		protected override void OnStart()
 		{

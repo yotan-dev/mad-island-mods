@@ -4,7 +4,7 @@ using YotanModCore.Extensions;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class ToggleManView : ActionNode
+	public class ToggleManView : Action
 	{
 		public int TrackIndex = 10;
 		public string AnimationName = "noman";

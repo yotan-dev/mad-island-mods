@@ -3,9 +3,9 @@ using YotanModCore;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class ChangeMainCanvasVisibility : ActionNode
+	public class ChangeMainCanvasVisibility : Action
 	{
-		public bool Visible = true;
+		public bool ToVisibility = true;
 
 		protected override void OnStart()
 		{
@@ -18,7 +18,7 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate()
 		{
-			Managers.mn.uiMN.MainCanvasView(this.Visible);
+			Managers.mn.uiMN.MainCanvasView(this.ToVisibility);
 			return State.Success;
 		}
 	}

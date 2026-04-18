@@ -1,23 +1,25 @@
+using UnityEngine;
+
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class SetSexAction : Action
+	public class DebugLog : Action
 	{
-		public SexAction Action;
+		public string message;
 
 		protected override void OnStart()
 		{
-
+			Debug.Log($"OnStart: {message}");
 		}
 
 		protected override void OnStop()
 		{
-
+			Debug.Log($"OnStop: {message}");
 		}
 
 		protected override State OnUpdate()
 		{
-			this.context.SexAction = this.Action;
+			Debug.Log($"OnUpdate: {message}");
 			return State.Success;
 		}
 	}

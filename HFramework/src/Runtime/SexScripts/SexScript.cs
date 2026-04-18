@@ -85,12 +85,12 @@ namespace HFramework.SexScripts
 #endif
 
 		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "") {
-			var decorator = parent as DecoratorNode;
+			var decorator = parent as Decorator;
 			if (decorator) {
 				decorator.child = child;
 			}
 
-			var root = parent as RootNode;
+			var root = parent as Root;
 			if (root) {
 				if (portName == TeardownPortName) {
 					root.teardownNode = child;
@@ -99,19 +99,19 @@ namespace HFramework.SexScripts
 				}
 			}
 
-			var composite = parent as CompositeNode;
+			var composite = parent as Composite;
 			if (composite) {
 				composite.children.Add(child);
 			}
 		}
 
 		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "") {
-			var decorator = parent as DecoratorNode;
+			var decorator = parent as Decorator;
 			if (decorator) {
 				decorator.child = null;
 			}
 
-			var root = parent as RootNode;
+			var root = parent as Root;
 			if (root) {
 				if (portName == TeardownPortName) {
 					root.teardownNode = null;
@@ -120,7 +120,7 @@ namespace HFramework.SexScripts
 				}
 			}
 
-			var composite = parent as CompositeNode;
+			var composite = parent as Composite;
 			if (composite) {
 				composite.children.Remove(child);
 			}
@@ -129,12 +129,12 @@ namespace HFramework.SexScripts
 		public List<ScriptNode> GetChildren(ScriptNode parent) {
 			var children = new List<ScriptNode>();
 
-			var decorator = parent as DecoratorNode;
+			var decorator = parent as Decorator;
 			if (decorator && decorator.child != null) {
 				children.Add(decorator.child);
 			}
 
-			var root = parent as RootNode;
+			var root = parent as Root;
 			if (root && root.child != null) {
 				children.Add(root.child);
 			}
@@ -143,7 +143,7 @@ namespace HFramework.SexScripts
 				children.Add(root.teardownNode);
 			}
 
-			var composite = parent as CompositeNode;
+			var composite = parent as Composite;
 			if (composite) {
 				return composite.children;
 			}

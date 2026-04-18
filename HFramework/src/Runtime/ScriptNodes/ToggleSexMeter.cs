@@ -3,9 +3,9 @@ using HFramework.Scenes;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class ToggleSexMeter : ActionNode
+	public class ToggleSexMeter : Action
 	{
-		public bool Show = true;
+		public bool ToVisibility = true;
 
 		protected override void OnStart()
 		{
@@ -17,7 +17,7 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate()
 		{
-			if (this.Show)
+			if (this.ToVisibility)
 			{
 				SexMeter.Instance.Show();
 			}

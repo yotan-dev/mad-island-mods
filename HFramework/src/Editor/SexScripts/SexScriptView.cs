@@ -53,7 +53,7 @@ namespace HFramework.EditorUI.SexScripts
 
 		Port GetOutputPort(NodeView parentView, ScriptNode childNode)
 		{
-			var root = parentView.node as RootNode;
+			var root = parentView.node as Root;
 			if (root != null && parentView.teardownOutput != null && root.teardownNode == childNode)
 			{
 				return parentView.teardownOutput;
@@ -73,7 +73,7 @@ namespace HFramework.EditorUI.SexScripts
 			if (tree.rootNode == null)
 			{
 #if UNITY_EDITOR
-				tree.rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
+				tree.rootNode = tree.CreateNode(typeof(Root)) as Root;
 				EditorUtility.SetDirty(tree);
 				AssetDatabase.SaveAssets();
 #endif
@@ -143,19 +143,19 @@ namespace HFramework.EditorUI.SexScripts
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
 			// base.BuildContextualMenu(evt);
-			var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
+			var types = TypeCache.GetTypesDerivedFrom<ScriptNodes.Action>();
 			foreach (var type in types)
 			{
 				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
 			}
 
-			types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
+			types = TypeCache.GetTypesDerivedFrom<Composite>();
 			foreach (var type in types)
 			{
 				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
 			}
 
-			types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
+			types = TypeCache.GetTypesDerivedFrom<Decorator>();
 			foreach (var type in types)
 			{
 				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));

@@ -10,7 +10,7 @@ using System;
 namespace HFramework.EditorUI.SexScripts
 {
 
-	[CustomEditor(typeof(EmitEventNode))]
+	[CustomEditor(typeof(EmitEvent))]
 	public class EmitEventNode_Inspector : Editor
 	{
 		public VisualTreeAsset m_InspectorXML;

@@ -4,13 +4,13 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class CreateSexMeter : ActionNode
+	public class CreateSexMeter : Action
 	{
 		public float DividerPercent = 0.3f;
 
-		public Vector3 Offset = new Vector3(1f, 1f, 0f);
+		public Vector3 Offset = new(1f, 1f, 0f);
 
-		public bool Show = true;
+		public bool ShowImmediately = true;
 
 		protected override void OnStart()
 		{
@@ -30,7 +30,7 @@ namespace HFramework.ScriptNodes
 			}
 
 			SexMeter.Instance.Init(this.context.SexPlacePos.Value + this.Offset, this.DividerPercent);
-			if (this.Show)
+			if (this.ShowImmediately)
 			{
 				SexMeter.Instance.Show();
 			}

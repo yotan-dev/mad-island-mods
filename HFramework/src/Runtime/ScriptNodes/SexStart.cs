@@ -1,10 +1,11 @@
+using UnityEngine;
+using YotanModCore.Extensions;
+
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	public class SetSexAction : Action
+	public class SexStart : Action
 	{
-		public SexAction Action;
-
 		protected override void OnStart()
 		{
 
@@ -17,7 +18,8 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate()
 		{
-			this.context.SexAction = this.Action;
+			// @TODO: Emit Penetration event.
+
 			return State.Success;
 		}
 	}

@@ -26,7 +26,7 @@ namespace HFramework.EditorUI.SexScripts
 
 			UnityEngine.Object.DestroyImmediate(editor); // destroy previous editor
 
-			if (nodeView.node is EmitEventNode emitEventNode) {
+			if (nodeView.node is EmitEvent emitEventNode) {
 				editor = EmitEventNode_Inspector.CreateEditor(nodeView.node);
 				var container = editor.CreateInspectorGUI();
 				var so = new SerializedObject(nodeView.node);
