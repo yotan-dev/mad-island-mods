@@ -4,7 +4,7 @@ namespace HFramework.ScriptNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Repeat")]
-	public class Repeat : Decorator
+	public class Repeat : Passthrough
 	{
 		protected override void OnStart()
 		{

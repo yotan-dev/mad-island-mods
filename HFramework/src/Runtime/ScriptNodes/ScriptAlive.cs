@@ -4,7 +4,7 @@ namespace HFramework.ScriptNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Script Alive")]
-	public class ScriptAlive : Decorator
+	public class ScriptAlive : Passthrough
 	{
 		protected override void OnStart()
 		{

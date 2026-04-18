@@ -54,7 +54,7 @@ namespace HFramework.EditorUI.SexScripts
 			{
 				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
 			}
-			else if (node is Decorator)
+			else if (node is Passthrough)
 			{
 				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
 			}
@@ -80,11 +80,11 @@ namespace HFramework.EditorUI.SexScripts
 			{
 				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
 			}
-			else if (node is Decorator)
+			else if (node is Passthrough)
 			{
 				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
 			}
-			else if (node is Decorator)
+			else if (node is Passthrough)
 			{
 				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
 			}
