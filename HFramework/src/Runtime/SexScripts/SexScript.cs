@@ -85,7 +85,7 @@ namespace HFramework.SexScripts
 #endif
 
 		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "") {
-			var decorator = parent as Decorator;
+			var decorator = parent as Passthrough;
 			if (decorator) {
 				decorator.child = child;
 			}
@@ -106,7 +106,7 @@ namespace HFramework.SexScripts
 		}
 
 		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "") {
-			var decorator = parent as Decorator;
+			var decorator = parent as Passthrough;
 			if (decorator) {
 				decorator.child = null;
 			}
@@ -129,7 +129,7 @@ namespace HFramework.SexScripts
 		public List<ScriptNode> GetChildren(ScriptNode parent) {
 			var children = new List<ScriptNode>();
 
-			var decorator = parent as Decorator;
+			var decorator = parent as Passthrough;
 			if (decorator && decorator.child != null) {
 				children.Add(decorator.child);
 			}

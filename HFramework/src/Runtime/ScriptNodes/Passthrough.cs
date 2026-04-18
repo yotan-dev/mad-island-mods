@@ -2,8 +2,12 @@ using UnityEngine;
 
 namespace HFramework.ScriptNodes
 {
+	/// <summary>
+	/// Base class for nodes that continually executes their child node.
+	/// They may be used to perform something every tick, or ensure something is happening (and breaking the process if needed)
+	/// </summary>
 	[Experimental]
-	public abstract class Decorator : ScriptNode
+	public abstract class Passthrough : ScriptNode
 	{
 		[HideInInspector] public ScriptNode child;
 

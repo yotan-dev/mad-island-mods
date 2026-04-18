@@ -5,7 +5,7 @@ namespace HFramework.ScriptNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Sex Meter/Tick Sex Meter")]
-	public class TickSexMeter : Decorator
+	public class TickSexMeter : Passthrough
 	{
 		protected override void OnStart()
 		{
