@@ -21,14 +21,27 @@ namespace HFramework.EditorUI.SexScripts
 		public NodeView(ScriptNode node)
 		{
 			this.node = node;
-			this.title = node.name;
+			this.title = node.ID;
 			this.viewDataKey = node.GUID; // MEtadata for GraphView
 
 			style.left = node.position.x;
 			style.top = node.position.y;
 
+			NodeEvents.OnNodeChanged += OnNodeChanged;
+
 			CreateInputPorts();
 			CreateOutputPorts();
+		}
+
+		private void OnNodeChanged(ScriptNode node)
+		{
+			if (this.node != node)
+				return;
+
+			if (this.title != node.ID) {
+				this.title = node.ID;
+				NodeEvents.TriggerNodeIDChanged(node);
+			}
 		}
 
 		private void CreateInputPorts()

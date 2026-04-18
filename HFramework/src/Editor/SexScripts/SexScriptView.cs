@@ -6,6 +6,7 @@ using UnityEditor;
 using System;
 using System.Linq;
 using HFramework.SexScripts;
+using UnityEngine;
 
 namespace HFramework.EditorUI.SexScripts
 {
@@ -19,6 +20,8 @@ namespace HFramework.EditorUI.SexScripts
 
 		public SexScriptView()
 		{
+			NodeEvents.OnNodeIDChanged += OnNodeIDChanged;
+
 			Insert(0, new GridBackground());
 
 			this.AddManipulator(new ContentZoomer());
@@ -28,6 +31,19 @@ namespace HFramework.EditorUI.SexScripts
 
 			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/SexScriptEditor.uss");
 			styleSheets.Add(styleSheet);
+		}
+
+		private void OnNodeIDChanged(ScriptNode node) {
+			var nodeView = FindNodeView(node);
+			if (nodeView == null) {
+				return;
+			}
+
+			// NOTE: "node" itself will be included in the list
+			var nodesWithID = this.tree.nodes.FindAll(otherNode => otherNode.ID == node.ID);
+			if (nodesWithID.Count > 1) {
+				Debug.LogWarning($"Multiple nodes with ID \"{node.ID}\" found in the SexScript \"{tree.name}\". IDs should be unique within the SexScript.");
+			}
 		}
 
 		NodeView FindNodeView(ScriptNode node)
