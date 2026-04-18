@@ -1,6 +1,7 @@
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Root")]
 	public class Root : ScriptNode
 	{
 		public ScriptNode child;

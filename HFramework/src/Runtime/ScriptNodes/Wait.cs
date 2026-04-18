@@ -3,6 +3,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Wait")]
 	public class Wait : Action
 	{
 		public float duration = 1;

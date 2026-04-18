@@ -6,6 +6,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Menu/Set Menu Choice")]
 	public class SetMenuChoice : Action
 	{
 		public string newChoiceId;

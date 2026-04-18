@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using HFramework.SexScripts;
 using UnityEngine;
+using System.Reflection;
 
 namespace HFramework.EditorUI.SexScripts
 {
@@ -143,22 +144,16 @@ namespace HFramework.EditorUI.SexScripts
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
 			// base.BuildContextualMenu(evt);
-			var types = TypeCache.GetTypesDerivedFrom<ScriptNodes.Action>();
+			var types = TypeCache.GetTypesWithAttribute<ScriptNodeAttribute>();
 			foreach (var type in types)
 			{
-				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
-			}
-
-			types = TypeCache.GetTypesDerivedFrom<Composite>();
-			foreach (var type in types)
-			{
-				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
-			}
-
-			types = TypeCache.GetTypesDerivedFrom<Decorator>();
-			foreach (var type in types)
-			{
-				evt.menu.AppendAction($"[{type.BaseType.Name}] {type.Name}", (a) => CreateNode(type));
+				var attr = type.GetCustomAttribute<ScriptNodeAttribute>();
+				if (attr != null)
+				{
+					var nameParts = attr.MenuName.Split('/');
+					nameParts[^1] = $"[{attr.Source}] {nameParts[^1]}";
+					evt.menu.AppendAction(string.Join('/', nameParts), (a) => CreateNode(type));
+				}
 			}
 		}
 

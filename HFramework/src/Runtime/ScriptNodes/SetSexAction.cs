@@ -1,6 +1,7 @@
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Other/Set Sex Action")]
 	public class SetSexAction : Action
 	{
 		public SexAction Action;

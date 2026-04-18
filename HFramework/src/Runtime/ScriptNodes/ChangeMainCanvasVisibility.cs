@@ -3,6 +3,7 @@ using YotanModCore;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Change Main Canvas Visibility")]
 	public class ChangeMainCanvasVisibility : Action
 	{
 		public bool ToVisibility = true;

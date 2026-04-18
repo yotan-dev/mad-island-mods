@@ -3,6 +3,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Repeat")]
 	public class Repeat : Decorator
 	{
 		protected override void OnStart()

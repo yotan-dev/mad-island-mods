@@ -4,6 +4,7 @@ using YotanModCore.Extensions;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Animation/Loop Animation For Time")]
 	public class LoopAnimationForTime : Action
 	{
 		public float duration = 1;

@@ -4,6 +4,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Sex Meter/Create Sex Meter")]
 	public class CreateSexMeter : Action
 	{
 		public float DividerPercent = 0.3f;

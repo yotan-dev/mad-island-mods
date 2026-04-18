@@ -5,6 +5,7 @@ using UnityEngine;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Menu/Set Menu Options")]
 	public class SetMenuOptions : Action
 	{
 		public List<MenuOption> options = new List<MenuOption>();

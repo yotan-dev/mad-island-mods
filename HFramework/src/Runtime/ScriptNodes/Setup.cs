@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 using YotanModCore;
 
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Setup")]
 	public class Setup : Action
 	{
 		public PrefabConfig prefabConfig;

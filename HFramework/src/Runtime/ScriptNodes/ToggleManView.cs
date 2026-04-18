@@ -4,6 +4,7 @@ using YotanModCore.Extensions;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Other/Toggle Man View")]
 	public class ToggleManView : Action
 	{
 		public int TrackIndex = 10;

@@ -4,6 +4,7 @@ using YotanModCore.Extensions;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
+	[ScriptNode("HFramework", "Flow/Sex Start")]
 	public class SexStart : Action
 	{
 		protected override void OnStart()
