@@ -350,5 +350,13 @@ namespace HFramework.Scenes
 		{
 			return new CommonStates[] { this.Npc1, this.Npc2 };
 		}
+
+		public override int GetSexType() {
+			if (this.Place == null) {
+				return -1;
+			}
+
+			return this.Place.grade;
+		}
 	}
 }
