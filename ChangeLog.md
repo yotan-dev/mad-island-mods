@@ -7,7 +7,7 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
-## Unreleased
+## v2026.04.19
 
 > [!WARNING]
 > This release is changing the way plugin zips are distributted:
@@ -23,6 +23,9 @@ Each mod has its own version which follows SemVer.
 
 
 ### HFramework v1.2.0
+- **Fix**: Include missing Delivery scenes from v0.5.9 update, you should now be able to "Give Birth" for them: Daughter, UnderGround Girl, Large Native Girl
+- **Fix**: Fix positioning of NPCs over bed in CommonSexNPC, they will no longer clip through beds
+- **Fix**: Fix CommonSexNPC scenes not checking for bed type, causing some scenes to not be triggered (specially Young Boy x Daughter)
 - Splits HFramework into 2 DLLs:
 	- `HFramework.dll` - contains the main framework code
 	- `HFrameworkLoader.dll` - contains the BepInEx interface/loader code
