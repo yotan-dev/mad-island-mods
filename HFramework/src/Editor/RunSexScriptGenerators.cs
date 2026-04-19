@@ -36,7 +36,7 @@ namespace HFramework.EditorUI
 				return;
 			}
 
-			List<ISexScriptGenerator> generators = new List<ISexScriptGenerator>();
+			List<ISexScriptGenerator> generators;
 			if (selectedObjects.Length == 1 && AssetDatabase.IsValidFolder(AssetDatabase.GUIDToAssetPath(selectedObjects[0]))) {
 				var folderPath = AssetDatabase.GUIDToAssetPath(selectedObjects[0]);
 				generators = FromFolder(folderPath);

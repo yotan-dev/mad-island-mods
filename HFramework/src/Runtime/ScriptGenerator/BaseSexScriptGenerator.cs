@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.IO;
 using HFramework.SexScripts;
 using UnityEditor;
@@ -51,3 +52,4 @@ namespace HFramework.ScriptGenerator
 		public abstract void Generate();
 	}
 }
+#endif
