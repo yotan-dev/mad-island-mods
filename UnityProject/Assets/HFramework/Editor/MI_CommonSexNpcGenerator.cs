@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HFramework.ScriptGenerator;
 using HFramework.ScriptNodes;
+using HFramework.ScriptNodes.PrefabSetup;
 using HFramework.SexScripts;
 using HFramework.SexScripts.Info.NpcConditions;
 using YotanModCore.Consts;
@@ -46,7 +47,7 @@ namespace HFramework
 				throw new System.Exception("Setup node not found");
 			}
 
-			var instantiator = setupNode.prefabConfig.Instantiator as SexListPrefab;
+			var instantiator = setupNode.Instantiator as SexListPrefab;
 			if (instantiator == null) {
 				throw new System.Exception("SexListPrefab not found");
 			}

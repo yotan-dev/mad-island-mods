@@ -1,3 +1,4 @@
+using HFramework.ScriptNodes.PrefabSetup;
 using UnityEngine;
 using YotanModCore;
 
@@ -7,7 +8,11 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Setup")]
 	public class Setup : Action
 	{
-		public PrefabConfig prefabConfig;
+		[SerializeReference, Subclass]
+		public PrefabInstantiator Instantiator;
+
+		[SerializeReference, Subclass]
+		public AppearanceSetter AppearanceSetter;
 
 		// Note: When false, NPC will change out of WAIT and fall down from the world if the sex doesn't stop.
 		// CommonSexNpc -> false
@@ -28,7 +33,7 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate()
 		{
-			var prefab = this.prefabConfig.Instantiator.CreatePrefab(this.context.SexPlacePos.Value);
+			var prefab = this.Instantiator.CreatePrefab(this.context.SexPlacePos.Value);
 			if (this.context.SexPlace != null)
 			{
 				if (this.context.SexPlace.user != null)
@@ -54,9 +59,9 @@ namespace HFramework.ScriptNodes
 				}
 			}
 
-			this.prefabConfig.AppearanceSetter.SetAppearance(prefab, this.context);
+			this.AppearanceSetter.SetAppearance(prefab, this.context);
 			this.context.TmpSex = prefab;
-			this.context.TmpSexAnim = this.prefabConfig.Instantiator.GetSkeletonAnimation(prefab);
+			this.context.TmpSexAnim = this.Instantiator.GetSkeletonAnimation(prefab);
 
 			return State.Success;
 		}

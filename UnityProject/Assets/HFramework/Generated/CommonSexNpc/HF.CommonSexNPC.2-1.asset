@@ -131,7 +131,6 @@ MonoBehaviour:
   - {fileID: 825737041473868055}
   - {fileID: -4020210571441976709}
   - {fileID: 609076073872774052}
-  - {fileID: 5938624741365799137}
   - {fileID: -3184267799031327407}
   - {fileID: 2377001853325030986}
   - {fileID: -6143787167048508130}
@@ -140,9 +139,47 @@ MonoBehaviour:
   - {fileID: 2480944071005333294}
   - {fileID: 8258167949781465546}
   - {fileID: 7996944335336121934}
+  - {fileID: 4293681066832810}
   references:
     version: 2
     RefIds: []
+--- !u!114 &4293681066832810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d862e67f098ce4abb6e6f65bbe83d2, type: 3}
+  m_Name: Setup
+  m_EditorClassIdentifier: 
+  ID: Setup
+  state: 0
+  started: 0
+  GUID: 1d3ea7a4f40760a4798e035a8951e819
+  position: {x: 0, y: 0}
+  Instantiator:
+    rid: 896238759577387086
+  AppearanceSetter:
+    rid: 896238759577387087
+  stopNpcReaction: 1
+  posOffset: {x: 0, y: 0, z: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 896238759577387086
+      type: {class: SexListPrefab, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        PathToSkeletonAnimation: Scale/Anim
+        listIndex: 0
+        objIndex: 0
+    - rid: 896238759577387087
+      type: {class: MaleFemaleRandCharSetter, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        MaleIndex: 0
+        FemaleIndex: 1
 --- !u!114 &609076073872774052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +218,7 @@ MonoBehaviour:
   children:
   - {fileID: 609076073872774052}
   - {fileID: -4020210571441976709}
-  - {fileID: 5938624741365799137}
+  - {fileID: 4293681066832810}
   - {fileID: -3184267799031327407}
   - {fileID: 2377001853325030986}
   - {fileID: -6143787167048508130}
@@ -313,44 +350,6 @@ MonoBehaviour:
   position: {x: -0.00013245583, y: 410.9272}
   duration: 10
   animName: A_Loop_02
---- !u!114 &5938624741365799137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47d862e67f098ce4abb6e6f65bbe83d2, type: 3}
-  m_Name: Setup
-  m_EditorClassIdentifier: 
-  ID: Setup
-  state: 0
-  started: 0
-  GUID: c271cbb5e4fc7b342b535166078df263
-  position: {x: 0, y: 0}
-  prefabConfig:
-    Instantiator:
-      rid: 896238742760063000
-    AppearanceSetter:
-      rid: 896238742760063006
-  stopNpcReaction: 0
-  posOffset: {x: 0, y: 0, z: 0.02}
-  references:
-    version: 2
-    RefIds:
-    - rid: 896238742760063000
-      type: {class: SexListPrefab, ns: HFramework.ScriptNodes, asm: HFramework}
-      data:
-        PathToSkeletonAnimation: Scale/Anim
-        listIndex: 0
-        objIndex: 0
-    - rid: 896238742760063006
-      type: {class: MaleFemaleRandCharSetter, ns: HFramework.ScriptNodes, asm: HFramework}
-      data:
-        MaleIndex: 0
-        FemaleIndex: 1
 --- !u!114 &7996944335336121934
 MonoBehaviour:
   m_ObjectHideFlags: 0
