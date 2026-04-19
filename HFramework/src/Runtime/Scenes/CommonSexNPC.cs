@@ -154,7 +154,11 @@ namespace HFramework.Scenes
 				return false;
 			}
 
-			var pos = this.Place.transform.position;
+			var posTransform = this.Place.transform.Find("pos");
+			if (posTransform == null)
+				PLogger.LogError($"Failed to find \"pos\" object for SexPlace {this.Place.name}");
+
+			var pos = posTransform?.position ?? this.Place.transform.position;
 			this.TmpSex = GameObject.Instantiate<GameObject>(scene, pos, Quaternion.identity);
 
 			if (!this.IsPlaceFree() || this.TmpSex == null)
