@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace HFramework.SexScripts.Info
 {
@@ -20,6 +21,12 @@ namespace HFramework.SexScripts.Info
 		/// The display name of the sex script.
 		/// </summary>
 		public string Name;
+
+		/// <summary>
+		/// The description of the sex script.
+		/// </summary>
+		[TextArea(3, 10)]
+		public string Description;
 
 		public SexNpcInfo[] Npcs;
 

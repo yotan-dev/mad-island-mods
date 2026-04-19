@@ -25,7 +25,7 @@ public class Pregnant : NpcCondition
 		PregnantNoBelly = 1 << 1,
 
 		/// <summary>
-		/// Pregnant and ready to give birth (has belly)
+		/// Pregnant and ready to give birth (has belly) - same as IsDueDate()
 		/// </summary>
 		PregnantReady = 1 << 2,
 
