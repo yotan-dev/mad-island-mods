@@ -39,7 +39,7 @@ namespace HFrameworkLoader
 				"How the mod checks for scenes. (Requires restart)\n"
 				+ "Legacy: Uses the old Scenes / Definition files.\n"
 				+ "Compatibility: Uses both the new SexScript mode and the old Scenes / Definition files.\n"
-				+ "Future: Uses the new SexScript mode only."
+				+ "Modern: Uses the new SexScript mode only."
 			);
 			hfConfig.RunMode = this.RunMode.Value;
 			this.RunMode.SettingChanged += (sender, eventArgs) =>
