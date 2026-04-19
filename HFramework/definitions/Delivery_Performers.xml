@@ -141,5 +141,71 @@
 				</AnimationSet>
 			</AnimationSets>
 		</Performer>
+		<Performer id="HF_Daughter_Delivery" minVersion="0.5.9">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="Daughter#144" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_UnderGirl_Delivery" minVersion="0.5.9">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="UnderGroundGirl#142" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
+		<Performer id="HF_LargeGirl_Delivery" minVersion="0.5.9">
+			<Scopes>
+				<Scope>Delivery</Scope>
+			</Scopes>
+			<PrefabSelector xsi:type="SexObjPrefabSelector" objIndex="10" /> <!-- Not accurate -->
+			<Actors>
+				<Actor val="LargeNativeGirl#140" />
+			</Actors>
+			<AnimationSets>
+				<AnimationSet id="Default">
+					<Animations>
+						<Animation action="DeliveryIdle" play="Loop" name="A_delivery_idle" />
+						<Animation action="DeliveryLoop" play="Loop" name="A_delivery_loop" />
+						<Animation action="DeliveryEnd" play="Once" name="A_delivery_end">
+							<Events>
+								<string>OnDelivery</string>
+							</Events>
+						</Animation>
+					</Animations>
+				</AnimationSet>
+			</AnimationSets>
+		</Performer>
 	</Performers>
 </PerformersConfig>

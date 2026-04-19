@@ -42,6 +42,21 @@
 						<Condition xsi:type="PregnantCheck" actor="YoungLady#9" value="true" />
 					</StartConditions>
 				</Performer>
+				<Performer id="HF_Daughter_Delivery">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="Daughter#144" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_UnderGirl_Delivery">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="UnderGroundGirl#142" value="true" />
+					</StartConditions>
+				</Performer>
+				<Performer id="HF_LargeGirl_Delivery">
+					<StartConditions>
+						<Condition xsi:type="PregnantCheck" actor="LargeNativeGirl#140" value="true" />
+					</StartConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>
