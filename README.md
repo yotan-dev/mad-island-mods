@@ -38,6 +38,12 @@ See [End user guide](https://yotan-dev.github.io/mad-island-mods/) for info and 
 Utilitary tool to strip relevant Mad Island dlls into Assemblies folder. Stripped DLLs does not contain original/copyrighted code.
 
 
+## FixPluginTypesSerialization
+
+This is a 3rd party dependency (https://github.com/xiaoxiao921/FixPluginTypesSerialization) that we ship together with YotanModCore
+to enable proper serialization of classes from plugins, it is needed by YotanModCore, HFramework and may be used by others too.
+
+
 ## Support
 
 If you find a bug, have questions or feature requests, feel free to open an issue. Feature requests may not be implemented by me.
@@ -53,6 +59,11 @@ For bigger changes/new features, please open an issue for discussion first.
 ## Development Setup
 
 1. Clone this repo
+2. Clone submodules:
+```
+git submodule init
+git submodule update
+```
 
 - You can build any mod by opening a shell in its folder and running `dotnet build`
 - You can build all mods by opening a PowerShell and running:
