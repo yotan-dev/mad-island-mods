@@ -1,5 +1,5 @@
+using System;
 using System.Linq;
-using HFramework.SexScripts;
 using UnityEngine;
 
 namespace HFramework
@@ -14,16 +14,36 @@ namespace HFramework
 
 			var bundle = AssetBundle.LoadFromFile(path);
 			var assets = bundle.LoadAllAssets<SexScripts.SexScript>();
-			if (Loader == null) {
-				PLogger.LogError($"Failed to load HFrameworkDataLoader from bundle. Make sure the asset exists with the right name.");
-				return;
-			}
 
 			LoadSexScripts(assets);
 		}
 
+		private static bool IsScriptValid(SexScripts.SexScript script, out string error) {
+			error = null;
+			try {
+				if (script.Info == null)
+					throw new Exception("Info is null");
+				if (script.Info.Npcs == null || script.Info.Npcs.Length == 0)
+					throw new Exception("No NPCs");
+
+				foreach (var npc in script.Info.Npcs) {
+					if (npc.Conditions == null)
+						throw new Exception($"NPC {npc.NpcID} has NULL conditions");
+				}
+			} catch (Exception e) {
+				error = e.Message;
+			}
+
+			return error == null;
+		}
+
 		private static void LoadSexScripts(SexScripts.SexScript[] scripts) {
 			foreach (var item in scripts) {
+				if (!IsScriptValid(item, out string error)) {
+					PLogger.LogError($"Skipping {item.name}: {error}");
+					continue;
+				}
+
 				Loader.Prefabs.Add(item);
 			}
 
@@ -33,8 +53,7 @@ namespace HFramework
 		internal static void Load() {
 			Loader = HFrameworkDataLoader.CreateInstance<HFrameworkDataLoader>();
 
-			// Temp disable until we start making the official scripts
-			// LoadBundle("BepInEx/Plugins/HFramework/hf_sex_scripts");
+			LoadBundle("BepInEx/Plugins/HFramework/hframework");
 
 			var assets = YotanModCore.BundleUtils.BundleLoader.LoadAllAssetsOfType<SexScripts.SexScript>();
 			var scripts = assets.Select(x => x.Asset).ToArray();
