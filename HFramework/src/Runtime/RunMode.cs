@@ -16,8 +16,8 @@ namespace HFramework
 		Compatibility,
 
 		/**
-		 * Future mode - uses the new SexScript mode only.
+		 * Modern mode - uses the new SexScript mode only.
 		 */
-		Future
+		Modern
 	}
 }
