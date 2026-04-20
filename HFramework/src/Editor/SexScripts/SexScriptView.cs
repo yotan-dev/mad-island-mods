@@ -143,6 +143,8 @@ namespace HFramework.EditorUI.SexScripts
 
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
+			var position = viewTransform.matrix.inverse.MultiplyPoint(evt.localMousePosition);
+
 			// base.BuildContextualMenu(evt);
 			var types = TypeCache.GetTypesWithAttribute<ScriptNodeAttribute>();
 			foreach (var type in types)
@@ -152,15 +154,16 @@ namespace HFramework.EditorUI.SexScripts
 				{
 					var nameParts = attr.MenuName.Split('/');
 					nameParts[^1] = $"[{attr.Source}] {nameParts[^1]}";
-					evt.menu.AppendAction(string.Join('/', nameParts), (a) => CreateNode(type));
+					evt.menu.AppendAction(string.Join('/', nameParts), (a) => CreateNode(type, position));
 				}
 			}
 		}
 
-		void CreateNode(System.Type type)
+		void CreateNode(System.Type type, Vector2 position)
 		{
 #if UNITY_EDITOR
 			var node = tree.CreateNode(type);
+			node.position = position;
 			CreateNodeView(node);
 #endif
 		}
