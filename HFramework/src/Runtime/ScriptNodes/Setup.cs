@@ -74,6 +74,13 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
+			// If there is already a TmpSex object, destroy it (e.g. we are changing active "scene")
+			if (this.context.TmpSex != null) {
+				GameObject.Destroy(this.context.TmpSex);
+				this.context.TmpSex = null;
+				this.context.TmpSexAnim = null;
+			}
+
 			if (!this.TryGetPosition(out var position)) {
 				return State.Failure;
 			}
