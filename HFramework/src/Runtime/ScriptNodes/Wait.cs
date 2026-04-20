@@ -1,3 +1,4 @@
+using HFramework.ScriptNodes.WaitNode;
 using UnityEngine;
 
 namespace HFramework.ScriptNodes
@@ -6,24 +7,19 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Wait")]
 	public class Wait : Action
 	{
-		public float duration = 1;
+		[SerializeReference, Subclass]
+		public WaitKind WaitKind;
 
-		float startTime;
-
-		protected override void OnStart()
-		{
-			startTime = Time.time;
+		protected override void OnStart() {
+			WaitKind.Start();
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 
 		}
 
-		protected override State OnUpdate()
-		{
-			if (Time.time - startTime > duration)
-			{
+		protected override State OnUpdate() {
+			if (WaitKind.IsDone()) {
 				return State.Success;
 			}
 
