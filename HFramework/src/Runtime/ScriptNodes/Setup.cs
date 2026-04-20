@@ -8,6 +8,13 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Setup")]
 	public class Setup : Action
 	{
+		public enum PrefabPositionSource
+		{
+			SexPlacePos,
+			Actor0,
+			Actor1,
+		}
+
 		[SerializeReference, Subclass]
 		public PrefabInstantiator Instantiator;
 
@@ -23,21 +30,57 @@ namespace HFramework.ScriptNodes
 		// commonSexPlayer -> zero
 		public Vector3 posOffset = Vector3.zero;
 
-		protected override void OnStart()
-		{
+		public PrefabPositionSource PositionSource = PrefabPositionSource.SexPlacePos;
+
+		protected override void OnStart() {
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 		}
 
-		protected override State OnUpdate()
-		{
-			var prefab = this.Instantiator.CreatePrefab(this.context.SexPlacePos.Value);
-			if (this.context.SexPlace != null)
-			{
-				if (this.context.SexPlace.user != null)
-				{
+		private bool TryGetPosition(out Vector3 position) {
+			position = Vector3.zero;
+			switch (this.PositionSource) {
+				case PrefabPositionSource.SexPlacePos:
+					if (!this.context.SexPlacePos.HasValue) {
+						PLogger.LogWarning("Sex place pos is not set");
+						return false;
+					}
+
+					position = this.context.SexPlacePos.Value;
+					return true;
+
+				case PrefabPositionSource.Actor0:
+					if (this.context.Actors.Length == 0 || this.context.Actors[0] == null || this.context.Actors[0].Common == null) {
+						PLogger.LogWarning($"Actor 0 is not set for \"{this.context.SexScript.name}\".");
+						return false;
+					}
+
+					position = this.context.Actors[0].Common.gameObject.transform.position;
+					return true;
+
+				case PrefabPositionSource.Actor1:
+					if (this.context.Actors.Length <= 1 || this.context.Actors[1] == null || this.context.Actors[1].Common == null) {
+						PLogger.LogWarning($"Actor 1 is not set for \"{this.context.SexScript.name}\".");
+						return false;
+					}
+					position = this.context.Actors[1].Common.gameObject.transform.position;
+					return true;
+
+				default:
+					PLogger.LogWarning($"Unknown position source: {this.PositionSource}");
+					return false;
+			}
+		}
+
+		protected override State OnUpdate() {
+			if (!this.TryGetPosition(out var position)) {
+				return State.Failure;
+			}
+
+			var prefab = this.Instantiator.CreatePrefab(position);
+			if (this.context.SexPlace != null) {
+				if (this.context.SexPlace.user != null) {
 					PLogger.LogError("Sex place already has a user");
 					return State.Failure;
 				}
@@ -49,11 +92,9 @@ namespace HFramework.ScriptNodes
 			// CommonSexNpc -> new Vector3(0.0f, 0.0f, 0.02f)
 			prefab.transform.position += this.posOffset;
 			var currentPlayer = CommonUtils.GetActivePlayer();
-			foreach (var npc in this.context.Actors)
-			{
+			foreach (var npc in this.context.Actors) {
 				npc.Angle = npc.Common.nMove.searchAngle;
-				if (npc.Common != currentPlayer)
-				{
+				if (npc.Common != currentPlayer) {
 					npc.Common.nMove.searchAngle = this.stopNpcReaction ? 0f : 180f;
 					npc.Common.gameObject.transform.position = this.context.SexPlacePos.Value;
 				}
