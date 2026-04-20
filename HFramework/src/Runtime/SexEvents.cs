@@ -82,9 +82,6 @@ namespace HFramework
 		public static readonly SexEvent<FromToEventArgs> OnStillbirth = new SexEvent<FromToEventArgs>("HF.delivery.stillbirth");
 
 		// Other
-		[SexEvent("HF", "Other: Player Defeated")]
-		public static readonly SexEvent<FromToEventArgs> OnPlayerDefeated = new SexEvent<FromToEventArgs>("HF.other.playerDefeated");
-
 		[SexEvent("HF", "End")]
 		public static readonly SexEvent<SexEventArgs> OnEnd = new SexEvent<SexEventArgs>("HF.end");
 
