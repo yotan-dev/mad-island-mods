@@ -33,9 +33,6 @@ namespace HFramework
 			// SexEvents.OnGiveBirth.Triggered += this.OnSexStart;
 			// SexEvents.OnStillbirth.Triggered += this.OnSexStart;
 
-			// @TODO:
-			// SexEvents.OnPlayerDefeated.Triggered += this.OnPlayerDefeated;
-
 			SexEvents.OnEnd.Triggered += this.OnSexEnd_CommonSexNpc;
 			SexEvents.OnEnd.Triggered += this.OnSexEnd_CommonSexPlayer;
 		}
@@ -109,16 +106,6 @@ namespace HFramework
 
 			e.Self.sexInfo[SexInfoIndex.Masturbation]++;
 		}
-
-		// @TODO:
-		// private void OnPlayerDefeated(object sender, SelfEventArgs e)
-		// {
-		// 	Managers.mn.uiMN.MainCanvasView(false);
-		// 	yield return Managers.mn.sexMN.StartCoroutine(Managers.mn.sound.GoBGMFade(1));
-		// 	GameObject.Find("UIFXPool").transform.Find("ReviveSlider").GetComponent<Slider>().gameObject.SetActive(false);
-		// 	yield return new WaitForSeconds(1f);
-		// 	Managers.mn.uiMN.SkipView(true);
-		// }
 
 		private void OnSexEnd_CommonSexPlayer(object sender, SexEventArgs e)
 		{
