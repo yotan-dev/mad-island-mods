@@ -9,20 +9,18 @@ namespace HFramework.ScriptNodes
 	[Experimental]
 	public abstract class Passthrough : ScriptNode
 	{
-		[HideInInspector] public ScriptNode child;
+		[HideInInspector] public ScriptNode Child;
 
-		public override ScriptNode Clone(CommonContext context)
-		{
+		public override ScriptNode Clone(CommonContext context) {
 			var node = Instantiate(this);
-			node.context = context;
-			node.child = child.Clone(context);
+			node.Context = context;
+			node.Child = Child.Clone(context);
 
 			return node;
 		}
 
-		public override void Terminate(bool fromOutside = true)
-		{
-			child.Terminate(fromOutside);
+		public override void Terminate(bool fromOutside = true) {
+			Child.Terminate(fromOutside);
 			base.Terminate(fromOutside);
 		}
 	}

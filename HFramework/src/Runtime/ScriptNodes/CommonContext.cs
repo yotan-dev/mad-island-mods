@@ -32,8 +32,7 @@ namespace HFramework.ScriptNodes
 		public CommonStates Common { get; set; }
 		public float? Angle { get; set; }
 
-		public ContextNpc(CommonStates common, float? angle)
-		{
+		public ContextNpc(CommonStates common, float? angle) {
 			Common = common;
 			Angle = angle;
 		}
@@ -95,19 +94,16 @@ namespace HFramework.ScriptNodes
 
 		public ScriptNode.State MainNodeState { get; set; }
 
-		public CommonContext(SexScripts.SexScript sexScript)
-		{
+		public CommonContext(SexScripts.SexScript sexScript) {
 			this.SexScript = sexScript;
 		}
 
-		public virtual void LoadActorsVariables()
-		{
+		public virtual void LoadActorsVariables() {
 			// Log if anything below is null
 			PLogger.LogDebug($"Actors: {this.Actors == null}");
 			PLogger.LogDebug($"Variables: {this.Variables == null}");
 			int idx = 0;
-			foreach (var actor in this.Actors)
-			{
+			foreach (var actor in this.Actors) {
 				PLogger.LogDebug($"Actor: {actor == null}");
 				PLogger.LogDebug($"Actor.Common: {actor?.Common == null}");
 				PLogger.LogDebug($"Actor.Common Params: {actor?.Common?.parameters == null}");

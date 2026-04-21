@@ -41,7 +41,7 @@ namespace HFramework.EditorUI.SexScripts
 			}
 
 			// NOTE: "node" itself will be included in the list
-			var nodesWithID = this.tree.nodes.FindAll(otherNode => otherNode.ID == node.ID);
+			var nodesWithID = this.tree.Nodes.FindAll(otherNode => otherNode.ID == node.ID);
 			if (nodesWithID.Count > 1) {
 				Debug.LogWarning($"Multiple nodes with ID \"{node.ID}\" found in the SexScript \"{tree.name}\". IDs should be unique within the SexScript.");
 			}
@@ -55,7 +55,7 @@ namespace HFramework.EditorUI.SexScripts
 		Port GetOutputPort(NodeView parentView, ScriptNode childNode)
 		{
 			var root = parentView.node as Root;
-			if (root != null && parentView.teardownOutput != null && root.teardownNode == childNode)
+			if (root != null && parentView.teardownOutput != null && root.TeardownNode == childNode)
 			{
 				return parentView.teardownOutput;
 			}
@@ -71,20 +71,20 @@ namespace HFramework.EditorUI.SexScripts
 			DeleteElements(graphElements);
 			graphViewChanged += OnGraphViewChanged;
 
-			if (tree.rootNode == null)
+			if (tree.RootNode == null)
 			{
 #if UNITY_EDITOR
-				tree.rootNode = tree.CreateNode(typeof(Root)) as Root;
+				tree.RootNode = tree.CreateNode(typeof(Root)) as Root;
 				EditorUtility.SetDirty(tree);
 				AssetDatabase.SaveAssets();
 #endif
 			}
 
 			// Creates nodes views
-			tree.nodes.ForEach(n => CreateNodeView(n));
+			tree.Nodes.ForEach(n => CreateNodeView(n));
 
 			// Creates edges
-			tree.nodes.ForEach(n =>
+			tree.Nodes.ForEach(n =>
 			{
 				var children = tree.GetChildren(n);
 				children.ForEach(c =>
@@ -163,7 +163,7 @@ namespace HFramework.EditorUI.SexScripts
 		{
 #if UNITY_EDITOR
 			var node = tree.CreateNode(type);
-			node.position = position;
+			node.Position = position;
 			CreateNodeView(node);
 #endif
 		}

@@ -9,14 +9,14 @@ namespace HFramework.ScriptNodes.WaitNode
 	{
 		public float DurationSeconds;
 
-		private float _startTime;
+		private float StartTime;
 
 		public override void Start() {
-			_startTime = Time.time;
+			StartTime = Time.time;
 		}
 
 		public override bool IsDone() {
-			return Time.time - _startTime >= DurationSeconds;
+			return Time.time - StartTime >= DurationSeconds;
 		}
 	}
 }

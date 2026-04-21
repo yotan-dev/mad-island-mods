@@ -6,21 +6,18 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Debug/Debug Log")]
 	public class DebugLog : Action
 	{
-		public string message;
+		public string Message;
 
-		protected override void OnStart()
-		{
-			Debug.Log($"OnStart: {message}");
+		protected override void OnStart() {
+			Debug.Log($"OnStart: {Message}");
 		}
 
-		protected override void OnStop()
-		{
-			Debug.Log($"OnStop: {message}");
+		protected override void OnStop() {
+			Debug.Log($"OnStop: {Message}");
 		}
 
-		protected override State OnUpdate()
-		{
-			Debug.Log($"OnUpdate: {message}");
+		protected override State OnUpdate() {
+			Debug.Log($"OnUpdate: {Message}");
 			return State.Success;
 		}
 	}

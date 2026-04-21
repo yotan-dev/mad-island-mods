@@ -8,22 +8,16 @@ namespace HFramework.ScriptNodes
 	{
 		public bool ToVisibility = true;
 
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 		}
 
-		protected override State OnUpdate()
-		{
-			if (this.ToVisibility)
-			{
+		protected override State OnUpdate() {
+			if (this.ToVisibility) {
 				SexMeter.Instance.Show();
-			}
-			else
-			{
+			} else {
 				SexMeter.Instance.Hide();
 			}
 

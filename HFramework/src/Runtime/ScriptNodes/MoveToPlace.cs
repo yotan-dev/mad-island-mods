@@ -10,33 +10,28 @@ namespace HFramework.ScriptNodes
 	{
 		public float TimeLimitSeconds = 30f;
 
-		private float animTime;
+		private float AnimationTime;
 
-		private GameObject[] emotions;
+		private GameObject[] Emotions;
 
-		protected override void OnStart()
-		{
-			this.animTime = this.TimeLimitSeconds;
+		protected override void OnStart() {
+			this.AnimationTime = this.TimeLimitSeconds;
 
 			// Start moving NPCs to sex place
-			this.emotions = new GameObject[this.context.Actors.Length];
-			for (int i = 0; i < this.context.Actors.Length; i++)
-			{
-				this.emotions[i] = Managers.fxMN.GoEmotion(0, this.context.Actors[i].Common.gameObject, Vector3.zero);
+			this.Emotions = new GameObject[this.Context.Actors.Length];
+			for (int i = 0; i < this.Context.Actors.Length; i++) {
+				this.Emotions[i] = Managers.fxMN.GoEmotion(0, this.Context.Actors[i].Common.gameObject, Vector3.zero);
 			}
-			for (int i = 0; i < this.context.Actors.Length; i++)
-			{
+			for (int i = 0; i < this.Context.Actors.Length; i++) {
 				Managers.sexMN.StartCoroutine(
-					Managers.storyMN.MovePosition(this.context.Actors[i].Common.gameObject, this.context.SexPlacePos.Value, 2f, "A_walk", true)
+					Managers.storyMN.MovePosition(this.Context.Actors[i].Common.gameObject, this.Context.SexPlacePos.Value, 2f, "A_walk", true)
 				);
 			}
 		}
 
-		private bool IsNpcAtPos(CommonStates npc, Vector3 pos)
-		{
+		private bool IsNpcAtPos(CommonStates npc, Vector3 pos) {
 			// Delivery checks for 0.5 instead of 1, but 1 for everything should be good enough.
-			if (Vector3.Distance(npc.gameObject.transform.position, pos) > 1f)
-			{
+			if (Vector3.Distance(npc.gameObject.transform.position, pos) > 1f) {
 				if (npc.anim.GetCurrentAnimName() != "A_walk" && npc.nMove.actType != NPCMove.ActType.Interval)
 					npc.anim.state.SetAnimation(0, "A_walk", true);
 
@@ -49,8 +44,7 @@ namespace HFramework.ScriptNodes
 			return true;
 		}
 
-		private bool IsNpcWaiting(CommonStates npc)
-		{
+		private bool IsNpcWaiting(CommonStates npc) {
 			var player = CommonUtils.GetActivePlayer();
 			if (npc == player)
 				return true;
@@ -63,60 +57,49 @@ namespace HFramework.ScriptNodes
 			);
 		}
 
-		protected override void OnStop()
-		{
-			if (this.emotions == null)
+		protected override void OnStop() {
+			if (this.Emotions == null)
 				return;
 
-			foreach (var emotion in this.emotions)
-			{
+			foreach (var emotion in this.Emotions) {
 				emotion?.SetActive(false);
 			}
 		}
 
-		protected override State OnUpdate()
-		{
-			this.animTime -= Time.deltaTime;
+		protected override State OnUpdate() {
+			this.AnimationTime -= Time.deltaTime;
 
 			// If NPCs reached target position, we are done.
 			bool allAtPos = true;
-			for (int i = 0; i < this.context.Actors.Length; i++)
-			{
-				if (!this.IsNpcAtPos(this.context.Actors[i].Common, this.context.SexPlacePos.Value))
-				{
+			for (int i = 0; i < this.Context.Actors.Length; i++) {
+				if (!this.IsNpcAtPos(this.Context.Actors[i].Common, this.Context.SexPlacePos.Value)) {
 					allAtPos = false;
 					break;
 				}
 			}
 
-			if (allAtPos)
-			{
+			if (allAtPos) {
 				return State.Success;
 			}
 
 			// Otherwise, we need to check for possible interruptions.
 
 			bool allWaiting = true;
-			for (int i = 0; i < this.context.Actors.Length; i++)
-			{
-				if (!this.IsNpcWaiting(this.context.Actors[i].Common))
-				{
+			for (int i = 0; i < this.Context.Actors.Length; i++) {
+				if (!this.IsNpcWaiting(this.Context.Actors[i].Common)) {
 					allWaiting = false;
 					break;
 				}
 			}
-			if (!allWaiting)
-			{ // Something else took the "attention" of one of the NPCs -- give up
+			if (!allWaiting) { // Something else took the "attention" of one of the NPCs -- give up
 				return State.Failure;
 			}
 
-			if (this.context.SexPlace != null && this.context.SexPlace.user != null)
-			{ // Some other NPC took the sex place, can't use it -- give up
+			if (this.Context.SexPlace != null && this.Context.SexPlace.user != null) { // Some other NPC took the sex place, can't use it -- give up
 				return State.Failure;
 			}
 
-			if (this.animTime <= 0f)
-			{ // Timeout reached -- give up
+			if (this.AnimationTime <= 0f) { // Timeout reached -- give up
 				return State.Failure;
 			}
 

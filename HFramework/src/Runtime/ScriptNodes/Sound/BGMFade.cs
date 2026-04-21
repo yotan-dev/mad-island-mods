@@ -13,18 +13,18 @@ namespace HFramework.ScriptNodes.Sound
 	{
 		public int BGMId;
 
-		private IEnumerator coroutine;
+		private IEnumerator BGMCoroutine;
 
 		private IEnumerator BGMFadeCoroutine() {
 			yield return Managers.sexMN.StartCoroutine(Managers.mn.sound.GoBGMFade(this.BGMId));
 		}
 
 		protected override void OnStart() {
-			coroutine = BGMFadeCoroutine();
+			BGMCoroutine = BGMFadeCoroutine();
 		}
 
 		protected override State OnUpdate() {
-			if (coroutine?.MoveNext() ?? false) {
+			if (BGMCoroutine?.MoveNext() ?? false) {
 				return State.Running;
 			}
 
@@ -32,9 +32,9 @@ namespace HFramework.ScriptNodes.Sound
 		}
 
 		protected override void OnStop() {
-			if (coroutine != null) {
-				Managers.sexMN.StopCoroutine(coroutine);
-				coroutine = null;
+			if (BGMCoroutine != null) {
+				Managers.sexMN.StopCoroutine(BGMCoroutine);
+				BGMCoroutine = null;
 			}
 		}
 	}

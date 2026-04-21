@@ -6,19 +6,16 @@ namespace HFramework.ScriptNodes
 	{
 		public SexAction Action;
 
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 
 		}
 
-		protected override State OnUpdate()
-		{
-			this.context.SexAction = this.Action;
+		protected override State OnUpdate() {
+			this.Context.SexAction = this.Action;
 			return State.Success;
 		}
 	}

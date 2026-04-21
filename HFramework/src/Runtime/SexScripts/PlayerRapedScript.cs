@@ -11,9 +11,9 @@ namespace HFramework.SexScripts
 	{
 		public PlayerRapedScript Create(CommonStates rapist, CommonStates victim) {
 			var tree = Clone();
-			tree.context.Actors = this.Info.BuildNpcs(rapist, victim).Select(npc => new ContextNpc(npc, null)).ToArray();
-			tree.context.SexPlace = null;
-			tree.context.SexPlacePos = null;
+			tree.Context.Actors = this.Info.BuildNpcs(rapist, victim).Select(npc => new ContextNpc(npc, null)).ToArray();
+			tree.Context.SexPlace = null;
+			tree.Context.SexPlacePos = null;
 			return (PlayerRapedScript)tree;
 		}
 	}

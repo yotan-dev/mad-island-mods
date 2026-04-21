@@ -5,12 +5,11 @@ namespace HFramework.SexScripts
 	[Experimental]
 	public class SexScriptRunner : MonoBehaviour
 	{
-		public SexScript tree;
+		public SexScript Tree;
 
 		// Start is called before the first frame update
-		void Start()
-		{
-			tree = tree.Clone();
+		void Start() {
+			Tree = Tree.Clone();
 			// tree = ScriptableObject.CreateInstance<BehaviourTree>();
 
 			// var log1 = ScriptableObject.CreateInstance<DebugLogNode>();
@@ -45,9 +44,8 @@ namespace HFramework.SexScripts
 		}
 
 		// Update is called once per frame
-		void Update()
-		{
-			tree.Update();
+		void Update() {
+			Tree.Update();
 		}
 	}
 }

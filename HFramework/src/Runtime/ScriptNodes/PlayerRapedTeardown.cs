@@ -18,7 +18,7 @@ namespace HFramework.ScriptNodes
 
 		protected override void OnStart() {
 			FadeCoroutine = null;
-			if (this.context.MainNodeState == ScriptNode.State.Success) {
+			if (this.Context.MainNodeState == ScriptNode.State.Success) {
 				FadeCoroutine = Managers.mn.eventMN.FadeOut();
 			}
 		}
@@ -31,7 +31,7 @@ namespace HFramework.ScriptNodes
 				return;
 
 			if (character != CommonUtils.GetActivePlayer()) {
-				if (this.context.MainNodeState != State.Success) {
+				if (this.Context.MainNodeState != State.Success) {
 					// Player mesh is only restored at this moment if the rape was a failure.
 					// On success, game will restore the player later, during the revive step.
 					var mesh = character.anim.GetComponent<MeshRenderer>();
@@ -55,17 +55,17 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
-			if (this.context.HasChangedSkipButtonVisibility)
+			if (this.Context.HasChangedSkipButtonVisibility)
 				Managers.mn.uiMN.SkipView(false);
 
 			if (FadeCoroutine != null && FadeCoroutine.MoveNext()) {
 				return State.Running;
 			}
 
-			if (this.context.TmpSex != null)
-				UnityEngine.Object.Destroy(this.context.TmpSex);
+			if (this.Context.TmpSex != null)
+				UnityEngine.Object.Destroy(this.Context.TmpSex);
 
-			foreach (var npc in this.context.Actors) {
+			foreach (var npc in this.Context.Actors) {
 				RestoreLivingCharacter(npc.Common);
 
 				// Restores hand items
@@ -77,7 +77,7 @@ namespace HFramework.ScriptNodes
 			}
 
 			SexEvents.OnEnd?.Trigger(new SexEventArgs() {
-				ctx = this.context,
+				ctx = this.Context,
 			});
 
 			// We intentionally don't restore the canvas here -- it will be done by the end event

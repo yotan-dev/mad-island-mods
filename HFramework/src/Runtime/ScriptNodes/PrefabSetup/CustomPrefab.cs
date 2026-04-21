@@ -7,10 +7,10 @@ namespace HFramework.ScriptNodes.PrefabSetup
 	[Experimental]
 	public class CustomPrefab : PrefabInstantiator
 	{
-		public GameObject prefab;
+		public GameObject Prefab;
 
 		public override GameObject CreatePrefab(Vector3 position) {
-			return GameObject.Instantiate(prefab, position, Quaternion.identity);
+			return GameObject.Instantiate(Prefab, position, Quaternion.identity);
 		}
 	}
 }

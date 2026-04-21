@@ -23,7 +23,7 @@ namespace HFramework.ScriptNodes
 				return State.Success;
 			}
 
-			return child.Update();
+			return Child.Update();
 		}
 	}
 }

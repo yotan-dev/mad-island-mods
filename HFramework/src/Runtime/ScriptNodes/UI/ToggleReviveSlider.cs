@@ -11,6 +11,7 @@ namespace HFramework.ScriptNodes.UI
 	[ScriptNode("HFramework", "UI/Toggle Revive Slider")]
 	public class ToggleReviveSlider : Action
 	{
+		[Tooltip("Expected visibility state of the revive slider")]
 		public bool ToVisibility;
 
 		protected override void OnStart() {

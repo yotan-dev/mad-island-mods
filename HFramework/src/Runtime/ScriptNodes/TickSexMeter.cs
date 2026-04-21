@@ -7,13 +7,11 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Sex Meter/Tick Sex Meter")]
 	public class TickSexMeter : Passthrough
 	{
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 
 		}
 
@@ -21,10 +19,8 @@ namespace HFramework.ScriptNodes
 		/// Fills the sex meter based on the current sex action.
 		/// Kept as a separate method to enable overriding/hooking for custom behavior.
 		/// </summary>
-		protected virtual void FillSexMeter()
-		{
-			switch (this.context.SexAction)
-			{
+		protected virtual void FillSexMeter() {
+			switch (this.Context.SexAction) {
 				case SexAction.Caressing:
 					if (SexMeter.Instance.FillAmount <= SexMeter.Instance.DividerPercent)
 						SexMeter.Instance.Fill(Time.deltaTime * 0.03f);
@@ -46,18 +42,16 @@ namespace HFramework.ScriptNodes
 			}
 		}
 
-		protected override State OnUpdate()
-		{
+		protected override State OnUpdate() {
 			this.FillSexMeter();
 
 			// If we don't have a children, nothing we can do.
-			if (this.child == null)
-			{
+			if (this.Child == null) {
 				PLogger.LogWarning("TickSexMeter: No child found, this means it will only tick once and stop, which is probably not what you were expecting.");
 				return State.Success;
 			}
 
-			return this.child.Update();
+			return this.Child.Update();
 		}
 	}
 }

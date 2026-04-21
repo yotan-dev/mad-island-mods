@@ -22,40 +22,40 @@ namespace HFramework.ScriptNodes
 		[Tooltip("Unique identifier for the node, used to reference from code. Should be unique within the script.")]
 		public string ID;
 
-		internal CommonContext context;
+		internal CommonContext Context;
 
-		[HideInInspector] public State state = State.Running;
-		[HideInInspector] public bool started = false;
+		[HideInInspector] public State ScriptState = State.Running;
+		[HideInInspector] public bool Started = false;
 
 		[HideInInspector] public string GUID;
-		[HideInInspector] public Vector2 position;
+		[HideInInspector] public Vector2 Position;
 
 		public State Update() {
-			if (!started) {
+			if (!Started) {
 				PLogger.LogDebug($"Node {this.name} started");
 				OnStart();
-				started = true;
+				Started = true;
 			}
 
 			PLogger.LogDebug($"Node {this.name} updating");
-			state = OnUpdate();
+			ScriptState = OnUpdate();
 
-			if (state == State.Failure || state == State.Success) {
+			if (ScriptState == State.Failure || ScriptState == State.Success) {
 				this.Terminate(false);
 			}
 
-			return state;
+			return ScriptState;
 		}
 
 		public virtual void Terminate(bool fromOutside = true) {
 			PLogger.LogDebug($"Node {this.name} stopped ({(fromOutside ? "from outside" : "naturally")})");
 			this.OnStop();
-			this.started = false;
+			this.Started = false;
 		}
 
 		public virtual ScriptNode Clone(CommonContext context) {
 			var node = Instantiate(this);
-			node.context = context;
+			node.Context = context;
 			return node;
 		}
 
