@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using YotanModCore;
 
 namespace HFramework
 {
@@ -38,13 +39,25 @@ namespace HFramework
 		}
 
 		private static void LoadSexScripts(SexScripts.SexScript[] scripts) {
-			foreach (var item in scripts) {
-				if (!IsScriptValid(item, out string error)) {
-					PLogger.LogError($"Skipping {item.name}: {error}");
+			foreach (var script in scripts) {
+				if (!string.IsNullOrEmpty(script.Info.MinimalGameVersion)) {
+					if (GameInfo.GameVersion < GameInfo.ToVersion(script.Info.MinimalGameVersion)) {
+						PLogger.LogWarning($"Skipping {script.name}: Minimal game version {script.Info.MinimalGameVersion} is higher than current game version {GameInfo.GameVersion}");
+						continue;
+					}
+				}
+
+				if (script.Info.RequiresDLC && !GameInfo.HasDLC) {
+					PLogger.LogWarning($"Skipping {script.name}: Requires DLC but DLC is not available");
 					continue;
 				}
 
-				Loader.Prefabs.Add(item);
+				if (!IsScriptValid(script, out string error)) {
+					PLogger.LogError($"Skipping {script.name}: {error}");
+					continue;
+				}
+
+				Loader.Prefabs.Add(script);
 			}
 
 			PLogger.LogInfo($"Loaded - {Loader.Prefabs.Count} prefabs");
