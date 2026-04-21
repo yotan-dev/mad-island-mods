@@ -40,14 +40,14 @@ namespace HFramework
 
 		private static void LoadSexScripts(SexScripts.SexScript[] scripts) {
 			foreach (var script in scripts) {
-				if (!string.IsNullOrEmpty(script.Info.MinimalGameVersion)) {
-					if (GameInfo.GameVersion < GameInfo.ToVersion(script.Info.MinimalGameVersion)) {
-						PLogger.LogWarning($"Skipping {script.name}: Minimal game version {script.Info.MinimalGameVersion} is higher than current game version {GameInfo.GameVersion}");
+				if (!string.IsNullOrEmpty(script.MinimalGameVersion)) {
+					if (GameInfo.GameVersion < GameInfo.ToVersion(script.MinimalGameVersion)) {
+						PLogger.LogWarning($"Skipping {script.name}: Minimal game version {script.MinimalGameVersion} is higher than current game version {GameInfo.GameVersion}");
 						continue;
 					}
 				}
 
-				if (script.Info.RequiresDLC && !GameInfo.HasDLC) {
+				if (script.RequiresDLC && !GameInfo.HasDLC) {
 					PLogger.LogWarning($"Skipping {script.name}: Requires DLC but DLC is not available");
 					continue;
 				}

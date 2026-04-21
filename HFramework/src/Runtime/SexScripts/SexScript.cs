@@ -42,6 +42,12 @@ namespace HFramework.SexScripts
 		[TextArea(3, 10)]
 		public string Description;
 
+		[Tooltip("Minimum game version required to run this script. Format: xx.xx.xx.xx (e.g. 0.5.9.0; if parts are omitted, they are assumed as 0)")]
+		public string MinimalGameVersion = "0.0.0.0";
+
+		[Tooltip("Whether this script requires the game DLC to be installed.")]
+		public bool RequiresDLC = false;
+
 		public SexScriptInfo Info;
 
 		public static string TeardownPortName = "Teardown";

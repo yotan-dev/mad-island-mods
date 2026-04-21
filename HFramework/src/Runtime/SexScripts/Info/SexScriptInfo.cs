@@ -17,12 +17,6 @@ namespace HFramework.SexScripts.Info
 
 		public List<ConditionGroup> ExecuteConditions;
 
-		[Tooltip("Minimum game version required to run this script. Format: xx.xx.xx.xx (e.g. 0.5.9.0; if parts are omitted, they are assumed as 0)")]
-		public string MinimalGameVersion;
-
-		[Tooltip("Whether this script requires the game DLC to be installed.")]
-		public bool RequiresDLC;
-
 		private bool TryMatchUnorderedNpcs(CommonStates[] npcs, out CommonStates[] matchedNpcs)
 		{
 			//@FIXME: This will fail likely fail if e.g.:
