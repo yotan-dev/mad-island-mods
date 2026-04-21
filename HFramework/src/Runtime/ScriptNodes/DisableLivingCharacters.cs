@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using YotanModCore;
 
@@ -7,33 +8,48 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Characters/Disable Living Characters")]
 	public class DisableLivingCharacters : Action
 	{
-		protected override void OnStart()
+		[Flags]
+		public enum DisableMode
 		{
+			DisableRigidbody = 1 << 0,
+			DisableCollider = 1 << 1,
+			HideMesh = 1 << 2,
 		}
 
-		protected override void OnStop()
+		[Serializable]
+		public class DisableTarget
 		{
+			public int ActorIndex = 0;
+
+			[Tooltip("Which components to disable")]
+			public DisableMode Mode = DisableMode.DisableRigidbody | DisableMode.DisableCollider | DisableMode.HideMesh;
 		}
 
-		protected override State OnUpdate()
-		{
-			var currentPlayer = CommonUtils.GetActivePlayer();
-			foreach (var actor in this.context.Actors)
-			{
-				if (actor.Common == currentPlayer)
-				{
-					// @TODO: This is based on CommonSexNpc -- needs to check for others
-					var mesh = actor.Common.anim.GetComponent<MeshRenderer>();
-					if (mesh != null)
-						mesh.enabled = false;
+		public DisableTarget[] Targets = new DisableTarget[0];
+
+		protected override void OnStart() {
+		}
+
+		protected override void OnStop() {
+		}
+
+		protected override State OnUpdate() {
+			foreach (var target in this.Targets) {
+				var actor = this.context.Actors[target.ActorIndex];
+				if (actor == null) {
 					continue;
-				} else {
-					// @TODO: Valid for CommonSexNpc and CommonSexPlayer
+				}
+
+				if (target.Mode.HasFlag(DisableMode.DisableRigidbody))
 					actor.Common.nMove.RBState(false);
+
+				if (target.Mode.HasFlag(DisableMode.DisableCollider)) {
 					var coll = actor.Common.GetComponent<CapsuleCollider>();
 					if (coll != null)
 						coll.enabled = false;
+				}
 
+				if (target.Mode.HasFlag(DisableMode.HideMesh)) {
 					var mesh = actor.Common.anim.GetComponent<MeshRenderer>();
 					if (mesh != null)
 						mesh.enabled = false;
