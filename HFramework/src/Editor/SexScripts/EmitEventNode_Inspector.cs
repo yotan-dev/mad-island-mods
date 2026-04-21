@@ -56,7 +56,8 @@ namespace HFramework.EditorUI.SexScripts
 			// Handle event type change so we can update the event args
 			vals.RegisterValueChangedCallback((e) =>
 			{
-				var eventKeyRef = serializedObject.FindProperty("eventKey");
+				var eventKeyRef = serializedObject.FindProperty(nameof(EmitEvent.EventKey));
+				Debug.Log($"Event type changed from {eventKeyRef.stringValue} to {e.newValue}");
 				if (eventKeyRef.stringValue == e.newValue || (eventKeyRef.stringValue == "" && e.newValue == null))
 					return;
 
@@ -68,7 +69,7 @@ namespace HFramework.EditorUI.SexScripts
 				// We need to manually handle the change callback, or it will lose the update
 				eventKeyRef.stringValue = e.newValue;
 
-				var eventArgsRef = serializedObject.FindProperty("EventArgs");
+				var eventArgsRef = serializedObject.FindProperty(nameof(EmitEvent.EventArgs));
 				if (SexEvents.Events.TryGetValue(e.newValue, out var eventInfo))
 				{
 					try
