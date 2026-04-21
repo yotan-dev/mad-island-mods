@@ -13,6 +13,35 @@ namespace HFramework.SexScripts
 	[Experimental]
 	public class SexScript : ScriptableObject
 	{
+		/// <summary>
+		/// Sex script engine version.
+		/// This will be used if HFramework needs to do drastic changes to its own Nodes, which will lead to a new engine version but allow backward compatibility.
+		/// </summary>
+		[Tooltip("Sex script engine version.\nThis will be used if HFramework needs to do drastic changes to its own Nodes, which will lead to a new engine version but allow backward compatibility.")]
+		public EngineVersion EngineVersion = EngineVersion.V1;
+
+		/// <summary>
+		/// The Unique Identifier of this SexScript, it may be used if we want to reference it from code/other mods.
+		/// Should be unique across all mods.
+		///
+		/// Recommended format: "modname.scriptname"
+		/// </summary>
+		[Tooltip("The Unique Identifier of this SexScript, it may be used if we want to reference it from code/other mods.\nShould be unique across all mods.\nRecommended format: \"modname.scriptname\"")]
+		public string UniqueID;
+
+		/// <summary>
+		/// The display name of the sex script.
+		/// May be shown to players in the UI.
+		/// </summary>
+		[Tooltip("The display name of the sex script.\nMay be shown to players in the UI.")]
+		public string Name;
+
+		/// <summary>
+		/// The description of the sex script.
+		/// </summary>
+		[TextArea(3, 10)]
+		public string Description;
+
 		public SexScriptInfo Info;
 
 		public static string TeardownPortName = "Teardown";
