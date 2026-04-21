@@ -6,29 +6,24 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Script Alive")]
 	public class ScriptAlive : Passthrough
 	{
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 			Debug.Log("---- ScriptAlive Node Start");
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 			Debug.Log("---- ScriptAlive Node Stop");
 		}
 
-		protected override State OnUpdate()
-		{
-			foreach (var npc in this.context.Actors)
-			{
-				if (npc.Common.dead != 0)
-				{
+		protected override State OnUpdate() {
+			foreach (var npc in this.Context.Actors) {
+				if (npc.Common.dead != 0) {
 					PLogger.LogError("ScriptAliveNode: Npc is dead");
 					return State.Failure;
 				}
 			}
 
 			Debug.Log("---- ScriptAlive Node UPDATE");
-			return child.Update();
+			return Child.Update();
 		}
 	}
 }

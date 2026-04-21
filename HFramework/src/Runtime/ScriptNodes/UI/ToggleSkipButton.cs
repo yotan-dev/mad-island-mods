@@ -1,3 +1,4 @@
+using UnityEngine;
 using YotanModCore;
 
 namespace HFramework.ScriptNodes.UI
@@ -9,10 +10,11 @@ namespace HFramework.ScriptNodes.UI
 	[ScriptNode("HFramework", "UI/Toggle Skip Button")]
 	public class ToggleSkipButton : Action
 	{
+		[Tooltip("Expected visibility state of the skip button")]
 		public bool ToVisibility;
 
 		protected override void OnStart() {
-			this.context.HasChangedSkipButtonVisibility = true;
+			this.Context.HasChangedSkipButtonVisibility = true;
 		}
 
 		protected override State OnUpdate() {

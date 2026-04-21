@@ -47,43 +47,38 @@ namespace HFramework.SexScripts
 		public static string TeardownPortName = "Teardown";
 
 		[HideInInspector]
-		public ScriptNode rootNode;
+		public ScriptNode RootNode;
 
 		[HideInInspector]
-		public ScriptNode.State treeState = ScriptNode.State.Running;
+		public ScriptNode.State TreeState = ScriptNode.State.Running;
 
-		public CommonContext context;
+		public CommonContext Context;
 
 		[HideInInspector]
-		public List<ScriptNode> nodes = new List<ScriptNode>();
+		public List<ScriptNode> Nodes = new List<ScriptNode>();
 
 		public ScriptNode.State Update() {
-			if (rootNode.state == ScriptNode.State.Running) {
-				treeState = rootNode.Update();
+			if (RootNode.ScriptState == ScriptNode.State.Running) {
+				TreeState = RootNode.Update();
 			}
 
-			return treeState;
+			return TreeState;
 		}
 
 #if UNITY_EDITOR
-		private string GenerateNodeId(System.Type type)
-		{
+		private string GenerateNodeId(System.Type type) {
 			var newId = type.Name.ToString();
 			var idCount = 0;
 			bool isUnique = false;
-			while (!isUnique)
-			{
+			while (!isUnique) {
 				isUnique = true;
-				foreach (var node in nodes)
-				{
-					if (node.ID == newId)
-					{
+				foreach (var node in this.Nodes) {
+					if (node.ID == newId) {
 						isUnique = false;
 						break;
 					}
 				}
-				if (!isUnique)
-				{
+				if (!isUnique) {
 					idCount++;
 					newId = $"{type.Name}_{idCount}";
 				}
@@ -92,22 +87,20 @@ namespace HFramework.SexScripts
 			return newId;
 		}
 
-		public ScriptNode CreateNode(System.Type type)
-		{
+		public ScriptNode CreateNode(System.Type type) {
 			var node = ScriptableObject.CreateInstance(type) as ScriptNode;
 			node.name = type.Name;
 			node.GUID = GUID.Generate().ToString();
 			node.ID = this.GenerateNodeId(type);
-			nodes.Add(node);
+			this.Nodes.Add(node);
 
 			AssetDatabase.AddObjectToAsset(node, this);
 			AssetDatabase.SaveAssets();
 			return node;
 		}
 
-		public void DeleteNode(ScriptNode node)
-		{
-			nodes.Remove(node);
+		public void DeleteNode(ScriptNode node) {
+			this.Nodes.Remove(node);
 			AssetDatabase.RemoveObjectFromAsset(node);
 			AssetDatabase.SaveAssets();
 		}
@@ -116,42 +109,42 @@ namespace HFramework.SexScripts
 		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as Passthrough;
 			if (decorator) {
-				decorator.child = child;
+				decorator.Child = child;
 			}
 
 			var root = parent as Root;
 			if (root) {
 				if (portName == TeardownPortName) {
-					root.teardownNode = child;
+					root.TeardownNode = child;
 				} else {
-					root.child = child;
+					root.Child = child;
 				}
 			}
 
 			var composite = parent as Composite;
 			if (composite) {
-				composite.children.Add(child);
+				composite.Children.Add(child);
 			}
 		}
 
 		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as Passthrough;
 			if (decorator) {
-				decorator.child = null;
+				decorator.Child = null;
 			}
 
 			var root = parent as Root;
 			if (root) {
 				if (portName == TeardownPortName) {
-					root.teardownNode = null;
+					root.TeardownNode = null;
 				} else {
-					root.child = null;
+					root.Child = null;
 				}
 			}
 
 			var composite = parent as Composite;
 			if (composite) {
-				composite.children.Remove(child);
+				composite.Children.Remove(child);
 			}
 		}
 
@@ -159,22 +152,22 @@ namespace HFramework.SexScripts
 			var children = new List<ScriptNode>();
 
 			var decorator = parent as Passthrough;
-			if (decorator && decorator.child != null) {
-				children.Add(decorator.child);
+			if (decorator && decorator.Child != null) {
+				children.Add(decorator.Child);
 			}
 
 			var root = parent as Root;
-			if (root && root.child != null) {
-				children.Add(root.child);
+			if (root && root.Child != null) {
+				children.Add(root.Child);
 			}
 
-			if (root && root.teardownNode != null) {
-				children.Add(root.teardownNode);
+			if (root && root.TeardownNode != null) {
+				children.Add(root.TeardownNode);
 			}
 
 			var composite = parent as Composite;
 			if (composite) {
-				return composite.children;
+				return composite.Children;
 			}
 
 			return children;
@@ -182,8 +175,8 @@ namespace HFramework.SexScripts
 
 		internal SexScript Clone() {
 			var tree = Instantiate(this);
-			tree.context = new CommonContext(this);
-			tree.rootNode = tree.rootNode.Clone(tree.context);
+			tree.Context = new CommonContext(this);
+			tree.RootNode = tree.RootNode.Clone(tree.Context);
 			return tree;
 		}
 	}

@@ -169,7 +169,7 @@ namespace HFramework
 			if (e.ctx.SexScript is not CommonSexNPCScript commonSexNpcScript)
 				return;
 
-			if (commonSexNpcScript.treeState != ScriptNode.State.Success)
+			if (commonSexNpcScript.TreeState != ScriptNode.State.Success)
 				return;
 
 			// Sex was completed, every actor loves the others more.

@@ -6,20 +6,17 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Repeat")]
 	public class Repeat : Passthrough
 	{
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 			Debug.Log("---- Repeat Node Start");
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 			Debug.Log("---- Repeat Node Stop");
 		}
 
-		protected override State OnUpdate()
-		{
+		protected override State OnUpdate() {
 			Debug.Log("---- Repeat Node UPDATE");
-			child.Update();
+			Child.Update();
 			return State.Running;
 		}
 	}

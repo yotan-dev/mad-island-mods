@@ -7,8 +7,7 @@ namespace HFramework.ScriptNodes
 
 		public readonly string MenuName;
 
-		public ScriptNodeAttribute(string source, string menuName)
-		{
+		public ScriptNodeAttribute(string source, string menuName) {
 			Source = source;
 			MenuName = menuName;
 		}

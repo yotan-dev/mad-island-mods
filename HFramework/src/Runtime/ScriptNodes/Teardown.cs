@@ -11,16 +11,13 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Teardown")]
 	public class Teardown : Action
 	{
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 		}
 
-		private void RestoreLivingNpc(CommonStates? character, float? searchAngle)
-		{
+		private void RestoreLivingNpc(CommonStates? character, float? searchAngle) {
 			if (character == null)
 				return;
 
@@ -46,8 +43,7 @@ namespace HFramework.ScriptNodes
 				character.libido -= 20f;
 		}
 
-		private void RestoreLivingPlayer(CommonStates? character)
-		{
+		private void RestoreLivingPlayer(CommonStates? character) {
 			if (character == null)
 				return;
 
@@ -56,24 +52,21 @@ namespace HFramework.ScriptNodes
 				mesh.enabled = true;
 		}
 
-		private bool IsPlayerInvolved()
-		{
+		private bool IsPlayerInvolved() {
 			var currentPlayer = CommonUtils.GetActivePlayer();
-			return this.context.Actors.Any(npc => npc.Common == currentPlayer);
+			return this.Context.Actors.Any(npc => npc.Common == currentPlayer);
 		}
 
-		protected override State OnUpdate()
-		{
+		protected override State OnUpdate() {
 			Debug.Log("Teardown.Update");
-			if (this.context.TmpSex != null)
-				UnityEngine.Object.Destroy(this.context.TmpSex);
+			if (this.Context.TmpSex != null)
+				UnityEngine.Object.Destroy(this.Context.TmpSex);
 
-			if (this.context.SexPlace != null)
-				this.context.SexPlace.user = null;
+			if (this.Context.SexPlace != null)
+				this.Context.SexPlace.user = null;
 
 			var currentPlayer = CommonUtils.GetActivePlayer();
-			foreach (var npc in this.context.Actors)
-			{
+			foreach (var npc in this.Context.Actors) {
 				if (npc.Common == currentPlayer)
 					RestoreLivingPlayer(npc.Common);
 				else
@@ -87,10 +80,10 @@ namespace HFramework.ScriptNodes
 				Managers.mn.randChar.HandItemHide(npc.Common, false);
 			}
 
-			if (this.context.HasChangedMainCanvasVisibility)
+			if (this.Context.HasChangedMainCanvasVisibility)
 				Managers.mn.uiMN.MainCanvasView(true);
 
-			if (this.context.HasSexMeter)
+			if (this.Context.HasSexMeter)
 				SexMeter.Instance.Hide();
 
 			// Refresh the "status" window if the player has it open

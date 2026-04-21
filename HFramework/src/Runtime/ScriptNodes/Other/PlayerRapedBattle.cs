@@ -19,11 +19,11 @@ namespace HFramework.ScriptNodes.Other
 
 		protected override void OnStart() {
 			FaintTime = 1f;
-			PlayerCommon = this.context.Actors[PlayerIndex].Common;
+			PlayerCommon = this.Context.Actors[PlayerIndex].Common;
 		}
 
 		protected override State OnUpdate() {
-			if (PlayerCommon.faint > 0.0 && this.context.TmpSex != null && PlayerCommon.pMove.common.dead != 0) {
+			if (PlayerCommon.faint > 0.0 && this.Context.TmpSex != null && PlayerCommon.pMove.common.dead != 0) {
 				this.FaintTime -= Time.deltaTime;
 				if (this.FaintTime <= 0.0) {
 					this.FaintTime = 1f;

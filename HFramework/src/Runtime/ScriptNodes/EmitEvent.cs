@@ -7,7 +7,7 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Emit Event")]
 	public class EmitEvent : Action
 	{
-		public string eventKey;
+		public string EventKey;
 
 		public bool EmitOnce = false;
 
@@ -16,42 +16,34 @@ namespace HFramework.ScriptNodes
 
 		[HideInInspector] public bool hasEmitted = false;
 
-		protected override void OnStart()
-		{
-			Debug.Log($"OnStart: {eventKey}");
+		protected override void OnStart() {
+			Debug.Log($"OnStart: {EventKey}");
 		}
 
-		protected override void OnStop()
-		{
-			Debug.Log($"OnStop: {eventKey}");
+		protected override void OnStop() {
+			Debug.Log($"OnStop: {EventKey}");
 		}
 
-		protected override State OnUpdate()
-		{
-			Debug.Log($"OnUpdate: {eventKey}");
-			if (this.EmitOnce && this.hasEmitted)
-			{
+		protected override State OnUpdate() {
+			Debug.Log($"OnUpdate: {EventKey}");
+			if (this.EmitOnce && this.hasEmitted) {
 				return State.Success;
 			}
 
-			if (SexEvents.Events.TryGetValue(eventKey, out var eventInfo))
-			{
-				try
-				{
+			if (SexEvents.Events.TryGetValue(EventKey, out var eventInfo)) {
+				try {
 					this.hasEmitted = true;
 					var eventArgs = this.EventArgs.Clone();
-					eventArgs.Populate(context, this);
+					eventArgs.Populate(Context, this);
 					eventInfo.Event.TriggerWithBaseArgs(eventArgs);
 					return State.Success;
-				}
-				catch (Exception ex)
-				{
-					Debug.LogError($"Error triggering event {eventKey}: {ex}");
+				} catch (Exception ex) {
+					Debug.LogError($"Error triggering event {EventKey}: {ex}");
 					return State.Failure;
 				}
 			}
 
-			Debug.LogError($"Event not found: {eventKey}");
+			Debug.LogError($"Event not found: {EventKey}");
 			return State.Failure;
 		}
 	}

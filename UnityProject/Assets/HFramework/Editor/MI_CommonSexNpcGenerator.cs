@@ -42,7 +42,7 @@ namespace HFramework
 			script.Name = config.Name;
 			script.Description = config.Description;
 
-			var setupNode = script.nodes.Find(node => node.ID == "Setup") as Setup;
+			var setupNode = script.Nodes.Find(node => node.ID == "Setup") as Setup;
 			if (setupNode == null) {
 				throw new System.Exception("Setup node not found");
 			}
@@ -52,18 +52,18 @@ namespace HFramework
 				throw new System.Exception("SexListPrefab not found");
 			}
 
-			instantiator.listIndex = config.ListIndex;
-			instantiator.objIndex = config.ObjIndex;
+			instantiator.ListIndex = config.ListIndex;
+			instantiator.ObjIndex = config.ObjIndex;
 
 			if (config.AnimationPrefix != "A_") {
-				var animNodes = script.nodes.FindAll((node) => node is LoopAnimationForTime && node.ID.StartsWith("Anim_"));
+				var animNodes = script.Nodes.FindAll((node) => node is LoopAnimationForTime && node.ID.StartsWith("Anim_"));
 				foreach (var node in animNodes) {
 					var animNode = (LoopAnimationForTime)node;
-					animNode.animName = config.AnimationPrefix + animNode.animName[2..]; // removes the "A_" prefix
+					animNode.AnimationName = config.AnimationPrefix + animNode.AnimationName[2..]; // removes the "A_" prefix
 				}
 
-				var animFinish = (AnimateOnce)script.nodes.Find((node) => node is AnimateOnce && node.ID == "Anim_Finish");
-				animFinish.animationName = config.AnimationPrefix + animFinish.animationName[2..]; // removes the "A_" prefix
+				var animFinish = (AnimateOnce)script.Nodes.Find((node) => node is AnimateOnce && node.ID == "Anim_Finish");
+				animFinish.AnimationName = config.AnimationPrefix + animFinish.AnimationName[2..]; // removes the "A_" prefix
 			}
 		}
 
@@ -109,18 +109,18 @@ namespace HFramework
 				}
 			};
 
-			var sequenceNode = script.nodes.Find((node) => node.ID == "Sequence") as Sequence;
+			var sequenceNode = script.Nodes.Find((node) => node.ID == "Sequence") as Sequence;
 			if (sequenceNode == null) {
 				throw new System.Exception("Sequence node not found");
 			}
 
-			var emitCumNode = sequenceNode.children.Find((child) => child.ID == "Emit_Cum");
+			var emitCumNode = sequenceNode.Children.Find((child) => child.ID == "Emit_Cum");
 			if (emitCumNode == null) {
 				throw new System.Exception("Emit_Cum node not found");
 			}
 
 			script.RemoveChild(sequenceNode, emitCumNode);
-			script.nodes.Remove(emitCumNode);
+			script.Nodes.Remove(emitCumNode);
 
 			return script;
 		}

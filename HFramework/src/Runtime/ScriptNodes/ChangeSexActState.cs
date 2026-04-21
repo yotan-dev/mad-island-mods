@@ -61,7 +61,7 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate() {
 			foreach (var actor in this.Changes) {
-				var npc = this.context.Actors[actor.Index];
+				var npc = this.Context.Actors[actor.Index];
 				if (actor.SexState != TargetSexState.DontChange)
 					npc.Common.sex = (CommonStates.SexState)actor.SexState;
 

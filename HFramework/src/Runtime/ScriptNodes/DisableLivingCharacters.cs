@@ -36,7 +36,7 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate() {
 			foreach (var target in this.Targets) {
-				var actor = this.context.Actors[target.ActorIndex];
+				var actor = this.Context.Actors[target.ActorIndex];
 				if (actor == null) {
 					continue;
 				}

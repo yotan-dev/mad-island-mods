@@ -12,45 +12,36 @@ namespace HFramework.ScriptNodes
 
 		private TemplatedString templatedAnimName;
 
-		private void Awake()
-		{
+		private void Awake() {
 			this.templatedAnimName = new TemplatedString(this.AnimationName);
 		}
 
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 
 		}
 
-		protected override State OnUpdate()
-		{
-			if (this.context.TmpSexAnim == null)
-			{
+		protected override State OnUpdate() {
+			if (this.Context.TmpSexAnim == null) {
 				// While this is an issue, we can keep the system running -- probably
 				PLogger.LogError("ToggleManView: TmpSexAnim is null");
 				return State.Success;
 			}
 
-			var animationName = this.templatedAnimName.GetString(this.context.Variables);
-			if (!this.context.TmpSexAnim.HasAnimation(animationName))
-			{
+			var animationName = this.templatedAnimName.GetString(this.Context.Variables);
+			if (!this.Context.TmpSexAnim.HasAnimation(animationName)) {
 				// While this is an issue, we can keep the system running -- probably
 				PLogger.LogError($"ToggleManView: Animation '{animationName}' not found");
 				return State.Success;
 			}
 
-			if (this.context.TmpSexAnim.state.GetCurrent(this.TrackIndex) != null)
-			{
-				this.context.TmpSexAnim.state.SetEmptyAnimation(this.TrackIndex, 0);
-			}
-			else
-			{
-				this.context.TmpSexAnim.state.SetAnimation(this.TrackIndex, animationName, true);
+			if (this.Context.TmpSexAnim.state.GetCurrent(this.TrackIndex) != null) {
+				this.Context.TmpSexAnim.state.SetEmptyAnimation(this.TrackIndex, 0);
+			} else {
+				this.Context.TmpSexAnim.state.SetAnimation(this.TrackIndex, animationName, true);
 			}
 
 			return State.Success;

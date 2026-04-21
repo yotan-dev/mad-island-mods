@@ -8,20 +8,17 @@ namespace HFramework.ScriptNodes
 	{
 		public bool ToVisibility = true;
 
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 		}
 
-		protected override State OnUpdate()
-		{
+		protected override State OnUpdate() {
 			if (this.ToVisibility)
-				this.context.MenuSession?.Show();
+				this.Context.MenuSession?.Show();
 			else
-				this.context.MenuSession?.Hide();
+				this.Context.MenuSession?.Hide();
 
 			return State.Success;
 		}

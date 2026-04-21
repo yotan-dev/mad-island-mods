@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace HFramework.ScriptNodes
 {
@@ -8,31 +7,26 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Menu/Set Menu Options")]
 	public class SetMenuOptions : Action
 	{
-		public List<MenuOption> options = new List<MenuOption>();
+		public List<MenuOption> Options = new();
 
-		public bool forceOpen = true;
+		public bool ForceOpen = true;
 
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 		}
 
-		protected override State OnUpdate()
-		{
-			if (this.context.MenuSession != null)
-			{
-				var opts = this.options
+		protected override State OnUpdate() {
+			if (this.Context.MenuSession != null) {
+				var opts = this.Options
 					.Where(o => o != null && !string.IsNullOrEmpty(o.Id))
 					.Select(o => (o.Id, o.Text, o.Effect))
 					.ToArray();
-				this.context.MenuSession.SetOptions(opts);
+				this.Context.MenuSession.SetOptions(opts);
 
-				if (this.forceOpen)
-				{
-					this.context.MenuSession.Show();
+				if (this.ForceOpen) {
+					this.Context.MenuSession.Show();
 				}
 			}
 

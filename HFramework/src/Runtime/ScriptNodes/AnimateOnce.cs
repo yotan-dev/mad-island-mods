@@ -7,47 +7,40 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Animation/Animate Once")]
 	public class AnimateOnce : Action
 	{
-		public string animationName = "";
+		public string AnimationName = "";
 
-		private TemplatedString templatedAnimationName;
-		float remainingTime;
+		private TemplatedString TemplatedAnimationName;
+		private float RemainingTime;
 
-		private void Awake()
-		{
-			this.templatedAnimationName = new TemplatedString(this.animationName);
+		private void Awake() {
+			this.TemplatedAnimationName = new TemplatedString(this.AnimationName);
 		}
 
-		protected override void OnStart()
-		{
-			if (this.context.TmpSexAnim == null)
-			{
+		protected override void OnStart() {
+			if (this.Context.TmpSexAnim == null) {
 				PLogger.LogError("AnimOnce: TmpSexAnim is null");
 				return;
 			}
 
 			//@TODO: We may consider pausing the animation here and resuming later (see ResumeAnimation in DefaultSceneController)
 
-			var animationName = this.templatedAnimationName.GetString(this.context.Variables);
-			if (!this.context.TmpSexAnim.HasAnimation(animationName))
-			{
+			var animationName = this.TemplatedAnimationName.GetString(this.Context.Variables);
+			if (!this.Context.TmpSexAnim.HasAnimation(animationName)) {
 				PLogger.LogError($"AnimOnce: Animation '{animationName}' not found");
 				return;
 			}
 
-			this.context.TmpSexAnim.state.SetAnimation(0, animationName, false);
-			this.remainingTime = this.context.TmpSexAnim.state.GetCurrent(0).AnimationEnd;
+			this.Context.TmpSexAnim.state.SetAnimation(0, animationName, false);
+			this.RemainingTime = this.Context.TmpSexAnim.state.GetCurrent(0).AnimationEnd;
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 
 		}
 
-		protected override State OnUpdate()
-		{
-			this.remainingTime -= Time.deltaTime;
-			if (this.remainingTime <= 0)
-			{
+		protected override State OnUpdate() {
+			this.RemainingTime -= Time.deltaTime;
+			if (this.RemainingTime <= 0) {
 				return State.Success;
 			}
 

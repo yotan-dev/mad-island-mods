@@ -24,11 +24,11 @@ namespace HFramework.ScriptNodes
 		// Note: When false, NPC will change out of WAIT and fall down from the world if the sex doesn't stop.
 		// CommonSexNpc -> false
 		// CommonSexPlayer -> true
-		public bool stopNpcReaction = true;
+		public bool StopNpcReaction = true;
 
 		// CommonSexNPc -> new Vector3(0.0f, 0.0f, 0.02f)
 		// commonSexPlayer -> zero
-		public Vector3 posOffset = Vector3.zero;
+		public Vector3 PositionOffset = Vector3.zero;
 
 		public PrefabPositionSource PositionSource = PrefabPositionSource.SexPlacePos;
 
@@ -42,29 +42,29 @@ namespace HFramework.ScriptNodes
 			position = Vector3.zero;
 			switch (this.PositionSource) {
 				case PrefabPositionSource.SexPlacePos:
-					if (!this.context.SexPlacePos.HasValue) {
+					if (!this.Context.SexPlacePos.HasValue) {
 						PLogger.LogWarning("Sex place pos is not set");
 						return false;
 					}
 
-					position = this.context.SexPlacePos.Value;
+					position = this.Context.SexPlacePos.Value;
 					return true;
 
 				case PrefabPositionSource.Actor0:
-					if (this.context.Actors.Length == 0 || this.context.Actors[0] == null || this.context.Actors[0].Common == null) {
-						PLogger.LogWarning($"Actor 0 is not set for \"{this.context.SexScript.name}\".");
+					if (this.Context.Actors.Length == 0 || this.Context.Actors[0] == null || this.Context.Actors[0].Common == null) {
+						PLogger.LogWarning($"Actor 0 is not set for \"{this.Context.SexScript.name}\".");
 						return false;
 					}
 
-					position = this.context.Actors[0].Common.gameObject.transform.position;
+					position = this.Context.Actors[0].Common.gameObject.transform.position;
 					return true;
 
 				case PrefabPositionSource.Actor1:
-					if (this.context.Actors.Length <= 1 || this.context.Actors[1] == null || this.context.Actors[1].Common == null) {
-						PLogger.LogWarning($"Actor 1 is not set for \"{this.context.SexScript.name}\".");
+					if (this.Context.Actors.Length <= 1 || this.Context.Actors[1] == null || this.Context.Actors[1].Common == null) {
+						PLogger.LogWarning($"Actor 1 is not set for \"{this.Context.SexScript.name}\".");
 						return false;
 					}
-					position = this.context.Actors[1].Common.gameObject.transform.position;
+					position = this.Context.Actors[1].Common.gameObject.transform.position;
 					return true;
 
 				default:
@@ -75,10 +75,10 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate() {
 			// If there is already a TmpSex object, destroy it (e.g. we are changing active "scene")
-			if (this.context.TmpSex != null) {
-				GameObject.Destroy(this.context.TmpSex);
-				this.context.TmpSex = null;
-				this.context.TmpSexAnim = null;
+			if (this.Context.TmpSex != null) {
+				GameObject.Destroy(this.Context.TmpSex);
+				this.Context.TmpSex = null;
+				this.Context.TmpSexAnim = null;
 			}
 
 			if (!this.TryGetPosition(out var position)) {
@@ -86,33 +86,33 @@ namespace HFramework.ScriptNodes
 			}
 
 			var prefab = this.Instantiator.CreatePrefab(position);
-			if (this.context.SexPlace != null) {
-				if (this.context.SexPlace.user != null) {
+			if (this.Context.SexPlace != null) {
+				if (this.Context.SexPlace.user != null) {
 					PLogger.LogError("Sex place already has a user");
 					return State.Failure;
 				}
 
-				this.context.SexPlace.user = prefab;
+				this.Context.SexPlace.user = prefab;
 			}
 
 			// Pos offset only in CommonSexNpc
 			// CommonSexNpc -> new Vector3(0.0f, 0.0f, 0.02f)
-			prefab.transform.position += this.posOffset;
+			prefab.transform.position += this.PositionOffset;
 			var currentPlayer = CommonUtils.GetActivePlayer();
-			foreach (var npc in this.context.Actors) {
+			foreach (var npc in this.Context.Actors) {
 				npc.Angle = npc.Common.nMove.searchAngle;
 				if (npc.Common != currentPlayer) {
-					npc.Common.nMove.searchAngle = this.stopNpcReaction ? 0f : 180f;
+					npc.Common.nMove.searchAngle = this.StopNpcReaction ? 0f : 180f;
 
-					if (this.context.SexPlacePos.HasValue) {
-						npc.Common.transform.position = this.context.SexPlacePos.Value;
+					if (this.Context.SexPlacePos.HasValue) {
+						npc.Common.transform.position = this.Context.SexPlacePos.Value;
 					}
 				}
 			}
 
-			this.AppearanceSetter.SetAppearance(prefab, this.context);
-			this.context.TmpSex = prefab;
-			this.context.TmpSexAnim = this.Instantiator.GetSkeletonAnimation(prefab);
+			this.AppearanceSetter.SetAppearance(prefab, this.Context);
+			this.Context.TmpSex = prefab;
+			this.Context.TmpSexAnim = this.Instantiator.GetSkeletonAnimation(prefab);
 
 			return State.Success;
 		}

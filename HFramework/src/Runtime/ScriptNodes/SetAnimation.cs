@@ -9,31 +9,31 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Animation/Set Animation")]
 	public class SetAnimation : Action
 	{
-		public string animName = "";
+		public string AnimationName = "";
 
-		private TemplatedString templatedAnimName;
+		private TemplatedString TemplatedAnimationName;
 
-		private string finalAnimName;
+		private string FinalAnimationName;
 
 		private void Awake() {
-			this.templatedAnimName = new TemplatedString(this.animName);
+			this.TemplatedAnimationName = new TemplatedString(this.AnimationName);
 		}
 
 		protected override void OnStart() {
-			if (this.context.TmpSexAnim == null) {
+			if (this.Context.TmpSexAnim == null) {
 				PLogger.LogError("SetAnimForTime: TmpSexAnim is null");
 				return;
 			}
 
 			//@TODO: We may consider pausing the animation here and resuming later (see ResumeAnimation in DefaultSceneController)
 
-			var animationName = this.templatedAnimName.GetString(this.context.Variables);
-			if (!this.context.TmpSexAnim.HasAnimation(animationName)) {
+			var animationName = this.TemplatedAnimationName.GetString(this.Context.Variables);
+			if (!this.Context.TmpSexAnim.HasAnimation(animationName)) {
 				PLogger.LogError($"SetAnimForTime: Animation '{animationName}' not found");
 				return;
 			}
 
-			this.finalAnimName = animationName;
+			this.FinalAnimationName = animationName;
 		}
 
 		protected override void OnStop() {
@@ -41,7 +41,7 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
-			this.context.TmpSexAnim.state.SetAnimation(0, this.finalAnimName, true);
+			this.Context.TmpSexAnim.state.SetAnimation(0, this.FinalAnimationName, true);
 			return State.Success;
 		}
 	}

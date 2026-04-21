@@ -6,7 +6,8 @@ namespace HFramework.ScriptNodes
 	[Experimental]
 	public class MenuOption
 	{
-		public enum EffectType {
+		public enum EffectType
+		{
 			ChangeState,
 			Action,
 		}

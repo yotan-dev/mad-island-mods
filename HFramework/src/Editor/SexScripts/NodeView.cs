@@ -24,8 +24,8 @@ namespace HFramework.EditorUI.SexScripts
 			this.title = node.ID;
 			this.viewDataKey = node.GUID; // MEtadata for GraphView
 
-			style.left = node.position.x;
-			style.top = node.position.y;
+			style.left = node.Position.x;
+			style.top = node.Position.y;
 
 			NodeEvents.OnNodeChanged += OnNodeChanged;
 
@@ -111,8 +111,8 @@ namespace HFramework.EditorUI.SexScripts
 		public override void SetPosition(Rect newPos)
 		{
 			base.SetPosition(newPos);
-			node.position.x = newPos.xMin;
-			node.position.y = newPos.yMin;
+			node.Position.x = newPos.xMin;
+			node.Position.y = newPos.yMin;
 		}
 
 		public override void OnSelected()

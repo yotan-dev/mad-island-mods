@@ -1,10 +1,7 @@
 #nullable enable
 
 using System;
-using System.Collections.Generic;
 using HFramework.ScriptNodes;
-using UnityEngine;
-using YotanModCore;
 using YotanModCore.PropPanels;
 
 namespace HFramework.SexScripts
@@ -12,21 +9,18 @@ namespace HFramework.SexScripts
 	[Experimental]
 	public class SexScriptMenuPanel : BasePropPanel
 	{
-		private readonly Func<(string Id, string Text, MenuOption.EffectType Effect)[]> getOptions;
-		private readonly Action<string, MenuOption.EffectType> onSelected;
+		private readonly Func<(string Id, string Text, MenuOption.EffectType Effect)[]> GetOptions;
+		private readonly Action<string, MenuOption.EffectType> OnSelected;
 
-		public SexScriptMenuPanel(Func<(string Id, string Text, MenuOption.EffectType Effect)[]> getOptions, Action<string, MenuOption.EffectType> onSelected)
-		{
-			this.getOptions = getOptions;
-			this.onSelected = onSelected;
+		public SexScriptMenuPanel(Func<(string Id, string Text, MenuOption.EffectType Effect)[]> getOptions, Action<string, MenuOption.EffectType> onSelected) {
+			this.GetOptions = getOptions;
+			this.OnSelected = onSelected;
 		}
 
-		public void Redraw()
-		{
+		public void Redraw() {
 			this.Options.Clear();
-			foreach (var (id, text, effect) in this.getOptions())
-			{
-				this.Options.Add(new MenuItem(text, () => this.onSelected(id, effect)));
+			foreach (var (id, text, effect) in this.GetOptions()) {
+				this.Options.Add(new MenuItem(text, () => this.OnSelected(id, effect)));
 			}
 			PropPanelManager.Instance.DrawOptions();
 		}

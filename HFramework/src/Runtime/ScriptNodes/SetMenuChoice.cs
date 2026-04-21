@@ -1,27 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Menu/Set Menu Choice")]
 	public class SetMenuChoice : Action
 	{
-		public string newChoiceId;
+		public string NewChoiceId;
 
-		protected override void OnStart()
-		{
+		protected override void OnStart() {
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 		}
 
-		protected override State OnUpdate()
-		{
-			this.context.PendingChoiceId = this.newChoiceId;
+		protected override State OnUpdate() {
+			this.Context.PendingChoiceId = this.NewChoiceId;
 			return State.Success;
 		}
 	}

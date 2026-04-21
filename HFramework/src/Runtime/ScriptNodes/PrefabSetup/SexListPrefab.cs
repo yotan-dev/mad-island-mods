@@ -8,11 +8,14 @@ namespace HFramework.ScriptNodes.PrefabSetup
 	[Experimental]
 	public class SexListPrefab : PrefabInstantiator
 	{
-		public int listIndex;
-		public int objIndex;
+		[Tooltip("Index of the sex list to use")]
+		public int ListIndex;
+
+		[Tooltip("Index of the object within the sex list to use")]
+		public int ObjIndex;
 
 		public override GameObject CreatePrefab(Vector3 position) {
-			var prefab = Managers.sexMN.sexList[listIndex].sexObj[objIndex];
+			var prefab = Managers.sexMN.sexList[ListIndex].sexObj[ObjIndex];
 			return GameObject.Instantiate(prefab, position, Quaternion.identity);
 		}
 	}

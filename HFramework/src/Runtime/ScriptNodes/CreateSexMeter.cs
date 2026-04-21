@@ -13,26 +13,21 @@ namespace HFramework.ScriptNodes
 
 		public bool ShowImmediately = true;
 
-		protected override void OnStart()
-		{
-			this.context.HasSexMeter = true;
+		protected override void OnStart() {
+			this.Context.HasSexMeter = true;
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 		}
 
-		protected override State OnUpdate()
-		{
-			if (this.context.SexPlacePos == null)
-			{
+		protected override State OnUpdate() {
+			if (this.Context.SexPlacePos == null) {
 				PLogger.LogError("SexPlacePos is null");
 				return State.Failure;
 			}
 
-			SexMeter.Instance.Init(this.context.SexPlacePos.Value + this.Offset, this.DividerPercent);
-			if (this.ShowImmediately)
-			{
+			SexMeter.Instance.Init(this.Context.SexPlacePos.Value + this.Offset, this.DividerPercent);
+			if (this.ShowImmediately) {
 				SexMeter.Instance.Show();
 			}
 

@@ -4,65 +4,56 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Root")]
 	public class Root : ScriptNode
 	{
-		public ScriptNode child;
+		public ScriptNode Child;
 
-		public ScriptNode teardownNode;
+		public ScriptNode TeardownNode;
 
-		State mainFinalState;
+		private State MainFinalState;
 
-		bool mainFinished;
+		private bool MainFinished;
 
-		protected override void OnStart()
-		{
-			mainFinalState = State.Running;
-			mainFinished = false;
+		protected override void OnStart() {
+			MainFinalState = State.Running;
+			MainFinished = false;
 		}
 
-		protected override void OnStop()
-		{
+		protected override void OnStop() {
 
 		}
 
-		protected override State OnUpdate()
-		{
-			if (!mainFinished)
-			{
-				var mainState = child?.Update() ?? State.Success;
-				this.context.MainNodeState = mainState;
-				if (mainState == State.Running)
-				{
+		protected override State OnUpdate() {
+			if (!MainFinished) {
+				var mainState = Child?.Update() ?? State.Success;
+				this.Context.MainNodeState = mainState;
+				if (mainState == State.Running) {
 					return State.Running;
 				}
 
-				mainFinalState = mainState;
-				mainFinished = true;
+				MainFinalState = mainState;
+				MainFinished = true;
 			}
 
-			if (teardownNode != null)
-			{
-				var teardownState = teardownNode.Update();
-				if (teardownState == State.Running)
-				{
+			if (TeardownNode != null) {
+				var teardownState = TeardownNode.Update();
+				if (teardownState == State.Running) {
 					return State.Running;
 				}
 			}
 
-			return mainFinalState;
+			return MainFinalState;
 		}
 
-		public override void Terminate(bool fromOutside = true)
-		{
-			child?.Terminate(fromOutside);
-			teardownNode?.Terminate(fromOutside);
+		public override void Terminate(bool fromOutside = true) {
+			Child?.Terminate(fromOutside);
+			TeardownNode?.Terminate(fromOutside);
 			base.Terminate(fromOutside);
 		}
 
-		public override ScriptNode Clone(CommonContext context)
-		{
+		public override ScriptNode Clone(CommonContext context) {
 			var node = Instantiate(this);
-			node.context = context;
-			node.child = child != null ? child.Clone(context) : null;
-			node.teardownNode = teardownNode != null ? teardownNode.Clone(context) : null;
+			node.Context = context;
+			node.Child = Child != null ? Child.Clone(context) : null;
+			node.TeardownNode = TeardownNode != null ? TeardownNode.Clone(context) : null;
 
 			return node;
 		}

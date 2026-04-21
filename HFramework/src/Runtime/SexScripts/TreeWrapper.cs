@@ -7,23 +7,17 @@ namespace HFramework.SexScripts
 	[Experimental]
 	public class TreeWrapper
 	{
-		public IEnumerator Run(SexScript tree)
-		{
-			if (tree.context != null && tree.context.MenuSession == null)
-			{
-				var pos = tree.context.SexPlacePos ?? tree.context.SexPlace?.transform.position ?? Vector3.zero;
-				tree.context.MenuSession = new PropPanelMenuSession(tree.context, pos);
+		public IEnumerator Run(SexScript tree) {
+			if (tree.Context != null && tree.Context.MenuSession == null) {
+				var pos = tree.Context.SexPlacePos ?? tree.Context.SexPlace?.transform.position ?? Vector3.zero;
+				tree.Context.MenuSession = new PropPanelMenuSession(tree.Context, pos);
 			}
 
 			// bool recoveryMode = false;
-			while (tree.treeState == ScriptNode.State.Running)
-			{
-				try
-				{
+			while (tree.TreeState == ScriptNode.State.Running) {
+				try {
 					tree.Update();
-				}
-				catch (System.Exception e)
-				{
+				} catch (System.Exception e) {
 					// if (recoveryMode) {
 					// 	PLogger.LogError($"Sex script update error: {e} -- Already in recovery mode, giving up");
 					// 	break;
@@ -43,9 +37,9 @@ namespace HFramework.SexScripts
 				yield return null;
 			}
 
-			tree.context?.MenuSession?.Close();
-			if (tree.context != null)
-				tree.context.MenuSession = null;
+			tree.Context?.MenuSession?.Close();
+			if (tree.Context != null)
+				tree.Context.MenuSession = null;
 
 			PLogger.LogError($"Sex script finished");
 		}

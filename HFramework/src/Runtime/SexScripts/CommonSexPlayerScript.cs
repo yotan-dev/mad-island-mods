@@ -11,10 +11,10 @@ namespace HFramework.SexScripts
 	{
 		public CommonSexPlayerScript Create(CommonStates actorA, CommonStates actorB, Vector3 pos, int sexType) {
 			var tree = Clone();
-			tree.context.Actors = this.Info.BuildNpcs(actorA, actorB).Select(npc => new ContextNpc(npc, null)).ToArray();
-			tree.context.SexPlace = null;
-			tree.context.SexPlacePos = pos;
-			tree.context.SexType = sexType;
+			tree.Context.Actors = this.Info.BuildNpcs(actorA, actorB).Select(npc => new ContextNpc(npc, null)).ToArray();
+			tree.Context.SexPlace = null;
+			tree.Context.SexPlacePos = pos;
+			tree.Context.SexType = sexType;
 			return (CommonSexPlayerScript)tree;
 		}
 	}
