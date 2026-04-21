@@ -78,6 +78,13 @@ namespace HFramework.ScriptNodes
 		public bool HasChangedMainCanvasVisibility { get; set; }
 
 		/// <summary>
+		/// Whether the skip button visibility has been changed by a node.
+		/// We use that to hide the skip button on Teardown
+		/// Note: We only expect to have 1 script touching the skip button at any given time
+		/// </summary>
+		public bool HasChangedSkipButtonVisibility { get; set; }
+
+		/// <summary>
 		/// Whether the sex meter has been created by a node.
 		/// We use that to hide the sex meter on Teardown.
 		/// Note: We only expect to have 1 script using sex meter at any given time
