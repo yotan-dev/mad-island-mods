@@ -48,7 +48,7 @@ namespace HFramework.ScriptNodes
 			public TargetActType ActType = TargetActType.DontChange;
 		}
 
-		public ActorConfig[] Actors = new ActorConfig[0];
+		public ActorConfig[] Changes = new ActorConfig[0];
 
 		protected override void OnStart() {
 		}
@@ -57,7 +57,7 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
-			foreach (var actor in this.Actors) {
+			foreach (var actor in this.Changes) {
 				var npc = this.context.Actors[actor.Index];
 				if (actor.SexState != TargetSexState.DontChange)
 					npc.Common.sex = (CommonStates.SexState)actor.SexState;
