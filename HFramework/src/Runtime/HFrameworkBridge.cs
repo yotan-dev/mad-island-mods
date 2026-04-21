@@ -251,8 +251,37 @@ namespace HFramework
 		#endregion
 
 		#region Delivery
+		private bool SexManager_Pre_Delivery_Modern(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result) {
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+			List<Func<IEnumerator>> scripts = new();
+			var info = new PlayerSexInfo {
+				Pos = tmpSexPlace.transform.position,
+				SexType = 0,
+			};
+
+			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
+			BundleLoader.Loader.Prefabs
+				.FindAll(x => x is DeliveryScript && x.Info.CanStart(common, null) && x.Info.CanExecute(info))
+				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((DeliveryScript)x).Create(common, tmpWorkPlace, tmpSexPlace))));
+
+			if (HFConfig.Instance.IsLegacyModeEnabled) {
+				var legacyScene = new Delivery(common, tmpWorkPlace, tmpSexPlace);
+				scripts.Add(() => legacyScene.Run());
+			}
+
+			if (scripts.Count > 0) {
+				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
+				__result = targetScript();
+			}
+
+			return false;
+		}
 
 		public bool SexManager_Pre_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result) {
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				return SexManager_Pre_Delivery_Modern(common, tmpWorkPlace, tmpSexPlace, ref __result);
+			}
+
 			var scene = new Delivery(common, tmpWorkPlace, tmpSexPlace);
 			__result = scene.Run();
 			return false;
