@@ -6,7 +6,7 @@ namespace HFramework.ScriptNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Setup")]
-	public class Setup : Action
+	public class MakeSexPrefab : Action
 	{
 		public enum PrefabPositionSource
 		{
