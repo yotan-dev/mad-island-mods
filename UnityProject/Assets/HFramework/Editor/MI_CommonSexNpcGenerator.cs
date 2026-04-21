@@ -12,7 +12,7 @@ namespace HFramework
 	{
 		private class Config
 		{
-			public string GUID;
+			public string UniqueID;
 			public string Name;
 			public string Description;
 			public int ListIndex;
@@ -38,9 +38,9 @@ namespace HFramework
 		}
 
 		private void SetupCommon(CommonSexNPCScript script, Config config) {
-			script.Info.GUID = config.GUID;
-			script.Info.Name = config.Name;
-			script.Info.Description = config.Description;
+			script.UniqueID = config.UniqueID;
+			script.Name = config.Name;
+			script.Description = config.Description;
 
 			var setupNode = script.nodes.Find(node => node.ID == "Setup") as Setup;
 			if (setupNode == null) {
@@ -71,7 +71,7 @@ namespace HFramework
 		private CommonSexNPCScript CreateMxF(MxFConfig config) {
 			var script = this.CreateFromTemplate(
 				"Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexNPC.MxF.asset",
-				$"Assets/HFramework/Generated/CommonSexNpc/{config.GUID}.asset"
+				$"Assets/HFramework/Generated/CommonSexNpc/{config.UniqueID}.asset"
 			) as CommonSexNPCScript;
 
 			this.SetupCommon(script, config);
@@ -90,7 +90,7 @@ namespace HFramework
 		private CommonSexNPCScript CreateFxF(FxFConfig config) {
 			var script = this.CreateFromTemplate(
 				"Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexNPC.MxF.asset",
-				$"Assets/HFramework/Generated/CommonSexNpc/{config.GUID}.asset"
+				$"Assets/HFramework/Generated/CommonSexNpc/{config.UniqueID}.asset"
 			) as CommonSexNPCScript;
 
 			this.SetupCommon(script, config);
@@ -140,7 +140,7 @@ namespace HFramework
 			// Note: SexCheck skips the DueDate check when sexLimit == 0,
 			//       but it is later blocked in CommonSexNpc, probably a bug and does not make a difference for us.
 			var reika4_0 = this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.4-0",
+				UniqueID = "HF.CommonSexNPC.4-0",
 				Name = "4-0",
 				Description = "Original scene",
 				AnimationPrefix = "Love_A_",
@@ -172,7 +172,7 @@ namespace HFramework
 
 			#region case 7 - Takumi
 			this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.6-1",
+				UniqueID = "HF.CommonSexNPC.6-1",
 				Name = "6-1",
 				Description = "Original scene",
 				AnimationPrefix = "Love_A_",
@@ -187,7 +187,7 @@ namespace HFramework
 			#region case 10 - Male Native
 
 			this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.2-0",
+				UniqueID = "HF.CommonSexNPC.2-0",
 				Name = "Doggystyle",
 				Description = "Original scene",
 				MaleNpcID = NpcID.MaleNative, // 10
@@ -198,7 +198,7 @@ namespace HFramework
 			});
 
 			this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.2-1",
+				UniqueID = "HF.CommonSexNPC.2-1",
 				Name = "2-1",
 				Description = "Original scene",
 				MaleNpcID = NpcID.MaleNative, // 10
@@ -214,7 +214,7 @@ namespace HFramework
 			#region case 15 - Female Native
 
 			this.CreateFxF(new FxFConfig {
-				GUID = "HF.CommonSexNPC.15-15",
+				UniqueID = "HF.CommonSexNPC.15-15",
 				Name = "15-15",
 				Description = "Original scene",
 				FemaleANpcID = NpcID.FemaleNative, // 15
@@ -226,7 +226,7 @@ namespace HFramework
 			});
 
 			this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.1-1",
+				UniqueID = "HF.CommonSexNPC.1-1",
 				Name = "1-1",
 				Description = "Original scene",
 				MaleNpcID = NpcID.YoungMan, // 89
@@ -237,7 +237,7 @@ namespace HFramework
 			});
 
 			this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.1-20",
+				UniqueID = "HF.CommonSexNPC.1-20",
 				Name = "1-20",
 				Description = "Original scene",
 				MaleNpcID = NpcID.YoungMan, // 89
@@ -252,7 +252,7 @@ namespace HFramework
 			#region case 16 - Native Girl
 
 			this.CreateFxF(new FxFConfig {
-				GUID = "HF.CommonSexNPC.10-0",
+				UniqueID = "HF.CommonSexNPC.10-0",
 				Name = "10-0",
 				Description = "Original scene",
 				FemaleANpcID = NpcID.NativeGirl, // 16
@@ -265,7 +265,7 @@ namespace HFramework
 			});
 
 			this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.1-3",
+				UniqueID = "HF.CommonSexNPC.1-3",
 				Name = "1-3",
 				Description = "Original scene",
 				MaleNpcID = NpcID.YoungMan, // 89
@@ -277,7 +277,7 @@ namespace HFramework
 			});
 
 			this.CreateMxF(new MxFConfig {
-				GUID = "HF.CommonSexNPC.1-28",
+				UniqueID = "HF.CommonSexNPC.1-28",
 				Name = "1-28",
 				Description = "Original scene",
 				MaleNpcID = NpcID.YoungMan, // 89
