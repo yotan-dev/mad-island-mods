@@ -145,7 +145,39 @@ namespace HFramework
 
 		#region AssWall
 
+		private bool SexManager_Pre_AssWall_Modern(InventorySlot tmpWall, ref IEnumerator __result) {
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+
+			List<Func<IEnumerator>> scripts = new();
+
+			var info = new CommonSexInfo {
+				Place = tmpWall.GetComponent<SexPlace>(),
+			};
+
+			BundleLoader.Loader.Prefabs
+				.FindAll(p => p is AssWallScript && p.Info.CanStart(new CommonStates[] { CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common }) && p.Info.CanExecute(info))
+				.ForEach(p => scripts.Add(() => new TreeWrapper().Run(((AssWallScript)p).Create(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpWall))));
+
+			if (HFConfig.Instance.IsLegacyModeEnabled) {
+				var legacyScene = new AssWall(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpWall);
+				if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, new CommonStates[] { CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common })) {
+					scripts.Add(() => legacyScene.Run());
+				}
+			}
+
+			if (scripts.Count > 0) {
+				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
+				__result = targetScript();
+			}
+
+			return false;
+		}
+
 		public bool SexManager_Pre_AssWall(InventorySlot tmpWall, ref IEnumerator __result) {
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				return SexManager_Pre_AssWall_Modern(tmpWall, ref __result);
+			}
+
 			var pCommon = CommonUtils.GetActivePlayer();
 			var girlCommon = Managers.mn.inventory.itemSlot[50].common;
 			var scene = new AssWall(pCommon, girlCommon, tmpWall);
