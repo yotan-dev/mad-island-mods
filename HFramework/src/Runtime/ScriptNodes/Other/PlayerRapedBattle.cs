@@ -10,6 +10,7 @@ namespace HFramework.ScriptNodes.Other
 	[ScriptNode("HFramework", "Other/Player Raped Battle")]
 	public class PlayerRapedBattle : Action
 	{
+		[ActorIndex]
 		public int PlayerIndex = 1;
 
 		private float FaintTime = 1f;

@@ -8,7 +8,9 @@ namespace HFramework.ScriptNodes.PrefabSetup
 	[Experimental]
 	public class FemaleFemaleRandCharSetter : AppearanceSetter
 	{
-		[SerializeField] private int FemaleIndex = 0;
+		[ActorIndex]
+		[SerializeField]
+		private int FemaleIndex = 0;
 
 		public override void SetAppearance(GameObject prefab, CommonContext ctx) {
 			Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[FemaleIndex].Common, ctx.Actors[FemaleIndex].Common);

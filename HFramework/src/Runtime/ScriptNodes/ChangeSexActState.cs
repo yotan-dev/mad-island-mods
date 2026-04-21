@@ -1,3 +1,5 @@
+using System;
+
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
@@ -43,6 +45,7 @@ namespace HFramework.ScriptNodes
 		[Serializable]
 		public class ActorConfig
 		{
+			[ActorIndex]
 			public int Index;
 			public TargetSexState SexState = TargetSexState.DontChange;
 			public TargetActType ActType = TargetActType.DontChange;
