@@ -40,6 +40,7 @@ namespace HFramework.ScriptNodes
 			Sleep = 14
 		}
 
+		[Serializable]
 		public class ActorConfig
 		{
 			public int Index;
