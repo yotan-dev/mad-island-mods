@@ -78,7 +78,23 @@ namespace HFramework
 			return false;
 		}
 
+		private bool SexManager_Pre_RapesCheck_Modern(CommonStates from, CommonStates to, ref bool __result) {
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+			if (to == CommonUtils.GetActivePlayer()) {
+				// PlayerRaped
+				__result = BundleLoader.Loader.Prefabs.Any(p => p is PlayerRapedScript && p.Info.CanStart(from, to));
+				if (!__result && HFConfig.Instance.IsLegacyModeEnabled)
+					__result = SexChecker.CanRape(PlayerRaped.Name, from, to);
+			}
+
+			return false;
+		}
+
 		public bool SexManager_Pre_RapesCheck(CommonStates from, CommonStates to, ref bool __result) {
+			if (HFConfig.Instance.IsModernModeEnabled && to == CommonUtils.GetActivePlayer()) {
+				return SexManager_Pre_RapesCheck_Modern(from, to, ref __result);
+			}
+
 			__result = false;
 
 			// NOTE: We don't sort actors for rape scenes, because we need to know WHO is raping and WHO is being raped.
@@ -276,7 +292,34 @@ namespace HFramework
 
 		#region PlayerRaped
 
+		private bool SexManager_Pre_PlayerRaped_Modern(CommonStates to, CommonStates from, ref IEnumerator __result) {
+			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
+			List<Func<IEnumerator>> scripts = new();
+			var info = new SexInfo();
+
+			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
+			BundleLoader.Loader.Prefabs
+				.FindAll(x => x is PlayerRapedScript && x.Info.CanStart(from, to) && x.Info.CanExecute(info))
+				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((PlayerRapedScript)x).Create(from, to))));
+
+			if (HFConfig.Instance.IsLegacyModeEnabled) {
+				var legacyScene = new PlayerRaped(to, from);
+				scripts.Add(() => legacyScene.Run());
+			}
+
+			if (scripts.Count > 0) {
+				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
+				__result = targetScript();
+			}
+
+			return false;
+		}
+
 		public bool SexManager_Pre_PlayerRaped(CommonStates to, CommonStates from, ref IEnumerator __result) {
+			if (HFConfig.Instance.IsModernModeEnabled) {
+				return SexManager_Pre_PlayerRaped_Modern(to, from, ref __result);
+			}
+
 			var scene = new PlayerRaped(to, from);
 			__result = scene.Run();
 			return false;
