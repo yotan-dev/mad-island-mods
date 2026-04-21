@@ -103,7 +103,10 @@ namespace HFramework.ScriptNodes
 				npc.Angle = npc.Common.nMove.searchAngle;
 				if (npc.Common != currentPlayer) {
 					npc.Common.nMove.searchAngle = this.stopNpcReaction ? 0f : 180f;
-					npc.Common.gameObject.transform.position = this.context.SexPlacePos.Value;
+
+					if (this.context.SexPlacePos.HasValue) {
+						npc.Common.transform.position = this.context.SexPlacePos.Value;
+					}
 				}
 			}
 
