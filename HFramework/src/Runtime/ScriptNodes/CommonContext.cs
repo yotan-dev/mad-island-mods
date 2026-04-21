@@ -109,6 +109,7 @@ namespace HFramework.ScriptNodes
 				PLogger.LogDebug($"Actor.Common Params: {actor?.Common?.parameters == null}");
 				PLogger.LogDebug($"Actor.Common Dissect: {actor?.Common?.dissect == null}");
 				var missingLegs = actor.Common.dissect[4] == 1 && actor.Common.dissect[5] == 1;
+				this.Variables[$"actors[{idx}].npcId"] = actor.Common.npcID.ToString();
 				this.Variables[$"actors[{idx}].tits"] = actor.Common.parameters[6].ToString("00");
 				this.Variables[$"actors[{idx}].disleg"] = missingLegs ? "DisLeg_" : "";
 				idx++;
