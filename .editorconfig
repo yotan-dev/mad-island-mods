@@ -9,6 +9,20 @@ indent_style = space
 
 # CSharp formatting rules:
 [*.cs]
+# Disable IDE0130 (folder vs namespace mismatch) as we have src/Editor and src/Runtime which will never match the namespace.
+dotnet_diagnostic.IDE0130.severity = none
+
+# New line rules.
+# Expectation:
+#
+# public class MyClass
+# { // <-- Always in new line
+# 	public void MyMethod() { // <-- Always in same line
+#		if () { // <-- Always in same line
+#		}
+# 	}
+# }
+#
 csharp_new_line_before_open_brace = types
 csharp_new_line_before_else = false
 csharp_new_line_before_catch = false
@@ -16,3 +30,22 @@ csharp_new_line_before_finally = false
 csharp_new_line_before_members_in_object_initializers = false
 csharp_new_line_before_members_in_anonymous_types = false
 csharp_new_line_between_query_expression_clauses = false
+
+# Naming rules - groups
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = public,internal,private,protected,protected_internal,private_protected
+
+dotnet_naming_symbols.types.applicable_kinds = namespace,class,struct,interface,enum,property,method,field,event,delegate,parameter,type_parameter
+dotnet_naming_symbols.types.applicable_accessibilities = public,internal,private,protected,protected_internal,private_protected
+
+# Naming rules
+# Interface naming: must be capitalized and start with 'I' (e.g. ISomething)
+dotnet_naming_rule.interface_must_be_capitalized_and_start_with_I.symbols = interface
+dotnet_naming_rule.interface_must_be_capitalized_and_start_with_I.severity = warning
+dotnet_naming_rule.interface_must_be_capitalized_and_start_with_I.style = pascal_case
+dotnet_naming_rule.interface_must_be_capitalized_and_start_with_I.prefix = I
+
+# Type naming: must be capitalized (PascalCase)
+dotnet_naming_rule.type_must_be_capitalized.symbols = types
+dotnet_naming_rule.type_must_be_capitalized.severity = warning
+dotnet_naming_rule.type_must_be_capitalized.style = pascal_case
