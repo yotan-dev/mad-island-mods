@@ -4,7 +4,7 @@ using UnityEngine;
 namespace HFramework.SexScripts.Info
 {
 	[Experimental]
-	public abstract class SexInfo
+	public class SexInfo
 	{
 
 	}
