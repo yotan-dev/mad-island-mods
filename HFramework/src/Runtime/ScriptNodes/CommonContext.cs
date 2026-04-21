@@ -93,6 +93,8 @@ namespace HFramework.ScriptNodes
 
 		public int SexType = -1;
 
+		public ScriptNode.State MainNodeState { get; set; }
+
 		public CommonContext(SexScripts.SexScript sexScript)
 		{
 			this.SexScript = sexScript;

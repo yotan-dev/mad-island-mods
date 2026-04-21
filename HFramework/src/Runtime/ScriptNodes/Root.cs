@@ -28,6 +28,7 @@ namespace HFramework.ScriptNodes
 			if (!mainFinished)
 			{
 				var mainState = child?.Update() ?? State.Success;
+				this.context.MainNodeState = mainState;
 				if (mainState == State.Running)
 				{
 					return State.Running;
