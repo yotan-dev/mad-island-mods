@@ -67,7 +67,10 @@ namespace HFramework
 	[Experimental]
 	public class FromToEventArgs : SexEventArgs
 	{
+		[ActorIndex]
 		public int fromNpcIdx;
+
+		[ActorIndex]
 		public int toNpcIdx;
 
 		public bool isRape;
@@ -103,6 +106,7 @@ namespace HFramework
 	[Experimental]
 	public class SelfEventArgs : SexEventArgs
 	{
+		[ActorIndex]
 		public int fromNpcIdx;
 		[HideInInspector] public CommonStates Self;
 

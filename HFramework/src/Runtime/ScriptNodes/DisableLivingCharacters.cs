@@ -19,6 +19,7 @@ namespace HFramework.ScriptNodes
 		[Serializable]
 		public class DisableTarget
 		{
+			[ActorIndex]
 			public int ActorIndex = 0;
 
 			[Tooltip("Which components to disable")]
