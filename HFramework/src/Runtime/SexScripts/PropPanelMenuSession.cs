@@ -2,6 +2,7 @@
 
 using System;
 using HFramework.ScriptNodes;
+using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
 
 namespace HFramework.SexScripts
