@@ -293,7 +293,7 @@ namespace HFramework
 
 			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
 			BundleLoader.Loader.Prefabs
-				.FindAll(x => x is DeliveryScript && x.Info.CanStart(common, null) && x.Info.CanExecute(info))
+				.FindAll(x => x is DeliveryScript && x.Info.CanStart(common) && x.Info.CanExecute(info))
 				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((DeliveryScript)x).Create(common, tmpWorkPlace, tmpSexPlace))));
 
 			if (HFConfig.Instance.IsLegacyModeEnabled) {
