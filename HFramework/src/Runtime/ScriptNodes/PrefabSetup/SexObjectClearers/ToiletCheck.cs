@@ -1,3 +1,4 @@
+using HFramework.SexScripts.ScriptContext;
 using YotanModCore;
 
 namespace HFramework.ScriptNodes.PrefabSetup.SexObjectClearers

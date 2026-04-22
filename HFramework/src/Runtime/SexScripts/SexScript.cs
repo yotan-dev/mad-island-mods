@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using HFramework.SexScripts.Info;
 using HFramework.ScriptNodes;
 using UnityEngine;
+using HFramework.SexScripts.ScriptContext;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;

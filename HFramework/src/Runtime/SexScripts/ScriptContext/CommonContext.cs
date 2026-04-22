@@ -1,43 +1,12 @@
 #nullable enable
 
-using System;
 using System.Collections.Generic;
-using HFramework.SexScripts;
+using HFramework.ScriptNodes;
 using Spine.Unity;
 using UnityEngine;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.SexScripts.ScriptContext
 {
-	[Serializable]
-	public enum SexAction
-	{
-		Idle,
-		Caressing,
-		SexSlow,
-		SexFast,
-		Cumming,
-	}
-
-	public interface ISexScriptMenuSession
-	{
-		void SetOptions((string Id, string Text, MenuOption.EffectType Effect)[] options);
-		void Show();
-		void Hide();
-		void Close();
-	}
-
-	[Experimental]
-	public class ContextNpc
-	{
-		public CommonStates Common { get; set; }
-		public float? Angle { get; set; }
-
-		public ContextNpc(CommonStates common, float? angle) {
-			Common = common;
-			Angle = angle;
-		}
-	}
-
 	[Experimental]
 	public class CommonContext
 	{
@@ -99,15 +68,8 @@ namespace HFramework.ScriptNodes
 		}
 
 		public virtual void LoadActorsVariables() {
-			// Log if anything below is null
-			PLogger.LogDebug($"Actors: {this.Actors == null}");
-			PLogger.LogDebug($"Variables: {this.Variables == null}");
 			int idx = 0;
 			foreach (var actor in this.Actors) {
-				PLogger.LogDebug($"Actor: {actor == null}");
-				PLogger.LogDebug($"Actor.Common: {actor?.Common == null}");
-				PLogger.LogDebug($"Actor.Common Params: {actor?.Common?.parameters == null}");
-				PLogger.LogDebug($"Actor.Common Dissect: {actor?.Common?.dissect == null}");
 				var missingLegs = actor.Common.dissect[4] == 1 && actor.Common.dissect[5] == 1;
 				this.Variables[$"actors[{idx}].npcId"] = actor.Common.npcID.ToString();
 				this.Variables[$"actors[{idx}].tits"] = actor.Common.parameters[6].ToString("00");

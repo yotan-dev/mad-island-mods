@@ -1,3 +1,5 @@
+using HFramework.SexScripts.ScriptContext;
+
 namespace HFramework.ScriptNodes.PrefabSetup.SexObjectClearers
 {
 	public class NoOpClearer : SexObjectClearer
