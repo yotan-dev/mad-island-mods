@@ -42,12 +42,7 @@ namespace HFramework.ScriptNodes
 			position = Vector3.zero;
 			switch (this.PositionSource) {
 				case PrefabPositionSource.SexPlacePos:
-					if (!this.Context.SexPlacePos.HasValue) {
-						PLogger.LogWarning("Sex place pos is not set");
-						return false;
-					}
-
-					position = this.Context.SexPlacePos.Value;
+					position = this.Context.ScriptPlace.GetCharacterPosition();
 					return true;
 
 				case PrefabPositionSource.Actor0:
@@ -86,14 +81,12 @@ namespace HFramework.ScriptNodes
 			}
 
 			var prefab = this.Instantiator.CreatePrefab(position);
-			if (this.Context.SexPlace != null) {
-				if (this.Context.SexPlace.user != null) {
-					PLogger.LogError("Sex place already has a user");
-					return State.Failure;
-				}
-
-				this.Context.SexPlace.user = prefab;
+			if (this.Context.ScriptPlace.IsInUse()) {
+				PLogger.LogError("Sex place already has a user");
+				return State.Failure;
 			}
+
+			this.Context.ScriptPlace.SetUser(prefab);
 
 			// Pos offset only in CommonSexNpc
 			// CommonSexNpc -> new Vector3(0.0f, 0.0f, 0.02f)
@@ -103,10 +96,7 @@ namespace HFramework.ScriptNodes
 				npc.Angle = npc.Common.nMove.searchAngle;
 				if (npc.Common != currentPlayer) {
 					npc.Common.nMove.searchAngle = this.StopNpcReaction ? 0f : 180f;
-
-					if (this.Context.SexPlacePos.HasValue) {
-						npc.Common.transform.position = this.Context.SexPlacePos.Value;
-					}
+					npc.Common.transform.position = this.Context.ScriptPlace.GetCharacterPosition();
 				}
 			}
 

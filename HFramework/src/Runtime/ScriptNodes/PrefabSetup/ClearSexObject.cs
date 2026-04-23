@@ -3,6 +3,9 @@ using HFramework.ScriptNodes.PrefabSetup.SexObjectClearers;
 
 namespace HFramework.ScriptNodes.PrefabSetup
 {
+	/// <summary>
+	/// Clears a sex object previously set for a sex interaction (removes user, resets skin and slots, calls clearer).
+	/// </summary>
 	[ScriptNode("HFramework", "Prefab Setup/Clear Sex Object")]
 	public class ClearSexObject : Action
 	{
@@ -15,16 +18,12 @@ namespace HFramework.ScriptNodes.PrefabSetup
 		}
 
 		protected override State OnUpdate() {
-			if (this.Context.SexPlace == null) {
-				PLogger.LogWarning("PrepareSexObject: Sex place is null");
+			if (this.Context.ScriptPlace.IsGround()) {
+				PLogger.LogWarning("PrepareSexObject: Sex place is ground - no need to prepare");
 				return State.Failure;
 			}
 
-			if (this.Context.SexPlace.user != null) {
-				return State.Failure;
-			}
-
-			this.Context.SexPlace.user = null;
+			this.Context.ScriptPlace.ClearUser();
 
 			this.Context.TmpSexAnim.skeleton.SetSkin(this.Skin);
 			this.Context.TmpSexAnim.skeleton.SetSlotsToSetupPose();

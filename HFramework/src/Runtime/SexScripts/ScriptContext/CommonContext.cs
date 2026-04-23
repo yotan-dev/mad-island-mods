@@ -16,7 +16,7 @@ namespace HFramework.SexScripts.ScriptContext
 			set { this._actors = value; this.LoadActorsVariables(); }
 		}
 
-		public SexScripts.SexScript? SexScript { get; set; }
+		public SexScript? SexScript { get; set; }
 
 		public ISexScriptMenuSession? MenuSession { get; set; }
 
@@ -28,9 +28,7 @@ namespace HFramework.SexScripts.ScriptContext
 
 		public string? LastChoiceId { get; set; }
 
-		public SexPlace? SexPlace { get; set; }
-
-		public Vector3? SexPlacePos { get; set; }
+		public ScriptPlace ScriptPlace { get; set; } = new GroundScriptPlace();
 
 		public GameObject? TmpSex { get; set; }
 
@@ -63,7 +61,7 @@ namespace HFramework.SexScripts.ScriptContext
 
 		public ScriptNode.State MainNodeState { get; set; }
 
-		public CommonContext(SexScripts.SexScript sexScript) {
+		public CommonContext(SexScript sexScript) {
 			this.SexScript = sexScript;
 		}
 

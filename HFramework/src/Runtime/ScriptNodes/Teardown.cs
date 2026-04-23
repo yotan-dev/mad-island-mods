@@ -62,8 +62,7 @@ namespace HFramework.ScriptNodes
 			if (this.Context.TmpSex != null)
 				UnityEngine.Object.Destroy(this.Context.TmpSex);
 
-			if (this.Context.SexPlace != null)
-				this.Context.SexPlace.user = null;
+			this.Context.ScriptPlace.ClearUser();
 
 			var currentPlayer = CommonUtils.GetActivePlayer();
 			foreach (var npc in this.Context.Actors) {
