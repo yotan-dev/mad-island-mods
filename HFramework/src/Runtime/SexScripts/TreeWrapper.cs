@@ -9,7 +9,7 @@ namespace HFramework.SexScripts
 	{
 		public IEnumerator Run(SexScript tree) {
 			if (tree.Context != null && tree.Context.MenuSession == null) {
-				var pos = tree.Context.SexPlacePos ?? tree.Context.SexPlace?.transform.position ?? Vector3.zero;
+				var pos = tree.Context.ScriptPlace.GetCharacterPosition();
 				tree.Context.MenuSession = new PropPanelMenuSession(tree.Context, pos);
 			}
 

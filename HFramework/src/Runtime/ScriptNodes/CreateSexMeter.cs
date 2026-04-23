@@ -21,12 +21,7 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
-			if (this.Context.SexPlacePos == null) {
-				PLogger.LogError("SexPlacePos is null");
-				return State.Failure;
-			}
-
-			SexMeter.Instance.Init(this.Context.SexPlacePos.Value + this.Offset, this.DividerPercent);
+			SexMeter.Instance.Init(this.Context.ScriptPlace.GetCharacterPosition() + this.Offset, this.DividerPercent);
 			if (this.ShowImmediately) {
 				SexMeter.Instance.Show();
 			}

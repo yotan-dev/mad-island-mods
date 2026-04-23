@@ -12,8 +12,8 @@ namespace HFramework.SexScripts
 		public AssWallScript Create(CommonStates common, CommonStates girl, InventorySlot tmpWall) {
 			var tree = Clone();
 			tree.Context.Actors = this.Info.BuildNpcs(common, girl).Select(npc => new ContextNpc(npc, null)).ToArray();
-			tree.Context.SexPlace = tmpWall.GetComponent<SexPlace>();
-			tree.Context.SexPlacePos = tree.Context.SexPlace.transform.Find("pos")?.position;
+			var sexPlace = tmpWall.GetComponent<SexPlace>();
+			tree.Context.ScriptPlace = new SexPlaceScriptPlace(sexPlace);
 			return (AssWallScript)tree;
 		}
 	}

@@ -16,6 +16,7 @@ namespace HFramework.ScriptNodes
 
 		protected override void OnStart() {
 			this.AnimationTime = this.TimeLimitSeconds;
+			var targetPos = this.Context.ScriptPlace.GetCharacterPosition();
 
 			// Start moving NPCs to sex place
 			this.Emotions = new GameObject[this.Context.Actors.Length];
@@ -24,7 +25,7 @@ namespace HFramework.ScriptNodes
 			}
 			for (int i = 0; i < this.Context.Actors.Length; i++) {
 				Managers.sexMN.StartCoroutine(
-					Managers.storyMN.MovePosition(this.Context.Actors[i].Common.gameObject, this.Context.SexPlacePos.Value, 2f, "A_walk", true)
+					Managers.storyMN.MovePosition(this.Context.Actors[i].Common.gameObject, targetPos, 2f, "A_walk", true)
 				);
 			}
 		}
@@ -68,11 +69,12 @@ namespace HFramework.ScriptNodes
 
 		protected override State OnUpdate() {
 			this.AnimationTime -= Time.deltaTime;
+			var targetPos = this.Context.ScriptPlace.GetCharacterPosition();
 
 			// If NPCs reached target position, we are done.
 			bool allAtPos = true;
 			for (int i = 0; i < this.Context.Actors.Length; i++) {
-				if (!this.IsNpcAtPos(this.Context.Actors[i].Common, this.Context.SexPlacePos.Value)) {
+				if (!this.IsNpcAtPos(this.Context.Actors[i].Common, targetPos)) {
 					allAtPos = false;
 					break;
 				}
@@ -95,7 +97,7 @@ namespace HFramework.ScriptNodes
 				return State.Failure;
 			}
 
-			if (this.Context.SexPlace != null && this.Context.SexPlace.user != null) { // Some other NPC took the sex place, can't use it -- give up
+			if (this.Context.ScriptPlace.IsInUse()) { // Some other NPC took the sex place, can't use it -- give up
 				return State.Failure;
 			}
 

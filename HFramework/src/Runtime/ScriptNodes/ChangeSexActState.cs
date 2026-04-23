@@ -53,14 +53,23 @@ namespace HFramework.ScriptNodes
 
 		public ActorConfig[] Changes = new ActorConfig[0];
 
+		private bool HasApplied = false;
+
 		protected override void OnStart() {
+			this.HasApplied = false;
 		}
 
 		protected override void OnStop() {
 		}
 
 		protected override State OnUpdate() {
+			// Gives one tick for the game to react to the change, and then conclude it.
+			if (this.HasApplied)
+				return State.Success;
+
 			foreach (var actor in this.Changes) {
+				this.HasApplied = true;
+
 				var npc = this.Context.Actors[actor.Index];
 				if (actor.SexState != TargetSexState.DontChange)
 					npc.Common.sex = (CommonStates.SexState)actor.SexState;
@@ -69,7 +78,7 @@ namespace HFramework.ScriptNodes
 					npc.Common.GetComponent<NPCMove>().actType = (NPCMove.ActType)actor.ActType;
 			}
 
-			return State.Success;
+			return State.Running;
 		}
 	}
 }

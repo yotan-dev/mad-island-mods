@@ -286,10 +286,7 @@ namespace HFramework
 		private bool SexManager_Pre_Delivery_Modern(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result) {
 			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
 			List<Func<IEnumerator>> scripts = new();
-			var info = new PlayerSexInfo {
-				Pos = tmpSexPlace.transform.position,
-				SexType = 0,
-			};
+			var info = new SexInfo { };
 
 			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
 			BundleLoader.Loader.Prefabs
