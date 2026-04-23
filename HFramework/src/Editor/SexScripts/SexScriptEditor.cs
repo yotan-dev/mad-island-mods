@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using HFramework.SexScripts;
+using UnityEditor.Callbacks;
 
 namespace HFramework.EditorUI.SexScripts
 {
@@ -12,14 +13,22 @@ namespace HFramework.EditorUI.SexScripts
 
 
 		[MenuItem("Sex Script/Editor...")]
-		public static void OpenWindow()
-		{
+		public static void OpenWindow() {
 			SexScriptEditor wnd = GetWindow<SexScriptEditor>();
 			wnd.titleContent = new GUIContent("SexScriptEditor");
 		}
 
-		public void CreateGUI()
-		{
+		[OnOpenAsset]
+		public static bool OnOpenAsset(int instanceId, int line) {
+			if (Selection.activeObject is SexScript) {
+				OpenWindow();
+				return true;
+			}
+
+			return false;
+		}
+
+		public void CreateGUI() {
 			// Each editor window contains a root VisualElement object
 			VisualElement root = rootVisualElement;
 
@@ -39,17 +48,14 @@ namespace HFramework.EditorUI.SexScripts
 			OnSelectionChange(); // Trigger recreation after editing/opening the UI
 		}
 
-		public void OnSelectionChange()
-		{
+		public void OnSelectionChange() {
 			var tree = Selection.activeObject as SexScript;
-			if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
-			{
+			if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID())) {
 				treeView.PopulateView(tree);
 			}
 		}
 
-		void OnNodeSelectionChanged(NodeView node)
-		{
+		void OnNodeSelectionChanged(NodeView node) {
 			inspectorView.UpdateSelection(node);
 		}
 	}
