@@ -32,6 +32,13 @@ namespace HFramework.EditorUI.SexScripts
 
 			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/SexScriptEditor.uss");
 			styleSheets.Add(styleSheet);
+
+			Undo.undoRedoPerformed += OnUndoRedo;
+		}
+
+		private void OnUndoRedo() {
+			PopulateView(tree);
+			AssetDatabase.SaveAssets();
 		}
 
 		private void OnNodeIDChanged(ScriptNode node) {

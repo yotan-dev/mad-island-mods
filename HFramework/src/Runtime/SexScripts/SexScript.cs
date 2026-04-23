@@ -3,6 +3,7 @@ using HFramework.SexScripts.Info;
 using HFramework.ScriptNodes;
 using UnityEngine;
 using HFramework.SexScripts.ScriptContext;
+using UnityEditor;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
@@ -99,16 +100,24 @@ namespace HFramework.SexScripts
 			node.name = type.Name;
 			node.GUID = GUID.Generate().ToString();
 			node.ID = this.GenerateNodeId(type);
+
+			Undo.RecordObject(this, "SexScript (CreateNode)");
 			this.Nodes.Add(node);
 
 			AssetDatabase.AddObjectToAsset(node, this);
+			Undo.RegisterCreatedObjectUndo(node, "SexScript (CreateNode)");
+
 			AssetDatabase.SaveAssets();
 			return node;
 		}
 
 		public void DeleteNode(ScriptNode node) {
+			Undo.RecordObject(this, "SexScript (DeleteNode)");
 			this.Nodes.Remove(node);
-			AssetDatabase.RemoveObjectFromAsset(node);
+
+			// AssetDatabase.RemoveObjectFromAsset(node);
+			Undo.DestroyObjectImmediate(node);
+
 			AssetDatabase.SaveAssets();
 		}
 #endif
@@ -116,42 +125,54 @@ namespace HFramework.SexScripts
 		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as Passthrough;
 			if (decorator) {
+				Undo.RecordObject(decorator, "SexScript (AddChild)");
 				decorator.Child = child;
+				EditorUtility.SetDirty(decorator);
 			}
 
 			var root = parent as Root;
 			if (root) {
+				Undo.RecordObject(root, "SexScript (AddChild)");
 				if (portName == TeardownPortName) {
 					root.TeardownNode = child;
 				} else {
 					root.Child = child;
 				}
+				EditorUtility.SetDirty(root);
 			}
 
 			var composite = parent as Composite;
 			if (composite) {
+				Undo.RecordObject(composite, "SexScript (AddChild)");
 				composite.Children.Add(child);
+				EditorUtility.SetDirty(composite);
 			}
 		}
 
 		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as Passthrough;
 			if (decorator) {
+				Undo.RecordObject(decorator, "SexScript (RemoveChild)");
 				decorator.Child = null;
+				EditorUtility.SetDirty(decorator);
 			}
 
 			var root = parent as Root;
 			if (root) {
+				Undo.RecordObject(root, "SexScript (RemoveChild)");
 				if (portName == TeardownPortName) {
 					root.TeardownNode = null;
 				} else {
 					root.Child = null;
 				}
+				EditorUtility.SetDirty(root);
 			}
 
 			var composite = parent as Composite;
 			if (composite) {
+				Undo.RecordObject(composite, "SexScript (RemoveChild)");
 				composite.Children.Remove(child);
+				EditorUtility.SetDirty(composite);
 			}
 		}
 
