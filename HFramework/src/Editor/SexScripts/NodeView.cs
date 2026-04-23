@@ -3,6 +3,7 @@ using UnityEditor.Experimental.GraphView;
 using HFramework.ScriptNodes;
 using UnityEngine;
 using HFramework.SexScripts;
+using UnityEditor;
 
 namespace HFramework.EditorUI.SexScripts
 {
@@ -111,8 +112,10 @@ namespace HFramework.EditorUI.SexScripts
 		public override void SetPosition(Rect newPos)
 		{
 			base.SetPosition(newPos);
+			Undo.RecordObject(node, "Sex Script (Set Position)");
 			node.Position.x = newPos.xMin;
 			node.Position.y = newPos.yMin;
+			EditorUtility.SetDirty(node);
 		}
 
 		public override void OnSelected()

@@ -36,7 +36,9 @@ namespace HFramework.EditorUI.SexScripts
 				editor = Editor.CreateEditor(nodeView.node);
 				var container = new IMGUIContainer(() =>
 				{
-					editor.OnInspectorGUI();
+					if (editor.target) {
+						editor.OnInspectorGUI();
+					}
 				});
 				Add(container);
 			}
