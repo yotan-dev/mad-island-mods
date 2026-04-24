@@ -8,6 +8,7 @@ namespace HFramework.SexScripts
 {
 	[CreateAssetMenu()]
 	[Experimental]
+	[SexScriptType(SexScriptTypes.CommonSexPlayer)]
 	public class CommonSexPlayerScript : SexScript
 	{
 		public CommonSexPlayerScript Create(CommonStates actorA, CommonStates actorB, Vector3 pos, int sexType) {

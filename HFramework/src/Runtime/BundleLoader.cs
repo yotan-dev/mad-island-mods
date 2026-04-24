@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using HFramework.SexScripts;
 using UnityEngine;
 using YotanModCore;
 
@@ -19,45 +20,12 @@ namespace HFramework
 			LoadSexScripts(assets);
 		}
 
-		private static bool IsScriptValid(SexScripts.SexScript script, out string error) {
-			error = null;
-			try {
-				if (script.Info == null)
-					throw new Exception("Info is null");
-				if (script.Info.Npcs == null || script.Info.Npcs.Length == 0)
-					throw new Exception("No NPCs");
-
-				foreach (var npc in script.Info.Npcs) {
-					if (npc.Conditions == null)
-						throw new Exception($"NPC {npc.NpcID} has NULL conditions");
-				}
-			} catch (Exception e) {
-				error = e.Message;
-			}
-
-			return error == null;
-		}
-
 		private static void LoadSexScripts(SexScripts.SexScript[] scripts) {
 			foreach (var script in scripts) {
-				if (!string.IsNullOrEmpty(script.MinimalGameVersion)) {
-					if (GameInfo.GameVersion < GameInfo.ToVersion(script.MinimalGameVersion)) {
-						PLogger.LogWarning($"Skipping {script.name}: Minimal game version {script.MinimalGameVersion} is higher than current game version {GameInfo.GameVersion}");
-						continue;
-					}
+				if (SexScriptsManager.Instance.AddScript(script)) {
+					// Temporary until we finish moving to SexScriptsMAnager
+					Loader.Prefabs.Add(script);
 				}
-
-				if (script.RequiresDLC && !GameInfo.HasDLC) {
-					PLogger.LogWarning($"Skipping {script.name}: Requires DLC but DLC is not available");
-					continue;
-				}
-
-				if (!IsScriptValid(script, out string error)) {
-					PLogger.LogError($"Skipping {script.name}: {error}");
-					continue;
-				}
-
-				Loader.Prefabs.Add(script);
 			}
 
 			PLogger.LogInfo($"Loaded - {Loader.Prefabs.Count} prefabs");

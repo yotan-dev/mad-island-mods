@@ -8,6 +8,7 @@ namespace HFramework.SexScripts
 {
 	[CreateAssetMenu()]
 	[Experimental]
+	[SexScriptType(SexScriptTypes.PlayerRaped)]
 	public class PlayerRapedScript : SexScript
 	{
 		public PlayerRapedScript Create(CommonStates rapist, CommonStates victim) {
