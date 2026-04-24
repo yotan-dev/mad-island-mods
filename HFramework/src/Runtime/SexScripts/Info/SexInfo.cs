@@ -1,3 +1,4 @@
+using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
 
 
@@ -9,9 +10,9 @@ namespace HFramework.SexScripts.Info
 
 	}
 
-	public interface IHasSexPlace
+	public interface IHasScriptPlace
 	{
-		SexPlace Place { get; }
+		ScriptPlace Place { get; }
 	}
 
 	public interface IHasSexPos
@@ -20,9 +21,9 @@ namespace HFramework.SexScripts.Info
 	}
 
 	[Experimental]
-	public class CommonSexInfo : SexInfo, IHasSexPlace
+	public class CommonSexInfo : SexInfo, IHasScriptPlace
 	{
-		public SexPlace Place { get; set; }
+		public ScriptPlace Place { get; set; }
 		public Vector3 Pos { get; set; }
 	}
 
