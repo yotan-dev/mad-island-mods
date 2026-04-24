@@ -11,13 +11,16 @@ namespace YoUnnoficialPatches
 		private void Awake()
 		{
 			PLogger._Logger = Logger;
-			
+
 			PConfig.Instance.Init(Config);
 
 			Harmony.CreateAndPatchAll(typeof(TranslationPatch));
 
 			if (PConfig.Instance.DontStartInvalidSex.Value)
 				Harmony.CreateAndPatchAll(typeof(DontStartInvalidSexPatch));
+
+			if (PConfig.Instance.FixDebugToolInput.Value)
+				Harmony.CreateAndPatchAll(typeof(FixDebugToolInputPatch));
 
 			if (PConfig.Instance.FixMosaic.Value)
 				Harmony.CreateAndPatchAll(typeof(FixMosaicPatch));
