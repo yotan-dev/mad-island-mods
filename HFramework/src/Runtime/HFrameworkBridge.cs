@@ -7,7 +7,6 @@ using HFramework.Scenes;
 using YotanModCore;
 using YotanModCore.Consts;
 using UnityEngine;
-using System.Linq;
 using HFramework.SexScripts;
 using System.Collections.Generic;
 using HFramework.SexScripts.Info;
@@ -48,75 +47,33 @@ namespace HFramework
 
 		#region SexChecks
 
-		private bool SexManager_Pre_SexCheck_Modern(CommonStates from, CommonStates to, ref bool __result) {
-			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
-			if (from.npcID == CommonUtils.GetActivePlayer().npcID) {
-				// CommonSexPlayer
-				__result = BundleLoader.Loader.Prefabs.Any(p => p is CommonSexPlayerScript && p.Info.CanStart(from, to));
-				if (!__result && HFConfig.Instance.IsLegacyModeEnabled)
-					__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
-			} else {
-				// CommonSexNPC
-				__result = BundleLoader.Loader.Prefabs.Any(p => p is CommonSexNPCScript && p.Info.CanStart(from, to));
-				if (!__result && HFConfig.Instance.IsLegacyModeEnabled)
-					__result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
-			}
-
-			return false;
-		}
-
 		public bool SexManager_Pre_SexCheck(CommonStates from, CommonStates to, ref bool __result) {
-			if (HFConfig.Instance.IsModernModeEnabled) {
-				return SexManager_Pre_SexCheck_Modern(from, to, ref __result);
-			}
-
 			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
-				__result = SexChecker.CanFriendSex(CommonSexPlayer.Name, from, to);
+				__result = SexScriptsManager.Instance.CanStart(SexScriptTypes.CommonSexPlayer, from, to);
 			else
-				__result = SexChecker.CanFriendSex(CommonSexNPC.Name, from, to);
-
-			return false;
-		}
-
-		private bool SexManager_Pre_RapesCheck_Modern(CommonStates from, CommonStates to, ref bool __result) {
-			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
-			if (to == CommonUtils.GetActivePlayer()) {
-				// PlayerRaped
-				__result = BundleLoader.Loader.Prefabs.Any(p => p is PlayerRapedScript && p.Info.CanStart(from, to));
-				if (!__result && HFConfig.Instance.IsLegacyModeEnabled)
-					__result = SexChecker.CanRape(PlayerRaped.Name, from, to);
-			}
+				__result = SexScriptsManager.Instance.CanStart(SexScriptTypes.CommonSexNPC, from, to);
 
 			return false;
 		}
 
 		public bool SexManager_Pre_RapesCheck(CommonStates from, CommonStates to, ref bool __result) {
-			if (HFConfig.Instance.IsModernModeEnabled && to == CommonUtils.GetActivePlayer()) {
-				return SexManager_Pre_RapesCheck_Modern(from, to, ref __result);
-			}
-
 			__result = false;
 
-			// NOTE: We don't sort actors for rape scenes, because we need to know WHO is raping and WHO is being raped.
-			//       For example, LargeNativeFemale can rape Man (thus [LargeNativeFemale, Man]),
-			//       but Man can rape LargeNativeFemale too (thus [Man, LargeNativeFemale]).
-			//       In those cases, we will have additional performers to support that.
-
 			int activePlayer = CommonUtils.GetActivePlayer().npcID;
-			string sceneName;
+			string typeName;
 			if (to.npcID == activePlayer) {
-				sceneName = PlayerRaped.Name;
+				typeName = SexScriptTypes.PlayerRaped;
 			} else if (from.npcID == activePlayer) {
 				if (to.nMove.actType == NPCMove.ActType.Sleep && to.anim.state.GetCurrent(0).Animation.Name == "A_sleep")
-					sceneName = ManRapesSleep.Name;
+					typeName = SexScriptTypes.ManRapesSleep;
 				else
-					sceneName = ManRapes.Name;
+					typeName = SexScriptTypes.ManRapes;
 			} else {
 				// Npc x Npc
 				return true; // @TODO: We don't have this yet
 			}
 
-			return SexChecker.CanRape(sceneName, from, to);
+			return SexScriptsManager.Instance.CanStart(typeName, from, to);
 		}
 
 		public bool NPCManager_Post_LoveLoveCheck(bool result, CommonStates commonA, CommonStates commonB) {

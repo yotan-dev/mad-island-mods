@@ -7,6 +7,7 @@ namespace HFramework.SexScripts
 {
 	[CreateAssetMenu(fileName = "DeliveryScript", menuName = "HFramework/DeliveryScript")]
 	[Experimental]
+	[SexScriptType(SexScriptTypes.Delivery)]
 	public class DeliveryScript : SexScript
 	{
 		public DeliveryScript Create(CommonStates common, WorkPlace workPlace, SexPlace sexPlace) {
