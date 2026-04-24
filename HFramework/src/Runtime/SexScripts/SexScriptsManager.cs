@@ -1,7 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using HFramework.Performer;
 using HFramework.Scenes;
+using HFramework.SexScripts.Info;
+using HFramework.SexScripts.ScriptContext;
 using YotanModCore;
 
 namespace HFramework.SexScripts
@@ -142,6 +146,56 @@ namespace HFramework.SexScripts
 			}
 
 			return false;
+		}
+
+		public Func<IEnumerator> GetScript(string typeName, CommonStates[] actors, SexInfo info) {
+			List<Func<IEnumerator>> candidates = new();
+			do { // Little hack to make code cleaner -- can be removed once we drop legacy support
+				if (!HFConfig.Instance.IsModernModeEnabled) {
+					break;
+				}
+
+				if (!ScriptsByType.ContainsKey(typeName)) {
+					// @TODO: Enable once we have fully converted to modern mode
+					// PLogger.LogWarning($"No sex scripts found for type \"{typeName}\".");
+					break;
+				}
+
+				ScriptsByType[typeName]
+					.FindAll(script => script.Info.CanStart(actors) && script.Info.CanExecute(info))
+					.ForEach(script => candidates.Add(() => new TreeWrapper().Run(script.Create(actors, info))));
+			} while (false);
+
+			if (HFConfig.Instance.IsLegacyModeEnabled) {
+				switch (typeName) {
+					// case SexScriptTypes.CommonSexPlayer:
+					// 	return SexChecker.CanFriendSex(CommonSexPlayer.Name, actors[0], actors[1]);
+
+					case SexScriptTypes.CommonSexNPC:
+						if (info is IHasScriptPlace scriptPlace && scriptPlace.Place is SexPlaceScriptPlace sexPlace) {
+							var legacyScene = new CommonSexNPC(actors[0], actors[1], sexPlace.Place);
+							if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
+								candidates.Add(() => legacyScene.Run());
+							}
+						}
+						break;
+
+					// case SexScriptTypes.ManRapes:
+					// 	return SexChecker.CanRape(ManRapes.Name, actors[0], actors[1]);
+
+					// case SexScriptTypes.ManRapesSleep:
+					// 	return SexChecker.CanRape(ManRapesSleep.Name, actors[0], actors[1]);
+
+					// case SexScriptTypes.PlayerRaped:
+					// 	return SexChecker.CanRape(PlayerRaped.Name, actors[0], actors[1]);
+				}
+			}
+
+			if (candidates.Count == 0) {
+				return null;
+			}
+
+			return candidates[UnityEngine.Random.Range(0, candidates.Count)];
 		}
 	}
 }

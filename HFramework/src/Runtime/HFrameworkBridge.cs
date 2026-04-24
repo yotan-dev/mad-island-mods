@@ -10,6 +10,8 @@ using UnityEngine;
 using HFramework.SexScripts;
 using System.Collections.Generic;
 using HFramework.SexScripts.Info;
+using HFramework.SexScripts.ScriptContext;
+using System.Linq;
 
 namespace HFramework
 {
@@ -108,12 +110,13 @@ namespace HFramework
 			List<Func<IEnumerator>> scripts = new();
 
 			var info = new CommonSexInfo {
-				Place = tmpWall.GetComponent<SexPlace>(),
+				Place = new SexPlaceScriptPlace(tmpWall.GetComponent<SexPlace>()),
 			};
 
+			var actors = new CommonStates[] { CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common };
 			BundleLoader.Loader.Prefabs
-				.FindAll(p => p is AssWallScript && p.Info.CanStart(new CommonStates[] { CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common }) && p.Info.CanExecute(info))
-				.ForEach(p => scripts.Add(() => new TreeWrapper().Run(((AssWallScript)p).Create(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpWall))));
+				.FindAll(p => p is AssWallScript && p.Info.CanStart(actors) && p.Info.CanExecute(info))
+				.ForEach(p => scripts.Add(() => new TreeWrapper().Run(((AssWallScript)p).Create(actors, info))));
 
 			if (HFConfig.Instance.IsLegacyModeEnabled) {
 				var legacyScene = new AssWall(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpWall);
@@ -145,42 +148,19 @@ namespace HFramework
 		#endregion
 
 		#region CommonSexNPC
-
-		private bool SexManager_Pre_CommonSexNPC_Modern(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, ref IEnumerator __result) {
-			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
-
-			List<Func<IEnumerator>> scripts = new();
-
+		public bool SexManager_Pre_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, ref IEnumerator __result) {
+			var actors = new CommonStates[] { npcA, npcB };
 			var info = new CommonSexInfo {
-				Place = sexPlace
+				Place = new SexPlaceScriptPlace(sexPlace)
 			};
 
-			BundleLoader.Loader.Prefabs
-				.FindAll(p => p is CommonSexNPCScript && p.Info.CanStart(new CommonStates[] { npcA, npcB }) && p.Info.CanExecute(info))
-				.ForEach(p => scripts.Add(() => new TreeWrapper().Run(((CommonSexNPCScript)p).Create(npcA, npcB, sexPlace))));
-
-			if (HFConfig.Instance.IsLegacyModeEnabled) {
-				var legacyScene = new CommonSexNPC(npcA, npcB, sexPlace);
-				if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, new CommonStates[] { npcA, npcB })) {
-					scripts.Add(() => legacyScene.Run());
-				}
+			var runner = SexScriptsManager.Instance.GetScript(SexScriptTypes.CommonSexNPC, actors, info);
+			if (runner != null) {
+				__result = runner();
+			} else {
+				PLogger.LogWarning($"No CommonSexNPC script found for actors {string.Join(", ", actors.Select(a => a.name))}");
 			}
 
-			if (scripts.Count > 0) {
-				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
-				__result = targetScript();
-			}
-
-			return false;
-		}
-
-		public bool SexManager_Pre_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, ref IEnumerator __result) {
-			if (HFConfig.Instance.IsModernModeEnabled) {
-				return SexManager_Pre_CommonSexNPC_Modern(npcA, npcB, sexPlace, ref __result);
-			}
-
-			var scene = new CommonSexNPC(npcA, npcB, sexPlace);
-			__result = scene.Run();
 			return false;
 		}
 		#endregion

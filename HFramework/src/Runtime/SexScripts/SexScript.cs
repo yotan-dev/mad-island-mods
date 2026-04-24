@@ -207,6 +207,10 @@ namespace HFramework.SexScripts
 			tree.RootNode = tree.RootNode.Clone(tree.Context);
 			return tree;
 		}
+
+		public virtual SexScript Create(CommonStates[] actors, SexInfo info) {
+			return Clone();
+		}
 	}
 }
 
