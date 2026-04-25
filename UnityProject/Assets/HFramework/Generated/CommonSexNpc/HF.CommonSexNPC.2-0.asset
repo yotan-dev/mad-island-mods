@@ -1,0 +1,405 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9176427987421494564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe98d705ac4344343909ee2ea598c227, type: 3}
+  m_Name: ScriptAlive
+  m_EditorClassIdentifier: 
+  ID: ScriptAlive
+  state: 0
+  started: 0
+  GUID: 68416ecf30184df4182d6fdc663e6992
+  position: {x: -421.9999, y: -0.0000021457672}
+  child: {fileID: 825737041473868055}
+--- !u!114 &-6143787167048508130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1eb50a52c9aef499faac9fe5df95a3, type: 3}
+  m_Name: LoopAnimationForTime
+  m_EditorClassIdentifier: 
+  ID: Anim_Sex_01
+  state: 0
+  started: 0
+  GUID: bb412da1030b0334ab8f70aafe1e6639
+  position: {x: -0.00013245583, y: 299.6775}
+  duration: 20
+  animName: A_Loop_01
+--- !u!114 &-4020210571441976709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e2352607b98254cbad8368ac193ed2, type: 3}
+  m_Name: MoveToPlace
+  m_EditorClassIdentifier: 
+  ID: MoveToPlace
+  state: 0
+  started: 0
+  GUID: 8b456370563e3e14bb108200504263e7
+  position: {x: 2.9999735, y: -92.6775}
+  TimeLimitSeconds: 30
+--- !u!114 &-3184267799031327407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56b187b071db1d4f9becf045827c127, type: 3}
+  m_Name: DisableLivingCharacters
+  m_EditorClassIdentifier: 
+  ID: DisableLivingCharacters
+  state: 0
+  started: 0
+  GUID: 5b3dbc10dd5807a4bbc712495f382126
+  position: {x: 2.999974, y: 100.999985}
+--- !u!114 &-532887817488523803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e935d1b36cf52a548b2def0dc05ecb69, type: 3}
+  m_Name: AnimateOnce
+  m_EditorClassIdentifier: 
+  ID: Anim_Finish
+  state: 0
+  started: 0
+  GUID: 3b896b9702788b64389a284a040aed7e
+  position: {x: -1.0000172, y: 515.8279}
+  animationName: A_Finish
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496419a1b3166484885bb01f914899ce, type: 3}
+  m_Name: HF.CommonSexNPC.2-0
+  m_EditorClassIdentifier: 
+  Info:
+    GUID: HF.Template.CommonSexNPC.MxF
+    Name: CommonSexNPC MxF template
+    Description: Basic template for CommonSexNPC with a Male and a Female character.
+    Npcs:
+    - NpcID: 0
+      FaintCondition:
+        Expected: 0
+      DeadCondition:
+        Expected: 0
+      Conditions: []
+    - NpcID: 0
+      FaintCondition:
+        Expected: 0
+      DeadCondition:
+        Expected: 0
+      Conditions: []
+    NpcOrderMatters: 0
+    StartConditions: []
+    ExecuteConditions: []
+  rootNode: {fileID: 1262254030156052512}
+  treeState: 0
+  nodes:
+  - {fileID: 1262254030156052512}
+  - {fileID: 1278940022107206413}
+  - {fileID: -9176427987421494564}
+  - {fileID: 825737041473868055}
+  - {fileID: -4020210571441976709}
+  - {fileID: 609076073872774052}
+  - {fileID: -3184267799031327407}
+  - {fileID: 2377001853325030986}
+  - {fileID: -6143787167048508130}
+  - {fileID: 3166310684731952015}
+  - {fileID: -532887817488523803}
+  - {fileID: 2480944071005333294}
+  - {fileID: 8258167949781465546}
+  - {fileID: 7996944335336121934}
+  - {fileID: 4293681066832810}
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &4293681066832810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d862e67f098ce4abb6e6f65bbe83d2, type: 3}
+  m_Name: Setup
+  m_EditorClassIdentifier: 
+  ID: Setup
+  state: 0
+  started: 0
+  GUID: 1d3ea7a4f40760a4798e035a8951e819
+  position: {x: 0, y: 0}
+  Instantiator:
+    rid: 896238759577387086
+  AppearanceSetter:
+    rid: 896238759577387087
+  stopNpcReaction: 1
+  posOffset: {x: 0, y: 0, z: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 896238759577387086
+      type: {class: SexListPrefab, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        PathToSkeletonAnimation: Scale/Anim
+        listIndex: 0
+        objIndex: 0
+    - rid: 896238759577387087
+      type: {class: MaleFemaleRandCharSetter, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        MaleIndex: 0
+        FemaleIndex: 1
+--- !u!114 &609076073872774052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fe56b52f23ea8438fed06020cbc731, type: 3}
+  m_Name: EnterSexState
+  m_EditorClassIdentifier: 
+  ID: EnterSexState
+  state: 0
+  started: 0
+  GUID: 8bd292fc932e7b946a28583a8b2b80cf
+  position: {x: -0.9999755, y: -206.30997}
+  message: 
+--- !u!114 &825737041473868055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Sequence
+  state: 0
+  started: 0
+  GUID: 1574342d00f417a438eae98c8483e19a
+  position: {x: -238.04979, y: -0.0000021457672}
+  children:
+  - {fileID: 609076073872774052}
+  - {fileID: -4020210571441976709}
+  - {fileID: 4293681066832810}
+  - {fileID: -3184267799031327407}
+  - {fileID: 2377001853325030986}
+  - {fileID: -6143787167048508130}
+  - {fileID: 3166310684731952015}
+  - {fileID: -532887817488523803}
+  - {fileID: 2480944071005333294}
+  - {fileID: 8258167949781465546}
+  - {fileID: 7996944335336121934}
+--- !u!114 &1262254030156052512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0c9fd3eadbea645902d0e3257e7b2e, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  ID: Root
+  state: 0
+  started: 0
+  GUID: 076b4e0f38d6a7d43a2e2e980a4832db
+  position: {x: -564.6449, y: -0.0000021457672}
+  child: {fileID: -9176427987421494564}
+  teardownNode: {fileID: 1278940022107206413}
+--- !u!114 &1278940022107206413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b4c2476e4e64f42bbbac6d50554d99, type: 3}
+  m_Name: Teardown
+  m_EditorClassIdentifier: 
+  ID: Teardown
+  state: 0
+  started: 0
+  GUID: fa6d10080b2718f4e8586cdf102877fb
+  position: {x: -421.8773, y: 121.67}
+--- !u!114 &2377001853325030986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_SexStart
+  state: 0
+  started: 0
+  GUID: 5053ecbbd7202d24fb8fa6eeefd0e4e2
+  position: {x: -0.00013256073, y: 199}
+  eventKey: HF.penetrate.vagina
+  EmitOnce: 0
+  EventArgs:
+    rid: 896238742760063002
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 896238742760063002
+      type: {class: FromToEventArgs, ns: HFramework, asm: HFramework}
+      data:
+        comment: 
+        fromNpcIdx: 0
+        toNpcIdx: 1
+        isRape: 0
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &2480944071005333294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_Orgasm
+  state: 0
+  started: 0
+  GUID: 30d40747c37eb2c43a5d187dbabc3917
+  position: {x: -1.0000837, y: 607}
+  eventKey: HF.orgasm
+  EmitOnce: 0
+  EventArgs:
+    rid: 896238742760063003
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 896238742760063003
+      type: {class: FromToEventArgs, ns: HFramework, asm: HFramework}
+      data:
+        comment: 
+        fromNpcIdx: 0
+        toNpcIdx: 1
+        isRape: 0
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &3166310684731952015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1eb50a52c9aef499faac9fe5df95a3, type: 3}
+  m_Name: LoopAnimationForTime
+  m_EditorClassIdentifier: 
+  ID: Anim_Sex_02
+  state: 0
+  started: 0
+  GUID: 69899494d21cab54fbb541f917c95a8f
+  position: {x: -0.00013245583, y: 410.9272}
+  duration: 10
+  animName: A_Loop_02
+--- !u!114 &7996944335336121934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1eb50a52c9aef499faac9fe5df95a3, type: 3}
+  m_Name: LoopAnimationForTime
+  m_EditorClassIdentifier: 
+  ID: Anim_Finish
+  state: 0
+  started: 0
+  GUID: b721a0526c256174a95fa6755f6ab8a0
+  position: {x: -1.0000148, y: 806.2489}
+  duration: 8
+  animName: A_Finish_idle
+--- !u!114 &8258167949781465546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_Cum
+  state: 0
+  started: 0
+  GUID: 62a555bbb405e5b46ad4fe277d626cb6
+  position: {x: 0.0000023841858, y: 700.85004}
+  eventKey: HF.cum.vagina
+  EmitOnce: 0
+  EventArgs:
+    rid: 896238742760063004
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 896238742760063004
+      type: {class: FromToEventArgs, ns: HFramework, asm: HFramework}
+      data:
+        comment: 
+        fromNpcIdx: 0
+        toNpcIdx: 1
+        isRape: 0
+        From: {fileID: 0}
+        To: {fileID: 0}

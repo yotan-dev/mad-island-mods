@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace HFramework.SexScripts.Info
 {
@@ -92,7 +93,7 @@ namespace HFramework.SexScripts.Info
 			if (this.StartConditions.Count == 0)
 				return true;
 
-			var result = this.StartConditions.Any(g => g.Pass());
+			var result = this.StartConditions.Any(g => g.CanStart());
 			PLogger.LogDebug($"Start conditions result: {result}");
 			return result;
 		}
@@ -102,7 +103,7 @@ namespace HFramework.SexScripts.Info
 			if (this.ExecuteConditions.Count == 0)
 				return true;
 
-			var result = this.ExecuteConditions.Any(g => g.Pass(info));
+			var result = this.ExecuteConditions.Any(g => g.CanExecute(info));
 			PLogger.LogDebug($"Execute conditions result: {result}");
 			return result;
 		}

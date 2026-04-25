@@ -1,5 +1,6 @@
 using System;
-using HFramework.Tree;
+using HFramework.ScriptNodes;
+using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
 
 namespace HFramework
@@ -45,7 +46,7 @@ namespace HFramework
 
 		[HideInInspector] public CommonContext ctx;
 
-		public virtual void Populate(CommonContext ctx, EmitEventNode node)
+		public virtual void Populate(CommonContext ctx, EmitEvent node)
 		{
 			this.ctx = ctx;
 		}
@@ -67,7 +68,10 @@ namespace HFramework
 	[Experimental]
 	public class FromToEventArgs : SexEventArgs
 	{
+		[ActorIndex]
 		public int fromNpcIdx;
+
+		[ActorIndex]
 		public int toNpcIdx;
 
 		public bool isRape;
@@ -75,7 +79,7 @@ namespace HFramework
 		[HideInInspector] public CommonStates From;
 		[HideInInspector] public CommonStates To;
 
-		public override void Populate(CommonContext ctx, EmitEventNode node)
+		public override void Populate(CommonContext ctx, EmitEvent node)
 		{
 			base.Populate(ctx, node);
 			From = ctx.Actors[fromNpcIdx].Common;
@@ -103,10 +107,11 @@ namespace HFramework
 	[Experimental]
 	public class SelfEventArgs : SexEventArgs
 	{
+		[ActorIndex]
 		public int fromNpcIdx;
 		[HideInInspector] public CommonStates Self;
 
-		public override void Populate(CommonContext ctx, EmitEventNode node)
+		public override void Populate(CommonContext ctx, EmitEvent node)
 		{
 			base.Populate(ctx, node);
 			Self = ctx.Actors[fromNpcIdx].Common;

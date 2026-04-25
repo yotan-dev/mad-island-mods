@@ -74,6 +74,22 @@ async function pack(name, version, inputDir) {
 	});
 }
 
+async function buildFixPluginTypesSerialization() {
+	console.log('=== Building FixPluginTypesSerialization ===');
+
+	const fixPluginTypesSerializationPath = join(rootDir, 'FixPluginTypesSerialization');
+
+	runCommand('dotnet restore', fixPluginTypesSerializationPath);
+	runCommand(`dotnet build -c ${config}`, fixPluginTypesSerializationPath);
+
+	copyToRelease([
+		{
+			from: resolve(getBinaryPath(join(fixPluginTypesSerializationPath, 'src', 'FixPluginTypesSerialization')), 'FixPluginTypesSerialization.dll'),
+			to: 'YotanModCore/BepInEx/patchers/FixPluginTypesSerialization.dll',
+		},
+	]);
+}
+
 async function buildYotanModCore() {
 	console.log('=== Building YotanModCore ===');
 
@@ -106,6 +122,8 @@ async function buildYotanModCore() {
 			to: 'YotanModCore/BepInEx/patchers/YotanModCorePatcher.dll',
 		}
 	]);
+
+	buildFixPluginTypesSerialization();
 
 	const version = getProjectVersion(resolve(loaderPath, 'YotanModCoreLoader.csproj'));
 

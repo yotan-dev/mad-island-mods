@@ -1,0 +1,130 @@
+using System;
+using UnityEditor.Experimental.GraphView;
+using HFramework.ScriptNodes;
+using UnityEngine;
+using HFramework.SexScripts;
+using UnityEditor;
+
+namespace HFramework.EditorUI.SexScripts
+{
+	public class NodeView : Node
+	{
+		public Action<NodeView> OnNodeSelected;
+
+		public ScriptNode node;
+
+		public Port input;
+
+		public Port output;
+
+		public Port teardownOutput;
+
+		public NodeView(ScriptNode node)
+		{
+			this.node = node;
+			this.title = node.ID;
+			this.viewDataKey = node.GUID; // MEtadata for GraphView
+
+			style.left = node.Position.x;
+			style.top = node.Position.y;
+
+			NodeEvents.OnNodeChanged += OnNodeChanged;
+
+			CreateInputPorts();
+			CreateOutputPorts();
+		}
+
+		private void OnNodeChanged(ScriptNode node)
+		{
+			if (this.node != node)
+				return;
+
+			if (this.title != node.ID) {
+				this.title = node.ID;
+				NodeEvents.TriggerNodeIDChanged(node);
+			}
+		}
+
+		private void CreateInputPorts()
+		{
+			if (node is ScriptNodes.Action)
+			{
+				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+			}
+			else if (node is Composite)
+			{
+				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+			}
+			else if (node is Passthrough)
+			{
+				input = base.InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+			}
+			else if (node is Root)
+			{
+
+			}
+
+			if (input != null)
+			{
+				input.portName = "";
+				inputContainer.Add(input);
+			}
+		}
+
+		private void CreateOutputPorts()
+		{
+			if (node is ScriptNodes.Action)
+			{
+				// no ouputs
+			}
+			else if (node is Composite)
+			{
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+			}
+			else if (node is Passthrough)
+			{
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+			}
+			else if (node is Passthrough)
+			{
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+			}
+			else if (node is Root)
+			{
+				output = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				output.portName = "";
+
+				teardownOutput = base.InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+				teardownOutput.portName = SexScript.TeardownPortName;
+			}
+
+			if (output != null)
+			{
+				outputContainer.Add(output);
+			}
+
+			if (teardownOutput != null)
+			{
+				outputContainer.Add(teardownOutput);
+			}
+		}
+
+		public override void SetPosition(Rect newPos)
+		{
+			base.SetPosition(newPos);
+			Undo.RecordObject(node, "Sex Script (Set Position)");
+			node.Position.x = newPos.xMin;
+			node.Position.y = newPos.yMin;
+			EditorUtility.SetDirty(node);
+		}
+
+		public override void OnSelected()
+		{
+			base.OnSelected();
+			if (OnNodeSelected != null)
+			{
+				OnNodeSelected.Invoke(this);
+			}
+		}
+	}
+}

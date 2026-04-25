@@ -20,6 +20,7 @@ Each mod has its own version which follows SemVer.
 **Technical/Mod utiltities:**
 
 - Adds accessors for more managers via `Managers.` class
+- **[Experimental]** Expose `BundleLoader` class to load asset bundles from the `CustomBundles` folder
 
 
 ### HFramework v1.2.0
