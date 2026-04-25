@@ -1,5 +1,6 @@
 using System.Linq;
 using HFramework.ScriptNodes;
+using HFramework.SexScripts.Info;
 using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
 
@@ -11,11 +12,13 @@ namespace HFramework.SexScripts
 	[SexScriptType(SexScriptTypes.PlayerRaped)]
 	public class PlayerRapedScript : SexScript
 	{
-		public PlayerRapedScript Create(CommonStates rapist, CommonStates victim) {
+		public override SexScript Create(CommonStates[] actors, SexInfo info) {
 			var tree = Clone();
-			tree.Context.Actors = this.Info.BuildNpcs(rapist, victim).Select(npc => new ContextNpc(npc, null)).ToArray();
-			tree.Context.ScriptPlace = new GroundScriptPlace(victim.gameObject.transform.position);
-			return (PlayerRapedScript)tree;
+			tree.Context.Actors = this.Info.BuildNpcs(actors).Select(npc => new ContextNpc(npc, null)).ToArray();
+			if (actors.Length > 1 && actors[1] != null) {
+				tree.Context.ScriptPlace = new GroundScriptPlace(actors[1].gameObject.transform.position);
+			}
+			return tree;
 		}
 	}
 }
