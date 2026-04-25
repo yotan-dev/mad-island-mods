@@ -1,41 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 #if UNITY_EDITOR
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 #endif
 
-namespace HFramework
+namespace HFramework.Events
 {
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-	[Experimental]
-	public class SexEventAttribute : Attribute
-	{
-		public string Source;
-		public string Name;
-
-		public SexEventAttribute(string source, string name)
-		{
-			Source = source;
-			Name = name;
-		}
-	}
-
-	[Experimental]
-	public class SexEventInfo
-	{
-		public ISexEventBase Event { get; private set; }
-		public Type EventType { get; private set; }
-
-		public void SetEvent<T>(ISexEvent<T> evt) where T : SexEventArgs, new()
-		{
-			Event = evt;
-			EventType = typeof(T);
-		}
-	}
-
 	[Experimental]
 	public static class SexEvents
 	{

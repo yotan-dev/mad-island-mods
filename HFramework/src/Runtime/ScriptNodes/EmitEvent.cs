@@ -1,4 +1,5 @@
 using System;
+using HFramework.Events;
 using UnityEngine;
 
 namespace HFramework.ScriptNodes

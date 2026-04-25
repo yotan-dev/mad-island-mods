@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections;
+using HFramework.Events;
 using UnityEngine;
 using YotanModCore;
 

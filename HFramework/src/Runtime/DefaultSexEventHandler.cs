@@ -1,6 +1,7 @@
 using HFramework.Scenes;
 using HFramework.SexScripts;
 using HFramework.ScriptNodes;
+using HFramework.Events;
 using YotanModCore;
 using YotanModCore.Consts;
 
