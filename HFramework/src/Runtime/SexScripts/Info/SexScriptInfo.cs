@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace HFramework.SexScripts.Info
 {
@@ -9,16 +8,18 @@ namespace HFramework.SexScripts.Info
 	[Experimental]
 	public class SexScriptInfo
 	{
-		public SexNpcInfo[] Npcs;
+		[ScriptContext.ContextTag]
+		public List<string> ContextTags = new();
 
-		public bool NpcOrderMatters;
+		public SexNpcInfo[] Npcs = new SexNpcInfo[0];
 
-		public List<ConditionGroup> StartConditions;
+		public bool NpcOrderMatters = false;
 
-		public List<ConditionGroup> ExecuteConditions;
+		public List<ConditionGroup> StartConditions = new();
 
-		private bool TryMatchUnorderedNpcs(CommonStates[] npcs, out CommonStates[] matchedNpcs)
-		{
+		public List<ConditionGroup> ExecuteConditions = new();
+
+		private bool TryMatchUnorderedNpcs(CommonStates[] npcs, out CommonStates[] matchedNpcs) {
 			//@FIXME: This will fail likely fail if e.g.:
 			// NPC[0] -> ID 15, Pregnant = any
 			// NPC[1] -> ID 15, Pregnant = Ready to birth
@@ -27,21 +28,17 @@ namespace HFramework.SexScripts.Info
 			// As it will first assign the ready to birth as NPC[0].
 			matchedNpcs = new CommonStates[this.Npcs.Length];
 
-			for (int i = 0; i < npcs.Length; i++)
-			{
+			for (int i = 0; i < npcs.Length; i++) {
 				bool foundMatch = false;
-				for (int j = 0; j < this.Npcs.Length; j++)
-				{
-					if (matchedNpcs[j] == null && this.Npcs[j].Pass(npcs[i]))
-					{
+				for (int j = 0; j < this.Npcs.Length; j++) {
+					if (matchedNpcs[j] == null && this.Npcs[j].Pass(npcs[i])) {
 						matchedNpcs[j] = npcs[i];
 						foundMatch = true;
 						break;
 					}
 				}
 
-				if (!foundMatch)
-				{
+				if (!foundMatch) {
 					PLogger.LogDebug($"Failed to match NPC {i} - {npcs[i].npcID}");
 					return false;
 				}
@@ -52,29 +49,23 @@ namespace HFramework.SexScripts.Info
 			return true;
 		}
 
-		private bool HasNeededNpcs(CommonStates[] npcs)
-		{
+		private bool HasNeededNpcs(CommonStates[] npcs) {
 			if (npcs.Length != this.Npcs.Length)
 				return false;
 
-			if (this.NpcOrderMatters)
-			{
-				for (int i = 0; i < this.Npcs.Length; i++)
-				{
+			if (this.NpcOrderMatters) {
+				for (int i = 0; i < this.Npcs.Length; i++) {
 					if (!this.Npcs[i].Pass(npcs[i]))
 						return false;
 				}
-			}
-			else
-			{
+			} else {
 				return this.TryMatchUnorderedNpcs(npcs, out _);
 			}
 
 			return true;
 		}
 
-		public CommonStates[] BuildNpcs(params CommonStates[] npcs)
-		{
+		public CommonStates[] BuildNpcs(params CommonStates[] npcs) {
 			if (this.NpcOrderMatters)
 				return npcs;
 
@@ -82,8 +73,7 @@ namespace HFramework.SexScripts.Info
 			return matchedNpcs;
 		}
 
-		public bool CanStart(params CommonStates[] npcs)
-		{
+		public bool CanStart(params CommonStates[] npcs) {
 			PLogger.LogDebug($"CanStart: {string.Join(", ", npcs.Select(n => n.npcID))}");
 			if (!this.HasNeededNpcs(npcs)) {
 				PLogger.LogDebug("HasNeededNpcs returned false");
@@ -98,8 +88,7 @@ namespace HFramework.SexScripts.Info
 			return result;
 		}
 
-		public bool CanExecute(SexInfo info)
-		{
+		public bool CanExecute(SexInfo info) {
 			if (this.ExecuteConditions.Count == 0)
 				return true;
 
