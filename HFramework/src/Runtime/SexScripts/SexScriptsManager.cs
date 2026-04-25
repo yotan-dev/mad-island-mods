@@ -168,14 +168,45 @@ namespace HFramework.SexScripts
 
 			if (HFConfig.Instance.IsLegacyModeEnabled) {
 				switch (typeName) {
-					// case SexScriptTypes.CommonSexPlayer:
-					// 	return SexChecker.CanFriendSex(CommonSexPlayer.Name, actors[0], actors[1]);
+					case SexScriptTypes.AssWall: {
+							if (info is IHasScriptPlace scriptPlace && scriptPlace.Place is SexPlaceScriptPlace sexPlace) {
+								var legacyScene = new AssWall(actors[0], actors[1], sexPlace.Place.gameObject.GetComponent<InventorySlot>());
+								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
+									candidates.Add(() => legacyScene.Run());
+								}
+							}
+						}
+						break;
 
-					case SexScriptTypes.CommonSexNPC:
-						if (info is IHasScriptPlace scriptPlace && scriptPlace.Place is SexPlaceScriptPlace sexPlace) {
-							var legacyScene = new CommonSexNPC(actors[0], actors[1], sexPlace.Place);
-							if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
-								candidates.Add(() => legacyScene.Run());
+					case SexScriptTypes.CommonSexPlayer: {
+							if (info is PlayerSexInfo playerInfo) {
+								var legacyScene = new CommonSexPlayer(actors[0], actors[1], playerInfo.Pos, playerInfo.SexType);
+								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
+									candidates.Add(() => legacyScene.Run());
+								}
+							}
+						}
+						break;
+
+					case SexScriptTypes.CommonSexNPC: {
+							if (info is IHasScriptPlace scriptPlace && scriptPlace.Place is SexPlaceScriptPlace sexPlace) {
+								var legacyScene = new CommonSexNPC(actors[0], actors[1], sexPlace.Place);
+								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
+									candidates.Add(() => legacyScene.Run());
+								}
+							}
+						}
+						break;
+
+					case SexScriptTypes.Delivery: {
+							if (info is IHasScriptPlace scriptPlace) {
+								var workPlace = scriptPlace is WorkplaceScriptPlace workPlacePlace ? workPlacePlace.Place : null;
+								var sexPlace = scriptPlace is SexPlaceScriptPlace sexPlacePlace ? sexPlacePlace.Place : null;
+
+								var legacyScene = new Delivery(actors[0], workPlace, sexPlace);
+								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
+									candidates.Add(() => legacyScene.Run());
+								}
 							}
 						}
 						break;
@@ -186,8 +217,13 @@ namespace HFramework.SexScripts
 					// case SexScriptTypes.ManRapesSleep:
 					// 	return SexChecker.CanRape(ManRapesSleep.Name, actors[0], actors[1]);
 
-					// case SexScriptTypes.PlayerRaped:
-					// 	return SexChecker.CanRape(PlayerRaped.Name, actors[0], actors[1]);
+					case SexScriptTypes.PlayerRaped: {
+							var legacyScene = new PlayerRaped(actors[1], actors[0]);
+							if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
+								candidates.Add(() => legacyScene.Run());
+							}
+						}
+						break;
 				}
 			}
 

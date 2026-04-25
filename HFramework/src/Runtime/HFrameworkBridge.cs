@@ -104,44 +104,22 @@ namespace HFramework
 
 		#region AssWall
 
-		private bool SexManager_Pre_AssWall_Modern(InventorySlot tmpWall, ref IEnumerator __result) {
-			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
-
-			List<Func<IEnumerator>> scripts = new();
-
+		public bool SexManager_Pre_AssWall(InventorySlot tmpWall, ref IEnumerator __result) {
 			var info = new CommonSexInfo {
 				Place = new SexPlaceScriptPlace(tmpWall.GetComponent<SexPlace>()),
 			};
 
-			var actors = new CommonStates[] { CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common };
-			BundleLoader.Loader.Prefabs
-				.FindAll(p => p is AssWallScript && p.Info.CanStart(actors) && p.Info.CanExecute(info))
-				.ForEach(p => scripts.Add(() => new TreeWrapper().Run(((AssWallScript)p).Create(actors, info))));
-
-			if (HFConfig.Instance.IsLegacyModeEnabled) {
-				var legacyScene = new AssWall(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpWall);
-				if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, new CommonStates[] { CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common })) {
-					scripts.Add(() => legacyScene.Run());
-				}
+			var actors = new CommonStates[] {
+				CommonUtils.GetActivePlayer(),
+				Managers.mn.inventory.itemSlot[50].common
+			};
+			var runner = SexScriptsManager.Instance.GetScript(SexScriptTypes.AssWall, actors, info);
+			if (runner != null) {
+				__result = runner();
+			} else {
+				PLogger.LogWarning($"No AssWall script found for actors {string.Join(", ", actors.Select(a => a.name))}");
 			}
 
-			if (scripts.Count > 0) {
-				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
-				__result = targetScript();
-			}
-
-			return false;
-		}
-
-		public bool SexManager_Pre_AssWall(InventorySlot tmpWall, ref IEnumerator __result) {
-			if (HFConfig.Instance.IsModernModeEnabled) {
-				return SexManager_Pre_AssWall_Modern(tmpWall, ref __result);
-			}
-
-			var pCommon = CommonUtils.GetActivePlayer();
-			var girlCommon = Managers.mn.inventory.itemSlot[50].common;
-			var scene = new AssWall(pCommon, girlCommon, tmpWall);
-			__result = scene.Run();
 			return false;
 		}
 
@@ -167,39 +145,20 @@ namespace HFramework
 
 		#region CommonSexPlayer
 
-		private bool SexManager_Pre_CommonSexPlayer_Modern(int state, CommonStates pCommon, CommonStates nCommon, Vector3 pos, int sexType, ref IEnumerator __result) {
-			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
-			List<Func<IEnumerator>> scripts = new();
+		public bool SexManager_Pre_CommonSexPlayer(CommonStates pCommon, CommonStates nCommon, Vector3 pos, int sexType, ref IEnumerator __result) {
 			var info = new PlayerSexInfo {
 				Pos = pos,
 				SexType = sexType,
 			};
+			var actors = new CommonStates[] { pCommon, nCommon };
 
-			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
-			BundleLoader.Loader.Prefabs
-				.FindAll(x => x is CommonSexPlayerScript && x.Info.CanStart(pCommon, nCommon) && x.Info.CanExecute(info))
-				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((CommonSexPlayerScript)x).Create(pCommon, nCommon, pos, sexType))));
-
-			if (HFConfig.Instance.IsLegacyModeEnabled) {
-				var legacyScene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
-				scripts.Add(() => legacyScene.Run());
+			var runner = SexScriptsManager.Instance.GetScript(SexScriptTypes.CommonSexPlayer, actors, info);
+			if (runner != null) {
+				__result = runner();
+			} else {
+				PLogger.LogWarning($"No CommonSexPlayer script found for {pCommon.name} and {nCommon.name}");
 			}
 
-			if (scripts.Count > 0) {
-				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
-				__result = targetScript();
-			}
-
-			return false;
-		}
-
-		public bool SexManager_Pre_CommonSexPlayer(int state, CommonStates pCommon, CommonStates nCommon, Vector3 pos, int sexType, ref IEnumerator __result) {
-			if (HFConfig.Instance.IsModernModeEnabled) {
-				return SexManager_Pre_CommonSexPlayer_Modern(state, pCommon, nCommon, pos, sexType, ref __result);
-			}
-
-			var scene = new CommonSexPlayer(pCommon, nCommon, pos, sexType);
-			__result = scene.Run();
 			return false;
 		}
 
@@ -220,36 +179,23 @@ namespace HFramework
 		#endregion
 
 		#region Delivery
-		private bool SexManager_Pre_Delivery_Modern(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result) {
-			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
-			List<Func<IEnumerator>> scripts = new();
-			var info = new SexInfo { };
-
-			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
-			BundleLoader.Loader.Prefabs
-				.FindAll(x => x is DeliveryScript && x.Info.CanStart(common) && x.Info.CanExecute(info))
-				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((DeliveryScript)x).Create(common, tmpWorkPlace, tmpSexPlace))));
-
-			if (HFConfig.Instance.IsLegacyModeEnabled) {
-				var legacyScene = new Delivery(common, tmpWorkPlace, tmpSexPlace);
-				scripts.Add(() => legacyScene.Run());
-			}
-
-			if (scripts.Count > 0) {
-				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
-				__result = targetScript();
-			}
-
-			return false;
-		}
 
 		public bool SexManager_Pre_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result) {
-			if (HFConfig.Instance.IsModernModeEnabled) {
-				return SexManager_Pre_Delivery_Modern(common, tmpWorkPlace, tmpSexPlace, ref __result);
+			var info = new CommonSexInfo();
+			if (tmpWorkPlace != null) {
+				info.Place = new WorkplaceScriptPlace(tmpWorkPlace);
+			} else if (tmpSexPlace != null) {
+				info.Place = new SexPlaceScriptPlace(tmpSexPlace);
+			}
+			var actors = new CommonStates[] { common };
+
+			var runner = SexScriptsManager.Instance.GetScript(SexScriptTypes.Delivery, actors, info);
+			if (runner != null) {
+				__result = runner();
+			} else {
+				PLogger.LogWarning($"No Delivery script found for {common.name}");
 			}
 
-			var scene = new Delivery(common, tmpWorkPlace, tmpSexPlace);
-			__result = scene.Run();
 			return false;
 		}
 
@@ -287,36 +233,17 @@ namespace HFramework
 
 		#region PlayerRaped
 
-		private bool SexManager_Pre_PlayerRaped_Modern(CommonStates to, CommonStates from, ref IEnumerator __result) {
-			// @TODO: Probably a good idea to group Prefabs per type so we don't have to run through ALL scripts.
-			List<Func<IEnumerator>> scripts = new();
-			var info = new SexInfo();
-
-			// .CanStart ensures npcs are there, CanExecute checks for further conditions specific to the context.
-			BundleLoader.Loader.Prefabs
-				.FindAll(x => x is PlayerRapedScript && x.Info.CanStart(from, to) && x.Info.CanExecute(info))
-				.ForEach(x => scripts.Add(() => new TreeWrapper().Run(((PlayerRapedScript)x).Create(from, to))));
-
-			if (HFConfig.Instance.IsLegacyModeEnabled) {
-				var legacyScene = new PlayerRaped(to, from);
-				scripts.Add(() => legacyScene.Run());
-			}
-
-			if (scripts.Count > 0) {
-				var targetScript = scripts[UnityEngine.Random.Range(0, scripts.Count)];
-				__result = targetScript();
-			}
-
-			return false;
-		}
-
 		public bool SexManager_Pre_PlayerRaped(CommonStates to, CommonStates from, ref IEnumerator __result) {
-			if (HFConfig.Instance.IsModernModeEnabled) {
-				return SexManager_Pre_PlayerRaped_Modern(to, from, ref __result);
+			var info = new SexInfo();
+			var actors = new CommonStates[] { from, to };
+
+			var runner = SexScriptsManager.Instance.GetScript(SexScriptTypes.PlayerRaped, actors, info);
+			if (runner != null) {
+				__result = runner();
+			} else {
+				PLogger.LogWarning($"No PlayerRaped script found for {to.name}");
 			}
 
-			var scene = new PlayerRaped(to, from);
-			__result = scene.Run();
 			return false;
 		}
 

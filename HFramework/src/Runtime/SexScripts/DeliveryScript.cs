@@ -1,5 +1,6 @@
 using System.Linq;
 using HFramework.ScriptNodes;
+using HFramework.SexScripts.Info;
 using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
 
@@ -10,18 +11,16 @@ namespace HFramework.SexScripts
 	[SexScriptType(SexScriptTypes.Delivery)]
 	public class DeliveryScript : SexScript
 	{
-		public DeliveryScript Create(CommonStates common, WorkPlace workPlace, SexPlace sexPlace) {
+		public override SexScript Create(CommonStates[] actors, SexInfo info) {
 			var tree = Clone();
-			tree.Context.Actors = this.Info.BuildNpcs(common).Select(npc => new ContextNpc(npc, null)).ToArray();
-			if (workPlace != null) {
-				tree.Context.ScriptPlace = new WorkplaceScriptPlace(workPlace);
-			} else if (sexPlace != null) {
-				tree.Context.ScriptPlace = new SexPlaceScriptPlace(sexPlace);
-			} else {
-				tree.Context.ScriptPlace = new GroundScriptPlace(common.gameObject.transform.position);
+			tree.Context.Actors = this.Info.BuildNpcs(actors).Select(npc => new ContextNpc(npc, null)).ToArray();
+			if (info is IHasScriptPlace hasScriptPlace) {
+				tree.Context.ScriptPlace = hasScriptPlace.Place;
+			} else if (actors.Length > 0 && actors[0] != null) {
+				tree.Context.ScriptPlace = new GroundScriptPlace(actors[0].gameObject.transform.position);
 			}
 
-			return (DeliveryScript)tree;
+			return tree;
 		}
 	}
 }
