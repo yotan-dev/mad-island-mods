@@ -20,7 +20,7 @@ namespace HFrameworkLoader
 		private void Awake() {
 			HFrameworkLoader.Config.Instance.Init(Config);
 
-			Plugin.Bridge = Initializer.Init(new BepisLogger(Logger));
+			Plugin.Bridge = Initializer.Init(new BepisLogger(Logger), this.Info.Location);
 			PLogger._Logger = Logger;
 
 			var hfConfig = HFConfig.GetInstance();
