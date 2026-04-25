@@ -1,3 +1,4 @@
+using HFramework.Events.EventHandlers;
 using HFramework.Hook;
 using HFramework.Scenes;
 using YotanModCore.Events;
@@ -42,6 +43,7 @@ namespace HFramework
 
 			if (HFConfig.Instance.IsModernModeEnabled) {
 				DefaultSexEventHandler.Instance.Init();
+				RapeCountEventHandler.Instance.Init();
 			}
 
 			PLogger.LogInfo("HFramework initialized!");

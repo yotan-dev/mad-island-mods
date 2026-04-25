@@ -31,7 +31,6 @@ namespace HFramework.SexScripts.ScriptContext
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		static void LoadContextTags() {
-			Debug.Log("[ContextTags] After assemblies loaded");
 			ContextTagRegistry.Register(Normal);
 			ContextTagRegistry.Register(Forced);
 			ContextTagRegistry.Register(Daruma);

@@ -4,6 +4,7 @@ using HFramework.ScriptNodes;
 using HFramework.Events;
 using YotanModCore;
 using YotanModCore.Consts;
+using HFramework.SexScripts.ScriptContext;
 
 namespace HFramework
 {
@@ -12,28 +13,13 @@ namespace HFramework
 		internal static DefaultSexEventHandler Instance { get; private set; } = new DefaultSexEventHandler();
 
 		public void Init() {
-			SexEvents.OnPerformHandJob.Triggered += this.OnSexStart;
-			SexEvents.OnPerformTitFuck.Triggered += this.OnSexStart;
-			SexEvents.OnPerformScissor.Triggered += this.OnSexStart;
 			SexEvents.OnPerformMasturbation.Triggered += this.OnMasturbation;
 			SexEvents.OnPerformDelivery.Triggered += this.OnDelivery;
 
-			SexEvents.OnPenetrateVagina.Triggered += this.OnSexStart;
-			SexEvents.OnPenetrateMouth.Triggered += this.OnSexStart;
-			SexEvents.OnPenetrateAss.Triggered += this.OnSexStart;
+			SexEvents.OnPenetrateVagina.Triggered += this.OnPenetrationStart;
+			SexEvents.OnPenetrateAss.Triggered += this.OnPenetrationStart;
 
-			// SexEvents.OnLickVagina.Triggered += this.OnSexStart;
-
-			// SexEvents.OnOrgasm.Triggered += this.OnSexStart;
 			SexEvents.OnCumOnVagina.Triggered += this.OnCumOnVagina;
-			// SexEvents.OnCumOnAss.Triggered += this.OnSexStart;
-			// SexEvents.OnCumOnMouth.Triggered += this.OnSexStart;
-			// SexEvents.OnCumOnTits.Triggered += this.OnSexStart;
-
-			// SexEvents.OnGiveBirth.Triggered += this.OnSexStart;
-			// SexEvents.OnStillbirth.Triggered += this.OnSexStart;
-
-			SexEvents.OnRape.Triggered += this.OnRape;
 
 			SexEvents.OnEnd.Triggered += this.OnSexEnd_CommonSexNpc;
 			SexEvents.OnEnd.Triggered += this.OnSexEnd_CommonSexPlayer;
@@ -41,50 +27,13 @@ namespace HFramework
 		}
 
 		private void OnCumOnVagina(object sender, FromToEventArgs e) {
-			// Added to debug a reported crash in discord.
-			PLogger.LogDebug($"OnCumOnVagina: {e.From?.charaName ?? "NULL"} -> {e.To?.charaName ?? "NULL"}");
-
 			Managers.mn.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Creampie);
 		}
 
-		private void OnSexStart(object sender, FromToEventArgs e) {
-			if (e.ctx.SexScript is PlayerRapedScript)
-				return;
-
-			if (e.From == null || e.To == null)
-				return;
-
-			if (e.isRape) {
-				Managers.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Rapes);
-
-				// @TODO:
-				// if (e.ctx is ManRapes) {
-				// 	// Note: on original code, faint is only checked for Yona, Female Native and Native Girl,
-				// 	//       but doesn't make sense to check only for them... so we check for every NPC
-				// 	if (manRapes.InitialFaint > 0 && manRapes.InitialLife > 0)
-				// 		fromTo.Value.To.LoveChange(fromTo.Value.From, -10f, false);
-				// }
-			} else {
+		private void OnPenetrationStart(object sender, FromToEventArgs e) {
+			if (e.ctx.SexScript.Info.ContextTags.Contains(ContextTags.Normal)) {
 				Managers.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Normal);
 			}
-
-			// @TODO:
-			// if (e.ctx is Toilet || e.ctx is AssWall) {
-			// 	// Official code counts toilet once for AssWall but several times for Toilet, which is inconsistent.
-			// 	// We count once always, as IMO it means the start of the "interaction", not how many times you did
-			// 	if (ToiletCounted.ContainsKey(scene))
-			// 		yield break;
-
-			// 	ToiletCounted.Add(scene, true);
-			// 	Managers.mn.sexMN.SexCountChange(fromTo.Value.To, fromTo.Value.From, SexManager.SexCountState.Toilet);
-			// }
-		}
-
-		private void OnRape(object sender, FromToEventArgs e) {
-			if (e.From == null || e.To == null)
-				return;
-
-			Managers.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Rapes);
 		}
 
 		private void OnDelivery(object sender, SelfEventArgs e) {
@@ -183,21 +132,6 @@ namespace HFramework
 					actor.Common.LoveChange(otherActor.Common, 10f, false);
 				}
 			}
-
-
-			// @TODO:
-			// if (this.ToiletCounted.ContainsKey(scene))
-			// 	this.ToiletCounted.Remove(scene);
-
-			// if (ctx is PlayerRaped)
-			// {
-			// 	var playerRaped = scene as PlayerRaped;
-			// 	if (playerRaped == null)
-			// 		yield break;
-
-			// 	if (playerRaped.Rapist.debuff.discontent == 4)
-			// 		playerRaped.Rapist.MoralChange(20f, null, NPCManager.MoralCause.None);
-			// }
 		}
 	}
 }

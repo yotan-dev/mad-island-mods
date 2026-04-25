@@ -50,7 +50,7 @@ namespace HFramework.SexScripts
 		[Tooltip("Whether this script requires the game DLC to be installed.")]
 		public bool RequiresDLC = false;
 
-		public SexScriptInfo Info;
+		public SexScriptInfo Info = new();
 
 		public static string TeardownPortName = "Teardown";
 
