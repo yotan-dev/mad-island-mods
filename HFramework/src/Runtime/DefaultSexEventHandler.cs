@@ -16,9 +16,6 @@ namespace HFramework
 			SexEvents.OnPerformMasturbation.Triggered += this.OnMasturbation;
 			SexEvents.OnPerformDelivery.Triggered += this.OnDelivery;
 
-			SexEvents.OnPenetrateVagina.Triggered += this.OnPenetrationStart;
-			SexEvents.OnPenetrateAss.Triggered += this.OnPenetrationStart;
-
 			SexEvents.OnCumOnVagina.Triggered += this.OnCumOnVagina;
 
 			SexEvents.OnEnd.Triggered += this.OnSexEnd_CommonSexNpc;
@@ -28,12 +25,6 @@ namespace HFramework
 
 		private void OnCumOnVagina(object sender, FromToEventArgs e) {
 			Managers.mn.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Creampie);
-		}
-
-		private void OnPenetrationStart(object sender, FromToEventArgs e) {
-			if (e.ctx.SexScript.Info.ContextTags.Contains(ContextTags.Normal)) {
-				Managers.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Normal);
-			}
 		}
 
 		private void OnDelivery(object sender, SelfEventArgs e) {
