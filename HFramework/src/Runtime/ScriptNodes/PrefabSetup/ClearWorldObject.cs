@@ -1,18 +1,18 @@
 using UnityEngine;
-using HFramework.ScriptNodes.PrefabSetup.SexObjectClearers;
+using HFramework.ScriptNodes.PrefabSetup.WorldObjectClearers;
 
 namespace HFramework.ScriptNodes.PrefabSetup
 {
 	/// <summary>
-	/// Clears a sex object previously set for a sex interaction (removes user, resets skin and slots, calls clearer).
+	/// Clears a world object previously set for a sex interaction (removes user, resets skin and slots, calls clearer).
 	/// </summary>
-	[ScriptNode("HFramework", "Prefab Setup/Clear Sex Object")]
-	public class ClearSexObject : Action
+	[ScriptNode("HFramework", "Prefab Setup/Clear World Object")]
+	public class ClearWorldObject : Action
 	{
 		public string Skin = "default";
 
 		[SerializeReference, Subclass]
-		public SexObjectClearer Clearer = new NoOpClearer();
+		public WorldObjectClearer Clearer = new NoOpClearer();
 
 		protected override void OnStart() {
 		}

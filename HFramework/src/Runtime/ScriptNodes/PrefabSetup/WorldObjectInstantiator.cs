@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace HFramework.ScriptNodes.PrefabSetup
 {
-	public class SexObjectInstantiator : PrefabInstantiator
+	public class WorldObjectInstantiator : PrefabInstantiator
 	{
 		public override GameObject CreatePrefab(Vector3 position) {
-			throw new Exception("SexObjectInstantiator should not be used to Create prefabs.");
+			throw new Exception("WorldObjectInstantiator should not be used to Create prefabs.");
 		}
 	}
 }

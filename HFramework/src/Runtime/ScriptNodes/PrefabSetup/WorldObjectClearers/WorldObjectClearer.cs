@@ -1,8 +1,8 @@
 using HFramework.SexScripts.ScriptContext;
 
-namespace HFramework.ScriptNodes.PrefabSetup.SexObjectClearers
+namespace HFramework.ScriptNodes.PrefabSetup.WorldObjectClearers
 {
-	public class SexObjectClearer
+	public class WorldObjectClearer
 	{
 		public virtual void Clear(CommonContext ctx) {
 		}
