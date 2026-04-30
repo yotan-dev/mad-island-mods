@@ -15,8 +15,6 @@ namespace HFramework.Events
 		[ActorIndex]
 		public int toNpcIdx;
 
-		public bool isRape;
-
 		[HideInInspector] public CommonStates From;
 		[HideInInspector] public CommonStates To;
 
@@ -30,7 +28,6 @@ namespace HFramework.Events
 			base.CopyInspectorDataFrom(other);
 			this.fromNpcIdx = other.fromNpcIdx;
 			this.toNpcIdx = other.toNpcIdx;
-			this.isRape = other.isRape;
 		}
 
 		public override SexEventArgs Clone() {
