@@ -66,6 +66,10 @@ namespace HFramework.ScriptNodes
 		}
 #endif
 
+		public virtual void ClearChildren() {
+
+		}
+
 		protected abstract void OnStart();
 		protected abstract void OnStop();
 		protected abstract State OnUpdate();

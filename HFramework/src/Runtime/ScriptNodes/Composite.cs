@@ -24,5 +24,9 @@ namespace HFramework.ScriptNodes
 
 			base.Terminate(fromOutside);
 		}
+
+		public override void ClearChildren() {
+			this.Children.Clear();
+		}
 	}
 }

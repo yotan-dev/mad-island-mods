@@ -17,10 +17,9 @@ namespace HFramework.EditorUI.SexScripts
 
 		public new class UxmlFactory : UxmlFactory<SexScriptView, GraphView.UxmlTraits> { }
 
-		SexScript tree;
+		public SexScript tree { get; private set; }
 
-		public SexScriptView()
-		{
+		public SexScriptView() {
 			NodeEvents.OnNodeIDChanged += OnNodeIDChanged;
 
 			Insert(0, new GridBackground());
@@ -29,6 +28,7 @@ namespace HFramework.EditorUI.SexScripts
 			this.AddManipulator(new ContentDragger());
 			this.AddManipulator(new SelectionDragger());
 			this.AddManipulator(new RectangleSelector());
+			this.AddManipulator(new GraphCopyPasteManipulator());
 
 			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/SexScriptEditor.uss");
 			styleSheets.Add(styleSheet);
@@ -54,32 +54,27 @@ namespace HFramework.EditorUI.SexScripts
 			}
 		}
 
-		NodeView FindNodeView(ScriptNode node)
-		{
+		NodeView FindNodeView(ScriptNode node) {
 			return GetNodeByGuid(node.GUID) as NodeView;
 		}
 
-		Port GetOutputPort(NodeView parentView, ScriptNode childNode)
-		{
+		Port GetOutputPort(NodeView parentView, ScriptNode childNode) {
 			var root = parentView.node as Root;
-			if (root != null && parentView.teardownOutput != null && root.TeardownNode == childNode)
-			{
+			if (root != null && parentView.teardownOutput != null && root.TeardownNode == childNode) {
 				return parentView.teardownOutput;
 			}
 
 			return parentView.output;
 		}
 
-		internal void PopulateView(SexScript tree)
-		{
+		internal void PopulateView(SexScript tree) {
 			this.tree = tree;
 
 			graphViewChanged -= OnGraphViewChanged;
 			DeleteElements(graphElements);
 			graphViewChanged += OnGraphViewChanged;
 
-			if (tree.RootNode == null)
-			{
+			if (tree.RootNode == null) {
 #if UNITY_EDITOR
 				tree.RootNode = tree.CreateNode(typeof(Root)) as Root;
 				EditorUtility.SetDirty(tree);
@@ -91,11 +86,9 @@ namespace HFramework.EditorUI.SexScripts
 			tree.Nodes.ForEach(n => CreateNodeView(n));
 
 			// Creates edges
-			tree.Nodes.ForEach(n =>
-			{
+			tree.Nodes.ForEach(n => {
 				var children = tree.GetChildren(n);
-				children.ForEach(c =>
-				{
+				children.ForEach(c => {
 					var parentView = FindNodeView(n);
 					var childView = FindNodeView(c);
 
@@ -106,28 +99,22 @@ namespace HFramework.EditorUI.SexScripts
 			});
 		}
 
-		public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
-		{
+		public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter) {
 			return ports.ToList().Where(endPort => endPort.direction != startPort.direction && endPort.node != startPort.node).ToList();
 		}
 
-		private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange)
-		{
-			if (graphViewChange.elementsToRemove != null)
-			{
-				graphViewChange.elementsToRemove.ForEach(elem =>
-				{
+		private GraphViewChange OnGraphViewChanged(GraphViewChange graphViewChange) {
+			if (graphViewChange.elementsToRemove != null) {
+				graphViewChange.elementsToRemove.ForEach(elem => {
 					var nodeView = elem as NodeView;
-					if (nodeView != null)
-					{
+					if (nodeView != null) {
 #if UNITY_EDITOR
 						tree.DeleteNode(nodeView.node);
 #endif
 					}
 
 					var edge = elem as Edge;
-					if (edge != null)
-					{
+					if (edge != null) {
 						var parentView = edge.output.node as NodeView;
 						var childView = edge.input.node as NodeView;
 						tree.RemoveChild(parentView.node, childView.node, edge.output.portName);
@@ -135,10 +122,8 @@ namespace HFramework.EditorUI.SexScripts
 				});
 			}
 
-			if (graphViewChange.edgesToCreate != null)
-			{
-				graphViewChange.edgesToCreate.ForEach(edge =>
-				{
+			if (graphViewChange.edgesToCreate != null) {
+				graphViewChange.edgesToCreate.ForEach(edge => {
 					var parentView = edge.output.node as NodeView;
 					var childView = edge.input.node as NodeView;
 
@@ -148,17 +133,14 @@ namespace HFramework.EditorUI.SexScripts
 			return graphViewChange;
 		}
 
-		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
-		{
+		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt) {
 			var position = viewTransform.matrix.inverse.MultiplyPoint(evt.localMousePosition);
 
 			// base.BuildContextualMenu(evt);
 			var types = TypeCache.GetTypesWithAttribute<ScriptNodeAttribute>();
-			foreach (var type in types)
-			{
+			foreach (var type in types) {
 				var attr = type.GetCustomAttribute<ScriptNodeAttribute>();
-				if (attr != null)
-				{
+				if (attr != null) {
 					var nameParts = attr.MenuName.Split('/');
 					nameParts[^1] = $"[{attr.Source}] {nameParts[^1]}";
 					evt.menu.AppendAction(string.Join('/', nameParts), (a) => CreateNode(type, position));
@@ -166,8 +148,7 @@ namespace HFramework.EditorUI.SexScripts
 			}
 		}
 
-		void CreateNode(System.Type type, Vector2 position)
-		{
+		void CreateNode(System.Type type, Vector2 position) {
 #if UNITY_EDITOR
 			var node = tree.CreateNode(type);
 			node.Position = position;
@@ -176,11 +157,14 @@ namespace HFramework.EditorUI.SexScripts
 		}
 
 
-		void CreateNodeView(ScriptNode node)
-		{
+		public void CreateNodeView(ScriptNode node, bool setDirty = false) {
 			var nodeView = new NodeView(node);
 			nodeView.OnNodeSelected = OnNodeSelected;
 			AddElement(nodeView);
+
+			if (setDirty) {
+				EditorUtility.SetDirty(tree);
+			}
 		}
 	}
 }

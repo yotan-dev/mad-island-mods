@@ -59,5 +59,10 @@ namespace HFramework.ScriptNodes
 
 			return node;
 		}
+
+		public override void ClearChildren() {
+			this.Child = null;
+			this.TeardownNode = null;
+		}
 	}
 }
