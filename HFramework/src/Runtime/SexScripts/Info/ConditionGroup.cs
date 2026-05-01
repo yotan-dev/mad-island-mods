@@ -11,15 +11,19 @@ namespace HFramework.SexScripts.Info
 	{
 		[SerializeReference]
 		[Subclass]
-		public Condition[] Conditions;
+		public Condition[] Conditions = new Condition[0];
 
-		public bool CanStart()
-		{
+		public ConditionGroup() { }
+
+		public ConditionGroup(params Condition[] conditions) {
+			this.Conditions = conditions;
+		}
+
+		public bool CanStart() {
 			return this.Conditions.All(c => c.CanStart());
 		}
 
-		public bool CanExecute(SexInfo info)
-		{
+		public bool CanExecute(SexInfo info) {
 			return this.Conditions.All(c => c.CanExecute(info));
 		}
 	}

@@ -10,7 +10,14 @@ namespace HFramework.SexScripts.Info.Conditions
 	{
 		public string QuestName;
 
-		public int[] QuestValues;
+		public int[] QuestValues = new int[0];
+
+		public QuestProgress() { }
+
+		public QuestProgress(string name, params int[] values) {
+			this.QuestName = name;
+			this.QuestValues = values;
+		}
 
 		public override bool CanStart() {
 			var progress = Managers.mn.story.QuestProgress(this.QuestName);

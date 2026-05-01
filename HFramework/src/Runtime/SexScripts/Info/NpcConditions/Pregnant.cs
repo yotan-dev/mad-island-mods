@@ -15,7 +15,7 @@ public class Pregnant : NpcCondition
 		None = 0,
 
 		/// <summary>
-		/// Not pregnant at all
+		/// Not pregnant at all (pregnant[0] == -1)
 		/// </summary>
 		NotPregnant = 1 << 0,
 

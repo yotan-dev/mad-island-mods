@@ -7,7 +7,13 @@ namespace HFramework.SexScripts.Info.Conditions
 	[Experimental]
 	public class SexType : Condition
 	{
-		public int[] SexTypeValues;
+		public int[] SexTypeValues = new int[0];
+
+		public SexType() { }
+
+		public SexType(params int[] values) {
+			this.SexTypeValues = values;
+		}
 
 		public override bool CanExecute(SexInfo info) {
 			if (info is IHasSexType hasSexType) {
