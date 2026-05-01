@@ -1,3 +1,5 @@
+// Not sure why, but dotnet thinks these should be public (seems like it is looking at some publicized assembly)
+#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -174,3 +176,4 @@ namespace HFramework.EditorUI.SexScripts
 		}
 	}
 }
+#endif

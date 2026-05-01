@@ -28,7 +28,9 @@ namespace HFramework.EditorUI.SexScripts
 			this.AddManipulator(new ContentDragger());
 			this.AddManipulator(new SelectionDragger());
 			this.AddManipulator(new RectangleSelector());
+#if UNITY_EDITOR
 			this.AddManipulator(new GraphCopyPasteManipulator());
+#endif
 
 			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Packages/com.yotan-dev.hframework/Editor/SexScripts/SexScriptEditor.uss");
 			styleSheets.Add(styleSheet);
