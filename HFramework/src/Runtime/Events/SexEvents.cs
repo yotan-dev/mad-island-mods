@@ -47,10 +47,11 @@ namespace HFramework.Events
 		public static readonly SexEvent<FromToEventArgs> OnCumOnTits = new SexEvent<FromToEventArgs>("HF.cum.tits");
 
 		// Delivery outcomes
-		[SexEvent("HF", "Delivery: Birth")]
-		public static readonly SexEvent<FromToEventArgs> OnGiveBirth = new SexEvent<FromToEventArgs>("HF.delivery.birth");
-		[SexEvent("HF", "Delivery: Stillbirth")]
-		public static readonly SexEvent<FromToEventArgs> OnStillbirth = new SexEvent<FromToEventArgs>("HF.delivery.stillbirth");
+		[SexEvent("HF", "Birth")]
+		public static readonly SexEvent<BirthEventArgs> OnBirth = new SexEvent<BirthEventArgs>("HF.birth");
+
+		[SexEvent("HF", "Stillbirth")]
+		public static readonly SexEvent<BirthEventArgs> OnStillbirth = new SexEvent<BirthEventArgs>("HF.stillbirth");
 
 		[SexEvent("HF", "End")]
 		public static readonly SexEvent<SexEventArgs> OnEnd = new SexEvent<SexEventArgs>("HF.end");

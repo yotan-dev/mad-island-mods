@@ -10,9 +10,29 @@ namespace HFrameworkTemplates /* You can customize if you want */
 {
 	public partial class HFrameworkTemplates_Menus
 	{
+		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_ManxF", false, 1)]
+		public static void CreateHF_Template_CommonSexPlayer_ManxF() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexPlayer.ManxF.asset");
+		}
 		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexNPC_MxF", false, 1)]
 		public static void CreateHF_Template_CommonSexNPC_MxF() {
 			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexNPC.MxF.asset");
+		}
+		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_YonaxM", false, 1)]
+		public static void CreateHF_Template_CommonSexPlayer_YonaxM() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexPlayer.YonaxM.asset");
+		}
+		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_ManxF_2Pose", false, 1)]
+		public static void CreateHF_Template_CommonSexPlayer_ManxF_2Pose() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexPlayer.ManxF_2Pose.asset");
+		}
+		[MenuItem("Assets/Create/HFramework/HF_Template_Delivery", false, 1)]
+		public static void CreateHF_Template_Delivery() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.Delivery.asset");
+		}
+		[MenuItem("Assets/Create/HFramework/HF_Template_AssWall", false, 1)]
+		public static void CreateHF_Template_AssWall() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.AssWall.asset");
 		}
 	}
 }
