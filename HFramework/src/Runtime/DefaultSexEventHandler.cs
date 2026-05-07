@@ -4,7 +4,6 @@ using HFramework.ScriptNodes;
 using HFramework.Events;
 using YotanModCore;
 using YotanModCore.Consts;
-using HFramework.SexScripts.ScriptContext;
 
 namespace HFramework
 {
@@ -14,7 +13,6 @@ namespace HFramework
 
 		public void Init() {
 			SexEvents.OnPerformMasturbation.Triggered += this.OnMasturbation;
-			SexEvents.OnPerformDelivery.Triggered += this.OnDelivery;
 
 			SexEvents.OnCumOnVagina.Triggered += this.OnCumOnVagina;
 
@@ -25,24 +23,6 @@ namespace HFramework
 
 		private void OnCumOnVagina(object sender, FromToEventArgs e) {
 			Managers.mn.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Creampie);
-		}
-
-		private void OnDelivery(object sender, SelfEventArgs e) {
-			if (e.Self == null)
-				return;
-
-			if (!CommonUtils.IsPregnant(e.Self)) {
-				PLogger.LogWarning($"OnDelivery: Self '{e.Self.name}' is not pregnant");
-				return;
-			}
-
-			// @TODO:
-			// yield return new SpawnChild(scene, mother, delivery.SuccessRate).Handle();
-
-			Managers.sexMN.SexCountChange(e.Self, null, SexManager.SexCountState.Delivery);
-			e.Self.age++;
-
-			Managers.sexMN.Pregnancy(e.Self, null, false);
 		}
 
 		private void OnMasturbation(object sender, SelfEventArgs e) {

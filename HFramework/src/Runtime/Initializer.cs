@@ -43,6 +43,7 @@ namespace HFramework
 
 			if (HFConfig.Instance.IsModernModeEnabled) {
 				DefaultSexEventHandler.Instance.Init();
+				DeliveryEventHandler.Instance.Init();
 				NormalCountEventHandler.Instance.Init();
 				RapeCountEventHandler.Instance.Init();
 			}
