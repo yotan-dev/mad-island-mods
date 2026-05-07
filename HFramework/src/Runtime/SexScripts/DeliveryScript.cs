@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HFramework.SexScripts
 {
-	[CreateAssetMenu(fileName = "DeliveryScript", menuName = "HFramework/DeliveryScript")]
+	[CreateAssetMenu(fileName = "Delivery", menuName = "HFramework/Delivery", order = 20)]
 	[Experimental]
 	[SexScriptType(SexScriptTypes.Delivery)]
 	public class DeliveryScript : SexScript

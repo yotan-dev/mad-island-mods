@@ -3,7 +3,6 @@ using HFramework.SexScripts.Info;
 using HFramework.ScriptNodes;
 using UnityEngine;
 using HFramework.SexScripts.ScriptContext;
-using UnityEditor;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
@@ -11,7 +10,7 @@ using UnityEditorInternal;
 
 namespace HFramework.SexScripts
 {
-	[CreateAssetMenu()]
+	[CreateAssetMenu(fileName = "SexScript", menuName = "HFramework/Generic Sex Script", order = 0)]
 	[Experimental]
 	public class SexScript : ScriptableObject
 	{
@@ -101,12 +100,15 @@ namespace HFramework.SexScripts
 			node.GUID = GUID.Generate().ToString();
 			node.ID = this.GenerateNodeId(type);
 
+#if UNITY_EDITOR
 			Undo.RecordObject(this, "SexScript (CreateNode)");
+#endif
 			this.Nodes.Add(node);
 
 			AssetDatabase.AddObjectToAsset(node, this);
+#if UNITY_EDITOR
 			Undo.RegisterCreatedObjectUndo(node, "SexScript (CreateNode)");
-
+#endif
 			AssetDatabase.SaveAssets();
 			return node;
 		}
@@ -125,54 +127,78 @@ namespace HFramework.SexScripts
 		public void AddChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as Passthrough;
 			if (decorator) {
+#if UNITY_EDITOR
 				Undo.RecordObject(decorator, "SexScript (AddChild)");
+#endif
 				decorator.Child = child;
+#if UNITY_EDITOR
 				EditorUtility.SetDirty(decorator);
+#endif
 			}
 
 			var root = parent as Root;
 			if (root) {
+#if UNITY_EDITOR
 				Undo.RecordObject(root, "SexScript (AddChild)");
+#endif
 				if (portName == TeardownPortName) {
 					root.TeardownNode = child;
 				} else {
 					root.Child = child;
 				}
+#if UNITY_EDITOR
 				EditorUtility.SetDirty(root);
+#endif
 			}
 
 			var composite = parent as Composite;
 			if (composite) {
+#if UNITY_EDITOR
 				Undo.RecordObject(composite, "SexScript (AddChild)");
+#endif
 				composite.Children.Add(child);
+#if UNITY_EDITOR
 				EditorUtility.SetDirty(composite);
+#endif
 			}
 		}
 
 		public void RemoveChild(ScriptNode parent, ScriptNode child, string portName = "") {
 			var decorator = parent as Passthrough;
 			if (decorator) {
+#if UNITY_EDITOR
 				Undo.RecordObject(decorator, "SexScript (RemoveChild)");
+#endif
 				decorator.Child = null;
+#if UNITY_EDITOR
 				EditorUtility.SetDirty(decorator);
+#endif
 			}
 
 			var root = parent as Root;
 			if (root) {
+#if UNITY_EDITOR
 				Undo.RecordObject(root, "SexScript (RemoveChild)");
+#endif
 				if (portName == TeardownPortName) {
 					root.TeardownNode = null;
 				} else {
 					root.Child = null;
 				}
+#if UNITY_EDITOR
 				EditorUtility.SetDirty(root);
+#endif
 			}
 
 			var composite = parent as Composite;
 			if (composite) {
+#if UNITY_EDITOR
 				Undo.RecordObject(composite, "SexScript (RemoveChild)");
+#endif
 				composite.Children.Remove(child);
+#if UNITY_EDITOR
 				EditorUtility.SetDirty(composite);
+#endif
 			}
 		}
 
@@ -211,6 +237,14 @@ namespace HFramework.SexScripts
 		public virtual SexScript Create(CommonStates[] actors, SexInfo info) {
 			return Clone();
 		}
+
+		public T MustFindNodeById<T>(string id) where T : ScriptNode {
+			var node = this.Nodes.Find(node => node.ID == id) as T;
+			if (node == null) {
+				throw new System.Exception($"Node with ID '{id}' not found");
+			}
+
+			return node;
+		}
 	}
 }
-

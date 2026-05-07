@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HFramework.SexScripts
 {
-	[CreateAssetMenu(fileName = "AssWallScript", menuName = "HFramework/AssWallScript")]
+	[CreateAssetMenu(fileName = "AssWall", menuName = "HFramework/AssWall", order = 20)]
 	[SexScriptType(SexScriptTypes.AssWall)]
 	[Experimental]
 	public class AssWallScript : SexScript
