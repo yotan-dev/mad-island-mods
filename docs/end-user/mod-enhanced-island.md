@@ -1,5 +1,10 @@
 # Mod: Enhanced Island
 
+> [!WARNING]
+> Enhanced Island v1.2.0 onwards will only work with Game `v0.5.10.0` and later (Build `2026/05/09--10:49`)
+>
+> If you are playing in earlier versions, use version 1.1.0. Both contains the same content, it is just a matter of compatibility.
+
 This mod provides several enhancements/minor changes to the game. It is highly configurable and each feature may be turned on/off at your will.
 
 They are all enabled by default and using configurations that I like, so it is recommended to take a look before you play with it.
@@ -12,7 +17,9 @@ They are all enabled by default and using configurations that I like, so it is r
 
 ## Installation
 
-1. Download the latest version from [Releases](https://github.com/yotan-dev/mad-island-mods/releases/latest)
+1. Download the mod
+	- Game version v0.5.10 or newer (`2026/05/09--10:49` or newer): latest version from [Releases](https://github.com/yotan-dev/mad-island-mods/releases/latest)
+	- Game version older than v0.5.10: version 1.1.0 from [Releases](https://github.com/yotan-dev/mad-island-mods/releases/tag/v2026.04.19)
 2. Move the ZIP file to your Mad Island folder (`right click the game on Steam > Manage > Browser local files`)
 3. Extract the ZIP file there (use "Extract here" option)
 4. If asked to replace files, select "Yes to All"

@@ -1,6 +1,20 @@
 # Mod: Gallery
 
-By far the most ambitious of those mods. This implements a Gallery of game scenes.
+Adds a gallery of game scenes that you have already seen at some point during your playthrough,
+and will allow you to replay them as if in the game.
+
+This is a bit different from the game's built-in Preview option, which you can access by pressing Shift + P in main menu and clicking "Preview".
+
+Built-in preview:
+
+- allows you to play all the scenes by manually switching animations
+- list all possible animations with not descriptive names
+
+Gallery:
+
+- shows named interactions
+- unlocked as you play (no spoilers)
+- played end-to-end automatically, without you having to guess the next animation
 
 ![gallery](./assets/gallery/gallery.png)
 
