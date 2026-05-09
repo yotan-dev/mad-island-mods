@@ -10,7 +10,7 @@ namespace EnhancedIsland.BetterWorkplaces
 			if (workPlace == null)
 				return;
 
-			var itemData = __instance.WorkReward(NPCMove.WorkType.Harvest, workPlace.groundID, 1);
+			var itemData = __instance.WorkReward(NPCMove.WorkType.Harvest, workPlace, 1);
 			Managers.mn.itemMN.ItemToChest(itemData, tmpInventory, 1);
 		}
 

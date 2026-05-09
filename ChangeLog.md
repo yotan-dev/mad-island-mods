@@ -28,6 +28,16 @@ Each mod has its own version which follows SemVer.
 ### HFramework v1.2.1
 - Add support for v0.5.10.0 content
 
+### EnhancedIsland v1.2.0
+
+> [!WARNING]
+> This release will not work in older versions of the game, if you are on a older version, just use v1.1.0.
+>
+> Since this mod is not getting updates, I won't be releasing new versions with support for < 0.5.10 for now.
+> You can safely stay on v1.1.0 if you are not in latest beta.
+
+- Update for v0.5.10.0.
+
 
 ## v2026.04.19
 
