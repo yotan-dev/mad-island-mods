@@ -1786,8 +1786,8 @@
 			</Scopes>
 			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="0" objIndex="6" />
 			<Actors>
-				<Actor val="Yona#0" />
 				<Actor val="UnderGroundBoy#143" />
+				<Actor val="Yona#0" />
 			</Actors>
 			<AnimationSets>
 				<AnimationSet id="Default">
