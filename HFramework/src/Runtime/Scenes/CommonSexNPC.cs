@@ -115,6 +115,26 @@ namespace HFramework.Scenes
 			{ // Basic case, usually girl x men
 				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc2, this.Npc1);
 			}
+
+			if (this.Npc2.npcID == NpcID.YoungLady) {
+				AnimationFX animationFx = this.TmpSex.GetComponentInChildren<AnimationFX>();
+				if (animationFx != null) {
+					switch (this.Npc2.npcID)
+					{
+					case NpcID.NativeBoy:
+						animationFx.voiceID = this.Npc2.voiceID;
+						animationFx.voice2ID = this.Npc1.voiceID;
+						break;
+					case NpcID.UnderGroundBoy:
+						animationFx.voiceID = this.Npc2.voiceID;
+						break;
+					case NpcID.Son:
+						animationFx.voiceID = this.Npc1.voiceID;
+						animationFx.voice2ID = this.Npc2.voiceID;
+						break;
+					}
+				}
+			}
 		}
 
 		private void DisableLiveNpc(CommonStates npc)

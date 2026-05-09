@@ -96,5 +96,7 @@ namespace YotanModCore.Consts
 		public const int BgmAmbienceRainInCave01 = 45; // bgm_ambience_rain_in_cave_01.ogg
 
 		public const int BgmAmbienceRainHeavy = 46; // bgm_ambience_rain_heavy.ogg
+
+		public const int Shiki = 47; // shiki.ogg
 	}
 }

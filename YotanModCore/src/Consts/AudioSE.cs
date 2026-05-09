@@ -1,4 +1,6 @@
 // Automatically generated - Do NOT edit.
+using System;
+
 namespace YotanModCore.Consts
 {
 	public static class AudioSE
@@ -543,8 +545,13 @@ namespace YotanModCore.Consts
 
 		public const int MelodyDoPiano01 = 269; // melody_do_piano_01.ogg
 
-		public const int HitSaw03 = 270; // hit_saw_03.ogg
+		[Obsolete("HitSaw03 is only available between 0.5.0 and 0.5.9, and was replaced by HitSaw04 in v0.5.10. It no longer available in AudioSE. This constant is left for backward compatibility, but will already trigger HitSaw04 audio for v0.5.10 and newer.")]
+		public const int HitSaw03 = 270; // hit_saw_03.ogg (< v0.5.10) / hit_saw_04.ogg (v0.5.10+)
+
+		public const int HitSaw04 = 270; // hit_saw_04.ogg
 
 		public const int Piko03 = 271; // piko_03.ogg
+
+		public const int Shokwave01 = 272; // shokwave_01.ogg
 	}
 }

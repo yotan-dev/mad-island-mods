@@ -147,6 +147,9 @@
 						<Condition xsi:type="FaintCheck" actor="YoungLady#9" value="false" />
 					</PerformConditions>
 				</Performer>
+
+				<!-- New in v0.5.10 -->
+				<Performer id="HF_Man_Daughter_Rape" />
 			</Performers>
 		</Scene>
 	</Scenes>

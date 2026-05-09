@@ -7,6 +7,28 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## v2026.05.09
+
+### YotanModCore v2.4.0
+- v0.5.10.0 content support (version detection, constant updates)
+
+**⚠️ For mod developers**
+- `NpcID` constant changes/deprecation
+	- `UnderGroundWoman` was renamed to `UndergroundWoman`
+	- `UnderGroundGirl` was renamed to `UndergroundGirl`
+	- The old constants still exists but will eventually be removed
+
+- `AudioSE` constant removal/deprecation
+	- `HitSaw03` (`hit_saw_03.ogg`) was removed from the game.
+		- It was replaced by `HitSaw04` (`hit_saw_04.ogg`) in v0.5.10.0
+		- Both will play the same sound index, but different files depending on the game version.
+		- `HitSaw03` is now marked as deprecated for easier transition, but will eventually be removed
+
+
+### HFramework v1.2.1
+- Add support for v0.5.10.0 content
+
+
 ## v2026.04.19
 
 > [!WARNING]

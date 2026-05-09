@@ -123,6 +123,16 @@ namespace HFramework.Scenes
 			}
 		}
 
+		private void SetupTmpSexYonaUnderGroundBoy()
+		{
+			Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
+			AnimationFX componentInChildren = this.TmpSex.GetComponentInChildren<AnimationFX>();
+			if (componentInChildren != null)
+			{
+				componentInChildren.voiceID = this.Npc.voiceID;
+			}
+		}
+
 		private void SetupTmpSex()
 		{
 			if (this.Player.npcID == NpcID.Yona)
@@ -141,6 +151,8 @@ namespace HFramework.Scenes
 					this.SetupTmpSexYonaNativeBoy(); // Note: This happen inside NativeBoy case
 				else if (this.Npc.npcID == NpcID.Son)
 					this.SetupTmpSexYonaSon(); // Note: This happen inside Son case
+				else if (this.Npc.npcID == NpcID.UnderGroundBoy)
+					this.SetupTmpSexYonaUnderGroundBoy();
 				else
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
 			}
@@ -178,7 +190,7 @@ namespace HFramework.Scenes
 					if (cyborgCommon != null)
 						Managers.mn.randChar.SetCyborg(this.TmpSex, cyborgCommon.cyborgParams, noOffset: true);
 				}
-				else
+								else
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, this.Player);
 				}

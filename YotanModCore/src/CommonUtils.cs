@@ -16,8 +16,11 @@ namespace YotanModCore
 			var fields = typeof(NpcID).GetFields();
 			foreach (var field in fields) {
 				NPCConstToId[field.Name] = (int)field.GetValue(null);
-				
+
 				if (field.GetCustomAttributes(typeof(StrValAttribute), false).FirstOrDefault() is StrValAttribute attr) {
+					if (attr.Obsolete)
+						continue;
+
 					NPCNames[(int)field.GetValue(null)] = (string)attr.StrVal;
 				}
 			}
@@ -56,7 +59,7 @@ namespace YotanModCore
 
 			return common.employ != CommonStates.Employ.None;
 		}
-		
+
 		public static bool IsFemale(CommonStates common) {
 			if (common == null)
 				return false;

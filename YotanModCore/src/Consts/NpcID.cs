@@ -1,4 +1,6 @@
 // Automatically generated - Do NOT edit.
+using System;
+
 namespace YotanModCore.Consts
 {
 	public static class NpcID
@@ -135,8 +137,12 @@ namespace YotanModCore.Consts
 		[StrVal("Daddy")]
 		public const int Daddy = 43;
 
-		[StrVal("Under Ground Woman")]
+		[StrVal("Under Ground Woman", true)]
+		[Obsolete("Use UndergroundWoman instead")]
 		public const int UnderGroundWoman = 44;
+
+		[StrVal("Underground Woman")]
+		public const int UndergroundWoman = 44;
 
 		[StrVal("Under Ground Old Woman")]
 		public const int UnderGroundOldWoman = 45;
@@ -348,14 +354,21 @@ namespace YotanModCore.Consts
 		[StrVal("Ent Warrior")]
 		public const int EntWarrior = 122;
 
+		[StrVal("Franken")]
+		public const int Franken = 139;
+
 		[StrVal("Large Native Girl")]
 		public const int LargeNativeGirl = 140; // DLC
 
 		[StrVal("Large Native Boy")]
 		public const int LargeNativeBoy = 141; // DLC
 
-		[StrVal("Under Ground Girl")]
+		[StrVal("Under Ground Girl", true)]
+		[Obsolete("Use UndergroundGirl instead")]
 		public const int UnderGroundGirl = 142; // DLC
+
+		[StrVal("Underground Girl")]
+		public const int UndergroundGirl = 142; // DLC
 
 		[StrVal("Under Ground Boy")]
 		public const int UnderGroundBoy = 143; // DLC
@@ -380,6 +393,9 @@ namespace YotanModCore.Consts
 
 		[StrVal("Chaperon")]
 		public const int Chaperon = 153;
+
+		[StrVal("Snake")]
+		public const int Snake = 154;
 
 		[StrVal("Mogle")]
 		public const int Mogle = 155;
@@ -407,6 +423,12 @@ namespace YotanModCore.Consts
 
 		[StrVal("Lulu")]
 		public const int Lulu = 163;
+
+		[StrVal("Centipede")]
+		public const int Centipede = 168;
+
+		[StrVal("Cave Ape")]
+		public const int CaveApe = 169;
 
 		[StrVal("Present (Blue)")]
 		public const int PresentBlue = 170;

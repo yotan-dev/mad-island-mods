@@ -476,5 +476,9 @@ namespace YotanModCore.Consts
 		public const int FXWaterflowCapsule01Prefab = 235; // FX_waterflow_capsule_01_prefab.prefab
 
 		public const int ShotRing01 = 236; // shot_ring_01.prefab
+
+		public const int FXShockwave01Prefab = 237; // FX_Shockwave_01_prefab.prefab
+
+		public const int AttackCollSphere = 238; // attackColl_sphere.prefab
 	}
 }

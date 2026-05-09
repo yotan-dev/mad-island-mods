@@ -5,9 +5,12 @@ namespace YotanModCore
 	{
 		public readonly string StrVal;
 
-		public StrValAttribute(string strVal)
+		public bool Obsolete { get; set; }
+
+		public StrValAttribute(string strVal, bool obsolete = false)
 		{
 			StrVal = strVal;
+			Obsolete = obsolete;
 		}
 	}
 }

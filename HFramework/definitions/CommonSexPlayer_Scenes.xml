@@ -442,6 +442,9 @@
 
 				<!-- New in v0.5.9.0 -->
 				<Performer id="HF_Yona_Son_Friendly_Normal" />
+
+				<!-- New in v0.5.10.0 -->
+				<Performer id="HF_Yona_UnderGroundBoy_Friendly_Normal" />
 			</Performers>
 		</Scene>
 	</Scenes>
