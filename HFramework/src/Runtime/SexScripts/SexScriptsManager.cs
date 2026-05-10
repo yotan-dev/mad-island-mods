@@ -181,6 +181,7 @@ namespace HFramework.SexScripts
 					case SexScriptTypes.CommonSexPlayer: {
 							if (info is PlayerSexInfo playerInfo) {
 								var legacyScene = new CommonSexPlayer(actors[0], actors[1], playerInfo.Pos, playerInfo.SexType);
+								actors = Utils.SortActors(actors);
 								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
 									candidates.Add(() => legacyScene.Run());
 								}
@@ -191,6 +192,7 @@ namespace HFramework.SexScripts
 					case SexScriptTypes.CommonSexNPC: {
 							if (info is IHasScriptPlace scriptPlace && scriptPlace.Place is SexPlaceScriptPlace sexPlace) {
 								var legacyScene = new CommonSexNPC(actors[0], actors[1], sexPlace.Place);
+								actors = Utils.SortActors(actors);
 								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
 									candidates.Add(() => legacyScene.Run());
 								}

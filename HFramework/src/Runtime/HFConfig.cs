@@ -23,7 +23,7 @@ namespace HFramework
 		/// <summary>
 		/// Is Legacy mode enabled (either in compatiility or actively chosen)
 		/// </summary>
-		public bool IsLegacyModeEnabled => this.RunMode == RunMode.Legacy;
+		public bool IsLegacyModeEnabled => this.RunMode != RunMode.Modern;
 
 		/// <summary>
 		/// Is Modern mode enabled somehow (either in compatiility or actively chosen)
