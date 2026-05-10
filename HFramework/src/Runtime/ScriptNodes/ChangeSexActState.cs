@@ -6,6 +6,13 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Change SexState or ActType")]
 	public class ChangeSexActState : Action
 	{
+		public enum TargetNpcReaction
+		{
+			DontChange = -1,
+			On = 0,
+			Off = 1,
+		}
+
 		public enum TargetSexState
 		{
 			// Custom value to indicate no change
@@ -49,6 +56,7 @@ namespace HFramework.ScriptNodes
 			public int Index;
 			public TargetSexState SexState = TargetSexState.DontChange;
 			public TargetActType ActType = TargetActType.DontChange;
+			public TargetNpcReaction NpcReaction = TargetNpcReaction.DontChange;
 		}
 
 		public ActorConfig[] Changes = new ActorConfig[0];
@@ -76,6 +84,31 @@ namespace HFramework.ScriptNodes
 
 				if (actor.ActType != TargetActType.DontChange)
 					npc.Common.GetComponent<NPCMove>().actType = (NPCMove.ActType)actor.ActType;
+
+				switch (actor.NpcReaction) {
+					case TargetNpcReaction.On:
+						if (npc.Common.nMove.searchAngle != 0.0f) {
+							break;
+						}
+
+						if (!npc.Angle.HasValue) {
+							// @TODO: Maybe we should save the angle on startup?
+							// This should never happen, because whenever we turn off, we should have a copy, bust just in case..
+							PLogger.LogError($"[ChangeSexActState] Trying to turn NpcReaction to 'ON' but we don't have the angle (?)");
+							break;
+						}
+
+						npc.Common.nMove.searchAngle = npc.Angle.Value;
+						break;
+
+					case TargetNpcReaction.Off:
+						if (!npc.Angle.HasValue) {
+							npc.Angle = npc.Common.nMove.searchAngle;
+						}
+
+						npc.Common.nMove.searchAngle = 0.0f;
+						break;
+				}
 			}
 
 			return State.Running;
