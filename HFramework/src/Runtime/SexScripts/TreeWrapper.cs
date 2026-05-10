@@ -1,6 +1,5 @@
 using System.Collections;
 using HFramework.ScriptNodes;
-using UnityEngine;
 
 namespace HFramework.SexScripts
 {
@@ -40,8 +39,6 @@ namespace HFramework.SexScripts
 			tree.Context?.MenuSession?.Close();
 			if (tree.Context != null)
 				tree.Context.MenuSession = null;
-
-			PLogger.LogError($"Sex script finished");
 		}
 	}
 }

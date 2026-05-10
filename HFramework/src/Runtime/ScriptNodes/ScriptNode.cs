@@ -33,12 +33,12 @@ namespace HFramework.ScriptNodes
 
 		public State Update() {
 			if (!Started) {
-				PLogger.LogDebug($"Node {this.name} started");
+				// PLogger.LogDebug($"Node {this.name} started");
 				OnStart();
 				Started = true;
 			}
 
-			PLogger.LogDebug($"Node {this.name} updating");
+			// PLogger.LogDebug($"Node {this.name} updating");
 			ScriptState = OnUpdate();
 
 			if (ScriptState == State.Failure || ScriptState == State.Success) {
@@ -49,7 +49,7 @@ namespace HFramework.ScriptNodes
 		}
 
 		public virtual void Terminate(bool fromOutside = true) {
-			PLogger.LogDebug($"Node {this.name} stopped ({(fromOutside ? "from outside" : "naturally")})");
+			// PLogger.LogDebug($"Node {this.name} stopped ({(fromOutside ? "from outside" : "naturally")})");
 			this.OnStop();
 			this.Started = false;
 		}

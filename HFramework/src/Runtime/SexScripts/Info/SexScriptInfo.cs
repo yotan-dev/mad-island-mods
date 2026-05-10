@@ -39,12 +39,12 @@ namespace HFramework.SexScripts.Info
 				}
 
 				if (!foundMatch) {
-					PLogger.LogDebug($"Failed to match NPC {i} - {npcs[i].npcID}");
+					// PLogger.LogDebug($"Failed to match NPC {i} - {npcs[i].npcID}");
 					return false;
 				}
 			}
 
-			PLogger.LogDebug("All NPCs matched successfully");
+			// PLogger.LogDebug("All NPCs matched successfully");
 
 			return true;
 		}
@@ -74,9 +74,9 @@ namespace HFramework.SexScripts.Info
 		}
 
 		public bool CanStart(params CommonStates[] npcs) {
-			PLogger.LogDebug($"CanStart: {string.Join(", ", npcs.Select(n => n.npcID))}");
+			// PLogger.LogDebug($"CanStart: {string.Join(", ", npcs.Select(n => n.npcID))}");
 			if (!this.HasNeededNpcs(npcs)) {
-				PLogger.LogDebug("HasNeededNpcs returned false");
+				// PLogger.LogDebug("HasNeededNpcs returned false");
 				return false;
 			}
 
@@ -84,7 +84,7 @@ namespace HFramework.SexScripts.Info
 				return true;
 
 			var result = this.StartConditions.Any(g => g.CanStart());
-			PLogger.LogDebug($"Start conditions result: {result}");
+			// PLogger.LogDebug($"Start conditions result: {result}");
 			return result;
 		}
 
@@ -93,7 +93,7 @@ namespace HFramework.SexScripts.Info
 				return true;
 
 			var result = this.ExecuteConditions.Any(g => g.CanExecute(info));
-			PLogger.LogDebug($"Execute conditions result: {result}");
+			// PLogger.LogDebug($"Execute conditions result: {result}");
 			return result;
 		}
 	}
