@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using HFramework.ConfigFiles;
+using HFramework.Performer;
 using HFramework.Scenes.Conditionals;
 
 namespace HFramework.Scenes
@@ -90,6 +91,15 @@ namespace HFramework.Scenes
 				foreach (var performerConfig in scene.Performers)
 				{
 					var performerConst = performerConfig.Performer;
+
+					// If Modern mode is enabled, check if this performer is not already migrated to the new system
+					// Otherwise we will duplicate records.
+					if (HFConfig.Instance.IsModernModeEnabled && PerformerLoader.MigratedPerformers.Contains(performerConst))
+					{
+						PLogger.LogDebug($"Modern mode is enabled. Skipping scene with performer {performerConst} because it is already migrated to the new system");
+						continue;
+					}
+
 					var desc = $"(Scene: {scene.Id} / Performer: {performerConst})";
 					PLogger.LogDebug($"Loading performer {desc}");
 

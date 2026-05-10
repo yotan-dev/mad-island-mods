@@ -11,6 +11,66 @@ namespace HFramework.Performer
 {
 	public class PerformerLoader
 	{
+		public static readonly HashSet<string> MigratedPerformers = new() {
+			// AssWall
+			"HF_AssWall_Man_FemaleNative",
+			"HF_AssWall_Man_NativeGirl",
+			"HF_AssWall_Man_FemaleLargeNative",
+			"HF_AssWall_Man_UnderGroundWoman",
+			"HF_AssWall_Man_ElderSisterNative",
+
+			// CommonSexNpc
+			"HF_YoungMan_FemaleNative_Friendly_Normal", // 1-1
+			"HF_YoungMan_NativeGirl_Friendly_Normal",// 1-3
+			"HF_YoungMan_FemaleNative_Friendly_Pregnant", // 1-20
+			"HF_YoungMan_NativeGirl_Friendly_Pregnant", // 1-28
+			"HF_MaleNative_FemaleNative_Friendly_Doggy_Normal", // 2-0
+			"HF_MaleNative_NativeGirl_Friendly_Normal", // 2-1
+			"HF_Keigo_Reika_4_0_Love",// 4-0
+			"HF_Takumi_YoungLady_6_1_Love", // 6-1
+			"HF_NativeGirl_NativeGirl_Friendly_Normal", // 10-0
+			"HF_FemaleNative_FemaleNative_Friendly_Normal", // 15-15
+
+			// CommonSexPlayer / Man
+			"HF_Man_Yona_0-2", // 0-2
+			"HF_Man_YoungLady_0-2", // 0-2_young
+			"HF_Man_Yona_0-3", // 0-3
+			"HF_Man_YoungLady_0-3", // 0-3_young
+			"HF_Man_Yona_0-4", // 0-4
+			"HF_Man_YoungLady_0-4", // 0-4_young
+			"HF_Man_FemaleNative_Friendly_Normal", // 1-1
+			"HF_Man_NativeGirl_Friendly_Normal", // 1-3
+			"HF_Man_Reika_Friendly_RevCowgirl", // 1-12
+			"HF_Man_Reika_Friendly_Cowgirl", // 1-17
+			"HF_Man_FemaleNative_Friendly_Pregnant", // 1-20
+			"HF_Man_Nami_Friendly_ver1", // 1-26_nami
+			"HF_Man_SlenderYoungLady_Friendly_ver1", // 1-26b_slender
+			"HF_Man_Nami_Friendly_ver2", // 1-27
+			"HF_Man_SlenderYoungLady_Friendly_ver2", // 1-27b_slender
+			"HF_Man_NativeGirl_Friendly_Pregnant", // 1-28
+
+			// Delivery
+			"HF_FemaleNative_Delivery", // FemaleNative
+			"HF_NativeGirl_Delivery",// NativeGirl
+			"HF_FemaleLargeNative_Delivery", // FemaleLargeNative
+			"HF_UnderGroundWoman_Delivery",// UnderGroundWoman
+			"HF_Yona_Delivery",// Yona
+			"HF_YoungLady_Delivery",// YoungLady
+			"HF_Daughter_Delivery", // Daughter
+			"HF_UnderGirl_Delivery",// UnderGroundGirl
+			"HF_LargeGirl_Delivery", // LargeNativeGirl
+
+			// PlayerRaped / Yona
+			"HF_MaleNative_Yona_Rape_Doggy_Normal", // 10
+			"HF_BigNative_Yona_Rape", // 11
+			"HF_Bigfoot_Yona_Rape", // 25
+			"HF_Werewolf_Yona_Rape", // 35
+			"HF_Oldguy_Yona_Rape", // 100
+			"HF_Spike_Yona_Rape", // 101
+			"HF_Planton_Yona_Rape", // 103
+			"HF_BossNative_Yona_Rape", // 104
+		};
+
 		public delegate void LoadPeformers();
 
 		public static event LoadPeformers? OnLoadPeformers;
@@ -167,6 +227,13 @@ namespace HFramework.Performer
 		{
 			foreach (var performerConfig in performersConfig.Performers)
 			{
+				// If Modern mode is enabled, check if this performer is not already migrated to the new system
+				// Otherwise we will duplicate records.
+				if (HFConfig.Instance.IsModernModeEnabled && MigratedPerformers.Contains(performerConfig.Id)) {
+					PLogger.LogDebug($"Modern mode is enabled. Skipping Performer {performerConfig.Id} because it is already migrated to the new system");
+					continue;
+				}
+
 				AddPerformerFromConfig(performerConfig);
 			}
 		}
