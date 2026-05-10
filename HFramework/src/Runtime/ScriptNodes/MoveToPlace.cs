@@ -8,7 +8,13 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Characters/Move To Place")]
 	public class MoveToPlace : Action
 	{
+		[Tooltip("Maximum time to wait for NPCs to reach the target position.")]
 		public float TimeLimitSeconds = 30f;
+
+		[Tooltip("Whether NPC should try to avoid obstacles when moving. For some reason this does not work when 2+ NPCs are moving at the same time.")]
+		public bool AvoidObstacles = false;
+
+		private bool IsReady = false;
 
 		private float AnimationTime;
 
@@ -16,6 +22,7 @@ namespace HFramework.ScriptNodes
 
 		protected override void OnStart() {
 			this.AnimationTime = this.TimeLimitSeconds;
+			this.IsReady = false;
 			var targetPos = this.Context.ScriptPlace.GetCharacterPosition();
 
 			// Start moving NPCs to sex place
@@ -25,7 +32,7 @@ namespace HFramework.ScriptNodes
 			}
 			for (int i = 0; i < this.Context.Actors.Length; i++) {
 				Managers.sexMN.StartCoroutine(
-					Managers.storyMN.MovePosition(this.Context.Actors[i].Common.gameObject, targetPos, 2f, "A_walk", true)
+					Managers.storyMN.MovePosition(this.Context.Actors[i].Common.gameObject, targetPos, 2f, "A_walk", true, this.AvoidObstacles)
 				);
 			}
 		}
@@ -68,6 +75,10 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
+			if (this.IsReady) {
+				return State.Success;
+			}
+
 			this.AnimationTime -= Time.deltaTime;
 			var targetPos = this.Context.ScriptPlace.GetCharacterPosition();
 
@@ -81,7 +92,19 @@ namespace HFramework.ScriptNodes
 			}
 
 			if (allAtPos) {
-				return State.Success;
+				// Force them into the real position so that MovePosition can properly finish and return.
+				// We give a tick for this to happen and complete on the next tick.
+				//
+				// That's because MovePosition actually tries to hit 0.1 distance before completing,
+				// while MoveToPlacae ends at 0.5 distance. It is messy and we can't just use MovePosition,
+				// because MovePosition loses the animation data and also can't seem to be able to get in place for some reason
+				//
+				// Probably it would be better to just have our own version of MovePosition, but too much work for now.
+				foreach (var actor in this.Context.Actors) {
+					actor.Common.transform.position = targetPos;
+				}
+				this.IsReady = true;
+				return State.Running;
 			}
 
 			// Otherwise, we need to check for possible interruptions.
