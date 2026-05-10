@@ -29,7 +29,7 @@ namespace HFramework
 			script.Name = config.Name;
 			script.Description = config.Description;
 
-			script.Info.Npcs[0].NpcID = config.FemaleNpcID;
+			script.Info.Npcs[1].NpcID = config.FemaleNpcID;
 		}
 
 		public override void Generate() {

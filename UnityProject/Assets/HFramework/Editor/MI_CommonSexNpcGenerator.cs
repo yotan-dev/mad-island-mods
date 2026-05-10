@@ -2,6 +2,7 @@ using HFramework.ScriptGenerator;
 using HFramework.ScriptNodes;
 using HFramework.ScriptNodes.PrefabSetup;
 using HFramework.SexScripts;
+using HFramework.SexScripts.Info.Conditions;
 using HFramework.SexScripts.Info.NpcConditions;
 using YotanModCore.Consts;
 
@@ -195,8 +196,8 @@ namespace HFramework
 			#region case 15 - Female Native
 
 			this.CreateFxF(new FxFConfig {
-				UniqueID = "HF.CommonSexNPC.15-15",
-				Name = "15-15",
+				UniqueID = "HF.CommonSexNPC.9-0",
+				Name = "9-0",
 				Description = "Original scene",
 				FemaleANpcID = NpcID.FemaleNative, // 15
 				APregnancy = ~Pregnant.PregnancyStatus.PregnantReady,
