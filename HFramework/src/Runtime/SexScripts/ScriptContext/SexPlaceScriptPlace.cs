@@ -6,11 +6,11 @@ namespace HFramework.SexScripts.ScriptContext
 	{
 		public SexPlace Place;
 
-		private Vector3 CharacterPosition;
+		private Vector3? CharacterPosition;
 
 		public SexPlaceScriptPlace(SexPlace place) {
 			this.Place = place;
-			this.CharacterPosition = place.transform.Find("pos").position;
+			this.CharacterPosition = place.transform.Find("pos")?.position;
 		}
 
 		public override bool IsGround() {
@@ -46,7 +46,11 @@ namespace HFramework.SexScripts.ScriptContext
 		}
 
 		public override Vector3 GetCharacterPosition() {
-			return this.CharacterPosition;
+			if (this.CharacterPosition == null) {
+				return this.Place.transform.position;
+			}
+
+			return this.CharacterPosition.Value;
 		}
 	}
 }
