@@ -15,6 +15,13 @@ namespace HFramework.ScriptNodes.PrefabSetup
 		[SerializeField, ActorIndex]
 		private int FemaleIndex = 1;
 
+		public MaleFemaleRandCharSetter() { }
+
+		public MaleFemaleRandCharSetter(int MaleIndex = 0, int FemaleIndex = 1) {
+			this.MaleIndex = MaleIndex;
+			this.FemaleIndex = FemaleIndex;
+		}
+
 		public override void SetAppearance(GameObject prefab, CommonContext ctx) {
 			Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[FemaleIndex].Common, ctx.Actors[MaleIndex].Common);
 		}
