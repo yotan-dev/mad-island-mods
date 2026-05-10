@@ -1,0 +1,23 @@
+using UnityEngine;
+
+namespace HFramework.ScriptNodes
+{
+	[Experimental]
+	[ScriptNode("HFramework", "Flow/Repeat")]
+	public class Repeat : Passthrough
+	{
+		protected override void OnStart() {
+			Debug.Log("---- Repeat Node Start");
+		}
+
+		protected override void OnStop() {
+			Debug.Log("---- Repeat Node Stop");
+		}
+
+		protected override State OnUpdate() {
+			Debug.Log("---- Repeat Node UPDATE");
+			Child.Update();
+			return State.Running;
+		}
+	}
+}

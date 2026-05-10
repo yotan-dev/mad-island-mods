@@ -1,22 +1,34 @@
 using System.Linq;
-using HFramework.Tree;
+using HFramework.SexScripts.Info;
+using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
-using YotanModCore;
 
 
 namespace HFramework.SexScripts
 {
-	[CreateAssetMenu()]
+	[CreateAssetMenu(fileName = "CommonSexPlayer", menuName = "HFramework/Common Sex Player", order = 20)]
 	[Experimental]
+	[SexScriptType(SexScriptTypes.CommonSexPlayer)]
 	public class CommonSexPlayerScript : SexScript
 	{
-		public CommonSexPlayerScript Create(CommonStates actorA, CommonStates actorB, Vector3 pos, int sexType) {
+		/// <summary>
+		/// (Editor-only) Called by Unity when the script is created/reset.
+		/// Puts the default context tags for this kind of script (user can customize if wanted)
+		/// </summary>
+		public void Reset() {
+			this.Info.ContextTags.Add(ContextTags.Normal);
+		}
+
+		public override SexScript Create(CommonStates[] actors, SexInfo info) {
 			var tree = Clone();
-			tree.context.Actors = this.Info.BuildNpcs(actorA, actorB).Select(npc => new ContextNpc(npc, null)).ToArray();
-			tree.context.SexPlace = null;
-			tree.context.SexPlacePos = pos;
-			tree.context.SexType = sexType;
-			return (CommonSexPlayerScript)tree;
+			tree.Context.Actors = this.Info.BuildNpcs(actors).Select(npc => new ContextNpc(npc, null)).ToArray();
+			if (info is IHasSexPos hasSexPos) {
+				tree.Context.ScriptPlace = new GroundScriptPlace(hasSexPos.Pos);
+			}
+			if (info is IHasSexType hasSexType) {
+				tree.Context.SexType = hasSexType.SexType;
+			}
+			return tree;
 		}
 	}
 }

@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using HFramework.Tree;
-using YotanModCore;
+using UnityEngine;
+using HFramework.SexScripts.Info.Conditions;
 
 namespace HFramework.SexScripts.Info
 {
@@ -10,16 +9,22 @@ namespace HFramework.SexScripts.Info
 	[Experimental]
 	public class ConditionGroup
 	{
-		public List<Condition> Conditions;
+		[SerializeReference]
+		[Subclass]
+		public Condition[] Conditions = new Condition[0];
 
-		public bool Pass()
-		{
-			return this.Conditions.All(c => c.Pass());
+		public ConditionGroup() { }
+
+		public ConditionGroup(params Condition[] conditions) {
+			this.Conditions = conditions;
 		}
 
-		public bool Pass(SexInfo info)
-		{
-			return this.Conditions.All(c => c.Pass(info));
+		public bool CanStart() {
+			return this.Conditions.All(c => c.CanStart());
+		}
+
+		public bool CanExecute(SexInfo info) {
+			return this.Conditions.All(c => c.CanExecute(info));
 		}
 	}
 }

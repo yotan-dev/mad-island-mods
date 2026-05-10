@@ -6,7 +6,7 @@ using HFrameworkLoader.Patches;
 namespace HFrameworkLoader
 {
 	[BepInPlugin("HFramework", "HFramework", MyPluginInfo.PLUGIN_VERSION)]
-	[BepInDependency("YotanModCore", "2.2.7")]
+	[BepInDependency("YotanModCore", "2.3.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 #nullable disable // Awake will set it. Too much effort to type this as nullable
@@ -20,7 +20,7 @@ namespace HFrameworkLoader
 		private void Awake() {
 			HFrameworkLoader.Config.Instance.Init(Config);
 
-			Plugin.Bridge = Initializer.Init(new BepisLogger(Logger));
+			Plugin.Bridge = Initializer.Init(new BepisLogger(Logger), this.Info.Location);
 			PLogger._Logger = Logger;
 
 			var hfConfig = HFConfig.GetInstance();

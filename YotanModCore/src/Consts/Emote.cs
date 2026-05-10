@@ -3,6 +3,8 @@ namespace YotanModCore.Consts
 {
 	public static class Emote
 	{
+		public const int None = -1;
+
 		public const int Heart01 = 0; // heart_01.asset
 
 		public const int IconFoodMeat01 = 1; // icon_food_meat_01.asset

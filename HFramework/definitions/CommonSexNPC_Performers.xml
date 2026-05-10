@@ -433,7 +433,7 @@
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="4" objIndex="0" />
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="6" objIndex="1" />
 			<Actors>
 				<Actor val="Takumi#7" />
 				<Actor val="YoungLady#9" />

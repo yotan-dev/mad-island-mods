@@ -1,0 +1,203 @@
+ManifestFileVersion: 0
+CRC: 2867261525
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a5521e50485b63e1cad5ad3f1fa9dd80
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2c97ede7895254bef14178961562aa68
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: a5521e50485b63e1cad5ad3f1fa9dd80
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 27d0f48dd1605444b8b1baaf01072313, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1128d2c441052e04fbb588fcd2aca0cf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 82c767c9220eac74a8df44e8df782d22, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9666f364e5ea4b540b09a49e47505443, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 03652a5e39a387e4bb4cbd91215ba696, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1e05bb7eee43c4242ab90f26a37b4fd2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5daabe136a3b40c4cbe91faf5ef18d4d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 00e96d5608ee4864faa4fc5fcde756b3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3ffd5baa76ca38745862cee3b058a2ce, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 475b36843a7ff8b48bc0effebe7d01d4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6e7235251bef2ef408cdec9264ef9d86, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e30e4c26e87b3a41a0b679fdee047b2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e935d1b36cf52a548b2def0dc05ecb69, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 020df5321ebb3c84280d7fa30813ff2c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: db8be61e5da6d9c499067ae3e8a56971, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 89e615289c356254d8479cea44abcbb5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe98d705ac4344343909ee2ea598c227, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: efd3c4f420c20574196fe5073c13d8df, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6e9dae5e43c79ab448e530c640617a85, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7caffc60bd198c040a63dbcf8cb6d4c7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f21eef850a309304383675045ae9992a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 52ec00b7ccd86a748b0a89c750e88cf5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ccf0cd9455540f5479d3582a8e916106, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a9ced296fdb98254e90a630233c5d9db, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 27d87426a0250894aa28a1c03ebbfdaa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c56b187b071db1d4f9becf045827c127, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 44e2352607b98254cbad8368ac193ed2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 496419a1b3166484885bb01f914899ce, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6e1eb50a52c9aef499faac9fe5df95a3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: db061cc5fa446f54b9185808b0569a73, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 23b4c2476e4e64f42bbbac6d50554d99, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31fe56b52f23ea8438fed06020cbc731, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9f45880fefbef1445973352c9376966b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f148c59d39c4e8049b90689b4da90d23, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 36e1652c0f1a2e94c9c86c0e6494d550, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2cd34525ff46c5449a71002470a476f2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bba91720032c0e54f84b79b15467927c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e35db89a93ff68d4784f6cd3c726c3f5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a2b9dee987a243145b106eee885353ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a0c9fd3eadbea645902d0e3257e7b2e, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: HFramework
+  ClassName: HFramework.Events.FromToEventArgs
+- AssemblyName: HFramework
+  ClassName: HFramework.Events.SexEventArgs
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.ChangeSexActState/ActorConfig
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.DisableLivingCharacters/DisableTarget
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.MenuOption
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.AssWallAppearanceSetter
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.BossNativeCharSetter
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.FemaleRandCharSetter
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.MaleFemaleRandCharSetter
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.SexListPrefab
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.SexObjPrefab
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.WorldObjectClearers.ToiletCheck
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.PrefabSetup.WorldObjectInstantiator
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.WaitNode.WaitMouseInput
+- AssemblyName: HFramework
+  ClassName: HFramework.ScriptNodes.WaitNode.WaitTime
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.Info.ConditionGroup
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.Info.Conditions.QuestProgress
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.Info.Conditions.SexType
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.Info.NpcConditions.Dead
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.Info.NpcConditions.Faint
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.Info.SexNpcInfo
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.Info.SexScriptInfo
+- AssemblyName: HFramework
+  ClassName: HFramework.SexScripts.ScriptContext.SexAction
+- AssemblyName: HFramework
+  ClassName: Pregnant
+Assets:
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.4-0.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-26b_slender.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.FemaleNative.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.0-3.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.2-0.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-26_nami.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_25.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.FemaleLargeNative.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.NativeGirl.asset
+- Assets/HFramework/Generated/AssWall/HF.AssWall.NativeGirl.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.10-0.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.LargeNativeGirl.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_11.asset
+- Assets/HFramework/Generated/AssWall/HF.AssWall.UnderGroundWoman.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-1.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_100.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_101.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.Yona.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.0-4.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.9-0.asset
+- Assets/HFramework/Generated/AssWall/HF.AssWall.FemaleLargeNative.asset
+- Assets/HFramework/Generated/AssWall/HF.AssWall.ElderSisterNative.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.1-1.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-20.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_35.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-3.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.Daughter.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_10.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_104.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-28.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-17.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.YoungLady.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.1-3.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.1-28.asset
+- Assets/HFramework/Generated/AssWall/HF.AssWall.FemaleNative.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.1-20.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.2-1.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-27_nami.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.UnderGroundGirl.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.0-3_young.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-12.asset
+- Assets/HFramework/Generated/Delivery/HF.Delivery.UnderGroundWoman.asset
+- Assets/HFramework/Generated/PlayerRaped/Yona/HF.PlayerRaped.Yona_103.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.0-2.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.0-2_young.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.0-4_young.asset
+- Assets/HFramework/Generated/CommonSexPlayer/Man/HF.CommonSexPlayer.1-27b_slender.asset
+- Assets/HFramework/Generated/CommonSexNpc/HF.CommonSexNPC.6-1.asset
+Dependencies: []

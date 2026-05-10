@@ -1,0 +1,527 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8548886935621812588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e615289c356254d8479cea44abcbb5, type: 3}
+  m_Name: PlayVoice
+  m_EditorClassIdentifier: 
+  ID: Voice_Faint
+  ScriptState: 0
+  Started: 0
+  GUID: 7baa6681199af4740b6c8053c27f33d3
+  Position: {x: 358.99997, y: 945.1434}
+  Actor: 0
+  VoiceType: faint
+--- !u!114 &-8400907061344886572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1eb50a52c9aef499faac9fe5df95a3, type: 3}
+  m_Name: LoopAnimationForTime
+  m_EditorClassIdentifier: 
+  ID: LoopAnim_DeliveryLoop
+  ScriptState: 0
+  Started: 0
+  GUID: 5216c40dec0edc042992d581b51c7af5
+  Position: {x: 358.99997, y: 856.59216}
+  Duration: 10
+  AnimationName: A_delivery_loop
+--- !u!114 &-8254560602880613172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e2352607b98254cbad8368ac193ed2, type: 3}
+  m_Name: MoveToPlace
+  m_EditorClassIdentifier: 
+  ID: MoveToPlace
+  ScriptState: 0
+  Started: 0
+  GUID: ee1265f392f16a841bf654f22cb7e85f
+  Position: {x: 359.00003, y: 111.00002}
+  TimeLimitSeconds: 30
+  AvoidObstacles: 1
+  EmoteOnMove: -1
+--- !u!114 &-7953412621970803028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Prepare_seq
+  ScriptState: 0
+  Started: 0
+  GUID: 080eaf26bf6d32444ba8ff778e0605dd
+  Position: {x: 359, y: 0}
+  Children:
+  - {fileID: 8049596178675884817}
+  - {fileID: -4287147057217628544}
+  - {fileID: -5128650196517001714}
+  - {fileID: 6127506504750950244}
+--- !u!114 &-5779508933163131637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b4c2476e4e64f42bbbac6d50554d99, type: 3}
+  m_Name: Teardown
+  m_EditorClassIdentifier: 
+  ID: Teardown
+  ScriptState: 0
+  Started: 0
+  GUID: 9a5fcf5d865a64841918fb2955d8f1cb
+  Position: {x: 152.00003, y: 111}
+--- !u!114 &-5128650196517001714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fe56b52f23ea8438fed06020cbc731, type: 3}
+  m_Name: ChangeSexActState
+  m_EditorClassIdentifier: 
+  ID: ChangeToWait
+  ScriptState: 0
+  Started: 0
+  GUID: 01e195d9e3cb37a40ba8388cd3ee521c
+  Position: {x: 634, y: 51.19998}
+  Changes:
+  - Index: 0
+    SexState: 0
+    ActType: 1
+    NpcReaction: 1
+--- !u!114 &-4359002932717449073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e615289c356254d8479cea44abcbb5, type: 3}
+  m_Name: PlayVoice
+  m_EditorClassIdentifier: 
+  ID: Voice_Finish
+  ScriptState: 0
+  Started: 0
+  GUID: 2f3e84ee328a2064b8b694c9a866c4a3
+  Position: {x: 358.99997, y: 762.40796}
+  Actor: 0
+  VoiceType: finish
+--- !u!114 &-4287147057217628544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  ID: Wait
+  ScriptState: 0
+  Started: 0
+  GUID: 5bf165aed17e9ea448893b230bf85257
+  Position: {x: 634, y: -38.500023}
+  WaitKind:
+    rid: 1355207592882470915
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207592882470915
+      type: {class: WaitTime, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      data:
+        DurationSeconds: 0.1
+--- !u!114 &-3956539146296713412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1eb50a52c9aef499faac9fe5df95a3, type: 3}
+  m_Name: LoopAnimationForTime
+  m_EditorClassIdentifier: 
+  ID: LoopAnim_DeliveryIdle
+  ScriptState: 0
+  Started: 0
+  GUID: f8d2f56fb0ce9e84785107f555627f97
+  Position: {x: 358.99997, y: 673.1861}
+  Duration: 20
+  AnimationName: A_delivery_idle
+--- !u!114 &-2541012240248205156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_End
+  ScriptState: 0
+  Started: 0
+  GUID: 43e1e98633d539444b08ff27a2388ed5
+  Position: {x: 163.99, y: 251.275}
+  EventKey: HF.end
+  EmitOnce: 0
+  EventArgs:
+    rid: 1355207488545751072
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207488545751072
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        comment: 
+--- !u!114 &-2513433558535529186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daabe136a3b40c4cbe91faf5ef18d4d, type: 3}
+  m_Name: Rot
+  m_EditorClassIdentifier: 
+  ID: Rot
+  ScriptState: 0
+  Started: 0
+  GUID: d8b4b9a22f08b8b45adb832442734cc9
+  Position: {x: 359, y: 291.15}
+  Actor: 0
+  Amount: {x: 1, y: 0, z: 0}
+--- !u!114 &-1835964387162307075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e935d1b36cf52a548b2def0dc05ecb69, type: 3}
+  m_Name: AnimateOnce
+  m_EditorClassIdentifier: 
+  ID: Anim_DeliveryEnd
+  ScriptState: 0
+  Started: 0
+  GUID: 864fd3f1828bf1e48a1a8f5dcf9052e9
+  Position: {x: 358.99997, y: 1035.8942}
+  AnimationName: A_delivery_end
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e30e4c26e87b3a41a0b679fdee047b2, type: 3}
+  m_Name: HF.Template.Delivery
+  m_EditorClassIdentifier: 
+  EngineVersion: 0
+  UniqueID: HF.Template.Delivery
+  Name: Template for Delivery scenes
+  Description: "Template for Delivery scenes based on the original game.\n\nAssumes:\n1.
+    Npc 0 is the pregnant character\n2. The NPC itself contains the animations\n.
+    Animations are:\n  - A_idle\n  - A_delivery_idle\n  - A_delivery_loop\n  - A_delivery_end"
+  MinimalGameVersion: 0.0.0.0
+  RequiresDLC: 0
+  Info:
+    ContextTags: []
+    Npcs:
+    - NpcID: 15
+      FaintCondition:
+        Expected: 0
+      DeadCondition:
+        Expected: 0
+      Conditions:
+      - rid: 896238960966893592
+    NpcOrderMatters: 0
+    StartConditions: []
+    ExecuteConditions: []
+  RootNode: {fileID: 3624974151867406290}
+  TreeState: 0
+  Nodes:
+  - {fileID: 3624974151867406290}
+  - {fileID: 3558341206181537998}
+  - {fileID: -5128650196517001714}
+  - {fileID: -8254560602880613172}
+  - {fileID: 8304789724823427821}
+  - {fileID: -3956539146296713412}
+  - {fileID: -8400907061344886572}
+  - {fileID: -1835964387162307075}
+  - {fileID: 5990782104852179766}
+  - {fileID: 8314820249734858618}
+  - {fileID: -4359002932717449073}
+  - {fileID: -8548886935621812588}
+  - {fileID: -2513433558535529186}
+  - {fileID: -5779508933163131637}
+  - {fileID: 4605904849327982347}
+  - {fileID: 6480216415899210281}
+  - {fileID: -2541012240248205156}
+  - {fileID: -7953412621970803028}
+  - {fileID: 8049596178675884817}
+  - {fileID: -4287147057217628544}
+  - {fileID: 6127506504750950244}
+  - {fileID: 8519547312689227240}
+  references:
+    version: 2
+    RefIds:
+    - rid: 896238960966893592
+      type: {class: Pregnant, ns: , asm: HFramework}
+      data:
+        Pregnancy: 4
+--- !u!114 &3558341206181537998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Sequence
+  ScriptState: 0
+  Started: 0
+  GUID: 2014261f331475341893d747dacdc001
+  Position: {x: 152, y: 0}
+  Children:
+  - {fileID: -7953412621970803028}
+  - {fileID: -8254560602880613172}
+  - {fileID: 5990782104852179766}
+  - {fileID: -2513433558535529186}
+  - {fileID: 8304789724823427821}
+  - {fileID: 8519547312689227240}
+  - {fileID: 8314820249734858618}
+  - {fileID: -3956539146296713412}
+  - {fileID: -4359002932717449073}
+  - {fileID: -8400907061344886572}
+  - {fileID: -8548886935621812588}
+  - {fileID: -1835964387162307075}
+  - {fileID: 4605904849327982347}
+--- !u!114 &3624974151867406290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0c9fd3eadbea645902d0e3257e7b2e, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  ID: Root
+  ScriptState: 0
+  Started: 0
+  GUID: 756f1adf9f08a374693959ab25a880f3
+  Position: {x: -135.70001, y: -0.000016403199}
+  Child: {fileID: 3558341206181537998}
+  TeardownNode: {fileID: 6480216415899210281}
+--- !u!114 &4605904849327982347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e05bb7eee43c4242ab90f26a37b4fd2, type: 3}
+  m_Name: ProcessDelivery
+  m_EditorClassIdentifier: 
+  ID: ProcessDelivery
+  ScriptState: 0
+  Started: 0
+  GUID: 3efed54c2e6b67f40b9f15067a3e0ecd
+  Position: {x: 358.99997, y: 1137.3104}
+  PregnantActor: 0
+--- !u!114 &5990782104852179766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e96d5608ee4864faa4fc5fcde756b3, type: 3}
+  m_Name: SetActorAsAnimationTarget
+  m_EditorClassIdentifier: 
+  ID: SetActorAsAnimationTarget
+  ScriptState: 0
+  Started: 0
+  GUID: 8de7f338d29588a4887f6f37a306b453
+  Position: {x: 359, y: 209}
+  ActorIndex: 0
+--- !u!114 &6127506504750950244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  ID: Wait_1
+  ScriptState: 0
+  Started: 0
+  GUID: 780086015a811f94fb182be414dbdfff
+  Position: {x: 634, y: 131.99998}
+  WaitKind:
+    rid: 1355207592882470917
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207592882470917
+      type: {class: WaitTime, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      data:
+        DurationSeconds: 0.1
+--- !u!114 &6480216415899210281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Teardown_Seq
+  ScriptState: 0
+  Started: 0
+  GUID: 7fb36439f85fac04a95c4c66702e0d96
+  Position: {x: -12.999886, y: 110.99998}
+  Children:
+  - {fileID: -5779508933163131637}
+  - {fileID: -2541012240248205156}
+--- !u!114 &8049596178675884817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fe56b52f23ea8438fed06020cbc731, type: 3}
+  m_Name: ChangeSexActState
+  m_EditorClassIdentifier: 
+  ID: ChangeToIdle
+  ScriptState: 0
+  Started: 0
+  GUID: 26f1c4df3efd2b449b22f0b96af2a2ec
+  Position: {x: 634, y: -135.50005}
+  Changes:
+  - Index: 0
+    SexState: 0
+    ActType: 0
+    NpcReaction: -1
+--- !u!114 &8304789724823427821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56b187b071db1d4f9becf045827c127, type: 3}
+  m_Name: DisableLivingCharacters
+  m_EditorClassIdentifier: 
+  ID: DisableLivingCharacters
+  ScriptState: 0
+  Started: 0
+  GUID: af77594d8123cb44288723c875a6ab00
+  Position: {x: 359, y: 381.15}
+  Targets:
+  - ActorIndex: 0
+    Mode: 3
+--- !u!114 &8314820249734858618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e615289c356254d8479cea44abcbb5, type: 3}
+  m_Name: PlayVoice
+  m_EditorClassIdentifier: 
+  ID: Voice_Damage
+  ScriptState: 0
+  Started: 0
+  GUID: 31ea8a1bc55e70f4e857e3c283e41d60
+  Position: {x: 358.99997, y: 585}
+  Actor: 0
+  VoiceType: damage
+--- !u!114 &8519547312689227240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba91720032c0e54f84b79b15467927c, type: 3}
+  m_Name: SetScriptPlaceUser
+  m_EditorClassIdentifier: 
+  ID: SetScriptPlaceUser
+  ScriptState: 0
+  Started: 0
+  GUID: 622d5a72f7ce7bd44bc1456ef2c670e6
+  Position: {x: 359, y: 473.45013}
+  UserActor: 0
