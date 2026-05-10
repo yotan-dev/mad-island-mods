@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using HFramework.ScriptGenerator;
 using HFramework.ScriptNodes;
 using HFramework.ScriptNodes.PrefabSetup;
@@ -42,11 +41,7 @@ namespace HFramework
 			script.Name = config.Name;
 			script.Description = config.Description;
 
-			var setupNode = script.Nodes.Find(node => node.ID == "Setup") as Setup;
-			if (setupNode == null) {
-				throw new System.Exception("Setup node not found");
-			}
-
+			var setupNode = script.MustFindNodeById<MakeSexPrefab>("MakeSexPrefab");
 			var instantiator = setupNode.Instantiator as SexListPrefab;
 			if (instantiator == null) {
 				throw new System.Exception("SexListPrefab not found");
@@ -151,22 +146,8 @@ namespace HFramework
 				ObjIndex = 0
 			});
 			reika4_0.Info.StartConditions = new () {
-				new SexScripts.Info.ConditionGroup() {
-					Conditions = new SexScripts.Info.Conditions.Condition[] {
-						new SexScripts.Info.Conditions.QuestProgress() {
-							QuestName = "Main_Reika1",
-							QuestValues = new int[] { 2 },
-						}
-					}
-				},
-				new SexScripts.Info.ConditionGroup() {
-					Conditions = new SexScripts.Info.Conditions.Condition[] {
-						new SexScripts.Info.Conditions.QuestProgress() {
-							QuestName = "Sub_Keigo",
-							QuestValues = new int[] { 1 },
-						}
-					}
-				},
+				/* Path 1 */ new(new QuestProgress("Main_Reika1", 2)),
+				/* Path 2 */ new(new QuestProgress("Sub_Keigo", 1)),
 			};
 			#endregion
 
