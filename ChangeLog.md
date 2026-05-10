@@ -7,6 +7,53 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
+## Unreleased
+
+### YotanModCore v2.5.0
+
+**Technical/For modders:**
+
+- **[Experimental]** Expose `BundleLoader` class to load asset bundles from the `CustomBundles` folder
+- We now ship FixPluginTypesSerialization patcher together with it. This allows mods to properly load nested custom types
+
+
+### HFramework v1.3.0
+
+This release is starting to introduce the new HFramework system that will make it way easier for modders to create new content.
+
+It is still in experimental phase and disabled by default, please if you are willing to, enable it and help us test for bugs. If you are a modder, experiment with it and bring feedback!
+
+For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunMode` from `Legacy` to `Compatibility`
+
+> [!NOTE]
+> Gallery and HExtensions won't work in Compatibility/Modern mode for now (I will look into that later)
+
+**Technical/For modders:**
+
+- **[Experimental]** Modern HFramework work continues:
+	- Adds support for `AssWall`, `Delivery`, `PlayerRaped` scripts in modern mode
+	- Adds compatibility mode that allows running new scripts alongside old performers/scenes
+	- Adds version/DLC check to Sex Scripts (needed to support multiple game versions)
+	- Add SexScript Engine version, to enable HFramework to ship fixes that will automatically fix everybody, while keeping potential backwards compatibility for older versions
+	- Editor experience improved
+		- Most inputs that required magical numbers (Npc IDs, Actor Index, etc) now show a dropdown for you to select
+		- Ctrl C / Ctrl V / Ctrl Z / Ctrl Y now works in the script editor
+		- Nodes are now created where your cursor was
+		- Double clicking a script now opens the script editor
+		- Nodes are now grouped by their purpose
+		- Added support for [script templates](https://yotan-dev.github.io/mad-island-mods/guide-hf/core-concepts/templates.html) (saves a SexScript so you can create a new one like it)
+		- Added support for [script generators](https://yotan-dev.github.io/mad-island-mods/guide-hf/core-concepts/generators.html) (create a simple code to generate many SexScripts)
+	- SexScript improvements
+		- Many new node types added
+		- Some nodes were renamed for better clarity
+		- Some functionality was merged into a single node, or some nodes expanded to also support other functionality, reducing the need to create more nodes. Some examples:
+			- When setting the menu items, you can immediately open it
+			- MenuChoice handler is now a sequence, so you don't need to add a Sequence node to it to have multiple child nodes
+			- Many more that I forgot already...
+		- New script variable `actors[{index}].npcId` added
+	- Script loading improved: We now use YotanModCore bundle loader - just throw your asset bundle in BepInEx/CustomBundles. If it has a SexScript, it will get loaded.
+
+
 ## v2026.05.09
 
 ### YotanModCore v2.4.0
@@ -52,7 +99,6 @@ Each mod has its own version which follows SemVer.
 **Technical/Mod utiltities:**
 
 - Adds accessors for more managers via `Managers.` class
-- **[Experimental]** Expose `BundleLoader` class to load asset bundles from the `CustomBundles` folder
 
 
 ### HFramework v1.2.0

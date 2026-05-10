@@ -13,7 +13,7 @@ some complete examples.
 ## Simple asset bundle
 
 This method is ideal when just importing the Spine object and setting up the Behavior Tree with existing nodes components are enough.
-You simply produce a new asset bundle from the unity project and put it into `BepInEx/plugins/HFramework/CustomBundles/` folder (may be in a subfolder)
+You simply produce a new asset bundle from the unity project and put it into `BepInEx/CustomBundles/` folder (may be in a subfolder)
 
 Examples:
 - Making a new sex interaction for a character
@@ -24,7 +24,7 @@ Examples:
 1. Create your asset bundle containing the SexScript and related assets (See [how to](../../notes/unity-asset-bundles.md))
 First create your asset bundle:
 2. Now go to your Unity Project `AssetBundles` folder through Windows file explorer and copy the asset bundle there
-3. Paste the asset bundle on your Mad Island folder, at `BepInEx/plugins/HFramework/CustomBundles/` (may be in a subfolder)
+3. Paste the asset bundle on your Mad Island folder, at `BepInEx/CustomBundles/` (may be in a subfolder)
 
 You should be ready to go.
 

@@ -1,5 +1,8 @@
 # Your first script
 
+> [!WARNING]
+> I have not updated this guide on HFramework v1.3.0. Some details may be outdated (look at the HFramework templates for working versions)
+
 In this section we will re-create one of the original game sex scripts as an example.
 
 ## What are we building

@@ -17,11 +17,11 @@ the general idea, you can build your first few sex scenes by simply having a Uni
 
 HFramework contains 2 DLLs:
 
-- **HFramework.dll**: The BepInEx injection plugin -- this is only meant by HFramework to get loaded into the game
-- **HFrameworkLib.dll**: The main dll that provides the general API for mods and Unity tooling - You will be using that.
+- **HFramework.dll**: The main dll that provides the general API for mods and Unity tooling - You will be using that.
+- **HFrameworkLoder.dll**: The BepInEx injection plugin -- this is only meant by HFramework to get loaded into the game
 
 > [!WARNING]
-> NEVER distribute `HFramework.dll`, `HFrameworkLib.dll` or other files from HFramework together with your mod.
+> NEVER distribute `HFramework.dll`, `HFrameworkLoder.dll` or other files from HFramework together with your mod.
 > Tell your users to get the latest version from [https://github.com/yotan-dev/mad-island-mods/releases/latest](https://github.com/yotan-dev/mad-island-mods/releases/latest).
 >
 > Remember, other mods are also depending on it, so if you distribute it, collisions will happen and things will break.

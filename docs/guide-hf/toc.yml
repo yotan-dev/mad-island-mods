@@ -9,6 +9,8 @@
 - href: core-concepts/nodes.md
 - href: core-concepts/events.md
 - href: core-concepts/context.md
+- href: core-concepts/templates.md
+- href: core-concepts/generators.md
 
 - name: Guide
 - href: guide/first-script.md
