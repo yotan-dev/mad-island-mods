@@ -35,6 +35,7 @@ namespace HFramework
 			PLogger.LogInfo("Initializing HFramework...");
 			PLogger.LogInfo($"> Replace Original Scenes: {HFConfig.Instance.ReplaceOriginalScenes}");
 			PLogger.LogInfo($"> Debug Conditions: {HFConfig.Instance.DebugConditions}");
+			PLogger.LogInfo($"> RunMode: {HFConfig.Instance.RunMode}");
 
 			if (HFConfig.Instance.ReplaceOriginalScenes) {
 				GameLifecycleEvents.OnGameStartEvent += () => { SexMeter.Instance.Reload(); };
