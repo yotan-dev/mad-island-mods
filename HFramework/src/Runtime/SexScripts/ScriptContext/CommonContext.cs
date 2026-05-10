@@ -57,6 +57,8 @@ namespace HFramework.SexScripts.ScriptContext
 		/// </summary>
 		public bool HasSexMeter { get; set; }
 
+		public bool HasChangedGameControls { get; set; }
+
 		public int SexType = -1;
 
 		public ScriptNode.State MainNodeState { get; set; }

@@ -89,6 +89,9 @@ namespace HFramework.ScriptNodes
 			if (this.IsPlayerInvolved())
 				Managers.mn.uiMN.StatusChange(null);
 
+			if (this.Context.HasChangedGameControls)
+				Managers.mn.gameMN.Controlable(true, false);
+
 			// @TODO: Moral change
 			// npcA.MoralChange(3f);
 			// npcB.MoralChange(3f);

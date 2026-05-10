@@ -13,6 +13,7 @@ namespace HFramework.ScriptNodes.Other
 		}
 
 		protected override State OnUpdate() {
+			this.Context.HasChangedGameControls = true;
 			Managers.mn.gameMN.Controlable(this.ControlState, this.Invincible);
 			return State.Success;
 		}
