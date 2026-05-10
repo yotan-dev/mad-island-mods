@@ -10,27 +10,39 @@ namespace HFrameworkTemplates /* You can customize if you want */
 {
 	public partial class HFrameworkTemplates_Menus
 	{
-		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_ManxF", false, 1)]
+		[MenuItem("Assets/Create/HFramework/HF_Template_PlayerRaped_Yona", false, 40)]
+		public static void CreateHF_Template_PlayerRaped_Yona() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.PlayerRaped.Yona.asset");
+		}
+		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_ManxF", false, 40)]
 		public static void CreateHF_Template_CommonSexPlayer_ManxF() {
 			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexPlayer.ManxF.asset");
 		}
-		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexNPC_MxF", false, 1)]
+		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexNPC_MxF", false, 40)]
 		public static void CreateHF_Template_CommonSexNPC_MxF() {
 			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexNPC.MxF.asset");
 		}
-		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_YonaxM", false, 1)]
+		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_YonaxM", false, 40)]
 		public static void CreateHF_Template_CommonSexPlayer_YonaxM() {
 			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexPlayer.YonaxM.asset");
 		}
-		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_ManxF_2Pose", false, 1)]
+		[MenuItem("Assets/Create/HFramework/HF_Template_PlayerRaped_Man_2Prefabs", false, 40)]
+		public static void CreateHF_Template_PlayerRaped_Man_2Prefabs() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.PlayerRaped.Man_2Prefabs.asset");
+		}
+		[MenuItem("Assets/Create/HFramework/HF_Template_PlayerRaped_Man_1Prefab", false, 40)]
+		public static void CreateHF_Template_PlayerRaped_Man_1Prefab() {
+			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.PlayerRaped.Man_1Prefab.asset");
+		}
+		[MenuItem("Assets/Create/HFramework/HF_Template_CommonSexPlayer_ManxF_2Pose", false, 40)]
 		public static void CreateHF_Template_CommonSexPlayer_ManxF_2Pose() {
 			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.CommonSexPlayer.ManxF_2Pose.asset");
 		}
-		[MenuItem("Assets/Create/HFramework/HF_Template_Delivery", false, 1)]
+		[MenuItem("Assets/Create/HFramework/HF_Template_Delivery", false, 40)]
 		public static void CreateHF_Template_Delivery() {
 			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.Delivery.asset");
 		}
-		[MenuItem("Assets/Create/HFramework/HF_Template_AssWall", false, 1)]
+		[MenuItem("Assets/Create/HFramework/HF_Template_AssWall", false, 40)]
 		public static void CreateHF_Template_AssWall() {
 			HFramework.EditorUI.GenerateSexScriptTemplate.CreateFromTemplate("Packages/com.yotan-dev.hframework/Runtime/SexScriptTemplates/HF.Template.AssWall.asset");
 		}

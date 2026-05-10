@@ -1,0 +1,767 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8530595090054531352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e935d1b36cf52a548b2def0dc05ecb69, type: 3}
+  m_Name: AnimateOnce
+  m_EditorClassIdentifier: 
+  ID: AnimOnce_Finish
+  ScriptState: 0
+  Started: 0
+  GUID: ae2351d5ca3e7b74e861a47a07000d98
+  Position: {x: 859.99994, y: 1484.8726}
+  AnimationName: A_Finish
+--- !u!114 &-8284072431493890315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd34525ff46c5449a71002470a476f2, type: 3}
+  m_Name: BGMFade
+  m_EditorClassIdentifier: 
+  ID: BGMFade
+  ScriptState: 0
+  Started: 0
+  GUID: 743e43c4b2dd3934c935e2158ab2ee37
+  Position: {x: 935.85004, y: 439.25003}
+  BGMId: 1
+--- !u!114 &-7703853724229072494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56b187b071db1d4f9becf045827c127, type: 3}
+  m_Name: DisableLivingCharacters
+  m_EditorClassIdentifier: 
+  ID: DisableLivingCharacters
+  ScriptState: 0
+  Started: 0
+  GUID: f1a80d0e3a9d5f04ebd72538ec374324
+  Position: {x: 647, y: 87}
+  Targets:
+  - ActorIndex: 0
+    Mode: 6
+  - ActorIndex: 1
+    Mode: 6
+--- !u!114 &-7654593463948886281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ec00b7ccd86a748b0a89c750e88cf5, type: 3}
+  m_Name: PlayerRapedTeardown
+  m_EditorClassIdentifier: 
+  ID: PlayerRapedTeardown
+  ScriptState: 0
+  Started: 0
+  GUID: fdc54f546bf88ae4da2aa1d3ff31cc01
+  Position: {x: 42, y: 125.5}
+--- !u!114 &-7078863413856293504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e935d1b36cf52a548b2def0dc05ecb69, type: 3}
+  m_Name: AnimateOnce
+  m_EditorClassIdentifier: 
+  ID: Anim_AttackToSex
+  ScriptState: 0
+  Started: 0
+  GUID: 42cf3fe92cdbc2f48bc2c9af8579ffe0
+  Position: {x: 859.50006, y: 882.00006}
+  AnimationName: A_AttackToSex
+--- !u!114 &-5603551982026585610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Battle_seq
+  ScriptState: 0
+  Started: 0
+  GUID: d47d63c97386fe84c8a86a932df07aeb
+  Position: {x: 364, y: 220}
+  Children:
+  - {fileID: -5344303345077978390}
+  - {fileID: 2851730882415547431}
+--- !u!114 &-5344303345077978390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_Attack
+  ScriptState: 0
+  Started: 0
+  GUID: e8236ab2e15bd804b9a04b9e6a826c37
+  Position: {x: 661, y: 220}
+  AnimationName: A_Attack_loop
+--- !u!114 &-4959890244782332450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9dae5e43c79ab448e530c640617a85, type: 3}
+  m_Name: ChangeMainCanvasVisibility
+  m_EditorClassIdentifier: 
+  ID: MainCanvas_Hide
+  ScriptState: 0
+  Started: 0
+  GUID: 01f995e70bb587342bccddec70887440
+  Position: {x: 935.85004, y: 345.25}
+  ToVisibility: 0
+--- !u!114 &-4578782314541257347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  ID: Wait_1s
+  ScriptState: 0
+  Started: 0
+  GUID: 4870d74dde656634ba12baa9ada97299
+  Position: {x: 935.85004, y: 622.25}
+  WaitKind:
+    rid: 1355207513438945310
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945310
+      type: {class: WaitTime, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      data:
+        DurationSeconds: 1
+--- !u!114 &-3924534657538630888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_Loop01
+  ScriptState: 0
+  Started: 0
+  GUID: b9833fdde85c40b478eed588804e3129
+  Position: {x: 860, y: 1101.745}
+  AnimationName: A_Loop_01
+--- !u!114 &-3541338480485807926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0c9fd3eadbea645902d0e3257e7b2e, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  ID: Root
+  ScriptState: 0
+  Started: 0
+  GUID: bfdb5bce4b03f754ea7b1b2fc330fd26
+  Position: {x: -95.44003, y: 0}
+  Child: {fileID: -1097951257715062986}
+  TeardownNode: {fileID: -7654593463948886281}
+--- !u!114 &-1285692220723182979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Battle2Defeat_seq
+  ScriptState: 0
+  Started: 0
+  GUID: 541d96d4-e98f-420c-ab7d-76cfac726d0f
+  Position: {x: 364, y: 414.00003}
+  Children:
+  - {fileID: 6205033370349065049}
+  - {fileID: 3967889003745660564}
+  - {fileID: 9014157562284686369}
+--- !u!114 &-1097951257715062986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Main_seq
+  ScriptState: 0
+  Started: 0
+  GUID: 9c6d4087ae0ca174ca7b73ca014e6556
+  Position: {x: 159, y: 0}
+  Children:
+  - {fileID: 6163285598619062546}
+  - {fileID: -5603551982026585610}
+  - {fileID: -1285692220723182979}
+  - {fileID: 2577199382060583470}
+--- !u!114 &-1080708516420985481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fe56b52f23ea8438fed06020cbc731, type: 3}
+  m_Name: ChangeSexActState
+  m_EditorClassIdentifier: 
+  ID: ChangeSexActState
+  ScriptState: 0
+  Started: 0
+  GUID: 02c56fa7045907b4daecc272c13dba6d
+  Position: {x: 647, y: 0}
+  Changes:
+  - Index: 0
+    SexState: -1
+    ActType: 1
+--- !u!114 &-575570380016653429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_Insert
+  ScriptState: 0
+  Started: 0
+  GUID: 11d883c128c159f4bb3e60cbff74387a
+  Position: {x: 859.50006, y: 1000}
+  EventKey: HF.penetrate.vagina
+  EmitOnce: 0
+  EventArgs:
+    rid: 1355207513438945312
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945312
+      type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        comment: 
+        fromNpcIdx: 1
+        toNpcIdx: 0
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &-24137920869074890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  ID: Wait_click_finish
+  ScriptState: 0
+  Started: 0
+  GUID: 48dc6ff2-0a9b-4bf0-aa39-6f118c23b853
+  Position: {x: 858.00006, y: 1764.0277}
+  WaitKind:
+    rid: 1355207513438945315
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945315
+      type: {class: WaitMouseInput, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      data:
+        Button: 0
+        InputType: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d0f48dd1605444b8b1baaf01072313, type: 3}
+  m_Name: HF.Template.PlayerRaped.Man_1Prefab
+  m_EditorClassIdentifier: 
+  EngineVersion: 0
+  UniqueID: 
+  Name: 
+  Description: "Template for PlayerRaped scenes for Man based on the original game.\r\n\r\nThis
+    assumes a single prefab handles Battle + Sex.\r\n\r\nYou should set:\r\n1. MakeSexPrefab
+    >  Instantiator\r\n\r\nAssumes:\r\n1. It is using the SexList approach (new prefab)\r\n2.
+    SkeletonAnim is on Scale/Anim\r\n3. Npc 0 is rapist Female NPC\r\n4. Npc 1 is
+    victim Player\r\n5. There is a vagina penetration and a creampie (Player -> Rapist)\r\n6.
+    Animations are:\r\n  - A_Attack_loop\r\n  - A_Attack_giveup\r\n  - A_AttackToSex\r\n 
+    - A_Loop_01\r\n  - A_Loop_02\r\n  - A_Finish\r\n  - A_Finish_idle\r\n"
+  MinimalGameVersion: 0.0.0.0
+  RequiresDLC: 0
+  Info:
+    ContextTags:
+    - Forced
+    Npcs:
+    - NpcID: 15
+      FaintCondition:
+        Expected: 1
+      DeadCondition:
+        Expected: 1
+      Conditions: []
+    - NpcID: 1
+      FaintCondition:
+        Expected: 0
+      DeadCondition:
+        Expected: 2
+      Conditions: []
+    NpcOrderMatters: 1
+    StartConditions: []
+    ExecuteConditions: []
+  RootNode: {fileID: -3541338480485807926}
+  TreeState: 0
+  Nodes:
+  - {fileID: -3541338480485807926}
+  - {fileID: -1097951257715062986}
+  - {fileID: 1235700619031990040}
+  - {fileID: -7703853724229072494}
+  - {fileID: -1080708516420985481}
+  - {fileID: 6163285598619062546}
+  - {fileID: -5344303345077978390}
+  - {fileID: -5603551982026585610}
+  - {fileID: 2851730882415547431}
+  - {fileID: -7654593463948886281}
+  - {fileID: 6205033370349065049}
+  - {fileID: -1285692220723182979}
+  - {fileID: 105491640201646810}
+  - {fileID: -4959890244782332450}
+  - {fileID: -8284072431493890315}
+  - {fileID: 1155122323243938881}
+  - {fileID: -4578782314541257347}
+  - {fileID: 3967889003745660564}
+  - {fileID: 9014157562284686369}
+  - {fileID: -7078863413856293504}
+  - {fileID: 2577199382060583470}
+  - {fileID: -575570380016653429}
+  - {fileID: 7771861202403800825}
+  - {fileID: -3924534657538630888}
+  - {fileID: 9123074030494952024}
+  - {fileID: 5717554429978215426}
+  - {fileID: 8174485126399532403}
+  - {fileID: -8530595090054531352}
+  - {fileID: 7103647529921291260}
+  - {fileID: -24137920869074890}
+  - {fileID: 8920156079527373583}
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &105491640201646810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e1652c0f1a2e94c9c86c0e6494d550, type: 3}
+  m_Name: ToggleSkipButton
+  m_EditorClassIdentifier: 
+  ID: Skip_Show
+  ScriptState: 0
+  Started: 0
+  GUID: 5c5d9ec4d07c04946a22e3bd2c340400
+  Position: {x: 935.85004, y: 717.25}
+  ToVisibility: 1
+--- !u!114 &1155122323243938881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f45880fefbef1445973352c9376966b, type: 3}
+  m_Name: ToggleReviveSlider
+  m_EditorClassIdentifier: 
+  ID: ReviveSlider_Hide
+  ScriptState: 0
+  Started: 0
+  GUID: 5ba19f72a4929f145bee424dec6e8c50
+  Position: {x: 935.85004, y: 530.25}
+  ToVisibility: 0
+--- !u!114 &1235700619031990040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8be61e5da6d9c499067ae3e8a56971, type: 3}
+  m_Name: MakeSexPrefab
+  m_EditorClassIdentifier: 
+  ID: MakeSexPrefab
+  ScriptState: 0
+  Started: 0
+  GUID: 11ac15842c01ed34191df442db72d9f0
+  Position: {x: 647, y: -101}
+  Instantiator:
+    rid: 1355207513438945306
+  AppearanceSetter:
+    rid: 1355207513438945307
+  StopNpcReaction: 0
+  PositionOffset: {x: 0, y: 0, z: 0}
+  PositionSource: 2
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945306
+      type: {class: SexObjPrefab, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        PathToSkeletonAnimation: Scale/Anim
+        ObjIndex: 10
+    - rid: 1355207513438945307
+      type: {class: MaleFemaleRandCharSetter, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        MaleIndex: 0
+        FemaleIndex: 1
+--- !u!114 &2577199382060583470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e35db89a93ff68d4784f6cd3c726c3f5, type: 3}
+  m_Name: SkippableSection
+  m_EditorClassIdentifier: 
+  ID: SkippableSection
+  ScriptState: 0
+  Started: 0
+  GUID: 27683d80f8c573946a899c4302c3c779
+  Position: {x: 370.00003, y: 882.00006}
+  Child: {fileID: 7771861202403800825}
+--- !u!114 &2851730882415547431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd3c4f420c20574196fe5073c13d8df, type: 3}
+  m_Name: PlayerRapedBattle
+  m_EditorClassIdentifier: 
+  ID: PlayerRapedBattle
+  ScriptState: 0
+  Started: 0
+  GUID: cac784089cdc2014a8e9e77ad86265cf
+  Position: {x: 661, y: 312}
+  PlayerIndex: 1
+--- !u!114 &3967889003745660564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Battle_defeat_FX_seq
+  ScriptState: 0
+  Started: 0
+  GUID: be9a1575fa62c4e4abfc424419b1e093
+  Position: {x: 661.0001, y: 532}
+  Children:
+  - {fileID: -4959890244782332450}
+  - {fileID: -8284072431493890315}
+  - {fileID: 1155122323243938881}
+  - {fileID: -4578782314541257347}
+  - {fileID: 105491640201646810}
+--- !u!114 &5717554429978215426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_Loop02
+  ScriptState: 0
+  Started: 0
+  GUID: ab23d285-5d78-4503-b657-ae15b7bfced3
+  Position: {x: 860, y: 1296.8025}
+  AnimationName: A_Loop_02
+--- !u!114 &6163285598619062546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Start_seq
+  ScriptState: 0
+  Started: 0
+  GUID: 8d9e43ca779f8ee4d9f9212b7ea3929c
+  Position: {x: 364, y: 0}
+  Children:
+  - {fileID: 1235700619031990040}
+  - {fileID: -1080708516420985481}
+  - {fileID: -7703853724229072494}
+--- !u!114 &6205033370349065049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_giveup
+  ScriptState: 0
+  Started: 0
+  GUID: f0bde095f7e58064b9ee03d31a32c6e5
+  Position: {x: 661, y: 414}
+  AnimationName: A_Attack_giveup
+--- !u!114 &7103647529921291260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_Finish_idle
+  ScriptState: 0
+  Started: 0
+  GUID: 5cd931b305bab09478d82b495b37fd2d
+  Position: {x: 859.0001, y: 1665.0277}
+  AnimationName: A_Finish_idle
+--- !u!114 &7771861202403800825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Sex_seq
+  ScriptState: 0
+  Started: 0
+  GUID: 85fc3f6ad80f8e24aa09428f73d91232
+  Position: {x: 647, y: 882.00006}
+  Children:
+  - {fileID: -7078863413856293504}
+  - {fileID: -575570380016653429}
+  - {fileID: -3924534657538630888}
+  - {fileID: 9123074030494952024}
+  - {fileID: 5717554429978215426}
+  - {fileID: 8174485126399532403}
+  - {fileID: -8530595090054531352}
+  - {fileID: 8920156079527373583}
+  - {fileID: 7103647529921291260}
+  - {fileID: -24137920869074890}
+--- !u!114 &8174485126399532403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  ID: Wait_click_loop2
+  ScriptState: 0
+  Started: 0
+  GUID: 32aab13a-0686-4dcf-b8c8-593495d37610
+  Position: {x: 860, y: 1388.0001}
+  WaitKind:
+    rid: 1355207513438945314
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945314
+      type: {class: WaitMouseInput, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      data:
+        Button: 0
+        InputType: 0
+--- !u!114 &8920156079527373583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_Cum
+  ScriptState: 0
+  Started: 0
+  GUID: f55c190184c1e464bba93c7cf9c6c8db
+  Position: {x: 866, y: 1574.666}
+  EventKey: HF.cum.vagina
+  EmitOnce: 0
+  EventArgs:
+    rid: 1355207513438945316
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945316
+      type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        comment: 
+        fromNpcIdx: 1
+        toNpcIdx: 0
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &9014157562284686369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  ID: Wait_click_defeat2sex
+  ScriptState: 0
+  Started: 0
+  GUID: 43bdedba09fe3724698a61119c623be2
+  Position: {x: 661.0001, y: 660.50006}
+  WaitKind:
+    rid: 1355207513438945311
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945311
+      type: {class: WaitMouseInput, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      data:
+        Button: 0
+        InputType: 0
+--- !u!114 &9123074030494952024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d555b4dbc3cd02848a3b1b4efd267998, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  ID: Wait_click_loop1
+  ScriptState: 0
+  Started: 0
+  GUID: 41ee6ad4-b75e-4381-bd88-b3e134e08a88
+  Position: {x: 860, y: 1204}
+  WaitKind:
+    rid: 1355207513438945313
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207513438945313
+      type: {class: WaitMouseInput, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      data:
+        Button: 0
+        InputType: 0

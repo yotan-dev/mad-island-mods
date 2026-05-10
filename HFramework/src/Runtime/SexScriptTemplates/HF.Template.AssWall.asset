@@ -1,0 +1,760 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8747815709611047013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b4c2476e4e64f42bbbac6d50554d99, type: 3}
+  m_Name: Teardown
+  m_EditorClassIdentifier: 
+  ID: Teardown
+  ScriptState: 0
+  Started: 0
+  GUID: 998e6e63b6a42c9458e714b34c52fee6
+  Position: {x: 187, y: 220}
+--- !u!114 &-8088014872598480530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_Loop1
+  ScriptState: 0
+  Started: 0
+  GUID: ca0704f7b27f03243a04bd72d6299bc5
+  Position: {x: 795.978, y: 710.33997}
+  AnimationName: '{actors[1].npcId}_A_Loop_01'
+--- !u!114 &-6729176774219378529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_FInish_Idle
+  ScriptState: 0
+  Started: 0
+  GUID: 6dcc8ff1d6c0ee24eb3e322d63cd616e
+  Position: {x: 795.978, y: 1492.34}
+  AnimationName: '{actors[1].npcId}_A_Finish_idle'
+--- !u!114 &-6489306900411689267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e935d1b36cf52a548b2def0dc05ecb69, type: 3}
+  m_Name: AnimateOnce
+  m_EditorClassIdentifier: 
+  ID: Anim_Finish
+  ScriptState: 0
+  Started: 0
+  GUID: 121c87b9ce375de40923e37d034d42e4
+  Position: {x: 795.978, y: 1290.34}
+  AnimationName: '{actors[1].npcId}_A_Finish'
+--- !u!114 &-5982670619605973265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020df5321ebb3c84280d7fa30813ff2c, type: 3}
+  m_Name: LastChoiceEquals
+  m_EditorClassIdentifier: 
+  ID: Menu_finish
+  ScriptState: 0
+  Started: 0
+  GUID: 2d5bc1eb1b3d83446afcc936912ee8d2
+  Position: {x: 567.97815, y: 1184.34}
+  Children:
+  - {fileID: 1730604059715592976}
+  - {fileID: -6489306900411689267}
+  - {fileID: 509025228770068023}
+  - {fileID: -6729176774219378529}
+  - {fileID: 2262543254475115218}
+  ChoiceId: finish
+--- !u!114 &-5291562463329299131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_idle
+  ScriptState: 0
+  Started: 0
+  GUID: 7bcac72d5ac0aef4892441f895a1e672
+  Position: {x: 797.978, y: 275.34}
+  AnimationName: A_idle
+--- !u!114 &-5146719526754634964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020df5321ebb3c84280d7fa30813ff2c, type: 3}
+  m_Name: LastChoiceEquals
+  m_EditorClassIdentifier: 
+  ID: Menu_speed1
+  ScriptState: 0
+  Started: 0
+  GUID: ae70acd4701707e49aec0f4021104abe
+  Position: {x: 566.978, y: 710.33997}
+  Children:
+  - {fileID: -8088014872598480530}
+  - {fileID: 9184264855640262790}
+  ChoiceId: speed1
+--- !u!114 &-4774541753227718809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020df5321ebb3c84280d7fa30813ff2c, type: 3}
+  m_Name: LastChoiceEquals
+  m_EditorClassIdentifier: 
+  ID: Menu_idle
+  ScriptState: 0
+  Started: 0
+  GUID: 9c03e9fffddc10b409ef34760cf049e2
+  Position: {x: 565.978, y: 334.34}
+  Children:
+  - {fileID: -5291562463329299131}
+  - {fileID: -4405329865321204925}
+  ChoiceId: idle
+--- !u!114 &-4405329865321204925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f148c59d39c4e8049b90689b4da90d23, type: 3}
+  m_Name: SetMenuOptions
+  m_EditorClassIdentifier: 
+  ID: MenuOptions_Idle
+  ScriptState: 0
+  Started: 0
+  GUID: 02e1a9ccb54f62746a55ad88dde6ac95
+  Position: {x: 797.978, y: 373.34}
+  Options:
+  - Id: insert
+    Text: Insert
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  ForceOpen: 1
+--- !u!114 &-4030447248266310613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Main_seq
+  ScriptState: 0
+  Started: 0
+  GUID: 0c1ba8c51e89a32458710f868ab570cb
+  Position: {x: 233, y: -7}
+  Children:
+  - {fileID: 1367384003010236915}
+  - {fileID: -216224787906762113}
+--- !u!114 &-3631122653857774174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9dae5e43c79ab448e530c640617a85, type: 3}
+  m_Name: ChangeMainCanvasVisibility
+  m_EditorClassIdentifier: 
+  ID: Hide_Main_Canvas
+  ScriptState: 0
+  Started: 0
+  GUID: 9d21d6d0e9563724db2c05a1e5db95a8
+  Position: {x: 804, y: -72}
+  ToVisibility: 0
+--- !u!114 &-3280400803087635253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21eef850a309304383675045ae9992a, type: 3}
+  m_Name: TogglePlayerVisible
+  m_EditorClassIdentifier: 
+  ID: PlayerVisible_false
+  ScriptState: 0
+  Started: 0
+  GUID: f56cbda442061d94a985e6f97b46a9a5
+  Position: {x: 807, y: 82}
+  ToVisibility: 0
+--- !u!114 &-2846352217708251832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0c9fd3eadbea645902d0e3257e7b2e, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  ID: Root
+  ScriptState: 0
+  Started: 0
+  GUID: b4065595b34fa494d8e2421287906570
+  Position: {x: -80, y: -7}
+  Child: {fileID: -4030447248266310613}
+  TeardownNode: {fileID: 7171871197247311540}
+--- !u!114 &-762970190446412556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e76738b1160a064d8c85078ea529d6d, type: 3}
+  m_Name: SetAnimation
+  m_EditorClassIdentifier: 
+  ID: Anim_Loop2
+  ScriptState: 0
+  Started: 0
+  GUID: 49fe558500472bc4da24215ee848f17a
+  Position: {x: 795.978, y: 940.33997}
+  AnimationName: '{actors[1].npcId}_A_Loop_02'
+--- !u!114 &-534766242757832907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9666f364e5ea4b540b09a49e47505443, type: 3}
+  m_Name: SetMenuChoice
+  m_EditorClassIdentifier: 
+  ID: SetMenu_speed1
+  ScriptState: 0
+  Started: 0
+  GUID: 123c4ea9e4b31c1468808ad6bef81b35
+  Position: {x: 795.978, y: 583.33997}
+  NewChoiceId: speed1
+--- !u!114 &-216224787906762113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caffc60bd198c040a63dbcf8cb6d4c7, type: 3}
+  m_Name: MenuInteraction
+  m_EditorClassIdentifier: 
+  ID: MenuInteraction
+  ScriptState: 0
+  Started: 0
+  GUID: 3f6a4a9d416b05f4da454d9306ab3f8b
+  Position: {x: 377.97806, y: 411.34}
+  Children:
+  - {fileID: -4774541753227718809}
+  - {fileID: -5146719526754634964}
+  - {fileID: 7766914281240841551}
+  - {fileID: 5329526862143839732}
+  - {fileID: -5982670619605973265}
+  InitialMenuId: idle
+  SuccessOnChoiceId: leave
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03652a5e39a387e4bb4cbd91215ba696, type: 3}
+  m_Name: HF.Template.AssWall
+  m_EditorClassIdentifier: 
+  EngineVersion: 0
+  UniqueID: HF.Template.AssWall
+  Name: 
+  Description: "Template for AssWall scenes based on the original game.\n\nAssumes:\n1.
+    It is targeting a world object (AssWall structure)\n2. Npc 0 is Male player\n3.
+    Npc 1 is \"Toileted\" female NPC\n4. Animations are:\n  - A_idle\n  - [NPCID]_A_Loop_01\n 
+    - [NPCID]_A_Loop_02\n  - [NPCID]_A_Finish\n  - [NPCID]_A_Finish_idle\n\nWhere
+    [NPCID] is the NPCs[1]"
+  MinimalGameVersion: 0.0.0.0
+  RequiresDLC: 0
+  Info:
+    ContextTags:
+    - Toilet
+    Npcs:
+    - NpcID: 1
+      FaintCondition:
+        Expected: 0
+      DeadCondition:
+        Expected: 0
+      Conditions: []
+    - NpcID: 15
+      FaintCondition:
+        Expected: 0
+      DeadCondition:
+        Expected: 0
+      Conditions: []
+    NpcOrderMatters: 0
+    StartConditions: []
+    ExecuteConditions: []
+  RootNode: {fileID: -2846352217708251832}
+  TreeState: 0
+  Nodes:
+  - {fileID: -2846352217708251832}
+  - {fileID: -4030447248266310613}
+  - {fileID: 1367384003010236915}
+  - {fileID: 8959546791688622402}
+  - {fileID: -3631122653857774174}
+  - {fileID: 7878815071649756966}
+  - {fileID: -3280400803087635253}
+  - {fileID: -5291562463329299131}
+  - {fileID: -216224787906762113}
+  - {fileID: -4774541753227718809}
+  - {fileID: -4405329865321204925}
+  - {fileID: -5146719526754634964}
+  - {fileID: 7766914281240841551}
+  - {fileID: -534766242757832907}
+  - {fileID: 4386255594678917522}
+  - {fileID: -8088014872598480530}
+  - {fileID: 9184264855640262790}
+  - {fileID: 5329526862143839732}
+  - {fileID: -762970190446412556}
+  - {fileID: 7327563885354278568}
+  - {fileID: -5982670619605973265}
+  - {fileID: 1730604059715592976}
+  - {fileID: -6489306900411689267}
+  - {fileID: 509025228770068023}
+  - {fileID: -6729176774219378529}
+  - {fileID: 2262543254475115218}
+  - {fileID: 7171871197247311540}
+  - {fileID: -8747815709611047013}
+  - {fileID: 6561039749853475755}
+  - {fileID: 7061902643192192578}
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &509025228770068023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_Cum
+  ScriptState: 0
+  Started: 0
+  GUID: d05f259bfe2931a4398d536fa449fb26
+  Position: {x: 795.978, y: 1394.34}
+  EventKey: HF.cum.vagina
+  EmitOnce: 0
+  EventArgs:
+    rid: 896239005865082908
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 896239005865082908
+      type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        comment: 
+        fromNpcIdx: 0
+        toNpcIdx: 1
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &1367384003010236915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Section_Start
+  ScriptState: 0
+  Started: 0
+  GUID: 5a44626f9861e364d815a3823f3dcaed
+  Position: {x: 452, y: -6.9999986}
+  Children:
+  - {fileID: -3631122653857774174}
+  - {fileID: 7878815071649756966}
+  - {fileID: -3280400803087635253}
+  - {fileID: 8959546791688622402}
+--- !u!114 &1730604059715592976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d87426a0250894aa28a1c03ebbfdaa, type: 3}
+  m_Name: ToggleMenu
+  m_EditorClassIdentifier: 
+  ID: ToggleMenu_Hide
+  ScriptState: 0
+  Started: 0
+  GUID: 77b59d8f3b1f9d3478b6c7116739b0ef
+  Position: {x: 795.978, y: 1184.34}
+  ToVisibility: 0
+--- !u!114 &2262543254475115218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f148c59d39c4e8049b90689b4da90d23, type: 3}
+  m_Name: SetMenuOptions
+  m_EditorClassIdentifier: 
+  ID: MenuOptions_Finish
+  ScriptState: 0
+  Started: 0
+  GUID: f5e5bf3f80e3ddc45a895a45a4e2ef6a
+  Position: {x: 795.978, y: 1594.34}
+  Options:
+  - Id: insert
+    Text: Insert
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  ForceOpen: 1
+--- !u!114 &4386255594678917522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_Penetrate
+  ScriptState: 0
+  Started: 0
+  GUID: bc2e86d459c90f54992f98de13680694
+  Position: {x: 797.978, y: 494.34}
+  EventKey: HF.penetrate.vagina
+  EmitOnce: 0
+  EventArgs:
+    rid: 896239005865082907
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 896239005865082907
+      type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        comment: 
+        fromNpcIdx: 0
+        toNpcIdx: 1
+        From: {fileID: 0}
+        To: {fileID: 0}
+--- !u!114 &5329526862143839732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020df5321ebb3c84280d7fa30813ff2c, type: 3}
+  m_Name: LastChoiceEquals
+  m_EditorClassIdentifier: 
+  ID: Menu_speed2
+  ScriptState: 0
+  Started: 0
+  GUID: b42164217a7d4ff48ba24deec2352238
+  Position: {x: 565.978, y: 943.33997}
+  Children:
+  - {fileID: -762970190446412556}
+  - {fileID: 7327563885354278568}
+  ChoiceId: speed2
+--- !u!114 &6561039749853475755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e7235251bef2ef408cdec9264ef9d86, type: 3}
+  m_Name: ClearWorldObject
+  m_EditorClassIdentifier: 
+  ID: ClearWorldObject
+  ScriptState: 0
+  Started: 0
+  GUID: a2814d3efcf8d0244a4437d26e1fd12c
+  Position: {x: 187, y: 121}
+  Skin: default
+  Clearer:
+    rid: 1355207488545751069
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207488545751069
+      type: {class: ToiletCheck, ns: HFramework.ScriptNodes.PrefabSetup.WorldObjectClearers, asm: HFramework}
+      data: 
+--- !u!114 &7061902643192192578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
+  m_Name: EmitEvent
+  m_EditorClassIdentifier: 
+  ID: Emit_End
+  ScriptState: 0
+  Started: 0
+  GUID: bc10d2faedabf2a4ab5fa462dd25d369
+  Position: {x: 186.99998, y: 313.49997}
+  EventKey: HF.end
+  EmitOnce: 0
+  EventArgs:
+    rid: 1355207488545751070
+  hasEmitted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1355207488545751070
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        comment: 
+--- !u!114 &7171871197247311540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Teardwon_seq
+  ScriptState: 0
+  Started: 0
+  GUID: e4cc7364f8c6f1d41a549c2d9baeb97e
+  Position: {x: 36, y: 120.5}
+  Children:
+  - {fileID: 6561039749853475755}
+  - {fileID: -8747815709611047013}
+  - {fileID: 7061902643192192578}
+--- !u!114 &7327563885354278568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f148c59d39c4e8049b90689b4da90d23, type: 3}
+  m_Name: SetMenuOptions
+  m_EditorClassIdentifier: 
+  ID: MenuOptions_Speed2
+  ScriptState: 0
+  Started: 0
+  GUID: bf53084327fcbc84aad02265475213d9
+  Position: {x: 795.978, y: 1033.34}
+  Options:
+  - Id: idle
+    Text: Stop
+    Effect: 0
+  - Id: speed1
+    Text: Speed
+    Effect: 0
+  - Id: finish
+    Text: Finish
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  ForceOpen: 1
+--- !u!114 &7766914281240841551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020df5321ebb3c84280d7fa30813ff2c, type: 3}
+  m_Name: LastChoiceEquals
+  m_EditorClassIdentifier: 
+  ID: Menu_insert
+  ScriptState: 0
+  Started: 0
+  GUID: 4c6e8e3257bf5964cbbdb1be56e5dfee
+  Position: {x: 567.97815, y: 494.34}
+  Children:
+  - {fileID: 4386255594678917522}
+  - {fileID: -534766242757832907}
+  ChoiceId: insert
+--- !u!114 &7878815071649756966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf0cd9455540f5479d3582a8e916106, type: 3}
+  m_Name: ToggleGameControl
+  m_EditorClassIdentifier: 
+  ID: Disable_Game_Controls
+  ScriptState: 0
+  Started: 0
+  GUID: 905d10af970f8c1429a6db77e08d9da1
+  Position: {x: 804, y: 5}
+  ControlState: 0
+  Invincible: 0
+--- !u!114 &8959546791688622402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c767c9220eac74a8df44e8df782d22, type: 3}
+  m_Name: PrepareSexObject
+  m_EditorClassIdentifier: 
+  ID: PrepareSexObject
+  ScriptState: 0
+  Started: 0
+  GUID: 09f70cd8041ed6d41b8b34c5f2b07b20
+  Position: {x: 807, y: 159}
+  Instantiator:
+    rid: 896239005865082906
+  AppearanceSetter:
+    rid: 896239005865082905
+  User: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 896239005865082905
+      type: {class: AssWallAppearanceSetter, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        SkinName: Man
+        MaleActor: 0
+        GirlActor: 1
+    - rid: 896239005865082906
+      type: {class: WorldObjectInstantiator, ns: HFramework.ScriptNodes.PrefabSetup, asm: HFramework}
+      data:
+        PathToSkeletonAnimation: Scale/Anim
+--- !u!114 &9184264855640262790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f148c59d39c4e8049b90689b4da90d23, type: 3}
+  m_Name: SetMenuOptions
+  m_EditorClassIdentifier: 
+  ID: MenuOptions_Speed1
+  ScriptState: 0
+  Started: 0
+  GUID: 425a92c866297f140b6f77d4b485c977
+  Position: {x: 795.978, y: 800.33997}
+  Options:
+  - Id: idle
+    Text: Stop
+    Effect: 0
+  - Id: speed2
+    Text: Speed
+    Effect: 0
+  - Id: finish
+    Text: Finish
+    Effect: 0
+  - Id: leave
+    Text: Leave
+    Effect: 0
+  ForceOpen: 1
