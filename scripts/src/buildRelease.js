@@ -156,6 +156,10 @@ async function buildHFramework() {
 			from: resolve(getBinaryPath(loaderPath), 'HFrameworkLoader.dll'),
 			to: 'HFramework/BepInEx/plugins/HFramework/HFrameworkLoader.dll',
 		},
+		{
+			from: join(rootDir, 'UnityProject', 'Assets', 'AssetBundles', 'hframework'),
+			to: 'HFramework/BepInEx/plugins/HFramework/hframework',
+		}
 	]);
 
 	const version = getProjectVersion(resolve(loaderPath, 'HFrameworkLoader.csproj'));
