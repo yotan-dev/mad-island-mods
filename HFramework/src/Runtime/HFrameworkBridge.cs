@@ -41,6 +41,10 @@ namespace HFramework
 
 		public static event EventHandler<NPCMove.ActType>? OnActTypeChanged;
 
+		private IEnumerator EmptyEnumerator() {
+			yield break;
+		}
+
 		public void NPCMove_Pre_Wait(NPCMove __instance) {
 			OnActTypeChanged?.Invoke(__instance, __instance.actType);
 		}
@@ -186,6 +190,8 @@ namespace HFramework
 				info.Place = new WorkplaceScriptPlace(tmpWorkPlace);
 			} else if (tmpSexPlace != null) {
 				info.Place = new SexPlaceScriptPlace(tmpSexPlace);
+			} else {
+				info.Place = new GroundScriptPlace(common.gameObject.transform.position);
 			}
 			var actors = new CommonStates[] { common };
 
@@ -194,6 +200,7 @@ namespace HFramework
 				__result = runner();
 			} else {
 				PLogger.LogWarning($"No Delivery script found for {common.name}");
+				__result = EmptyEnumerator(); // Prevents original code from breaking
 			}
 
 			return false;

@@ -31,7 +31,6 @@ namespace HFramework.SexScripts.ScriptContext
 		}
 
 		public override GameObject GetObject() {
-			PLogger.LogWarning("GroundScriptPlace.GetObject() called. This should not happen as Ground places are not objects! You are likely to have errors in your Sex Script.");
 			return null;
 		}
 

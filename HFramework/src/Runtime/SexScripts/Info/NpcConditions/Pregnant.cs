@@ -10,7 +10,8 @@ using YotanModCore.Consts;
 public class Pregnant : NpcCondition
 {
 	[Flags]
-	public enum PregnancyStatus : int {
+	public enum PregnancyStatus : int
+	{
 		[InspectorName("None - (DO NOT USE) Will never pass")]
 		None = 0,
 
@@ -36,12 +37,18 @@ public class Pregnant : NpcCondition
 	[Tooltip("Pregnancy states that are accepted (treated as 'OR')")]
 	public PregnancyStatus Pregnancy = PregnancyStatus.NotPregnant;
 
+	public Pregnant() { }
+
+	public Pregnant(PregnancyStatus pregnancy) {
+		this.Pregnancy = pregnancy;
+	}
+
 	public override bool Pass(CommonStates common) {
 		if (!CommonUtils.IsPregnant(common)) {
 			return this.Pregnancy.HasFlag(PregnancyStatus.NotPregnant);
 		}
 
-		var isReadyToGiveBirth = common.pregnant[PregnantIndex.TimeToBirth] != 0;
+		var isReadyToGiveBirth = common.pregnant[PregnantIndex.TimeToBirth] == 0;
 		if (isReadyToGiveBirth) {
 			return this.Pregnancy.HasFlag(PregnancyStatus.PregnantReady);
 		} else {

@@ -5,7 +5,7 @@ using YotanModCore;
 namespace HFramework.ScriptNodes
 {
 	[Experimental]
-	[ScriptNode("HFramework", "Flow/Setup")]
+	[ScriptNode("HFramework", "Prefab Setup/Make Prefab")]
 	public class MakeSexPrefab : Action
 	{
 		public enum PrefabPositionSource
