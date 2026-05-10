@@ -1,5 +1,6 @@
 using UnityEngine;
 using YotanModCore;
+using YotanModCore.Consts;
 using YotanModCore.Extensions;
 
 namespace HFramework.ScriptNodes
@@ -14,6 +15,10 @@ namespace HFramework.ScriptNodes
 		[Tooltip("Whether NPC should try to avoid obstacles when moving. For some reason this does not work when 2+ NPCs are moving at the same time.")]
 		public bool AvoidObstacles = false;
 
+		[Tooltip("Emote to play while moving.")]
+		[EmoteId]
+		public int EmoteOnMove = Emote.None;
+
 		private bool IsReady = false;
 
 		private float AnimationTime;
@@ -26,10 +31,14 @@ namespace HFramework.ScriptNodes
 			var targetPos = this.Context.ScriptPlace.GetCharacterPosition();
 
 			// Start moving NPCs to sex place
-			this.Emotions = new GameObject[this.Context.Actors.Length];
-			for (int i = 0; i < this.Context.Actors.Length; i++) {
-				this.Emotions[i] = Managers.fxMN.GoEmotion(0, this.Context.Actors[i].Common.gameObject, Vector3.zero);
+			this.Emotions = null;
+			if (this.EmoteOnMove != Emote.None) {
+				this.Emotions = new GameObject[this.Context.Actors.Length];
+				for (int i = 0; i < this.Context.Actors.Length; i++) {
+					this.Emotions[i] = Managers.fxMN.GoEmotion(this.EmoteOnMove, this.Context.Actors[i].Common.gameObject, Vector3.zero);
+				}
 			}
+
 			for (int i = 0; i < this.Context.Actors.Length; i++) {
 				Managers.sexMN.StartCoroutine(
 					Managers.storyMN.MovePosition(this.Context.Actors[i].Common.gameObject, targetPos, 2f, "A_walk", true, this.AvoidObstacles)
