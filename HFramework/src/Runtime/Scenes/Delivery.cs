@@ -180,7 +180,7 @@ namespace HFramework.Scenes
 
 			girlMove.searchAngle = 0f;
 			if (this.TargetPosObject != null)
-				yield return new MoveToPlace(this, new CommonStates[] { this.Girl }, this.TargetPosObject.transform.position, this.SexPlace);
+				yield return new MoveToPlace(this, new CommonStates[] { this.Girl }, this.TargetPosObject.transform.position, this.SexPlace, true).Handle();
 
 			if (!this.CanContinue())
 				yield break;

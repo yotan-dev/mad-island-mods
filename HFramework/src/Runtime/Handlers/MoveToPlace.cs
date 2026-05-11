@@ -19,16 +19,20 @@ namespace HFramework.Handlers
 
 		private readonly SexPlace? Place;
 
+		private readonly bool AvoidObstacles;
+
 		public MoveToPlace(
 			IScene scene,
 			CommonStates[] actors,
 			Vector3 position,
-			SexPlace? place
+			SexPlace? place,
+			bool avoidObstacles = false
 		) : base(scene)
 		{
 			this.Actors = actors;
 			this.Position = position;
 			this.Place = place;
+			this.AvoidObstacles = avoidObstacles;
 		}
 
 		private bool AreActorsAlive()
@@ -98,7 +102,7 @@ namespace HFramework.Handlers
 			foreach (var actor in this.Actors)
 			{
 				Managers.mn.sexMN.StartCoroutine(
-					Managers.mn.story.MovePosition(actor.gameObject, this.Position, 2f, "A_walk", true, false, 0.1f, 40f)
+					Managers.mn.story.MovePosition(actor.gameObject, this.Position, 2f, "A_walk", true, this.AvoidObstacles)
 				);
 			}
 

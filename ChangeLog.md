@@ -19,7 +19,7 @@ Each mod has its own version which follows SemVer.
 
 ### HFramework v1.3.0
 
-This release is starting to introduce the new HFramework system that will make it way easier for modders to create new content.
+This release has some updates to the current way HFramework works but is starting to introduce the new HFramework system that will make it way easier for modders to create new content.
 
 It is still in experimental phase and disabled by default, please if you are willing to, enable it and help us test for bugs. If you are a modder, experiment with it and bring feedback!
 
@@ -27,6 +27,9 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 
 > [!NOTE]
 > Gallery and HExtensions won't work in Compatibility/Modern mode for now (I will look into that later)
+
+- **(Legacy)** Fixed Delivery teleporting NPCs to bed instead of walking there
+
 
 **Technical/For modders:**
 

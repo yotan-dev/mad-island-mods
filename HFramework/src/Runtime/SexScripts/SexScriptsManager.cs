@@ -202,11 +202,11 @@ namespace HFramework.SexScripts
 
 					case SexScriptTypes.Delivery: {
 							if (info is IHasScriptPlace scriptPlace) {
-								var workPlace = scriptPlace is WorkplaceScriptPlace workPlacePlace ? workPlacePlace.Place : null;
-								var sexPlace = scriptPlace is SexPlaceScriptPlace sexPlacePlace ? sexPlacePlace.Place : null;
+								var workPlace = scriptPlace.Place is WorkplaceScriptPlace workPlacePlace ? workPlacePlace.Place : null;
+								var sexPlace = scriptPlace.Place is SexPlaceScriptPlace sexPlacePlace ? sexPlacePlace.Place : null;
 
 								var legacyScene = new Delivery(actors[0], workPlace, sexPlace);
-								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Sex, actors)) {
+								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Delivery, actors)) {
 									candidates.Add(() => legacyScene.Run());
 								}
 							}
