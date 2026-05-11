@@ -11,6 +11,8 @@ Each mod has its own version which follows SemVer.
 
 ### YotanModCore v2.5.0
 
+- Adds v0.5.10.2 detection
+
 **Technical/For modders:**
 
 - **[Experimental]** Expose `BundleLoader` class to load asset bundles from the `CustomBundles` folder
