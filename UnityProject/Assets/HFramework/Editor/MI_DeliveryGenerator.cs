@@ -65,7 +65,7 @@ namespace HFramework
 
 			this.Create(new Config {
 				UniqueID = "HF.Delivery.UnderGroundWoman",
-				NpcID = NpcID.UnderGroundWoman, // 44
+				NpcID = NpcID.UndergroundWoman, // 44
 				MinVersion = "0.4.2"
 			});
 
@@ -88,7 +88,7 @@ namespace HFramework
 			});
 			this.Create(new Config {
 				UniqueID = "HF.Delivery.UnderGroundGirl",
-				NpcID = NpcID.UnderGroundGirl, // 142
+				NpcID = NpcID.UndergroundGirl, // 142
 				MinVersion = "0.5.9",
 				RequiresDlc = true
 			});

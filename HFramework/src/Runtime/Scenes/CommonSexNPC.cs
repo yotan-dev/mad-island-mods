@@ -185,7 +185,7 @@ namespace HFramework.Scenes
 				return false;
 
 			// @TODO: Check if we really need to those here or we can move to SetupTmpSex
-			if (this.Npc2.npcID == NpcID.UnderGroundWoman && this.Npc1.npcID == NpcID.YoungMan)
+			if (this.Npc2.npcID == NpcID.UndergroundWoman && this.Npc1.npcID == NpcID.YoungMan)
 			{
 				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Npc1);
 				Managers.mn.randChar.LoadGenUnder(this.Npc2, this.TmpSex);

@@ -134,7 +134,7 @@ namespace HFramework.Scenes
 				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Man);
 				Managers.mn.randChar.LoadMummy(this.Girl, this.TmpSex);
 			}
-			else if (this.Girl.npcID == NpcID.UnderGroundWoman)
+			else if (this.Girl.npcID == NpcID.UndergroundWoman)
 			{
 				Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Man);
 				Managers.mn.randChar.LoadGenUnder(this.Girl, this.TmpSex);

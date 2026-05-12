@@ -84,9 +84,9 @@ namespace HFramework.Handlers
 					childNpcId = gender == Gender.Male ? NpcID.LargeNativeBoy : NpcID.LargeNativeGirl;
 					break;
 
-				case NpcID.UnderGroundWoman:
-				case NpcID.UnderGroundGirl:
-					childNpcId = gender == Gender.Male ? NpcID.UnderGroundBoy : NpcID.UnderGroundGirl;
+				case NpcID.UndergroundWoman:
+				case NpcID.UndergroundGirl:
+					childNpcId = gender == Gender.Male ? NpcID.UnderGroundBoy : NpcID.UndergroundGirl;
 					break;
 
 				default:

@@ -80,9 +80,9 @@ namespace HFramework.Pregnancy
 					childNpcId = data.Gender == Gender.Male ? NpcID.LargeNativeBoy : NpcID.LargeNativeGirl;
 					break;
 
-				case NpcID.UnderGroundWoman:
-				case NpcID.UnderGroundGirl:
-					childNpcId = data.Gender == Gender.Male ? NpcID.UnderGroundBoy : NpcID.UnderGroundGirl;
+				case NpcID.UndergroundWoman:
+				case NpcID.UndergroundGirl:
+					childNpcId = data.Gender == Gender.Male ? NpcID.UnderGroundBoy : NpcID.UndergroundGirl;
 					break;
 
 				default:

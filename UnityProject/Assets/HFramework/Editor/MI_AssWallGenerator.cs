@@ -53,7 +53,7 @@ namespace HFramework
 
 			this.Create(new Config {
 				UniqueID = "HF.AssWall.UnderGroundWoman",
-				FemaleNpcID = NpcID.UnderGroundWoman, // 44
+				FemaleNpcID = NpcID.UndergroundWoman, // 44
 				MinVersion = "0.2.2"
 			});
 
