@@ -84,6 +84,10 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
+			if (this.Context.ScriptPlace.IsInUse()) { // Some other NPC took the sex place, can't use it -- give up
+				return State.Failure;
+			}
+
 			if (this.IsReady) {
 				return State.Success;
 			}
@@ -126,10 +130,6 @@ namespace HFramework.ScriptNodes
 				}
 			}
 			if (!allWaiting) { // Something else took the "attention" of one of the NPCs -- give up
-				return State.Failure;
-			}
-
-			if (this.Context.ScriptPlace.IsInUse()) { // Some other NPC took the sex place, can't use it -- give up
 				return State.Failure;
 			}
 

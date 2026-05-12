@@ -26,6 +26,10 @@ namespace HFramework.SexScripts.ScriptContext
 			return false;
 		}
 
+		public override bool IsUser(GameObject user) {
+			return false;
+		}
+
 		public override bool HasObject() {
 			return false;
 		}

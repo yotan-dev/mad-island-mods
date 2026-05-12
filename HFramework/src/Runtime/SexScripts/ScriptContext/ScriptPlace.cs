@@ -12,6 +12,7 @@ namespace HFramework.SexScripts.ScriptContext
 		public abstract GameObject GetObject();
 		public abstract void SetUser(GameObject user);
 		public abstract void ClearUser();
+		public abstract bool IsUser(GameObject user);
 		public abstract Vector3 GetCharacterPosition();
 	}
 }

@@ -69,6 +69,10 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
+			if (this.Context.ScriptPlace.IsInUse() && !this.Context.ScriptPlace.IsUser(this.Context.TmpSex)) {
+				return State.Failure;
+			}
+
 			// If there is already a TmpSex object, destroy it (e.g. we are changing active "scene")
 			if (this.Context.TmpSex != null) {
 				GameObject.Destroy(this.Context.TmpSex);
@@ -81,11 +85,6 @@ namespace HFramework.ScriptNodes
 			}
 
 			var prefab = this.Instantiator.CreatePrefab(position);
-			if (this.Context.ScriptPlace.IsInUse()) {
-				PLogger.LogError("Sex place already has a user");
-				return State.Failure;
-			}
-
 			this.Context.ScriptPlace.SetUser(prefab);
 
 			// Pos offset only in CommonSexNpc

@@ -8,6 +8,8 @@ namespace HFramework.SexScripts.ScriptContext
 
 		private Vector3? CharacterPosition;
 
+		private bool WasUserSet = false;
+
 		public SexPlaceScriptPlace(SexPlace place) {
 			this.Place = place;
 			this.CharacterPosition = place.transform.Find("pos")?.position;
@@ -29,6 +31,10 @@ namespace HFramework.SexScripts.ScriptContext
 			return Place.user != null;
 		}
 
+		public override bool IsUser(GameObject user) {
+			return Place.user == user;
+		}
+
 		public override bool HasObject() {
 			return Place.gameObject != null;
 		}
@@ -38,10 +44,15 @@ namespace HFramework.SexScripts.ScriptContext
 		}
 
 		public override void SetUser(GameObject user) {
+			this.WasUserSet = true;
 			Place.user = user;
 		}
 
 		public override void ClearUser() {
+			if (!this.WasUserSet)
+				return;
+
+			this.WasUserSet = false;
 			Place.user = null;
 		}
 
