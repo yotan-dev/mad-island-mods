@@ -31,7 +31,7 @@ namespace HFramework.ScriptNodes
 			if (character == null)
 				return;
 
-			if (character != CommonUtils.GetActivePlayer()) {
+			if (character == CommonUtils.GetActivePlayer()) {
 				if (this.Context.MainNodeState != State.Success) {
 					// Player mesh is only restored at this moment if the rape was a failure.
 					// On success, game will restore the player later, during the revive step.
