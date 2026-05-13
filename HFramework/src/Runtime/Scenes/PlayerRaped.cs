@@ -154,7 +154,9 @@ namespace HFramework.Scenes
 			if (scene == null)
 				return false;
 
-			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Player.gameObject.transform.position, Quaternion.identity);
+			this.TmpSex = Object.Instantiate(scene, this.Player.gameObject.transform.position, Quaternion.identity);
+			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = sexAnim;
 
 			this.SetCharacter();
 
@@ -175,7 +177,9 @@ namespace HFramework.Scenes
 			if (this.TmpSex != null)
 				Object.Destroy(this.TmpSex);
 
-			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Player.gameObject.transform.position, Quaternion.identity);
+			this.TmpSex = Object.Instantiate(scene, this.Player.gameObject.transform.position, Quaternion.identity);
+			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			this.CommonAnim = sexAnim;
 
 			// This is a made up logic. originally SetupSexScene only happens for Man x Large Female
 			this.SetCharacter();
@@ -188,9 +192,6 @@ namespace HFramework.Scenes
 
 		private IEnumerator Battle()
 		{
-			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			this.CommonAnim = sexAnim;
-
 			yield return this.Performer.Perform(ActionType.Battle);
 			yield return this.PerformGrapple();
 
@@ -252,8 +253,6 @@ namespace HFramework.Scenes
 		private IEnumerator PerformSex()
 		{
 			this.SetupSexScene();
-			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			this.CommonAnim = sexAnim;
 
 			yield return this.RunStep(StepNames.Insert, this.Insert);
 			if (!this.CanContinue())

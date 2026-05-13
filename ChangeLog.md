@@ -31,7 +31,7 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 > Gallery and HExtensions won't work in Compatibility/Modern mode for now (I will look into that later)
 
 - **(Legacy)** Fixed Delivery teleporting NPCs to bed instead of walking there
-
+- **(Legacy)** Fixed BossNative Forced scene on Legacy mode (Fixes #22)
 
 **Technical/For modders:**
 
