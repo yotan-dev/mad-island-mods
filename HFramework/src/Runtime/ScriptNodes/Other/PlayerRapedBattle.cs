@@ -39,6 +39,7 @@ namespace HFramework.ScriptNodes.Other
 			}
 
 			// Player was defeated, success
+			PlayerCommon.sex = CommonStates.SexState.GameOver;
 			return State.Success;
 		}
 
