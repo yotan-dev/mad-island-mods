@@ -59,6 +59,20 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 	- Script loading improved: We now use YotanModCore bundle loader - just throw your asset bundle in BepInEx/CustomBundles. If it has a SexScript, it will get loaded.
 
 
+### YoUnnoficialPatches v0.5.0
+- Reworked mosaic fixer
+	- It now fixes both in-game and Preview window
+	- It should now be more reliable, as the previous version was no longer working correctly
+	- It should now be a bit more optmized (not that the previous version had any noticeable performance impact)
+- Fixed existing mosaic fixes so they work again:
+	- Yona x Male Native (Normal / 2-4)
+	- Yona "downed" after defeat
+	- Female Native masturbation (9-1)
+- New mosaic fixes
+	- Takumi "in world"
+	- Takumi x Yona (Forced / 6-1)
+
+
 ## v2026.05.09
 
 ### YotanModCore v2.4.0

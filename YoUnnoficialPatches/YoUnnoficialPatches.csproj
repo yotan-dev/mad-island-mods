@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>YoUnnoficialPatches</AssemblyName>
 		<Product>Yo Unnoficial Patches</Product>
-		<Version>0.4.1</Version>
+		<Version>0.5.0</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 		<RestoreAdditionalProjectSources>
@@ -30,6 +30,9 @@
 	<ItemGroup>
 		<Reference Include="MadIsland-Asssembly">
 			<HintPath>../Assemblies/Assembly-CSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="Spine-Unity">
+			<HintPath>../Assemblies/spine-unity.dll</HintPath>
 		</Reference>
 		<Reference Include="Unity-TextMeshPro">
 			<HintPath>../Assemblies/Unity.TextMeshPro.dll</HintPath>
