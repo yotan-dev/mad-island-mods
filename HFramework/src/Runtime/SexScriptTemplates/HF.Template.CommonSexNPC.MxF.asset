@@ -16,7 +16,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 53fc9f98570b9e8488d307f583a1dc54
-  Position: {x: 791.0001, y: 385.00006}
+  Position: {x: 1023.2942, y: 389.04175}
   Duration: 20
   AnimationName: A_Loop_01
 --- !u!114 &-8139114836365925751
@@ -64,7 +64,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 4f2d89779f0486c4383e57c44e72c013
-  Position: {x: 791, y: 231.00006}
+  Position: {x: 1023.2942, y: 235.04173}
   Targets:
   - ActorIndex: 0
     Mode: -1
@@ -86,7 +86,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: f5fcf4dd010dfea4a89033d911f9514d
-  Position: {x: 792.0001, y: 616.0001}
+  Position: {x: 1024.2942, y: 620.04175}
   EventKey: HF.orgasm
   EmitOnce: 0
   EventArgs:
@@ -103,6 +103,51 @@ MonoBehaviour:
         toNpcIdx: 1
         From: {fileID: 0}
         To: {fileID: 0}
+--- !u!114 &-6899999417762529231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db77b4724573440934c8da61a0b0f2, type: 3}
+  m_Name: WhileNpcsWaiting
+  m_EditorClassIdentifier: 
+  ID: WhileNpcsWaiting
+  ScriptState: 0
+  Started: 0
+  GUID: 2dc89272eb498d941a1503bb289d98f8
+  Position: {x: 609.0616, y: 206.5}
+  Child: {fileID: -6465540745351693633}
+--- !u!114 &-6465540745351693633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Sequence_1
+  ScriptState: 0
+  Started: 0
+  GUID: ff94f82f0b24cf84ca467014c36a0b0b
+  Position: {x: 836, y: 206.99995}
+  Children:
+  - {fileID: 3473068767809857424}
+  - {fileID: -7686643106415815773}
+  - {fileID: 7802511415670578162}
+  - {fileID: -8982206736722550815}
+  - {fileID: -6142119255998758}
+  - {fileID: -3356899016668617151}
+  - {fileID: -7518640671741496551}
+  - {fileID: 6554581931302240408}
+  - {fileID: 241387093041269482}
 --- !u!114 &-6450646663631767542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,15 +206,7 @@ MonoBehaviour:
   Children:
   - {fileID: 485627428291047422}
   - {fileID: -6358600341136279095}
-  - {fileID: 3473068767809857424}
-  - {fileID: -7686643106415815773}
-  - {fileID: 7802511415670578162}
-  - {fileID: -8982206736722550815}
-  - {fileID: -6142119255998758}
-  - {fileID: -3356899016668617151}
-  - {fileID: -7518640671741496551}
-  - {fileID: 6554581931302240408}
-  - {fileID: 241387093041269482}
+  - {fileID: -6899999417762529231}
 --- !u!114 &-3356899016668617151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +223,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 75a56b45cf6f184419bb682c1ee7aa15
-  Position: {x: 791.99994, y: 539}
+  Position: {x: 1024.2942, y: 543.04175}
   AnimationName: A_Finish
 --- !u!114 &-3230199220490701207
 MonoBehaviour:
@@ -260,7 +297,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: fde590cf7d14f8141b42f52458826ee1
-  Position: {x: 791, y: 462.00012}
+  Position: {x: 1023.2942, y: 466.04175}
   Duration: 1
   AnimationName: A_Loop_02
 --- !u!114 &11400000
@@ -324,6 +361,8 @@ MonoBehaviour:
   - {fileID: 241387093041269482}
   - {fileID: -3230199220490701207}
   - {fileID: -8139114836365925751}
+  - {fileID: -6899999417762529231}
+  - {fileID: -6465540745351693633}
   references:
     version: 2
     RefIds: []
@@ -343,7 +382,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: c1c0c8cbc7747e147b0854f394e8e850
-  Position: {x: 792, y: 770.0001}
+  Position: {x: 1024.2942, y: 774.04175}
   Duration: 8
   AnimationName: A_Finish_idle
 --- !u!114 &485627428291047422
@@ -388,7 +427,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 024e865d14c4c9a49b833b7ed0f27593
-  Position: {x: 791, y: 154}
+  Position: {x: 1023.2942, y: 158.04176}
   Instantiator:
     rid: 896238960966893595
   AppearanceSetter:
@@ -426,7 +465,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 46244c683234b4a4eab4e31453d75df7
-  Position: {x: 792.00006, y: 693.0001}
+  Position: {x: 1024.2942, y: 697.04175}
   EventKey: HF.cum.vagina
   EmitOnce: 0
   EventArgs:
@@ -459,7 +498,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: cae483d4ae4adce4eb07e777052d4594
-  Position: {x: 791, y: 308}
+  Position: {x: 1023.2942, y: 312.04175}
   EventKey: HF.penetrate.vagina
   EmitOnce: 0
   EventArgs:

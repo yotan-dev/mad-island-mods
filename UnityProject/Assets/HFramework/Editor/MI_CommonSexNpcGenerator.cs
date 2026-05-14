@@ -105,7 +105,7 @@ namespace HFramework
 				}
 			};
 
-			var sequenceNode = script.Nodes.Find((node) => node.ID == "Sequence") as Sequence;
+			var sequenceNode = script.Nodes.Find((node) => node.ID == "Sequence_1") as Sequence;
 			if (sequenceNode == null) {
 				throw new System.Exception("Sequence node not found");
 			}
