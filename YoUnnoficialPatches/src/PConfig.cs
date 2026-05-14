@@ -6,12 +6,21 @@ namespace YoUnnoficialPatches
 	{
 		public static PConfig Instance { get; private set; } = new PConfig();
 
+		public ConfigEntry<bool> FixTranslationToEnglish { get; private set; }
+
 		public ConfigEntry<bool> DontStartInvalidSex { get; private set; }
-		
+
 		public ConfigEntry<bool> FixMosaic { get; private set; }
 
 		internal void Init(ConfigFile conf)
 		{
+			this.FixTranslationToEnglish = conf.Bind<bool>(
+				"General",
+				"FixTranslationToEnglish",
+				true,
+				"Fixes some untranslated text from Japanese to English. If true, it will fix them, if false, keeps original game text."
+			);
+
 			this.DontStartInvalidSex = conf.Bind<bool>(
 				"General",
 				"DontStartInvalidSex",

@@ -10,10 +10,11 @@ namespace YoUnnoficialPatches
 	{
 		private void Awake() {
 			PLogger._Logger = Logger;
-			
+
 			PConfig.Instance.Init(Config);
 
-			Harmony.CreateAndPatchAll(typeof(TranslationPatch));
+			if (PConfig.Instance.FixTranslationToEnglish.Value)
+				Harmony.CreateAndPatchAll(typeof(TranslationPatch));
 
 			if (PConfig.Instance.DontStartInvalidSex.Value)
 				Harmony.CreateAndPatchAll(typeof(DontStartInvalidSexPatch));
