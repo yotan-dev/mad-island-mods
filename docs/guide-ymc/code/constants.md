@@ -8,4 +8,4 @@ Yotan Mod Core provides a set of constants for you, with values already mapped i
 You can find all the available constants on `YotanModCore.Consts` namespace, and I try to keep them up to date
 whenever a new version of the game is available.
 
-See [API: Consts](/api/YotanModCore.Consts.html) for a list of available constants.
+See [API: Consts](~/api/YotanModCore.Consts.html) for a list of available constants.
