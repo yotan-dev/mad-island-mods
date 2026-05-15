@@ -67,7 +67,7 @@ Original settings:
 
 Custom settings:
 - **DefenceDamagedSE**: SE played when using custom code for your defence logic. (See below)
-	- Values can be found in [AudioSE](/api/YotanModCore.Consts.AudioSE.html)
+	- Values can be found in [AudioSE](~/api/YotanModCore.Consts.AudioSE.html)
 	- Default: `AudioSE.HitMeat01`
 - **IgnoresContact**: Whether this defence performs "contact" logic.
 	- Originally, this is always false. But this gives you the power to make items that NPCs ignore, but can still be damaged by code (and repaired)

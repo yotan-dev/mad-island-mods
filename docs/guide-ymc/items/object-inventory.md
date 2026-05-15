@@ -50,7 +50,7 @@ This configures how the object inventory works.
 
 Original settings:
 - **Type**: This defines how the inventory should work, used for example to control custom interface for each kind of item (e.g.: highlight a slot, show a special UI, etc)
-	- See [Inventory_SlotType](/notes/Inventory_SlotType.md)
+	- See [Inventory_SlotType](~/notes/Inventory_SlotType.md)
 - **Slots**: Leave it in 0. I am not sure if you can customize it (maybe to put initial items? Untested)
 - **Size**: The number of slots this inventory has. For example, if Size = 10, it can hold 10 items.
 

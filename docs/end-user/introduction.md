@@ -21,9 +21,9 @@ Let's not make the life of the developers harder. And responsibly enjoy a modded
 
 If you are a mod developer looking for information on how to create mods, please check the other sections:
 
-- [Guide - Yotan Mod Core](/guide-ymc/introduction.html)
-- [Code notes](/notes/damage-type.html)
-- [API Reference](/api/HFramework.html)
+- [Guide - Yotan Mod Core](~/guide-ymc/introduction.html)
+- [Code notes](~/notes/damage-type.html)
+- [API Reference](~/api/HFramework.html)
 
 
 ## Supported versions

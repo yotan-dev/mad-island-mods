@@ -25,7 +25,7 @@ Fill its fields with the desired data:
 1. **Bench Item Key**: the item key of where this recipe will be available at
 	- Use the item name when crafting on benches (e.g. `bench_wood`)
 	- Use `@other:hand` when it is a craft that does not require a station (player "hand")
-	- Use `@npc:<npc_name>` when it is a craft performed by a NPC. `<npc_name>` is the constant from Yotan Mod Core. (See: [YotanModCore.Consts.NpcID](/api/YotanModCore.Consts.NpcID.html))
+	- Use `@npc:<npc_name>` when it is a craft performed by a NPC. `<npc_name>` is the constant from Yotan Mod Core. (See: [YotanModCore.Consts.NpcID](~/api/YotanModCore.Consts.NpcID.html))
 	- **Note:** We don't support adding craft to new NPCs yet
 2. **Item Key**: the item key of the item to be crafted
 3. **Materials**: the list of required items to craft it.

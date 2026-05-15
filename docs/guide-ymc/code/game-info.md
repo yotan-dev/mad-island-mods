@@ -1,6 +1,6 @@
 # Game info
 
-[GameInfo](/api/YotanModCore.GameInfo.html) provides some useful information about the game, such as the game version, DLC status, etc.
+[GameInfo](~/api/YotanModCore.GameInfo.html) provides some useful information about the game, such as the game version, DLC status, etc.
 
 You can use these to make your mod behave differently based on the running environment.
 

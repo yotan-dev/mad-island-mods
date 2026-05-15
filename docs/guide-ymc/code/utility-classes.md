@@ -6,9 +6,9 @@ Utility classes generally contain static methods that allows you to perform some
 
 Check their API documentation for more information.
 
-- [CommonUtils](/api/YotanModCore.CommonUtils.html)
-- [NameUtils](/api/YotanModCore.NameUtils.html)
-- [StatsUtils](/api/YotanModCore.StatsUtils.html)
+- [CommonUtils](~/api/YotanModCore.CommonUtils.html)
+- [NameUtils](~/api/YotanModCore.NameUtils.html)
+- [StatsUtils](~/api/YotanModCore.StatsUtils.html)
 
 
 ## Extension methods
@@ -26,5 +26,5 @@ and this will make `common` Take 1000 damage.
 
 See each extension API documentation for more information.
 
-- [CommonStatesExtensions](/api/YotanModCore.Extensions.CommonStatesExtensions.html)
-- [SkeletonAnimExtensions](/api/YotanModCore.Extensions.SkeletonAnimExtensions.html)
+- [CommonStatesExtensions](~/api/YotanModCore.Extensions.CommonStatesExtensions.html)
+- [SkeletonAnimExtensions](~/api/YotanModCore.Extensions.SkeletonAnimExtensions.html)
