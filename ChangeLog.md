@@ -72,6 +72,8 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 	- Takumi "in world"
 	- Takumi x Yona (Forced / 6-1)
 - Added config to turn off translation fixes (It is enabled by default)
+- Fixed Herb Village sex not working when "Don't Start Invalid Sex" patch is enabled
+
 
 ## v2026.05.09
 
