@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
+using System.Linq;
 using HFramework.ScriptNodes;
 using Spine.Unity;
 using UnityEngine;
@@ -70,9 +71,9 @@ namespace HFramework.SexScripts.ScriptContext
 		public virtual void LoadActorsVariables() {
 			int idx = 0;
 			foreach (var actor in this.Actors) {
-				var missingLegs = actor.Common.dissect[4] == 1 && actor.Common.dissect[5] == 1;
+				var missingLegs = actor.Common.dissect.ElementAtOrDefault(4) == 1 && actor.Common.dissect.ElementAtOrDefault(5) == 1;
 				this.Variables[$"actors[{idx}].npcId"] = actor.Common.npcID.ToString();
-				this.Variables[$"actors[{idx}].tits"] = actor.Common.parameters[6].ToString("00");
+				this.Variables[$"actors[{idx}].tits"] = actor.Common.parameters.ElementAtOrDefault(6).ToString("00");
 				this.Variables[$"actors[{idx}].disleg"] = missingLegs ? "DisLeg_" : "";
 				idx++;
 			}
