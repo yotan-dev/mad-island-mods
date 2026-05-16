@@ -126,5 +126,14 @@ namespace HFramework.EditorUI.SexScripts
 				OnNodeSelected.Invoke(this);
 			}
 		}
+
+		public override void OnUnselected()
+		{
+			base.OnUnselected();
+			if (OnNodeSelected != null)
+			{
+				OnNodeSelected.Invoke(null);
+			}
+		}
 	}
 }
