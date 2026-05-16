@@ -1,5 +1,6 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Label text="Label created in UI Build" display-tooltip-when-elided="true" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:ListView focusable="true" virtualization-method="DynamicHeight" show-border="true" show-foldout-header="true" header-title="Events" show-add-remove-footer="true" reorderable="true" name="Events_List" />
+    <ui:Label text="&lt;b&gt;(Deprecated) Old event&lt;/b&gt;&#10;(Please update to array above)" display-tooltip-when-elided="true" style="border-top-width: 10px; border-left-color: rgba(168, 168, 168, 255); border-right-color: rgba(168, 168, 168, 255); border-top-color: rgba(168, 168, 168, 255); border-bottom-color: rgba(168, 168, 168, 255); margin-top: 10px; padding-top: 5px;" />
     <ui:DropdownField label="Event" binding-path="eventKey" choices="A,B,C" name="Event_Dropdown" usage-hints="None" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
     <ui:Foldout text="Foldout" name="Default_Inspector" />
 </ui:UXML>

@@ -56,6 +56,9 @@ namespace HFramework.Events
 		[SexEvent("HF", "End")]
 		public static readonly SexEvent<SexEventArgs> OnEnd = new SexEvent<SexEventArgs>("HF.end");
 
+		[SexEvent("HF", "Noop")]
+		public static readonly SexEvent<SexEventArgs> OnNoop = new SexEvent<SexEventArgs>("HF.noop");
+
 		public static readonly Dictionary<string, SexEventInfo> Events = new Dictionary<string, SexEventInfo>();
 
 		static SexEvents()

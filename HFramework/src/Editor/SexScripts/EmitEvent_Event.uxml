@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:DropdownField label="Event" binding-path="eventKey" choices="A,B,C" name="Event_Dropdown" usage-hints="None" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+    <uie:PropertyField name="Properties" label="Args" style="margin-left: 20px;" />
+</ui:UXML>
