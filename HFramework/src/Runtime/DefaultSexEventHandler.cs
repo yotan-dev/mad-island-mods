@@ -33,10 +33,10 @@ namespace HFramework
 		}
 
 		private void OnSexEnd_CommonSexPlayer(object sender, SexEventArgs e) {
-			if (e.ctx.SexScript is not CommonSexPlayerScript commonSexPlayerScript)
+			if (e.Ctx.SexScript is not CommonSexPlayerScript commonSexPlayerScript)
 				return;
 
-			if (!e.ctx.HasSexMeter)
+			if (!e.Ctx.HasSexMeter)
 				return;
 
 			float loveChange = 0f;
@@ -47,7 +47,7 @@ namespace HFramework
 
 			if (loveChange != 0f) {
 				var currentPlayer = CommonUtils.GetActivePlayer();
-				foreach (var npcActor in e.ctx.Actors) {
+				foreach (var npcActor in e.Ctx.Actors) {
 					if (npcActor.Common == currentPlayer)
 						continue;
 
@@ -57,15 +57,15 @@ namespace HFramework
 		}
 
 		private void OnSexEnd_PlayerRaped(object sender, SexEventArgs e) {
-			if (e.ctx.SexScript is not PlayerRapedScript playerRapedScript)
+			if (e.Ctx.SexScript is not PlayerRapedScript playerRapedScript)
 				return;
 
 			// Success means the rape encounter went until the end (player didn't escape)
-			if (e.ctx.MainNodeState != ScriptNode.State.Success)
+			if (e.Ctx.MainNodeState != ScriptNode.State.Success)
 				return;
 
-			var rapist = e.ctx.Actors[0]?.Common ?? null;
-			var victim = e.ctx.Actors[1]?.Common ?? null;
+			var rapist = e.Ctx.Actors[0]?.Common ?? null;
+			var victim = e.Ctx.Actors[1]?.Common ?? null;
 			if (rapist == null || victim == null) {
 				PLogger.LogWarning($"OnSexEnd_PlayerRaped: Rapist or victim is null");
 				return;
@@ -87,7 +87,7 @@ namespace HFramework
 		}
 
 		private void OnSexEnd_CommonSexNpc(object sender, SexEventArgs e) {
-			if (e.ctx.SexScript is not CommonSexNPCScript commonSexNpcScript)
+			if (e.Ctx.SexScript is not CommonSexNPCScript commonSexNpcScript)
 				return;
 
 			if (commonSexNpcScript.TreeState != ScriptNode.State.Success)
@@ -95,8 +95,8 @@ namespace HFramework
 
 			// Sex was completed, every actor loves the others more.
 			// Official code only works for 2 actors, but we are generalizing here so custom scripts may support more than 2.
-			foreach (var actor in e.ctx.Actors) {
-				foreach (var otherActor in e.ctx.Actors) {
+			foreach (var actor in e.Ctx.Actors) {
+				foreach (var otherActor in e.Ctx.Actors) {
 					if (actor == otherActor)
 						continue;
 

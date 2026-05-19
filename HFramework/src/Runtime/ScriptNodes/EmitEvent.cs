@@ -29,6 +29,7 @@ namespace HFramework.ScriptNodes
 		[Obsolete]
 		[HideInInspector] public bool hasEmitted = false;
 
+		[SerializeField]
 		public List<EventEntry> Events = new();
 
 		protected override void OnStart() {
@@ -83,6 +84,13 @@ namespace HFramework.ScriptNodes
 			}
 
 			return State.Success;
+		}
+
+		private void OnValidate() {
+			if (this.EventKey != "HF.noop") {
+				var msg = $"Legacy EmitEvent is deprecated, use the array version instead. Once migrated, put the old version to Noop.\nNode: {this.ID}";
+				Debug.LogWarning(msg);
+			}
 		}
 	}
 }

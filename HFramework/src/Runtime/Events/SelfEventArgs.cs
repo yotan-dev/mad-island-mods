@@ -2,6 +2,7 @@ using System;
 using HFramework.ScriptNodes;
 using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HFramework.Events
 {
@@ -10,17 +11,18 @@ namespace HFramework.Events
 	public class SelfEventArgs : SexEventArgs
 	{
 		[ActorIndex]
-		public int fromNpcIdx;
+		[FormerlySerializedAs("fromNpcIdx")]
+		public int FromNpcIdx;
 		[HideInInspector] public CommonStates Self;
 
 		public override void Populate(CommonContext ctx, EmitEvent node) {
 			base.Populate(ctx, node);
-			Self = ctx.Actors[fromNpcIdx].Common;
+			Self = ctx.Actors[FromNpcIdx].Common;
 		}
 
 		internal void CopyInspectorDataFrom(SelfEventArgs other) {
 			base.CopyInspectorDataFrom(other);
-			this.fromNpcIdx = other.fromNpcIdx;
+			this.FromNpcIdx = other.FromNpcIdx;
 		}
 
 		public override SexEventArgs Clone() {

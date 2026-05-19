@@ -22,7 +22,7 @@ namespace HFramework.Events.EventHandlers
 
 		private void OnActStart(object sender, FromToEventArgs e) {
 			// Forced sex, regardless of the type, is counted as rape on start
-			if (e.ctx.SexScript.Info.ContextTags.Contains(ContextTags.Forced)) {
+			if (e.Ctx.SexScript.Info.ContextTags.Contains(ContextTags.Forced)) {
 				Managers.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Rapes);
 			}
 		}

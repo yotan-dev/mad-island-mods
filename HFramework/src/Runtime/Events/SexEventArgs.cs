@@ -2,6 +2,7 @@ using System;
 using HFramework.ScriptNodes;
 using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HFramework.Events
 {
@@ -18,16 +19,18 @@ namespace HFramework.Events
 		/// </summary>
 		[TextArea(1, 3)]
 		[Tooltip("Optional comment to describe the event or provide additional context. Shown in the inspector for better documentation.")]
-		public string comment;
+		[FormerlySerializedAs("comment")]
+		public string Comment;
 
-		[HideInInspector] public CommonContext ctx;
+		[FormerlySerializedAs("ctx")]
+		[HideInInspector] public CommonContext Ctx;
 
 		public virtual void Populate(CommonContext ctx, EmitEvent node) {
-			this.ctx = ctx;
+			this.Ctx = ctx;
 		}
 
 		internal void CopyInspectorDataFrom(SexEventArgs other) {
-			this.comment = other.comment;
+			this.Comment = other.Comment;
 		}
 
 		public virtual SexEventArgs Clone() {

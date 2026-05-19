@@ -17,7 +17,7 @@ namespace HFramework.Events.EventHandlers
 		}
 
 		private void OnPenetrationStart(object sender, FromToEventArgs e) {
-			if (e.ctx.SexScript.Info.ContextTags.Contains(ContextTags.Normal)) {
+			if (e.Ctx.SexScript.Info.ContextTags.Contains(ContextTags.Normal)) {
 				Managers.sexMN.SexCountChange(e.To, e.From, SexManager.SexCountState.Normal);
 			}
 		}

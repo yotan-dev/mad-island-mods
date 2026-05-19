@@ -78,7 +78,7 @@ namespace HFramework.ScriptNodes
 			}
 
 			SexEvents.OnEnd?.Trigger(new SexEventArgs() {
-				ctx = this.Context,
+				Ctx = this.Context,
 			});
 
 			// We intentionally don't restore the canvas here -- it will be done by the end event

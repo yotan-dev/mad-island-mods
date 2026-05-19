@@ -6,7 +6,6 @@ using HFramework.Events;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 
 namespace HFramework.EditorUI.SexScripts
 {
@@ -71,45 +70,9 @@ namespace HFramework.EditorUI.SexScripts
 		private void SetupEventDropdown(DropdownField eventDropdown, SerializedProperty eventKeyRef) {
 			eventDropdown.choices = this.SexEventsList;
 			eventDropdown.bindingPath = eventKeyRef.propertyPath;
+			eventDropdown.BindProperty(eventKeyRef);
 			eventDropdown.value = eventKeyRef.stringValue;
 		}
-
-		private EventCallback<ChangeEvent<string>> BuildEventDropwdownChangedHandler(DropdownField eventDropdown, PropertyField propField) {
-			return (ChangeEvent<string> e) => {
-				var newValue = e.newValue;
-
-				if (string.IsNullOrEmpty(newValue))
-					return;
-
-				// Unbind the inspector propField from the serialized object
-				// This is necessary because otherwise the changes we make to the serialized object
-				// will not be persisted when the inspector redraws.
-				propField.Unbind();
-
-				var pathParts = eventDropdown.bindingPath.Split('.');
-				var eventPath = string.Join(".", pathParts.Take(pathParts.Length - 1));
-				var eventKeyRef = serializedObject.FindProperty($"{eventPath}.{nameof(EmitEvent.EventEntry.EventKey)}");
-				var eventArgsRef = serializedObject.FindProperty($"{eventPath}.{nameof(EmitEvent.EventEntry.EventArgs)}");
-
-				// We need to manually handle the change callback, or it will lose the update
-				eventKeyRef.stringValue = e.newValue;
-
-				if (SexEvents.Events.TryGetValue(e.newValue, out var eventInfo)) {
-					try {
-						var eventArgs = Activator.CreateInstance(eventInfo.EventType);
-						eventArgsRef.managedReferenceValue = eventArgs;
-						serializedObject.ApplyModifiedProperties();
-						serializedObject.Update();
-					} catch (Exception ex) {
-						Debug.LogError($"Error triggering event {e.newValue}: {ex}");
-					}
-				}
-
-				// Rebinds the propField to the serialized object
-				propField.Bind(serializedObject);
-			};
-		}
-
 		private void SetupFoldout(VisualElement foldout) {
 			// Attach a default inspector to the foldout
 			InspectorElement.FillDefaultInspector(foldout, serializedObject, this);
@@ -123,19 +86,10 @@ namespace HFramework.EditorUI.SexScripts
 			listView.itemsSource = emitEvent.Events;
 
 			// 2. Set how to create a new row (using your template)
-			listView.makeItem = () => {
-				var element = m_EventTemplateXML.CloneTree();
-
-				var eventDropdown = element.Q<DropdownField>("Event_Dropdown");
-				var properties = element.Q<PropertyField>("Properties");
-				eventDropdown.RegisterValueChangedCallback(BuildEventDropwdownChangedHandler(eventDropdown, properties));
-
-				return element;
-			};
-
-			var eventsArray = serializedObject.FindProperty("Events");
+			listView.makeItem = () => m_EventTemplateXML.CloneTree();
 
 			// 3. Initialize new items when added
+			var eventsArray = serializedObject.FindProperty(nameof(EmitEvent.Events));
 			listView.itemsAdded += (indices) => {
 				foreach (var i in indices) {
 					if (emitEvent.Events[i] == null) {
@@ -145,13 +99,14 @@ namespace HFramework.EditorUI.SexScripts
 				}
 			};
 
+			// 4. Remove items when removed
 			listView.itemsRemoved += (indices) => {
 				foreach (var i in indices) {
 					eventsArray.DeleteArrayElementAtIndex(i);
 				}
 			};
 
-			// 4. Set how to bind data to that row
+			// 5. When the UI refreshes the binding between visual data <-> backing data, update the bindings
 			listView.bindItem = (element, i) => {
 				var entry = emitEvent.Events[i];
 
@@ -163,12 +118,30 @@ namespace HFramework.EditorUI.SexScripts
 				var eventArgsRef = eventsArray.GetArrayElementAtIndex(i).FindPropertyRelative("EventArgs");
 
 				// Bind the property field
-				propField.bindingPath = eventArgsRef.propertyPath;
-				if (eventArgsRef.managedReferenceValue != null) {
-					propField.Bind(serializedObject);
-				}
-
 				this.SetupEventDropdown(eventDropdown, eventKeyRef);
+				propField.BindProperty(eventArgsRef);
+
+				// We look at changes on eventDropdown so we can recreate the event args object
+				eventDropdown.TrackPropertyValue(eventKeyRef, (ch) => {
+					if (SexEvents.Events.TryGetValue(ch.stringValue, out var eventInfo)) {
+						try {
+							var eventArgs = Activator.CreateInstance(eventInfo.EventType);
+							eventArgsRef.managedReferenceValue = eventArgs;
+							serializedObject.ApplyModifiedProperties();
+
+							// Rebind the propField so it reflects the changed object
+							propField.Bind(serializedObject);
+						} catch (Exception ex) {
+							Debug.LogError($"Error triggering event {ch.stringValue}: {ex}");
+						}
+					}
+				});
+			};
+
+			// 6. When the UI unbinds the item, unbind the event dropdown, or we will duplicate it
+			listView.unbindItem = (element, i) => {
+				var eventDropdown = element.Q<DropdownField>("Event_Dropdown");
+				eventDropdown.Unbind();
 			};
 		}
 

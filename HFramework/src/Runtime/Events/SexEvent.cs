@@ -1,21 +1,23 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace HFramework.Events
 {
 	[Experimental]
 	public class SexEvent<T> : ISexEvent<T> where T : SexEventArgs, new()
 	{
-		public readonly string id;
+		[FormerlySerializedAs("id")]
+		public readonly string Id;
 
 		public event EventHandler<T> Triggered;
 
 		public SexEvent(string id) {
-			this.id = id;
+			this.Id = id;
 		}
 
 		public void Trigger(T args) {
 			// Implementation here
-			PLogger.LogError($"Event triggered: {id}");
+			PLogger.LogError($"Event triggered: {Id}");
 			Triggered?.Invoke(this, args);
 		}
 
@@ -28,7 +30,7 @@ namespace HFramework.Events
 		}
 
 		public string GetId() {
-			return id;
+			return Id;
 		}
 	}
 }

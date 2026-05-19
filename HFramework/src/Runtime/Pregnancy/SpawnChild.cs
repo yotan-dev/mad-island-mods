@@ -155,7 +155,7 @@ namespace HFramework.Pregnancy
 			Managers.mn.randChar.GenChildSet(tmpGenerate, this.Girl);
 
 			var eventArgs = new BirthEventArgs() {
-				ctx = ctx,
+				Ctx = ctx,
 				MotherNpcIdx = 0,
 				Mother = this.Girl,
 				WasBorn = true,

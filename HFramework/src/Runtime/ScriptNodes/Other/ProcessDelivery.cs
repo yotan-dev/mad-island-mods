@@ -36,7 +36,7 @@ namespace HFramework.ScriptNodes.Other
 		protected override State OnUpdate() {
 			if (!Born) {
 				SexEvents.OnStillbirth.Trigger(new BirthEventArgs() {
-					ctx = this.Context,
+					Ctx = this.Context,
 					MotherNpcIdx = PregnantActor,
 					Mother = PregnantCommon,
 					WasBorn = false,
