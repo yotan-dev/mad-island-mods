@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HFramework.ScriptNodes;
@@ -49,6 +50,7 @@ namespace HFramework.SexScripts.ScriptContext
 		/// We use that to hide the skip button on Teardown
 		/// Note: We only expect to have 1 script touching the skip button at any given time
 		/// </summary>
+		[Obsolete("SkippableSection is handling everything by itself, this will be removed soon")]
 		public bool HasChangedSkipButtonVisibility { get; set; }
 
 		/// <summary>

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using YotanModCore;
 
@@ -8,6 +9,7 @@ namespace HFramework.ScriptNodes.UI
 	/// </summary>
 	[Experimental]
 	[ScriptNode("HFramework", "UI/Toggle Skip Button")]
+	[Obsolete("Skippable Section is now taking care of that.")]
 	public class ToggleSkipButton : Action
 	{
 		[Tooltip("Expected visibility state of the skip button")]
@@ -24,6 +26,10 @@ namespace HFramework.ScriptNodes.UI
 		}
 
 		protected override void OnStop() {
+		}
+
+		public void OnValidate() {
+			Debug.LogError("ToggleSkipButton is obsolete and should not be used. Migrate to Skippable Section instead.");
 		}
 	}
 }

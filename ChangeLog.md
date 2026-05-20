@@ -85,6 +85,13 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 			- This better represents that "this is something happening on the actor", and you can have multiple actors.
 			- This goes as the opposite of a `FromToEventArgs` (where `From` does something to `To`)
 
+	- Simplification of "Skip" functionality:
+		- `SkippableSection` is now a Sequence node that handles the entire "Skip" flow internally.
+			- It will show the Skip button once the script enters it
+			- It will take care of hiding the button when the script exits it
+			- When skipping, it will skip each children, except for the new `DontSkipSequence` node
+		- ⚠️ `ToggleSkipButton` is now obsolete and should not be used. Migrate to `SkippableSection` instead.
+		- New `DontSkipSequence` node added, it is a Sequece node to be used as direct child of `SkippableSection`, childrens of this node will be executed regardless of the user having skipped. For example, if you have an event that must happen, regardless of the animation being skipped, this is where it goes.
 
 
 ### YoUnnoficialPatches v0.5.0

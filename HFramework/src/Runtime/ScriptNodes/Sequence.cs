@@ -4,7 +4,7 @@ namespace HFramework.ScriptNodes
 	[ScriptNode("HFramework", "Flow/Sequence")]
 	public class Sequence : Composite
 	{
-		private int Current;
+		protected int Current;
 
 		protected override void OnStart() {
 			Current = 0;

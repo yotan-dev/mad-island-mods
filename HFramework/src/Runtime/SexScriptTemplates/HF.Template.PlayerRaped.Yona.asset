@@ -16,7 +16,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: ae2351d5ca3e7b74e861a47a07000d98
-  Position: {x: 859.99994, y: 1484.8726}
+  Position: {x: 670.50006, y: 1400.739}
   AnimationName: A_Finish
 --- !u!114 &-8284072431493890315
 MonoBehaviour:
@@ -91,8 +91,27 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 42cf3fe92cdbc2f48bc2c9af8579ffe0
-  Position: {x: 859.50006, y: 882.00006}
+  Position: {x: 670.50006, y: 797.7389}
   AnimationName: A_AttackToSex
+--- !u!114 &-6854401491882156260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7d725d31f0f7c42a2e4440ccfa43fd, type: 3}
+  m_Name: DontSkipSequence
+  m_EditorClassIdentifier: 
+  ID: DontSkipSequence_1
+  ScriptState: 0
+  Started: 0
+  GUID: fa0730f6c60fd2c4f80928d7fe2ad421
+  Position: {x: 670.50006, y: 1490.739}
+  Children:
+  - {fileID: 8920156079527373583}
 --- !u!114 &-5603551982026585610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +194,25 @@ MonoBehaviour:
       type: {class: WaitTime, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
       data:
         DurationSeconds: 1
+--- !u!114 &-3935916610136412210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7d725d31f0f7c42a2e4440ccfa43fd, type: 3}
+  m_Name: DontSkipSequence
+  m_EditorClassIdentifier: 
+  ID: DontSkipSequence
+  ScriptState: 0
+  Started: 0
+  GUID: 1d47169c04a85b340818a39d29d19941
+  Position: {x: 670.50006, y: 912.73895}
+  Children:
+  - {fileID: -575570380016653429}
 --- !u!114 &-3924534657538630888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +229,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: b9833fdde85c40b478eed588804e3129
-  Position: {x: 860, y: 1101.745}
+  Position: {x: 670.50006, y: 1017.7389}
   AnimationName: A_Loop_01
 --- !u!114 &-3541338480485807926
 MonoBehaviour:
@@ -293,7 +331,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 11d883c128c159f4bb3e60cbff74387a
-  Position: {x: 859.50006, y: 1000}
+  Position: {x: 864.5002, y: 912.73895}
   EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
@@ -334,7 +372,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 48dc6ff2-0a9b-4bf0-aa39-6f118c23b853
-  Position: {x: 858.00006, y: 1764.0277}
+  Position: {x: 668.5002, y: 1679.739}
   WaitKind:
     rid: 1355207513438945315
   references:
@@ -402,7 +440,6 @@ MonoBehaviour:
   - {fileID: -7654593463948886281}
   - {fileID: 6205033370349065049}
   - {fileID: -1285692220723182979}
-  - {fileID: 105491640201646810}
   - {fileID: -4959890244782332450}
   - {fileID: -8284072431493890315}
   - {fileID: 1155122323243938881}
@@ -412,7 +449,6 @@ MonoBehaviour:
   - {fileID: -7078863413856293504}
   - {fileID: 2577199382060583470}
   - {fileID: -575570380016653429}
-  - {fileID: 7771861202403800825}
   - {fileID: -3924534657538630888}
   - {fileID: 9123074030494952024}
   - {fileID: 5717554429978215426}
@@ -421,27 +457,11 @@ MonoBehaviour:
   - {fileID: 7103647529921291260}
   - {fileID: -24137920869074890}
   - {fileID: 8920156079527373583}
+  - {fileID: -3935916610136412210}
+  - {fileID: -6854401491882156260}
   references:
     version: 2
     RefIds: []
---- !u!114 &105491640201646810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36e1652c0f1a2e94c9c86c0e6494d550, type: 3}
-  m_Name: ToggleSkipButton
-  m_EditorClassIdentifier: 
-  ID: Skip_Show
-  ScriptState: 0
-  Started: 0
-  GUID: 5c5d9ec4d07c04946a22e3bd2c340400
-  Position: {x: 935.85004, y: 717.25}
-  ToVisibility: 1
 --- !u!114 &1155122323243938881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,7 +534,17 @@ MonoBehaviour:
   Started: 0
   GUID: 27683d80f8c573946a899c4302c3c779
   Position: {x: 370.00003, y: 882.00006}
-  Child: {fileID: 7771861202403800825}
+  Children:
+  - {fileID: -7078863413856293504}
+  - {fileID: -3935916610136412210}
+  - {fileID: -3924534657538630888}
+  - {fileID: 9123074030494952024}
+  - {fileID: 5717554429978215426}
+  - {fileID: 8174485126399532403}
+  - {fileID: -8530595090054531352}
+  - {fileID: -6854401491882156260}
+  - {fileID: 7103647529921291260}
+  - {fileID: -24137920869074890}
 --- !u!114 &2851730882415547431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +585,6 @@ MonoBehaviour:
   - {fileID: -8284072431493890315}
   - {fileID: 1155122323243938881}
   - {fileID: -4578782314541257347}
-  - {fileID: 105491640201646810}
 --- !u!114 &5717554429978215426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +601,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: ab23d285-5d78-4503-b657-ae15b7bfced3
-  Position: {x: 860, y: 1296.8025}
+  Position: {x: 670.50006, y: 1212.7389}
   AnimationName: A_Loop_02
 --- !u!114 &6163285598619062546
 MonoBehaviour:
@@ -629,36 +658,8 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 5cd931b305bab09478d82b495b37fd2d
-  Position: {x: 859.0001, y: 1665.0277}
+  Position: {x: 669.5001, y: 1580.739}
   AnimationName: A_Finish_idle
---- !u!114 &7771861202403800825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
-  m_Name: Sequence
-  m_EditorClassIdentifier: 
-  ID: Sex_seq
-  ScriptState: 0
-  Started: 0
-  GUID: 85fc3f6ad80f8e24aa09428f73d91232
-  Position: {x: 647, y: 882.00006}
-  Children:
-  - {fileID: -7078863413856293504}
-  - {fileID: -575570380016653429}
-  - {fileID: -3924534657538630888}
-  - {fileID: 9123074030494952024}
-  - {fileID: 5717554429978215426}
-  - {fileID: 8174485126399532403}
-  - {fileID: -8530595090054531352}
-  - {fileID: 8920156079527373583}
-  - {fileID: 7103647529921291260}
-  - {fileID: -24137920869074890}
 --- !u!114 &8174485126399532403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,7 +676,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 32aab13a-0686-4dcf-b8c8-593495d37610
-  Position: {x: 860, y: 1388.0001}
+  Position: {x: 670.50006, y: 1303.7389}
   WaitKind:
     rid: 1355207513438945314
   references:
@@ -702,7 +703,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: f55c190184c1e464bba93c7cf9c6c8db
-  Position: {x: 866, y: 1574.3121}
+  Position: {x: 884.5002, y: 1490.739}
   EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
@@ -781,7 +782,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 41ee6ad4-b75e-4381-bd88-b3e134e08a88
-  Position: {x: 860, y: 1204}
+  Position: {x: 670.50006, y: 1119.7389}
   WaitKind:
     rid: 1355207513438945313
   references:
