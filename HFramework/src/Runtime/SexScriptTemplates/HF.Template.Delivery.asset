@@ -199,19 +199,27 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 43e1e98633d539444b08ff27a2388ed5
-  Position: {x: 163.99, y: 251.275}
-  EventKey: HF.end
+  Position: {x: 158.00002, y: 247.50005}
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 1355207488545751072
+    rid: 1355207895819485450
   hasEmitted: 0
+  Events:
+  - EventKey: HF.end
+    EventArgs:
+      rid: 1355207895819485449
   references:
     version: 2
     RefIds:
-    - rid: 1355207488545751072
+    - rid: 1355207895819485449
       type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
+        Comment: 
+    - rid: 1355207895819485450
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
 --- !u!114 &-2513433558535529186
 MonoBehaviour:
   m_ObjectHideFlags: 0

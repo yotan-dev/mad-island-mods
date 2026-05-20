@@ -92,5 +92,15 @@ namespace HFramework.ScriptNodes
 				Debug.LogWarning(msg);
 			}
 		}
+
+		public void RemoveEvent(string eventKey) {
+			if (!this.TryRemoveEvent(eventKey)) {
+				throw new System.Exception($"Event not found: {eventKey}");
+			}
+		}
+
+		public bool TryRemoveEvent(string eventKey) {
+			return this.Events.RemoveAll(entry => entry.EventKey == eventKey) > 0;
+		}
 	}
 }

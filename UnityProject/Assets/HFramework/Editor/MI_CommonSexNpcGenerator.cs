@@ -1,3 +1,4 @@
+using HFramework.Events;
 using HFramework.ScriptGenerator;
 using HFramework.ScriptNodes;
 using HFramework.ScriptNodes.PrefabSetup;
@@ -105,18 +106,8 @@ namespace HFramework
 				}
 			};
 
-			var sequenceNode = script.Nodes.Find((node) => node.ID == "Sequence_1") as Sequence;
-			if (sequenceNode == null) {
-				throw new System.Exception("Sequence node not found");
-			}
-
-			var emitCumNode = sequenceNode.Children.Find((child) => child.ID == "Emit_Cum");
-			if (emitCumNode == null) {
-				throw new System.Exception("Emit_Cum node not found");
-			}
-
-			script.RemoveChild(sequenceNode, emitCumNode);
-			script.Nodes.Remove(emitCumNode);
+			script.MustFindNodeById<EmitEvent>("Emit_Orgasm")
+				.RemoveEvent(SexEvents.OnCumOnVagina.Id);
 
 			return script;
 		}

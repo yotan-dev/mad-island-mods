@@ -58,6 +58,34 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 		- New script variable `actors[{index}].npcId` added
 	- Script loading improved: We now use YotanModCore bundle loader - just throw your asset bundle in BepInEx/CustomBundles. If it has a SexScript, it will get loaded.
 
+- **Part 2 (after first preview release)**
+	- `EmitEvent` / Event system changes:
+		- `EmitEvent` node can now emit multiple events
+			- This allows for easier customization by other mods (e.g. you can just insert another event where one exists)
+			- This saves some nodes from scripts (mostly the combo of Orgasm + Cum)
+		- ⚠️ Many events were renamed and parameter types changed (This is not backwards compatible, so scripts will break):
+			- This aims at making their names more generic while at the same time groupable.
+			- Changed events:
+
+				| Old Name                  | New Name                       |
+				| ------------------------- | ------------------------------ |
+				| `HF.perform.scissoring`   | `HF.interact.vagina2vagina`    |
+				| `HF.perform.titfuck`      | `HF.interact.penis2tits`       |
+				| `HF.perform.handjob`      | `HF.interact.penis2hand`       |
+				| `HF.penetrate.vagina`     | `HF.interact.penis2vagina`     |
+				| `HF.penetrate.ass`        | `HF.interact.penis2ass`        |
+				| `HF.penetrate.mouth`      | `HF.interact.penis2mouth`      |
+				| `HF.lick.vagina`          | `HF.interact.tongue2vagina`    |
+				| `HF.perform.masturbation` | `HF.self-interact.hand2vagina` |
+
+			- Changed parameters:
+				- `OnOrgasm` now uses `SelfEventArgs` instead of `FromToEventArgs`
+
+		- `SelfEventArgs`'s `FromNpcIdx` is now deprecated, replaced by `ActorsIdx`.
+			- This better represents that "this is something happening on the actor", and you can have multiple actors.
+			- This goes as the opposite of a `FromToEventArgs` (where `From` does something to `To`)
+
+
 
 ### YoUnnoficialPatches v0.5.0
 - Reworked mosaic fixer

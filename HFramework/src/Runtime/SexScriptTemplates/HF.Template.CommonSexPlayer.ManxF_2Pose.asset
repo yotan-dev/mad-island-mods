@@ -95,7 +95,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 3e94ebe5-fd15-4061-b23f-685435fb716c
-  Position: {x: 1656.0001, y: 1266.0001}
+  Position: {x: 1651, y: 1189}
   AnimationName: B_Finish_idle
 --- !u!114 &-6186982124030043810
 MonoBehaviour:
@@ -113,7 +113,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 423b2fa307fff5e44936c09e13b2da63
-  Position: {x: 1242, y: 1360}
+  Position: {x: 1237, y: 1283}
   Options:
   - Id: caress
     Text: Caress
@@ -258,7 +258,6 @@ MonoBehaviour:
   - {fileID: -4524825916772174491}
   - {fileID: 7854282548817083961}
   - {fileID: -907304987173910213}
-  - {fileID: -2115384989609936971}
   - {fileID: 1553222899693348535}
   - {fileID: -6186982124030043810}
   ChoiceId: finish
@@ -280,39 +279,6 @@ MonoBehaviour:
   GUID: cc0e78af-9fbf-4483-9928-80e30affeb01
   Position: {x: 1656.0001, y: 1007.0001}
   AnimationName: B_Finish
---- !u!114 &-2115384989609936971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
-  m_Name: EmitEvent
-  m_EditorClassIdentifier: 
-  ID: Emit_Cum
-  ScriptState: 0
-  Started: 0
-  GUID: f9a73c3180a2e7e44ae712c41f9bc941
-  Position: {x: 1242, y: 1179}
-  EventKey: HF.cum.vagina
-  EmitOnce: 0
-  EventArgs:
-    rid: 1355207478976446491
-  hasEmitted: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 1355207478976446491
-      type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
-      data:
-        comment: 
-        fromNpcIdx: 0
-        toNpcIdx: 1
-        From: {fileID: 0}
-        To: {fileID: 0}
 --- !u!114 &-1652254914727666239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,22 +348,30 @@ MonoBehaviour:
   Started: 0
   GUID: b2f6b09204d3ed84a9cfd9d4e981ad57
   Position: {x: 1219.6963, y: -76.50015}
-  EventKey: HF.penetrate.vagina
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 1355207478976446489
+    rid: 1355207895819485438
   hasEmitted: 0
+  Events:
+  - EventKey: HF.interact.penis2vagina
+    EventArgs:
+      rid: 1355207895819485437
   references:
     version: 2
     RefIds:
-    - rid: 1355207478976446489
+    - rid: 1355207895819485437
       type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
-        fromNpcIdx: 0
-        toNpcIdx: 1
+        Comment: 
+        FromNpcIdx: 0
+        ToNpcIdx: 1
         From: {fileID: 0}
         To: {fileID: 0}
+    - rid: 1355207895819485438
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
 --- !u!114 &-1058413785889156696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,23 +446,42 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 228fbb58cbd77a841b0052c75321f23a
-  Position: {x: 1241, y: 1091}
-  EventKey: HF.orgasm
+  Position: {x: 1240, y: 1092}
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 1355207478976446490
+    rid: 1355207895819485448
   hasEmitted: 0
+  Events:
+  - EventKey: HF.orgasm
+    EventArgs:
+      rid: 1355207895819485464
+  - EventKey: HF.cum.vagina
+    EventArgs:
+      rid: 1355207895819485434
   references:
     version: 2
     RefIds:
-    - rid: 1355207478976446490
+    - rid: 1355207895819485434
       type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
-        fromNpcIdx: 0
-        toNpcIdx: 0
+        Comment: 
+        FromNpcIdx: 0
+        ToNpcIdx: 1
         From: {fileID: 0}
         To: {fileID: 0}
+    - rid: 1355207895819485448
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
+    - rid: 1355207895819485464
+      type: {class: SelfEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
+        FromNpcIdx: 0
+        ActorsIdx: 0000000001000000
+        Self: {fileID: 0}
+        Actors: []
 --- !u!114 &-646771552133167632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,18 +499,26 @@ MonoBehaviour:
   Started: 0
   GUID: 6f9e0b7b120805d43b9046296d196c8c
   Position: {x: 354, y: 262}
-  EventKey: HF.end
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 1355207478976446488
+    rid: 1355207895819485440
   hasEmitted: 0
+  Events:
+  - EventKey: HF.end
+    EventArgs:
+      rid: 1355207895819485439
   references:
     version: 2
     RefIds:
-    - rid: 1355207478976446488
+    - rid: 1355207895819485439
       type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
+        Comment: 
+    - rid: 1355207895819485440
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
 --- !u!114 &-418676651100972087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +560,7 @@ MonoBehaviour:
   - Index: 1
     SexState: -1
     ActType: 1
+    NpcReaction: -1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +649,6 @@ MonoBehaviour:
   - {fileID: 7854282548817083961}
   - {fileID: 1553222899693348535}
   - {fileID: -907304987173910213}
-  - {fileID: -2115384989609936971}
   - {fileID: -6186982124030043810}
   - {fileID: -3426560435013139417}
   - {fileID: 9215966033675367668}
@@ -668,7 +669,6 @@ MonoBehaviour:
   - {fileID: -2560870281799291710}
   - {fileID: -6204211780958349511}
   - {fileID: 122489859031334398}
-  - {fileID: 1203608256758032112}
   - {fileID: 3959998607837978143}
   references:
     version: 2
@@ -690,22 +690,41 @@ MonoBehaviour:
   Started: 0
   GUID: e5e3e408-64a5-4d5b-9916-ded75e5476d5
   Position: {x: 1657.0001, y: 1092.0001}
-  EventKey: HF.orgasm
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 1355207488545751066
+    rid: 1355207895819485447
   hasEmitted: 0
+  Events:
+  - EventKey: HF.orgasm
+    EventArgs:
+      rid: 1355207895819485466
+  - EventKey: HF.cum.vagina
+    EventArgs:
+      rid: 1355207895819485436
   references:
     version: 2
     RefIds:
-    - rid: 1355207488545751066
+    - rid: 1355207895819485436
       type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
-        fromNpcIdx: 0
-        toNpcIdx: 0
+        Comment: 
+        FromNpcIdx: 0
+        ToNpcIdx: 1
         From: {fileID: 0}
         To: {fileID: 0}
+    - rid: 1355207895819485447
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
+    - rid: 1355207895819485466
+      type: {class: SelfEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
+        FromNpcIdx: 0
+        ActorsIdx: 0000000001000000
+        Self: {fileID: 0}
+        Actors: []
 --- !u!114 &1020196183117298594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,40 +779,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 354eec1737bfc3a4eb247c735b0af314
-  Position: {x: 329, y: 135}
---- !u!114 &1203608256758032112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9188b30615e518e47aa7fe5d3eedb758, type: 3}
-  m_Name: EmitEvent
-  m_EditorClassIdentifier: 
-  ID: Emit_Cum_b
-  ScriptState: 0
-  Started: 0
-  GUID: 7419b2f0-d982-4633-ad72-c8b92968267d
-  Position: {x: 1658, y: 1179}
-  EventKey: HF.cum.vagina
-  EmitOnce: 0
-  EventArgs:
-    rid: 1355207488545751067
-  hasEmitted: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 1355207488545751067
-      type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
-      data:
-        comment: 
-        fromNpcIdx: 0
-        toNpcIdx: 1
-        From: {fileID: 0}
-        To: {fileID: 0}
+  Position: {x: 354, y: 135}
 --- !u!114 &1549204812262559626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,7 +814,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 3940359ddc07ee241b45ae398961b88d
-  Position: {x: 1240, y: 1264.88}
+  Position: {x: 1235, y: 1188}
   AnimationName: A_Finish_idle
 --- !u!114 &2125583095763255109
 MonoBehaviour:
@@ -948,7 +934,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: c20f4317-133d-4b51-ae1f-f2a9ecb21648
-  Position: {x: 1658.0002, y: 1361.0001}
+  Position: {x: 1653, y: 1284}
   Options:
   - Id: caress
     Text: Caress
@@ -1409,7 +1395,6 @@ MonoBehaviour:
   - {fileID: -4194741870637886634}
   - {fileID: -2560870281799291710}
   - {fileID: 122489859031334398}
-  - {fileID: 1203608256758032112}
   - {fileID: -6204211780958349511}
   - {fileID: 3959998607837978143}
   ChoiceId: finish_b

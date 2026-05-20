@@ -12,7 +12,11 @@ namespace HFramework
 		internal static DefaultSexEventHandler Instance { get; private set; } = new DefaultSexEventHandler();
 
 		public void Init() {
+#pragma warning disable CS0618 // Type or member is obsolete
 			SexEvents.OnPerformMasturbation.Triggered += this.OnMasturbation;
+#pragma warning restore CS0618 // Type or member is obsolete
+			SexEvents.OnSelfHand2Vagina.Triggered += this.OnMasturbation;
+			SexEvents.OnSelfHand2Penis.Triggered += this.OnMasturbation;
 
 			SexEvents.OnCumOnVagina.Triggered += this.OnCumOnVagina;
 

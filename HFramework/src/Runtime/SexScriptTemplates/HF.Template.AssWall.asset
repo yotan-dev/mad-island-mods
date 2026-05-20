@@ -410,22 +410,41 @@ MonoBehaviour:
   Started: 0
   GUID: d05f259bfe2931a4398d536fa449fb26
   Position: {x: 795.978, y: 1394.34}
-  EventKey: HF.cum.vagina
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 896239005865082908
+    rid: 1355207895819485423
   hasEmitted: 0
+  Events:
+  - EventKey: HF.orgasm
+    EventArgs:
+      rid: 1355207895819485455
+  - EventKey: HF.cum.vagina
+    EventArgs:
+      rid: 1355207895819485422
   references:
     version: 2
     RefIds:
-    - rid: 896239005865082908
+    - rid: 1355207895819485422
       type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
-        fromNpcIdx: 0
-        toNpcIdx: 1
+        Comment: 
+        FromNpcIdx: 0
+        ToNpcIdx: 1
         From: {fileID: 0}
         To: {fileID: 0}
+    - rid: 1355207895819485423
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
+    - rid: 1355207895819485455
+      type: {class: SelfEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
+        FromNpcIdx: 0
+        ActorsIdx: 0000000001000000
+        Self: {fileID: 0}
+        Actors: []
 --- !u!114 &1367384003010236915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,20 +527,28 @@ MonoBehaviour:
   Started: 0
   GUID: bc2e86d459c90f54992f98de13680694
   Position: {x: 797.978, y: 494.34}
-  EventKey: HF.penetrate.vagina
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 896239005865082907
+    rid: 1355207895819485425
   hasEmitted: 0
+  Events:
+  - EventKey: HF.interact.penis2vagina
+    EventArgs:
+      rid: 1355207895819485456
   references:
     version: 2
     RefIds:
-    - rid: 896239005865082907
+    - rid: 1355207895819485425
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
+    - rid: 1355207895819485456
       type: {class: FromToEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
-        fromNpcIdx: 0
-        toNpcIdx: 1
+        Comment: 
+        FromNpcIdx: 0
+        ToNpcIdx: 1
         From: {fileID: 0}
         To: {fileID: 0}
 --- !u!114 &5329526862143839732
@@ -588,18 +615,26 @@ MonoBehaviour:
   Started: 0
   GUID: bc10d2faedabf2a4ab5fa462dd25d369
   Position: {x: 186.99998, y: 313.49997}
-  EventKey: HF.end
+  EventKey: HF.noop
   EmitOnce: 0
   EventArgs:
-    rid: 1355207488545751070
+    rid: 1355207895819485418
   hasEmitted: 0
+  Events:
+  - EventKey: HF.end
+    EventArgs:
+      rid: 1355207895819485417
   references:
     version: 2
     RefIds:
-    - rid: 1355207488545751070
+    - rid: 1355207895819485417
       type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
       data:
-        comment: 
+        Comment: 
+    - rid: 1355207895819485418
+      type: {class: SexEventArgs, ns: HFramework.Events, asm: HFramework}
+      data:
+        Comment: 
 --- !u!114 &7171871197247311540
 MonoBehaviour:
   m_ObjectHideFlags: 0
