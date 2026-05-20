@@ -30,8 +30,9 @@ namespace HFramework.EditorUI.SexScripts
 
 			NodeEvents.OnNodeChanged += OnNodeChanged;
 
-			CreateInputPorts();
-			CreateOutputPorts();
+			this.CreateInputPorts();
+			this.CreateOutputPorts();
+			this.SetupClasses();
 		}
 
 		private void OnNodeChanged(ScriptNode node)
@@ -42,6 +43,21 @@ namespace HFramework.EditorUI.SexScripts
 			if (this.title != node.ID) {
 				this.title = node.ID;
 				NodeEvents.TriggerNodeIDChanged(node);
+			}
+
+			this.SetupClasses();
+		}
+
+		private void SetupClasses() {
+			this.RemoveFromClassList("warning");
+			this.RemoveFromClassList("error");
+
+			if (this.node.HasWarnings()) {
+				this.AddToClassList("warning");
+			}
+
+			if (this.node.HasErrors()) {
+				this.AddToClassList("error");
 			}
 		}
 

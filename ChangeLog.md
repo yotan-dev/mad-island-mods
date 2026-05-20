@@ -59,6 +59,8 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 	- Script loading improved: We now use YotanModCore bundle loader - just throw your asset bundle in BepInEx/CustomBundles. If it has a SexScript, it will get loaded.
 
 - **Part 2 (after first preview release)**
+	- SexScript nodes with Errors/Warnings are now highlighted in Red/Yellow
+
 	- `EmitEvent` / Event system changes:
 		- `EmitEvent` node can now emit multiple events
 			- This allows for easier customization by other mods (e.g. you can just insert another event where one exists)

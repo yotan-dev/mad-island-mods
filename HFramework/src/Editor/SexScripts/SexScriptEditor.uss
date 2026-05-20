@@ -4,3 +4,11 @@ GridBackground {
     --thick-line-color: rgba(193, 196, 192, 0.1);
     --spacing: 15;
 }
+
+NodeView.warning {
+    background-color: rgba(255, 247, 0, 255);
+}
+
+NodeView.error {
+    background-color: rgb(255, 13, 0);
+}

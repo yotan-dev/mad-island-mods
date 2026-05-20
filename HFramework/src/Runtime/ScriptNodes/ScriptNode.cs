@@ -60,12 +60,19 @@ namespace HFramework.ScriptNodes
 			return node;
 		}
 
+		protected virtual void OnValidate() {
 #if UNITY_EDITOR
-		private void OnValidate() {
 			NodeEvents.TriggerNodeChanged(this);
-		}
 #endif
+		}
 
+		public virtual bool HasWarnings() {
+			return false;
+		}
+
+		public virtual bool HasErrors() {
+			return false;
+		}
 		public virtual void ClearChildren() {
 
 		}

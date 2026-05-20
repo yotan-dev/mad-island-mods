@@ -28,8 +28,13 @@ namespace HFramework.ScriptNodes.UI
 		protected override void OnStop() {
 		}
 
-		public void OnValidate() {
+		protected override void OnValidate() {
+			base.OnValidate();
 			Debug.LogError("ToggleSkipButton is obsolete and should not be used. Migrate to Skippable Section instead.");
+		}
+
+		public override bool HasErrors() {
+			return true;
 		}
 	}
 }

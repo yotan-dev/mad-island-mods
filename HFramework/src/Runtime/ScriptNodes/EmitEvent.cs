@@ -86,11 +86,16 @@ namespace HFramework.ScriptNodes
 			return State.Success;
 		}
 
-		private void OnValidate() {
+		protected override void OnValidate() {
+			base.OnValidate();
 			if (this.EventKey != "HF.noop") {
 				var msg = $"Legacy EmitEvent is deprecated, use the array version instead. Once migrated, put the old version to Noop.\nNode: {this.ID}";
 				Debug.LogWarning(msg);
 			}
+		}
+
+		public override bool HasWarnings() {
+			return this.EventKey != "HF.noop";
 		}
 
 		public void RemoveEvent(string eventKey) {
