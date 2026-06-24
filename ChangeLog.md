@@ -7,11 +7,12 @@ if multiple releases were made in the same day.
 
 Each mod has its own version which follows SemVer.
 
-## Unreleased
+
+## 2026.06.24
 
 ### YotanModCore v2.5.0
 
-- Adds v0.5.10.2 detection
+- Adds v0.5.10.2, v0.5.11.0,1,2 detection
 
 **Technical/For modders:**
 
@@ -30,8 +31,10 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 > [!NOTE]
 > Gallery and HExtensions won't work in Compatibility/Modern mode for now (I will look into that later)
 
-- **(Legacy)** Fixed Delivery teleporting NPCs to bed instead of walking there
-- **(Legacy)** Fixed BossNative Forced scene on Legacy mode (Fixes #22)
+- v0.5.11.x content support
+- Bug fixes:
+	- **(Legacy)** Fixed Delivery teleporting NPCs to bed instead of walking there
+	- **(Legacy)** Fixed BossNative Forced scene on Legacy mode (Fixes #22)
 
 **Technical/For modders:**
 
