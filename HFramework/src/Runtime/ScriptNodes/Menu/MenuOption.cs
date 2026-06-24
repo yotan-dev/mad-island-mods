@@ -1,9 +1,11 @@
 using System;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Menu
 {
 	[Serializable]
 	[Experimental]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "MenuOption")]
 	public class MenuOption
 	{
 		public enum EffectType

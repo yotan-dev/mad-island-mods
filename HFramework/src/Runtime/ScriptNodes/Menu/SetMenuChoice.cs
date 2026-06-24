@@ -1,7 +1,10 @@
-namespace HFramework.ScriptNodes
+using UnityEngine.Scripting.APIUpdating;
+
+namespace HFramework.ScriptNodes.Menu
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Menu/Set Menu Choice")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "SetMenuChoice")]
 	public class SetMenuChoice : Action
 	{
 		public string NewChoiceId;

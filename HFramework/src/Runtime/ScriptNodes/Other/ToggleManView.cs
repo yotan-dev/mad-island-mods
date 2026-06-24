@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using YotanModCore.Extensions;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Other
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Other/Toggle Man View")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "ToggleManView")]
 	public class ToggleManView : Action
 	{
 		public int TrackIndex = 10;

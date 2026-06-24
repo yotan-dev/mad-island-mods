@@ -1,6 +1,7 @@
 using HFramework.Events;
 using HFramework.ScriptGenerator;
 using HFramework.ScriptNodes;
+using HFramework.ScriptNodes.Animation;
 using HFramework.ScriptNodes.PrefabSetup;
 using HFramework.SexScripts;
 using HFramework.SexScripts.Info.Conditions;

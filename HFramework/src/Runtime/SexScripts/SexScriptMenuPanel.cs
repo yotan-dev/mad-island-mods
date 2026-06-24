@@ -1,7 +1,7 @@
 #nullable enable
 
 using System;
-using HFramework.ScriptNodes;
+using HFramework.ScriptNodes.Menu;
 using YotanModCore.PropPanels;
 
 namespace HFramework.SexScripts

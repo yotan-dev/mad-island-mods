@@ -1,7 +1,10 @@
-namespace HFramework.ScriptNodes
+using UnityEngine.Scripting.APIUpdating;
+
+namespace HFramework.ScriptNodes.Flow
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Sequence")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "Sequence")]
 	public class Sequence : Composite
 	{
 		protected int Current;

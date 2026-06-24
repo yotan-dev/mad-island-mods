@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Menu
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Menu/Set Menu Options")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "SetMenuOptions")]
 	public class SetMenuOptions : Action
 	{
 		public List<MenuOption> Options = new();

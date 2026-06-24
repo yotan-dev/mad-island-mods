@@ -3,12 +3,14 @@
 using System.Linq;
 using HFramework.Scenes;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using YotanModCore;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Flow
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Teardown")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "Teardown")]
 	public class Teardown : Action
 	{
 		protected override void OnStart() {

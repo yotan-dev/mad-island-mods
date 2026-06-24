@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using YotanModCore;
 using YotanModCore.Consts;
 using YotanModCore.Extensions;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Characters
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Characters/Move To Place")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "MoveToPlace")]
 	public class MoveToPlace : Action
 	{
 		[Tooltip("Maximum time to wait for NPCs to reach the target position.")]

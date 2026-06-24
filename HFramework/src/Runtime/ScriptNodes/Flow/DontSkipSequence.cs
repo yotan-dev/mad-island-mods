@@ -1,4 +1,6 @@
-namespace HFramework.ScriptNodes
+using UnityEngine.Scripting.APIUpdating;
+
+namespace HFramework.ScriptNodes.Flow
 {
 	/// <summary>
 	/// Node to mark part of a Skippable Section as a MUST-run. It must be a direct children of SkippableSection node.
@@ -9,6 +11,7 @@ namespace HFramework.ScriptNodes
 	/// </summary>
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Dont Skip Sequence")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "DontSkipSequence")]
 	public class DontSkipSequence : Sequence
 	{
 		/**

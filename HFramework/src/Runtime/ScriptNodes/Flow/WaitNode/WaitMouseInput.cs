@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes.WaitNode
+namespace HFramework.ScriptNodes.Flow.WaitNode
 {
 	[Serializable]
 	[Experimental]
+	[MovedFrom(true, "HFramework.ScriptNodes.WaitNode", null, "WaitMouseInput")]
 	public class WaitMouseInput : WaitKind
 	{
 		public enum MouseButtonType

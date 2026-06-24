@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Menu
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Menu/Toggle Menu")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "ToggleMenu")]
 	public class ToggleMenu : Action
 	{
 		public bool ToVisibility = true;

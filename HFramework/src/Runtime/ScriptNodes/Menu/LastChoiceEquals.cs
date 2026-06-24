@@ -1,4 +1,7 @@
-namespace HFramework.ScriptNodes
+using HFramework.ScriptNodes.Flow;
+using UnityEngine.Scripting.APIUpdating;
+
+namespace HFramework.ScriptNodes.Menu
 {
 	/// <summary>
 	/// Node to handle menu choices. It must be a direct children of MenuInteraction node.
@@ -16,6 +19,7 @@ namespace HFramework.ScriptNodes
 	/// </summary>
 	[Experimental]
 	[ScriptNode("HFramework", "Menu/Last Choice Equals")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "LastChoiceEquals")]
 	public class LastChoiceEquals : Sequence
 	{
 		public string ChoiceId = "";

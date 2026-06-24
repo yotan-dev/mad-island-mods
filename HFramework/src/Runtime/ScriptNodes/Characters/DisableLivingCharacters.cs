@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using YotanModCore;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Characters
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Characters/Disable Living Characters")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "DisableLivingCharacters")]
 	public class DisableLivingCharacters : Action
 	{
 		[Flags]

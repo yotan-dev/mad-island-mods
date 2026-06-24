@@ -1,9 +1,11 @@
 using System;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Flow
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Change SexState or ActType")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "ChangeSexActState")]
 	public class ChangeSexActState : Action
 	{
 		public enum TargetNpcReaction

@@ -1,6 +1,7 @@
+using UnityEngine.Scripting.APIUpdating;
 using YotanModCore;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Flow
 {
 	/// <summary>
 	/// Marks a section that will be skipped if the player presses the skip button.
@@ -13,6 +14,7 @@ namespace HFramework.ScriptNodes
 	/// </summary>
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Skippable Section")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "SkippableSection")]
 	public class SkippableSection : Sequence
 	{
 		private bool _hasSkipped = false;

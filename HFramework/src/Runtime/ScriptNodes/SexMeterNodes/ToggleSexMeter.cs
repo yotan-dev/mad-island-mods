@@ -1,9 +1,12 @@
 using HFramework.Scenes;
+using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.SexMeterNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Sex Meter/Toggle Sex Meter")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "ToggleSexMeter")]
 	public class ToggleSexMeter : Action
 	{
 		public bool ToVisibility = true;

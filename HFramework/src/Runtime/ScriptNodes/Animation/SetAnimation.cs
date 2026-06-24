@@ -1,27 +1,29 @@
-using UnityEngine;
 using YotanModCore.Extensions;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Animation
 {
+	/// <summary>
+	/// Sets the animation for the current sex scene in loop and succeed
+	/// </summary>
 	[Experimental]
-	[ScriptNode("HFramework", "Animation/Loop Animation For Time")]
-	public class LoopAnimationForTime : Action
+	[ScriptNode("HFramework", "Animation/Set Animation")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "SetAnimation")]
+	public class SetAnimation : Action
 	{
-		public float Duration = 1;
-
 		public string AnimationName = "";
 
 		private TemplatedString TemplatedAnimationName;
-		float remainingTime;
+
+		private string FinalAnimationName;
 
 		private void Awake() {
 			this.TemplatedAnimationName = new TemplatedString(this.AnimationName);
 		}
 
 		protected override void OnStart() {
-			remainingTime = Duration;
 			if (this.Context.TmpSexAnim == null) {
-				PLogger.LogError("LoopAnimForTime: TmpSexAnim is null");
+				PLogger.LogError("SetAnimForTime: TmpSexAnim is null");
 				return;
 			}
 
@@ -29,11 +31,11 @@ namespace HFramework.ScriptNodes
 
 			var animationName = this.TemplatedAnimationName.GetString(this.Context.Variables);
 			if (!this.Context.TmpSexAnim.HasAnimation(animationName)) {
-				PLogger.LogError($"LoopAnimForTime: Animation '{animationName}' not found");
+				PLogger.LogError($"SetAnimForTime: Animation '{animationName}' not found");
 				return;
 			}
 
-			this.Context.TmpSexAnim.state.SetAnimation(0, animationName, true);
+			this.FinalAnimationName = animationName;
 		}
 
 		protected override void OnStop() {
@@ -41,12 +43,8 @@ namespace HFramework.ScriptNodes
 		}
 
 		protected override State OnUpdate() {
-			remainingTime -= Time.deltaTime;
-			if (remainingTime <= 0) {
-				return State.Success;
-			}
-
-			return State.Running;
+			this.Context.TmpSexAnim.state.SetAnimation(0, this.FinalAnimationName, true);
+			return State.Success;
 		}
 	}
 }

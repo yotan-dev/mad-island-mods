@@ -1,6 +1,8 @@
 #nullable enable
 
-namespace HFramework.ScriptNodes
+using UnityEngine.Scripting.APIUpdating;
+
+namespace HFramework.ScriptNodes.Menu
 {
 	/// <summary>
 	/// Node to handle menu interactions. All of its children must be LastChoiceEquals nodes.
@@ -16,6 +18,7 @@ namespace HFramework.ScriptNodes
 	/// </summary>
 	[Experimental]
 	[ScriptNode("HFramework", "Menu/Menu Interaction")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "MenuInteraction")]
 	public class MenuInteraction : Composite
 	{
 		public string InitialMenuId = "";

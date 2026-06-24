@@ -1,11 +1,13 @@
 using HFramework.Scenes;
 using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.SexMeterNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Sex Meter/Tick Sex Meter")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "TickSexMeter")]
 	public class TickSexMeter : Passthrough
 	{
 		protected override void OnStart() {

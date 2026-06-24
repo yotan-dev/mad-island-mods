@@ -1,10 +1,12 @@
 using HFramework.Scenes;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.SexMeterNodes
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Sex Meter/Create Sex Meter")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "CreateSexMeter")]
 	public class CreateSexMeter : Action
 	{
 		public float DividerPercent = 0.3f;

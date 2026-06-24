@@ -1,10 +1,12 @@
-using HFramework.ScriptNodes.WaitNode;
+using HFramework.ScriptNodes.Flow.WaitNode;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Flow
 {
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/Wait")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "Wait")]
 	public class Wait : Action
 	{
 		[SerializeReference, Subclass]

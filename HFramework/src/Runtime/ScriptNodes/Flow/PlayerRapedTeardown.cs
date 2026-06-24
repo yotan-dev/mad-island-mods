@@ -3,9 +3,10 @@
 using System.Collections;
 using HFramework.Events;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using YotanModCore;
 
-namespace HFramework.ScriptNodes
+namespace HFramework.ScriptNodes.Flow
 {
 	/// <summary>
 	/// Teardown node for player-raped encounters.
@@ -13,6 +14,7 @@ namespace HFramework.ScriptNodes
 	/// </summary>
 	[Experimental]
 	[ScriptNode("HFramework", "Flow/PlayerRaped Teardown")]
+	[MovedFrom(true, "HFramework.ScriptNodes", null, "PlayerRapedTeardown")]
 	public class PlayerRapedTeardown : Action
 	{
 		private IEnumerator? FadeCoroutine;
