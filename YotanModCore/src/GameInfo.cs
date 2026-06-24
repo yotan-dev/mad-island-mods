@@ -201,6 +201,8 @@ namespace YotanModCore
 				{ "2026/05/09--10:49", ToVersion("0.5.10.0")}, // Beta
 				{ "2026/05/09--17:25", ToVersion("0.5.10.1")}, // Beta
 				{ "2026/05/11--01:29", ToVersion("0.5.10.2")}, // Beta
+				{ "2026/06/24--01:27", ToVersion("0.5.11.1")}, // Beta
+				{ "2026/06/24--02:20", ToVersion("0.5.11.2")}, // Beta
 			};
 
 			if (buildDateVersion.ContainsKey(buildTimestamp))
@@ -220,6 +222,7 @@ namespace YotanModCore
 				{ "2026/01/09", ToVersion("0.5.0.0") }, // Beta; 0.5.0.0 / 0.5.1.0
 				{ "2026/01/10", ToVersion("0.5.2.0") }, // Beta; 0.5.2.0 was a bit before 5.3.0, same day
 				{ "2026/01/17", ToVersion("0.5.5.0") }, // Beta; 0.5.5.0 was a bit before 5.6.0, same day
+				{ "2026/06/24", ToVersion("0.5.11.0")}, // Beta; 0.5.11.0 was a bit before 0.5.11.1, same day
 			};
 
 			var buildDate = buildTimestamp[..10];
