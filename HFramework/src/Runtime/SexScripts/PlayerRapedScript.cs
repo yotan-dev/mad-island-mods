@@ -20,7 +20,7 @@ namespace HFramework.SexScripts
 		}
 
 		public override SexScript Create(CommonStates[] actors, SexInfo info) {
-			var tree = Clone();
+			var tree = Clone(info);
 			tree.Context.Actors = this.Info.BuildNpcs(actors).Select(npc => new ContextNpc(npc, null)).ToArray();
 			if (actors.Length > 1 && actors[1] != null) {
 				tree.Context.ScriptPlace = new GroundScriptPlace(actors[1].gameObject.transform.position);

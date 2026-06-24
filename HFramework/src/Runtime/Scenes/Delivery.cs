@@ -32,12 +32,15 @@ namespace HFramework.Scenes
 
 		public float SuccessRate = 100f;
 
-		public Delivery(CommonStates girl, WorkPlace workPlace, SexPlace sexPlace)
+		public float TimeFactor = 1f;
+
+		public Delivery(CommonStates girl, WorkPlace workPlace, SexPlace sexPlace, float timeFactor = 1f)
 			: base(Name)
 		{
 			this.Girl = girl;
 			this.WorkPlace = workPlace;
 			this.SexPlace = sexPlace;
+			this.TimeFactor = timeFactor;
 
 			if (this.WorkPlace != null)
 			{
@@ -103,13 +106,13 @@ namespace HFramework.Scenes
 		private IEnumerator Idle()
 		{
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "damage", this.Girl.transform.position);
-			yield return this.Performer.Perform(ActionType.DeliveryIdle, new PerformModifiers() { Duration = 20f });
+			yield return this.Performer.Perform(ActionType.DeliveryIdle, new PerformModifiers() { Duration = 20f * this.TimeFactor });
 		}
 
 		private IEnumerator DeliveryLoop()
 		{
 			Managers.mn.sound.GoVoice(this.Girl.voiceID, "finish", this.Girl.transform.position);
-			yield return this.Performer.Perform(ActionType.DeliveryLoop, new PerformModifiers() { Duration = 10f });
+			yield return this.Performer.Perform(ActionType.DeliveryLoop, new PerformModifiers() { Duration = 10f * this.TimeFactor });
 		}
 
 		private IEnumerator Finish()

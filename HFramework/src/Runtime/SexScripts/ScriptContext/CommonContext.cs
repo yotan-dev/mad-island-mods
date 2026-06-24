@@ -18,6 +18,18 @@ namespace HFramework.SexScripts.ScriptContext
 			set { this._actors = value; this.LoadActorsVariables(); }
 		}
 
+		/// <summary>
+		/// <para>
+		/// Allows adjustment of duration of animation times (as long as the animation allows it)
+		/// A scale of 1f means normal speed, 2f means double the duration, 0.5f means half the duration, etc.
+		/// </para>
+		/// <para>
+		/// Animations must explicitly support it by setting "AllowDurationModifier" to true in their configuration.
+		/// </para>
+		/// </summary>
+		/// <value></value>
+		public float AnimDurationModifier { get; set; } = 1f;
+
 		public SexScript? SexScript { get; set; }
 
 		public ISexScriptMenuSession? MenuSession { get; set; }

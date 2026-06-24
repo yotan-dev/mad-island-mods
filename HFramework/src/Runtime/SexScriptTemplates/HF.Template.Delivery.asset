@@ -38,6 +38,7 @@ MonoBehaviour:
   Position: {x: 358.99997, y: 856.59216}
   Duration: 10
   AnimationName: A_delivery_loop
+  UseDurationModifier: 1
 --- !u!114 &-8254560602880613172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 1355207592882470915
-      type: {class: WaitTime, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      type: {class: WaitTime, ns: HFramework.ScriptNodes.Flow.WaitNode, asm: HFramework}
       data:
         DurationSeconds: 0.1
 --- !u!114 &-3956539146296713412
@@ -183,6 +184,7 @@ MonoBehaviour:
   Position: {x: 358.99997, y: 673.1861}
   Duration: 20
   AnimationName: A_delivery_idle
+  UseDurationModifier: 1
 --- !u!114 &-2541012240248205156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +433,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 1355207592882470917
-      type: {class: WaitTime, ns: HFramework.ScriptNodes.WaitNode, asm: HFramework}
+      type: {class: WaitTime, ns: HFramework.ScriptNodes.Flow.WaitNode, asm: HFramework}
       data:
         DurationSeconds: 0.1
 --- !u!114 &6480216415899210281

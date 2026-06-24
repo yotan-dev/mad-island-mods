@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using HFramework.SexScripts.Info;
 using HFramework.ScriptNodes;
-using UnityEngine;
+using HFramework.SexScripts.Info;
 using HFramework.SexScripts.ScriptContext;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
@@ -227,15 +227,15 @@ namespace HFramework.SexScripts
 			return children;
 		}
 
-		internal SexScript Clone() {
+		internal SexScript Clone(SexInfo info) {
 			var tree = Instantiate(this);
-			tree.Context = new CommonContext(this);
+			tree.Context = new CommonContext(this) { AnimDurationModifier = info.AnimDurationModifier };
 			tree.RootNode = tree.RootNode.Clone(tree.Context);
 			return tree;
 		}
 
 		public virtual SexScript Create(CommonStates[] actors, SexInfo info) {
-			return Clone();
+			return Clone(info);
 		}
 
 		public T MustFindNodeById<T>(string id) where T : ScriptNode {

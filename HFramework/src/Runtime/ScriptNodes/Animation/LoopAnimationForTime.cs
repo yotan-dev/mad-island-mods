@@ -13,6 +13,9 @@ namespace HFramework.ScriptNodes.Animation
 
 		public string AnimationName = "";
 
+		[Tooltip("If true, the animation duration will be multiplied by the sex info's duration modifier (reducing/increasing its total time)")]
+		public bool UseDurationModifier = false;
+
 		private TemplatedString TemplatedAnimationName;
 		float remainingTime;
 
@@ -22,6 +25,10 @@ namespace HFramework.ScriptNodes.Animation
 
 		protected override void OnStart() {
 			remainingTime = Duration;
+			if (this.UseDurationModifier) {
+				remainingTime *= this.Context.AnimDurationModifier;
+			}
+
 			if (this.Context.TmpSexAnim == null) {
 				PLogger.LogError("LoopAnimForTime: TmpSexAnim is null");
 				return;

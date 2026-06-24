@@ -9,7 +9,7 @@ namespace HFramework.SexScripts
 
 		// Start is called before the first frame update
 		void Start() {
-			Tree = Tree.Clone();
+			Tree = Tree.Clone(new Info.SexInfo());
 			// tree = ScriptableObject.CreateInstance<BehaviourTree>();
 
 			// var log1 = ScriptableObject.CreateInstance<DebugLogNode>();

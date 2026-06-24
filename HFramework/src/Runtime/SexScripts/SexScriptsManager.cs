@@ -205,7 +205,7 @@ namespace HFramework.SexScripts
 								var workPlace = scriptPlace.Place is WorkplaceScriptPlace workPlacePlace ? workPlacePlace.Place : null;
 								var sexPlace = scriptPlace.Place is SexPlaceScriptPlace sexPlacePlace ? sexPlacePlace.Place : null;
 
-								var legacyScene = new Delivery(actors[0], workPlace, sexPlace);
+								var legacyScene = new Delivery(actors[0], workPlace, sexPlace, info.AnimDurationModifier);
 								if (ScenesManager.Instance.HasPerformer(legacyScene, PerformerScope.Delivery, actors)) {
 									candidates.Add(() => legacyScene.Run());
 								}

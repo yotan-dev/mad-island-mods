@@ -95,6 +95,13 @@ For end-users, enable it by changing `BepInEx/config/HFramework.cfg`, edit `RunM
 		- ⚠️ `ToggleSkipButton` is now obsolete and should not be used. Migrate to `SkippableSection` instead.
 		- New `DontSkipSequence` node added, it is a Sequece node to be used as direct child of `SkippableSection`, childrens of this node will be executed regardless of the user having skipped. For example, if you have an event that must happen, regardless of the animation being skipped, this is where it goes.
 
+	- Many nodes were renamed/moved around. The menus, namespaces and node names should be more consistent now.
+		- ⚠️ I have marked them all for automated migration, so existing scripts should not have issues as long as they are reloaded using this new version once.
+		- ⚠️ I will eventually remove the automated conversion, so please update scripts soon.
+
+	- Added support for animation duration modification, for now only usable by `LoopAnimationForTime`
+		- This is introduced in order to align with needs of v0.5.11.0 update
+
 
 ### YoUnnoficialPatches v0.5.0
 - Reworked mosaic fixer
