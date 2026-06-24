@@ -264,6 +264,23 @@ namespace HFramework
 
 			#endregion
 
+			// @TODO: Load Mummy
+			// #region case 42 - Mummy
+
+			// this.CreateMxF(new MxFConfig {
+			// 	UniqueID = "HF.CommonSexNPC.1-6",
+			// 	Name = "1-6",
+			// 	Description = "Original scene",
+			// 	MaleNpcID = NpcID.YoungMan, // 89
+			// 	FemaleNpcID = NpcID.Mummy, // 42
+			// 	Pregnancy = ~Pregnant.PregnancyStatus.PregnantReady,
+			// 	ListIndex = 1,
+			// 	ObjIndex = 6,
+			// 	MinVersion = "0.5.11.0"
+			// });
+
+			// #endregion
+
 			this.Save();
 		}
 	}

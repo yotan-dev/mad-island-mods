@@ -2,16 +2,16 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using HFramework.Performer;
 using HFramework.Scenes;
-using YotanModCore;
-using YotanModCore.Consts;
-using UnityEngine;
 using HFramework.SexScripts;
-using System.Collections.Generic;
 using HFramework.SexScripts.Info;
 using HFramework.SexScripts.ScriptContext;
-using System.Linq;
+using UnityEngine;
+using YotanModCore;
+using YotanModCore.Consts;
 
 namespace HFramework
 {
@@ -184,8 +184,10 @@ namespace HFramework
 
 		#region Delivery
 
-		public bool SexManager_Pre_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result) {
-			var info = new CommonSexInfo();
+		public bool SexManager_Pre_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, float animDurationModifier, ref IEnumerator __result) {
+			var info = new CommonSexInfo() {
+				AnimDurationModifier = animDurationModifier
+			};
 			if (tmpWorkPlace != null) {
 				info.Place = new WorkplaceScriptPlace(tmpWorkPlace);
 			} else if (tmpSexPlace != null) {

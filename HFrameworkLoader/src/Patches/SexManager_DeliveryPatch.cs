@@ -7,9 +7,9 @@ namespace HFrameworkLoader.Patches
 	{
 		[HarmonyPatch(typeof(SexManager), "Delivery")]
 		[HarmonyPrefix]
-		private static bool Pre_SexManager_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, ref IEnumerator __result)
+		private static bool Pre_SexManager_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, float time, ref IEnumerator __result)
 		{
-			return Plugin.Bridge.SexManager_Pre_Delivery(common, tmpWorkPlace, tmpSexPlace, ref __result);
+			return Plugin.Bridge.SexManager_Pre_Delivery(common, tmpWorkPlace, tmpSexPlace, time, ref __result);
 		}
 	}
 }
