@@ -203,6 +203,7 @@ namespace YotanModCore
 				{ "2026/05/11--01:29", ToVersion("0.5.10.2")}, // Beta
 				{ "2026/06/24--01:27", ToVersion("0.5.11.1")}, // Beta
 				{ "2026/06/24--02:20", ToVersion("0.5.11.2")}, // Beta
+				{ "2026/06/24--11:05", ToVersion("0.5.11.3")}, // Beta
 			};
 
 			if (buildDateVersion.ContainsKey(buildTimestamp))

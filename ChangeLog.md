@@ -8,6 +8,12 @@ if multiple releases were made in the same day.
 Each mod has its own version which follows SemVer.
 
 
+## Unreleased
+
+### YotanModCore
+- Adds v0.5.11.3 detection
+
+
 ## 2026.06.24
 
 ### YotanModCore v2.5.0
