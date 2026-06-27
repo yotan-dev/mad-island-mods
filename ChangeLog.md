@@ -11,7 +11,7 @@ Each mod has its own version which follows SemVer.
 ## Unreleased
 
 ### YotanModCore
-- Adds v0.5.11.3 detection
+- Adds v0.5.11.3,4 detection
 
 
 ## 2026.06.24
