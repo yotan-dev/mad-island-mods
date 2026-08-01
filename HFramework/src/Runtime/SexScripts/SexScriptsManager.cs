@@ -120,7 +120,13 @@ namespace HFramework.SexScripts
 					break;
 				}
 
-				var canStart = ScriptsByType[typeName].Any(script => script.Info.CanStart(actors));
+				var canStart = ScriptsByType[typeName].Any(script => {
+					if (script.RequiresDLC && !GameInfo.EnableDLCSex) {
+						return false;
+					}
+
+					return script.Info.CanStart(actors);
+				});
 				if (canStart) {
 					return true;
 				}

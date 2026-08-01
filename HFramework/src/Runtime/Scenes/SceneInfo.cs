@@ -26,6 +26,9 @@ namespace HFramework.Scenes
 
 			public bool CanStart(PerformerScope scope, CommonStates from, CommonStates? to)
 			{
+				if (this.Performer.IsDlcPerformer && !GameInfo.EnableDLCSex)
+					return false;
+
 				if (!this.Performer.Scopes.Contains(scope))
 					return false;
 
@@ -50,6 +53,9 @@ namespace HFramework.Scenes
 
 			public bool CanPerform(IScene scene, PerformerScope scope)
 			{
+				if (this.Performer.IsDlcPerformer && !GameInfo.EnableDLCSex)
+					return false;
+
 				if (!this.Performer.Scopes.Contains(scope))
 					return false;
 

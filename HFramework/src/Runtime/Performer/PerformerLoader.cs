@@ -151,7 +151,7 @@ namespace HFramework.Performer
 			}
 
 			string errorMessage = "";
-			var builder = new SexPerformerInfoBuilder(performerConfig.Id);
+			var builder = new SexPerformerInfoBuilder(performerConfig.Id, performerConfig.DLC);
 
 			try
 			{

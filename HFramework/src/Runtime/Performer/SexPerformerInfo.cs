@@ -10,6 +10,8 @@ namespace HFramework.Performer
 
 		public readonly string Id;
 
+		public readonly bool IsDlcPerformer;
+
 		public readonly IPrefabSelector SexPrefabSelector;
 
 		public readonly int FromNpcId;
@@ -26,7 +28,8 @@ namespace HFramework.Performer
 			int? to,
 			IPrefabSelector sexPrefabSelector,
 			Dictionary<string, AnimationSet> animationSets,
-			List<PerformerScope> scopes
+			List<PerformerScope> scopes,
+			bool isDlcPerformer = false
 		)
 		{
 			this.Id = id;
@@ -35,6 +38,7 @@ namespace HFramework.Performer
 			this.SexPrefabSelector = sexPrefabSelector;
 			this.AnimationSets = animationSets;
 			this.Scopes = scopes;
+			this.IsDlcPerformer = isDlcPerformer;
 		}
 	}
 }

@@ -5,7 +5,10 @@ namespace HFramework.Performer
 	public class SexPerformerInfoBuilder
 	{
 		private string Id { get; set; }
+
 		private IPrefabSelector SexPrefabSeletor { get; set; }
+
+		private bool IsDlcPerformer { get; set; }
 
 		private int FromNpcId { get; set; }
 
@@ -15,9 +18,10 @@ namespace HFramework.Performer
 
 		private Dictionary<string, AnimationSet> AnimationSets { get; set; } = new();
 
-		public SexPerformerInfoBuilder(string id)
+		public SexPerformerInfoBuilder(string id, bool isDlcPerformer = false)
 		{
 			this.Id = id;
+			this.IsDlcPerformer = isDlcPerformer;
 		}
 
 		public SexPerformerInfoBuilder AddScope(PerformerScope scope)
@@ -47,7 +51,7 @@ namespace HFramework.Performer
 
 		public SexPerformerInfo Build()
 		{
-			return new SexPerformerInfo(this.Id, this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.AnimationSets, this.Scopes);
+			return new SexPerformerInfo(this.Id, this.FromNpcId, this.ToNpcId, this.SexPrefabSeletor, this.AnimationSets, this.Scopes, this.IsDlcPerformer);
 		}
 	}
 }
