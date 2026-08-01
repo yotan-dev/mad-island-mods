@@ -13,21 +13,21 @@ namespace Gallery.Patches
 		/// "From" rapes "to"
 		[HarmonyPatch(typeof(SexManager), "CommonRapesNPC")]
 		[HarmonyPrefix]
-		private static void Pre_SexManager_CommonRapesNPC(CommonStates npcA, CommonStates npcB, int sexType)
+		private static void Pre_SexManager_CommonRapesNPC(CommonStates from, CommonStates to, int sexType)
 		{
 			if (Plugin.InGallery)
 				return;
 
 			try {
 				Dictionary<string, CommonStates> charas = new Dictionary<string, CommonStates>() {
-					{"npcA", npcA},
-					{"npcB", npcB},
+					{"from", from},
+					{"to", to},
 				};
 
 				Dictionary<string, string> infos = new Dictionary<string, string>() {
 					{ "sexType", $"{sexType}" },
 				};
-			
+
 				GalleryLogger.SceneStart("CommonRapesNPC", charas, infos, true);
 
 				// GalleryManager.AddScene(new CommonRapesNPCScene(to, from));
@@ -39,7 +39,7 @@ namespace Gallery.Patches
 		/// "From" rapes "to"
 		[HarmonyPatch(typeof(SexManager), "CommonRapesNPC")]
 		[HarmonyPostfix]
-		private static IEnumerator Post_SexManager_CommonRapesNPC(IEnumerator result, CommonStates npcA, CommonStates npcB, int sexType)
+		private static IEnumerator Post_SexManager_CommonRapesNPC(IEnumerator result, CommonStates from, CommonStates to, int sexType)
 		{
 			while (result.MoveNext())
 				yield return result.Current;
@@ -49,8 +49,8 @@ namespace Gallery.Patches
 
 			try {
 				Dictionary<string, CommonStates> charas = new Dictionary<string, CommonStates>() {
-					{"npcA", npcA},
-					{"npcB", npcB},
+					{"from", from},
+					{"to", to},
 				};
 
 				Dictionary<string, string> infos = new Dictionary<string, string>() {
