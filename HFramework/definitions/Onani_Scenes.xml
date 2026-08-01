@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 
+<!--
 	HF_OnaniNPC (Masturbation) scene config.
 -->
 
@@ -17,6 +17,18 @@
 				<Performer id="HF_Onani_FemaleNative_Perfume">
 					<PerformConditions>
 						<Condition xsi:type="PerfumeCheck" actor="FemaleNative#15" value="true" />
+					</PerformConditions>
+				</Performer>
+
+				<!-- New in 0.5.12 -->
+				<Performer id="HF_Onani_NativeGirl_Normal">
+					<PerformConditions>
+						<Condition xsi:type="PerfumeCheck" actor="NativeGirl#16" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Onani_NativeGirl_Perfume">
+					<PerformConditions>
+						<Condition xsi:type="PerfumeCheck" actor="NativeGirl#16" value="true" />
 					</PerformConditions>
 				</Performer>
 			</Performers>
