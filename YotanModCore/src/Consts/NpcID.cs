@@ -354,6 +354,27 @@ namespace YotanModCore.Consts
 		[StrVal("Ent Warrior")]
 		public const int EntWarrior = 122;
 
+		[StrVal("Chief")]
+		public const int Chief = 123;
+
+		[StrVal("Mako")]
+		public const int Mako = 124;
+
+		[StrVal("Adon")]
+		public const int Adon = 125;
+
+		[StrVal("Jiera")]
+		public const int Jiera = 126;
+
+		[StrVal("Mamoru")]
+		public const int Mamoru = 127;
+
+		[StrVal("Naoto")]
+		public const int Naoto = 128;
+
+		[StrVal("Hannah")]
+		public const int Hannah = 129;
+
 		[StrVal("Franken")]
 		public const int Franken = 139;
 
@@ -378,6 +399,9 @@ namespace YotanModCore.Consts
 
 		[StrVal("Son")]
 		public const int Son = 145;
+
+		[StrVal("Giant Mama")]
+		public const int GiantMama = 148;
 
 		[StrVal("Giant2")]
 		public const int Giant2 = 149;

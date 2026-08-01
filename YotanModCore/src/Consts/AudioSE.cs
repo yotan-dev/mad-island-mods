@@ -553,5 +553,13 @@ namespace YotanModCore.Consts
 		public const int Piko03 = 271; // piko_03.ogg
 
 		public const int Shokwave01 = 272; // shokwave_01.ogg
+
+		public const int GuardSword02 = 273; // guard_sword_02.ogg
+
+		public const int Teleport05 = 274; // teleport_05.ogg
+
+		public const int Chain02 = 275; // chain_02.ogg
+
+		public const int Chain01 = 276; // chain_01.ogg
 	}
 }

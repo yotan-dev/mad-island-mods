@@ -480,5 +480,11 @@ namespace YotanModCore.Consts
 		public const int FXShockwave01Prefab = 237; // FX_Shockwave_01_prefab.prefab
 
 		public const int AttackCollSphere = 238; // attackColl_sphere.prefab
+
+		public const int ShotIronball01 = 239; // shot_ironball_01.prefab
+
+		public const int FXWarpForce01 = 240; // FX_warp_force_01.prefab
+
+		public const int FXGuardSword01 = 241; // FX_guard_sword_01.prefab
 	}
 }
