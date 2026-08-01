@@ -151,6 +151,7 @@ namespace HFramework.Pregnancy
 
 			tmpGenerate.age = 0;
 			tmpGenerate.friendID = Managers.mn.npcMN.CreateFriendID();
+			tmpGenerate.houseID = this.Girl.houseID;
 			Managers.mn.npcMN.NPCtoFriend(tmpGenerate.gameObject, true, false);
 			Managers.mn.randChar.GenChildSet(tmpGenerate, this.Girl);
 
