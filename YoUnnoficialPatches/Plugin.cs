@@ -1,10 +1,12 @@
 ﻿using BepInEx;
 using HarmonyLib;
+using YotanModCore;
 using YoUnnoficialPatches.Patches;
+using YoUnnoficialPatches.Patches.Compat;
 
 namespace YoUnnoficialPatches
 {
-	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.5.0")]
+	[BepInPlugin("YoUnnoficialPatches", "YoUnnoficialPatches", "0.5.1")]
 	[BepInDependency("YotanModCore", "2.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
@@ -16,8 +18,12 @@ namespace YoUnnoficialPatches
 			if (PConfig.Instance.FixTranslationToEnglish.Value)
 				Harmony.CreateAndPatchAll(typeof(TranslationPatch));
 
-			if (PConfig.Instance.DontStartInvalidSex.Value)
-				Harmony.CreateAndPatchAll(typeof(DontStartInvalidSexPatch));
+			if (PConfig.Instance.DontStartInvalidSex.Value) {
+				if (GameInfo.GameVersion >= GameInfo.ToVersion(0, 5, 12))
+					Harmony.CreateAndPatchAll(typeof(DontStartInvalidSexPatch));
+				else // < 0.5.12 ; compatibility.
+					Harmony.CreateAndPatchAll(typeof(DontStartInvalidSexPatch_Pre0_5_12));
+			}
 
 			PLogger.LogInfo($"Plugin YoUnnoficialPatches is loaded!");
 		}
