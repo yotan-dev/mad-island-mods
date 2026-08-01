@@ -26,6 +26,11 @@ namespace YotanModCore
 		public static bool HasDLC { get { return Instance._HasDLC; } }
 
 		/// <summary>
+		/// True if DLC sex scenes are enabled
+		/// </summary>
+		public static bool EnableDLCSex { get { return SaveManager.SaveSettingStatic.dlcH == 1; } }
+
+		/// <summary>
 		/// True if Joke mode is enabled
 		/// </summary>
 		public static bool JokeMode { get { return SaveManager.SaveSettingStatic.joke == 1; } }

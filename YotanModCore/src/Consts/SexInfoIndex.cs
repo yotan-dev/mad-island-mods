@@ -11,5 +11,6 @@ namespace YotanModCore.Consts
 
 		public const int AllowLove = 8; // 1 = disabled / 0 = enabled
 		public const int AllowSex = 9; // 1 = disabled / 0 = enabled
+		public const int AllowRape = 10; // 1 = disabled / 0 = enabled
 	}
 }
