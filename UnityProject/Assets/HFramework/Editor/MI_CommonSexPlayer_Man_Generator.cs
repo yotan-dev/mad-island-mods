@@ -36,6 +36,8 @@ namespace HFramework
 			script.UniqueID = config.UniqueID;
 			script.Name = config.Name;
 			script.Description = config.Description;
+			script.MinimalGameVersion = config.MinVersion;
+			script.RequiresDLC = config.RequiresDlc;
 
 			var setupNode = script.MustFindNodeById<MakeSexPrefab>("MakeSexPrefab");
 			var instantiator = setupNode.Instantiator as SexListPrefab;

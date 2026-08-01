@@ -1050,7 +1050,7 @@
 			<Scopes>
 				<Scope>Sex</Scope>
 			</Scopes>
-			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="17" objIndex="6" />
+			<PrefabSelector xsi:type="SexListPrefabSelector" listIndex="17" objIndex="0" />
 			<Actors>
 				<Actor val="UnderGroundYoungMan#181" />
 				<Actor val="YoungLady#9" />

@@ -10,8 +10,25 @@ Each mod has its own version which follows SemVer.
 
 ## Unreleased
 
-### YotanModCore
+
+## 2026.08.01
+
+### YotanModCore v2.5.1
 - Adds v0.5.11.3,4 detection
+- Adds v0.5.12.0,1,2 detection and constants
+- Adds "EnableDLCSex" in GameInfo to replicate official check
+
+### HFramework v1.3.1
+- Adds v0.5.12 support
+  - New scenes
+  - Respects "DLC Sex" option
+  - Child now copies mother's house id (official fix)
+
+### Gallery v1.0.15
+- Updates to support v0.5.12.x
+
+### YoUnnoficialPatches v0.5.1
+- Support v0.5.12.x (Keeping backwards compatibility for older versions for now)
 
 
 ## 2026.06.24
