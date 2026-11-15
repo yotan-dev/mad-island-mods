@@ -1,6 +1,8 @@
 using System.Collections;
 using HFramework.Hook;
 using HFramework.Performer;
+using HFramework.Scenes.Conditionals;
+using HFramework.SexScripts.Info.Conditions;
 using Spine.Unity;
 
 namespace HFramework.Scenes

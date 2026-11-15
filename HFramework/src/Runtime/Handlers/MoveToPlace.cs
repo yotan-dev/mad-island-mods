@@ -95,6 +95,15 @@ namespace HFramework.Handlers
 			return reached;
 		}
 
+		private bool IsAnyActorControlled()
+		{
+			foreach (var actor in this.Actors)
+				if (Managers.mn.gameMN.IsControlledNpc(actor) || Managers.mn.gameMN.IsPreparingControlledCharacter(actor))
+					return true;
+
+			return false;
+		}
+
 		protected override IEnumerator Run()
 		{
 			float animTime = 30f;
@@ -112,6 +121,7 @@ namespace HFramework.Handlers
 				&& !this.DidActorsReachPos()
 				&& this.IsPlaceFree()
 				&& this.AreActorsAlive()
+				&& !this.IsAnyActorControlled()
 			)
 			{
 				animTime -= Time.deltaTime;

@@ -13,14 +13,23 @@ namespace YotanModCore.DataStore
 	{
 		private static IEnumerable<MethodBase> TargetMethods()
 		{
-			var saveCoroutineMethod = AccessTools.Method(typeof(SaveManager), nameof(SaveManager.SaveCoroutine));
-			var loadStartMethod = AccessTools.Method(typeof(SaveManager), nameof(SaveManager.LoadStart));
+			var result = new List<MethodBase>();
 
-			var result = new List<MethodBase>
+			if (GameInfo.GameVersion >= GameInfo.ToVersion("0.6.0.0"))
 			{
-				AccessTools.EnumeratorMoveNext(saveCoroutineMethod),
-				AccessTools.EnumeratorMoveNext(loadStartMethod)
-			};
+				// v0.6.0 moved XmlSerializer construction out of the save/load coroutines
+				// into cached static properties. Patch the property getters instead.
+				result.Add(AccessTools.Method(typeof(SaveManager), "get_NativeSaveDataSerializer", Type.EmptyTypes));
+				result.Add(AccessTools.Method(typeof(SaveManager), "get_NativeSaveViewSerializer", Type.EmptyTypes));
+			}
+			else
+			{
+				var saveCoroutineMethod = AccessTools.Method(typeof(SaveManager), nameof(SaveManager.SaveCoroutine));
+				var loadStartMethod = AccessTools.Method(typeof(SaveManager), nameof(SaveManager.LoadStart));
+
+				result.Add(AccessTools.EnumeratorMoveNext(saveCoroutineMethod));
+				result.Add(AccessTools.EnumeratorMoveNext(loadStartMethod));
+			}
 
 			return result;
 		}

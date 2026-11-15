@@ -39,7 +39,7 @@ namespace YotanModCore.DataStore
 				SaveCharDataPatch.LoadCommonData(__instance.gameMN.playerCommons[i], __instance.saveDB.save[0].playerSave[i]);
 		}
 
-		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
+		private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator, MethodBase __originalMethod)
 		{
 			var codeMatcher = new CodeMatcher(instructions, generator);
 
@@ -59,8 +59,14 @@ namespace YotanModCore.DataStore
 				)
 				.ThrowIfNotMatch("Could not find StaticBG load");
 
+			// MoveNext is a state machine method: the SaveManager instance lives in its
+			// compiler-generated <>4__this field, not in a local. Local indexes are not
+			// stable across game versions (v0.6.0 shifted them), so load the field instead.
+			var thisField = AccessTools.Field(__originalMethod.DeclaringType, "<>4__this");
+
 			codeMatcher.InsertAndAdvance(
-				new CodeInstruction(OpCodes.Ldloc_1),
+				new CodeInstruction(OpCodes.Ldarg_0),
+				new CodeInstruction(OpCodes.Ldfld, thisField),
 				new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(TranspileLoadPlayer), nameof(TranspileLoadPlayer.LoadPlayerData)))
 			);
 

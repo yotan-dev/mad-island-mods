@@ -122,6 +122,7 @@ namespace HFramework.Scenes
 			}
 
 			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Man.gameObject.transform.position, Quaternion.identity);
+			// TODO: tmpSex = this.InstantiateFreeList(1, 23, girl.gameObject.transform.position, Quaternion.identity);
 			if (this.TmpSex == null)
 			{
 				PLogger.LogDebug($"Could not instantiate prefab for {this.Man.npcID} x {this.Girl.npcID}");
@@ -146,14 +147,23 @@ namespace HFramework.Scenes
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 
+			// TODO: FreeInteractionSource.Observe(tmpSex, man, girl, sexAnim);
 			if (this.Girl.npcID == NpcID.Yona && string.IsNullOrEmpty(this.Girl.equip[3].itemKey) && this.CommonAnim.skeleton.FindSlot("Panty") != null)
 				this.CommonAnim.skeleton.SetAttachment("Panty", null);
 
-			this.TmpSexScale = null;
-			if (this.Man.pMove.scale.transform.localScale.x == -1f)
-			{
-				this.TmpSexScale = this.TmpSex.transform.Find("Scale").gameObject;
-				this.TmpSexScale.transform.localScale = new Vector3(-1f, 1f, 1f);
+
+			if (GameInfo.GameVersion < GameInfo.ToVersion("0.6.0.0")) {
+				this.TmpSexScale = null;
+				if (this.Man.pMove.scale.transform.localScale.x == -1f)
+				{
+					this.TmpSexScale = this.TmpSex.transform.Find("Scale").gameObject;
+					this.TmpSexScale.transform.localScale = new Vector3(-1f, 1f, 1f);
+				}
+			} else {
+				// TODO: Understand why this happens.
+				bool isSourceFlipped = this.Man.pMove.scale.transform.localScale.x < 0.0;
+				bool flag2 = (this.Girl.npcID == NpcID.Hannah) ? !isSourceFlipped : isSourceFlipped;
+				this.TmpSex.transform.Find("Scale").gameObject.transform.localScale = new Vector3(flag2 ? -1f : 1f, 1f, 1f);
 			}
 
 			this.PrepareGirl(this.Girl);
@@ -240,8 +250,15 @@ namespace HFramework.Scenes
 
 		private IEnumerator Teardown()
 		{
-			Vector3 rot = this.TmpSexScale == null ? Vector3.left : Vector3.right;
-			this.Girl.nMove.Rot(this.Girl.transform.position + rot);
+			if (GameInfo.GameVersion < GameInfo.ToVersion("0.6.0.0")) {
+				Vector3 rot = this.TmpSexScale == null ? Vector3.left : Vector3.right;
+				this.Girl.nMove.Rot(this.Girl.transform.position + rot);
+			} else {
+				if (this.Girl.faint > 0.0 && this.Girl.life > 0.0) {
+					bool sourceFlipped = this.Man.pMove.scale.transform.localScale.x < 0.0;
+					this.Girl.nMove.Rot(this.Girl.transform.position + (sourceFlipped ? Vector3.right : Vector3.left));
+				}
+			}
 			this.Girl.transform.position = this.Man.transform.position + new Vector3(0f, 0.01f, -0.01f);
 
 			yield return this.EnableLiveGirl(this.Girl);

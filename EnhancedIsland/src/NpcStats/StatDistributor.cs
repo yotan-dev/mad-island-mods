@@ -90,6 +90,11 @@ namespace EnhancedIsland.NpcStats
 
 		public static void RedistributeStats(NpcKind kind, CommonStates common)
 		{
+			// NPC stats are replicated world state; only the host (or single-player)
+			// may change them, otherwise peers would diverge.
+			if (Coop.IsSupported && Coop.IsClient())
+				return;
+
 			switch (kind)
 			{
 				case NpcKind.Enemy:

@@ -1,4 +1,6 @@
 // Automatically generated - Do NOT edit.
+using System;
+
 namespace YotanModCore.Consts
 {
 	public static class FX
@@ -89,7 +91,10 @@ namespace YotanModCore.Consts
 
 		public const int SandImpact3 = 42; // SandImpact3.prefab
 
-		public const int Impact01Prefab = 43; // impact_01_prefab.prefab
+		[Obsolete("Impact01Prefab was renamed to FXImpact01Prefab in v0.6.0.0 (Probably only file name change)")]
+		public const int Impact01Prefab = 43; // Renamed to FXImpact01Prefab in v0.6.0.0
+
+		public const int FXImpact01Prefab = 43; // FX_impact_01_prefab.prefab
 
 		public const int RocketFire01 = 44; // RocketFire_01.prefab
 
@@ -486,5 +491,15 @@ namespace YotanModCore.Consts
 		public const int FXWarpForce01 = 240; // FX_warp_force_01.prefab
 
 		public const int FXGuardSword01 = 241; // FX_guard_sword_01.prefab
+
+		public const int FXHealSingle01 = 242; // FX_HealSingle_01.prefab
+
+		public const int FXImpact02Prefab = 243; // FX_impact_02_prefab.prefab
+
+		public const int FXSkillWaves00 = 244; // FX_skill_waves_00.prefab
+
+		public const int FXTwinkle00 = 245; // FX_twinkle_00.prefab
+
+		public const int FXBloodDropSmall = 246; // FX_BloodDrop_small.prefab
 	}
 }

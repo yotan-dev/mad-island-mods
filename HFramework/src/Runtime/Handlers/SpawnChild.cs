@@ -127,16 +127,40 @@ namespace HFramework.Handlers
 				Managers.mn.itemMN.GetItem(Managers.mn.itemMN.FindItem("orb_life_01"), 1);
 				string failureLog = Managers.mn.textMN.texts[15].Replace("XXXX", this.Girl.charaName);
 				Managers.mn.uiMN.GoLogText(failureLog);
+
+				/* TODO:
+					string str = sexManager.mn.textMN.texts[15].Replace("XXXX", common.charaName);
+					if (!FreeCoopSession.FacilityBirthNotice(sexManager, common, str))
+						sexManager.mn.uiMN.GoLogText(str);
+				*/
 				yield break;
 			}
 
 			this.GetChildGender(out int gender, out string addText);
+
+			// TODO: FreePersonRuntime.BirthParentNpcId((Component) sexManager, common.pregnant[0], friend);
 			int npcId = this.GetChildNpcId(gender);
 
 			yield return Managers.mn.npcMN.GenSpawn(npcId, this.Girl.gameObject, null, 0f, null, true);
 
+			/* TODO:
+			int num2 = FreePersonRuntime.ChildSpawnId((Component) sexManager, selected);
+            if (FreePersonRuntime.InvalidChildSpawn((Component) sexManager, num2, common, tmpWorkPlace, tmpSexPlace, tmpSearchAngle))
+              yield break;
+            if (num2 != -1)
+              yield return (object) sexManager.mn.npcMN.GenSpawn(num2, common.gameObject, (GameObject) null, 0.0f, (EnemySpawner) null, true, true);
+            else
+              Debug.LogError((object) "child not found");
+			*/
+
 			CommonStates tmpGenerate = Managers.mn.npcMN.tmpGenerate;
 			Managers.mn.npcMN.tmpGenerate = null;
+
+			/* TODO:
+			if (FreePersonRuntime.MissingGeneratedChild((Component) sexManager, tmpGenerate, common, tmpWorkPlace, tmpSexPlace, tmpSearchAngle))
+              yield break;
+			*/
+
 			if (gender == Gender.Female)
 				tmpGenerate.charaName = Managers.mn.randChar.GirlNaming();
 			else
@@ -151,6 +175,12 @@ namespace HFramework.Handlers
 			yield return HookManager.Instance.RunEventHook(this.Scene, EventNames.OnBirth, null);
 			string log = addText + Managers.mn.textMN.texts[14].Replace("XXXX", this.Girl.charaName).Replace("YYYY", tmpGenerate.charaName);
 			Managers.mn.uiMN.GoLogText(log);
+
+			/* TODO:
+				string str = addText + sexManager.mn.textMN.texts[14].Replace("XXXX", common.charaName).Replace("YYYY", tmpGenerate.charaName);
+				if (!FreeCoopSession.FacilityBirthNotice(sexManager, common, str))
+				sexManager.mn.uiMN.GoLogText(str);
+			*/
 		}
 	}
 }

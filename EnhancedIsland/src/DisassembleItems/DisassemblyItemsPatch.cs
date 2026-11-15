@@ -32,6 +32,11 @@ namespace EnhancedIsland.DisassembleItems
 
 			__runOriginal = false;
 
+			/* TODO: Review
+			if (FreeCoopSession.TryDisassembleAnimal(this, slotID, component))
+            return;
+			*/
+
 			Managers.mn.inventory.ConsumeItem(slotID, 1);
 			PLogger.LogVerbose($"Disassembling {itemData.GetItemName()}...");
 			foreach (var item in items)

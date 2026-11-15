@@ -48,6 +48,11 @@ namespace EnhancedIsland.StackNearby
 		}
 
 		private void StackNearby_Sub(Vector3 fromPos) {
+			// In co-op, world chests use host-authoritative shared storage;
+			// stacking items into them locally would desync.
+			if (Coop.IsSupported && Coop.InNetworkScene(Managers.mn.inventory))
+				return;
+
 			Managers.mn.StartCoroutine(StackNearby_Subsub(fromPos));
 		}
 	}

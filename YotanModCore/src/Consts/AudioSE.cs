@@ -561,5 +561,17 @@ namespace YotanModCore.Consts
 		public const int Chain02 = 275; // chain_02.ogg
 
 		public const int Chain01 = 276; // chain_01.ogg
+
+		public const int HitIronball = 277; // hit_ironball.ogg
+
+		public const int HitHeavy02 = 278; // hit_heavy_02.ogg
+
+		public const int BodyFallDropBloodDesignStereo5 = 279; // body_fall_drop_blood_design_stereo_5.wav
+
+		public const int VacuumCharge01 = 280; // vacuum_charge_01.ogg
+
+		public const int Gun01 = 281; // gun_01.ogg
+
+		public const int HitIronball02 = 282; // hit_ironball_02.ogg
 	}
 }

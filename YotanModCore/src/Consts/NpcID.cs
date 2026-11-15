@@ -448,6 +448,9 @@ namespace YotanModCore.Consts
 		[StrVal("Lulu")]
 		public const int Lulu = 163;
 
+		[StrVal("Nie")]
+		public const int Nie = 167;
+
 		[StrVal("Centipede")]
 		public const int Centipede = 168;
 

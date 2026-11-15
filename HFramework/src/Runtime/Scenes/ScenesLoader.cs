@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using HFramework.ConfigFiles;
 using HFramework.Performer;
@@ -26,6 +27,7 @@ namespace HFramework.Scenes
 			AddConditional(typeof(JokeCheck));
 			AddConditional(typeof(LibidoCheck));
 			AddConditional(typeof(PerfumeCheck));
+			AddConditional(typeof(PlayerControlled));
 			AddConditional(typeof(PregnantCheck));
 			AddConditional(typeof(IsDueDate));
 			AddConditional(typeof(QuestProgressCheck));
@@ -112,6 +114,19 @@ namespace HFramework.Scenes
 					}
 
 					errorMessage = $"Failed to load Performer {performerConst} {desc}";
+
+					// Force basic constraints of player control so we don't have to copy paste it all the time
+					// TODO: Improve how we do this (Or maybe not since we are going to replace with modern)
+					if (scene.Id == "HF_CommonSexNPC") {
+						performerConfig.StartConditions.Append(new PlayerControlled(performer.FromNpcId, false));
+						performerConfig.PerformConditions.Append(new PlayerControlled(performer.FromNpcId, false));
+
+						if (performer.ToNpcId != null && performer.ToNpcId != performer.FromNpcId) {
+							performerConfig.StartConditions.Append(new PlayerControlled(performer.ToNpcId.Value, false));
+							performerConfig.PerformConditions.Append(new PlayerControlled(performer.ToNpcId.Value, false));
+						}
+					}
+
 					sceneInfo.AddPerformer(performer, performerConfig.StartConditions, performerConfig.PerformConditions);
 				}
 			}

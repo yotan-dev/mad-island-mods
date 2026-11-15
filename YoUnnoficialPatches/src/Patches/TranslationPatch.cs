@@ -25,16 +25,14 @@ namespace YoUnnoficialPatches.Patches
 			}
 		}
 
-		[HarmonyPatch(typeof(StoryManager), "BossBattleCheck")]
-		[HarmonyPrefix]
-		private static void Pre_StoryManager_BossBattleCheck(CommonStates bossCommon, bool teleport)
+		internal static void FixBossName(CommonStates boss)
 		{
-			switch (bossCommon?.npcID) {
-			case NpcID.Cassie:	bossCommon.charaName = "Cassie"; break;
-			case NpcID.Takumi:	bossCommon.charaName = "Takumi"; break;
-			case NpcID.Scythe:	bossCommon.charaName = "Scythe"; break;
-			case NpcID.Planton:	bossCommon.charaName = "Planton"; break; // @TODO: Other monsters
-			case NpcID.Sally:	bossCommon.charaName = "Sally"; break;
+			switch (boss?.npcID) {
+			case NpcID.Cassie:	boss.charaName = "Cassie"; break;
+			case NpcID.Takumi:	boss.charaName = "Takumi"; break;
+			case NpcID.Scythe:	boss.charaName = "Scythe"; break;
+			case NpcID.Planton:	boss.charaName = "Planton"; break; // @TODO: Other monsters
+			case NpcID.Sally:	boss.charaName = "Sally"; break;
 			}
 		}
 

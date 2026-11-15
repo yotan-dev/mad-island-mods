@@ -187,6 +187,7 @@ namespace HFramework.Scenes
 			if (scene == null)
 				return false;
 
+			// TODO: manager.InstantiateFreeList
 			this.TmpSex = GameObject.Instantiate(scene, pos, Quaternion.identity);
 			if (this.TmpSex == null)
 				return false;
@@ -242,6 +243,11 @@ namespace HFramework.Scenes
 		{
 			this.MenuPanel.Hide();
 
+			// TODO:
+			/*
+			if ((UnityEngine.Object) actionObject == (UnityEngine.Object) null || (UnityEngine.Object) actionObject != (UnityEngine.Object) manager.tmpCommonSex || (UnityEngine.Object) actionAnimation != (UnityEngine.Object) manager.tmpCommonAnim || (UnityEngine.Object) actionPartner != (UnityEngine.Object) manager.tmpCommonGirl)
+          		yield break;
+		  	*/
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
@@ -279,12 +285,21 @@ namespace HFramework.Scenes
 			this.MenuPanel.Hide();
 			this.TmpCommonSub = 0;
 
-			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape)
+			if (this.TmpCommonState == ManRapeSleepState.ForcefullRape) {
+				// TODO: FreeCoopSession.NotifyInteractionFaintZero(manager.tmpCommonGirl);
 				this.Girl.faint = 0.0;
+			}
 
 			yield return this.Performer.Perform(ActionType.Finish);
 			if (!this.CanContinue())
 				yield break;
+
+			/*
+			TODO:
+
+			if ((UnityEngine.Object) actionObject == (UnityEngine.Object) null || (UnityEngine.Object) actionObject != (UnityEngine.Object) manager.tmpCommonSex || (UnityEngine.Object) actionAnimation != (UnityEngine.Object) manager.tmpCommonAnim || (UnityEngine.Object) actionPartner != (UnityEngine.Object) manager.tmpCommonGirl)
+          		yield break;
+			*/
 
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 
@@ -316,6 +331,11 @@ namespace HFramework.Scenes
 				{
 					if (UnityEngine.Random.Range(0, 100) <= 10)
 					{
+						/*
+						TODO:
+						if (!FreeCoopSession.InteractionNotice(manager, 10, manager.tmpCommonGirl))
+                  			manager.mn.uiMN.GoLogText(manager.mn.textMN.logTexts[10].Replace("XXXX", manager.tmpCommonGirl.charaName));
+						*/
 						Managers.mn.uiMN.GoLogText(Managers.mn.textMN.logTexts[10].Replace("XXXX", this.Girl.charaName));
 						this.Destroyed = true;
 						this.TmpCommonSub = 5;
@@ -331,6 +351,7 @@ namespace HFramework.Scenes
 				yield break;
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+			// TODO: FreeInteractionSource.Observe
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())

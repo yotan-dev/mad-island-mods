@@ -22,7 +22,13 @@ namespace YotanModCore.Patches
 		{
 			PLogger.LogDebug($"DefenceCounterAttack({attacker}, {fixedDamage})");
 			if (__instance is CDefenceInfo cDefenceInfo)
+			{
+				// In co-op, counter attacks are host-authoritative; skip custom handling on clients.
+				if (Coop.IsSupported && Coop.InNetworkScene(__instance) && Coop.IsClient())
+					return false;
+
 				return cDefenceInfo.DefenceCounterAttack(attacker, fixedDamage);
+			}
 
 			return false;
 		}

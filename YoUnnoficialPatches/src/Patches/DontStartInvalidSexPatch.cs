@@ -12,6 +12,11 @@ namespace YoUnnoficialPatches.Patches
 		[HarmonyPostfix]
 		private static void Post_NPCManager_ShallWeSex(CommonStates from, CommonStates to, ref SexManager.SexInviteState __result)
 		{
+			// In co-op, NPC brains are host-simulated (replicated NPCs have
+			// nMove disabled); skip on clients to avoid divergent decisions.
+			if (Coop.IsSupported && Coop.IsClient())
+				return;
+
 			if (__result != SexManager.SexInviteState.Yes)
 				return;
 

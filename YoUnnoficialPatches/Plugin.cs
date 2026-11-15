@@ -16,7 +16,13 @@ namespace YoUnnoficialPatches
 			PConfig.Instance.Init(Config);
 
 			if (PConfig.Instance.FixTranslationToEnglish.Value)
+			{
 				Harmony.CreateAndPatchAll(typeof(TranslationPatch));
+				if (GameInfo.GameVersion >= GameInfo.ToVersion("0.6.0"))
+					Harmony.CreateAndPatchAll(typeof(BossBattleCheckPatch));
+				else // < 0.6.0 ; compatibility.
+					Harmony.CreateAndPatchAll(typeof(BossBattleCheckPatch_Pre0_6));
+			}
 
 			if (PConfig.Instance.DontStartInvalidSex.Value) {
 				if (GameInfo.GameVersion >= GameInfo.ToVersion(0, 5, 12))

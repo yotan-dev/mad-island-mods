@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HFramework.Hook;
 using HFramework.Performer;
+using HFramework.Scenes.Conditionals;
 using Spine.Unity;
 
 namespace HFramework.Scenes
