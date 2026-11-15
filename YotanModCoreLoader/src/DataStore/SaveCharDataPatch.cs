@@ -74,7 +74,7 @@ namespace YotanModCore.DataStore
 		/// </summary>
 		/// <param name="commonStates"></param>
 		/// <param name="charaSave"></param>
-		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.NPCCommonToCharaSave))]
+		[HarmonyPatch(typeof(SaveManager), nameof(SaveManager.NPCCommonToCharaSave), new[] { typeof(CommonStates), typeof(SaveManager.CharaSave), typeof(SaveManager.NPCBagCommon) })]
 		[HarmonyPostfix]
 		private static void Post_SaveManager_NPCCommonToCharaSave(CommonStates nCommon, SaveManager.CharaSave chara)
 		{

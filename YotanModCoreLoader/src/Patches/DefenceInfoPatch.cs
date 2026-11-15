@@ -12,7 +12,10 @@ namespace YotanModCore.Patches
 		{
 			var skip = false;
 			PLogger.LogDebug($"OnDefenceAttacked({attacker}, {fixedDamage})");
-			if (__instance is CDefenceInfo cDefenceInfo)
+
+			// In co-op, defence damage is routed to the host; custom handling
+			// must not mutate state on clients.
+			if (__instance is CDefenceInfo cDefenceInfo && !(Coop.IsSupported && Coop.InNetworkScene(__instance) && Coop.IsClient()))
 				skip = cDefenceInfo.OnDefenceAttacked(attacker, fixedDamage);
 
 			return skip;
@@ -24,7 +27,7 @@ namespace YotanModCore.Patches
 		{
 			var skip = false;
 			PLogger.LogDebug($"OnDefenceTouched({collision})");
-			if (__instance is CDefenceInfo cDefenceInfo)
+			if (__instance is CDefenceInfo cDefenceInfo && !(Coop.IsSupported && Coop.InNetworkScene(__instance) && Coop.IsClient()))
 				skip = cDefenceInfo.OnDefenceTouched(collision);
 
 			return skip;
@@ -35,6 +38,11 @@ namespace YotanModCore.Patches
 		internal static void Post_DefenceInfo_Repair(DefenceInfo __instance)
 		{
 			PLogger.LogDebug($"OnDefenceRepaired()");
+
+			// Co-op may suppress Repair() entirely; only notify when life was actually restored.
+			if (__instance.itemInfo != null && __instance.itemInfo.life < __instance.itemInfo.lifeMax)
+				return;
+
 			if (__instance is CDefenceInfo cDefenceInfo)
 				cDefenceInfo.OnDefenceRepaired();
 		}
