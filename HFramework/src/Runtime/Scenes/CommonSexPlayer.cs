@@ -96,8 +96,10 @@ namespace HFramework.Scenes
 				Managers.mn.randChar.CopyParams(this.Npc, tmpSexCommon);
 				Managers.mn.randChar.LoadGenGirl(this.TmpSex, false, RandomCharacter.LoadType.G2);
 				AnimationFX sexPlaceAnimFx = tmpSexCommon.anim.GetComponent<AnimationFX>();
-				sexPlaceAnimFx.voiceID = this.Player.voiceID;
-				sexPlaceAnimFx.voice2ID = this.Npc.voiceID;
+				if (sexPlaceAnimFx != null) {
+					sexPlaceAnimFx.voiceID = this.Player.voiceID;
+					sexPlaceAnimFx.voice2ID = this.Npc.voiceID;
+				}
 			}
 		}
 
@@ -135,8 +137,9 @@ namespace HFramework.Scenes
 
 		private void SetupTmpSex()
 		{
-			if (this.Player.npcID == NpcID.Yona)
+			switch (this.Player.npcID)
 			{
+			case NpcID.Yona:
 				// NOTE: right know, all Yona scenes are with humans. Maybe this will change later...
 				//       As of v0.4.0, Nami is an exception for SetCharacter
 				// NPC IDs (as of v0.2.3): 10, 11, 12, 91
@@ -145,7 +148,7 @@ namespace HFramework.Scenes
 				// NPC IDs (as of v0.4.5): + 180
 				// NPC IDs (as of v0.5.0): + 1, 7, 89
 				// NPC IDs (as of v0.5.4): + 72
-				if (this.Npc.npcID == NpcID.Nami)
+				if (this.Npc.npcID == NpcID.Nami || this.Npc.npcID == NpcID.SlenderYoungLady)
 					this.SetupTmpSexYonaNami();
 				else if (this.Npc.npcID == NpcID.NativeBoy)
 					this.SetupTmpSexYonaNativeBoy(); // Note: This happen inside NativeBoy case
@@ -155,9 +158,9 @@ namespace HFramework.Scenes
 					this.SetupTmpSexYonaUnderGroundBoy();
 				else
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
-			}
-			else
-			{
+				break;
+
+			case NpcID.Man:
 				// New decomp (v0.4.2) shows it is not needed
 				// @TODO: Check if this has side effects on current stable
 				// if (this.Npc.npcID == NpcID.Reika)
@@ -166,21 +169,23 @@ namespace HFramework.Scenes
 				// 	Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 				// 	Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, this.Player);
 				// }
-				if (this.Npc.npcID == NpcID.Mermaid)
+
+				// v0.5.12.4 or 0.5.12.5 changed this so SetCharacter for Mermaid goes through normal flow (NPC, Player)
+				if (this.Npc.npcID == NpcID.Mermaid && GameInfo.GameVersion <= GameInfo.ToVersion("0.5.12.3"))
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 				}
-				else if (this.Npc.npcID == NpcID.Mummy)
+				else if (this.Npc.npcID == NpcID.Mummy) // 42
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 					Managers.mn.randChar.LoadMummy(this.Npc, this.TmpSex);
 				}
-				else if (this.Npc.npcID == NpcID.UndergroundWoman)
+				else if (this.Npc.npcID == NpcID.UndergroundWoman) // 44
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, null, this.Player);
 					Managers.mn.randChar.LoadGenUnder(this.Npc, this.TmpSex);
 				}
-				else if (this.Npc.npcID == NpcID.Cyborg)
+				else if (this.Npc.npcID == NpcID.Cyborg) // 88
 				{
 					SkeletonAnimation subSkeletonAnimation = this.TmpSex.GetComponentInChildren<SkeletonAnimation>();
 					subSkeletonAnimation.skeleton.SetSkin("Man");
@@ -190,10 +195,19 @@ namespace HFramework.Scenes
 					if (cyborgCommon != null)
 						Managers.mn.randChar.SetCyborg(this.TmpSex, cyborgCommon.cyborgParams, noOffset: true);
 				}
-								else
+				else
 				{
 					Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, this.Player);
 				}
+				break;
+
+			case NpcID.Reika: // 5
+				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Player, this.Npc);
+				break;
+
+			case NpcID.Takumi: // 7
+				Managers.mn.randChar.SetCharacter(this.TmpSex, this.Npc, this.Player);
+				break;
 			}
 		}
 
@@ -261,6 +275,12 @@ namespace HFramework.Scenes
 				return false;
 
 			this.TmpSex = GameObject.Instantiate<GameObject>(scene, this.Position, Quaternion.identity);
+			/* TODO:
+				this.tmpCommonSex = this.InstantiateFreeList(list, index1, pos, Quaternion.identity);
+				if ((UnityEngine.Object) this.tmpCommonSex == (UnityEngine.Object) null && index2 >= 0)
+					this.tmpCommonSex = this.InstantiateFreeList(list, index2, pos, Quaternion.identity);
+			*/
+
 			this.SetupTmpSex();
 
 			SexMeter.Instance.Init(this.Position + new Vector3(1f, 1f, 0f), 0.3f);
@@ -282,6 +302,7 @@ namespace HFramework.Scenes
 
 			this.TmpCommonState = 0;
 
+			// TODO: FreeInteractionSource.Observe(this.tmpCommonSex, pCommon, nCommon, this.tmpCommonAnim);
 			yield return this.Performer.Perform(ActionType.StartIdle);
 		}
 
@@ -330,6 +351,14 @@ namespace HFramework.Scenes
 
 			yield return this.Performer.Perform(ActionType.Finish);
 
+			/* TODO:
+			actionObject = this.tmpCommonSex;
+			actionAnimation = this.tmpCommonAnim;
+			yield return (object) new WaitForSeconds(this.tmpCommonAnim.state.GetCurrent(0).AnimationEnd);
+			if ((UnityEngine.Object) actionObject == (UnityEngine.Object) null || (UnityEngine.Object) actionObject != (UnityEngine.Object) this.tmpCommonSex || (UnityEngine.Object) actionAnimation == (UnityEngine.Object) null || (UnityEngine.Object) actionAnimation != (UnityEngine.Object) this.tmpCommonAnim || (UnityEngine.Object) pCommon == (UnityEngine.Object) null || (UnityEngine.Object) nCommon == (UnityEngine.Object) null || (UnityEngine.Object) pCommon != (UnityEngine.Object) this.tmpCommonPlayer || (UnityEngine.Object) nCommon != (UnityEngine.Object) this.tmpCommonGirl)
+				yield break;
+			*/
+
 			yield return this.Performer.Perform(ActionType.FinishIdle);
 
 			this.MenuPanel.Show();
@@ -369,6 +398,11 @@ namespace HFramework.Scenes
 			Managers.mn.uiMN.MainCanvasView(true);
 			SexMeter.Instance.Hide();
 
+			/* TODO:
+			if ((UnityEngine.Object) this.tmpCommonPlayer == (UnityEngine.Object) pCommon)
+				this.tmpCommonPlayer = (CommonStates) null;
+			*/
+
 			Managers.mn.uiMN.StatusChange(null);
 		}
 
@@ -379,6 +413,23 @@ namespace HFramework.Scenes
 
 		public override IEnumerator Run()
 		{
+			/*
+			TODO:
+
+				if (state == 0)
+				{
+				if ((UnityEngine.Object) pCommon == (UnityEngine.Object) null || (UnityEngine.Object) nCommon == (UnityEngine.Object) null || (UnityEngine.Object) pCommon == (UnityEngine.Object) nCommon)
+					yield break;
+				this.tmpCommonPlayer = pCommon;
+				}
+				else
+				{
+				pCommon = this.tmpCommonPlayer;
+				nCommon = this.tmpCommonGirl;
+				if ((UnityEngine.Object) pCommon == (UnityEngine.Object) null || (UnityEngine.Object) nCommon == (UnityEngine.Object) null || (UnityEngine.Object) this.tmpCommonSex == (UnityEngine.Object) null || (UnityEngine.Object) this.tmpCommonAnim == (UnityEngine.Object) null)
+					yield break;
+				}
+			*/
 			this.Performer = this.SelectPerformer();
 			if (this.Performer == null)
 			{
@@ -391,7 +442,7 @@ namespace HFramework.Scenes
 				if (this.TmpSex != null)
 					UnityEngine.Object.Destroy(this.TmpSex);
 
-				Debug.LogError("sex not found");
+				PLogger.LogError($"CommonSexPlayer: Failed to create sex scene. Player NPC ID: {this.Player.npcID} / Target NPC ID: {this.Npc.npcID}");
 				yield break;
 			}
 
@@ -399,6 +450,20 @@ namespace HFramework.Scenes
 			this.CommonAnim = (this.TmpSex.transform.Find("Scale/Anim") ?? this.TmpSex.transform.Find("scale/Anim"))?.gameObject?.GetComponent<SkeletonAnimation>();
 			if (this.CommonAnim == null) {
 				PLogger.LogError("CommonAnim not found");
+
+				/* TODO:
+
+				if ((UnityEngine.Object) nCommon != (UnityEngine.Object) null && nCommon.sex == CommonStates.SexState.Playing)
+				{
+					nCommon.sex = CommonStates.SexState.None;
+					if ((UnityEngine.Object) nCommon.nMove != (UnityEngine.Object) null && nCommon.nMove.actType == NPCMove.ActType.Wait)
+					nCommon.nMove.actType = NPCMove.ActType.Idle;
+				}
+				if (!((UnityEngine.Object) this.tmpCommonPlayer == (UnityEngine.Object) pCommon))
+					yield break;
+				this.tmpCommonPlayer = (CommonStates) null;
+				*/
+
 				yield break;
 			}
 

@@ -155,11 +155,14 @@ namespace HFramework.Scenes
 				return false;
 
 			this.TmpSex = Object.Instantiate(scene, this.Player.gameObject.transform.position, Quaternion.identity);
+			// TODO: Multiplayer
+			// For man: tmpSex = sexManager.InstantiateFreePrimary(from.npcID, to.gameObject.transform.position, Quaternion.identity);
+			// For yona: tmpSex = sexManager.InstantiateFreeList(list, index, to.gameObject.transform.position, Quaternion.identity);
 			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			this.CommonAnim = sexAnim;
 
 			this.SetCharacter();
-
+			// TODO: FreeInteractionSource.ObserveDowned(tmpSex, to, from, sexAnim);
 			this.PrepareNpc(this.Rapist, out this.RapistMove);
 			this.DisableLiveNpc(this.Rapist, this.RapistMove);
 
@@ -183,6 +186,9 @@ namespace HFramework.Scenes
 
 			// This is a made up logic. originally SetupSexScene only happens for Man x Large Female
 			this.SetCharacter();
+			// TODO: For npcID = 17
+			// tmpSex = sexManager.InstantiateFreeList(8, 1, to.gameObject.transform.position, Quaternion.identity);
+			// FreeInteractionSource.ObserveDowned(tmpSex, to, from, sexAnim);
 		}
 
 		private IEnumerator PerformGrapple()
@@ -281,6 +287,10 @@ namespace HFramework.Scenes
 			this.Player.CommonLifeChange(0.0, 0);
 			this.Player.faint = (int)(this.Player.maxFaint * 0.2);
 			Managers.mn.gameMN.FaintImageChange();
+
+			// TODO: Multiplayer
+			// sexManager.StartFreeDownedRecovery(from.npcID);
+			// (replaces coroutine to revive)
 
 			Managers.mn.sexMN.StartCoroutine(Managers.mn.sexMN.ReviveToNearPoint(this.Rapist.npcID));
 		}

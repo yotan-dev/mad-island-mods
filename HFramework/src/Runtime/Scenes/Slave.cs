@@ -172,6 +172,7 @@ namespace HFramework.Scenes
 				position = this.SlaveObject.transform.position;
 			}
 
+			// TODO: this.mn.sexMN.InstantiateFreeList
 			this.SexObject = GameObject.Instantiate(scene, position, Quaternion.identity);
 			if (this.SexObject == null)
 				return false;

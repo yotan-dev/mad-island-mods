@@ -150,6 +150,25 @@
 
 				<!-- New in v0.5.10 -->
 				<Performer id="HF_Man_Daughter_Rape" />
+
+				<!-- New in v0.6.0 -->
+				<Performer id="HF_Man_Hannah_Rape">
+					<StartConditions>
+						<Condition xsi:type="FaintCheck" actor="Hannah#129" value="true" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="FaintCheck" actor="Hannah#129" value="true" />
+					</PerformConditions>
+				</Performer>
+
+				<Performer id="HF_Takumi_YoungLady_Rape">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="YoungLady#9" value="false" />
+					</PerformConditions>
+				</Performer>
 			</Performers>
 		</Scene>
 	</Scenes>

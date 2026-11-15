@@ -90,6 +90,7 @@ namespace HFramework.Scenes
 				return false;
 
 			var sexPos = this.Place?.transform?.position ?? this.Npc.transform.position;
+			// TODO: InstantiateFreeList
 			this.TmpSex = GameObject.Instantiate<GameObject>(this.Performer.Info.SexPrefabSelector.GetPrefab(), sexPos, Quaternion.identity);
 			if (this.TmpSex == null)
 				return false;
@@ -155,6 +156,7 @@ namespace HFramework.Scenes
 
 		private IEnumerator Speed1()
 		{
+			// TODO: FreeInteractionSource.ObserveNpcSolo(tmpSex, common, tmpSexAnim);
 			yield return this.Performer.Perform(ActionType.Speed1, new PerformModifiers() { Duration = 10f });
 		}
 
@@ -244,6 +246,9 @@ namespace HFramework.Scenes
 
 		public override bool CanContinue()
 		{
+			if (Managers.mn.gameMN.IsPreparingControlledCharacter(this.Npc))
+				return false;
+
 			return ((this.SceneSet && this.TmpSex != null) || !this.SceneSet) && this.IsActorWaiting() && this.IsActorAlive();
 		}
 

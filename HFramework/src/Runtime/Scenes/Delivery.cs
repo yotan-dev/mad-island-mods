@@ -215,7 +215,7 @@ namespace HFramework.Scenes
 
 		public override bool CanContinue()
 		{
-			return this.Girl.nMove.actType == NPCMove.ActType.Wait && !this.Destroyed;
+			return this.Girl.nMove.actType == NPCMove.ActType.Wait && !Managers.mn.gameMN.IsPreparingControlledCharacter(this.Girl) && !this.Destroyed;
 		}
 
 		public override CommonStates[] GetActors()

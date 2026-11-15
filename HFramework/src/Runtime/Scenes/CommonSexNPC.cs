@@ -59,8 +59,11 @@ namespace HFramework.Scenes
 
 		private void ResetNpc(CommonStates npc)
 		{
-			npc.sex = CommonStates.SexState.None;
-			npc.nMove.actType = NPCMove.ActType.Travel;
+			if (npc.sex == CommonStates.SexState.Playing)
+				npc.sex = CommonStates.SexState.None;
+
+			if (npc.nMove.actType == NPCMove.ActType.Wait && npc.dead == 0 && npc.life > 0f && npc.faint > 0f && !Managers.mn.gameMN.IsControlledNpc(npc))
+				npc.nMove.actType = NPCMove.ActType.Travel;
 		}
 
 		private GameObject SetEmotion(CommonStates npc)
@@ -179,6 +182,7 @@ namespace HFramework.Scenes
 				PLogger.LogError($"Failed to find \"pos\" object for SexPlace {this.Place.name}");
 
 			var pos = posTransform?.position ?? this.Place.transform.position;
+			// TODO: sexManager.InstantiateFreeList
 			this.TmpSex = GameObject.Instantiate<GameObject>(scene, pos, Quaternion.identity);
 
 			if (!this.IsPlaceFree() || this.TmpSex == null)
@@ -222,6 +226,7 @@ namespace HFramework.Scenes
 
 			this.CommonAnim = (this.TmpSex.transform.Find("Scale/Anim") ?? this.TmpSex.transform.Find("scale/Anim"))
 				.gameObject.GetComponent<SkeletonAnimation>();
+			// TODO: FreeInteractionSource.ObserveNpcPair
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;
@@ -346,7 +351,17 @@ namespace HFramework.Scenes
 
 		public override bool CanContinue()
 		{
-			return !this.Destroyed && this.TmpSex != null && this.AreActorsWaiting() && this.AreActorsAlive();
+			// official code has more checks, but I think we don't need them all:
+			// - life > 0
+			// - faint > 0
+			// - activeInHierarchy = true
+			// but I think what we have today is good enough.
+			return !this.Destroyed && this.TmpSex != null && this.AreActorsWaiting() && this.AreActorsAlive() && !this.IsAnyActorBeingControlled();
+		}
+
+		private bool IsAnyActorBeingControlled()
+		{
+			return Managers.mn.gameMN.IsControlledNpc(this.Npc1) || Managers.mn.gameMN.IsControlledNpc(this.Npc2) || Managers.mn.gameMN.IsPreparingControlledCharacter(this.Npc1) || Managers.mn.gameMN.IsPreparingControlledCharacter(this.Npc2);
 		}
 
 		public override void Destroy()

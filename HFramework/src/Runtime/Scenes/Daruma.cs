@@ -121,6 +121,7 @@ namespace HFramework.Scenes
 			if (scene == null)
 				return false;
 
+			// TODO: this.mn.sexMN.InstantiateFreeList
 			this.SexObj = GameObject.Instantiate(scene, this.DarumaObj.transform.position, Quaternion.identity);
 			this.CommonAnim = SexObj.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			Managers.mn.randChar.SetCharacter(this.SexObj, this.Npc, Managers.mn.gameMN.playerCommons[1]);

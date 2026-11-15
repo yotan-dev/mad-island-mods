@@ -448,6 +448,18 @@
 
 				<!-- New in v0.5.12.0 -->
 				<Performer id="HF_Yona_UnderGroundYoungMan_Friendly_Normal" />
+
+				<!-- New in v0.6.0.0 -->
+				<Performer id="HF_Reika_Keigo_Friendly_Normal">
+					<StartConditions>
+						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
+					</StartConditions>
+					<PerformConditions>
+						<Condition xsi:type="IsDueDate" actor="Reika#5" value="false" />
+					</PerformConditions>
+				</Performer>
+				<Performer id="HF_Takumi_Yona_Friendly_Normal" />
+				<Performer id="HF_Takumi_YoungLady_Friendly_Normal" />
 			</Performers>
 		</Scene>
 	</Scenes>

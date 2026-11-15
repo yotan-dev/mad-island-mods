@@ -46,6 +46,10 @@ namespace HFramework
 		}
 
 		public void NPCMove_Pre_Wait(NPCMove __instance) {
+			// In co-op, NPC sex behavior is handled by the game's native flow.
+			if (Coop.IsSupported && Coop.InNetworkScene(__instance))
+				return;
+
 			OnActTypeChanged?.Invoke(__instance, __instance.actType);
 		}
 
@@ -54,6 +58,9 @@ namespace HFramework
 		#region SexChecks
 
 		public bool SexManager_Pre_SexCheck(CommonStates from, CommonStates to, ref bool __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(from))
+				return true;
+
 			if (from.npcID == CommonUtils.GetActivePlayer().npcID)
 				__result = SexScriptsManager.Instance.CanStart(SexScriptTypes.CommonSexPlayer, from, to);
 			else
@@ -63,7 +70,13 @@ namespace HFramework
 		}
 
 		public bool SexManager_Pre_RapesCheck(CommonStates from, CommonStates to, ref bool __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(from))
+				return true;
+
 			__result = false;
+
+			// TODO: Check if it is the coop player
+			// FreeCoopSession.IsRemoteDownedTarget((Component) this, to)
 
 			int activePlayer = CommonUtils.GetActivePlayer().npcID;
 			string typeName;
@@ -83,6 +96,10 @@ namespace HFramework
 		}
 
 		public bool NPCManager_Post_LoveLoveCheck(bool result, CommonStates commonA, CommonStates commonB) {
+			// In co-op, NPC sex behavior is handled by the game's native flow.
+			if (Coop.IsSupported && Coop.InNetworkScene(commonA))
+				return result;
+
 			// This is a check where we want to know if commonB accepts sex from commonA
 
 			var sexTo = commonB;
@@ -109,6 +126,9 @@ namespace HFramework
 		#region AssWall
 
 		public bool SexManager_Pre_AssWall(InventorySlot tmpWall, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(tmpWall))
+				return true;
+
 			var info = new CommonSexInfo {
 				Place = new SexPlaceScriptPlace(tmpWall.GetComponent<SexPlace>()),
 			};
@@ -131,6 +151,9 @@ namespace HFramework
 
 		#region CommonSexNPC
 		public bool SexManager_Pre_CommonSexNPC(CommonStates npcA, CommonStates npcB, SexPlace sexPlace, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(npcA))
+				return true;
+
 			var actors = new CommonStates[] { npcA, npcB };
 			var info = new CommonSexInfo {
 				Place = new SexPlaceScriptPlace(sexPlace)
@@ -150,6 +173,9 @@ namespace HFramework
 		#region CommonSexPlayer
 
 		public bool SexManager_Pre_CommonSexPlayer(CommonStates pCommon, CommonStates nCommon, Vector3 pos, int sexType, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(pCommon))
+				return true;
+
 			var info = new PlayerSexInfo {
 				Pos = pos,
 				SexType = sexType,
@@ -171,6 +197,9 @@ namespace HFramework
 		#region Daruma
 
 		public bool SexManager_Pre_DarumaSex(int state, InventorySlot tmpDaruma, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(tmpDaruma))
+				return true;
+
 			var pCommon = CommonUtils.GetActivePlayer();
 			var girlCommon = Managers.mn.inventory.itemSlot[50].common;
 
@@ -185,6 +214,9 @@ namespace HFramework
 		#region Delivery
 
 		public bool SexManager_Pre_Delivery(CommonStates common, WorkPlace tmpWorkPlace, SexPlace tmpSexPlace, float animDurationModifier, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(common))
+				return true;
+
 			var info = new CommonSexInfo() {
 				AnimDurationModifier = animDurationModifier
 			};
@@ -213,6 +245,9 @@ namespace HFramework
 		#region ManRapes
 
 		public bool SexManager_Pre_ManRapes(CommonStates girl, CommonStates man, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(girl))
+				return true;
+
 			var scene = new ManRapes(girl, man);
 			__result = scene.Run();
 			return false;
@@ -223,6 +258,9 @@ namespace HFramework
 		#region ManRapesSleep
 
 		public bool SexManager_Pre_ManRapesSleep(CommonStates girl, CommonStates man, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(girl))
+				return true;
+
 			var scene = new ManRapesSleep(girl, man);
 			__result = scene.Run();
 			return false;
@@ -233,6 +271,9 @@ namespace HFramework
 		#region OnaniNPC
 
 		public bool SexManager_Pre_OnaniNPC(CommonStates common, SexPlace sexPlace, float upMoral, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(common))
+				return true;
+
 			var scene = new OnaniNPC(common, sexPlace, upMoral);
 			__result = scene.Run();
 			return false;
@@ -243,6 +284,9 @@ namespace HFramework
 		#region PlayerRaped
 
 		public bool SexManager_Pre_PlayerRaped(CommonStates to, CommonStates from, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(to))
+				return true;
+
 			var info = new SexInfo();
 			var actors = new CommonStates[] { from, to };
 
@@ -261,6 +305,9 @@ namespace HFramework
 		#region Slave
 
 		public bool SexManager_Pre_Slave(InventorySlot tmpSlave, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(tmpSlave))
+				return true;
+
 			var scene = new Slave(CommonUtils.GetActivePlayer(), tmpSlave);
 			__result = scene.Run();
 			return false;
@@ -281,6 +328,9 @@ namespace HFramework
 		#region Toilet
 
 		public bool SexManager_Pre_Toilet(InventorySlot tmpToile, ref IEnumerator __result) {
+			if (Coop.IsSupported && Coop.InNetworkScene(tmpToile))
+				return true;
+
 			var scene = new Toilet(CommonUtils.GetActivePlayer(), Managers.mn.inventory.itemSlot[50].common, tmpToile);
 			__result = scene.Run();
 			return false;
@@ -297,6 +347,11 @@ namespace HFramework
 		/// <param name="st"></param>
 		/// <returns></returns>
 		public int CanSexWithNpc(CommonStates st) {
+			// In co-op, NPC sex behavior is handled by the game's native flow;
+			// preserve the original npcID > 1 gate.
+			if (Coop.IsSupported && Coop.InNetworkScene(st))
+				return st.npcID > 1 ? 999 : 0;
+
 			// We allow player characters to do it, as long as they are not the active player
 			// otherwise it would block player control.
 			// This is being controlled by the sex scenes anyway, and in the default game it would
