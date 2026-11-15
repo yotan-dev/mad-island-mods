@@ -96,6 +96,7 @@ namespace EnhancedIsland.DisassembleItems
 
 			PLogger.LogDebug($"Recreated disassemble table with {newTable.Count} items");
 			DisassembleTable.Table = newTable;
+			DisassembleTable.ApplyUserOverrides();
 		}
 	}
 }

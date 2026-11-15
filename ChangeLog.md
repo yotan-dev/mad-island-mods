@@ -12,6 +12,7 @@ Each mod has its own version which follows SemVer.
 
 ### Enhanced Island v1.3.0
 - Adds config for Stack Nearby key
+- Allow user customization of disassemble items table via a XML file (see docs site)
 
 
 ## v2026.11.15
