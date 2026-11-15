@@ -45,6 +45,22 @@ When trying to craft an item, the missing requirements will show in Red.
 
 Crafted something by mistake? Don't need it any longer? Press `T` and get the materials back.
 
+You can customize the disassemble recipes by creating `EnhancedIsland.DissassembleTable.user.xml`
+in the `BepInEx/config` folder. Each `Entry` overrides (or adds) the materials an item disassembles into;
+an `Entry` with no `Material` children removes the item from the table.
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<DisassembleTable>
+	<Entry id="stone_axe">
+		<Material item="wood" count="2" />
+		<Material item="stone" count="1" />
+	</Entry>
+	<Entry id="some_item">
+	</Entry>
+</DisassembleTable>
+```
+
 
 ### Better Workplaces
 

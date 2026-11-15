@@ -1,4 +1,5 @@
 using BepInEx.Configuration;
+using UnityEngine;
 
 namespace EnhancedIsland
 {
@@ -15,6 +16,8 @@ namespace EnhancedIsland
 
 		public ConfigEntry<bool> EnableDisassembleItems { get; private set; }
 
+		public ConfigEntry<bool> DisassembleItemsLogUserTableEntries { get; private set; }
+
 		public ConfigEntry<bool> EnableIncreaseZoom { get; private set; }
 
 		public ConfigEntry<bool> EnableItemColorInSlot { get; private set; }
@@ -24,6 +27,8 @@ namespace EnhancedIsland
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
 
 		public ConfigEntry<bool> EnableStackNearby { get; private set; }
+
+		public ConfigEntry<KeyCode> StackNearbyKey { get; private set; }
 
 		public ConfigEntry<bool> EnableWarpBody { get; private set; }
 
@@ -50,6 +55,15 @@ namespace EnhancedIsland
 				"Allow player to disassemble items?\n"
 				+ "If true, player may pess T to break items back into their crafting materials.\n"
 				+ "If false, no changes are made to the game.\n"
+			);
+
+			this.DisassembleItemsLogUserTableEntries = conf.Bind<bool>(
+				"DisassembleItems",
+				"LogUserTableEntries",
+				false,
+				"Log each entry added/overridden/removed by the user disassemble table?\n"
+				+ "If true, every change from EnhancedIsland.DissassembleTable.user.xml is logged (can be spammy for large files).\n"
+				+ "If false, only a summary count is logged.\n"
 			);
 
 			this.EnableIncreaseZoom = conf.Bind<bool>(
@@ -84,8 +98,16 @@ namespace EnhancedIsland
 				"Enabled",
 				true,
 				"Enable Stack Nearby enhancement?\n"
-				+ "If true, you may press V to stack items from inventory into nearby containers.\n"
+				+ "If true, you may press the configured key (default V) to stack items from inventory into nearby containers.\n"
 				+ "If false, no changes are made to the game.\n"
+			);
+
+			this.StackNearbyKey = conf.Bind<KeyCode>(
+				"StackNearby",
+				"Key",
+				KeyCode.V,
+				"Key used to trigger Stack Nearby.\n"
+				+ "Accepts Unity KeyCode names (e.g. V, F, Alpha1, F5).\n"
 			);
 
 			this.EnableWarpBody = conf.Bind<bool>(

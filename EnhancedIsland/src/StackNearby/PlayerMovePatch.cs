@@ -18,7 +18,7 @@ namespace EnhancedIsland.StackNearby
 				return;
 			}
 
-			if (Input.GetKeyDown(KeyCode.V)) {
+			if (Input.GetKeyDown(PConfig.Instance.StackNearbyKey.Value)) {
 				StackNearbyController.StackNearby(__instance.transform.position);
 			}
 		}
