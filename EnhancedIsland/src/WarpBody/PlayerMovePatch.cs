@@ -27,6 +27,10 @@ namespace EnhancedIsland.WarpBody
 		[HarmonyPostfix]
 		private static void Post_PlayerMove_Update(PlayerMove __instance)
 		{
+			// NPC teleport is local-only; in co-op it would desync replicated NPC state.
+			if (Coop.IsSupported && Coop.InNetworkScene(__instance))
+				return;
+
 			if (Input.GetKeyDown(KeyCode.P) && __instance.searchNPC != null)
 			{
 				WarpBody(__instance, __instance.searchNPC);

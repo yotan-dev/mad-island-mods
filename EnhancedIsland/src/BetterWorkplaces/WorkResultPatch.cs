@@ -9,6 +9,11 @@ namespace EnhancedIsland.BetterWorkplaces
 		[HarmonyPrefix]
 		private static void Pre_NPCManager_WorkResult(CommonStates common, WorkPlace workPlace, InventorySlot tmpInventory, int posID, NPCManager __instance, ref bool __runOriginal)
 		{
+			// In co-op the original WorkResult defers/routes rewards itself;
+			// writing chest items locally would desync, so keep vanilla behavior.
+			if (Coop.IsSupported && Coop.InNetworkScene(__instance))
+				return;
+
 			if (common.nMove.workType != NPCMove.WorkType.Wood && common.nMove.workType != NPCMove.WorkType.Stone && common.nMove.workType != NPCMove.WorkType.Harvest)
 				return;
 
