@@ -11,6 +11,35 @@ Each mod has its own version which follows SemVer.
 ## Unreleased
 
 
+## v2026.11.15
+
+### YotanModCore
+- Detection for v0.6.0.x and constants
+- Some Coop helpers (Still experimental)
+- Adjustments to work on v0.6.0.x
+
+### EnhancedIsland
+- v0.6.0.x support
+- BetterWorkplaces: custom work rewards are skipped in co-op (vanilla `DeferWorkResult` path runs)
+- NpcStats: stat redistribution restricted to host/single-player in co-op
+- StackNearby: disabled in co-op network scenes; `V` hotkey respects `FreeSaveSession.BlocksInput`
+- WarpBody: disabled in co-op network scenes
+- Fixes version gate (`6.0.0` → `0.6.0`) for the StackNearby input block
+
+### HFramework / HFrameworkLoader
+- v0.6.0.x support: all sex-scene bridge entry points defer to the game's native co-op flow inside network scenes
+- Note: Modern mode is not tested yet.
+
+### YoUnnoficialPatches
+- v0.6.0.x support: `BossBattleCheck` patch split into versioned variants (`CommonStates[]` signature on v0.6+)
+
+### Gallery / HExtensions
+- v0.6.0.x support (no behavioral changes; sex tracking inherits HFramework co-op gating)
+
+**Known co-op limitations:** Coop is still barely supported. Many features were coded to not run in Coop.
+I still have to figure out a way to make run coop locally.
+
+
 ## 2026.08.01
 
 ### YotanModCore v2.5.1
