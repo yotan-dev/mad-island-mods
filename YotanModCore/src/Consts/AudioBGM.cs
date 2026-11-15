@@ -98,5 +98,17 @@ namespace YotanModCore.Consts
 		public const int BgmAmbienceRainHeavy = 46; // bgm_ambience_rain_heavy.ogg
 
 		public const int Shiki = 47; // shiki.ogg
+
+		public const int Yasasisanojikan = 48; // Yasasisanojikan.ogg
+
+		public const int WaterSurface = 49; // water_surface.ogg
+
+		public const int Yumeame = 50; // Yumeame.ogg
+
+		public const int AmeIrodoriNiOdoru = 51; // ame_irodori_ni_odoru.ogg
+
+		public const int Yukinohana = 52; // Yukinohana.ogg
+
+		public const int Jigging = 53; // Jigging.ogg
 	}
 }
