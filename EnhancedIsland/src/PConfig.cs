@@ -1,4 +1,5 @@
 using BepInEx.Configuration;
+using UnityEngine;
 
 namespace EnhancedIsland
 {
@@ -24,6 +25,8 @@ namespace EnhancedIsland
 		public ConfigEntry<bool> EnableRequirementChecker { get; private set; }
 
 		public ConfigEntry<bool> EnableStackNearby { get; private set; }
+
+		public ConfigEntry<KeyCode> StackNearbyKey { get; private set; }
 
 		public ConfigEntry<bool> EnableWarpBody { get; private set; }
 
@@ -84,8 +87,16 @@ namespace EnhancedIsland
 				"Enabled",
 				true,
 				"Enable Stack Nearby enhancement?\n"
-				+ "If true, you may press V to stack items from inventory into nearby containers.\n"
+				+ "If true, you may press the configured key (default V) to stack items from inventory into nearby containers.\n"
 				+ "If false, no changes are made to the game.\n"
+			);
+
+			this.StackNearbyKey = conf.Bind<KeyCode>(
+				"StackNearby",
+				"Key",
+				KeyCode.V,
+				"Key used to trigger Stack Nearby.\n"
+				+ "Accepts Unity KeyCode names (e.g. V, F, Alpha1, F5).\n"
 			);
 
 			this.EnableWarpBody = conf.Bind<bool>(

@@ -10,6 +10,9 @@ Each mod has its own version which follows SemVer.
 
 ## Unreleased
 
+### Enhanced Island v1.3.0
+- Adds config for Stack Nearby key
+
 
 ## v2026.11.15
 
