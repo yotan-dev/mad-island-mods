@@ -15,6 +15,10 @@ Each mod has its own version which follows SemVer.
 - Allow user customization of disassemble items table via a XML file (see docs site)
 
 
+### HFramework v1.3.3
+- Fix crash when NPCs tries to sex but has no bed (Modern)
+
+
 ## v2026.11.15
 
 ### YotanModCore

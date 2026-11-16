@@ -155,9 +155,26 @@ namespace HFramework
 				return true;
 
 			var actors = new CommonStates[] { npcA, npcB };
-			var info = new CommonSexInfo {
-				Place = new SexPlaceScriptPlace(sexPlace)
-			};
+			var info = new CommonSexInfo();
+			if (sexPlace == null) {
+				// Following official implementation, no sex place (no bed) = no CommonSexNPC.
+				// I Think we could change that to use ground instead, but not sure if we really want...
+				// So for now, staying official.
+				__result = EmptyEnumerator();
+
+				// var position = npcA?.transform?.position ?? npcB?.transform?.position ?? Vector3.zero;
+				// if (position == Vector3.zero) {
+				// 	PLogger.LogWarning("No position found for CommonSexNPC. Aborting.");
+				// 	__result = EmptyEnumerator();
+				// 	return false;
+				// }
+
+				// info.Place = new GroundScriptPlace(position);
+
+				return false;
+			}
+
+			info.Place = new SexPlaceScriptPlace(sexPlace);
 
 			var runner = SexScriptsManager.Instance.GetScript(SexScriptTypes.CommonSexNPC, actors, info);
 			if (runner != null) {
