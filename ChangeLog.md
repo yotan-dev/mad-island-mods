@@ -10,6 +10,9 @@ Each mod has its own version which follows SemVer.
 
 ## Unreleased
 
+### YotanModCore v2.5.2
+- Detection for v0.6.0.3
+
 ### Enhanced Island v1.3.0
 - Adds config for Stack Nearby key
 - Allow user customization of disassemble items table via a XML file (see docs site)
