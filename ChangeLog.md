@@ -11,7 +11,7 @@ Each mod has its own version which follows SemVer.
 ## Unreleased
 
 ### YotanModCore v2.5.2
-- Detection for v0.6.0.3, v0.6.0.4
+- Detection for v0.6.0.3, v0.6.0.4, v0.6.0.5
 
 ### Enhanced Island v1.3.0
 - Adds config for Stack Nearby key
