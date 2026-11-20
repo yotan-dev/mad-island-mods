@@ -17,6 +17,7 @@ Each mod has its own version which follows SemVer.
 ### Enhanced Island v1.3.0
 - Adds config for Stack Nearby key
 - Allow user customization of disassemble items table via a XML file (see docs site)
+- Fixed requirements highlight not working for some new benches after recent updates
 
 
 ### HFramework v1.3.3

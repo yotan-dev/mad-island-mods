@@ -16,8 +16,12 @@ namespace EnhancedIsland.RequirementChecker
 
 			CraftInfo.Required[] requiredList;
 			if (isCraft) {
-				requiredList = Managers.mn.craftMN.craftData[Managers.mn.inventory.craftPanelID].craftInfo[slotID - 100].required;
+				if (!Managers.mn.inventory.TryGetDisplayedRecipe(slotID - 100, out int _, out int _, out var recipe)) {
+					PLogger.LogError($"ItemDescOpen: Failed to get recipe for slot {slotID}");
+					return;
+				}
 
+				requiredList = recipe.required;
 				var itemSlot = Managers.mn.inventory.itemSlot[slotID];
 				if (itemSlot.GetComponent<Button>().interactable) {
 					// The validation already found that this item is fine. No need to check
