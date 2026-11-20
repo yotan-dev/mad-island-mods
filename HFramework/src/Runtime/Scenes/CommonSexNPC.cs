@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.FreeMode;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
@@ -182,8 +183,7 @@ namespace HFramework.Scenes
 				PLogger.LogError($"Failed to find \"pos\" object for SexPlace {this.Place.name}");
 
 			var pos = posTransform?.position ?? this.Place.transform.position;
-			// TODO: sexManager.InstantiateFreeList
-			this.TmpSex = GameObject.Instantiate<GameObject>(scene, pos, Quaternion.identity);
+			this.TmpSex = FreeModeInterop.SpawnVisual(scene, pos, Quaternion.identity);
 
 			if (!this.IsPlaceFree() || this.TmpSex == null)
 				return false;
@@ -226,7 +226,7 @@ namespace HFramework.Scenes
 
 			this.CommonAnim = (this.TmpSex.transform.Find("Scale/Anim") ?? this.TmpSex.transform.Find("scale/Anim"))
 				.gameObject.GetComponent<SkeletonAnimation>();
-			// TODO: FreeInteractionSource.ObserveNpcPair
+			FreeModeInterop.ObserveNpcPair(this.TmpSex, this.Npc1, this.Npc2, this.CommonAnim);
 			yield return this.Performer.Perform(ActionType.Insert);
 			if (!this.CanContinue())
 				yield break;

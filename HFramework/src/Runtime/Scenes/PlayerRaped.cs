@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.FreeMode;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.ParamContainers;
@@ -154,15 +155,12 @@ namespace HFramework.Scenes
 			if (scene == null)
 				return false;
 
-			this.TmpSex = Object.Instantiate(scene, this.Player.gameObject.transform.position, Quaternion.identity);
-			// TODO: Multiplayer
-			// For man: tmpSex = sexManager.InstantiateFreePrimary(from.npcID, to.gameObject.transform.position, Quaternion.identity);
-			// For yona: tmpSex = sexManager.InstantiateFreeList(list, index, to.gameObject.transform.position, Quaternion.identity);
+			this.TmpSex = FreeModeInterop.SpawnVisual(scene, this.Player.gameObject.transform.position, Quaternion.identity);
 			var sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			this.CommonAnim = sexAnim;
 
 			this.SetCharacter();
-			// TODO: FreeInteractionSource.ObserveDowned(tmpSex, to, from, sexAnim);
+			FreeModeInterop.ObserveDowned(this.TmpSex, this.Player, this.Rapist, sexAnim);
 			this.PrepareNpc(this.Rapist, out this.RapistMove);
 			this.DisableLiveNpc(this.Rapist, this.RapistMove);
 
@@ -180,15 +178,13 @@ namespace HFramework.Scenes
 			if (this.TmpSex != null)
 				Object.Destroy(this.TmpSex);
 
-			this.TmpSex = Object.Instantiate(scene, this.Player.gameObject.transform.position, Quaternion.identity);
+			this.TmpSex = FreeModeInterop.SpawnVisual(scene, this.Player.gameObject.transform.position, Quaternion.identity);
 			SkeletonAnimation sexAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 			this.CommonAnim = sexAnim;
 
 			// This is a made up logic. originally SetupSexScene only happens for Man x Large Female
 			this.SetCharacter();
-			// TODO: For npcID = 17
-			// tmpSex = sexManager.InstantiateFreeList(8, 1, to.gameObject.transform.position, Quaternion.identity);
-			// FreeInteractionSource.ObserveDowned(tmpSex, to, from, sexAnim);
+			FreeModeInterop.ObserveDowned(this.TmpSex, this.Player, this.Rapist, sexAnim);
 		}
 
 		private IEnumerator PerformGrapple()

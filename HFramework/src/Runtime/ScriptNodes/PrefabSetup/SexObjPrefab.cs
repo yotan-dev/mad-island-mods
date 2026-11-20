@@ -1,4 +1,5 @@
 using System;
+using HFramework.FreeMode;
 using UnityEngine;
 using YotanModCore;
 
@@ -13,7 +14,7 @@ namespace HFramework.ScriptNodes.PrefabSetup
 
 		public override GameObject CreatePrefab(Vector3 position) {
 			var prefab = Managers.sexMN.sexObj[ObjIndex];
-			return GameObject.Instantiate(prefab, position, Quaternion.identity);
+			return FreeModeInterop.SpawnVisual(prefab, position, Quaternion.identity);
 		}
 	}
 }

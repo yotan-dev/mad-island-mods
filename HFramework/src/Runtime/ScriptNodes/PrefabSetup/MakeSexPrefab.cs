@@ -1,3 +1,5 @@
+using System.Linq;
+using HFramework.FreeMode;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using YotanModCore;
@@ -103,6 +105,8 @@ namespace HFramework.ScriptNodes.PrefabSetup
 			this.AppearanceSetter.SetAppearance(prefab, this.Context);
 			this.Context.TmpSex = prefab;
 			this.Context.TmpSexAnim = this.Instantiator.GetSkeletonAnimation(prefab);
+
+			FreeModeInterop.ObserveActors(prefab, this.Context.Actors.Select(a => a?.Common).ToArray(), this.Context.TmpSexAnim);
 
 			return State.Success;
 		}

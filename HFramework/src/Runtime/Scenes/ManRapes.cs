@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.FreeMode;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
@@ -121,8 +122,7 @@ namespace HFramework.Scenes
 				return false;
 			}
 
-			this.TmpSex = Object.Instantiate<GameObject>(scene, this.Man.gameObject.transform.position, Quaternion.identity);
-			// TODO: tmpSex = this.InstantiateFreeList(1, 23, girl.gameObject.transform.position, Quaternion.identity);
+			this.TmpSex = FreeModeInterop.SpawnVisual(scene, this.Man.gameObject.transform.position, Quaternion.identity);
 			if (this.TmpSex == null)
 			{
 				PLogger.LogDebug($"Could not instantiate prefab for {this.Man.npcID} x {this.Girl.npcID}");
@@ -147,7 +147,7 @@ namespace HFramework.Scenes
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
 
-			// TODO: FreeInteractionSource.Observe(tmpSex, man, girl, sexAnim);
+			FreeModeInterop.ObservePlayerNpc(this.TmpSex, this.Man, this.Girl, this.CommonAnim);
 			if (this.Girl.npcID == NpcID.Yona && string.IsNullOrEmpty(this.Girl.equip[3].itemKey) && this.CommonAnim.skeleton.FindSlot("Panty") != null)
 				this.CommonAnim.skeleton.SetAttachment("Panty", null);
 

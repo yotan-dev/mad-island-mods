@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using HFramework.FreeMode;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -274,12 +275,7 @@ namespace HFramework.Scenes
 			if (scene == null)
 				return false;
 
-			this.TmpSex = GameObject.Instantiate<GameObject>(scene, this.Position, Quaternion.identity);
-			/* TODO:
-				this.tmpCommonSex = this.InstantiateFreeList(list, index1, pos, Quaternion.identity);
-				if ((UnityEngine.Object) this.tmpCommonSex == (UnityEngine.Object) null && index2 >= 0)
-					this.tmpCommonSex = this.InstantiateFreeList(list, index2, pos, Quaternion.identity);
-			*/
+			this.TmpSex = FreeModeInterop.SpawnVisual(scene, this.Position, Quaternion.identity);
 
 			this.SetupTmpSex();
 
@@ -302,7 +298,6 @@ namespace HFramework.Scenes
 
 			this.TmpCommonState = 0;
 
-			// TODO: FreeInteractionSource.Observe(this.tmpCommonSex, pCommon, nCommon, this.tmpCommonAnim);
 			yield return this.Performer.Perform(ActionType.StartIdle);
 		}
 
@@ -468,6 +463,8 @@ namespace HFramework.Scenes
 			}
 
 			this.MenuPanel.CanToggleManDisplay = this.CommonAnim.HasAnimation("noman");
+
+			FreeModeInterop.ObservePlayerNpc(this.TmpSex, this.Player, this.Npc, this.CommonAnim);
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())

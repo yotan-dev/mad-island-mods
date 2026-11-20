@@ -1,4 +1,5 @@
 using System;
+using HFramework.FreeMode;
 using UnityEngine;
 
 namespace HFramework.ScriptNodes.PrefabSetup
@@ -10,7 +11,7 @@ namespace HFramework.ScriptNodes.PrefabSetup
 		public GameObject Prefab;
 
 		public override GameObject CreatePrefab(Vector3 position) {
-			return GameObject.Instantiate(Prefab, position, Quaternion.identity);
+			return FreeModeInterop.SpawnVisual(Prefab, position, Quaternion.identity);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.FreeMode;
 using HFramework.Handlers;
 using HFramework.Hook;
 using HFramework.Performer;
@@ -90,12 +91,13 @@ namespace HFramework.Scenes
 				return false;
 
 			var sexPos = this.Place?.transform?.position ?? this.Npc.transform.position;
-			// TODO: InstantiateFreeList
-			this.TmpSex = GameObject.Instantiate<GameObject>(this.Performer.Info.SexPrefabSelector.GetPrefab(), sexPos, Quaternion.identity);
+			this.TmpSex = FreeModeInterop.SpawnVisual(this.Performer.Info.SexPrefabSelector.GetPrefab(), sexPos, Quaternion.identity);
 			if (this.TmpSex == null)
 				return false;
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+
+			FreeModeInterop.ObserveNpcSolo(this.TmpSex, this.Npc, this.CommonAnim);
 
 			this.Npc.transform.position = sexPos;
 			this.SearchAngle = this.Npc.nMove.searchAngle;

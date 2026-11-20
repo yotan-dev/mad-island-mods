@@ -1,4 +1,5 @@
 using System.Collections;
+using HFramework.FreeMode;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -187,8 +188,7 @@ namespace HFramework.Scenes
 			if (scene == null)
 				return false;
 
-			// TODO: manager.InstantiateFreeList
-			this.TmpSex = GameObject.Instantiate(scene, pos, Quaternion.identity);
+			this.TmpSex = FreeModeInterop.SpawnVisual(scene, pos, Quaternion.identity);
 			if (this.TmpSex == null)
 				return false;
 
@@ -351,7 +351,7 @@ namespace HFramework.Scenes
 				yield break;
 
 			this.CommonAnim = this.TmpSex.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
-			// TODO: FreeInteractionSource.Observe
+			FreeModeInterop.ObservePlayerNpc(this.TmpSex, this.Man, this.Girl, this.CommonAnim);
 
 			yield return HookManager.Instance.RunStepStartHook(this, StepNames.Main);
 			if (!this.CanContinue())

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using HFramework.FreeMode;
 using HFramework.Hook;
 using HFramework.Performer;
 using Spine.Unity;
@@ -172,12 +173,13 @@ namespace HFramework.Scenes
 				position = this.SlaveObject.transform.position;
 			}
 
-			// TODO: this.mn.sexMN.InstantiateFreeList
-			this.SexObject = GameObject.Instantiate(scene, position, Quaternion.identity);
+			this.SexObject = FreeModeInterop.SpawnVisual(scene, position, Quaternion.identity);
 			if (this.SexObject == null)
 				return false;
 
 			this.CommonAnim = this.SexObject.transform.Find("Scale/Anim").gameObject.GetComponent<SkeletonAnimation>();
+
+			FreeModeInterop.ObservePlayerNpc(this.SexObject, this.Player, this.Npc, this.CommonAnim);
 
 			Managers.mn.randChar.SetCharacter(this.SexObject, null, this.Player);
 

@@ -43,6 +43,10 @@ namespace HFrameworkLoader
 
 			Harmony.CreateAndPatchAll(typeof(NpcMovePatches));
 
+			if (YotanModCore.Coop.IsSupported) {
+				Harmony.CreateAndPatchAll(typeof(FreeModePatches));
+			}
+
 			PLogger.LogInfo($"Plugin HFramework is loaded!");
 		}
 

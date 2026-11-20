@@ -355,6 +355,30 @@ namespace HFramework
 
 		#endregion
 
+		#region FreeMode
+
+		/// <summary>
+		/// Postfix for FreeInteractionPrefabBinding.TryResolve: resolves family 4
+		/// ("mod prefab registry") triples via <see cref="FreeMode.ModPrefabRegistry"/>.
+		/// </summary>
+		public bool FreeMode_TryResolvePrefab(SexManager manager, int family, int list, int index, out GameObject prefab, out string signature) {
+			return FreeMode.FreeModePatchLogic.TryResolveModPrefab(manager, family, list, index, out prefab, out signature);
+		}
+
+		/// <summary>
+		/// Postfix for FreeInteractionVisual.Valid: accepts family 4 visuals by
+		/// re-running vanilla validation under a whitelisted family.
+		/// Parameter is object so callers don't need the v0.6.0+ FreeMode type.
+		/// </summary>
+		public bool FreeMode_ValidateVisual(object visual) {
+			if (!Coop.IsSupported)
+				return false;
+
+			return FreeMode.FreeModePatchLogic.ValidateVisual(visual);
+		}
+
+		#endregion
+
 		#region TranspilePlayerCheck
 
 		/// <summary>
