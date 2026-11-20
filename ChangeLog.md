@@ -24,6 +24,7 @@ Each mod has its own version which follows SemVer.
 
 ### HFramework v1.3.3
 - Fix crash when NPCs tries to sex but has no bed (Modern)
+- Fix condition for one Nami x Man scene (Legacy / Modern was fixed already)
 
 
 ## v2026.11.15
