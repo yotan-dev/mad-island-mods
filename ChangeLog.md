@@ -26,6 +26,12 @@ Each mod has its own version which follows SemVer.
 ### HFramework v1.3.3
 - Fix crash when NPCs tries to sex but has no bed (Modern)
 - Fix condition for one Nami x Man scene (Legacy / Modern was fixed already)
+- Modern mode support for v0.6.0.x (No Co-op support yet)
+	- Now prevents CommonSexNPC from starting if any NPC is controlled by player (this is a global rule in the script)
+	- `WhileNpcsWaiting` now can also fail when a NPC becomes controlled (on by default)
+	- `Teardown` adjusted to take player control into consideration
+	- Added Reika and Takumi controlled scenes
+	- Fixed Delivery scenes to fail in case of player control or NPC stops waiting
 
 
 ## v2026.11.15

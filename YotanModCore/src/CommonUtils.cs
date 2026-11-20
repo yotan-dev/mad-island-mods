@@ -94,6 +94,11 @@ namespace YotanModCore
 			return Managers.mn.gameMN.CurrentPlayer;
 		}
 
+		public static bool IsControlled(CommonStates common)
+		{
+			return Managers.mn.gameMN.IsControlledNpc(common) || Managers.mn.gameMN.IsPreparingControlledCharacter(common);
+		}
+
 
 		/// <summary>
 		/// Checks if common is pregnant

@@ -32,7 +32,7 @@ namespace HFramework.ScriptNodes.Flow
 				mesh.enabled = true;
 
 			var move = character.nMove;
-			if (move.actType == NPCMove.ActType.Wait)
+			if (move.actType == NPCMove.ActType.Wait && !CommonUtils.IsControlled(character))
 				move.actType = NPCMove.ActType.Travel;
 			else
 				move.actType = NPCMove.ActType.Interval;
@@ -40,7 +40,9 @@ namespace HFramework.ScriptNodes.Flow
 			if (searchAngle != null)
 				move.searchAngle = searchAngle.Value;
 
-			character.sex = CommonStates.SexState.None;
+			if (character.sex == CommonStates.SexState.Playing)
+				character.sex = CommonStates.SexState.None;
+
 			if (character.debuff.perfume <= 0.0)
 				character.libido -= 20f;
 		}

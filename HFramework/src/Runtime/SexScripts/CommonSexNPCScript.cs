@@ -2,6 +2,7 @@ using System.Linq;
 using HFramework.SexScripts.Info;
 using HFramework.SexScripts.ScriptContext;
 using UnityEngine;
+using YotanModCore;
 
 namespace HFramework.SexScripts
 {
@@ -25,6 +26,10 @@ namespace HFramework.SexScripts
 				tree.Context.ScriptPlace = hasScriptPlace.Place;
 			}
 			return tree;
+		}
+
+		public override bool CanStart(CommonStates[] actors) {
+			return actors.All(actor => !CommonUtils.IsControlled(actor));
 		}
 	}
 }

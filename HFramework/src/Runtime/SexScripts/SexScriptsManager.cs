@@ -125,7 +125,7 @@ namespace HFramework.SexScripts
 						return false;
 					}
 
-					return script.Info.CanStart(actors);
+					return script.CanStart(actors) && script.Info.CanStart(actors);
 				});
 				if (canStart) {
 					return true;

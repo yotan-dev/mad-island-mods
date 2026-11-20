@@ -238,6 +238,19 @@ namespace HFramework.SexScripts
 			return Clone(info);
 		}
 
+		/// <summary>
+		/// Checks if the sex script can start with the given actors.
+		/// This condition is checked before checking for Info conditions, both must pass.
+		///
+		/// This method is meant for very specific validations that apply to the entire sex script type.
+		/// For example, CommonSexNPC must never have a player (it simply doesn't make sense).
+		/// </summary>
+		/// <param name="actors">The actors involved in the sex script.</param>
+		/// <returns>True if the sex script can start, false otherwise.</returns>
+		public virtual bool CanStart(CommonStates[] actors) {
+			return true;
+		}
+
 		public T MustFindNodeById<T>(string id) where T : ScriptNode {
 			var node = this.Nodes.Find(node => node.ID == id) as T;
 			if (node == null) {
