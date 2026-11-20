@@ -12,6 +12,7 @@ Each mod has its own version which follows SemVer.
 
 ### YotanModCore v2.5.2
 - Detection for v0.6.0.{3,4,5,6,7}
+- Adds bench_cassie and machine_cassie to craft extension
 
 
 ### Enhanced Island v1.3.0

@@ -64,6 +64,19 @@ namespace YotanModCore.Items
 		};
 
 		/// <summary>
+		/// Official benches that are known to YotanModCore but do NOT have their own
+		/// entry in <see cref="CraftManager.craftData"/> (dupes or special-cased by the game).
+		///
+		/// They are still treated as default benches (game handles opening them), but are
+		/// excluded from the craftData length validation since they have no backing craftData.
+		/// </summary>
+		private static readonly Dictionary<string, int> VirtualBenches = new()
+		{
+			{ "bench_cassie", 16 }, // "Cassies Workbench" -- uses same crafts as Cassie NPC
+			{ "machine_cassie", 31 }, // Uses benches added to its inventory
+		};
+
+		/// <summary>
 		/// Maps Bench IDs to Craft IDs
 		/// Note that some benches does not have a linked item id, and thus we use a special prefix:
 		/// - <x> -- no prefix, bench item is <x>
@@ -142,6 +155,8 @@ namespace YotanModCore.Items
 		internal void SetDefaultBenches()
 		{
 			this.BenchToCraftId = new Dictionary<string, int>(DefaultBenches);
+			foreach (var virtualBench in VirtualBenches)
+				this.BenchToCraftId[virtualBench.Key] = virtualBench.Value;
 		}
 
 		public void LoadRecipes(CraftManager craftManager)
@@ -203,7 +218,7 @@ namespace YotanModCore.Items
 
 		public static bool IsDefaultBench(string benchKey)
 		{
-			return DefaultBenches.ContainsKey(benchKey);
+			return DefaultBenches.ContainsKey(benchKey) || VirtualBenches.ContainsKey(benchKey);
 		}
 
 		/// <summary>
