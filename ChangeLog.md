@@ -14,6 +14,7 @@ Each mod has its own version which follows SemVer.
 - Detection for v0.6.0.{3,4,5,6,7}
 - Adds bench_cassie and machine_cassie to craft extension
 - Add Category to recipes
+- Change how we detect current player to also work with Takumi/Reika
 
 
 ### Enhanced Island v1.3.0

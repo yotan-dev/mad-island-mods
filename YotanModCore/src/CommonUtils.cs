@@ -91,7 +91,7 @@ namespace YotanModCore
 
 		public static CommonStates GetActivePlayer()
 		{
-			return Managers.mn.gameMN.playerCommons[GameManager.selectPlayer];
+			return Managers.mn.gameMN.CurrentPlayer;
 		}
 
 
