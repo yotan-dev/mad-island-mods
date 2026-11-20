@@ -54,14 +54,11 @@ namespace HFramework
 			instantiator.ObjIndex = config.ObjIndex;
 
 			if (config.AnimationPrefix != "A_") {
-				var animNodes = script.Nodes.FindAll((node) => node is LoopAnimationForTime && node.ID.StartsWith("Anim_"));
+				var animNodes = script.Nodes.FindAll((node) => node is IAnimationNode animNode && animNode.GetAnimationName().StartsWith("A_"));
 				foreach (var node in animNodes) {
-					var animNode = (LoopAnimationForTime)node;
-					animNode.AnimationName = config.AnimationPrefix + animNode.AnimationName[2..]; // removes the "A_" prefix
+					var animNode = (IAnimationNode)node;
+					animNode.SetAnimationName(config.AnimationPrefix + animNode.GetAnimationName()[2..]); // removes the "A_" prefix
 				}
-
-				var animFinish = (AnimateOnce)script.Nodes.Find((node) => node is AnimateOnce && node.ID == "Anim_Finish");
-				animFinish.AnimationName = config.AnimationPrefix + animFinish.AnimationName[2..]; // removes the "A_" prefix
 			}
 		}
 

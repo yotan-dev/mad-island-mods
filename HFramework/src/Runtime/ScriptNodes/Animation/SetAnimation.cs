@@ -9,7 +9,7 @@ namespace HFramework.ScriptNodes.Animation
 	[Experimental]
 	[ScriptNode("HFramework", "Animation/Set Animation")]
 	[MovedFrom(true, "HFramework.ScriptNodes", null, "SetAnimation")]
-	public class SetAnimation : Action
+	public class SetAnimation : Action, IAnimationNode
 	{
 		public string AnimationName = "";
 
@@ -45,6 +45,14 @@ namespace HFramework.ScriptNodes.Animation
 		protected override State OnUpdate() {
 			this.Context.TmpSexAnim.state.SetAnimation(0, this.FinalAnimationName, true);
 			return State.Success;
+		}
+
+		public string GetAnimationName() {
+			return this.AnimationName;
+		}
+
+		public void SetAnimationName(string animationName) {
+			this.AnimationName = animationName;
 		}
 	}
 }

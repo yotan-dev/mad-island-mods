@@ -7,7 +7,7 @@ namespace HFramework.ScriptNodes.Animation
 	[Experimental]
 	[ScriptNode("HFramework", "Animation/Animate Once")]
 	[MovedFrom(true, "HFramework.ScriptNodes", null, "AnimateOnce")]
-	public class AnimateOnce : Action
+	public class AnimateOnce : Action, IAnimationNode
 	{
 		public string AnimationName = "";
 
@@ -47,6 +47,14 @@ namespace HFramework.ScriptNodes.Animation
 			}
 
 			return State.Running;
+		}
+
+		public string GetAnimationName() {
+			return this.AnimationName;
+		}
+
+		public void SetAnimationName(string animationName) {
+			this.AnimationName = animationName;
 		}
 	}
 }

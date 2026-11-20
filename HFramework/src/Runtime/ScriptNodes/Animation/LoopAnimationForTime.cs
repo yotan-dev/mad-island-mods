@@ -7,7 +7,7 @@ namespace HFramework.ScriptNodes.Animation
 	[Experimental]
 	[ScriptNode("HFramework", "Animation/Loop Animation For Time")]
 	[MovedFrom(true, "HFramework.ScriptNodes", null, "LoopAnimationForTime")]
-	public class LoopAnimationForTime : Action
+	public class LoopAnimationForTime : Action, IAnimationNode
 	{
 		public float Duration = 1;
 
@@ -56,6 +56,14 @@ namespace HFramework.ScriptNodes.Animation
 			}
 
 			return State.Running;
+		}
+
+		public string GetAnimationName() {
+			return this.AnimationName;
+		}
+
+		public void SetAnimationName(string animationName) {
+			this.AnimationName = animationName;
 		}
 	}
 }

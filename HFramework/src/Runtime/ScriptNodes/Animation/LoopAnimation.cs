@@ -7,7 +7,7 @@ namespace HFramework.ScriptNodes.Animation
 	[Experimental]
 	[ScriptNode("HFramework", "Animation/Loop Animation")]
 	[MovedFrom(true, "HFramework.ScriptNodes", null, "LoopAnimation")]
-	public class LoopAnimation : Action
+	public class LoopAnimation : Action, IAnimationNode
 	{
 		public string AnimationName = "";
 
@@ -40,6 +40,14 @@ namespace HFramework.ScriptNodes.Animation
 
 		protected override State OnUpdate() {
 			return State.Running;
+		}
+
+		public string GetAnimationName() {
+			return this.AnimationName;
+		}
+
+		public void SetAnimationName(string animationName) {
+			this.AnimationName = animationName;
 		}
 	}
 }
