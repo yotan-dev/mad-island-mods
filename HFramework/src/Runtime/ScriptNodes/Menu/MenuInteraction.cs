@@ -28,11 +28,12 @@ namespace HFramework.ScriptNodes.Menu
 		private ScriptNode? CurrentChild;
 
 		protected override void OnStart() {
+			this.Context.InitMenuSession();
 			this.Context.PendingChoiceId = this.InitialMenuId;
 		}
 
 		protected override void OnStop() {
-
+			this.Context.FreeMenuSession();
 		}
 
 		private bool HandleAction() {

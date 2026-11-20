@@ -7,11 +7,6 @@ namespace HFramework.SexScripts
 	public class TreeWrapper
 	{
 		public IEnumerator Run(SexScript tree) {
-			if (tree.Context != null && tree.Context.MenuSession == null) {
-				var pos = tree.Context.ScriptPlace.GetCharacterPosition();
-				tree.Context.MenuSession = new PropPanelMenuSession(tree.Context, pos);
-			}
-
 			// bool recoveryMode = false;
 			while (tree.TreeState == ScriptNode.State.Running) {
 				try {
@@ -36,9 +31,7 @@ namespace HFramework.SexScripts
 				yield return null;
 			}
 
-			tree.Context?.MenuSession?.Close();
-			if (tree.Context != null)
-				tree.Context.MenuSession = null;
+			tree.Context?.FreeMenuSession();
 		}
 	}
 }

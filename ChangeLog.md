@@ -10,11 +10,12 @@ Each mod has its own version which follows SemVer.
 
 ## Unreleased
 
-### YotanModCore v2.5.2
+### YotanModCore v2.6.0
 - Detection for v0.6.0.{3,4,5,6,7}
 - Adds bench_cassie and machine_cassie to craft extension
 - Add Category to recipes
 - Change how we detect current player to also work with Takumi/Reika
+- (Potential breaking) Opening a new prop panel will no longer close the previous one -- scripts should properly close the previous one first.
 
 
 ### Enhanced Island v1.3.0
@@ -32,6 +33,9 @@ Each mod has its own version which follows SemVer.
 	- `Teardown` adjusted to take player control into consideration
 	- Added Reika and Takumi controlled scenes
 	- Fixed Delivery scenes to fail in case of player control or NPC stops waiting
+- Modern mode fixes
+  - Menu is no longer lost if another NPC starts sexing nearby
+
 
 
 ## v2026.11.15

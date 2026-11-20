@@ -24,8 +24,8 @@ namespace YotanModCore.PropPanels
 
 			if (CurrentPanel != null)
 			{
-				PLogger.LogWarning("Open: another panel is already open");
-				this.Close(CurrentPanel);
+				PLogger.LogError($"PropPanelManager::Open - another panel ({CurrentPanel.GetType().Name}) is already open. Skipping.");
+				return;
 			}
 
 			CurrentPanel = panel;

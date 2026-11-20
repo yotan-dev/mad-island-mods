@@ -92,5 +92,19 @@ namespace HFramework.SexScripts.ScriptContext
 				idx++;
 			}
 		}
+
+		public void InitMenuSession() {
+			if (this.MenuSession != null) {
+				return;
+			}
+
+			var pos = this.ScriptPlace.GetCharacterPosition();
+			this.MenuSession = new PropPanelMenuSession(this, pos);
+		}
+
+		public void FreeMenuSession() {
+			this.MenuSession?.Close();
+			this.MenuSession = null;
+		}
 	}
 }
