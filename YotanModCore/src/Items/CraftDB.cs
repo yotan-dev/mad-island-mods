@@ -100,6 +100,7 @@ namespace YotanModCore.Items
 
 			var craftInfo = gameObj.AddComponent<CraftInfo>();
 			craftInfo.name = recipe.ItemKey;
+			craftInfo.category = recipe.Category;
 
 			craftInfo.required = new CraftInfo.Required[recipe.Materials.Count];
 			for (int i = 0; i < recipe.Materials.Count; i++)

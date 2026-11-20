@@ -15,6 +15,13 @@ namespace YotanModCore.Items
 	public class CraftRecipe : ScriptableObject, ISerializationCallbackReceiver
 	{
 		/// <summary>
+		/// Category of the craft recipe
+		/// Used to group recipes in the UI
+		/// </summary>
+		[Tooltip("Category of the craft recipe. Used to group recipes in the UI")]
+		public CraftInfo.CraftCategory Category = CraftInfo.CraftCategory.Auto;
+
+		/// <summary>
 		/// "key" of the Bench used to craft the item. May be:
 		/// - An Item Key, when the bench is a crafting station
 		/// - `@other:hand` for hand crafting (no station)
