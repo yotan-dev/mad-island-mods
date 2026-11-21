@@ -10,6 +10,9 @@ Each mod has its own version which follows SemVer.
 
 ## Unreleased
 
+
+## v2026.11.20
+
 ### YotanModCore v2.6.0
 - Detection for v0.6.0.{3,4,5,6,7}
 - Adds bench_cassie and machine_cassie to craft extension
