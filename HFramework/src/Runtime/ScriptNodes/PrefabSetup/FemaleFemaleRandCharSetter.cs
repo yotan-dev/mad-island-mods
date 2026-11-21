@@ -9,21 +9,14 @@ namespace HFramework.ScriptNodes.PrefabSetup
 	[Experimental]
 	public class FemaleFemaleRandCharSetter : AppearanceSetter
 	{
-		[ActorIndex]
-		[SerializeField]
-		private int FemaleIndex = 0;
-
 		public override void SetAppearance(GameObject prefab, CommonContext ctx) {
-			Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[FemaleIndex].Common, ctx.Actors[FemaleIndex].Common);
+			Managers.mn.randChar.SetCharacter(prefab, ctx.Actors[0].Common, null);
 
-			// @TODO: Understand when this is used and how to make it into char setter
-			// 				CommonStates component = tmpSex.GetComponent<CommonStates>();
-			// 				if ((UnityEngine.Object)component != (UnityEngine.Object)null)
-			// 				{
-			// 					sexManager.mn.randChar.CopyParams(man, component);
-			// 					sexManager.mn.randChar.LoadGenGirl(tmpSex, loadType: RandomCharacter.LoadType.G);
-			// 					break;
-			// 				}
+			var tmpSexStates = prefab?.GetComponent<CommonStates>();
+			if (tmpSexStates != null) {
+				Managers.mn.randChar.CopyParams(ctx.Actors[1].Common, tmpSexStates);
+				Managers.mn.randChar.LoadGenGirl(prefab, loadType: RandomCharacter.LoadType.G);
+			}
 		}
 	}
 }

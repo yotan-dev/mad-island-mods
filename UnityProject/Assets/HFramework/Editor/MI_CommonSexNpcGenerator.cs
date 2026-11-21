@@ -6,6 +6,7 @@ using HFramework.ScriptNodes.PrefabSetup;
 using HFramework.SexScripts;
 using HFramework.SexScripts.Info.Conditions;
 using HFramework.SexScripts.Info.NpcConditions;
+using UnityEngine;
 using YotanModCore.Consts;
 
 namespace HFramework
@@ -103,6 +104,13 @@ namespace HFramework
 					Pregnancy = config.BPregnancy
 				}
 			};
+
+			var makeSexPrefab = script.MustFindNodeById<MakeSexPrefab>("MakeSexPrefab");
+			if (makeSexPrefab != null) {
+				makeSexPrefab.AppearanceSetter = new FemaleFemaleRandCharSetter();
+			} else {
+				Debug.LogError($"MakeSexPrefab node not found in {config.UniqueID}");
+			}
 
 			script.MustFindNodeById<EmitEvent>("Emit_Orgasm")
 				.RemoveEvent(SexEvents.OnCumOnVagina.Id);

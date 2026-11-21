@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8813662003228314994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328f11b82145cf84ba6ac0a96a3f381c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  ID: Do_seq
+  ScriptState: 0
+  Started: 0
+  GUID: c23a01a04ea489e4aaf6099ba235dc8c
+  Position: {x: 634, y: 247.99998}
+  Children:
+  - {fileID: -8254560602880613172}
+  - {fileID: 5990782104852179766}
+  - {fileID: -2513433558535529186}
+  - {fileID: 8304789724823427821}
+  - {fileID: 8519547312689227240}
+  - {fileID: 8314820249734858618}
+  - {fileID: -3956539146296713412}
+  - {fileID: -4359002932717449073}
+  - {fileID: -8400907061344886572}
+  - {fileID: -8548886935621812588}
+  - {fileID: -1835964387162307075}
+  - {fileID: 4605904849327982347}
 --- !u!114 &-8548886935621812588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16,7 +46,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 7baa6681199af4740b6c8053c27f33d3
-  Position: {x: 358.99997, y: 945.1434}
+  Position: {x: 999.46375, y: 834.0001}
   Actor: 0
   VoiceType: faint
 --- !u!114 &-8400907061344886572
@@ -35,7 +65,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 5216c40dec0edc042992d581b51c7af5
-  Position: {x: 358.99997, y: 856.59216}
+  Position: {x: 999.46375, y: 746.00006}
   Duration: 10
   AnimationName: A_delivery_loop
   UseDurationModifier: 1
@@ -55,7 +85,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: ee1265f392f16a841bf654f22cb7e85f
-  Position: {x: 359.00003, y: 111.00002}
+  Position: {x: 999.46375, y: 0.000015258789}
   TimeLimitSeconds: 30
   AvoidObstacles: 1
   EmoteOnMove: -1
@@ -81,6 +111,25 @@ MonoBehaviour:
   - {fileID: -4287147057217628544}
   - {fileID: -5128650196517001714}
   - {fileID: 6127506504750950244}
+--- !u!114 &-7317123455292769565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92db77b4724573440934c8da61a0b0f2, type: 3}
+  m_Name: WhileNpcsWaiting
+  m_EditorClassIdentifier: 
+  ID: WhileNpcsWaiting
+  ScriptState: 0
+  Started: 0
+  GUID: a7fe5fce32780d340bc9145c2ab76577
+  Position: {x: 359, y: 248}
+  Child: {fileID: -8813662003228314994}
+  FailIfControlled: 1
 --- !u!114 &-5779508933163131637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +185,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 2f3e84ee328a2064b8b694c9a866c4a3
-  Position: {x: 358.99997, y: 762.40796}
+  Position: {x: 999.46375, y: 651}
   Actor: 0
   VoiceType: finish
 --- !u!114 &-4287147057217628544
@@ -181,7 +230,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: f8d2f56fb0ce9e84785107f555627f97
-  Position: {x: 358.99997, y: 673.1861}
+  Position: {x: 999.46375, y: 562.00006}
   Duration: 20
   AnimationName: A_delivery_idle
   UseDurationModifier: 1
@@ -238,7 +287,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: d8b4b9a22f08b8b45adb832442734cc9
-  Position: {x: 359, y: 291.15}
+  Position: {x: 999.46375, y: 180}
   Actor: 0
   Amount: {x: 1, y: 0, z: 0}
 --- !u!114 &-1835964387162307075
@@ -257,7 +306,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 864fd3f1828bf1e48a1a8f5dcf9052e9
-  Position: {x: 358.99997, y: 1035.8942}
+  Position: {x: 999.46375, y: 925}
   AnimationName: A_delivery_end
 --- !u!114 &11400000
 MonoBehaviour:
@@ -317,6 +366,8 @@ MonoBehaviour:
   - {fileID: -4287147057217628544}
   - {fileID: 6127506504750950244}
   - {fileID: 8519547312689227240}
+  - {fileID: -7317123455292769565}
+  - {fileID: -8813662003228314994}
   references:
     version: 2
     RefIds:
@@ -343,18 +394,7 @@ MonoBehaviour:
   Position: {x: 152, y: 0}
   Children:
   - {fileID: -7953412621970803028}
-  - {fileID: -8254560602880613172}
-  - {fileID: 5990782104852179766}
-  - {fileID: -2513433558535529186}
-  - {fileID: 8304789724823427821}
-  - {fileID: 8519547312689227240}
-  - {fileID: 8314820249734858618}
-  - {fileID: -3956539146296713412}
-  - {fileID: -4359002932717449073}
-  - {fileID: -8400907061344886572}
-  - {fileID: -8548886935621812588}
-  - {fileID: -1835964387162307075}
-  - {fileID: 4605904849327982347}
+  - {fileID: -7317123455292769565}
 --- !u!114 &3624974151867406290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +430,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 3efed54c2e6b67f40b9f15067a3e0ecd
-  Position: {x: 358.99997, y: 1137.3104}
+  Position: {x: 999.46375, y: 1026.0001}
   PregnantActor: 0
 --- !u!114 &5990782104852179766
 MonoBehaviour:
@@ -408,7 +448,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 8de7f338d29588a4887f6f37a306b453
-  Position: {x: 359, y: 209}
+  Position: {x: 999.46375, y: 98.00003}
   ActorIndex: 0
 --- !u!114 &6127506504750950244
 MonoBehaviour:
@@ -494,7 +534,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: af77594d8123cb44288723c875a6ab00
-  Position: {x: 359, y: 381.15}
+  Position: {x: 999.46375, y: 270}
   Targets:
   - ActorIndex: 0
     Mode: 3
@@ -514,7 +554,7 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 31ea8a1bc55e70f4e857e3c283e41d60
-  Position: {x: 358.99997, y: 585}
+  Position: {x: 999.46375, y: 474}
   Actor: 0
   VoiceType: damage
 --- !u!114 &8519547312689227240
@@ -533,5 +573,5 @@ MonoBehaviour:
   ScriptState: 0
   Started: 0
   GUID: 622d5a72f7ce7bd44bc1456ef2c670e6
-  Position: {x: 359, y: 473.45013}
+  Position: {x: 999.46375, y: 362}
   UserActor: 0

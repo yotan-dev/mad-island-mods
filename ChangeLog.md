@@ -35,7 +35,7 @@ Each mod has its own version which follows SemVer.
 	- Fixed Delivery scenes to fail in case of player control or NPC stops waiting
 - Modern mode fixes
   - Menu is no longer lost if another NPC starts sexing nearby
-
+  - Female-female sex scenes now use correct appearance
 
 
 ## v2026.11.15
